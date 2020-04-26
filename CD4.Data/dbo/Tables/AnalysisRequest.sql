@@ -1,11 +1,11 @@
 ﻿CREATE TABLE [dbo].[AnalysisRequest]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
-	PatientId INT NOT NULL, 
+	[PatientId] INT NOT NULL,
+    [ClinicalDetailId] INT NOT NULL , -- Zero Will be NA on scientist table
     [Age] INT NULL, 
     [CheckedBy] INT NOT NULL DEFAULT 0, -- Zero Will be NA on scientist table
-    [ApprovedBy] INT NOT NULL DEFAULT 0 -- Zero will be NA on scientist table
-,   [ClinicalDetailId] INT NOT NULL DEFAULT 0, -- Zero Will be NA on scientist table
+    [ApprovedBy] INT NOT NULL DEFAULT 0, -- Zero will be NA on scientist table
 
     CONSTRAINT [FK_AnalysisRequest_Patient] FOREIGN KEY ([PatientId]) REFERENCES [dbo].[Patient]([Id]), 
     CONSTRAINT [FK_AnalysisRequest_ScientistChecked] FOREIGN KEY ([CheckedBy]) REFERENCES [dbo].[Scientist]([Id]),
