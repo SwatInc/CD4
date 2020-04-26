@@ -1,0 +1,6 @@
+﻿CREATE TABLE [dbo].[Sites]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Name] VARCHAR(100) NOT NULL, 
+    CONSTRAINT [AK_Sites_Name] UNIQUE ([Name])
+)

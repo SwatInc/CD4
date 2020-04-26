@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+  <Operation Name="Rename Refactor" Key="adc1fce5-78ac-4422-9dba-a3e9aef59212" ChangeDateTime="04/26/2020 21:17:58">
+    <Property Name="ElementName" Value="[dbo].[AnalysisRequest].[CheckedBy]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[AnalysisRequest]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="EmployeeChecked" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6b18a445-69d5-4760-998e-fe8c8e81cfdd" ChangeDateTime="04/26/2020 21:18:11">
+    <Property Name="ElementName" Value="[dbo].[AnalysisRequest].[EmployeeChecked]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[AnalysisRequest]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="CheckedBy" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="6169b0c3-d391-4ace-be1d-5f819563f3c1" ChangeDateTime="04/26/2020 22:03:32">
+    <Property Name="ElementName" Value="[dbo].[Patient].[Gender]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Patient]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="GenderId" />
+  </Operation>
+</Operations>
