@@ -1,4 +1,4 @@
-﻿CREATE TABLE [dbo].[ResultType]
+﻿CREATE TABLE [dbo].[ResultDataType]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [Name] VARCHAR(50) NOT NULL, 

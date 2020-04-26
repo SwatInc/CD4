@@ -67,7 +67,7 @@
     <Build Include="dbo\Tables\Country.sql" />
     <Build Include="dbo\Tables\CodifiedResult.sql" />
     <Build Include="dbo\Tables\Test.sql" />
-    <Build Include="dbo\Tables\ResultType.sql" />
+    <Build Include="dbo\Tables\ResultDataType.sql" />
     <Build Include="dbo\Tables\ClinicalDetail.sql" />
     <Build Include="dbo\Tables\AnalysisRequest.sql" />
     <Build Include="dbo\Tables\Result.sql" />
