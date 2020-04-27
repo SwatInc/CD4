@@ -15,7 +15,7 @@ namespace CD4.UI.View
             InitializeComponent();
             _viewModel = viewModel;
 
-            barButtonItemConfiguaration.ItemClick += OpenConfiguration;
+            barButtonItemCodifiedResults.ItemClick += OpenConfiguration;
         }
 
         private void OpenConfiguration(object sender, ItemClickEventArgs e)
@@ -33,5 +33,7 @@ namespace CD4.UI.View
             form.Dispose();
             GC.Collect();
         }
+
+
     }
 }
