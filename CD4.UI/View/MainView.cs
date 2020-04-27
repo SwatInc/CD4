@@ -20,7 +20,13 @@ namespace CD4.UI.View
         {
             InitializeComponent();
             _viewModel = viewModel;
+
+            barButtonItemConfiguaration.ItemClick += OpenConfiguration;
         }
 
+        private void OpenConfiguration(object sender, ItemClickEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
