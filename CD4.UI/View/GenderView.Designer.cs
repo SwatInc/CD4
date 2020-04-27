@@ -30,16 +30,15 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GenderView));
             this.gridControlCodifiedValues = new DevExpress.XtraGrid.GridControl();
-            this.gridViewCodifiedResults = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridViewCountries = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumnId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnGender = new DevExpress.XtraGrid.Columns.GridColumn();
             this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
-            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButtonSave = new DevExpress.XtraEditors.SimpleButton();
             this.textEditId = new DevExpress.XtraEditors.TextEdit();
             this.textEditGender = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlCodifiedValues)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewCodifiedResults)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewCountries)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
             this.splitContainerControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEditId.Properties)).BeginInit();
@@ -50,20 +49,20 @@
             // 
             this.gridControlCodifiedValues.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControlCodifiedValues.Location = new System.Drawing.Point(0, 0);
-            this.gridControlCodifiedValues.MainView = this.gridViewCodifiedResults;
+            this.gridControlCodifiedValues.MainView = this.gridViewCountries;
             this.gridControlCodifiedValues.Name = "gridControlCodifiedValues";
             this.gridControlCodifiedValues.Size = new System.Drawing.Size(318, 268);
             this.gridControlCodifiedValues.TabIndex = 0;
             this.gridControlCodifiedValues.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridViewCodifiedResults});
+            this.gridViewCountries});
             // 
             // gridViewCodifiedResults
             // 
-            this.gridViewCodifiedResults.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridViewCountries.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumnId,
             this.gridColumnGender});
-            this.gridViewCodifiedResults.GridControl = this.gridControlCodifiedValues;
-            this.gridViewCodifiedResults.Name = "gridViewCodifiedResults";
+            this.gridViewCountries.GridControl = this.gridControlCodifiedValues;
+            this.gridViewCountries.Name = "gridViewCodifiedResults";
             // 
             // gridColumnId
             // 
@@ -90,8 +89,7 @@
             this.splitContainerControl.Name = "splitContainerControl";
             this.splitContainerControl.Panel1.Controls.Add(this.gridControlCodifiedValues);
             this.splitContainerControl.Panel1.Text = "Panel1";
-            this.splitContainerControl.Panel2.Controls.Add(this.simpleButton2);
-            this.splitContainerControl.Panel2.Controls.Add(this.simpleButton1);
+            this.splitContainerControl.Panel2.Controls.Add(this.simpleButtonSave);
             this.splitContainerControl.Panel2.Controls.Add(this.textEditId);
             this.splitContainerControl.Panel2.Controls.Add(this.textEditGender);
             this.splitContainerControl.Panel2.Text = "Panel2";
@@ -101,26 +99,17 @@
             // 
             // simpleButton2
             // 
-            this.simpleButton2.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.simpleButton2.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton2.ImageOptions.SvgImage")));
-            this.simpleButton2.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
-            this.simpleButton2.Location = new System.Drawing.Point(34, 222);
-            this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(60, 34);
-            this.simpleButton2.TabIndex = 3;
-            // 
-            // simpleButton1
-            // 
-            this.simpleButton1.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.simpleButton1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage")));
-            this.simpleButton1.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
-            this.simpleButton1.Location = new System.Drawing.Point(100, 222);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(60, 34);
-            this.simpleButton1.TabIndex = 2;
+            this.simpleButtonSave.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.simpleButtonSave.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton2.ImageOptions.SvgImage")));
+            this.simpleButtonSave.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
+            this.simpleButtonSave.Location = new System.Drawing.Point(9, 221);
+            this.simpleButtonSave.Name = "simpleButton2";
+            this.simpleButtonSave.Size = new System.Drawing.Size(173, 34);
+            this.simpleButtonSave.TabIndex = 3;
             // 
             // textEditId
             // 
+            this.textEditId.Enabled = false;
             this.textEditId.Location = new System.Drawing.Point(9, 23);
             this.textEditId.Name = "textEditId";
             this.textEditId.Properties.NullText = "Id";
@@ -130,7 +119,7 @@
             // 
             // textEditGender
             // 
-            this.textEditGender.Location = new System.Drawing.Point(9, 49);
+            this.textEditGender.Location = new System.Drawing.Point(9, 195);
             this.textEditGender.Name = "textEditGender";
             this.textEditGender.Properties.NullText = "Please enter the gender";
             this.textEditGender.Properties.NullValuePrompt = "Please enter the gender";
@@ -147,7 +136,7 @@
             this.Name = "GenderView";
             this.Text = "GenderView";
             ((System.ComponentModel.ISupportInitialize)(this.gridControlCodifiedValues)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewCodifiedResults)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewCountries)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).EndInit();
             this.splitContainerControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.textEditId.Properties)).EndInit();
@@ -159,12 +148,11 @@
         #endregion
 
         private DevExpress.XtraGrid.GridControl gridControlCodifiedValues;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridViewCodifiedResults;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewCountries;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnId;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnGender;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl;
-        private DevExpress.XtraEditors.SimpleButton simpleButton2;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.SimpleButton simpleButtonSave;
         private DevExpress.XtraEditors.TextEdit textEditId;
         private DevExpress.XtraEditors.TextEdit textEditGender;
     }
