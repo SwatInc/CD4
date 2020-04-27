@@ -52,17 +52,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
+    <Compile Include="View\MainView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MainView.Designer.cs">
+      <DependentUpon>MainView.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Properties\licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -72,7 +69,11 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="View\MainView.resx">
+      <DependentUpon>MainView.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -82,6 +83,2881 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
+    <Folder Include="ViewModel\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ad.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\address-book.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\address-card.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\adjust.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\air-freshener.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\align-center.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\align-justify.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\align-left.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\align-right.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\allergies.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ambulance.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\american-sign-language-interpreting.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\anchor.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\angle-double-down.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\angle-double-left.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\angle-double-right.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\angle-double-up.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\angle-down.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\angle-left.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\angle-right.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\angle-up.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\angry.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ankh.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\apple-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\archive.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\archway.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-alt-circle-down.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-alt-circle-left.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-alt-circle-right.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-alt-circle-up.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-circle-down.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-circle-left.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-circle-right.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-circle-up.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-down.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-left.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-right.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrows-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrows-alt-h.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrows-alt-v.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow-up.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\assistive-listening-systems.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\asterisk.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\at.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\atlas.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\atom.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\audio-description.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\award.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\baby.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\baby-carriage.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\backspace.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\backward.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bacon.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\balance-scale.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\balance-scale-left.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\balance-scale-right.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ban.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\band-aid.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\barcode.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bars.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\baseball-ball.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\basketball-ball.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bath.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\battery-empty.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\battery-full.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\battery-half.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\battery-quarter.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\battery-three-quarters.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bed.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\beer.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bell.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bell-slash.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bezier-curve.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bible.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bicycle.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\biking.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\binoculars.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\biohazard.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\birthday-cake.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blender.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blender-phone.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blind.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blog.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bold.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bolt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bomb.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bone.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bong.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\book.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\book-dead.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bookmark.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\book-medical.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\book-open.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\book-reader.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\border-all.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\border-none.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\border-style.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bowling-ball.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\box.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\boxes.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\box-open.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\braille.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brain.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bread-slice.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\briefcase.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\briefcase-medical.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\broadcast-tower.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\broom.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\brush.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bug.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\building.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bullhorn.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bullseye.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\burn.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bus.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bus-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\business-time.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calculator.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calendar.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calendar-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calendar-check.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calendar-day.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calendar-minus.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calendar-plus.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calendar-times.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calendar-week.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\camera.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\camera-retro.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\campground.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\candy-cane.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cannabis.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\capsules.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\car.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\car-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\car-battery.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\car-crash.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\caret-down.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\caret-left.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\caret-right.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\caret-square-down.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\caret-square-left.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\caret-square-right.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\caret-square-up.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\caret-up.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\carrot.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\car-side.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cart-arrow-down.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cart-plus.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cash-register.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cat.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\certificate.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chair.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chalkboard.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chalkboard-teacher.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\charging-station.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chart-area.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chart-bar.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chart-line.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chart-pie.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\check.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\check-circle.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\check-double.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\check-square.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cheese.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chess.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chess-bishop.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chess-board.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chess-king.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chess-knight.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chess-pawn.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chess-queen.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chess-rook.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chevron-circle-down.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chevron-circle-left.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chevron-circle-right.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chevron-circle-up.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chevron-down.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chevron-left.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chevron-right.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\chevron-up.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\child.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\church.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\circle.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\circle-notch.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\city.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clinic-medical.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clipboard.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clipboard-check.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clipboard-list.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clock.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\clone.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\closed-captioning.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cloud.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cloud-download-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cloud-meatball.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cloud-moon.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cloud-moon-rain.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cloud-rain.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cloud-showers-heavy.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cloud-sun.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cloud-sun-rain.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cloud-upload-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cocktail.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\code.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\code-branch.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\coffee.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cog.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cogs.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\coins.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\columns.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\comment.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\comment-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\comment-dollar.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\comment-dots.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\comment-medical.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\comments.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\comments-dollar.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\comment-slash.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\compact-disc.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\compass.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\compress.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\compress-arrows-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\concierge-bell.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cookie.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cookie-bite.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\copy.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\copyright.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\couch.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\credit-card.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\crop.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\crop-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cross.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\crosshairs.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\crow.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\crown.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\crutch.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cube.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cubes.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\cut.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\database.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\deaf.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\democrat.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\desktop.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dharmachakra.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\diagnoses.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dice.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dice-d6.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dice-d20.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dice-five.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dice-four.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dice-one.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dice-six.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dice-three.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dice-two.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\digital-tachograph.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\directions.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\divide.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dizzy.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dna.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dog.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dollar-sign.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dolly.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dolly-flatbed.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\donate.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\door-closed.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\door-open.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dot-circle.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dove.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\download.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\drafting-compass.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dragon.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\draw-polygon.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\drum.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\drum-steelpan.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\drumstick-bite.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dumbbell.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dumpster.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dumpster-fire.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\dungeon.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\edit.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\egg.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eject.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ellipsis-h.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ellipsis-v.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\envelope.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\envelope-open.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\envelope-open-text.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\envelope-square.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\equals.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eraser.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ethernet.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\euro-sign.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exchange-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exclamation.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exclamation-circle.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\exclamation-triangle.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\expand.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\expand-arrows-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\external-link-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\external-link-square-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eye.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eye-dropper.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\eye-slash.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fan.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fast-backward.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fast-forward.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fax.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\feather.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\feather-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\female.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fighter-jet.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file-archive.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file-audio.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file-code.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file-contract.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file-csv.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file-download.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file-excel.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file-export.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file-image.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file-import.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file-invoice.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file-invoice-dollar.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file-medical.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file-medical-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file-pdf.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file-powerpoint.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file-prescription.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file-signature.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file-upload.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file-video.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\file-word.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fill.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fill-drip.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\film.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\filter.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fingerprint.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fire.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fire-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fire-extinguisher.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\first-aid.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fish.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\fist-raised.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flag.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flag-checkered.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flag-usa.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flask.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\flushed.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder-minus.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder-open.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\folder-plus.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\font.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\font-awesome-logo-full.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\football-ball.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\forward.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frog.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frown.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\frown-open.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\funnel-dollar.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\futbol.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gamepad.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gas-pump.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gavel.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gem.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\genderless.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ghost.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gift.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gifts.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\glass-cheers.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\glasses.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\glass-martini.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\glass-martini-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\glass-whiskey.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\globe.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\globe-africa.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\globe-americas.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\globe-asia.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\globe-europe.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\golf-ball.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\gopuram.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\graduation-cap.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\greater-than.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\greater-than-equal.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grimace.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grin.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grin-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grin-beam.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grin-beam-sweat.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grin-hearts.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grin-squint.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grin-squint-tears.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grin-stars.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grin-tears.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grin-tongue.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grin-tongue-squint.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grin-tongue-wink.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grin-wink.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grip-horizontal.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grip-lines.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grip-lines-vertical.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\grip-vertical.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\guitar.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hamburger.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hammer.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hamsa.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hand-holding.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hand-holding-heart.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hand-holding-usd.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hand-lizard.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hand-middle-finger.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hand-paper.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hand-peace.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hand-point-down.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hand-pointer.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hand-point-left.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hand-point-right.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hand-point-up.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hand-rock.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hands.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hand-scissors.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\handshake.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hands-helping.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hand-spock.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hanukiah.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hard-hat.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hashtag.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hat-wizard.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\haykal.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hdd.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\heading.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\headphones.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\headphones-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\headset.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\heart.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\heartbeat.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\heart-broken.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\helicopter.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\highlighter.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hiking.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hippo.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\history.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hockey-puck.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\holly-berry.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\home.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\horse.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\horse-head.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hospital.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hospital-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hospital-symbol.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hotdog.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hotel.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hot-tub.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hourglass.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hourglass-end.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hourglass-half.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hourglass-start.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\house-damage.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\hryvnia.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\h-square.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ice-cream.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icicles.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\icons.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\i-cursor.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\id-badge.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\id-card.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\id-card-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\igloo.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\image.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\images.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\inbox.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\indent.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\industry.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\infinity.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\info-circle.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\italic.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jedi.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\joint.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\journal-whills.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kaaba.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\key.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\keyboard.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\khanda.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kiss.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kiss-beam.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kiss-wink-heart.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\kiwi-bird.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\landmark.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\language.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\laptop.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\laptop-code.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\laptop-medical.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\laugh.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\laugh-beam.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\laugh-squint.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\laugh-wink.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\layer-group.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\leaf.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lemon.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\less-than.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\less-than-equal.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\level-down-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\level-up-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\life-ring.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lightbulb.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\link.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lira-sign.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\list.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\list-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\list-ol.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\list-ul.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\location-arrow.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lock.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\lock-open.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\long-arrow-alt-down.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\long-arrow-alt-left.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\long-arrow-alt-right.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\long-arrow-alt-up.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\low-vision.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\luggage-cart.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\magic.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\magnet.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mail-bulk.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\male.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map-marked.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map-marked-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map-marker.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map-marker-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map-pin.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\map-signs.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\marker.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mars.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mars-double.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mars-stroke.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mars-stroke-h.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mars-stroke-v.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mask.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\medal.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\medkit.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\meh.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\meh-blank.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\meh-rolling-eyes.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\memory.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\menorah.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mercury.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\meteor.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\microchip.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\microphone.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\microphone-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\microphone-alt-slash.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\microphone-slash.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\microscope.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minus.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minus-circle.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\minus-square.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mitten.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mobile.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mobile-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\money-bill.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\money-bill-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\money-bill-wave.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\money-bill-wave-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\money-check.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\money-check-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\monument.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\moon.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mortar-pestle.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mosque.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\motorcycle.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mountain.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mouse-pointer.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\mug-hot.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\music.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\network-wired.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\neuter.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\newspaper.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\not-equal.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\notes-medical.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\object-group.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\object-ungroup.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\oil-can.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\om.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\otter.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\outdent.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pager.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paint-brush.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paint-roller.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\palette.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pallet.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paperclip.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paper-plane.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\parachute-box.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paragraph.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\parking.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\passport.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pastafarianism.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paste.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pause.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pause-circle.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\paw.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\peace.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pen.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pen-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pencil-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pencil-ruler.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pen-fancy.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pen-nib.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pen-square.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\people-carry.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pepper-hot.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\percent.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\percentage.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\person-booth.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\phone.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\phone-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\phone-slash.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\phone-square.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\phone-square-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\phone-volume.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\photo-video.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\piggy-bank.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pills.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pizza-slice.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\place-of-worship.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plane.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plane-arrival.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plane-departure.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\play.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\play-circle.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plug.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus-circle.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus-square.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\podcast.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\poll.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\poll-h.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\poo.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\poop.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\poo-storm.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\portrait.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pound-sign.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\power-off.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\pray.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\praying-hands.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\prescription.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\prescription-bottle.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\prescription-bottle-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\print.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\procedures.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\project-diagram.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\puzzle-piece.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\qrcode.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\question.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\question-circle.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\quidditch.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\quote-left.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\quote-right.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\quran.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\radiation.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\radiation-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rainbow.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\random.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\receipt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\recycle.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\redo.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\redo-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\registered.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\remove-format.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reply.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\reply-all.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\republican.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\restroom.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\retweet.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ribbon.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ring.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\road.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\robot.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rocket.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\route.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rss.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rss-square.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ruble-sign.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ruler.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ruler-combined.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ruler-horizontal.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ruler-vertical.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\running.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\rupee-sign.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sad-cry.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sad-tear.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\satellite.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\satellite-dish.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\save.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\school.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\screwdriver.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\scroll.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sd-card.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search-dollar.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search-location.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search-minus.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\search-plus.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\seedling.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\server.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shapes.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\share.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\share-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\share-alt-square.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\share-square.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shekel-sign.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shield-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ship.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shipping-fast.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shoe-prints.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shopping-bag.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shopping-basket.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shopping-cart.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shower.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\shuttle-van.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sign.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\signal.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\signature.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sign-in-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sign-language.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sign-out-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sim-card.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sitemap.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\skating.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\skiing.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\skiing-nordic.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\skull.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\skull-crossbones.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\slash.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sleigh.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sliders-h.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\smile.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\smile-beam.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\smile-wink.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\smog.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\smoking.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\smoking-ban.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sms.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\snowboarding.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\snowflake.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\snowman.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\snowplow.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\socks.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\solar-panel.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sort.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sort-alpha-down.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sort-alpha-down-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sort-alpha-up.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sort-alpha-up-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sort-amount-down.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sort-amount-down-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sort-amount-up.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sort-amount-up-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sort-down.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sort-numeric-down.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sort-numeric-down-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sort-numeric-up.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sort-numeric-up-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sort-up.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spa.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\space-shuttle.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spell-check.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spider.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spinner.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\splotch.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\spray-can.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\square.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\square-full.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\square-root-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stamp.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\star.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\star-and-crescent.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\star-half.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\star-half-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\star-of-david.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\star-of-life.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\step-backward.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\step-forward.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stethoscope.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sticky-note.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stop.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stop-circle.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stopwatch.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\store.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\store-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stream.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\street-view.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\strikethrough.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\stroopwafel.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\subscript.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\subway.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\suitcase.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\suitcase-rolling.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sun.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\superscript.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\surprise.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\swatchbook.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\swimmer.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\swimming-pool.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\synagogue.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sync.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\sync-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\syringe.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tablet.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tablet-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\table-tennis.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tablets.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tachometer-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tag.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tags.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tape.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tasks.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\taxi.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\teeth.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\teeth-open.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\temperature-high.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\temperature-low.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tenge.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\terminal.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\text-height.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\text-width.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\th.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\theater-masks.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thermometer.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thermometer-empty.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thermometer-full.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thermometer-half.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thermometer-quarter.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thermometer-three-quarters.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\th-large.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\th-list.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thumbs-down.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thumbs-up.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\thumbtack.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ticket-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\times.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\times-circle.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tint.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tint-slash.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tired.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\toggle-off.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\toggle-on.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\toilet.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\toilet-paper.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\toolbox.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tools.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tooth.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\torah.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\torii-gate.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tractor.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trademark.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\traffic-light.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\train.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tram.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\transgender.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\transgender-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trash.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trash-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trash-restore.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trash-restore-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tree.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\trophy.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\truck.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\truck-loading.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\truck-monster.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\truck-moving.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\truck-pickup.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tshirt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tty.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\tv.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\umbrella.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\umbrella-beach.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\underline.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\undo.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\undo-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\universal-access.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\university.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\unlink.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\unlock.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\unlock-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\upload.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-alt-slash.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-astronaut.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-check.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-circle.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-clock.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-cog.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-edit.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-friends.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-graduate.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-injured.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-lock.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-md.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-minus.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-ninja.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-nurse.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-plus.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\users.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\users-cog.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-secret.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-shield.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-slash.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-tag.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-tie.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\user-times.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\utensils.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\utensil-spoon.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vector-square.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\venus.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\venus-double.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\venus-mars.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vial.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vials.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\video.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\video-slash.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vihara.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\voicemail.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\volleyball-ball.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\volume-down.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\volume-mute.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\volume-off.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\volume-up.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vote-yea.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\vr-cardboard.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\walking.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wallet.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\warehouse.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\water.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wave-square.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\weight.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\weight-hanging.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wheelchair.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wifi.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wind.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\window-close.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\window-maximize.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\window-minimize.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\window-restore.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wine-bottle.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wine-glass.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wine-glass-alt.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\won-sign.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\wrench.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\x-ray.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\yen-sign.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\yin-yang.svg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
