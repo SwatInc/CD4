@@ -4,6 +4,7 @@ using System.Linq;
 using System.Windows.Forms;
 using DevExpress.UserSkins;
 using DevExpress.Skins;
+using CD4.UI.View;
 
 namespace CD4.UI
 {
@@ -19,7 +20,7 @@ namespace CD4.UI
             Application.SetCompatibleTextRenderingDefault(false);
 
             BonusSkins.Register();
-            Application.Run(new Form1());
+            Application.Run(new MainView());
         }
     }
 }
