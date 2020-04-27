@@ -5,7 +5,9 @@ namespace CD4.UI.Library.ViewModel
 {
     public interface ICodifiedResultsViewModel
     {
-        BindingList<CodifiedValueModel> CodifiedValuesList { get; set; }
-        CodifiedValueModel SelectedRow { get; set; }
+        BindingList<CodifiedResultsModel> CodifiedValuesList { get; set; }
+        CodifiedResultsModel SelectedRow { get; set; }
+
+        void ChangeDisplayedCodifiedData(int selectedId);
     }
 }
