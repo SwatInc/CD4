@@ -43,5 +43,16 @@ namespace CD4.UI.Library.Model
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
+
+        public override bool Equals(object obj)
+        {
+            var model = (CodifiedResultsModel)obj;
+
+            if (model.id != this.id) return false;
+            if (model.CodifiedValue != this.CodifiedValue) return false;
+
+            return true;
+
+        }
     }
 }

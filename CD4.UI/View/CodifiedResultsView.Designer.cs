@@ -35,8 +35,8 @@
             this.gridViewCodifiedResults = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumnId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnCode = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButtonSave = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButtonNew = new DevExpress.XtraEditors.SimpleButton();
             this.textEditId = new DevExpress.XtraEditors.TextEdit();
             this.textEditCodfiedValue = new DevExpress.XtraEditors.TextEdit();
             this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
@@ -56,8 +56,8 @@
             this.splitContainerControl.Name = "splitContainerControl";
             this.splitContainerControl.Panel1.Controls.Add(this.gridControlCodifiedValues);
             this.splitContainerControl.Panel1.Text = "Panel1";
-            this.splitContainerControl.Panel2.Controls.Add(this.simpleButton2);
-            this.splitContainerControl.Panel2.Controls.Add(this.simpleButton1);
+            this.splitContainerControl.Panel2.Controls.Add(this.simpleButtonSave);
+            this.splitContainerControl.Panel2.Controls.Add(this.simpleButtonNew);
             this.splitContainerControl.Panel2.Controls.Add(this.textEditId);
             this.splitContainerControl.Panel2.Controls.Add(this.textEditCodfiedValue);
             this.splitContainerControl.Panel2.Text = "Panel2";
@@ -102,25 +102,25 @@
             this.gridColumnCode.VisibleIndex = 1;
             this.gridColumnCode.Width = 321;
             // 
-            // simpleButton2
+            // simpleButtonSave
             // 
-            this.simpleButton2.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.simpleButton2.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton2.ImageOptions.SvgImage")));
-            this.simpleButton2.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
-            this.simpleButton2.Location = new System.Drawing.Point(56, 222);
-            this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(60, 34);
-            this.simpleButton2.TabIndex = 3;
+            this.simpleButtonSave.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.simpleButtonSave.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton2.ImageOptions.SvgImage")));
+            this.simpleButtonSave.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
+            this.simpleButtonSave.Location = new System.Drawing.Point(56, 222);
+            this.simpleButtonSave.Name = "simpleButtonSave";
+            this.simpleButtonSave.Size = new System.Drawing.Size(60, 34);
+            this.simpleButtonSave.TabIndex = 3;
             // 
-            // simpleButton1
+            // simpleButtonNew
             // 
-            this.simpleButton1.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.simpleButton1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage")));
-            this.simpleButton1.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
-            this.simpleButton1.Location = new System.Drawing.Point(122, 222);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(60, 34);
-            this.simpleButton1.TabIndex = 2;
+            this.simpleButtonNew.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.simpleButtonNew.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage")));
+            this.simpleButtonNew.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
+            this.simpleButtonNew.Location = new System.Drawing.Point(122, 222);
+            this.simpleButtonNew.Name = "simpleButtonNew";
+            this.simpleButtonNew.Size = new System.Drawing.Size(60, 34);
+            this.simpleButtonNew.TabIndex = 2;
             // 
             // textEditId
             // 
@@ -174,8 +174,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnCode;
         private DevExpress.XtraEditors.TextEdit textEditId;
         private DevExpress.XtraEditors.TextEdit textEditCodfiedValue;
-        private DevExpress.XtraEditors.SimpleButton simpleButton2;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.SimpleButton simpleButtonSave;
+        private DevExpress.XtraEditors.SimpleButton simpleButtonNew;
         private DevExpress.Utils.Behaviors.BehaviorManager behaviorManager1;
     }
 }

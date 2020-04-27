@@ -39,7 +39,13 @@ namespace CD4.UI.View
             gridControlCodifiedValues.DataSource = _viewModel.CodifiedValuesList;
 
             this.textEditId.DataBindings.Add(new Binding("EditValue", _viewModel.SelectedRow, nameof(_viewModel.SelectedRow.Id)));
-            this.textEditCodfiedValue.DataBindings.Add(new Binding("EditValue", _viewModel.SelectedRow, nameof(_viewModel.SelectedRow.CodifiedValue)));
+            this.textEditCodfiedValue.DataBindings.Add
+                (new Binding("EditValue", _viewModel.SelectedRow, nameof(_viewModel.SelectedRow.CodifiedValue)));
+
+            this.textEditId.DataBindings.Add(new Binding("Enabled", _viewModel, nameof(_viewModel.IsTextEditIdEnabled)));
+            this.textEditCodfiedValue.DataBindings.Add(new Binding("Enabled", _viewModel, nameof(_viewModel.IsTextEditCodifiedResultEnabled)));
+            this.simpleButtonNew.DataBindings.Add(new Binding("Enabled", _viewModel, nameof(_viewModel.IsButtonEditEnabled)));
+            this.simpleButtonSave.DataBindings.Add(new Binding("Enabled", _viewModel, nameof(_viewModel.IsButtonSaveEnabled)));
 
         }
 
