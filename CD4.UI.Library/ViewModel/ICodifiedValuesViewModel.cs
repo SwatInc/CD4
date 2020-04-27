@@ -13,7 +13,7 @@ namespace CD4.UI.Library.ViewModel
         event EventHandler<string> PushingLogs;
         event EventHandler<string> PushingMessages;
 
-        void ChangeDisplayedCodifiedData(int selectedId);
+        void DisplaySelectedCodifiedData(int selectedId);
         void SavePhrase(object sender, EventArgs e);
     }
 }

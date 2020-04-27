@@ -75,7 +75,7 @@ namespace CD4.UI.Library.ViewModel
         public BindingList<CodifiedResultsModel> CodifiedValuesList { get; set; }
         public CodifiedResultsModel SelectedRow { get; set; }
 
-        public void ChangeDisplayedCodifiedData(int selectedId)
+        public void DisplaySelectedCodifiedData(int selectedId)
         {
             var selectedRow = this.CodifiedValuesList.SingleOrDefault(c => c.Id == selectedId);
             this.SelectedRow.Id = selectedRow.Id;

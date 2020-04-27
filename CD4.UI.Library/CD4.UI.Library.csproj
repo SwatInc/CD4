@@ -50,6 +50,7 @@
     <Compile Include="ViewModel\CodifiedValuesViewModel.cs" />
     <Compile Include="ViewModel\CountryViewModel.cs" />
     <Compile Include="ViewModel\ICodifiedValuesViewModel.cs" />
+    <Compile Include="ViewModel\ICountryViewModel.cs" />
     <Compile Include="ViewModel\IMainViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
   </ItemGroup>

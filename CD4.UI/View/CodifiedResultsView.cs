@@ -57,7 +57,7 @@ namespace CD4.UI.View
             _log.Info($"{nameof(gridViewCodifiedResults)} row clicked.");
             var SelectedId = (int)gridViewCodifiedResults.GetRowCellValue(e.FocusedRowHandle, "Id");
             _log.Info($"Selected codified Id: {SelectedId}");
-            _viewModel.ChangeDisplayedCodifiedData(SelectedId);
+            _viewModel.DisplaySelectedCodifiedData(SelectedId);
         }
     }
 }
