@@ -29,7 +29,14 @@ namespace CD4.UI.View
 
             //Listen for events
             gridViewCodifiedResults.FocusedRowChanged += GridViewCodifiedResults_FocusedRowChanged;
+            simpleButtonSave.Click += _viewModel.SavePhrase;
+            _viewModel.PushingMessages += _viewModel_PushingMessages;
 
+        }
+
+        private void _viewModel_PushingMessages(object sender, string e)
+        {
+            XtraMessageBox.Show(e);
         }
 
         private void InitializeBinding()
@@ -41,11 +48,6 @@ namespace CD4.UI.View
             this.textEditId.DataBindings.Add(new Binding("EditValue", _viewModel.SelectedRow, nameof(_viewModel.SelectedRow.Id)));
             this.textEditCodfiedValue.DataBindings.Add
                 (new Binding("EditValue", _viewModel.SelectedRow, nameof(_viewModel.SelectedRow.CodifiedValue)));
-
-            this.textEditId.DataBindings.Add(new Binding("Enabled", _viewModel, nameof(_viewModel.IsTextEditIdEnabled)));
-            this.textEditCodfiedValue.DataBindings.Add(new Binding("Enabled", _viewModel, nameof(_viewModel.IsTextEditCodifiedResultEnabled)));
-            this.simpleButtonNew.DataBindings.Add(new Binding("Enabled", _viewModel, nameof(_viewModel.IsButtonEditEnabled)));
-            this.simpleButtonSave.DataBindings.Add(new Binding("Enabled", _viewModel, nameof(_viewModel.IsButtonSaveEnabled)));
 
         }
 

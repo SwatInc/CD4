@@ -45,7 +45,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\CodifiedValueModel.cs" />
-    <Compile Include="Model\State.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\CodifiedValuesViewModel.cs" />
     <Compile Include="ViewModel\ICodifiedValuesViewModel.cs" />

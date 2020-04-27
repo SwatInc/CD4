@@ -36,7 +36,6 @@
             this.gridColumnId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.simpleButtonSave = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButtonNew = new DevExpress.XtraEditors.SimpleButton();
             this.textEditId = new DevExpress.XtraEditors.TextEdit();
             this.textEditCodfiedValue = new DevExpress.XtraEditors.TextEdit();
             this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
@@ -57,12 +56,11 @@
             this.splitContainerControl.Panel1.Controls.Add(this.gridControlCodifiedValues);
             this.splitContainerControl.Panel1.Text = "Panel1";
             this.splitContainerControl.Panel2.Controls.Add(this.simpleButtonSave);
-            this.splitContainerControl.Panel2.Controls.Add(this.simpleButtonNew);
             this.splitContainerControl.Panel2.Controls.Add(this.textEditId);
             this.splitContainerControl.Panel2.Controls.Add(this.textEditCodfiedValue);
             this.splitContainerControl.Panel2.Text = "Panel2";
             this.splitContainerControl.Size = new System.Drawing.Size(596, 268);
-            this.splitContainerControl.SplitterPosition = 397;
+            this.splitContainerControl.SplitterPosition = 368;
             this.splitContainerControl.TabIndex = 0;
             // 
             // gridControlCodifiedValues
@@ -71,7 +69,7 @@
             this.gridControlCodifiedValues.Location = new System.Drawing.Point(0, 0);
             this.gridControlCodifiedValues.MainView = this.gridViewCodifiedResults;
             this.gridControlCodifiedValues.Name = "gridControlCodifiedValues";
-            this.gridControlCodifiedValues.Size = new System.Drawing.Size(397, 268);
+            this.gridControlCodifiedValues.Size = new System.Drawing.Size(368, 268);
             this.gridControlCodifiedValues.TabIndex = 0;
             this.gridControlCodifiedValues.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewCodifiedResults});
@@ -105,26 +103,18 @@
             // simpleButtonSave
             // 
             this.simpleButtonSave.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.simpleButtonSave.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton2.ImageOptions.SvgImage")));
+            this.simpleButtonSave.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButtonSave.ImageOptions.SvgImage")));
             this.simpleButtonSave.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
-            this.simpleButtonSave.Location = new System.Drawing.Point(56, 222);
+            this.simpleButtonSave.Location = new System.Drawing.Point(20, 215);
             this.simpleButtonSave.Name = "simpleButtonSave";
-            this.simpleButtonSave.Size = new System.Drawing.Size(60, 34);
+            this.simpleButtonSave.Size = new System.Drawing.Size(173, 34);
             this.simpleButtonSave.TabIndex = 3;
-            // 
-            // simpleButtonNew
-            // 
-            this.simpleButtonNew.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.simpleButtonNew.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage")));
-            this.simpleButtonNew.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
-            this.simpleButtonNew.Location = new System.Drawing.Point(122, 222);
-            this.simpleButtonNew.Name = "simpleButtonNew";
-            this.simpleButtonNew.Size = new System.Drawing.Size(60, 34);
-            this.simpleButtonNew.TabIndex = 2;
+            this.simpleButtonSave.ToolTip = "Save Record";
             // 
             // textEditId
             // 
-            this.textEditId.Location = new System.Drawing.Point(9, 23);
+            this.textEditId.Enabled = false;
+            this.textEditId.Location = new System.Drawing.Point(20, 20);
             this.textEditId.Name = "textEditId";
             this.textEditId.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.textEditId.Properties.NullText = "Id";
@@ -134,11 +124,12 @@
             // 
             // textEditCodfiedValue
             // 
-            this.textEditCodfiedValue.Location = new System.Drawing.Point(9, 49);
+            this.textEditCodfiedValue.Location = new System.Drawing.Point(20, 189);
             this.textEditCodfiedValue.Name = "textEditCodfiedValue";
             this.textEditCodfiedValue.Properties.NullText = "Please enter codified value";
             this.textEditCodfiedValue.Properties.NullValuePrompt = "Please enter codified value";
             this.textEditCodfiedValue.Properties.NullValuePromptShowForEmptyValue = true;
+            this.textEditCodfiedValue.Properties.ValidateOnEnterKey = true;
             this.textEditCodfiedValue.Size = new System.Drawing.Size(173, 20);
             this.textEditCodfiedValue.TabIndex = 0;
             // 
@@ -175,7 +166,6 @@
         private DevExpress.XtraEditors.TextEdit textEditId;
         private DevExpress.XtraEditors.TextEdit textEditCodfiedValue;
         private DevExpress.XtraEditors.SimpleButton simpleButtonSave;
-        private DevExpress.XtraEditors.SimpleButton simpleButtonNew;
         private DevExpress.Utils.Behaviors.BehaviorManager behaviorManager1;
     }
 }
