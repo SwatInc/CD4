@@ -36,12 +36,12 @@
             this.barButtonItemIslandAtoll = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemScientist = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemClinicalDetails = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemSites = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemResultDataTypes = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemTests = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
-            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -56,9 +56,9 @@
             this.barButtonItemIslandAtoll,
             this.barButtonItemScientist,
             this.barButtonItemClinicalDetails,
-            this.barButtonItem1,
+            this.barButtonItemSites,
             this.barButtonItemResultDataTypes,
-            this.barButtonItem2});
+            this.barButtonItemTests});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
             this.ribbon.MaxItemId = 10;
             this.ribbon.Name = "ribbon";
@@ -115,13 +115,13 @@
             this.barButtonItemClinicalDetails.Name = "barButtonItemClinicalDetails";
             this.barButtonItemClinicalDetails.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
-            // barButtonItem1
+            // barButtonItemSites
             // 
-            this.barButtonItem1.Caption = "Sites";
-            this.barButtonItem1.Id = 7;
-            this.barButtonItem1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
-            this.barButtonItem1.Name = "barButtonItem1";
-            this.barButtonItem1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.barButtonItemSites.Caption = "Sites";
+            this.barButtonItemSites.Id = 7;
+            this.barButtonItemSites.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
+            this.barButtonItemSites.Name = "barButtonItemSites";
+            this.barButtonItemSites.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
             // barButtonItemResultDataTypes
             // 
@@ -129,6 +129,14 @@
             this.barButtonItemResultDataTypes.Id = 8;
             this.barButtonItemResultDataTypes.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemResultDataTypes.ImageOptions.SvgImage")));
             this.barButtonItemResultDataTypes.Name = "barButtonItemResultDataTypes";
+            // 
+            // barButtonItemTests
+            // 
+            this.barButtonItemTests.Caption = "Tests";
+            this.barButtonItemTests.Id = 9;
+            this.barButtonItemTests.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem2.ImageOptions.SvgImage")));
+            this.barButtonItemTests.Name = "barButtonItemTests";
+            this.barButtonItemTests.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
             // ribbonPage1
             // 
@@ -145,9 +153,9 @@
             this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItemIslandAtoll);
             this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItemScientist);
             this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItemClinicalDetails);
-            this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItem1);
+            this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItemSites);
             this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItemResultDataTypes);
-            this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItem2);
+            this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItemTests);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Text = "Configuration";
             // 
@@ -157,14 +165,6 @@
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
             this.ribbonStatusBar.Size = new System.Drawing.Size(1153, 31);
-            // 
-            // barButtonItem2
-            // 
-            this.barButtonItem2.Caption = "Tests";
-            this.barButtonItem2.Id = 9;
-            this.barButtonItem2.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem2.ImageOptions.SvgImage")));
-            this.barButtonItem2.Name = "barButtonItem2";
-            this.barButtonItem2.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
             // MainView
             // 
@@ -196,8 +196,8 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItemIslandAtoll;
         private DevExpress.XtraBars.BarButtonItem barButtonItemScientist;
         private DevExpress.XtraBars.BarButtonItem barButtonItemClinicalDetails;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemSites;
         private DevExpress.XtraBars.BarButtonItem barButtonItemResultDataTypes;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemTests;
     }
 }

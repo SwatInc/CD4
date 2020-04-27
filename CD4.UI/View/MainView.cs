@@ -15,25 +15,85 @@ namespace CD4.UI.View
             InitializeComponent();
             _viewModel = viewModel;
 
-            barButtonItemCodifiedResults.ItemClick += OpenConfiguration;
+            #region Event Subscriptions
+
+            barButtonItemCodifiedResults.ItemClick += OpenCodifiedResultsView;
+            barButtonItemCountries.ItemClick += OpenCountriesConfigView;
+            barButtonItemGender.ItemClick += OpenGenderConfigView;
+            barButtonItemIslandAtoll.ItemClick += OpenAtollAndIslandsConfigView;
+            barButtonItemScientist.ItemClick += OpenScientistConfigView;
+            barButtonItemClinicalDetails.ItemClick += OpenClinicalDetailsConfigView;
+            barButtonItemSites.ItemClick += OpenSitesConfigView;
+            barButtonItemResultDataTypes.ItemClick += OpenResultsDataTypesConfigView;
+            barButtonItemTests.ItemClick += OpenTestsConfigView;
+
+            #endregion
         }
 
-        private void OpenConfiguration(object sender, ItemClickEventArgs e)
+        #region Open Config Forms
+        private void OpenTestsConfigView(object sender, ItemClickEventArgs e)
         {
-            var form = FormFactory.Create<CodifiedResultsView>();
-
-            form.MdiParent = this;
-            form.Show();
-            form.FormClosed += Form_FormClosed;
+            this.OpenMdiForm<TestsView>();
         }
 
-        private void Form_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
+        private void OpenResultsDataTypesConfigView(object sender, ItemClickEventArgs e)
+        {
+            this.OpenMdiForm<ResultDataTypesView>();
+        }
+
+        private void OpenSitesConfigView(object sender, ItemClickEventArgs e)
+        {
+            this.OpenMdiForm<SitesView>();
+        }
+
+        private void OpenClinicalDetailsConfigView(object sender, ItemClickEventArgs e)
+        {
+            this.OpenMdiForm<ClinicaDetailsView>();
+        }
+
+        private void OpenScientistConfigView(object sender, ItemClickEventArgs e)
+        {
+            this.OpenMdiForm<Scientists>();
+        }
+
+        private void OpenAtollAndIslandsConfigView(object sender, ItemClickEventArgs e)
+        {
+            this.OpenMdiForm<AtollIslandView>();
+        }
+
+        private void OpenGenderConfigView(object sender, ItemClickEventArgs e)
+        {
+            this.OpenMdiForm<GenderView>();
+        }
+
+        private void OpenCodifiedResultsView(object sender, ItemClickEventArgs e)
+        {
+            this.OpenMdiForm<CodifiedResultsView>();
+        }
+
+        private void OpenCountriesConfigView(object sender, ItemClickEventArgs e)
+        {
+            OpenMdiForm<CountriesView>();
+        }
+
+        #endregion
+
+        private void Form_FormClosed(object sender, FormClosedEventArgs e)
         {
             var form = (XtraForm)sender;
             form.Dispose();
             GC.Collect();
         }
 
+        public void OpenMdiForm<T>() where T : Form
+        {
+            var form = FormFactory.Create<T>();
 
+            form.MdiParent = this;
+            form.Show();
+
+            form.FormClosed += Form_FormClosed;
+
+        }
     }
 }

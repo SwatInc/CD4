@@ -11,12 +11,11 @@ using DevExpress.XtraEditors;
 
 namespace CD4.UI.View
 {
-    public partial class TestsView : DevExpress.XtraEditors.XtraForm
+    public partial class ClinicaDetailsView : DevExpress.XtraEditors.XtraForm
     {
-        public TestsView()
+        public ClinicaDetailsView()
         {
             InitializeComponent();
         }
-
     }
 }

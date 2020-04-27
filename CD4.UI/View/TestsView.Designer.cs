@@ -32,22 +32,26 @@
             this.gridControlCodifiedValues = new DevExpress.XtraGrid.GridControl();
             this.gridViewCodifiedResults = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumnId = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnGender = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnDescription = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnResultDataType = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnIsReportable = new DevExpress.XtraGrid.Columns.GridColumn();
             this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
+            this.checkEdit1 = new DevExpress.XtraEditors.CheckEdit();
+            this.textEditResultMask = new DevExpress.XtraEditors.TextEdit();
+            this.lookUpEditTestDataType = new DevExpress.XtraEditors.LookUpEdit();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.textEditId = new DevExpress.XtraEditors.TextEdit();
             this.textEditDescription = new DevExpress.XtraEditors.TextEdit();
-            this.lookUpEditTestDataType = new DevExpress.XtraEditors.LookUpEdit();
-            this.textEditResultMask = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlCodifiedValues)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewCodifiedResults)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
             this.splitContainerControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditResultMask.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTestDataType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditId.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditDescription.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTestDataType.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditResultMask.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gridControlCodifiedValues
@@ -65,7 +69,9 @@
             // 
             this.gridViewCodifiedResults.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumnId,
-            this.gridColumnGender});
+            this.gridColumnDescription,
+            this.gridColumnResultDataType,
+            this.gridColumnIsReportable});
             this.gridViewCodifiedResults.GridControl = this.gridControlCodifiedValues;
             this.gridViewCodifiedResults.Name = "gridViewCodifiedResults";
             // 
@@ -76,16 +82,34 @@
             this.gridColumnId.Name = "gridColumnId";
             this.gridColumnId.Visible = true;
             this.gridColumnId.VisibleIndex = 0;
-            this.gridColumnId.Width = 58;
+            this.gridColumnId.Width = 90;
             // 
-            // gridColumnGender
+            // gridColumnDescription
             // 
-            this.gridColumnGender.Caption = "Gender";
-            this.gridColumnGender.FieldName = "Gender";
-            this.gridColumnGender.Name = "gridColumnGender";
-            this.gridColumnGender.Visible = true;
-            this.gridColumnGender.VisibleIndex = 1;
-            this.gridColumnGender.Width = 321;
+            this.gridColumnDescription.Caption = "Description";
+            this.gridColumnDescription.FieldName = "Description";
+            this.gridColumnDescription.Name = "gridColumnDescription";
+            this.gridColumnDescription.Visible = true;
+            this.gridColumnDescription.VisibleIndex = 1;
+            this.gridColumnDescription.Width = 181;
+            // 
+            // gridColumnResultDataType
+            // 
+            this.gridColumnResultDataType.Caption = "ResultType";
+            this.gridColumnResultDataType.FieldName = "ResultDataType";
+            this.gridColumnResultDataType.Name = "gridColumnResultDataType";
+            this.gridColumnResultDataType.Visible = true;
+            this.gridColumnResultDataType.VisibleIndex = 2;
+            this.gridColumnResultDataType.Width = 106;
+            // 
+            // gridColumnIsReportable
+            // 
+            this.gridColumnIsReportable.Caption = "Is Reportable";
+            this.gridColumnIsReportable.FieldName = "IsReported";
+            this.gridColumnIsReportable.Name = "gridColumnIsReportable";
+            this.gridColumnIsReportable.Visible = true;
+            this.gridColumnIsReportable.VisibleIndex = 3;
+            this.gridColumnIsReportable.Width = 119;
             // 
             // splitContainerControl
             // 
@@ -94,6 +118,7 @@
             this.splitContainerControl.Name = "splitContainerControl";
             this.splitContainerControl.Panel1.Controls.Add(this.gridControlCodifiedValues);
             this.splitContainerControl.Panel1.Text = "Panel1";
+            this.splitContainerControl.Panel2.Controls.Add(this.checkEdit1);
             this.splitContainerControl.Panel2.Controls.Add(this.textEditResultMask);
             this.splitContainerControl.Panel2.Controls.Add(this.lookUpEditTestDataType);
             this.splitContainerControl.Panel2.Controls.Add(this.simpleButton2);
@@ -105,48 +130,27 @@
             this.splitContainerControl.SplitterPosition = 574;
             this.splitContainerControl.TabIndex = 2;
             // 
-            // simpleButton2
+            // checkEdit1
             // 
-            this.simpleButton2.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.simpleButton2.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton2.ImageOptions.SvgImage")));
-            this.simpleButton2.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
-            this.simpleButton2.Location = new System.Drawing.Point(34, 222);
-            this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(60, 34);
-            this.simpleButton2.TabIndex = 3;
+            this.checkEdit1.Location = new System.Drawing.Point(17, 128);
+            this.checkEdit1.Name = "checkEdit1";
+            this.checkEdit1.Properties.Caption = "Reportable ?";
+            this.checkEdit1.Size = new System.Drawing.Size(102, 19);
+            this.checkEdit1.TabIndex = 6;
             // 
-            // simpleButton1
+            // textEditResultMask
             // 
-            this.simpleButton1.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.simpleButton1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage")));
-            this.simpleButton1.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
-            this.simpleButton1.Location = new System.Drawing.Point(100, 222);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(60, 34);
-            this.simpleButton1.TabIndex = 2;
-            // 
-            // textEditId
-            // 
-            this.textEditId.Location = new System.Drawing.Point(9, 23);
-            this.textEditId.Name = "textEditId";
-            this.textEditId.Properties.NullText = "Id";
-            this.textEditId.Properties.NullValuePrompt = "Id";
-            this.textEditId.Size = new System.Drawing.Size(173, 20);
-            this.textEditId.TabIndex = 1;
-            // 
-            // textEditDescription
-            // 
-            this.textEditDescription.Location = new System.Drawing.Point(9, 49);
-            this.textEditDescription.Name = "textEditDescription";
-            this.textEditDescription.Properties.NullText = "Please enter the test description";
-            this.textEditDescription.Properties.NullValuePrompt = "Please enter the test Description";
-            this.textEditDescription.Properties.NullValuePromptShowForEmptyValue = true;
-            this.textEditDescription.Size = new System.Drawing.Size(173, 20);
-            this.textEditDescription.TabIndex = 0;
+            this.textEditResultMask.Location = new System.Drawing.Point(17, 102);
+            this.textEditResultMask.Name = "textEditResultMask";
+            this.textEditResultMask.Properties.NullText = "Please enter the result mask";
+            this.textEditResultMask.Properties.NullValuePrompt = "Please enter the result mask";
+            this.textEditResultMask.Properties.NullValuePromptShowForEmptyValue = true;
+            this.textEditResultMask.Size = new System.Drawing.Size(173, 20);
+            this.textEditResultMask.TabIndex = 5;
             // 
             // lookUpEditTestDataType
             // 
-            this.lookUpEditTestDataType.Location = new System.Drawing.Point(9, 75);
+            this.lookUpEditTestDataType.Location = new System.Drawing.Point(17, 76);
             this.lookUpEditTestDataType.Name = "lookUpEditTestDataType";
             this.lookUpEditTestDataType.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.lookUpEditTestDataType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -159,15 +163,44 @@
             this.lookUpEditTestDataType.Size = new System.Drawing.Size(173, 20);
             this.lookUpEditTestDataType.TabIndex = 4;
             // 
-            // textEditResultMask
+            // simpleButton2
             // 
-            this.textEditResultMask.Location = new System.Drawing.Point(9, 101);
-            this.textEditResultMask.Name = "textEditResultMask";
-            this.textEditResultMask.Properties.NullText = "Please enter the result mask";
-            this.textEditResultMask.Properties.NullValuePrompt = "Please enter the result mask";
-            this.textEditResultMask.Properties.NullValuePromptShowForEmptyValue = true;
-            this.textEditResultMask.Size = new System.Drawing.Size(173, 20);
-            this.textEditResultMask.TabIndex = 5;
+            this.simpleButton2.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.simpleButton2.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton2.ImageOptions.SvgImage")));
+            this.simpleButton2.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
+            this.simpleButton2.Location = new System.Drawing.Point(41, 191);
+            this.simpleButton2.Name = "simpleButton2";
+            this.simpleButton2.Size = new System.Drawing.Size(60, 34);
+            this.simpleButton2.TabIndex = 3;
+            // 
+            // simpleButton1
+            // 
+            this.simpleButton1.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.simpleButton1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage")));
+            this.simpleButton1.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
+            this.simpleButton1.Location = new System.Drawing.Point(107, 191);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(60, 34);
+            this.simpleButton1.TabIndex = 2;
+            // 
+            // textEditId
+            // 
+            this.textEditId.Location = new System.Drawing.Point(17, 24);
+            this.textEditId.Name = "textEditId";
+            this.textEditId.Properties.NullText = "Id";
+            this.textEditId.Properties.NullValuePrompt = "Id";
+            this.textEditId.Size = new System.Drawing.Size(173, 20);
+            this.textEditId.TabIndex = 1;
+            // 
+            // textEditDescription
+            // 
+            this.textEditDescription.Location = new System.Drawing.Point(17, 50);
+            this.textEditDescription.Name = "textEditDescription";
+            this.textEditDescription.Properties.NullText = "Please enter the test description";
+            this.textEditDescription.Properties.NullValuePrompt = "Please enter the test Description";
+            this.textEditDescription.Properties.NullValuePromptShowForEmptyValue = true;
+            this.textEditDescription.Size = new System.Drawing.Size(173, 20);
+            this.textEditDescription.TabIndex = 0;
             // 
             // TestsView
             // 
@@ -181,10 +214,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridViewCodifiedResults)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).EndInit();
             this.splitContainerControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditResultMask.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTestDataType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditId.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditDescription.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTestDataType.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditResultMask.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -194,7 +228,7 @@
         private DevExpress.XtraGrid.GridControl gridControlCodifiedValues;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewCodifiedResults;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnId;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnGender;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDescription;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl;
         private DevExpress.XtraEditors.TextEdit textEditResultMask;
         private DevExpress.XtraEditors.LookUpEdit lookUpEditTestDataType;
@@ -202,5 +236,8 @@
         private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private DevExpress.XtraEditors.TextEdit textEditId;
         private DevExpress.XtraEditors.TextEdit textEditDescription;
+        private DevExpress.XtraEditors.CheckEdit checkEdit1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnResultDataType;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnIsReportable;
     }
 }

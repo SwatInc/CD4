@@ -88,6 +88,12 @@
     <Compile Include="View\AtollIslandView.Designer.cs">
       <DependentUpon>AtollIslandView.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\ClinicaDetailsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ClinicaDetailsView.Designer.cs">
+      <DependentUpon>ClinicaDetailsView.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\CodifiedResultsView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -149,6 +155,9 @@
     </Compile>
     <EmbeddedResource Include="View\AtollIslandView.resx">
       <DependentUpon>AtollIslandView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ClinicaDetailsView.resx">
+      <DependentUpon>ClinicaDetailsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\CodifiedResultsView.resx">
       <DependentUpon>CodifiedResultsView.cs</DependentUpon>
