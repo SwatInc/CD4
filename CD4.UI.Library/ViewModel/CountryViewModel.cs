@@ -14,6 +14,24 @@ namespace CD4.UI.Library.ViewModel
         public event EventHandler<String> PushingLogs;
         public event EventHandler<string> PushingMessages;
 
+        public CountryViewModel()
+        {
+            this.CountryList = new BindingList<CountryModel>();
+            this.SelectedRow = new CountryModel();
+
+            InitializeDemoData();
+
+        }
+
+        private void InitializeDemoData()
+        {
+            var country1 = new CountryModel() {Id=1, Country="Maldives" };
+            var country2 = new CountryModel() {Id=2, Country="Pakistan" };
+
+            this.CountryList.Add(country1);
+            this.CountryList.Add(country2);
+        }
+
         #region INotifyPropertyChanged Hookup
 
         public event PropertyChangedEventHandler PropertyChanged;

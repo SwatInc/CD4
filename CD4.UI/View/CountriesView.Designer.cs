@@ -34,16 +34,15 @@
             this.gridColumnId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnCountry = new DevExpress.XtraGrid.Columns.GridColumn();
             this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
-            this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButtonSave = new DevExpress.XtraEditors.SimpleButton();
             this.textEditId = new DevExpress.XtraEditors.TextEdit();
-            this.textEditCodfiedValue = new DevExpress.XtraEditors.TextEdit();
+            this.textEditSelectedCountry = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlCodifiedValues)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewCodifiedResults)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
             this.splitContainerControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEditId.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditCodfiedValue.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditSelectedCountry.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gridControlCodifiedValues
@@ -90,39 +89,28 @@
             this.splitContainerControl.Name = "splitContainerControl";
             this.splitContainerControl.Panel1.Controls.Add(this.gridControlCodifiedValues);
             this.splitContainerControl.Panel1.Text = "Panel1";
-            this.splitContainerControl.Panel2.Controls.Add(this.simpleButton2);
-            this.splitContainerControl.Panel2.Controls.Add(this.simpleButton1);
+            this.splitContainerControl.Panel2.Controls.Add(this.simpleButtonSave);
             this.splitContainerControl.Panel2.Controls.Add(this.textEditId);
-            this.splitContainerControl.Panel2.Controls.Add(this.textEditCodfiedValue);
+            this.splitContainerControl.Panel2.Controls.Add(this.textEditSelectedCountry);
             this.splitContainerControl.Panel2.Text = "Panel2";
             this.splitContainerControl.Size = new System.Drawing.Size(601, 253);
             this.splitContainerControl.SplitterPosition = 397;
             this.splitContainerControl.TabIndex = 1;
             // 
-            // simpleButton2
+            // simpleButtonSave
             // 
-            this.simpleButton2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.simpleButton2.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.simpleButton2.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton2.ImageOptions.SvgImage")));
-            this.simpleButton2.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
-            this.simpleButton2.Location = new System.Drawing.Point(47, 207);
-            this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(60, 34);
-            this.simpleButton2.TabIndex = 3;
-            // 
-            // simpleButton1
-            // 
-            this.simpleButton1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.simpleButton1.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.simpleButton1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage")));
-            this.simpleButton1.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
-            this.simpleButton1.Location = new System.Drawing.Point(113, 207);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(60, 34);
-            this.simpleButton1.TabIndex = 2;
+            this.simpleButtonSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.simpleButtonSave.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
+            this.simpleButtonSave.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButtonSave.ImageOptions.SvgImage")));
+            this.simpleButtonSave.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
+            this.simpleButtonSave.Location = new System.Drawing.Point(9, 204);
+            this.simpleButtonSave.Name = "simpleButtonSave";
+            this.simpleButtonSave.Size = new System.Drawing.Size(173, 34);
+            this.simpleButtonSave.TabIndex = 3;
             // 
             // textEditId
             // 
+            this.textEditId.Enabled = false;
             this.textEditId.Location = new System.Drawing.Point(9, 23);
             this.textEditId.Name = "textEditId";
             this.textEditId.Properties.NullText = "Id";
@@ -130,15 +118,15 @@
             this.textEditId.Size = new System.Drawing.Size(173, 20);
             this.textEditId.TabIndex = 1;
             // 
-            // textEditCodfiedValue
+            // textEditSelectedCountry
             // 
-            this.textEditCodfiedValue.Location = new System.Drawing.Point(9, 49);
-            this.textEditCodfiedValue.Name = "textEditCodfiedValue";
-            this.textEditCodfiedValue.Properties.NullText = "Please enter country name";
-            this.textEditCodfiedValue.Properties.NullValuePrompt = "Please enter country name";
-            this.textEditCodfiedValue.Properties.NullValuePromptShowForEmptyValue = true;
-            this.textEditCodfiedValue.Size = new System.Drawing.Size(173, 20);
-            this.textEditCodfiedValue.TabIndex = 0;
+            this.textEditSelectedCountry.Location = new System.Drawing.Point(9, 178);
+            this.textEditSelectedCountry.Name = "textEditSelectedCountry";
+            this.textEditSelectedCountry.Properties.NullText = "Please enter country name";
+            this.textEditSelectedCountry.Properties.NullValuePrompt = "Please enter country name";
+            this.textEditSelectedCountry.Properties.NullValuePromptShowForEmptyValue = true;
+            this.textEditSelectedCountry.Size = new System.Drawing.Size(173, 20);
+            this.textEditSelectedCountry.TabIndex = 0;
             // 
             // CountriesView
             // 
@@ -153,7 +141,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).EndInit();
             this.splitContainerControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.textEditId.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditCodfiedValue.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditSelectedCountry.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -165,9 +153,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnId;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnCountry;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl;
-        private DevExpress.XtraEditors.SimpleButton simpleButton2;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.SimpleButton simpleButtonSave;
         private DevExpress.XtraEditors.TextEdit textEditId;
-        private DevExpress.XtraEditors.TextEdit textEditCodfiedValue;
+        private DevExpress.XtraEditors.TextEdit textEditSelectedCountry;
     }
 }
