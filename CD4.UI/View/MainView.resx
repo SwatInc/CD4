@@ -117,4 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <assembly alias="DevExpress.Data.v18.2" name="DevExpress.Data.v18.2, Version=18.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" />
+  <data name="barButtonItemConfiguaration.ImageOptions.SvgImage" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v18.2" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFlEZXZFeHByZXNzLkRhdGEudjE4LjIsIFZlcnNpb249MTguMi40
+        LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjg4ZDE3NTRkNzAwZTQ5YQUBAAAAHURl
+        dkV4cHJlc3MuVXRpbHMuU3ZnLlN2Z0ltYWdlAQAAAAREYXRhBwICAAAACQMAAAAPAwAAADUDAAAC77u/
+        PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4NCjxzdmcgdmlld0JveD0iMCAwIDUx
+        MiA1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+DQogIDxwYXRoIGQ9Ik01MDEu
+        MSAzOTUuN0wzODQgMjc4LjZjLTIzLjEtMjMuMS01Ny42LTI3LjYtODUuNC0xMy45TDE5MiAxNTguMVY5
+        Nkw2NCAwIDAgNjRsOTYgMTI4aDYyLjFsMTA2LjYgMTA2LjZjLTEzLjYgMjcuOC05LjIgNjIuMyAxMy45
+        IDg1LjRsMTE3LjEgMTE3LjFjMTQuNiAxNC42IDM4LjIgMTQuNiA1Mi43IDBsNTIuNy01Mi43YzE0LjUt
+        MTQuNiAxNC41LTM4LjIgMC01Mi43ek0zMzEuNyAyMjVjMjguMyAwIDU0LjkgMTEgNzQuOSAzMWwxOS40
+        IDE5LjRjMTUuOC02LjkgMzAuOC0xNi41IDQzLjgtMjkuNSAzNy4xLTM3LjEgNDkuNy04OS4zIDM3Ljkt
+        MTM2LjctMi4yLTktMTMuNS0xMi4xLTIwLjEtNS41bC03NC40IDc0LjQtNjcuOS0xMS4zTDMzNCA5OC45
+        bDc0LjQtNzQuNGM2LjYtNi42IDMuNC0xNy45LTUuNy0yMC4yLTQ3LjQtMTEuNy05OS42LjktMTM2LjYg
+        MzcuOS0yOC41IDI4LjUtNDEuOSA2Ni4xLTQxLjIgMTAzLjZsODIuMSA4Mi4xYzguMS0xLjkgMTYuNS0y
+        LjkgMjQuNy0yLjl6bS0xMDMuOSA4MmwtNTYuNy01Ni43TDE4LjcgNDAyLjhjLTI1IDI1LTI1IDY1LjUg
+        MCA5MC41czY1LjUgMjUgOTAuNSAwbDEyMy42LTEyMy42Yy03LjYtMTkuOS05LjktNDEuNi01LTYyLjd6
+        TTY0IDQ3MmMtMTMuMiAwLTI0LTEwLjgtMjQtMjQgMC0xMy4zIDEwLjctMjQgMjQtMjRzMjQgMTAuNyAy
+        NCAyNGMwIDEzLjItMTAuNyAyNC0yNCAyNHoiIC8+DQo8L3N2Zz4L
+</value>
+  </data>
 </root>

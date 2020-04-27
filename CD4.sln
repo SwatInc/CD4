@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CD4.UI", "CD4.UI\CD4.UI.csp
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "CD4.Data", "CD4.Data\CD4.Data.sqlproj", "{E7D9DD5B-1699-47F8-818C-F5B0B67085B6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CD4.UI.Library", "CD4.UI.Library\CD4.UI.Library.csproj", "{87A4ABE4-6121-4D2B-A9A1-D68D053AEAFD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,6 +25,10 @@ Global
 		{E7D9DD5B-1699-47F8-818C-F5B0B67085B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E7D9DD5B-1699-47F8-818C-F5B0B67085B6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E7D9DD5B-1699-47F8-818C-F5B0B67085B6}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{87A4ABE4-6121-4D2B-A9A1-D68D053AEAFD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87A4ABE4-6121-4D2B-A9A1-D68D053AEAFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87A4ABE4-6121-4D2B-A9A1-D68D053AEAFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87A4ABE4-6121-4D2B-A9A1-D68D053AEAFD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

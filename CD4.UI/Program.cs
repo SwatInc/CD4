@@ -5,6 +5,8 @@ using System.Windows.Forms;
 using DevExpress.UserSkins;
 using DevExpress.Skins;
 using CD4.UI.View;
+using CD4.UI.Library.ViewModel;
+using Autofac;
 
 namespace CD4.UI
 {
@@ -16,11 +18,14 @@ namespace CD4.UI
         [STAThread]
         static void Main()
         {
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            var container = ContainerConfig.Configure();
 
-            BonusSkins.Register();
-            Application.Run(new MainView());
+            using (var scope = container.BeginLifetimeScope())
+            {
+                var app = scope.Resolve<ICd4Application>();
+                app.Run();
+            }
+            
         }
     }
 }

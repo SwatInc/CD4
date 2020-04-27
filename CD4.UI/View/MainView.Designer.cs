@@ -28,8 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
-            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemConfiguaration = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
@@ -41,7 +42,7 @@
             this.ribbon.ExpandCollapseItem.Id = 0;
             this.ribbon.Items.AddRange(new DevExpress.XtraBars.BarItem[] {
             this.ribbon.ExpandCollapseItem,
-            this.barButtonItem1});
+            this.barButtonItemConfiguaration});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
             this.ribbon.MaxItemId = 2;
             this.ribbon.Name = "ribbon";
@@ -50,12 +51,13 @@
             this.ribbon.Size = new System.Drawing.Size(1153, 143);
             this.ribbon.StatusBar = this.ribbonStatusBar;
             // 
-            // barButtonItem1
+            // barButtonItemConfiguaration
             // 
-            this.barButtonItem1.Caption = "barButtonItem1";
-            this.barButtonItem1.Id = 1;
-            this.barButtonItem1.Name = "barButtonItem1";
-            this.barButtonItem1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.barButtonItemConfiguaration.Caption = "Configuration";
+            this.barButtonItemConfiguaration.Id = 1;
+            this.barButtonItemConfiguaration.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemConfiguaration.ImageOptions.SvgImage")));
+            this.barButtonItemConfiguaration.Name = "barButtonItemConfiguaration";
+            this.barButtonItemConfiguaration.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
             // ribbonPage1
             // 
@@ -66,7 +68,7 @@
             // 
             // ribbonPageGroup1
             // 
-            this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItem1);
+            this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItemConfiguaration);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Text = "ribbonPageGroup1";
             // 
@@ -100,6 +102,6 @@
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup1;
         private DevExpress.XtraBars.Ribbon.RibbonStatusBar ribbonStatusBar;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemConfiguaration;
     }
 }
