@@ -53,7 +53,7 @@ namespace CD4.UI.View
 
         private void OpenScientistConfigView(object sender, ItemClickEventArgs e)
         {
-            this.OpenMdiForm<Scientists>();
+            this.OpenMdiForm<ScientistsView>();
         }
 
         private void OpenAtollAndIslandsConfigView(object sender, ItemClickEventArgs e)

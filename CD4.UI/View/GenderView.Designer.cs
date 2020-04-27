@@ -30,7 +30,7 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GenderView));
             this.gridControlCodifiedValues = new DevExpress.XtraGrid.GridControl();
-            this.gridViewCountries = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridViewGender = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumnId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnGender = new DevExpress.XtraGrid.Columns.GridColumn();
             this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
@@ -38,7 +38,7 @@
             this.textEditId = new DevExpress.XtraEditors.TextEdit();
             this.textEditGender = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlCodifiedValues)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewCountries)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewGender)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
             this.splitContainerControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEditId.Properties)).BeginInit();
@@ -49,20 +49,20 @@
             // 
             this.gridControlCodifiedValues.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControlCodifiedValues.Location = new System.Drawing.Point(0, 0);
-            this.gridControlCodifiedValues.MainView = this.gridViewCountries;
+            this.gridControlCodifiedValues.MainView = this.gridViewGender;
             this.gridControlCodifiedValues.Name = "gridControlCodifiedValues";
             this.gridControlCodifiedValues.Size = new System.Drawing.Size(318, 268);
             this.gridControlCodifiedValues.TabIndex = 0;
             this.gridControlCodifiedValues.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridViewCountries});
+            this.gridViewGender});
             // 
             // gridViewCodifiedResults
             // 
-            this.gridViewCountries.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridViewGender.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumnId,
             this.gridColumnGender});
-            this.gridViewCountries.GridControl = this.gridControlCodifiedValues;
-            this.gridViewCountries.Name = "gridViewCodifiedResults";
+            this.gridViewGender.GridControl = this.gridControlCodifiedValues;
+            this.gridViewGender.Name = "gridViewCodifiedResults";
             // 
             // gridColumnId
             // 
@@ -136,7 +136,7 @@
             this.Name = "GenderView";
             this.Text = "GenderView";
             ((System.ComponentModel.ISupportInitialize)(this.gridControlCodifiedValues)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewCountries)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewGender)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).EndInit();
             this.splitContainerControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.textEditId.Properties)).EndInit();
@@ -148,7 +148,7 @@
         #endregion
 
         private DevExpress.XtraGrid.GridControl gridControlCodifiedValues;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridViewCountries;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewGender;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnId;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnGender;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl;

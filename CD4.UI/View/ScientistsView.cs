@@ -13,46 +13,50 @@ using DevExpress.XtraGrid.Views.Base;
 
 namespace CD4.UI.View
 {
-    public partial class GenderView : XtraForm
+    public partial class ScientistsView : XtraForm
     {
         private static readonly log4net.ILog _log = LogHelper.GetLogger();
-        private readonly IGenderViewModel _viewModel;
+        private readonly IScientistViewModel _viewModel;
 
-        public GenderView(IGenderViewModel viewModel)
+        public ScientistsView(IScientistViewModel viewModel)
         {
             InitializeComponent();
             this._viewModel = viewModel;
             InitializeBinding();
 
-            this.gridViewGender.FocusedRowChanged += this.gridViewGender_FocusedRowChanged;
             _viewModel.PushingMessages += _viewModel_PushingMessages;
-            simpleButtonSave.Click += _viewModel.SaveGender;
-
+            this.gridViewScientists.FocusedRowChanged += GridViewScientists_FocusedRowChanged;
+            simpleButtonSave.Click += _viewModel.SaveScientist;
         }
+
+
 
         private void _viewModel_PushingMessages(object sender, string e)
         {
             XtraMessageBox.Show(e);
         }
 
+
         private void InitializeBinding()
         {
             _log.Info($"Initialize data binding in {nameof(CodifiedResultsView)}");
 
-            gridControlCodifiedValues.DataSource = _viewModel.GenderList;
+            gridControlCodifiedValues.DataSource = _viewModel.ScientistList;
 
             this.textEditId.DataBindings.Add(new Binding("EditValue", _viewModel.SelectedRow, nameof(_viewModel.SelectedRow.Id)));
-            this.textEditGender.DataBindings.Add
-                (new Binding("EditValue", _viewModel.SelectedRow, nameof(_viewModel.SelectedRow.Gender)));
+            this.textEditScientist.DataBindings.Add
+                (new Binding("EditValue", _viewModel.SelectedRow, nameof(_viewModel.SelectedRow.Scientist)));
         }
 
-        private void gridViewGender_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+        private void GridViewScientists_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
         {
-            _log.Info($"{nameof(gridViewGender)} row clicked.");
-            var SelectedId = (int)gridViewGender.GetRowCellValue(e.FocusedRowHandle, "Id");
+            _log.Info($"{nameof(gridViewScientists)} row clicked.");
+            var SelectedId = (int)gridViewScientists.GetRowCellValue(e.FocusedRowHandle, "Id");
 
             _log.Info($"Selected codified Id: {SelectedId}");
             _viewModel.DisplaySelectedData(SelectedId);
+
         }
+
     }
 }

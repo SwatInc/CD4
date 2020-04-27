@@ -124,11 +124,11 @@
     <Compile Include="View\ResultDataTypesView.Designer.cs">
       <DependentUpon>ResultDataTypesView.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\Scientists.cs">
+    <Compile Include="View\ScientistsView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\Scientists.Designer.cs">
-      <DependentUpon>Scientists.cs</DependentUpon>
+    <Compile Include="View\ScientistsView.Designer.cs">
+      <DependentUpon>ScientistsView.cs</DependentUpon>
     </Compile>
     <Compile Include="View\SitesView.cs">
       <SubType>Form</SubType>
@@ -174,8 +174,8 @@
     <EmbeddedResource Include="View\ResultDataTypesView.resx">
       <DependentUpon>ResultDataTypesView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\Scientists.resx">
-      <DependentUpon>Scientists.cs</DependentUpon>
+    <EmbeddedResource Include="View\ScientistsView.resx">
+      <DependentUpon>ScientistsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\SitesView.resx">
       <DependentUpon>SitesView.cs</DependentUpon>
