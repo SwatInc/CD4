@@ -8,14 +8,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using CD4.UI.Library.ViewModel;
 
 namespace CD4.UI.View
 {
-    public partial class CodifiedResults : DevExpress.XtraEditors.XtraForm
+    public partial class CodifiedResultsView : XtraForm
     {
-        public CodifiedResults()
+        private  ICodifiedResultsViewModel _viewModel { get; }
+
+        public CodifiedResultsView(ICodifiedResultsViewModel viewModel)
         {
             InitializeComponent();
+            _viewModel = viewModel;
         }
+
     }
 }

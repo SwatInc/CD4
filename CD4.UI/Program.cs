@@ -28,6 +28,8 @@ namespace CD4.UI
 
                 using var scope = container.BeginLifetimeScope();
                 var app = scope.Resolve<ICd4Application>();
+                FormFactory.Use(container.Resolve<IFormFactory>());
+
                 app.Run();
             }
             catch (Exception ex)

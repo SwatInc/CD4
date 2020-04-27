@@ -86,6 +86,7 @@
             this.ClientSize = new System.Drawing.Size(1153, 534);
             this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbon);
+            this.IsMdiContainer = true;
             this.Name = "MainView";
             this.Ribbon = this.ribbon;
             this.StatusBar = this.ribbonStatusBar;

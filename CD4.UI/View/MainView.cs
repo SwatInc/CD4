@@ -1,14 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using CD4.UI.Library.ViewModel;
 using DevExpress.XtraBars;
-using CD4.UI.Library.ViewModel;
+using DevExpress.XtraEditors;
+using System;
+using System.Windows.Forms;
 
 namespace CD4.UI.View
 {
@@ -26,7 +20,18 @@ namespace CD4.UI.View
 
         private void OpenConfiguration(object sender, ItemClickEventArgs e)
         {
-            throw new NotImplementedException();
+            var form = FormFactory.Create<CodifiedResultsView>();
+
+            form.MdiParent = this;
+            form.Show();
+            form.FormClosed += Form_FormClosed;
+        }
+
+        private void Form_FormClosed(object sender, System.Windows.Forms.FormClosedEventArgs e)
+        {
+            var form = (XtraForm)sender;
+            form.Dispose();
+            GC.Collect();
         }
     }
 }
