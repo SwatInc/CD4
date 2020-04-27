@@ -43,7 +43,8 @@ namespace CD4.UI.View
 
         }
 
-        private void GridViewCodifiedResults_FocusedRowChanged(object sender, FocusedRowChangedEventArgs e)
+        private void GridViewCodifiedResults_FocusedRowChanged
+            (object sender, FocusedRowChangedEventArgs e)
         {
             _log.Info($"{nameof(gridViewCodifiedResults)} row clicked.");
             var SelectedId = (int)gridViewCodifiedResults.GetRowCellValue(e.FocusedRowHandle, "Id");
