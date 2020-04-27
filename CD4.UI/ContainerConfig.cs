@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using CD4.UI.Library.ViewModel;
 using CD4.UI.View;
+using log4net;
 using System;
 using System.Collections.Generic;
 using System.Linq;
