@@ -49,6 +49,7 @@
     <Compile Include="Model\CountryModel.cs" />
     <Compile Include="Model\GenderModel.cs" />
     <Compile Include="Model\ScientistModel.cs" />
+    <Compile Include="Model\SitesModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\ClinicalDetailsViewModel.cs" />
     <Compile Include="ViewModel\CodifiedValuesViewModel.cs" />
@@ -60,8 +61,10 @@
     <Compile Include="ViewModel\IGenderViewModel.cs" />
     <Compile Include="ViewModel\IMainViewModel.cs" />
     <Compile Include="ViewModel\IScientistViewModel.cs" />
+    <Compile Include="ViewModel\ISitesViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ScientistViewModel.cs" />
+    <Compile Include="ViewModel\SitesViewModel.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
