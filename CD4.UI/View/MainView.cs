@@ -1,4 +1,5 @@
 ﻿using CD4.UI.Library.ViewModel;
+using DevExpress.Skins;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using System;
@@ -13,6 +14,8 @@ namespace CD4.UI.View
         public MainView(IMainViewModel viewModel)
         {
             InitializeComponent();
+            SkinManager.EnableFormSkins();
+            SkinManager.EnableMdiFormSkins();
             _viewModel = viewModel;
 
             #region Event Subscriptions
@@ -24,7 +27,6 @@ namespace CD4.UI.View
             barButtonItemScientist.ItemClick += OpenScientistConfigView;
             barButtonItemClinicalDetails.ItemClick += OpenClinicalDetailsConfigView;
             barButtonItemSites.ItemClick += OpenSitesConfigView;
-            barButtonItemResultDataTypes.ItemClick += OpenResultsDataTypesConfigView;
             barButtonItemTests.ItemClick += OpenTestsConfigView;
 
             #endregion
@@ -34,11 +36,6 @@ namespace CD4.UI.View
         private void OpenTestsConfigView(object sender, ItemClickEventArgs e)
         {
             this.OpenMdiForm<TestsView>();
-        }
-
-        private void OpenResultsDataTypesConfigView(object sender, ItemClickEventArgs e)
-        {
-            this.OpenMdiForm<ResultDataTypesView>();
         }
 
         private void OpenSitesConfigView(object sender, ItemClickEventArgs e)

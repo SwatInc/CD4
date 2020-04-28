@@ -1,14 +1,15 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace CD4.UI.Library.ViewModel
+namespace CD4.UI.Library.Model
 {
     public class TestModel : INotifyPropertyChanged
     {
-        private string mask;
         private int id;
         private string description;
         private string resultDataType;
+        private string mask;
         private bool isReportable;
 
         public int Id
@@ -38,6 +39,10 @@ namespace CD4.UI.Library.ViewModel
                 OnPropertyChanged();
             }
         }
+        /// <summary>
+        /// The numeric zero ( 0 ) indcates a mandatory presence of zero if no digit is present a position
+        /// The hash (#) means optional digit
+        /// </summary>
         public string Mask
         {
             get => mask; set
@@ -68,6 +73,27 @@ namespace CD4.UI.Library.ViewModel
         }
 
         #endregion
+
+        internal static bool HaveNulls(TestModel selectedTest)
+        {
+            if (selectedTest.Id == 0) return true;
+            if (string.IsNullOrEmpty(selectedTest.Description)) return true;
+            if (string.IsNullOrEmpty(selectedTest.resultDataType)) return true;
+            if (string.IsNullOrEmpty(selectedTest.Mask)) return true;
+
+            return false;
+        }
+
+        public override bool Equals(object obj)
+        {
+            var test = (TestModel)obj;
+            if (test.Id != this.Id) return false;
+            if (test.Description != this.Description) return false;
+            if (test.ResultDataType != this.resultDataType) return false;
+            if (test.mask != this.Mask) return false;
+            if (test.isReportable != this.isReportable) return false;
+            return true;
+        }
 
     }
 }
