@@ -37,7 +37,6 @@
             this.barButtonItemScientist = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemClinicalDetails = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemSites = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItemResultDataTypes = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemTests = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -57,7 +56,6 @@
             this.barButtonItemScientist,
             this.barButtonItemClinicalDetails,
             this.barButtonItemSites,
-            this.barButtonItemResultDataTypes,
             this.barButtonItemTests});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
             this.ribbon.MaxItemId = 10;
@@ -123,13 +121,6 @@
             this.barButtonItemSites.Name = "barButtonItemSites";
             this.barButtonItemSites.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
-            // barButtonItemResultDataTypes
-            // 
-            this.barButtonItemResultDataTypes.Caption = "Result Data Types";
-            this.barButtonItemResultDataTypes.Id = 8;
-            this.barButtonItemResultDataTypes.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemResultDataTypes.ImageOptions.SvgImage")));
-            this.barButtonItemResultDataTypes.Name = "barButtonItemResultDataTypes";
-            // 
             // barButtonItemTests
             // 
             this.barButtonItemTests.Caption = "Tests";
@@ -154,7 +145,6 @@
             this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItemScientist);
             this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItemClinicalDetails);
             this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItemSites);
-            this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItemResultDataTypes);
             this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItemTests);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Text = "Configuration";
@@ -197,7 +187,6 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItemScientist;
         private DevExpress.XtraBars.BarButtonItem barButtonItemClinicalDetails;
         private DevExpress.XtraBars.BarButtonItem barButtonItemSites;
-        private DevExpress.XtraBars.BarButtonItem barButtonItemResultDataTypes;
         private DevExpress.XtraBars.BarButtonItem barButtonItemTests;
     }
 }
