@@ -9,12 +9,21 @@ namespace CD4.UI.Library.ViewModel
 {
     public class TestViewModel : INotifyPropertyChanged, ITestViewModel
     {
-        public event EventHandler<String> PushingLogs;
+        public event EventHandler<string> PushingLogs;
         public event EventHandler<string> PushingMessages;
 
         public TestViewModel()
         {
+            InitializeDemoData();
+        }
 
+        private void InitializeDemoData()
+        {
+            var egene = new TestModel() { Id = 1, Description = "E Gene", ResultDataType = "Numeric", Mask = "###.00", IsReportable = true };
+            var rdrpgene = new TestModel() { Id = 1, Description = "RdRP Gene", ResultDataType = "Numeric", Mask = "###.00", IsReportable = true };
+
+            this.TestList.Add(egene);
+            this.TestList.Add(rdrpgene);
         }
 
         #region INotifyPropertyChanged Hookup
@@ -77,13 +86,7 @@ namespace CD4.UI.Library.ViewModel
 
         private void update(TestModel update)
         {
-            //check for null
-
-            //look for dublicate
-
-            //Check equality. 
-            // if not equal, update
-            //else mesg nothing to update.
+            PushingMessages?.Invoke(this, $"Test data updated {update.Description}.");
         }
     }
 }
