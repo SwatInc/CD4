@@ -35,7 +35,6 @@
             this.gridColumnId = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnSite = new DevExpress.XtraGrid.Columns.GridColumn();
             this.simpleButton2 = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             this.textEditId = new DevExpress.XtraEditors.TextEdit();
             this.textEditSite = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
@@ -54,12 +53,11 @@
             this.splitContainerControl.Panel1.Controls.Add(this.gridControlCodifiedValues);
             this.splitContainerControl.Panel1.Text = "Panel1";
             this.splitContainerControl.Panel2.Controls.Add(this.simpleButton2);
-            this.splitContainerControl.Panel2.Controls.Add(this.simpleButton1);
             this.splitContainerControl.Panel2.Controls.Add(this.textEditId);
             this.splitContainerControl.Panel2.Controls.Add(this.textEditSite);
             this.splitContainerControl.Panel2.Text = "Panel2";
-            this.splitContainerControl.Size = new System.Drawing.Size(596, 282);
-            this.splitContainerControl.SplitterPosition = 397;
+            this.splitContainerControl.Size = new System.Drawing.Size(510, 224);
+            this.splitContainerControl.SplitterPosition = 313;
             this.splitContainerControl.TabIndex = 1;
             // 
             // gridControlCodifiedValues
@@ -68,7 +66,7 @@
             this.gridControlCodifiedValues.Location = new System.Drawing.Point(0, 0);
             this.gridControlCodifiedValues.MainView = this.gridViewCodifiedResults;
             this.gridControlCodifiedValues.Name = "gridControlCodifiedValues";
-            this.gridControlCodifiedValues.Size = new System.Drawing.Size(397, 282);
+            this.gridControlCodifiedValues.Size = new System.Drawing.Size(313, 224);
             this.gridControlCodifiedValues.TabIndex = 0;
             this.gridControlCodifiedValues.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewCodifiedResults});
@@ -104,20 +102,10 @@
             this.simpleButton2.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
             this.simpleButton2.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton2.ImageOptions.SvgImage")));
             this.simpleButton2.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
-            this.simpleButton2.Location = new System.Drawing.Point(26, 212);
+            this.simpleButton2.Location = new System.Drawing.Point(9, 179);
             this.simpleButton2.Name = "simpleButton2";
-            this.simpleButton2.Size = new System.Drawing.Size(60, 34);
+            this.simpleButton2.Size = new System.Drawing.Size(173, 34);
             this.simpleButton2.TabIndex = 3;
-            // 
-            // simpleButton1
-            // 
-            this.simpleButton1.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
-            this.simpleButton1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButton1.ImageOptions.SvgImage")));
-            this.simpleButton1.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
-            this.simpleButton1.Location = new System.Drawing.Point(92, 212);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(60, 34);
-            this.simpleButton1.TabIndex = 2;
             // 
             // textEditId
             // 
@@ -130,7 +118,7 @@
             // 
             // textEditSite
             // 
-            this.textEditSite.Location = new System.Drawing.Point(9, 49);
+            this.textEditSite.Location = new System.Drawing.Point(9, 153);
             this.textEditSite.Name = "textEditSite";
             this.textEditSite.Properties.NullText = "Please enter the site name";
             this.textEditSite.Properties.NullValuePrompt = "Please enter the site name";
@@ -142,7 +130,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(596, 282);
+            this.ClientSize = new System.Drawing.Size(510, 224);
             this.Controls.Add(this.splitContainerControl);
             this.Name = "SitesView";
             this.Text = "SitesView";
@@ -164,7 +152,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnId;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnSite;
         private DevExpress.XtraEditors.SimpleButton simpleButton2;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
         private DevExpress.XtraEditors.TextEdit textEditId;
         private DevExpress.XtraEditors.TextEdit textEditSite;
     }

@@ -64,7 +64,7 @@
             this.ribbon.Name = "ribbon";
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
-            this.ribbon.Size = new System.Drawing.Size(1153, 143);
+            this.ribbon.Size = new System.Drawing.Size(915, 143);
             this.ribbon.StatusBar = this.ribbonStatusBar;
             // 
             // barButtonItemCodifiedResults
@@ -119,7 +119,7 @@
             // 
             this.barButtonItemSites.Caption = "Sites";
             this.barButtonItemSites.Id = 7;
-            this.barButtonItemSites.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
+            this.barButtonItemSites.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemSites.ImageOptions.SvgImage")));
             this.barButtonItemSites.Name = "barButtonItemSites";
             this.barButtonItemSites.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
@@ -134,7 +134,7 @@
             // 
             this.barButtonItemTests.Caption = "Tests";
             this.barButtonItemTests.Id = 9;
-            this.barButtonItemTests.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem2.ImageOptions.SvgImage")));
+            this.barButtonItemTests.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemTests.ImageOptions.SvgImage")));
             this.barButtonItemTests.Name = "barButtonItemTests";
             this.barButtonItemTests.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
@@ -161,16 +161,16 @@
             // 
             // ribbonStatusBar
             // 
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 503);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 433);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(1153, 31);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(915, 31);
             // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1153, 534);
+            this.ClientSize = new System.Drawing.Size(915, 464);
             this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbon);
             this.IsMdiContainer = true;

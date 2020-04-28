@@ -11,7 +11,7 @@ using DevExpress.XtraEditors;
 
 namespace CD4.UI.View
 {
-    public partial class SitesView : DevExpress.XtraEditors.XtraForm
+    public partial class SitesView : XtraForm
     {
         public SitesView()
         {
