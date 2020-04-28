@@ -14,6 +14,8 @@ namespace CD4.UI.Library.ViewModel
 
         public TestViewModel()
         {
+            this.TestList = new BindingList<TestModel>();
+            this.SelectedTest = new TestModel();
             InitializeDemoData();
         }
 
@@ -76,7 +78,7 @@ namespace CD4.UI.Library.ViewModel
             }
             else
             {
-                PushingLogs?.Invoke(this, $"Updating test {SelectedTest.Description}");
+                PushingMessages?.Invoke(this, $"Updated test {SelectedTest.Description}");
                 //update
 
             }
@@ -86,7 +88,8 @@ namespace CD4.UI.Library.ViewModel
 
         private void update(TestModel update)
         {
-            PushingMessages?.Invoke(this, $"Test data updated {update.Description}.");
+            PushingLogs?.Invoke(this, $"Updating test {SelectedTest.Description}");
+            PushingLogs?.Invoke(this, $"Updated test {SelectedTest.Description}");
         }
     }
 }
