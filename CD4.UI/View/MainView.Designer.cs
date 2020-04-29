@@ -38,6 +38,7 @@
             this.barButtonItemClinicalDetails = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemSites = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemTests = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemProfiles = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
@@ -56,9 +57,10 @@
             this.barButtonItemScientist,
             this.barButtonItemClinicalDetails,
             this.barButtonItemSites,
-            this.barButtonItemTests});
+            this.barButtonItemTests,
+            this.barButtonItemProfiles});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 10;
+            this.ribbon.MaxItemId = 11;
             this.ribbon.Name = "ribbon";
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPage1});
@@ -129,6 +131,14 @@
             this.barButtonItemTests.Name = "barButtonItemTests";
             this.barButtonItemTests.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
+            // barButtonItemProfiles
+            // 
+            this.barButtonItemProfiles.Caption = "Profiles";
+            this.barButtonItemProfiles.Id = 10;
+            this.barButtonItemProfiles.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
+            this.barButtonItemProfiles.Name = "barButtonItemProfiles";
+            this.barButtonItemProfiles.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            // 
             // ribbonPage1
             // 
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -146,6 +156,7 @@
             this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItemClinicalDetails);
             this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItemSites);
             this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItemTests);
+            this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItemProfiles);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Text = "Configuration";
             // 
@@ -188,5 +199,6 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItemClinicalDetails;
         private DevExpress.XtraBars.BarButtonItem barButtonItemSites;
         private DevExpress.XtraBars.BarButtonItem barButtonItemTests;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemProfiles;
     }
 }

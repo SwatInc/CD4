@@ -28,8 +28,14 @@ namespace CD4.UI.View
             barButtonItemClinicalDetails.ItemClick += OpenClinicalDetailsConfigView;
             barButtonItemSites.ItemClick += OpenSitesConfigView;
             barButtonItemTests.ItemClick += OpenTestsConfigView;
+            barButtonItemProfiles.ItemClick += OpenProfilesConfigView;
 
             #endregion
+        }
+
+        private void OpenProfilesConfigView(object sender, ItemClickEventArgs e)
+        {
+            this.OpenMdiForm<ProfilesView>();
         }
 
         #region Open Config Forms
