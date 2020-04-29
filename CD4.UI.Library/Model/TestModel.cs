@@ -78,7 +78,6 @@ namespace CD4.UI.Library.Model
         {
             if (selectedTest.Id == 0) return true;
             if (string.IsNullOrEmpty(selectedTest.Description)) return true;
-            if (string.IsNullOrEmpty(selectedTest.resultDataType)) return true;
             if (string.IsNullOrEmpty(selectedTest.Mask)) return true;
 
             return false;
@@ -89,7 +88,6 @@ namespace CD4.UI.Library.Model
             var test = (TestModel)obj;
             if (test.Id != this.Id) return false;
             if (test.Description != this.Description) return false;
-            if (test.ResultDataType != this.resultDataType) return false;
             if (test.mask != this.Mask) return false;
             if (test.isReportable != this.isReportable) return false;
             return true;

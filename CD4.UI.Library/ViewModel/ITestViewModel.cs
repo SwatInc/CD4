@@ -1,5 +1,6 @@
 ﻿using CD4.UI.Library.Model;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 
 namespace CD4.UI.Library.ViewModel
@@ -8,7 +9,8 @@ namespace CD4.UI.Library.ViewModel
     {
         TestModel SelectedTest { get; set; }
         BindingList<TestModel> TestList { get; set; }
-        BindingList<ResultDataTypeModel> ResultDataTypes { get; set; }
+        List<ResultDataTypeModel> ResultDataTypes { get; set; }
+        int SelectedDataType { get; set; }
 
         event PropertyChangedEventHandler PropertyChanged;
         event EventHandler<string> PushingLogs;
