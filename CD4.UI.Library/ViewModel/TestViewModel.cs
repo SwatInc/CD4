@@ -1,6 +1,7 @@
 ﻿using CD4.UI.Library.Model;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -16,16 +17,27 @@ namespace CD4.UI.Library.ViewModel
         {
             this.TestList = new BindingList<TestModel>();
             this.SelectedTest = new TestModel();
+            this.ResultDataTypes = new BindingList<ResultDataTypeModel>();
             InitializeDemoData();
         }
 
         private void InitializeDemoData()
         {
             var egene = new TestModel() { Id = 1, Description = "E Gene", ResultDataType = "Numeric", Mask = "###.00", IsReportable = true };
-            var rdrpgene = new TestModel() { Id = 1, Description = "RdRP Gene", ResultDataType = "Numeric", Mask = "###.00", IsReportable = true };
+            var rdrpgene = new TestModel() { Id = 2, Description = "RdRP Gene", ResultDataType = "Numeric", Mask = "###.00", IsReportable = false };
 
             this.TestList.Add(egene);
             this.TestList.Add(rdrpgene);
+
+
+            var numeric = new ResultDataTypeModel() { Id = 1, DataType = "Numeric" };
+            var codified = new ResultDataTypeModel() { Id = 1, DataType = "Codified" };
+            var Textual = new ResultDataTypeModel() { Id = 1, DataType = "Textual" };
+
+            this.ResultDataTypes.Add(numeric);
+            this.ResultDataTypes.Add(Textual);
+            this.ResultDataTypes.Add(codified);
+
         }
 
         #region INotifyPropertyChanged Hookup
@@ -41,6 +53,7 @@ namespace CD4.UI.Library.ViewModel
 
         public BindingList<TestModel> TestList { get; set; }
         public TestModel SelectedTest { get; set; }
+        public BindingList<ResultDataTypeModel> ResultDataTypes { get; set; }
 
         public void DisplaySelectedTest(int selectedId)
         {

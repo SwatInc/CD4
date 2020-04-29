@@ -8,6 +8,7 @@ namespace CD4.UI.Library.ViewModel
     {
         TestModel SelectedTest { get; set; }
         BindingList<TestModel> TestList { get; set; }
+        BindingList<ResultDataTypeModel> ResultDataTypes { get; set; }
 
         event PropertyChangedEventHandler PropertyChanged;
         event EventHandler<string> PushingLogs;

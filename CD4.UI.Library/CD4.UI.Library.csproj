@@ -51,6 +51,7 @@
     <Compile Include="Model\CodifiedValueModel.cs" />
     <Compile Include="Model\CountryModel.cs" />
     <Compile Include="Model\GenderModel.cs" />
+    <Compile Include="Model\ResultDataTypeModel.cs" />
     <Compile Include="Model\ScientistModel.cs" />
     <Compile Include="Model\SitesModel.cs" />
     <Compile Include="Model\TestModel.cs" />
