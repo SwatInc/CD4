@@ -164,6 +164,9 @@
             this.lookUpEditTestDataType.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.lookUpEditTestDataType.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpEditTestDataType.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Id", "Id", 20, DevExpress.Utils.FormatType.None, "", false, DevExpress.Utils.HorzAlignment.Default, DevExpress.Data.ColumnSortOrder.None, DevExpress.Utils.DefaultBoolean.Default),
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("DataType", "ResultDataType")});
             this.lookUpEditTestDataType.Properties.DropDownRows = 3;
             this.lookUpEditTestDataType.Properties.NullText = "Select the test data type";
             this.lookUpEditTestDataType.Properties.NullValuePrompt = "Select the test data type";
