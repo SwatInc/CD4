@@ -1,12 +1,10 @@
 ﻿using CD4.UI.Library.Model;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CD4.UI.Library.ViewModel
@@ -52,6 +50,10 @@ namespace CD4.UI.Library.ViewModel
                 case UiState.Default:
                     DataAddControlsEnabled = false;
                     break;
+                case UiState.BusyOperation:
+                    DataAddControlsEnabled = false;
+                    OtherFunctionButtons = false;
+                    break;
                 default:
                     break;
             }
@@ -60,18 +62,18 @@ namespace CD4.UI.Library.ViewModel
         private void InitializeDemoData()
         {
             //All tests
-            var t1 = new ProfileConfigTestModel() { Id =213, TestDescription = "TBIL" };
-            var t2 = new ProfileConfigTestModel() {Id=563, TestDescription = "DBIL" };
+            var t1 = new ProfileConfigTestModel() { Id = 213, TestDescription = "TBIL" };
+            var t2 = new ProfileConfigTestModel() { Id = 563, TestDescription = "DBIL" };
 
             //Profiles
             var p1 = new ProfileConfigModel() { Id = 1, Profile = "Liver Profile", State = State.Clean };
             var p2 = new ProfileConfigModel() { Id = 2, Profile = "Lipid Profile", State = State.Clean };
 
             //Profile Tests
-            var pt1 = new ProfileConfigProfileTestsModel() 
+            var pt1 = new ProfileConfigProfileTestsModel()
             { Id = 1, ProfileDescription = "Liver Profile", TestDescription = "TBIL", State = State.Clean };
 
-            var pt2 = new ProfileConfigProfileTestsModel() 
+            var pt2 = new ProfileConfigProfileTestsModel()
             { Id = 2, ProfileDescription = "Liver Profile", TestDescription = "DBIL", State = State.Clean };
 
             //Add All Tests
@@ -86,6 +88,19 @@ namespace CD4.UI.Library.ViewModel
             AllProfileTests.Add(pt1);
             AllProfileTests.Add(pt2);
         }
+
+        private IEnumerable<ProfileConfigProfileTestsModel> FilterProfileTestsByTest
+            (ProfileConfigModel filter)
+        {
+            if (filter is null) throw new ArgumentNullException
+                    ("The filter passed in is null.");
+
+            return from profileTests in AllProfileTests
+                   where profileTests.ProfileDescription == filter.Profile
+                   select profileTests;
+
+        }
+
 
         #endregion
 
@@ -102,7 +117,11 @@ namespace CD4.UI.Library.ViewModel
         {
             get => dataAddControlsEnabled; private set
             {
-                if (dataAddControlsEnabled == value) return;
+                if (dataAddControlsEnabled == value) 
+                {
+                    OtherFunctionButtons = !DataAddControlsEnabled;
+                    return; 
+                }
                 dataAddControlsEnabled = value;
                 OnPropertyChanged();
 
@@ -152,25 +171,64 @@ namespace CD4.UI.Library.ViewModel
             NewProfileName = null;
         }
 
-        public void SelectedProfileChanged(ProfileConfigModel selectedProfile)
+        public async Task  SelectedProfileChanged(ProfileConfigModel selectedProfile)
         {
+            InitializeUiState(UiState.BusyOperation);
             //return if parameter is null
-            if (selectedProfile is null) return;
+            if (selectedProfile is null) 
+            {
+                InitializeUiState(UiState.Default);
+                return; 
+            }
 
             //Clear the current profile tests
             this.ProfileTestsForSelectedProfile.Clear();
 
             //Find the profile tests corresponding to the selected profile
-            var displayProfileTests = from profileTests in AllProfileTests
-                                      where profileTests.ProfileDescription == selectedProfile.Profile
-                                      select profileTests;
+            var displayProfileTests = await Task.Run(() =>
+            {
+                return FilterProfileTestsByTest(selectedProfile);
+            });
 
             //Iterate and add the tests to the current profile tests.
             foreach (var profileTest in displayProfileTests)
             {
                 ProfileTestsForSelectedProfile.Add(profileTest);
             }
+
+            InitializeUiState(UiState.Default);
         }
+
+        public void AddItemToProfile(ProfileConfigModel profile,
+            ProfileConfigTestModel test, ProfileConfigProfileTestsModel profileTest)
+        {
+            if (profile is null || test is null) return;
+            Debug.WriteLine($"\nSELECTED PROFILE: {profile.Profile}\n");
+            Debug.WriteLine($"\nSELECTED TEST: {test.TestDescription}\n");
+            //If test is already included in the profile, ignore, return.
+            Debug.WriteLine("\nPHASE 2: DETERMINE WHETHER THE TEST IS ALREADY INCLUDED IN THE PROFILE.\n");
+
+            var a = from profileTests in AllProfileTests
+                              where profileTests.TestDescription == test.TestDescription
+                              && profileTests.ProfileDescription == profile.Profile
+                              select profileTests;
+
+            if (a is null || a.Count() == 0)
+            {
+                Debug.WriteLine("\nTest not present in profile\n");
+                
+            }
+            else
+            {
+                foreach (var item in a)
+                {
+                    Debug.WriteLine("Search Match: " + item.TestDescription);
+                }
+            }
+
+            Debug.WriteLine("======================================================================");
+        }
+
         #endregion
 
         #region INotifyPropertyChanged Hookup

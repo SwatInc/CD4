@@ -1,6 +1,7 @@
 ﻿using CD4.UI.Library.Model;
 using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace CD4.UI.Library.ViewModel
 {
@@ -39,7 +40,9 @@ namespace CD4.UI.Library.ViewModel
         string NewProfileName { get; set; }
         void UiPrepForAddingProfile(object sender, EventArgs e);
         void SaveProfile(object sender, EventArgs e);
-        void SelectedProfileChanged(ProfileConfigModel selectedProfile);
+        Task SelectedProfileChanged(ProfileConfigModel selectedProfile);
+        void AddItemToProfile(ProfileConfigModel profile,
+            ProfileConfigTestModel test, ProfileConfigProfileTestsModel profileTest);
 
         #endregion
 

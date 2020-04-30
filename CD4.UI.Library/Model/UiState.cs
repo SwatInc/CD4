@@ -3,6 +3,7 @@
     public enum UiState
     {
         Adding,
+        BusyOperation, //Needs all controls disabled
         Default
     }
 

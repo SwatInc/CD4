@@ -23,21 +23,22 @@ namespace CD4.UI.View
             listBoxControlProfiles.SelectedValueChanged += ListBoxControlProfiles_SelectedValueChanged;
         }
 
-        private void ListBoxControlProfiles_SelectedValueChanged(object sender, EventArgs e)
+        private async void ListBoxControlProfiles_SelectedValueChanged(object sender, EventArgs e)
         {
-            _viewModel.SelectedProfileChanged((ProfileConfigModel)listBoxControlProfiles.SelectedItem);
+            await _viewModel.SelectedProfileChanged((ProfileConfigModel)listBoxControlProfiles.SelectedItem);
         }
 
         private void SimpleButtonAddToProfile_Click(object sender, EventArgs e)
         {
-            var a = JsonConvert.SerializeObject(_viewModel.SelectedProfile, Formatting.Indented);
-            var b = JsonConvert.SerializeObject(_viewModel.SelectedTest, Formatting.Indented);
+            //var a = JsonConvert.SerializeObject(_viewModel.SelectedProfile, Formatting.Indented);
+            //var b = JsonConvert.SerializeObject(_viewModel.SelectedTest, Formatting.Indented);
 
-            XtraMessageBox.Show($"{a}\n\n{b}");
+            //XtraMessageBox.Show($"{a}\n\n{b}");
 
-            //add to Profile tests on clicking the button
+            var selectedProfile = (ProfileConfigModel)listBoxControlProfiles.SelectedItem;
+            var selectedTest = (ProfileConfigTestModel)listBoxControlTests.SelectedItem;
 
-            
+            _viewModel.AddItemToProfile(selectedProfile, selectedTest, new ProfileConfigProfileTestsModel());
         }
 
         private void InitializeBinding()
