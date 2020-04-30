@@ -62,8 +62,8 @@ namespace CD4.UI.Library.ViewModel
             var t2 = new ProfileConfigTestModel() { Id = 563, TestDescription = "DBIL" };
 
             //Profiles
-            var p1 = new ProfileConfigModel() { Id = 1, Profile = "Liver Profile", State = State.Clean };
-            var p2 = new ProfileConfigModel() { Id = 2, Profile = "Lipid Profile", State = State.Clean };
+            var p1 = new ProfileConfigModel() { Id = 1, ProfileDescription = "Liver Profile", State = State.Clean };
+            var p2 = new ProfileConfigModel() { Id = 2, ProfileDescription = "Lipid Profile", State = State.Clean };
 
             //Profile Tests
             var pt1 = new ProfileConfigProfileTestsModel()
@@ -98,7 +98,7 @@ namespace CD4.UI.Library.ViewModel
                     ("The filter passed in is null.");
 
             return from profileTests in AllProfileTests
-                   where profileTests.ProfileDescription == filter.Profile
+                   where profileTests.ProfileDescription == filter.ProfileDescription
                    select profileTests;
 
         }
@@ -115,7 +115,7 @@ namespace CD4.UI.Library.ViewModel
         {
             return from profileTests in AllProfileTests
                    where profileTests.TestDescription == tests.TestDescription
-                   && profileTests.ProfileDescription == profile.Profile
+                   && profileTests.ProfileDescription == profile.ProfileDescription
                    select profileTests;
 
         }
@@ -136,13 +136,15 @@ namespace CD4.UI.Library.ViewModel
             var allSpecifiedProfileTests = from profileTest in AllProfileTests
                                            where profileTest.ProfileDescription == profileName
                                            select profileTest;
-            
-            if (allSpecifiedProfileTests is null) return;
-            if (allSpecifiedProfileTests.Count() == 0) return;
 
-            foreach (var item in allSpecifiedProfileTests)
+            if (allSpecifiedProfileTests is null) return;
+            var allSpecifiedProfileTestsList = allSpecifiedProfileTests.ToList();
+            var DeleteProfilesCount = allSpecifiedProfileTestsList.Count();
+            if (DeleteProfilesCount == 0) return;
+
+            for (int i = 0; i < DeleteProfilesCount; i++)
             {
-                AllProfileTests.Remove(item);
+                AllProfileTests.Remove(allSpecifiedProfileTestsList.ElementAt(i));
             }
         }
         #endregion
@@ -207,7 +209,7 @@ namespace CD4.UI.Library.ViewModel
             this.ProfileList.Add(new ProfileConfigModel()
             {
                 Id = -1,
-                Profile = newProfileName,
+                ProfileDescription = newProfileName,
                 State = State.Added
             });
 
@@ -254,7 +256,7 @@ namespace CD4.UI.Library.ViewModel
             if (ProfileTests_MatchingSelectedProfileAndSelectedTest is null 
                 || ProfileTests_MatchingSelectedProfileAndSelectedTest.Count() == 0)
             {
-                AddTestToProfile(profile.Profile, test.TestDescription);
+                AddTestToProfile(profile.ProfileDescription, test.TestDescription);
             }
 
             //Refresh the UI to reflect the changes.
@@ -273,8 +275,12 @@ namespace CD4.UI.Library.ViewModel
 
         public async Task DeleteProfile(ProfileConfigModel profile)
         {
+            await Task.Run(() =>
+            {
+                RemoveAllProfileTestsInProfile(profile.ProfileDescription);
+            });
 
-            throw new NotImplementedException();
+            ProfileList.Remove(profile);
         }
 
         #region INotifyPropertyChanged Hookup

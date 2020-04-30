@@ -2,14 +2,14 @@
 {
     public class ProfileConfigModel : ProfilesConfigurationBaseModel
     {
-        private string profile;
+        private string profileDescription;
 
-        public string Profile
+        public string ProfileDescription
         {
-            get => profile; set
+            get => profileDescription; set
             {
-                if (profile == value) return;
-                profile = value;
+                if (profileDescription == value) return;
+                profileDescription = value;
                 OnPropertyChanged();
             }
 
@@ -17,7 +17,7 @@
 
         public override string ToString()
         {
-            return $"{profile}";
+            return $"{profileDescription}";
         }
     }
 }

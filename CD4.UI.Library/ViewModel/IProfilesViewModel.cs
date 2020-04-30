@@ -43,7 +43,7 @@ namespace CD4.UI.Library.ViewModel
         Task SelectedProfileChanged(ProfileConfigModel selectedProfile);
         Task ManageAddItemToProfile(ProfileConfigModel profile, ProfileConfigTestModel test);
         Task RemoveProfileTestFromProfile(ProfileConfigProfileTestsModel testToRemove);
-
+        Task DeleteProfile(ProfileConfigModel profile);
         #endregion
 
     }

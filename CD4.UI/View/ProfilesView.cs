@@ -21,7 +21,13 @@ namespace CD4.UI.View
             simpleButtonSave.Click += _viewModel.SaveProfile;
             simpleButtonAddToProfile.Click += SimpleButtonAddToProfile_Click;
             simpleButtonRemoveFromProfile.Click += OnRequestRemoveFromProfile;
+            simpleButtonDelete.Click += OnRequestDeleteSelectedProfile;
             listBoxControlProfiles.SelectedValueChanged += ListBoxControlProfiles_SelectedValueChanged;
+        }
+
+        private async void OnRequestDeleteSelectedProfile(object sender, EventArgs e)
+        {
+            await _viewModel.DeleteProfile((ProfileConfigModel)listBoxControlProfiles.SelectedItem);
         }
 
         private async void OnRequestRemoveFromProfile(object sender, EventArgs e)
@@ -48,7 +54,7 @@ namespace CD4.UI.View
         {
             #region Listbox Profiles Datasource
             listBoxControlProfiles.DataSource = _viewModel.ProfileList;
-            listBoxControlProfiles.DisplayMember = nameof(ProfileConfigModel.Profile);
+            listBoxControlProfiles.DisplayMember = nameof(ProfileConfigModel.ProfileDescription);
             listBoxControlProfiles.ValueMember = nameof(ProfileConfigModel.Id);
             #endregion
 
