@@ -42,6 +42,7 @@
             this.simpleButtonRemoveFromProfile = new DevExpress.XtraEditors.SimpleButton();
             this.textEditProfileName = new DevExpress.XtraEditors.TextEdit();
             this.simpleButtonSave = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.listBoxControlProfiles)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlProfiles)).BeginInit();
             this.groupControlProfiles.SuspendLayout();
@@ -176,11 +177,20 @@
             this.simpleButtonSave.Size = new System.Drawing.Size(26, 20);
             this.simpleButtonSave.TabIndex = 8;
             // 
+            // simpleButton1
+            // 
+            this.simpleButton1.Location = new System.Drawing.Point(406, 247);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(87, 23);
+            this.simpleButton1.TabIndex = 9;
+            this.simpleButton1.Text = "Save Changes";
+            // 
             // ProfilesView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(505, 278);
+            this.Controls.Add(this.simpleButton1);
             this.Controls.Add(this.simpleButtonSave);
             this.Controls.Add(this.textEditProfileName);
             this.Controls.Add(this.simpleButtonRemoveFromProfile);
@@ -222,5 +232,6 @@
         private DevExpress.XtraEditors.SimpleButton simpleButtonRemoveFromProfile;
         private DevExpress.XtraEditors.TextEdit textEditProfileName;
         private DevExpress.XtraEditors.SimpleButton simpleButtonSave;
+        private DevExpress.XtraEditors.SimpleButton simpleButton1;
     }
 }
