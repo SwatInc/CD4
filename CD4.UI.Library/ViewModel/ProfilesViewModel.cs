@@ -271,7 +271,6 @@ namespace CD4.UI.Library.ViewModel
             //Refresh the selected profile tests
             await SelectedProfileChanged(SelectedProfile);
         }
-        #endregion
 
         public async Task DeleteProfile(ProfileConfigModel profile)
         {
@@ -282,6 +281,8 @@ namespace CD4.UI.Library.ViewModel
 
             ProfileList.Remove(profile);
         }
+
+        #endregion
 
         #region INotifyPropertyChanged Hookup
 

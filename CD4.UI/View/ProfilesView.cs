@@ -23,6 +23,13 @@ namespace CD4.UI.View
             simpleButtonRemoveFromProfile.Click += OnRequestRemoveFromProfile;
             simpleButtonDelete.Click += OnRequestDeleteSelectedProfile;
             listBoxControlProfiles.SelectedValueChanged += ListBoxControlProfiles_SelectedValueChanged;
+
+            HackRequiredToUpdateUIOnStartUp();
+        }
+
+        private void HackRequiredToUpdateUIOnStartUp()
+        {
+            _viewModel.SelectedProfileChanged((ProfileConfigModel)listBoxControlProfiles.SelectedItem);
         }
 
         private async void OnRequestDeleteSelectedProfile(object sender, EventArgs e)
