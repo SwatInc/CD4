@@ -19,6 +19,19 @@ namespace CD4.UI.View
             InitializeBinding();
             simpleButtonAddNew.Click += _viewModel.UiPrepForAddingProfile;
             simpleButtonSave.Click += _viewModel.SaveProfile;
+            simpleButtonAddToProfile.Click += SimpleButtonAddToProfile_Click;
+        }
+
+        private void SimpleButtonAddToProfile_Click(object sender, EventArgs e)
+        {
+            var a = JsonConvert.SerializeObject(_viewModel.SelectedProfile, Formatting.Indented);
+            var b = JsonConvert.SerializeObject(_viewModel.SelectedTest, Formatting.Indented);
+
+            XtraMessageBox.Show($"{a}\n\n{b}");
+
+            //add to Profile tests on clicking the button
+
+            
         }
 
         private void InitializeBinding()
