@@ -26,7 +26,7 @@ namespace CD4.UI.Library.ViewModel
 
         #endregion
 
-        #region Profile Test(s) Models
+        #region Profile Test(s) Models / Lists
         BindingList<ProfileConfigProfileTestsModel> AllProfileTests { get; set; } //A collection of all the tests belonging to all profiles.
         BindingList<ProfileConfigProfileTestsModel> ProfileTestsForSelectedProfile { get; set; } //A collection of all tests belonging to the currently selected profile.
         ProfileConfigProfileTestsModel SelectedProfileTest { get; set; } //A single test selected amoung current profile tests.
@@ -39,6 +39,7 @@ namespace CD4.UI.Library.ViewModel
         string NewProfileName { get; set; }
         void UiPrepForAddingProfile(object sender, EventArgs e);
         void SaveProfile(object sender, EventArgs e);
+        void SelectedProfileChanged();
 
         #endregion
 

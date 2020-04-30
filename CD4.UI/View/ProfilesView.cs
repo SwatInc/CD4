@@ -20,6 +20,17 @@ namespace CD4.UI.View
             simpleButtonAddNew.Click += _viewModel.UiPrepForAddingProfile;
             simpleButtonSave.Click += _viewModel.SaveProfile;
             simpleButtonAddToProfile.Click += SimpleButtonAddToProfile_Click;
+            listBoxControlProfiles.SelectedValueChanged += ListBoxControlProfiles_SelectedValueChanged;
+        }
+
+        private void ListBoxControlProfiles_SelectedValueChanged(object sender, EventArgs e)
+        {
+            listBoxControlProfiles.CausesValidation = true;
+            //this looses the focus and validates the control
+            listBoxControlProfiles.Enabled = false;
+            listBoxControlProfiles.Enabled = true;
+
+            _viewModel.SelectedProfileChanged();
         }
 
         private void SimpleButtonAddToProfile_Click(object sender, EventArgs e)
@@ -86,6 +97,10 @@ namespace CD4.UI.View
                 (new Binding("EditValue", _viewModel, nameof(_viewModel.NewProfileName)));
 
             #endregion
+
+            listBoxControlProfileTests.DataSource = _viewModel.ProfileTestsForSelectedProfile;
+            listBoxControlProfileTests.DisplayMember = nameof(ProfileConfigProfileTestsModel.TestDescription);
+            listBoxControlProfileTests.ValueMember = nameof(ProfileConfigProfileTestsModel.Id);
 
         }
     }
