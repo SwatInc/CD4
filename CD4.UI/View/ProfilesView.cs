@@ -38,7 +38,7 @@ namespace CD4.UI.View
             var selectedProfile = (ProfileConfigModel)listBoxControlProfiles.SelectedItem;
             var selectedTest = (ProfileConfigTestModel)listBoxControlTests.SelectedItem;
 
-            _viewModel.AddItemToProfile(selectedProfile, selectedTest, new ProfileConfigProfileTestsModel());
+            _viewModel.ManageAddItemToProfile(selectedProfile, selectedTest);
         }
 
         private void InitializeBinding()

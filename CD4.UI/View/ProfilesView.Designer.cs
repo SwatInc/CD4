@@ -171,9 +171,9 @@
             this.simpleButtonSave.ImageOptions.Location = DevExpress.XtraEditors.ImageLocation.MiddleCenter;
             this.simpleButtonSave.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("simpleButtonSave.ImageOptions.SvgImage")));
             this.simpleButtonSave.ImageOptions.SvgImageSize = new System.Drawing.Size(16, 16);
-            this.simpleButtonSave.Location = new System.Drawing.Point(128, 248);
+            this.simpleButtonSave.Location = new System.Drawing.Point(129, 248);
             this.simpleButtonSave.Name = "simpleButtonSave";
-            this.simpleButtonSave.Size = new System.Drawing.Size(24, 20);
+            this.simpleButtonSave.Size = new System.Drawing.Size(26, 20);
             this.simpleButtonSave.TabIndex = 8;
             // 
             // ProfilesView

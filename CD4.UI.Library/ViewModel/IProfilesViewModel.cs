@@ -41,8 +41,7 @@ namespace CD4.UI.Library.ViewModel
         void UiPrepForAddingProfile(object sender, EventArgs e);
         void SaveProfile(object sender, EventArgs e);
         Task SelectedProfileChanged(ProfileConfigModel selectedProfile);
-        void AddItemToProfile(ProfileConfigModel profile,
-            ProfileConfigTestModel test, ProfileConfigProfileTestsModel profileTest);
+        Task ManageAddItemToProfile(ProfileConfigModel profile, ProfileConfigTestModel test);
 
         #endregion
 

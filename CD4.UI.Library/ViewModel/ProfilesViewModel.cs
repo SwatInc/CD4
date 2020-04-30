@@ -50,10 +50,6 @@ namespace CD4.UI.Library.ViewModel
                 case UiState.Default:
                     DataAddControlsEnabled = false;
                     break;
-                case UiState.BusyOperation:
-                    DataAddControlsEnabled = false;
-                    OtherFunctionButtons = false;
-                    break;
                 default:
                     break;
             }
@@ -89,6 +85,12 @@ namespace CD4.UI.Library.ViewModel
             AllProfileTests.Add(pt2);
         }
 
+        /// <summary>
+        /// Searches all profile tests to look for a profile tests matching 
+        /// the ProfileConfigModel provided.
+        /// </summary>
+        /// <param name="filter"> The criteria to look for a match</param>
+        /// <returns></returns>
         private IEnumerable<ProfileConfigProfileTestsModel> FilterProfileTestsByTest
             (ProfileConfigModel filter)
         {
@@ -101,6 +103,33 @@ namespace CD4.UI.Library.ViewModel
 
         }
 
+        /// <summary>
+        /// Search all profile tests looking for matches with the provided selected
+        /// profile and provided selected test.
+        /// </summary>
+        /// <param name="profile">the profile to look for</param>
+        /// <param name="tests">the tests to look for</param>
+        /// <returns>An IEnumerable of profile tests matching both the criteria</returns>
+        private IEnumerable<ProfileConfigProfileTestsModel> FilterProfileTestsByProfileAndTestDesc
+            (ProfileConfigModel profile, ProfileConfigTestModel tests)
+        {
+            return from profileTests in AllProfileTests
+                   where profileTests.TestDescription == tests.TestDescription
+                   && profileTests.ProfileDescription == profile.Profile
+                   select profileTests;
+
+        }
+
+        private void AddTestToProfile(string profileDescription, string testDescription)
+        {
+            AllProfileTests.Add(new ProfileConfigProfileTestsModel()
+            {
+                Id=-1,
+                ProfileDescription=profileDescription,
+                TestDescription = testDescription,
+                State=State.Added
+            });
+        }
 
         #endregion
 
@@ -117,10 +146,10 @@ namespace CD4.UI.Library.ViewModel
         {
             get => dataAddControlsEnabled; private set
             {
-                if (dataAddControlsEnabled == value) 
+                if (dataAddControlsEnabled == value)
                 {
                     OtherFunctionButtons = !DataAddControlsEnabled;
-                    return; 
+                    return;
                 }
                 dataAddControlsEnabled = value;
                 OnPropertyChanged();
@@ -171,14 +200,13 @@ namespace CD4.UI.Library.ViewModel
             NewProfileName = null;
         }
 
-        public async Task  SelectedProfileChanged(ProfileConfigModel selectedProfile)
+        public async Task SelectedProfileChanged(ProfileConfigModel selectedProfile)
         {
-            InitializeUiState(UiState.BusyOperation);
             //return if parameter is null
-            if (selectedProfile is null) 
+            if (selectedProfile is null)
             {
                 InitializeUiState(UiState.Default);
-                return; 
+                return;
             }
 
             //Clear the current profile tests
@@ -196,37 +224,27 @@ namespace CD4.UI.Library.ViewModel
                 ProfileTestsForSelectedProfile.Add(profileTest);
             }
 
-            InitializeUiState(UiState.Default);
         }
 
-        public void AddItemToProfile(ProfileConfigModel profile,
-            ProfileConfigTestModel test, ProfileConfigProfileTestsModel profileTest)
+        public async Task ManageAddItemToProfile(ProfileConfigModel profile,
+            ProfileConfigTestModel test)
         {
             if (profile is null || test is null) return;
-            Debug.WriteLine($"\nSELECTED PROFILE: {profile.Profile}\n");
-            Debug.WriteLine($"\nSELECTED TEST: {test.TestDescription}\n");
-            //If test is already included in the profile, ignore, return.
-            Debug.WriteLine("\nPHASE 2: DETERMINE WHETHER THE TEST IS ALREADY INCLUDED IN THE PROFILE.\n");
 
-            var a = from profileTests in AllProfileTests
-                              where profileTests.TestDescription == test.TestDescription
-                              && profileTests.ProfileDescription == profile.Profile
-                              select profileTests;
+            var ProfileTests_MatchingSelectedProfileAndSelectedTest = await Task.Run(() =>
+               {
+                   return FilterProfileTestsByProfileAndTestDesc(profile, test);
+               });
 
-            if (a is null || a.Count() == 0)
+            //decide to add and add the test to profile.
+            if (ProfileTests_MatchingSelectedProfileAndSelectedTest is null 
+                || ProfileTests_MatchingSelectedProfileAndSelectedTest.Count() == 0)
             {
-                Debug.WriteLine("\nTest not present in profile\n");
-                
-            }
-            else
-            {
-                foreach (var item in a)
-                {
-                    Debug.WriteLine("Search Match: " + item.TestDescription);
-                }
+                AddTestToProfile(profile.Profile, test.TestDescription);
             }
 
-            Debug.WriteLine("======================================================================");
+            //Refresh the UI to reflect the changes.
+            await SelectedProfileChanged(profile);
         }
 
         #endregion
@@ -241,7 +259,6 @@ namespace CD4.UI.Library.ViewModel
         }
 
         #endregion
-
 
     }
 
