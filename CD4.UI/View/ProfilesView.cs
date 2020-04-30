@@ -3,6 +3,7 @@ using CD4.UI.Library.ViewModel;
 using DevExpress.XtraEditors;
 using Newtonsoft.Json;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CD4.UI.View
@@ -27,9 +28,11 @@ namespace CD4.UI.View
             HackRequiredToUpdateUIOnStartUp();
         }
 
-        private void HackRequiredToUpdateUIOnStartUp()
+        private async void HackRequiredToUpdateUIOnStartUp()
         {
-            _viewModel.SelectedProfileChanged((ProfileConfigModel)listBoxControlProfiles.SelectedItem);
+            //Not cool. Remove async void somehow.
+           await _viewModel.SelectedProfileChanged
+                ((ProfileConfigModel)listBoxControlProfiles.SelectedItem);
         }
 
         private async void OnRequestDeleteSelectedProfile(object sender, EventArgs e)
