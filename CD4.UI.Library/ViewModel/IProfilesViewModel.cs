@@ -39,7 +39,7 @@ namespace CD4.UI.Library.ViewModel
         string NewProfileName { get; set; }
         void UiPrepForAddingProfile(object sender, EventArgs e);
         void SaveProfile(object sender, EventArgs e);
-        void SelectedProfileChanged();
+        void SelectedProfileChanged(ProfileConfigModel selectedProfile);
 
         #endregion
 

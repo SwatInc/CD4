@@ -25,12 +25,7 @@ namespace CD4.UI.View
 
         private void ListBoxControlProfiles_SelectedValueChanged(object sender, EventArgs e)
         {
-            listBoxControlProfiles.CausesValidation = true;
-            //this looses the focus and validates the control
-            listBoxControlProfiles.Enabled = false;
-            listBoxControlProfiles.Enabled = true;
-
-            _viewModel.SelectedProfileChanged();
+            _viewModel.SelectedProfileChanged((ProfileConfigModel)listBoxControlProfiles.SelectedItem);
         }
 
         private void SimpleButtonAddToProfile_Click(object sender, EventArgs e)

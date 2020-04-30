@@ -39,11 +39,6 @@ namespace CD4.UI.Library.ViewModel
 
         }
 
-        private void OnSelectedProfileChanged(object sender, PropertyChangedEventArgs e)
-        {
-            SelectedProfileChanged();
-        }
-
         #endregion
 
         #region Private Methods
@@ -157,25 +152,17 @@ namespace CD4.UI.Library.ViewModel
             NewProfileName = null;
         }
 
-        public void SelectedProfileChanged()
+        public void SelectedProfileChanged(ProfileConfigModel selectedProfile)
         {
+            //return if parameter is null
+            if (selectedProfile is null) return;
+
             //Clear the current profile tests
             this.ProfileTestsForSelectedProfile.Clear();
 
             //Find the profile tests corresponding to the selected profile
-            // var displayProfileTests = this.AllProfileTests.SelectMany(pts => pts.TestDescription == this.SelectedProfile.Profile).ToList();
-            Debug.WriteLine("\nALL PROFILE TESTS\n" + JsonConvert.SerializeObject(this.AllProfileTests, Formatting.Indented));
-            Debug.WriteLine("\nSELECTED PROFILE\n"+JsonConvert.SerializeObject(this.SelectedProfile, Formatting.Indented));
-            Debug.WriteLine("\nSELECTED PROFILE TEST\n"+JsonConvert.SerializeObject(this.SelectedProfileTest, Formatting.Indented));
-            Debug.WriteLine("======================================================================================================");
-            Debug.WriteLine("======================================================================================================");
-
-            if (SelectedProfile is null) return;
-
-
-
             var displayProfileTests = from profileTests in AllProfileTests
-                                      where profileTests.ProfileDescription == this.SelectedProfile.Profile
+                                      where profileTests.ProfileDescription == selectedProfile.Profile
                                       select profileTests;
 
             //Iterate and add the tests to the current profile tests.
