@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace CD4.UI.View
 {
-    public partial class ProfilesView : DevExpress.XtraEditors.XtraForm
+    public partial class ProfilesView : XtraForm
     {
         private readonly IProfilesViewModel _viewModel;
 
@@ -20,21 +20,24 @@ namespace CD4.UI.View
             simpleButtonAddNew.Click += _viewModel.UiPrepForAddingProfile;
             simpleButtonSave.Click += _viewModel.SaveProfile;
             simpleButtonAddToProfile.Click += SimpleButtonAddToProfile_Click;
+            simpleButtonRemoveFromProfile.Click += OnRequestRemoveFromProfile;
             listBoxControlProfiles.SelectedValueChanged += ListBoxControlProfiles_SelectedValueChanged;
         }
 
-        private async void ListBoxControlProfiles_SelectedValueChanged(object sender, EventArgs e)
+        private async void OnRequestRemoveFromProfile(object sender, EventArgs e)
+        {
+            await _viewModel.RemoveProfileTestFromProfile
+                ((ProfileConfigProfileTestsModel)listBoxControlProfileTests.SelectedItem);
+        }
+
+        private async void ListBoxControlProfiles_SelectedValueChanged
+            (object sender, EventArgs e)
         {
             await _viewModel.SelectedProfileChanged((ProfileConfigModel)listBoxControlProfiles.SelectedItem);
         }
 
         private void SimpleButtonAddToProfile_Click(object sender, EventArgs e)
         {
-            //var a = JsonConvert.SerializeObject(_viewModel.SelectedProfile, Formatting.Indented);
-            //var b = JsonConvert.SerializeObject(_viewModel.SelectedTest, Formatting.Indented);
-
-            //XtraMessageBox.Show($"{a}\n\n{b}");
-
             var selectedProfile = (ProfileConfigModel)listBoxControlProfiles.SelectedItem;
             var selectedTest = (ProfileConfigTestModel)listBoxControlTests.SelectedItem;
 

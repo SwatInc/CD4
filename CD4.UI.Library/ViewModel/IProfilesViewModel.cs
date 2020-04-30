@@ -42,6 +42,7 @@ namespace CD4.UI.Library.ViewModel
         void SaveProfile(object sender, EventArgs e);
         Task SelectedProfileChanged(ProfileConfigModel selectedProfile);
         Task ManageAddItemToProfile(ProfileConfigModel profile, ProfileConfigTestModel test);
+        Task RemoveProfileTestFromProfile(ProfileConfigProfileTestsModel testToRemove);
 
         #endregion
 

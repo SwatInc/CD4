@@ -131,6 +131,20 @@ namespace CD4.UI.Library.ViewModel
             });
         }
 
+        private void RemoveAllProfileTestsInProfile(string profileName)
+        {
+            var allSpecifiedProfileTests = from profileTest in AllProfileTests
+                                           where profileTest.ProfileDescription == profileName
+                                           select profileTest;
+            
+            if (allSpecifiedProfileTests is null) return;
+            if (allSpecifiedProfileTests.Count() == 0) return;
+
+            foreach (var item in allSpecifiedProfileTests)
+            {
+                AllProfileTests.Remove(item);
+            }
+        }
         #endregion
 
         #region Public Properties / Fields
@@ -247,7 +261,21 @@ namespace CD4.UI.Library.ViewModel
             await SelectedProfileChanged(profile);
         }
 
+        public async Task RemoveProfileTestFromProfile
+            (ProfileConfigProfileTestsModel testToRemove)
+        {
+            //Remove the test from all profile tests
+            this.AllProfileTests.Remove(testToRemove);
+            //Refresh the selected profile tests
+            await SelectedProfileChanged(SelectedProfile);
+        }
         #endregion
+
+        public async Task DeleteProfile(ProfileConfigModel profile)
+        {
+
+            throw new NotImplementedException();
+        }
 
         #region INotifyPropertyChanged Hookup
 
