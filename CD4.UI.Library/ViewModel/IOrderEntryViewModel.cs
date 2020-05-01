@@ -26,7 +26,7 @@ namespace CD4.UI.Library.ViewModel
         DateTime? SampleReceivedDate { get; set; }
         AtollModel SelectedAtoll { get; set; }
         CountryModel SelectedCountry { get; set; }
-        GenderModel SelectedGender { get; set; }
+        int SelectedGenderId { get; set; }
         IslandModel SelectedIsland { get; set; }
         int SelectedSiteId { get; set; }
         List<SitesModel> Sites { get; set; }

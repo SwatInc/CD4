@@ -26,6 +26,7 @@ namespace CD4.UI.Library.ViewModel
         private string address;
         private string episodeNumber;
         private int selectedSiteId;
+        private int selectedGenderId;
         #endregion
 
         #region Default Constructor
@@ -61,7 +62,8 @@ namespace CD4.UI.Library.ViewModel
         #endregion
 
         #region Properties
-        //Request Data
+
+        #region Request
         public string Cin
         {
             get => cin; set
@@ -87,7 +89,7 @@ namespace CD4.UI.Library.ViewModel
         {
             get => sampleCollectionDate; set
             {
-               // if (sampleCollectionDate == value) return;
+                // if (sampleCollectionDate == value) return;
                 sampleCollectionDate = value;
                 OnPropertyChanged();
             }
@@ -101,6 +103,8 @@ namespace CD4.UI.Library.ViewModel
                 OnPropertyChanged();
             }
         }
+
+        #endregion
 
         //Patient Data
         public string NidPp
@@ -122,7 +126,15 @@ namespace CD4.UI.Library.ViewModel
             }
         }
         public List<GenderModel> Gender { get; set; }
-        public GenderModel SelectedGender { get; set; }
+        public int SelectedGenderId
+        {
+            get => selectedGenderId; set
+            {
+                if (selectedGenderId == value) return;
+                selectedGenderId = value;
+                OnPropertyChanged();
+            }
+        }
         public int? Age
         {
             get => age; set
@@ -212,7 +224,7 @@ namespace CD4.UI.Library.ViewModel
             Debug.WriteLine("============ Property Change Handling COMPLETE ==========");
         }
 
-        private async Task SetSelectedSiteAsync(int siteId, [CallerMemberName] string propertyName="" )
+        private async Task SetSelectedSiteAsync(int siteId, [CallerMemberName] string propertyName = "")
         {
             Debug.WriteLine($"called {nameof(SetSelectedSiteAsync)}");
             var site = await GetSiteByIdAsync(siteId);
