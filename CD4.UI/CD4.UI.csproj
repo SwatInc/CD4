@@ -121,6 +121,12 @@
     <Compile Include="View\MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\OrderEntryView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\OrderEntryView.Designer.cs">
+      <DependentUpon>OrderEntryView.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\ProfilesView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -173,6 +179,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\MainView.resx">
       <DependentUpon>MainView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\OrderEntryView.resx">
+      <DependentUpon>OrderEntryView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\ProfilesView.resx">
       <DependentUpon>ProfilesView.cs</DependentUpon>
