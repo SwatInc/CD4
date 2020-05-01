@@ -73,6 +73,7 @@
     <Compile Include="ViewModel\ICountryViewModel.cs" />
     <Compile Include="ViewModel\IGenderViewModel.cs" />
     <Compile Include="ViewModel\IMainViewModel.cs" />
+    <Compile Include="ViewModel\IOrderEntryViewModel.cs" />
     <Compile Include="ViewModel\IProfilesViewModel.cs" />
     <Compile Include="ViewModel\IScientistViewModel.cs" />
     <Compile Include="ViewModel\ISitesViewModel.cs" />
@@ -81,7 +82,6 @@
     <Compile Include="ViewModel\OrderEntryViewModel.cs" />
     <Compile Include="ViewModel\ProfilesViewModel.cs" />
     <Compile Include="ViewModel\ScientistViewModel.cs" />
-    <Compile Include="ViewModel\SiteModel.cs" />
     <Compile Include="ViewModel\SitesViewModel.cs" />
     <Compile Include="ViewModel\TestViewModel.cs" />
   </ItemGroup>

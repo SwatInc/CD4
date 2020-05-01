@@ -45,6 +45,10 @@
             this.lookUpEditIsland = new DevExpress.XtraEditors.LookUpEdit();
             this.lookUpEditAtoll = new DevExpress.XtraEditors.LookUpEdit();
             this.groupControlClinicalDetails = new DevExpress.XtraEditors.GroupControl();
+            this.gridControlClinicalDetails = new DevExpress.XtraGrid.GridControl();
+            this.gridViewClinicalDetails = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumnIsChecked = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnClinicalDetail = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControlSelectedTestData = new DevExpress.XtraEditors.GroupControl();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -53,10 +57,6 @@
             this.groupControlTestSelection = new DevExpress.XtraEditors.GroupControl();
             this.textEditEpisodeNumber = new DevExpress.XtraEditors.TextEdit();
             this.lookUpEditTests = new DevExpress.XtraEditors.LookUpEdit();
-            this.gridControlClinicalDetails = new DevExpress.XtraGrid.GridControl();
-            this.gridViewClinicalDetails = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumnIsChecked = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnClinicalDetail = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlRequestData)).BeginInit();
             this.groupControlRequestData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditSampleReceived.Properties.CalendarTimeProperties)).BeginInit();
@@ -80,6 +80,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditAtoll.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlClinicalDetails)).BeginInit();
             this.groupControlClinicalDetails.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlClinicalDetails)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewClinicalDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlSelectedTestData)).BeginInit();
             this.groupControlSelectedTestData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
@@ -88,8 +90,6 @@
             this.groupControlTestSelection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEditEpisodeNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTests.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlClinicalDetails)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewClinicalDetails)).BeginInit();
             this.SuspendLayout();
             // 
             // groupControlRequestData
@@ -191,7 +191,7 @@
             // 
             this.textEditAge.Location = new System.Drawing.Point(185, 56);
             this.textEditAge.Name = "textEditAge";
-            this.textEditAge.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.textEditAge.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.textEditAge.Properties.NullText = "Age";
             this.textEditAge.Properties.NullValuePrompt = "Age";
             this.textEditAge.Properties.NullValuePromptShowForEmptyValue = true;
@@ -247,6 +247,7 @@
             this.dateEditBirthdate.EditValue = null;
             this.dateEditBirthdate.Location = new System.Drawing.Point(185, 82);
             this.dateEditBirthdate.Name = "dateEditBirthdate";
+            this.dateEditBirthdate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.dateEditBirthdate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateEditBirthdate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -299,6 +300,41 @@
             this.groupControlClinicalDetails.Size = new System.Drawing.Size(196, 186);
             this.groupControlClinicalDetails.TabIndex = 3;
             this.groupControlClinicalDetails.Text = "Clinical Details";
+            // 
+            // gridControlClinicalDetails
+            // 
+            this.gridControlClinicalDetails.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlClinicalDetails.Location = new System.Drawing.Point(2, 20);
+            this.gridControlClinicalDetails.MainView = this.gridViewClinicalDetails;
+            this.gridControlClinicalDetails.Name = "gridControlClinicalDetails";
+            this.gridControlClinicalDetails.Size = new System.Drawing.Size(192, 164);
+            this.gridControlClinicalDetails.TabIndex = 1;
+            this.gridControlClinicalDetails.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewClinicalDetails});
+            // 
+            // gridViewClinicalDetails
+            // 
+            this.gridViewClinicalDetails.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumnIsChecked,
+            this.gridColumnClinicalDetail});
+            this.gridViewClinicalDetails.GridControl = this.gridControlClinicalDetails;
+            this.gridViewClinicalDetails.Name = "gridViewClinicalDetails";
+            this.gridViewClinicalDetails.OptionsView.ShowColumnHeaders = false;
+            this.gridViewClinicalDetails.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumnIsChecked
+            // 
+            this.gridColumnIsChecked.Name = "gridColumnIsChecked";
+            this.gridColumnIsChecked.Visible = true;
+            this.gridColumnIsChecked.VisibleIndex = 1;
+            this.gridColumnIsChecked.Width = 146;
+            // 
+            // gridColumnClinicalDetail
+            // 
+            this.gridColumnClinicalDetail.Name = "gridColumnClinicalDetail";
+            this.gridColumnClinicalDetail.Visible = true;
+            this.gridColumnClinicalDetail.VisibleIndex = 0;
+            this.gridColumnClinicalDetail.Width = 30;
             // 
             // groupControlSelectedTestData
             // 
@@ -376,41 +412,6 @@
             this.lookUpEditTests.Size = new System.Drawing.Size(167, 20);
             this.lookUpEditTests.TabIndex = 13;
             // 
-            // gridControlClinicalDetails
-            // 
-            this.gridControlClinicalDetails.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControlClinicalDetails.Location = new System.Drawing.Point(2, 20);
-            this.gridControlClinicalDetails.MainView = this.gridViewClinicalDetails;
-            this.gridControlClinicalDetails.Name = "gridControlClinicalDetails";
-            this.gridControlClinicalDetails.Size = new System.Drawing.Size(192, 164);
-            this.gridControlClinicalDetails.TabIndex = 1;
-            this.gridControlClinicalDetails.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridViewClinicalDetails});
-            // 
-            // gridViewClinicalDetails
-            // 
-            this.gridViewClinicalDetails.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumnIsChecked,
-            this.gridColumnClinicalDetail});
-            this.gridViewClinicalDetails.GridControl = this.gridControlClinicalDetails;
-            this.gridViewClinicalDetails.Name = "gridViewClinicalDetails";
-            this.gridViewClinicalDetails.OptionsView.ShowColumnHeaders = false;
-            this.gridViewClinicalDetails.OptionsView.ShowGroupPanel = false;
-            // 
-            // gridColumnIsChecked
-            // 
-            this.gridColumnIsChecked.Name = "gridColumnIsChecked";
-            this.gridColumnIsChecked.Visible = true;
-            this.gridColumnIsChecked.VisibleIndex = 1;
-            this.gridColumnIsChecked.Width = 146;
-            // 
-            // gridColumnClinicalDetail
-            // 
-            this.gridColumnClinicalDetail.Name = "gridColumnClinicalDetail";
-            this.gridColumnClinicalDetail.Visible = true;
-            this.gridColumnClinicalDetail.VisibleIndex = 0;
-            this.gridColumnClinicalDetail.Width = 30;
-            // 
             // OrderEntryView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -449,6 +450,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditAtoll.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlClinicalDetails)).EndInit();
             this.groupControlClinicalDetails.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlClinicalDetails)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewClinicalDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlSelectedTestData)).EndInit();
             this.groupControlSelectedTestData.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
@@ -457,8 +460,6 @@
             this.groupControlTestSelection.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.textEditEpisodeNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTests.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControlClinicalDetails)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridViewClinicalDetails)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -1,32 +1,37 @@
 ﻿using CD4.UI.Library.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Globalization;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace CD4.UI.Library.ViewModel
 {
-    public class OrderEntryViewModel : INotifyPropertyChanged
+    public class OrderEntryViewModel : INotifyPropertyChanged, IOrderEntryViewModel
     {
         #region Private Properties
         private CultureInfo cultureInfo = new CultureInfo("en-US");
         private string cin;
-        private DateTime sampleCollectionDate;
-        private DateTime sampleReceivedDate;
+        private DateTime? sampleCollectionDate;
+        private DateTime? sampleReceivedDate;
         private string nidPp;
         private string fullname;
-        private int age;
+        private int? age;
         private string phoneNumber;
-        private DateTime birthdate;
+        private DateTime? birthdate;
         private string address;
         private string episodeNumber;
+        private int selectedSiteId;
         #endregion
 
         #region Default Constructor
         public OrderEntryViewModel()
         {
-            Sites = new List<SiteModel>();
+            Sites = new List<SitesModel>();
             Gender = new List<GenderModel>();
             Atolls = new List<AtollModel>();
             Islands = new List<IslandModel>();
@@ -35,8 +40,12 @@ namespace CD4.UI.Library.ViewModel
             AddedTests = new BindingList<TestModel>();
             AllTestsData = new List<TestModel>();
 
+            InitializeDemoData();
 
+
+            PropertyChanged += OrderEntryViewModel_PropertyChanged;
         }
+
 
         #endregion
 
@@ -62,18 +71,28 @@ namespace CD4.UI.Library.ViewModel
                 OnPropertyChanged();
             }
         }
-        public List<SiteModel> Sites { get; set; }
-        public SiteModel SelectedSite { get; set; }
-        public DateTime SampleCollectionDate
+        public List<SitesModel> Sites { get; set; }
+        private SitesModel SelectedSite { get; set; }
+        public int SelectedSiteId
+        {
+            get => selectedSiteId; set
+            {
+                if (selectedSiteId == value) return;
+                selectedSiteId = value;
+                SetSelectedSiteAsync(value).ConfigureAwait(true);
+                //OnPropertyChanged(); called elsewhere
+            }
+        }
+        public DateTime? SampleCollectionDate
         {
             get => sampleCollectionDate; set
             {
-                if (sampleCollectionDate == value) return;
+               // if (sampleCollectionDate == value) return;
                 sampleCollectionDate = value;
                 OnPropertyChanged();
             }
         }
-        public DateTime SampleReceivedDate
+        public DateTime? SampleReceivedDate
         {
             get => sampleReceivedDate; set
             {
@@ -104,7 +123,7 @@ namespace CD4.UI.Library.ViewModel
         }
         public List<GenderModel> Gender { get; set; }
         public GenderModel SelectedGender { get; set; }
-        public int Age
+        public int? Age
         {
             get => age; set
             {
@@ -122,7 +141,7 @@ namespace CD4.UI.Library.ViewModel
                 OnPropertyChanged();
             }
         }
-        public DateTime Birthdate
+        public DateTime? Birthdate
         {
             get => birthdate; set
             {
@@ -168,6 +187,55 @@ namespace CD4.UI.Library.ViewModel
 
         #endregion
 
+        #region Private Methods
+        private void InitializeDemoData()
+        {
+            var site1 = new SitesModel() { Id = 1, Site = "IGMH" };
+            var site2 = new SitesModel() { Id = 2, Site = "FARUKOLHU" };
+
+            this.Sites.Add(site1);
+            this.Sites.Add(site2);
+
+        }
+
+        private void OrderEntryViewModel_PropertyChanged
+            (object sender, PropertyChangedEventArgs e)
+        {
+            Debug.WriteLine("============= Property Change Handling START ============");
+            Debug.WriteLine(e.PropertyName);
+            //for debugging
+            if (e.PropertyName == nameof(this.selectedSiteId))
+            {
+                Debug.WriteLine(JsonConvert.SerializeObject(SelectedSite, Formatting.Indented));
+            }
+
+            Debug.WriteLine("============ Property Change Handling COMPLETE ==========");
+        }
+
+        private async Task SetSelectedSiteAsync(int siteId, [CallerMemberName] string propertyName="" )
+        {
+            Debug.WriteLine($"called {nameof(SetSelectedSiteAsync)}");
+            var site = await GetSiteByIdAsync(siteId);
+            if (site is null)
+            {
+                Debug.WriteLine($"Search Yeilded null");
+                return;
+            }
+            SelectedSite = site;
+            Debug.WriteLine($"Selected Site: {site.Id} | {site.Site}");
+            Debug.WriteLine($"Completed call to {nameof(SetSelectedSiteAsync)}");
+            OnPropertyChanged(propertyName);
+        }
+
+        private async Task<SitesModel> GetSiteByIdAsync(int siteId)
+        {
+            Debug.WriteLine($"Searching Site by Id. SiteID {siteId}");
+            return await Task.Run(() =>
+            {
+                return Sites.SingleOrDefault(s => s.Id == siteId);
+            });
+        }
+        #endregion
     }
 
 
