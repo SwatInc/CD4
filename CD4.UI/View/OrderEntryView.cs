@@ -17,5 +17,6 @@ namespace CD4.UI.View
         {
             InitializeComponent();
         }
+
     }
 }

@@ -32,19 +32,18 @@
             this.dateEditSampleReceived = new DevExpress.XtraEditors.DateEdit();
             this.dateEditCollectedDate = new DevExpress.XtraEditors.DateEdit();
             this.lookUpEditSite = new DevExpress.XtraEditors.LookUpEdit();
-            this.textEdit1 = new DevExpress.XtraEditors.TextEdit();
+            this.textEditCin = new DevExpress.XtraEditors.TextEdit();
             this.groupControlPatientData = new DevExpress.XtraEditors.GroupControl();
-            this.textEdit2 = new DevExpress.XtraEditors.TextEdit();
             this.textEditPhoneNumber = new DevExpress.XtraEditors.TextEdit();
-            this.lookUpEditGender = new DevExpress.XtraEditors.LookUpEdit();
             this.textEditAge = new DevExpress.XtraEditors.TextEdit();
+            this.textEditAddress = new DevExpress.XtraEditors.TextEdit();
+            this.textEditFullname = new DevExpress.XtraEditors.TextEdit();
+            this.textEditNidPp = new DevExpress.XtraEditors.TextEdit();
+            this.lookUpEditGender = new DevExpress.XtraEditors.LookUpEdit();
             this.dateEditBirthdate = new DevExpress.XtraEditors.DateEdit();
             this.lookUpEditCountry = new DevExpress.XtraEditors.LookUpEdit();
             this.lookUpEditIsland = new DevExpress.XtraEditors.LookUpEdit();
             this.lookUpEditAtoll = new DevExpress.XtraEditors.LookUpEdit();
-            this.textEditNidPp = new DevExpress.XtraEditors.TextEdit();
-            this.textEditAddress = new DevExpress.XtraEditors.TextEdit();
-            this.textEditFullname = new DevExpress.XtraEditors.TextEdit();
             this.checkedListBoxControlClinicalDetails = new DevExpress.XtraEditors.CheckedListBoxControl();
             this.groupControlClinicalDetails = new DevExpress.XtraEditors.GroupControl();
             this.groupControlSelectedTestData = new DevExpress.XtraEditors.GroupControl();
@@ -53,6 +52,7 @@
             this.simpleButtonSearch = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButtonConfirm = new DevExpress.XtraEditors.SimpleButton();
             this.groupControlTestSelection = new DevExpress.XtraEditors.GroupControl();
+            this.textEditEpisodeNumber = new DevExpress.XtraEditors.TextEdit();
             this.lookUpEditTests = new DevExpress.XtraEditors.LookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlRequestData)).BeginInit();
             this.groupControlRequestData.SuspendLayout();
@@ -61,21 +61,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateEditCollectedDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditCollectedDate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditSite.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditCin.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlPatientData)).BeginInit();
             this.groupControlPatientData.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditPhoneNumber.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditGender.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditAge.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditAddress.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditFullname.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditNidPp.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditGender.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditBirthdate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditBirthdate.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditCountry.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditIsland.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditAtoll.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditNidPp.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditAddress.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditFullname.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlClinicalDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlClinicalDetails)).BeginInit();
             this.groupControlClinicalDetails.SuspendLayout();
@@ -85,6 +84,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlTestSelection)).BeginInit();
             this.groupControlTestSelection.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditEpisodeNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTests.Properties)).BeginInit();
             this.SuspendLayout();
             // 
@@ -93,7 +93,7 @@
             this.groupControlRequestData.Controls.Add(this.dateEditSampleReceived);
             this.groupControlRequestData.Controls.Add(this.dateEditCollectedDate);
             this.groupControlRequestData.Controls.Add(this.lookUpEditSite);
-            this.groupControlRequestData.Controls.Add(this.textEdit1);
+            this.groupControlRequestData.Controls.Add(this.textEditCin);
             this.groupControlRequestData.Location = new System.Drawing.Point(7, 8);
             this.groupControlRequestData.Name = "groupControlRequestData";
             this.groupControlRequestData.Size = new System.Drawing.Size(196, 141);
@@ -143,50 +143,37 @@
             this.lookUpEditSite.Size = new System.Drawing.Size(167, 20);
             this.lookUpEditSite.TabIndex = 1;
             // 
-            // textEdit1
+            // textEditCin
             // 
-            this.textEdit1.Location = new System.Drawing.Point(12, 30);
-            this.textEdit1.Name = "textEdit1";
-            this.textEdit1.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.textEdit1.Properties.NullText = "CIN";
-            this.textEdit1.Properties.NullValuePrompt = "CIN";
-            this.textEdit1.Properties.NullValuePromptShowForEmptyValue = true;
-            this.textEdit1.Size = new System.Drawing.Size(167, 20);
-            this.textEdit1.TabIndex = 1;
+            this.textEditCin.Location = new System.Drawing.Point(12, 30);
+            this.textEditCin.Name = "textEditCin";
+            this.textEditCin.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.textEditCin.Properties.NullText = "CIN";
+            this.textEditCin.Properties.NullValuePrompt = "CIN";
+            this.textEditCin.Properties.NullValuePromptShowForEmptyValue = true;
+            this.textEditCin.Size = new System.Drawing.Size(167, 20);
+            this.textEditCin.TabIndex = 1;
             // 
             // groupControlPatientData
             // 
             this.groupControlPatientData.Controls.Add(this.textEditPhoneNumber);
-            this.groupControlPatientData.Controls.Add(this.lookUpEditGender);
             this.groupControlPatientData.Controls.Add(this.textEditAge);
+            this.groupControlPatientData.Controls.Add(this.textEditAddress);
+            this.groupControlPatientData.Controls.Add(this.textEditFullname);
+            this.groupControlPatientData.Controls.Add(this.textEditNidPp);
+            this.groupControlPatientData.Controls.Add(this.lookUpEditGender);
             this.groupControlPatientData.Controls.Add(this.dateEditBirthdate);
             this.groupControlPatientData.Controls.Add(this.lookUpEditCountry);
             this.groupControlPatientData.Controls.Add(this.lookUpEditIsland);
             this.groupControlPatientData.Controls.Add(this.lookUpEditAtoll);
-            this.groupControlPatientData.Controls.Add(this.textEditNidPp);
-            this.groupControlPatientData.Controls.Add(this.textEditAddress);
-            this.groupControlPatientData.Controls.Add(this.textEditFullname);
             this.groupControlPatientData.Location = new System.Drawing.Point(209, 8);
             this.groupControlPatientData.Name = "groupControlPatientData";
             this.groupControlPatientData.Size = new System.Drawing.Size(550, 141);
             this.groupControlPatientData.TabIndex = 3;
             this.groupControlPatientData.Text = "Patient Data";
             // 
-            // textEdit2
-            // 
-            this.textEdit2.EditValue = "Episode Number";
-            this.textEdit2.Location = new System.Drawing.Point(16, 61);
-            this.textEdit2.Name = "textEdit2";
-            this.textEdit2.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.textEdit2.Properties.NullText = "Phone Number";
-            this.textEdit2.Properties.NullValuePrompt = "Phone Number";
-            this.textEdit2.Properties.NullValuePromptShowForEmptyValue = true;
-            this.textEdit2.Size = new System.Drawing.Size(167, 20);
-            this.textEdit2.TabIndex = 12;
-            // 
             // textEditPhoneNumber
             // 
-            this.textEditPhoneNumber.EditValue = "Phone Number";
             this.textEditPhoneNumber.Location = new System.Drawing.Point(12, 82);
             this.textEditPhoneNumber.Name = "textEditPhoneNumber";
             this.textEditPhoneNumber.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
@@ -194,7 +181,51 @@
             this.textEditPhoneNumber.Properties.NullValuePrompt = "Phone Number";
             this.textEditPhoneNumber.Properties.NullValuePromptShowForEmptyValue = true;
             this.textEditPhoneNumber.Size = new System.Drawing.Size(167, 20);
-            this.textEditPhoneNumber.TabIndex = 11;
+            this.textEditPhoneNumber.TabIndex = 15;
+            // 
+            // textEditAge
+            // 
+            this.textEditAge.Location = new System.Drawing.Point(185, 56);
+            this.textEditAge.Name = "textEditAge";
+            this.textEditAge.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.textEditAge.Properties.NullText = "Age";
+            this.textEditAge.Properties.NullValuePrompt = "Age";
+            this.textEditAge.Properties.NullValuePromptShowForEmptyValue = true;
+            this.textEditAge.Size = new System.Drawing.Size(167, 20);
+            this.textEditAge.TabIndex = 14;
+            // 
+            // textEditAddress
+            // 
+            this.textEditAddress.Location = new System.Drawing.Point(370, 30);
+            this.textEditAddress.Name = "textEditAddress";
+            this.textEditAddress.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.textEditAddress.Properties.NullText = "Address";
+            this.textEditAddress.Properties.NullValuePrompt = "Address";
+            this.textEditAddress.Properties.NullValuePromptShowForEmptyValue = true;
+            this.textEditAddress.Size = new System.Drawing.Size(167, 20);
+            this.textEditAddress.TabIndex = 13;
+            // 
+            // textEditFullname
+            // 
+            this.textEditFullname.Location = new System.Drawing.Point(185, 30);
+            this.textEditFullname.Name = "textEditFullname";
+            this.textEditFullname.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.textEditFullname.Properties.NullText = "Fullname";
+            this.textEditFullname.Properties.NullValuePrompt = "Fullname";
+            this.textEditFullname.Properties.NullValuePromptShowForEmptyValue = true;
+            this.textEditFullname.Size = new System.Drawing.Size(167, 20);
+            this.textEditFullname.TabIndex = 12;
+            // 
+            // textEditNidPp
+            // 
+            this.textEditNidPp.Location = new System.Drawing.Point(12, 30);
+            this.textEditNidPp.Name = "textEditNidPp";
+            this.textEditNidPp.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.textEditNidPp.Properties.NullText = "National ID Card / Passport";
+            this.textEditNidPp.Properties.NullValuePrompt = "National ID Card / Passport";
+            this.textEditNidPp.Properties.NullValuePromptShowForEmptyValue = true;
+            this.textEditNidPp.Size = new System.Drawing.Size(167, 20);
+            this.textEditNidPp.TabIndex = 3;
             // 
             // lookUpEditGender
             // 
@@ -206,18 +237,6 @@
             this.lookUpEditGender.Properties.NullValuePrompt = "Select Gender";
             this.lookUpEditGender.Size = new System.Drawing.Size(167, 20);
             this.lookUpEditGender.TabIndex = 10;
-            // 
-            // textEditAge
-            // 
-            this.textEditAge.EditValue = "Age";
-            this.textEditAge.Location = new System.Drawing.Point(185, 56);
-            this.textEditAge.Name = "textEditAge";
-            this.textEditAge.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.textEditAge.Properties.NullText = "Age";
-            this.textEditAge.Properties.NullValuePrompt = "Age";
-            this.textEditAge.Properties.NullValuePromptShowForEmptyValue = true;
-            this.textEditAge.Size = new System.Drawing.Size(167, 20);
-            this.textEditAge.TabIndex = 9;
             // 
             // dateEditBirthdate
             // 
@@ -267,42 +286,6 @@
             this.lookUpEditAtoll.Properties.NullValuePrompt = "Select Atoll";
             this.lookUpEditAtoll.Size = new System.Drawing.Size(167, 20);
             this.lookUpEditAtoll.TabIndex = 6;
-            // 
-            // textEditNidPp
-            // 
-            this.textEditNidPp.EditValue = "ID Card Number / Passport";
-            this.textEditNidPp.Location = new System.Drawing.Point(12, 30);
-            this.textEditNidPp.Name = "textEditNidPp";
-            this.textEditNidPp.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.textEditNidPp.Properties.NullText = "National ID Card / Passport";
-            this.textEditNidPp.Properties.NullValuePrompt = "National ID Card / Passport";
-            this.textEditNidPp.Properties.NullValuePromptShowForEmptyValue = true;
-            this.textEditNidPp.Size = new System.Drawing.Size(167, 20);
-            this.textEditNidPp.TabIndex = 5;
-            // 
-            // textEditAddress
-            // 
-            this.textEditAddress.EditValue = "Address";
-            this.textEditAddress.Location = new System.Drawing.Point(370, 30);
-            this.textEditAddress.Name = "textEditAddress";
-            this.textEditAddress.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.textEditAddress.Properties.NullText = "Address";
-            this.textEditAddress.Properties.NullValuePrompt = "Address";
-            this.textEditAddress.Properties.NullValuePromptShowForEmptyValue = true;
-            this.textEditAddress.Size = new System.Drawing.Size(167, 20);
-            this.textEditAddress.TabIndex = 4;
-            // 
-            // textEditFullname
-            // 
-            this.textEditFullname.EditValue = "Fullname";
-            this.textEditFullname.Location = new System.Drawing.Point(185, 30);
-            this.textEditFullname.Name = "textEditFullname";
-            this.textEditFullname.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.textEditFullname.Properties.NullText = "Fullname";
-            this.textEditFullname.Properties.NullValuePrompt = "Fullname";
-            this.textEditFullname.Properties.NullValuePromptShowForEmptyValue = true;
-            this.textEditFullname.Size = new System.Drawing.Size(167, 20);
-            this.textEditFullname.TabIndex = 3;
             // 
             // checkedListBoxControlClinicalDetails
             // 
@@ -365,15 +348,26 @@
             // 
             // groupControlTestSelection
             // 
+            this.groupControlTestSelection.Controls.Add(this.textEditEpisodeNumber);
             this.groupControlTestSelection.Controls.Add(this.simpleButtonSearch);
             this.groupControlTestSelection.Controls.Add(this.simpleButtonConfirm);
             this.groupControlTestSelection.Controls.Add(this.lookUpEditTests);
-            this.groupControlTestSelection.Controls.Add(this.textEdit2);
             this.groupControlTestSelection.Location = new System.Drawing.Point(563, 155);
             this.groupControlTestSelection.Name = "groupControlTestSelection";
             this.groupControlTestSelection.Size = new System.Drawing.Size(196, 186);
             this.groupControlTestSelection.TabIndex = 5;
             this.groupControlTestSelection.Text = "Test Selection";
+            // 
+            // textEditEpisodeNumber
+            // 
+            this.textEditEpisodeNumber.Location = new System.Drawing.Point(16, 61);
+            this.textEditEpisodeNumber.Name = "textEditEpisodeNumber";
+            this.textEditEpisodeNumber.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.textEditEpisodeNumber.Properties.NullText = "EpisodeNumber";
+            this.textEditEpisodeNumber.Properties.NullValuePrompt = "EpisodeNumber";
+            this.textEditEpisodeNumber.Properties.NullValuePromptShowForEmptyValue = true;
+            this.textEditEpisodeNumber.Size = new System.Drawing.Size(167, 20);
+            this.textEditEpisodeNumber.TabIndex = 14;
             // 
             // lookUpEditTests
             // 
@@ -400,7 +394,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "OrderEntryView";
-            this.Text = "OrderEntryView";
+            this.Text = "Order Entry";
             ((System.ComponentModel.ISupportInitialize)(this.groupControlRequestData)).EndInit();
             this.groupControlRequestData.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dateEditSampleReceived.Properties.CalendarTimeProperties)).EndInit();
@@ -408,21 +402,20 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateEditCollectedDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditCollectedDate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditSite.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditCin.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlPatientData)).EndInit();
             this.groupControlPatientData.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.textEdit2.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditPhoneNumber.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditGender.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditAge.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditAddress.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditFullname.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditNidPp.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditGender.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditBirthdate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditBirthdate.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditCountry.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditIsland.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditAtoll.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditNidPp.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditAddress.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditFullname.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.checkedListBoxControlClinicalDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlClinicalDetails)).EndInit();
             this.groupControlClinicalDetails.ResumeLayout(false);
@@ -432,6 +425,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlTestSelection)).EndInit();
             this.groupControlTestSelection.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.textEditEpisodeNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTests.Properties)).EndInit();
             this.ResumeLayout(false);
 
@@ -443,27 +437,27 @@
         private DevExpress.XtraEditors.DateEdit dateEditSampleReceived;
         private DevExpress.XtraEditors.DateEdit dateEditCollectedDate;
         private DevExpress.XtraEditors.LookUpEdit lookUpEditSite;
-        private DevExpress.XtraEditors.TextEdit textEdit1;
+        private DevExpress.XtraEditors.TextEdit textEditCin;
         private DevExpress.XtraEditors.GroupControl groupControlPatientData;
         private DevExpress.XtraEditors.LookUpEdit lookUpEditCountry;
         private DevExpress.XtraEditors.LookUpEdit lookUpEditIsland;
         private DevExpress.XtraEditors.LookUpEdit lookUpEditAtoll;
-        private DevExpress.XtraEditors.TextEdit textEditNidPp;
-        private DevExpress.XtraEditors.TextEdit textEditAddress;
-        private DevExpress.XtraEditors.TextEdit textEditFullname;
-        private DevExpress.XtraEditors.TextEdit textEditPhoneNumber;
         private DevExpress.XtraEditors.LookUpEdit lookUpEditGender;
-        private DevExpress.XtraEditors.TextEdit textEditAge;
         private DevExpress.XtraEditors.DateEdit dateEditBirthdate;
         private DevExpress.XtraEditors.CheckedListBoxControl checkedListBoxControlClinicalDetails;
         private DevExpress.XtraEditors.GroupControl groupControlClinicalDetails;
         private DevExpress.XtraEditors.GroupControl groupControlSelectedTestData;
-        private DevExpress.XtraEditors.TextEdit textEdit2;
         private DevExpress.XtraGrid.GridControl gridControl1;
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraEditors.SimpleButton simpleButtonSearch;
         private DevExpress.XtraEditors.SimpleButton simpleButtonConfirm;
         private DevExpress.XtraEditors.GroupControl groupControlTestSelection;
         private DevExpress.XtraEditors.LookUpEdit lookUpEditTests;
+        private DevExpress.XtraEditors.TextEdit textEditAddress;
+        private DevExpress.XtraEditors.TextEdit textEditFullname;
+        private DevExpress.XtraEditors.TextEdit textEditNidPp;
+        private DevExpress.XtraEditors.TextEdit textEditEpisodeNumber;
+        private DevExpress.XtraEditors.TextEdit textEditAge;
+        private DevExpress.XtraEditors.TextEdit textEditPhoneNumber;
     }
 }

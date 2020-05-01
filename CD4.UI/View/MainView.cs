@@ -20,6 +20,7 @@ namespace CD4.UI.View
 
             #region Event Subscriptions
 
+            //Configuration Tab buttons
             barButtonItemCodifiedResults.ItemClick += OpenCodifiedResultsView;
             barButtonItemCountries.ItemClick += OpenCountriesConfigView;
             barButtonItemGender.ItemClick += OpenGenderConfigView;
@@ -30,7 +31,15 @@ namespace CD4.UI.View
             barButtonItemTests.ItemClick += OpenTestsConfigView;
             barButtonItemProfiles.ItemClick += OpenProfilesConfigView;
 
+            //General Tab Buttons
+            barButtonItemOrderEntry.ItemClick += OpenOrderEntryView;
+
             #endregion
+        }
+
+        private void OpenOrderEntryView(object sender, ItemClickEventArgs e)
+        {
+            this.OpenMdiForm<OrderEntryView>();
         }
 
         private void OpenProfilesConfigView(object sender, ItemClickEventArgs e)

@@ -330,7 +330,7 @@
         dmc+Cw==
 </value>
   </data>
-  <data name="barButtonItem1.ImageOptions.SvgImage" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v18.2" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="barButtonItemProfiles.ImageOptions.SvgImage" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v18.2" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         AAEAAAD/////AQAAAAAAAAAMAgAAAFlEZXZFeHByZXNzLkRhdGEudjE4LjIsIFZlcnNpb249MTguMi40
         LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjg4ZDE3NTRkNzAwZTQ5YQUBAAAAHURl
@@ -344,6 +344,42 @@
         NnpNMzYwIDY0aDI0djI0MGMwIDQ0LjEgMzUuOSA4MCA4MCA4MHM4MC0zNS45IDgwLTgwVjY0aDI0YzQu
         NCAwIDgtMy42IDgtOFY4YzAtNC40LTMuNi04LTgtOEgzNjBjLTQuNCAwLTggMy42LTggOHY0OGMwIDQu
         NCAzLjYgOCA4IDh6bTcyIDBoNjR2OTZoLTY0VjY0eiIgLz4NCjwvc3ZnPgs=
+</value>
+  </data>
+  <data name="barButtonItem1.ImageOptions.SvgImage" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v18.2" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFlEZXZFeHByZXNzLkRhdGEudjE4LjIsIFZlcnNpb249MTguMi40
+        LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjg4ZDE3NTRkNzAwZTQ5YQUBAAAAHURl
+        dkV4cHJlc3MuVXRpbHMuU3ZnLlN2Z0ltYWdlAQAAAAREYXRhBwICAAAACQMAAAAPAwAAAKwBAAAC77u/
+        PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4NCjxzdmcgdmlld0JveD0iMCAwIDQ0
+        OCA1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+DQogIDxwYXRoIGQ9Ik00Mzcu
+        MiA0MDMuNUwzMjAgMjE1VjY0aDhjMTMuMyAwIDI0LTEwLjcgMjQtMjRWMjRjMC0xMy4zLTEwLjctMjQt
+        MjQtMjRIMTIwYy0xMy4zIDAtMjQgMTAuNy0yNCAyNHYxNmMwIDEzLjMgMTAuNyAyNCAyNCAyNGg4djE1
+        MUwxMC44IDQwMy41Qy0xOC41IDQ1MC42IDE1LjMgNTEyIDcwLjkgNTEyaDMwNi4yYzU1LjcgMCA4OS40
+        LTYxLjUgNjAuMS0xMDguNXpNMTM3LjkgMzIwbDQ4LjItNzcuNmMzLjctNS4yIDUuOC0xMS42IDUuOC0x
+        OC40VjY0aDY0djE2MGMwIDYuOSAyLjIgMTMuMiA1LjggMTguNGw0OC4yIDc3LjZoLTE3MnoiIC8+DQo8
+        L3N2Zz4L
+</value>
+  </data>
+  <data name="barButtonItem3.ImageOptions.SvgImage" type="DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v18.2" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        AAEAAAD/////AQAAAAAAAAAMAgAAAFlEZXZFeHByZXNzLkRhdGEudjE4LjIsIFZlcnNpb249MTguMi40
+        LjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49Yjg4ZDE3NTRkNzAwZTQ5YQUBAAAAHURl
+        dkV4cHJlc3MuVXRpbHMuU3ZnLlN2Z0ltYWdlAQAAAAREYXRhBwICAAAACQMAAAAPAwAAABgDAAAC77u/
+        PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0nVVRGLTgnPz4NCjxzdmcgdmlld0JveD0iMCAwIDUx
+        MiA1MTIiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+DQogIDxwYXRoIGQ9Ik0zMzIu
+        OCAzMjBoMzguNGM2LjQgMCAxMi44LTYuNCAxMi44LTEyLjhWMTcyLjhjMC02LjQtNi40LTEyLjgtMTIu
+        OC0xMi44aC0zOC40Yy02LjQgMC0xMi44IDYuNC0xMi44IDEyLjh2MTM0LjRjMCA2LjQgNi40IDEyLjgg
+        MTIuOCAxMi44em05NiAwaDM4LjRjNi40IDAgMTIuOC02LjQgMTIuOC0xMi44Vjc2LjhjMC02LjQtNi40
+        LTEyLjgtMTIuOC0xMi44aC0zOC40Yy02LjQgMC0xMi44IDYuNC0xMi44IDEyLjh2MjMwLjRjMCA2LjQg
+        Ni40IDEyLjggMTIuOCAxMi44em0tMjg4IDBoMzguNGM2LjQgMCAxMi44LTYuNCAxMi44LTEyLjh2LTcw
+        LjRjMC02LjQtNi40LTEyLjgtMTIuOC0xMi44aC0zOC40Yy02LjQgMC0xMi44IDYuNC0xMi44IDEyLjh2
+        NzAuNGMwIDYuNCA2LjQgMTIuOCAxMi44IDEyLjh6bTk2IDBoMzguNGM2LjQgMCAxMi44LTYuNCAxMi44
+        LTEyLjhWMTA4LjhjMC02LjQtNi40LTEyLjgtMTIuOC0xMi44aC0zOC40Yy02LjQgMC0xMi44IDYuNC0x
+        Mi44IDEyLjh2MTk4LjRjMCA2LjQgNi40IDEyLjggMTIuOCAxMi44ek00OTYgMzg0SDY0VjgwYzAtOC44
+        NC03LjE2LTE2LTE2LTE2SDE2QzcuMTYgNjQgMCA3MS4xNiAwIDgwdjMzNmMwIDE3LjY3IDE0LjMzIDMy
+        IDMyIDMyaDQ2NGM4Ljg0IDAgMTYtNy4xNiAxNi0xNnYtMzJjMC04Ljg0LTcuMTYtMTYtMTYtMTZ6IiAv
+        Pg0KPC9zdmc+Cw==
 </value>
   </data>
 </root>
