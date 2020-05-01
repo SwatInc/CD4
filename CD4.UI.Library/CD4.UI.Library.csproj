@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Model\AtollModel.cs" />
     <Compile Include="Model\ClinicalDetailsModel.cs" />
+    <Compile Include="Model\ClinicalDetailsOrderEntryModel.cs" />
     <Compile Include="Model\CodifiedValueModel.cs" />
     <Compile Include="Model\CountryModel.cs" />
     <Compile Include="Model\GenderModel.cs" />

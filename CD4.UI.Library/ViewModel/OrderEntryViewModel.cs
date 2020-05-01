@@ -87,6 +87,7 @@ namespace CD4.UI.Library.ViewModel
         public CountryModel SelectedCountry { get; set; }
 
         //ClincalDetails
+
         #endregion
 
     }
