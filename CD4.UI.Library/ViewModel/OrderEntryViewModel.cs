@@ -9,6 +9,7 @@ namespace CD4.UI.Library.ViewModel
 {
     public class OrderEntryViewModel : INotifyPropertyChanged
     {
+        #region Private Properties
         private CultureInfo cultureInfo = new CultureInfo("en-US");
         private string cin;
         private DateTime sampleCollectionDate;
@@ -20,7 +21,9 @@ namespace CD4.UI.Library.ViewModel
         private DateTime birthdate;
         private string address;
         private string episodeNumber;
+        #endregion
 
+        #region Default Constructor
         public OrderEntryViewModel()
         {
             Sites = new List<SiteModel>();
@@ -34,6 +37,8 @@ namespace CD4.UI.Library.ViewModel
 
 
         }
+
+        #endregion
 
         #region INotifyPropertyChanged Hookup
 
