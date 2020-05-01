@@ -47,6 +47,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model\AtollModel.cs" />
     <Compile Include="Model\ClinicalDetailsModel.cs" />
     <Compile Include="Model\CodifiedValueModel.cs" />
     <Compile Include="Model\CountryModel.cs" />
@@ -76,8 +77,10 @@
     <Compile Include="ViewModel\ISitesViewModel.cs" />
     <Compile Include="ViewModel\ITestViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\OrderEntryViewModel.cs" />
     <Compile Include="ViewModel\ProfilesViewModel.cs" />
     <Compile Include="ViewModel\ScientistViewModel.cs" />
+    <Compile Include="ViewModel\SiteModel.cs" />
     <Compile Include="ViewModel\SitesViewModel.cs" />
     <Compile Include="ViewModel\TestViewModel.cs" />
   </ItemGroup>
