@@ -23,6 +23,16 @@ namespace CD4.UI.Library.ViewModel
 
         public OrderEntryViewModel()
         {
+            Sites = new List<SiteModel>();
+            Gender = new List<GenderModel>();
+            Atolls = new List<AtollModel>();
+            Islands = new List<IslandModel>();
+            Countries = new List<CountryModel>();
+            ClinicalDetails = new BindingList<ClinicalDetailsOrderEntryModel>();
+            AddedTests = new BindingList<TestModel>();
+            AllTestsData = new List<TestModel>();
+
+
         }
 
         #region INotifyPropertyChanged Hookup
@@ -136,7 +146,7 @@ namespace CD4.UI.Library.ViewModel
         public BindingList<ClinicalDetailsOrderEntryModel> ClinicalDetails { get; set; }
 
         //Selected Tests
-        public List<TestModel> SelectedTests { get; set; }
+        public BindingList<TestModel> AddedTests { get; set; }
 
         //TestSelection
         public List<TestModel> AllTestsData { get; set; }
