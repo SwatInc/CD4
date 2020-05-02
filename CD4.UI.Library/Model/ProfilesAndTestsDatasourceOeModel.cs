@@ -30,5 +30,22 @@ namespace CD4.UI.Library.Model
         }
         public List<TestModel> TestsInProfile { get; set; }
 
+        public override bool Equals(object obj)
+        {
+            try
+            {
+                var test = (ProfilesAndTestsDatasourceOeModel)obj;
+                if (test.Id != this.Id) return false;
+                if (test.Description != this.Description) return false;
+
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+
+            return true;
+        }
+
     }
 }

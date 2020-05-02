@@ -30,6 +30,7 @@ namespace CD4.UI.Library.ViewModel
         private int selectedAtollId;
         private int selectedIslandId;
         private int selectedCountryId;
+        private string testToAdd;
         #endregion
 
         #region Default Constructor
@@ -253,7 +254,15 @@ namespace CD4.UI.Library.ViewModel
 
         //TestSelection
         public List<ProfilesAndTestsDatasourceOeModel> AllTestsData { get; set; }
-        public TestModel TestToAdd { get; set; }
+        public string TestToAdd
+        {
+            get => testToAdd; set
+            {
+                if (testToAdd == value) return;
+                testToAdd = value;
+                OnPropertyChanged();
+            }
+        }
         public string EpisodeNumber
         {
             get => episodeNumber; set
@@ -268,7 +277,72 @@ namespace CD4.UI.Library.ViewModel
 
         #endregion
 
+        #region Public Methods
+        public async Task ManageAddTestToRequestAsync()
+        {
+            Debug.WriteLine("Called: ManageAddTestToRequestAsync");
+            if (TestToAdd is null) return;
+            var selectedTest = await GetSelectedTestOrProfileByDescriptionAsync(TestToAdd);
+            if (selectedTest is null) return;
+            switch (selectedTest.IsProfile)
+            {
+                case true:
+                    Debug.WriteLine("Selected a profile test. Proceeding to add corresponding tests...");
+                    await AddTestListToRequestAsync(selectedTest.TestsInProfile);
+                    break;
+                case false:
+                    Debug.WriteLine("Not a profile test. Proceeding...");
+                    await AddSingleTestToRequestAsync(selectedTest);
+                    break;
+                default:
+                    throw new Exception("IsProfile parameter must be specified.");
+            }
+
+            Debug.WriteLine("Clearing the lookupedit box.");
+            TestToAdd = null;
+        }
+
+        #endregion
+
         #region Private Methods
+        private async Task AddTestListToRequestAsync
+            (List<TestModel> testModelList)
+        {
+            if (testModelList is null) throw new ArgumentNullException(nameof(testModelList));
+
+            foreach (var test in testModelList)
+            {
+                await AddSingleTestToRequestAsync(test);
+            }
+        }
+
+        private async Task AddSingleTestToRequestAsync(TestModel test)
+        {
+            if (test is null) return;
+            if (await IsTestPresentOnRequest(test.Description) == false)
+            {
+                Debug.WriteLine("Test is not present on AR! Continuing to add.");
+                AddedTests.Add(test);
+            }
+        }
+
+        private async Task<bool> IsTestPresentOnRequest(string testDescription)
+        {
+            Debug.WriteLine("Checking whether the test is already added.");
+            return await Task.Run(() =>
+            {
+                return AddedTests.Any((t) => t.Description == testDescription);
+            });
+        }
+
+        private async Task<ProfilesAndTestsDatasourceOeModel>
+            GetSelectedTestOrProfileByDescriptionAsync(string testDescription)
+        {
+            return await Task.Run(() =>
+            {
+                return AllTestsData.SingleOrDefault(t => t.Description == testDescription);
+            });
+        }
         private void InitializeDemoData()
         {
             //Sites
@@ -314,7 +388,7 @@ namespace CD4.UI.Library.ViewModel
             Countries.Add(c2);
 
             //Clinical Details
-            var cd1 = new ClinicalDetailsOrderEntryModel() 
+            var cd1 = new ClinicalDetailsOrderEntryModel()
             { Id = 1, ClinicalDetail = "Fever", IsSelected = false };
 
             var cd2 = new ClinicalDetailsOrderEntryModel()

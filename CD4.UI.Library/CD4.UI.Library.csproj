@@ -60,7 +60,7 @@
     <Compile Include="Model\ProfileConfigModel.cs" />
     <Compile Include="Model\ProfileConfigProfileTestsModel.cs" />
     <Compile Include="Model\ProfileConfigTestModel.cs" />
-    <Compile Include="Model\ProfilesAndTestsOrderEntryModel.cs" />
+    <Compile Include="Model\ProfilesAndTestsDatasourceOeModel.cs" />
     <Compile Include="Model\ProfilesConfigurationBase.cs" />
     <Compile Include="Model\ResultDataTypeModel.cs" />
     <Compile Include="Model\ScientistModel.cs" />

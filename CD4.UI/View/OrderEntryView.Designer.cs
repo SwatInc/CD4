@@ -50,8 +50,8 @@
             this.gridColumnIsSelected = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnClinicalDetail = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControlSelectedTestData = new DevExpress.XtraEditors.GroupControl();
-            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridControlRequestedTests = new DevExpress.XtraGrid.GridControl();
+            this.gridViewRequestedTests = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.simpleButtonSearch = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButtonConfirm = new DevExpress.XtraEditors.SimpleButton();
             this.groupControlTestSelection = new DevExpress.XtraEditors.GroupControl();
@@ -84,8 +84,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridViewClinicalDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlSelectedTestData)).BeginInit();
             this.groupControlSelectedTestData.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlRequestedTests)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewRequestedTests)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlTestSelection)).BeginInit();
             this.groupControlTestSelection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEditEpisodeNumber.Properties)).BeginInit();
@@ -342,29 +342,29 @@
             // 
             // groupControlSelectedTestData
             // 
-            this.groupControlSelectedTestData.Controls.Add(this.gridControl1);
+            this.groupControlSelectedTestData.Controls.Add(this.gridControlRequestedTests);
             this.groupControlSelectedTestData.Location = new System.Drawing.Point(209, 155);
             this.groupControlSelectedTestData.Name = "groupControlSelectedTestData";
             this.groupControlSelectedTestData.Size = new System.Drawing.Size(350, 186);
             this.groupControlSelectedTestData.TabIndex = 3;
             this.groupControlSelectedTestData.Text = "Selected Tests Data";
             // 
-            // gridControl1
+            // gridControlRequestedTests
             // 
-            this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.Location = new System.Drawing.Point(2, 20);
-            this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(346, 164);
-            this.gridControl1.TabIndex = 0;
-            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
+            this.gridControlRequestedTests.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlRequestedTests.Location = new System.Drawing.Point(2, 20);
+            this.gridControlRequestedTests.MainView = this.gridViewRequestedTests;
+            this.gridControlRequestedTests.Name = "gridControlRequestedTests";
+            this.gridControlRequestedTests.Size = new System.Drawing.Size(346, 164);
+            this.gridControlRequestedTests.TabIndex = 0;
+            this.gridControlRequestedTests.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewRequestedTests});
             // 
-            // gridView1
+            // gridViewRequestedTests
             // 
-            this.gridView1.GridControl = this.gridControl1;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridViewRequestedTests.GridControl = this.gridControlRequestedTests;
+            this.gridViewRequestedTests.Name = "gridViewRequestedTests";
+            this.gridViewRequestedTests.OptionsView.ShowGroupPanel = false;
             // 
             // simpleButtonSearch
             // 
@@ -411,8 +411,14 @@
             this.lookUpEditTests.Name = "lookUpEditTests";
             this.lookUpEditTests.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpEditTests.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Description", "Description")});
             this.lookUpEditTests.Properties.NullText = "Select Tests";
             this.lookUpEditTests.Properties.NullValuePrompt = "Select Tests";
+            this.lookUpEditTests.Properties.PopupFilterMode = DevExpress.XtraEditors.PopupFilterMode.Contains;
+            this.lookUpEditTests.Properties.ShowHeader = false;
+            this.lookUpEditTests.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            this.lookUpEditTests.Properties.ValidateOnEnterKey = true;
             this.lookUpEditTests.Size = new System.Drawing.Size(167, 20);
             this.lookUpEditTests.TabIndex = 13;
             // 
@@ -458,8 +464,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridViewClinicalDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlSelectedTestData)).EndInit();
             this.groupControlSelectedTestData.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlRequestedTests)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewRequestedTests)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlTestSelection)).EndInit();
             this.groupControlTestSelection.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.textEditEpisodeNumber.Properties)).EndInit();
@@ -483,8 +489,8 @@
         private DevExpress.XtraEditors.DateEdit dateEditBirthdate;
         private DevExpress.XtraEditors.GroupControl groupControlClinicalDetails;
         private DevExpress.XtraEditors.GroupControl groupControlSelectedTestData;
-        private DevExpress.XtraGrid.GridControl gridControl1;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.GridControl gridControlRequestedTests;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewRequestedTests;
         private DevExpress.XtraEditors.SimpleButton simpleButtonSearch;
         private DevExpress.XtraEditors.SimpleButton simpleButtonConfirm;
         private DevExpress.XtraEditors.GroupControl groupControlTestSelection;

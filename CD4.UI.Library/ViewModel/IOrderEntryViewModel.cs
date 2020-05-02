@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace CD4.UI.Library.ViewModel
 {
@@ -30,7 +31,8 @@ namespace CD4.UI.Library.ViewModel
         int SelectedIslandId { get; set; }
         int SelectedSiteId { get; set; }
         List<SitesModel> Sites { get; set; }
-        TestModel TestToAdd { get; set; }
+        string TestToAdd { get; set; }
+        Task ManageAddTestToRequestAsync();
 
         event PropertyChangedEventHandler PropertyChanged;
     }

@@ -1,6 +1,7 @@
 ﻿using CD4.UI.Library.Model;
 using CD4.UI.Library.ViewModel;
 using Newtonsoft.Json;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace CD4.UI.View
@@ -16,6 +17,12 @@ namespace CD4.UI.View
             InitializeDataBinding();
 
             simpleButtonSearch.Click += SimpleButtonSearch_Click;
+            lookUpEditTests.Validated += LookUpEditTests_Validated;
+        }
+
+        private async void LookUpEditTests_Validated(object sender, System.EventArgs e)
+        {
+           await _viewModel.ManageAddTestToRequestAsync();
         }
 
         private void SimpleButtonSearch_Click(object sender, System.EventArgs e)
@@ -116,9 +123,17 @@ namespace CD4.UI.View
             #endregion
 
             #region Test data
+            //Tests and profiles lookupEdit datasource
             lookUpEditTests.Properties.DataSource = _viewModel.AllTestsData;
-            lookUpEditTests.Properties.ValueMember = nameof(ProfilesAndTestsDatasourceOeModel.Id);
+            lookUpEditTests.Properties.ValueMember = nameof(ProfilesAndTestsDatasourceOeModel.Description);
             lookUpEditTests.Properties.DisplayMember = nameof(ProfilesAndTestsDatasourceOeModel.Description);
+            
+            //Tests and profiles lookupEdit Editvalue
+            lookUpEditTests.DataBindings.Add
+                (new Binding("EditValue", _viewModel, nameof(_viewModel.TestToAdd)));
+
+            //Selected Tests DataGrid
+            gridControlRequestedTests.DataSource = _viewModel.AddedTests;
             #endregion
 
         }
