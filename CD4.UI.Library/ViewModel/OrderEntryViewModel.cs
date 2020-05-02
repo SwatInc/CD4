@@ -40,7 +40,7 @@ namespace CD4.UI.Library.ViewModel
             Atolls = new List<AtollModel>();
             Islands = new BindingList<IslandModel>();
             Countries = new List<CountryModel>();
-            AllTestsData = new List<TestModel>();
+            AllTestsData = new List<ProfilesAndTestsDatasourceOeModel>();
             AddedTests = new BindingList<TestModel>();
             AllAtollsWithCorrespondingIsland = new List<AtollIslandModel>();
             ClinicalDetails = new BindingList<ClinicalDetailsOrderEntryModel>();
@@ -252,7 +252,7 @@ namespace CD4.UI.Library.ViewModel
         public BindingList<TestModel> AddedTests { get; set; }
 
         //TestSelection
-        public List<TestModel> AllTestsData { get; set; }
+        public List<ProfilesAndTestsDatasourceOeModel> AllTestsData { get; set; }
         public TestModel TestToAdd { get; set; }
         public string EpisodeNumber
         {
@@ -313,6 +313,7 @@ namespace CD4.UI.Library.ViewModel
             Countries.Add(c1);
             Countries.Add(c2);
 
+            //Clinical Details
             var cd1 = new ClinicalDetailsOrderEntryModel() 
             { Id = 1, ClinicalDetail = "Fever", IsSelected = false };
 
@@ -333,6 +334,36 @@ namespace CD4.UI.Library.ViewModel
             ClinicalDetails.Add(cd3);
             ClinicalDetails.Add(cd4);
             ClinicalDetails.Add(cd5);
+
+            //Profiles and tests datasource
+            var pt1 = new ProfilesAndTestsDatasourceOeModel()
+            { Id = 1, Description = "Total Bilirubin", IsProfile = false, ResultDataType = "Numeric" };
+            var pt2 = new ProfilesAndTestsDatasourceOeModel()
+            { Id = 2, Description = "Direct Bilirubin", IsProfile = false, ResultDataType = "Numeric" };
+            var pt3 = new ProfilesAndTestsDatasourceOeModel()
+            { Id = 3, Description = "AST", IsProfile = false, ResultDataType = "Numeric" };
+
+            var liver = new List<TestModel>()
+            {
+                pt1,
+                pt2,
+                pt3
+            };
+
+            var pt4 = new ProfilesAndTestsDatasourceOeModel()
+            {
+                Id = 4,
+                Description = "Liver Profile",
+                IsProfile = true,
+                TestsInProfile = liver
+            };
+
+            AllTestsData.Add(pt1);
+            AllTestsData.Add(pt2);
+            AllTestsData.Add(pt3);
+            AllTestsData.Add(pt4);
+
+
         }
 
         private void SetAge(DateTime birthdate)

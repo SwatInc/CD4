@@ -319,23 +319,26 @@
             this.gridColumnClinicalDetail});
             this.gridViewClinicalDetails.GridControl = this.gridControlClinicalDetails;
             this.gridViewClinicalDetails.Name = "gridViewClinicalDetails";
+            this.gridViewClinicalDetails.OptionsView.ShowColumnHeaders = false;
             this.gridViewClinicalDetails.OptionsView.ShowGroupPanel = false;
             // 
             // gridColumnIsSelected
             // 
+            this.gridColumnIsSelected.Caption = " ";
             this.gridColumnIsSelected.FieldName = "IsSelected";
             this.gridColumnIsSelected.Name = "gridColumnIsSelected";
             this.gridColumnIsSelected.Visible = true;
             this.gridColumnIsSelected.VisibleIndex = 0;
-            this.gridColumnIsSelected.Width = 31;
+            this.gridColumnIsSelected.Width = 26;
             // 
             // gridColumnClinicalDetail
             // 
+            this.gridColumnClinicalDetail.Caption = "Clinical Details";
             this.gridColumnClinicalDetail.FieldName = "ClinicalDetail";
             this.gridColumnClinicalDetail.Name = "gridColumnClinicalDetail";
             this.gridColumnClinicalDetail.Visible = true;
             this.gridColumnClinicalDetail.VisibleIndex = 1;
-            this.gridColumnClinicalDetail.Width = 145;
+            this.gridColumnClinicalDetail.Width = 150;
             // 
             // groupControlSelectedTestData
             // 

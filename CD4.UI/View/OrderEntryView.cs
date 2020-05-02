@@ -115,6 +115,12 @@ namespace CD4.UI.View
             gridControlClinicalDetails.DataSource = _viewModel.ClinicalDetails;
             #endregion
 
+            #region Test data
+            lookUpEditTests.Properties.DataSource = _viewModel.AllTestsData;
+            lookUpEditTests.Properties.ValueMember = nameof(ProfilesAndTestsDatasourceOeModel.Id);
+            lookUpEditTests.Properties.DisplayMember = nameof(ProfilesAndTestsDatasourceOeModel.Description);
+            #endregion
+
         }
     }
 }

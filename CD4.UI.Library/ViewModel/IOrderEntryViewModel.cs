@@ -10,7 +10,7 @@ namespace CD4.UI.Library.ViewModel
         BindingList<TestModel> AddedTests { get; set; }
         string Address { get; set; }
         string Age { get; set; }
-        List<TestModel> AllTestsData { get; set; }
+        List<ProfilesAndTestsDatasourceOeModel> AllTestsData { get; set; }
         List<AtollModel> Atolls { get; set; }
         DateTime? Birthdate { get; set; }
         string Cin { get; set; }
