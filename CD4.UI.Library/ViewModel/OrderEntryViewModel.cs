@@ -49,21 +49,6 @@ namespace CD4.UI.Library.ViewModel
             InitializeAtollsDatasource();
             PropertyChanged += OrderEntryViewModel_PropertyChanged;
         }
-
-        private void InitializeAtollsDatasource()
-        {
-            var distinctAtoll = AllAtollsWithCorrespondingIsland
-                .Select((a) => a.Atoll).Distinct();
-
-            var counter = 1;
-            foreach (var item in distinctAtoll)
-            {
-                Atolls.Add(new AtollModel() { Id = counter, Atoll = item });
-                counter++;
-            }
-        }
-
-
         #endregion
 
         #region INotifyPropertyChanged Hookup
@@ -320,6 +305,34 @@ namespace CD4.UI.Library.ViewModel
             this.AllAtollsWithCorrespondingIsland.Add(ia4);
             this.AllAtollsWithCorrespondingIsland.Add(ia5);
 
+
+            //Country
+            var c1 = new CountryModel() { Id = 1, Country = "Maldives" };
+            var c2 = new CountryModel() { Id = 2, Country = "Pakistan" };
+
+            Countries.Add(c1);
+            Countries.Add(c2);
+
+            var cd1 = new ClinicalDetailsOrderEntryModel() 
+            { Id = 1, ClinicalDetail = "Fever", IsSelected = false };
+
+            var cd2 = new ClinicalDetailsOrderEntryModel()
+            { Id = 2, ClinicalDetail = "Cough", IsSelected = false };
+
+            var cd3 = new ClinicalDetailsOrderEntryModel()
+            { Id = 3, ClinicalDetail = "Runny nose", IsSelected = false };
+
+            var cd4 = new ClinicalDetailsOrderEntryModel()
+            { Id = 4, ClinicalDetail = "Shortness of Breath", IsSelected = false };
+
+            var cd5 = new ClinicalDetailsOrderEntryModel()
+            { Id = 5, ClinicalDetail = "Travel History", IsSelected = false };
+
+            ClinicalDetails.Add(cd1);
+            ClinicalDetails.Add(cd2);
+            ClinicalDetails.Add(cd3);
+            ClinicalDetails.Add(cd4);
+            ClinicalDetails.Add(cd5);
         }
 
         private void SetAge(DateTime birthdate)
@@ -327,6 +340,18 @@ namespace CD4.UI.Library.ViewModel
             Age = DateTimeExtensions.ToAgeString(birthdate);
         }
 
+        private void InitializeAtollsDatasource()
+        {
+            var distinctAtoll = AllAtollsWithCorrespondingIsland
+                .Select((a) => a.Atoll).Distinct();
+
+            var counter = 1;
+            foreach (var item in distinctAtoll)
+            {
+                Atolls.Add(new AtollModel() { Id = counter, Atoll = item });
+                counter++;
+            }
+        }
 
         private void OrderEntryViewModel_PropertyChanged
             (object sender, PropertyChangedEventArgs e)

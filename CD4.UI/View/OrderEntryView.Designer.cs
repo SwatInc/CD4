@@ -47,7 +47,7 @@
             this.groupControlClinicalDetails = new DevExpress.XtraEditors.GroupControl();
             this.gridControlClinicalDetails = new DevExpress.XtraGrid.GridControl();
             this.gridViewClinicalDetails = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumnIsChecked = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnIsSelected = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnClinicalDetail = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControlSelectedTestData = new DevExpress.XtraEditors.GroupControl();
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
@@ -315,26 +315,27 @@
             // gridViewClinicalDetails
             // 
             this.gridViewClinicalDetails.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumnIsChecked,
+            this.gridColumnIsSelected,
             this.gridColumnClinicalDetail});
             this.gridViewClinicalDetails.GridControl = this.gridControlClinicalDetails;
             this.gridViewClinicalDetails.Name = "gridViewClinicalDetails";
-            this.gridViewClinicalDetails.OptionsView.ShowColumnHeaders = false;
             this.gridViewClinicalDetails.OptionsView.ShowGroupPanel = false;
             // 
-            // gridColumnIsChecked
+            // gridColumnIsSelected
             // 
-            this.gridColumnIsChecked.Name = "gridColumnIsChecked";
-            this.gridColumnIsChecked.Visible = true;
-            this.gridColumnIsChecked.VisibleIndex = 1;
-            this.gridColumnIsChecked.Width = 146;
+            this.gridColumnIsSelected.FieldName = "IsSelected";
+            this.gridColumnIsSelected.Name = "gridColumnIsSelected";
+            this.gridColumnIsSelected.Visible = true;
+            this.gridColumnIsSelected.VisibleIndex = 0;
+            this.gridColumnIsSelected.Width = 31;
             // 
             // gridColumnClinicalDetail
             // 
+            this.gridColumnClinicalDetail.FieldName = "ClinicalDetail";
             this.gridColumnClinicalDetail.Name = "gridColumnClinicalDetail";
             this.gridColumnClinicalDetail.Visible = true;
-            this.gridColumnClinicalDetail.VisibleIndex = 0;
-            this.gridColumnClinicalDetail.Width = 30;
+            this.gridColumnClinicalDetail.VisibleIndex = 1;
+            this.gridColumnClinicalDetail.Width = 145;
             // 
             // groupControlSelectedTestData
             // 
@@ -493,7 +494,7 @@
         private DevExpress.XtraEditors.TextEdit textEditPhoneNumber;
         private DevExpress.XtraGrid.GridControl gridControlClinicalDetails;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewClinicalDetails;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnIsChecked;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnIsSelected;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnClinicalDetail;
     }
 }

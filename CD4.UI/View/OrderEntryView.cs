@@ -1,5 +1,6 @@
 ﻿using CD4.UI.Library.Model;
 using CD4.UI.Library.ViewModel;
+using Newtonsoft.Json;
 using System.Windows.Forms;
 
 namespace CD4.UI.View
@@ -13,6 +14,14 @@ namespace CD4.UI.View
             InitializeComponent();
             this._viewModel = viewModel;
             InitializeDataBinding();
+
+            simpleButtonSearch.Click += SimpleButtonSearch_Click;
+        }
+
+        private void SimpleButtonSearch_Click(object sender, System.EventArgs e)
+        {
+           var a = JsonConvert.SerializeObject(_viewModel,Formatting.Indented);
+            Clipboard.SetText(a);
         }
 
         private void InitializeDataBinding()
@@ -100,6 +109,10 @@ namespace CD4.UI.View
             lookUpEditCountry.Properties.ValueMember = nameof(CountryModel.Id);
             lookUpEditCountry.DataBindings.Add
                 (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedCountryId)));
+            #endregion
+
+            #region Clinical Details
+            gridControlClinicalDetails.DataSource = _viewModel.ClinicalDetails;
             #endregion
 
         }
