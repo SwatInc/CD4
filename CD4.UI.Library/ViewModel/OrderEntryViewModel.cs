@@ -20,13 +20,16 @@ namespace CD4.UI.Library.ViewModel
         private DateTime? sampleReceivedDate;
         private string nidPp;
         private string fullname;
-        private int? age;
+        private string age;
         private string phoneNumber;
         private DateTime? birthdate;
         private string address;
         private string episodeNumber;
         private int selectedSiteId;
         private int selectedGenderId;
+        private int selectedAtollId;
+        private int selectedIslandId;
+        private int selectedCountryId;
         #endregion
 
         #region Default Constructor
@@ -37,12 +40,12 @@ namespace CD4.UI.Library.ViewModel
             Atolls = new List<AtollModel>();
             Islands = new List<IslandModel>();
             Countries = new List<CountryModel>();
-            ClinicalDetails = new BindingList<ClinicalDetailsOrderEntryModel>();
-            AddedTests = new BindingList<TestModel>();
             AllTestsData = new List<TestModel>();
+            AddedTests = new BindingList<TestModel>();
+            AllAtollsAndIsland = new List<AtollsIslandsRawModel>();
+            ClinicalDetails = new BindingList<ClinicalDetailsOrderEntryModel>();
 
             InitializeDemoData();
-
 
             PropertyChanged += OrderEntryViewModel_PropertyChanged;
         }
@@ -61,7 +64,12 @@ namespace CD4.UI.Library.ViewModel
 
         #endregion
 
-        #region Properties
+        #region Public Properties
+
+        #region General Datasources
+        public List<AtollsIslandsRawModel> AllAtollsAndIsland { get; set; }
+
+        #endregion
 
         #region Request
         public string Cin
@@ -106,7 +114,7 @@ namespace CD4.UI.Library.ViewModel
 
         #endregion
 
-        //Patient Data
+        #region Patient
         public string NidPp
         {
             get => nidPp; set
@@ -135,7 +143,7 @@ namespace CD4.UI.Library.ViewModel
                 OnPropertyChanged();
             }
         }
-        public int? Age
+        public string Age
         {
             get => age; set
             {
@@ -159,9 +167,11 @@ namespace CD4.UI.Library.ViewModel
             {
                 if (birthdate == value) return;
                 birthdate = value;
+                SetAge((DateTime)value);
                 OnPropertyChanged();
             }
         }
+
         public string Address
         {
             get => address; set
@@ -172,15 +182,44 @@ namespace CD4.UI.Library.ViewModel
             }
         }
         public List<AtollModel> Atolls { get; set; }
-        public AtollModel SelectedAtoll { get; set; }
+        public int SelectedAtollId
+        {
+            get => selectedAtollId; set
+            {
+                if (selectedAtollId == value) return;
+                selectedAtollId = value;
+                OnPropertyChanged();
+            }
+        }
         public List<IslandModel> Islands { get; set; }
-        public IslandModel SelectedIsland { get; set; }
+        public int SelectedIslandId
+        {
+            get => selectedIslandId; set
+            {
+                if (selectedIslandId == value) return;
+                selectedIslandId = value;
+                OnPropertyChanged();
+            }
+        }
         public List<CountryModel> Countries { get; set; }
-        public CountryModel SelectedCountry { get; set; }
+        public int SelectedCountryId
+        {
+            get => selectedCountryId; set
+            {
+                if (selectedCountryId == value) return;
+                selectedCountryId = value;
+                OnPropertyChanged();
+            }
+        }
 
-        //ClincalDetails
+        #endregion
+
+        #region Clincal Details
         public BindingList<ClinicalDetailsOrderEntryModel> ClinicalDetails { get; set; }
 
+        #endregion
+
+        #region Selected Tests and Test Selection
         //Selected Tests
         public BindingList<TestModel> AddedTests { get; set; }
 
@@ -199,16 +238,34 @@ namespace CD4.UI.Library.ViewModel
 
         #endregion
 
+        #endregion
+
         #region Private Methods
         private void InitializeDemoData()
         {
+            //Sites
             var site1 = new SitesModel() { Id = 1, Site = "IGMH" };
             var site2 = new SitesModel() { Id = 2, Site = "FARUKOLHU" };
 
             this.Sites.Add(site1);
             this.Sites.Add(site2);
 
+            //Gender
+            var male = new GenderModel() { Id = 1, Gender = "MALE" };
+            var female = new GenderModel() { Id = 2, Gender = "FEMALE" };
+            var unknown = new GenderModel() { Id = 3, Gender = "UNKNOWN" };
+
+            Gender.Add(male);
+            Gender.Add(female);
+            Gender.Add(unknown);
+
         }
+
+        private void SetAge(DateTime birthdate)
+        {
+            Age =  DateTimeExtensions.ToAgeString(birthdate);
+        }
+
 
         private void OrderEntryViewModel_PropertyChanged
             (object sender, PropertyChangedEventArgs e)

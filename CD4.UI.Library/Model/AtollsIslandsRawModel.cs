@@ -8,10 +8,17 @@ using System.Threading.Tasks;
 
 namespace CD4.UI.Library.Model
 {
-    public class AtollModel : INotifyPropertyChanged
+    public class AtollsIslandsRawModel : INotifyPropertyChanged
     {
+        #region Private properties
+
         private int id;
-        private int atoll;
+        private string atollOrIslandName;
+        private bool isAtoll;
+
+        #endregion
+
+        #region Public Properties
 
         public int Id
         {
@@ -22,15 +29,26 @@ namespace CD4.UI.Library.Model
                 OnPropertyChanged();
             }
         }
-        public int Atoll
+        public string AtollOrIslandName
         {
-            get => atoll; set
+            get => atollOrIslandName; set
             {
-                if (atoll == value) return;
-                atoll = value;
+                if (atollOrIslandName == value) return;
+                atollOrIslandName = value;
                 OnPropertyChanged();
             }
         }
+        public bool IsAtoll
+        {
+            get => isAtoll; set
+            {
+                if (isAtoll == value) return;
+                isAtoll = value;
+                OnPropertyChanged();
+            }
+        }
+
+        #endregion
 
         #region INotifyPropertyChanged Hookup
 

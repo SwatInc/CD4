@@ -47,12 +47,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="Model\AtollModel.cs" />
+    <Compile Include="Model\AtollsIslandsRawModel.cs" />
     <Compile Include="Model\ClinicalDetailsModel.cs" />
     <Compile Include="Model\ClinicalDetailsOrderEntryModel.cs" />
     <Compile Include="Model\CodifiedValueModel.cs" />
     <Compile Include="Model\CountryModel.cs" />
     <Compile Include="Model\GenderModel.cs" />
+    <Compile Include="Model\IslandModel.cs" />
     <Compile Include="Model\ProfileConfigModel.cs" />
     <Compile Include="Model\ProfileConfigProfileTestsModel.cs" />
     <Compile Include="Model\ProfileConfigTestModel.cs" />

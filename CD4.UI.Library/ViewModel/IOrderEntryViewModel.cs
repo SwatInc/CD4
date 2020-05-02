@@ -9,7 +9,7 @@ namespace CD4.UI.Library.ViewModel
     {
         BindingList<TestModel> AddedTests { get; set; }
         string Address { get; set; }
-        int? Age { get; set; }
+        string Age { get; set; }
         List<TestModel> AllTestsData { get; set; }
         List<AtollModel> Atolls { get; set; }
         DateTime? Birthdate { get; set; }
@@ -24,10 +24,10 @@ namespace CD4.UI.Library.ViewModel
         string PhoneNumber { get; set; }
         DateTime? SampleCollectionDate { get; set; }
         DateTime? SampleReceivedDate { get; set; }
-        AtollModel SelectedAtoll { get; set; }
-        CountryModel SelectedCountry { get; set; }
+        int SelectedAtollId { get; set; }
+        int SelectedCountryId { get; set; }
         int SelectedGenderId { get; set; }
-        IslandModel SelectedIsland { get; set; }
+        int SelectedIslandId { get; set; }
         int SelectedSiteId { get; set; }
         List<SitesModel> Sites { get; set; }
         TestModel TestToAdd { get; set; }

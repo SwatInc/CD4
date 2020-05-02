@@ -2,8 +2,7 @@
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [FullName] VARCHAR(100) NULL, 
-    [NidPp] VARCHAR(50) NULL,
-    [Age] INT NULL, 
+    [NidPp] VARCHAR(50) NULL, 
     [Birthdate] DATE NULL,  
     [GenderId] INT NOT NULL, --MALE, FEMALE, UNKNOWN
     [AtollId] INT NOT NULL DEFAULT 0,  -- 0 will be as UNKNOWN Atoll table

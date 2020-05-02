@@ -1,17 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CD4.UI.Library.Model
 {
-    public class AtollModel : INotifyPropertyChanged
+    public class IslandModel : INotifyPropertyChanged
     {
         private int id;
-        private int atoll;
+        private int island;
 
         public int Id
         {
@@ -22,12 +17,12 @@ namespace CD4.UI.Library.Model
                 OnPropertyChanged();
             }
         }
-        public int Atoll
+        public int Island
         {
-            get => atoll; set
+            get => island; set
             {
-                if (atoll == value) return;
-                atoll = value;
+                if (island == value) return;
+                island = value;
                 OnPropertyChanged();
             }
         }
@@ -42,6 +37,7 @@ namespace CD4.UI.Library.Model
         }
 
         #endregion
+
 
     }
 }

@@ -70,11 +70,35 @@ namespace CD4.UI.View
                 DataSourceUpdateMode.OnPropertyChanged));
 
             //Birthdate... calculate age on view model.
+            dateEditBirthdate.DataBindings.Add
+                ("EditValue", _viewModel, nameof(_viewModel.Birthdate), true,
+                DataSourceUpdateMode.OnValidation);
 
             //Address
+            textEditAddress.DataBindings.Add
+                (new Binding("EditValue", _viewModel, nameof(_viewModel.Address), true,
+                DataSourceUpdateMode.OnPropertyChanged));
+
             //Atolls and Selected Atoll
+            lookUpEditAtoll.Properties.DataSource = _viewModel.Atolls;
+            lookUpEditAtoll.Properties.DisplayMember = nameof(AtollModel.Atoll);
+            lookUpEditAtoll.Properties.ValueMember = nameof(AtollModel.Id);
+            lookUpEditAtoll.DataBindings.Add
+                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedAtollId)));
+
             //Islands and Selected Island
+            lookUpEditIsland.Properties.DataSource = _viewModel.Islands;
+            lookUpEditIsland.Properties.DisplayMember = nameof(IslandModel.Island);
+            lookUpEditIsland.Properties.ValueMember = nameof(IslandModel.Id);
+            lookUpEditIsland.DataBindings.Add
+                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedIslandId)));
+
             //Countries and Selected Country
+            lookUpEditCountry.Properties.DataSource = _viewModel.Countries;
+            lookUpEditCountry.Properties.DisplayMember = nameof(CountryModel.Country);
+            lookUpEditCountry.Properties.ValueMember = nameof(CountryModel.Id);
+            lookUpEditCountry.DataBindings.Add
+                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedCountryId)));
             #endregion
 
         }
