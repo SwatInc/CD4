@@ -84,7 +84,8 @@ namespace CD4.UI.View
             lookUpEditAtoll.Properties.DisplayMember = nameof(AtollModel.Atoll);
             lookUpEditAtoll.Properties.ValueMember = nameof(AtollModel.Id);
             lookUpEditAtoll.DataBindings.Add
-                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedAtollId)));
+                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedAtollId),true,
+                DataSourceUpdateMode.OnPropertyChanged));
 
             //Islands and Selected Island
             lookUpEditIsland.Properties.DataSource = _viewModel.Islands;

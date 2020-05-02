@@ -38,16 +38,29 @@ namespace CD4.UI.Library.ViewModel
             Sites = new List<SitesModel>();
             Gender = new List<GenderModel>();
             Atolls = new List<AtollModel>();
-            Islands = new List<IslandModel>();
+            Islands = new BindingList<IslandModel>();
             Countries = new List<CountryModel>();
             AllTestsData = new List<TestModel>();
             AddedTests = new BindingList<TestModel>();
-            AllAtollsAndIsland = new List<AtollsIslandsRawModel>();
+            AllAtollsWithCorrespondingIsland = new List<AtollIslandModel>();
             ClinicalDetails = new BindingList<ClinicalDetailsOrderEntryModel>();
 
             InitializeDemoData();
-
+            InitializeAtollsDatasource();
             PropertyChanged += OrderEntryViewModel_PropertyChanged;
+        }
+
+        private void InitializeAtollsDatasource()
+        {
+            var distinctAtoll = AllAtollsWithCorrespondingIsland
+                .Select((a) => a.Atoll).Distinct();
+
+            var counter = 1;
+            foreach (var item in distinctAtoll)
+            {
+                Atolls.Add(new AtollModel() { Id = counter, Atoll = item });
+                counter++;
+            }
         }
 
 
@@ -66,10 +79,7 @@ namespace CD4.UI.Library.ViewModel
 
         #region Public Properties
 
-        #region General Datasources
-        public List<AtollsIslandsRawModel> AllAtollsAndIsland { get; set; }
-
-        #endregion
+        private List<AtollIslandModel> AllAtollsWithCorrespondingIsland { get; set; }
 
         #region Request
         public string Cin
@@ -171,7 +181,6 @@ namespace CD4.UI.Library.ViewModel
                 OnPropertyChanged();
             }
         }
-
         public string Address
         {
             get => address; set
@@ -188,10 +197,44 @@ namespace CD4.UI.Library.ViewModel
             {
                 if (selectedAtollId == value) return;
                 selectedAtollId = value;
+                RepopulateIslandDatasource(value).ConfigureAwait(true);
                 OnPropertyChanged();
             }
         }
-        public List<IslandModel> Islands { get; set; }
+
+        private async Task RepopulateIslandDatasource(int atollId)
+        {
+            var islandSearchResults = await SearchIslandsByAtoll
+                                                (GetAtollById(atollId));
+
+            //Clear the island list and add the new islands
+            Islands.Clear();
+            foreach (var results in islandSearchResults)
+            {
+                Islands.Add(new IslandModel()
+                { Id = results.Id, Island = results.Island });
+            }
+
+        }
+
+        private async Task<List<AtollIslandModel>> SearchIslandsByAtoll(string atollName)
+        {
+            if (atollName is null) throw new ArgumentNullException(nameof(atollName));
+            return await Task.Run(() =>
+            {
+                return AllAtollsWithCorrespondingIsland.FindAll((i) =>
+                {
+                    return i.Atoll == atollName;
+                });
+            });
+        }
+
+        private string GetAtollById(int atollId)
+        {
+            return Atolls.SingleOrDefault((a) => a.Id == atollId).Atoll;
+        }
+
+        public BindingList<IslandModel> Islands { get; set; }
         public int SelectedIslandId
         {
             get => selectedIslandId; set
@@ -259,11 +302,29 @@ namespace CD4.UI.Library.ViewModel
             Gender.Add(female);
             Gender.Add(unknown);
 
+            //Atolls and Islands
+            var ia1 = new AtollIslandModel()
+            { Id = 1, Atoll = "Addu", Island = "Hithadhoo" };
+            var ia2 = new AtollIslandModel()
+            { Id = 2, Atoll = "Addu", Island = "Maradhoo" };
+            var ia3 = new AtollIslandModel()
+            { Id = 3, Atoll = "Male", Island = "Hulhumale" };
+            var ia4 = new AtollIslandModel()
+            { Id = 4, Atoll = "Male", Island = "Villingilli" };
+            var ia5 = new AtollIslandModel()
+            { Id = 5, Atoll = "Male", Island = "Male" };
+
+            this.AllAtollsWithCorrespondingIsland.Add(ia1);
+            this.AllAtollsWithCorrespondingIsland.Add(ia2);
+            this.AllAtollsWithCorrespondingIsland.Add(ia3);
+            this.AllAtollsWithCorrespondingIsland.Add(ia4);
+            this.AllAtollsWithCorrespondingIsland.Add(ia5);
+
         }
 
         private void SetAge(DateTime birthdate)
         {
-            Age =  DateTimeExtensions.ToAgeString(birthdate);
+            Age = DateTimeExtensions.ToAgeString(birthdate);
         }
 
 

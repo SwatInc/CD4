@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DateTimeExtensions.cs" />
+    <Compile Include="Model\AtollIslandModel.cs" />
     <Compile Include="Model\AtollModel.cs" />
     <Compile Include="Model\AtollsIslandsRawModel.cs" />
     <Compile Include="Model\ClinicalDetailsModel.cs" />

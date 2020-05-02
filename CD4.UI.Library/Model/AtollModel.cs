@@ -11,7 +11,7 @@ namespace CD4.UI.Library.Model
     public class AtollModel : INotifyPropertyChanged
     {
         private int id;
-        private int atoll;
+        private string atoll;
 
         public int Id
         {
@@ -22,7 +22,7 @@ namespace CD4.UI.Library.Model
                 OnPropertyChanged();
             }
         }
-        public int Atoll
+        public string Atoll
         {
             get => atoll; set
             {
@@ -36,7 +36,7 @@ namespace CD4.UI.Library.Model
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public void OnPropertyChanged([CallerMemberName] string propertyName = "")
+        internal void OnPropertyChanged([CallerMemberName] string propertyName = "")
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

@@ -6,7 +6,7 @@ namespace CD4.UI.Library.Model
     public class IslandModel : INotifyPropertyChanged
     {
         private int id;
-        private int island;
+        private string island;
 
         public int Id
         {
@@ -17,7 +17,7 @@ namespace CD4.UI.Library.Model
                 OnPropertyChanged();
             }
         }
-        public int Island
+        public string Island
         {
             get => island; set
             {

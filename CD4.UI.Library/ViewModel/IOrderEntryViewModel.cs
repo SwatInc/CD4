@@ -19,7 +19,7 @@ namespace CD4.UI.Library.ViewModel
         string EpisodeNumber { get; set; }
         string Fullname { get; set; }
         List<GenderModel> Gender { get; set; }
-        List<IslandModel> Islands { get; set; }
+        BindingList<IslandModel> Islands { get; set; }
         string NidPp { get; set; }
         string PhoneNumber { get; set; }
         DateTime? SampleCollectionDate { get; set; }
