@@ -364,11 +364,14 @@
             // 
             this.gridViewRequestedTests.GridControl = this.gridControlRequestedTests;
             this.gridViewRequestedTests.Name = "gridViewRequestedTests";
+            this.gridViewRequestedTests.OptionsBehavior.AutoSelectAllInEditor = false;
+            this.gridViewRequestedTests.OptionsBehavior.Editable = false;
+            this.gridViewRequestedTests.OptionsSelection.MultiSelect = true;
             this.gridViewRequestedTests.OptionsView.ShowGroupPanel = false;
             // 
             // simpleButtonSearch
             // 
-            this.simpleButtonSearch.Location = new System.Drawing.Point(16, 146);
+            this.simpleButtonSearch.Location = new System.Drawing.Point(312, 345);
             this.simpleButtonSearch.Name = "simpleButtonSearch";
             this.simpleButtonSearch.Size = new System.Drawing.Size(76, 23);
             this.simpleButtonSearch.TabIndex = 1;
@@ -376,7 +379,7 @@
             // 
             // simpleButtonConfirm
             // 
-            this.simpleButtonConfirm.Location = new System.Drawing.Point(107, 146);
+            this.simpleButtonConfirm.Location = new System.Drawing.Point(394, 345);
             this.simpleButtonConfirm.Name = "simpleButtonConfirm";
             this.simpleButtonConfirm.Size = new System.Drawing.Size(76, 23);
             this.simpleButtonConfirm.TabIndex = 0;
@@ -385,8 +388,6 @@
             // groupControlTestSelection
             // 
             this.groupControlTestSelection.Controls.Add(this.textEditEpisodeNumber);
-            this.groupControlTestSelection.Controls.Add(this.simpleButtonSearch);
-            this.groupControlTestSelection.Controls.Add(this.simpleButtonConfirm);
             this.groupControlTestSelection.Controls.Add(this.lookUpEditTests);
             this.groupControlTestSelection.Location = new System.Drawing.Point(563, 155);
             this.groupControlTestSelection.Name = "groupControlTestSelection";
@@ -426,13 +427,16 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(765, 346);
+            this.ClientSize = new System.Drawing.Size(765, 372);
             this.Controls.Add(this.groupControlTestSelection);
+            this.Controls.Add(this.simpleButtonConfirm);
+            this.Controls.Add(this.simpleButtonSearch);
             this.Controls.Add(this.groupControlSelectedTestData);
             this.Controls.Add(this.groupControlClinicalDetails);
             this.Controls.Add(this.groupControlPatientData);
             this.Controls.Add(this.groupControlRequestData);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "OrderEntryView";

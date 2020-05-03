@@ -1,5 +1,6 @@
 ﻿using CD4.UI.Library.Model;
 using CD4.UI.Library.ViewModel;
+using DevExpress.XtraEditors;
 using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Windows.Forms;
@@ -18,6 +19,23 @@ namespace CD4.UI.View
 
             simpleButtonSearch.Click += SimpleButtonSearch_Click;
             lookUpEditTests.Validated += LookUpEditTests_Validated;
+            this.KeyUp += RemoveTestFromAR; ;
+        }
+
+        private void RemoveTestFromAR(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete) 
+            {
+                var rowsSelected = gridViewRequestedTests.GetSelectedRows();
+                if (rowsSelected.Length > 0)
+                {
+                    if (XtraMessageBox.Show($"Do you want to selected {rowsSelected.Length} tests?",
+                        "Confirmation", MessageBoxButtons.YesNo) != DialogResult.No)
+                    {
+                        
+                    }
+                }
+            }
         }
 
         private async void LookUpEditTests_Validated(object sender, System.EventArgs e)
@@ -134,6 +152,11 @@ namespace CD4.UI.View
 
             //Selected Tests DataGrid
             gridControlRequestedTests.DataSource = _viewModel.AddedTests;
+
+            //Episode Number
+            textEditEpisodeNumber.DataBindings.Add
+                (new Binding("EditValue", _viewModel, nameof(_viewModel.EpisodeNumber),
+                true, DataSourceUpdateMode.OnPropertyChanged));
             #endregion
 
         }
