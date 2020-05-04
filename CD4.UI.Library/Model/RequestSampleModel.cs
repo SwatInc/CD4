@@ -6,6 +6,7 @@ namespace CD4.UI.Library.Model
 {
     public class RequestSampleModel : INotifyPropertyChanged
     {
+        #region Private properties
         private int id;
         private string analysisRequestId;
         private string cin;
@@ -21,6 +22,9 @@ namespace CD4.UI.Library.Model
         private string episodeNumber;
         private string site;
         private string clinicalDetails;
+
+        #endregion
+
         #region Public Properties
         //Sample
         public int Id
@@ -175,8 +179,6 @@ namespace CD4.UI.Library.Model
         }
 
         #endregion
-
-
 
     }
 }
