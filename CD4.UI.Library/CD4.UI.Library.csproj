@@ -60,6 +60,8 @@
     <Compile Include="Model\AtollIslandModel.cs" />
     <Compile Include="Model\AtollModel.cs" />
     <Compile Include="Model\AtollsIslandsRawModel.cs" />
+    <Compile Include="Model\ResultModel.cs" />
+    <Compile Include="Model\RequestSampleModel.cs" />
     <Compile Include="Model\ValidationDataModel.cs" />
     <Compile Include="Model\ClinicalDetailsModel.cs" />
     <Compile Include="Model\ClinicalDetailsOrderEntryModel.cs" />
@@ -97,6 +99,7 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\OrderEntryViewModel.cs" />
     <Compile Include="ViewModel\ProfilesViewModel.cs" />
+    <Compile Include="ViewModel\ResultEntryViewModel.cs" />
     <Compile Include="ViewModel\ScientistViewModel.cs" />
     <Compile Include="ViewModel\SitesViewModel.cs" />
     <Compile Include="ViewModel\TestViewModel.cs" />
