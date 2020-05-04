@@ -28,76 +28,154 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
-            this.splitContainerControl2 = new DevExpress.XtraEditors.SplitContainerControl();
-            this.splitContainerControl3 = new DevExpress.XtraEditors.SplitContainerControl();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
-            this.splitContainerControl1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).BeginInit();
-            this.splitContainerControl2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl3)).BeginInit();
-            this.splitContainerControl3.SuspendLayout();
+            this.splitContainerControlPatient = new DevExpress.XtraEditors.SplitContainerControl();
+            this.groupControlSelectedPatientRequestClinicalDetailsArea = new DevExpress.XtraEditors.GroupControl();
+            this.splitContainerControlFunctions = new DevExpress.XtraEditors.SplitContainerControl();
+            this.splitContainerControlSamplesAndTest = new DevExpress.XtraEditors.SplitContainerControl();
+            this.gridControl2 = new DevExpress.XtraGrid.GridControl();
+            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
+            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.groupControlFunctions = new DevExpress.XtraEditors.GroupControl();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).BeginInit();
+            this.splitContainerControlPatient.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControlSelectedPatientRequestClinicalDetailsArea)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlFunctions)).BeginInit();
+            this.splitContainerControlFunctions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlSamplesAndTest)).BeginInit();
+            this.splitContainerControlSamplesAndTest.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControlFunctions)).BeginInit();
             this.SuspendLayout();
             // 
-            // splitContainerControl1
+            // splitContainerControlPatient
             // 
-            this.splitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerControl1.Horizontal = false;
-            this.splitContainerControl1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerControl1.Name = "splitContainerControl1";
-            this.splitContainerControl1.Panel1.Text = "Panel1";
-            this.splitContainerControl1.Panel2.Controls.Add(this.splitContainerControl2);
-            this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(839, 401);
-            this.splitContainerControl1.SplitterPosition = 67;
-            this.splitContainerControl1.TabIndex = 0;
+            this.splitContainerControlPatient.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControlPatient.Horizontal = false;
+            this.splitContainerControlPatient.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerControlPatient.Name = "splitContainerControlPatient";
+            this.splitContainerControlPatient.Panel1.Controls.Add(this.groupControlSelectedPatientRequestClinicalDetailsArea);
+            this.splitContainerControlPatient.Panel1.Text = "Panel1";
+            this.splitContainerControlPatient.Panel2.Controls.Add(this.splitContainerControlFunctions);
+            this.splitContainerControlPatient.Panel2.Text = "Panel2";
+            this.splitContainerControlPatient.Size = new System.Drawing.Size(839, 401);
+            this.splitContainerControlPatient.SplitterPosition = 90;
+            this.splitContainerControlPatient.TabIndex = 0;
             // 
-            // splitContainerControl2
+            // groupControlSelectedPatientRequestClinicalDetailsArea
             // 
-            this.splitContainerControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerControl2.Horizontal = false;
-            this.splitContainerControl2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerControl2.Name = "splitContainerControl2";
-            this.splitContainerControl2.Panel1.Controls.Add(this.splitContainerControl3);
-            this.splitContainerControl2.Panel1.Text = "Panel1";
-            this.splitContainerControl2.Panel2.Text = "Panel2";
-            this.splitContainerControl2.Size = new System.Drawing.Size(839, 329);
-            this.splitContainerControl2.SplitterPosition = 242;
-            this.splitContainerControl2.TabIndex = 0;
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Location = new System.Drawing.Point(0, 0);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Name = "groupControlSelectedPatientRequestClinicalDetailsArea";
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Size = new System.Drawing.Size(839, 90);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.TabIndex = 0;
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Text = "Selected Patient, Request and Clinical Details Information";
             // 
-            // splitContainerControl3
+            // splitContainerControlFunctions
             // 
-            this.splitContainerControl3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerControl3.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerControl3.Name = "splitContainerControl3";
-            this.splitContainerControl3.Panel1.Text = "Panel1";
-            this.splitContainerControl3.Panel2.Text = "Panel2";
-            this.splitContainerControl3.Size = new System.Drawing.Size(839, 242);
-            this.splitContainerControl3.SplitterPosition = 258;
-            this.splitContainerControl3.TabIndex = 0;
+            this.splitContainerControlFunctions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControlFunctions.Horizontal = false;
+            this.splitContainerControlFunctions.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerControlFunctions.Name = "splitContainerControlFunctions";
+            this.splitContainerControlFunctions.Panel1.Controls.Add(this.splitContainerControlSamplesAndTest);
+            this.splitContainerControlFunctions.Panel1.Text = "Panel1";
+            this.splitContainerControlFunctions.Panel2.Controls.Add(this.groupControlFunctions);
+            this.splitContainerControlFunctions.Panel2.Text = "Panel2";
+            this.splitContainerControlFunctions.Size = new System.Drawing.Size(839, 306);
+            this.splitContainerControlFunctions.SplitterPosition = 224;
+            this.splitContainerControlFunctions.TabIndex = 0;
+            // 
+            // splitContainerControlSamplesAndTest
+            // 
+            this.splitContainerControlSamplesAndTest.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControlSamplesAndTest.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerControlSamplesAndTest.Name = "splitContainerControlSamplesAndTest";
+            this.splitContainerControlSamplesAndTest.Panel1.Controls.Add(this.gridControl2);
+            this.splitContainerControlSamplesAndTest.Panel1.Text = "Panel1";
+            this.splitContainerControlSamplesAndTest.Panel2.Controls.Add(this.gridControl1);
+            this.splitContainerControlSamplesAndTest.Panel2.Text = "Panel2";
+            this.splitContainerControlSamplesAndTest.Size = new System.Drawing.Size(839, 224);
+            this.splitContainerControlSamplesAndTest.SplitterPosition = 258;
+            this.splitContainerControlSamplesAndTest.TabIndex = 0;
+            // 
+            // gridControl2
+            // 
+            this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControl2.Location = new System.Drawing.Point(0, 0);
+            this.gridControl2.MainView = this.gridView2;
+            this.gridControl2.Name = "gridControl2";
+            this.gridControl2.Size = new System.Drawing.Size(258, 224);
+            this.gridControl2.TabIndex = 1;
+            this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView2});
+            // 
+            // gridView2
+            // 
+            this.gridView2.GridControl = this.gridControl2;
+            this.gridView2.Name = "gridView2";
+            // 
+            // gridControl1
+            // 
+            this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControl1.Location = new System.Drawing.Point(0, 0);
+            this.gridControl1.MainView = this.gridView1;
+            this.gridControl1.Name = "gridControl1";
+            this.gridControl1.Size = new System.Drawing.Size(576, 224);
+            this.gridControl1.TabIndex = 0;
+            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView1});
+            // 
+            // gridView1
+            // 
+            this.gridView1.GridControl = this.gridControl1;
+            this.gridView1.Name = "gridView1";
+            // 
+            // groupControlFunctions
+            // 
+            this.groupControlFunctions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControlFunctions.Location = new System.Drawing.Point(0, 0);
+            this.groupControlFunctions.Name = "groupControlFunctions";
+            this.groupControlFunctions.Size = new System.Drawing.Size(839, 77);
+            this.groupControlFunctions.TabIndex = 1;
+            this.groupControlFunctions.Text = "Functions";
             // 
             // ResultEntryView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(839, 401);
-            this.Controls.Add(this.splitContainerControl1);
+            this.Controls.Add(this.splitContainerControlPatient);
             this.Name = "ResultEntryView";
             this.Text = "ResultEntryView";
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
-            this.splitContainerControl1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).EndInit();
-            this.splitContainerControl2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl3)).EndInit();
-            this.splitContainerControl3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).EndInit();
+            this.splitContainerControlPatient.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.groupControlSelectedPatientRequestClinicalDetailsArea)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlFunctions)).EndInit();
+            this.splitContainerControlFunctions.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlSamplesAndTest)).EndInit();
+            this.splitContainerControlSamplesAndTest.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControlFunctions)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
-        private DevExpress.XtraEditors.SplitContainerControl splitContainerControl2;
-        private DevExpress.XtraEditors.SplitContainerControl splitContainerControl3;
+        private DevExpress.XtraEditors.SplitContainerControl splitContainerControlPatient;
+        private DevExpress.XtraEditors.SplitContainerControl splitContainerControlFunctions;
+        private DevExpress.XtraEditors.SplitContainerControl splitContainerControlSamplesAndTest;
+        private DevExpress.XtraGrid.GridControl gridControl2;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
+        private DevExpress.XtraGrid.GridControl gridControl1;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraEditors.GroupControl groupControlSelectedPatientRequestClinicalDetailsArea;
+        private DevExpress.XtraEditors.GroupControl groupControlFunctions;
     }
 }

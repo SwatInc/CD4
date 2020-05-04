@@ -11,11 +11,24 @@ using DevExpress.XtraEditors;
 
 namespace CD4.UI.View
 {
-    public partial class ResultEntryView : DevExpress.XtraEditors.XtraForm
+    public partial class ResultEntryView : XtraForm
     {
         public ResultEntryView()
         {
             InitializeComponent();
+            this.SizeChanged += OnSizeChangedAdjustSplitContainers;
         }
+
+        private void OnSizeChangedAdjustSplitContainers(object sender, EventArgs e)
+        {
+            //set splitter for adjusting Top (patient) panel
+            splitContainerControlPatient.SplitterPosition = 90;
+
+            //set splitter for adjusting functions panel
+            var height = this.splitContainerControlFunctions.Size.Height;
+            splitContainerControlFunctions.SplitterPosition = (int)((decimal)height - 90m);
+        }
+
+
     }
 }

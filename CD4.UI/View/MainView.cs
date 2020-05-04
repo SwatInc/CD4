@@ -33,8 +33,13 @@ namespace CD4.UI.View
 
             //General Tab Buttons
             barButtonItemOrderEntry.ItemClick += OpenOrderEntryView;
-
+            barButtonItemResultEntry.ItemClick += OpenResultEntryView;
             #endregion
+        }
+
+        private void OpenResultEntryView(object sender, ItemClickEventArgs e)
+        {
+            this.OpenMdiForm<ResultEntryView>();
         }
 
         private void OpenOrderEntryView(object sender, ItemClickEventArgs e)
