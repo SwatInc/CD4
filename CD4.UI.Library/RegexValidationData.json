@@ -1,8 +1,8 @@
 [
   {
     "Tag": "CIN",
-    "Regex": "^nCoV-\\d{1,5}(?:R\\d{1,2})?\\/\\d{2}$",
-    "InvalidMessage": "Invalid CIN. Valid format: nCoV-1234/20 OR nCoV-1234R1/20"
+    "Regex": "^nCoV-\\d{1,7}(?:R\\d{1,2})?\\/20$",
+    "InvalidMessage": "Invalid CIN. Valid format: nCoV-1234567/20 OR nCoV-1234567R1/20"
   },
   {
     "Tag": "NationalId",
