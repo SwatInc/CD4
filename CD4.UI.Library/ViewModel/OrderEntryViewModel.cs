@@ -317,10 +317,15 @@ namespace CD4.UI.Library.ViewModel
             TestToAdd = null;
         }
 
+        public void RemoveTestModelFromAddedTests(TestModel testModel)
+        {
+            if (testModel is null) return;
+            AddedTests.Remove(testModel);
+        }
+
         #endregion
 
         #region Private Methods
-
         private void ManageValidation()
         {
             var results = ValidateOrderEntry();
@@ -342,8 +347,6 @@ namespace CD4.UI.Library.ViewModel
 
 
         }
-
-
 
         private ValidationResult ValidateOrderEntry()
         {

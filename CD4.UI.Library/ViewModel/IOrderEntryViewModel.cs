@@ -34,6 +34,7 @@ namespace CD4.UI.Library.ViewModel
         List<SitesModel> Sites { get; set; }
         string TestToAdd { get; set; }
         Task ManageAddTestToRequestAsync();
+        void RemoveTestModelFromAddedTests(TestModel testModel);
 
         event PropertyChangedEventHandler PropertyChanged;
     }

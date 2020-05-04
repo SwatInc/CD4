@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.groupControlRequestData = new DevExpress.XtraEditors.GroupControl();
             this.dateEditSampleReceived = new DevExpress.XtraEditors.DateEdit();
             this.dateEditCollectedDate = new DevExpress.XtraEditors.DateEdit();
@@ -57,6 +58,8 @@
             this.groupControlTestSelection = new DevExpress.XtraEditors.GroupControl();
             this.textEditEpisodeNumber = new DevExpress.XtraEditors.TextEdit();
             this.lookUpEditTests = new DevExpress.XtraEditors.LookUpEdit();
+            this.simpleButtonRemoveTest = new DevExpress.XtraEditors.SimpleButton();
+            this.behaviorManager1 = new DevExpress.Utils.Behaviors.BehaviorManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.groupControlRequestData)).BeginInit();
             this.groupControlRequestData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditSampleReceived.Properties.CalendarTimeProperties)).BeginInit();
@@ -90,6 +93,7 @@
             this.groupControlTestSelection.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEditEpisodeNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTests.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).BeginInit();
             this.SuspendLayout();
             // 
             // groupControlRequestData
@@ -155,6 +159,14 @@
             this.textEditCin.Location = new System.Drawing.Point(12, 30);
             this.textEditCin.Name = "textEditCin";
             this.textEditCin.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.textEditCin.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.textEditCin.Properties.Appearance.Options.UseBackColor = true;
+            this.textEditCin.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.Lavender;
+            this.textEditCin.Properties.AppearanceDisabled.Options.UseBackColor = true;
+            this.textEditCin.Properties.AppearanceFocused.BackColor = System.Drawing.Color.Lavender;
+            this.textEditCin.Properties.AppearanceFocused.Options.UseBackColor = true;
+            this.textEditCin.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.Lavender;
+            this.textEditCin.Properties.AppearanceReadOnly.Options.UseBackColor = true;
             this.textEditCin.Properties.NullText = "CIN";
             this.textEditCin.Properties.NullValuePrompt = "CIN";
             this.textEditCin.Properties.NullValuePromptShowForEmptyValue = true;
@@ -217,6 +229,22 @@
             this.textEditFullname.Location = new System.Drawing.Point(185, 30);
             this.textEditFullname.Name = "textEditFullname";
             this.textEditFullname.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.textEditFullname.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.textEditFullname.Properties.Appearance.BorderColor = System.Drawing.Color.Transparent;
+            this.textEditFullname.Properties.Appearance.Options.UseBackColor = true;
+            this.textEditFullname.Properties.Appearance.Options.UseBorderColor = true;
+            this.textEditFullname.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.Lavender;
+            this.textEditFullname.Properties.AppearanceDisabled.BorderColor = System.Drawing.Color.Transparent;
+            this.textEditFullname.Properties.AppearanceDisabled.Options.UseBackColor = true;
+            this.textEditFullname.Properties.AppearanceDisabled.Options.UseBorderColor = true;
+            this.textEditFullname.Properties.AppearanceFocused.BackColor = System.Drawing.Color.Lavender;
+            this.textEditFullname.Properties.AppearanceFocused.BorderColor = System.Drawing.Color.Transparent;
+            this.textEditFullname.Properties.AppearanceFocused.Options.UseBackColor = true;
+            this.textEditFullname.Properties.AppearanceFocused.Options.UseBorderColor = true;
+            this.textEditFullname.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.Lavender;
+            this.textEditFullname.Properties.AppearanceReadOnly.BorderColor = System.Drawing.Color.Transparent;
+            this.textEditFullname.Properties.AppearanceReadOnly.Options.UseBackColor = true;
+            this.textEditFullname.Properties.AppearanceReadOnly.Options.UseBorderColor = true;
             this.textEditFullname.Properties.NullText = "Fullname";
             this.textEditFullname.Properties.NullValuePrompt = "Fullname";
             this.textEditFullname.Properties.NullValuePromptShowForEmptyValue = true;
@@ -228,6 +256,14 @@
             this.textEditNidPp.Location = new System.Drawing.Point(12, 30);
             this.textEditNidPp.Name = "textEditNidPp";
             this.textEditNidPp.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.textEditNidPp.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.textEditNidPp.Properties.Appearance.Options.UseBackColor = true;
+            this.textEditNidPp.Properties.AppearanceDisabled.BackColor = System.Drawing.Color.Lavender;
+            this.textEditNidPp.Properties.AppearanceDisabled.Options.UseBackColor = true;
+            this.textEditNidPp.Properties.AppearanceFocused.BackColor = System.Drawing.Color.Lavender;
+            this.textEditNidPp.Properties.AppearanceFocused.Options.UseBackColor = true;
+            this.textEditNidPp.Properties.AppearanceReadOnly.BackColor = System.Drawing.Color.Lavender;
+            this.textEditNidPp.Properties.AppearanceReadOnly.Options.UseBackColor = true;
             this.textEditNidPp.Properties.NullText = "National ID Card / Passport";
             this.textEditNidPp.Properties.NullValuePrompt = "National ID Card / Passport";
             this.textEditNidPp.Properties.NullValuePromptShowForEmptyValue = true;
@@ -386,17 +422,17 @@
             // 
             // simpleButtonSearch
             // 
-            this.simpleButtonSearch.Location = new System.Drawing.Point(312, 345);
+            this.simpleButtonSearch.Location = new System.Drawing.Point(313, 345);
             this.simpleButtonSearch.Name = "simpleButtonSearch";
-            this.simpleButtonSearch.Size = new System.Drawing.Size(76, 23);
+            this.simpleButtonSearch.Size = new System.Drawing.Size(98, 23);
             this.simpleButtonSearch.TabIndex = 1;
             this.simpleButtonSearch.Text = "Search";
             // 
             // simpleButtonConfirm
             // 
-            this.simpleButtonConfirm.Location = new System.Drawing.Point(394, 345);
+            this.simpleButtonConfirm.Location = new System.Drawing.Point(417, 345);
             this.simpleButtonConfirm.Name = "simpleButtonConfirm";
-            this.simpleButtonConfirm.Size = new System.Drawing.Size(76, 23);
+            this.simpleButtonConfirm.Size = new System.Drawing.Size(98, 23);
             this.simpleButtonConfirm.TabIndex = 0;
             this.simpleButtonConfirm.Text = "Confirm";
             // 
@@ -438,11 +474,20 @@
             this.lookUpEditTests.Size = new System.Drawing.Size(167, 20);
             this.lookUpEditTests.TabIndex = 13;
             // 
+            // simpleButtonRemoveTest
+            // 
+            this.simpleButtonRemoveTest.Location = new System.Drawing.Point(209, 345);
+            this.simpleButtonRemoveTest.Name = "simpleButtonRemoveTest";
+            this.simpleButtonRemoveTest.Size = new System.Drawing.Size(98, 23);
+            this.simpleButtonRemoveTest.TabIndex = 6;
+            this.simpleButtonRemoveTest.Text = "Remove [ Del ]";
+            // 
             // OrderEntryView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(765, 372);
+            this.Controls.Add(this.simpleButtonRemoveTest);
             this.Controls.Add(this.groupControlTestSelection);
             this.Controls.Add(this.simpleButtonConfirm);
             this.Controls.Add(this.simpleButtonSearch);
@@ -489,6 +534,7 @@
             this.groupControlTestSelection.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.textEditEpisodeNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTests.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.behaviorManager1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -524,5 +570,7 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewClinicalDetails;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnIsSelected;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnClinicalDetail;
+        private DevExpress.XtraEditors.SimpleButton simpleButtonRemoveTest;
+        private DevExpress.Utils.Behaviors.BehaviorManager behaviorManager1;
     }
 }

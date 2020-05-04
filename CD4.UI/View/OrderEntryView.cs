@@ -2,6 +2,7 @@
 using CD4.UI.Library.ViewModel;
 using DevExpress.XtraEditors;
 using Newtonsoft.Json;
+using System;
 using System.Diagnostics;
 using System.Windows.Forms;
 
@@ -19,7 +20,13 @@ namespace CD4.UI.View
 
             simpleButtonSearch.Click += SimpleButtonSearch_Click;
             lookUpEditTests.Validated += LookUpEditTests_Validated;
-            this.KeyUp += RemoveTestFromAR; ;
+            simpleButtonRemoveTest.Click += RemoveTestFromAR;
+            KeyUp += RemoveTestFromAR; ;
+        }
+
+        private void RemoveTestFromAR(object sender, EventArgs e)
+        {
+            RemoveTestFromAR(this,new KeyEventArgs(Keys.Delete));
         }
 
         private void RemoveTestFromAR(object sender, KeyEventArgs e)
@@ -32,9 +39,23 @@ namespace CD4.UI.View
                     if (XtraMessageBox.Show($"Do you want to selected {rowsSelected.Length} tests?",
                         "Confirmation", MessageBoxButtons.YesNo) != DialogResult.No)
                     {
-                        
+                        DeleteSelectedRow();
                     }
                 }
+            }
+        }
+
+        private void DeleteSelectedRow()
+        {
+            //Get SelectedRows
+            var selectedRowHandles = gridViewRequestedTests.GetSelectedRows();
+            if (selectedRowHandles.Length == 0) return;
+
+            //Ask ViewModel to remove them
+            foreach (var rowHandle in selectedRowHandles)
+            {
+                var row  = (TestModel)(gridViewRequestedTests.GetRow(rowHandle));
+                _viewModel.RemoveTestModelFromAddedTests(row);
             }
         }
 
