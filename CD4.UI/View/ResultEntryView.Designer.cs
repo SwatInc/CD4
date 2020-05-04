@@ -35,8 +35,8 @@
             DevExpress.XtraEditors.LabelControl labelControl4;
             DevExpress.XtraEditors.LabelControl labelControl5;
             DevExpress.XtraEditors.LabelControl labelControl6;
-            DevExpress.XtraEditors.LabelControl labelControl7;
             DevExpress.XtraEditors.LabelControl labelControl8;
+            DevExpress.XtraEditors.LabelControl labelControl7;
             this.splitContainerControlPatient = new DevExpress.XtraEditors.SplitContainerControl();
             this.groupControlSelectedPatientRequestClinicalDetailsArea = new DevExpress.XtraEditors.GroupControl();
             this.splitContainerControlFunctions = new DevExpress.XtraEditors.SplitContainerControl();
@@ -54,8 +54,8 @@
             labelControl4 = new DevExpress.XtraEditors.LabelControl();
             labelControl5 = new DevExpress.XtraEditors.LabelControl();
             labelControl6 = new DevExpress.XtraEditors.LabelControl();
-            labelControl7 = new DevExpress.XtraEditors.LabelControl();
             labelControl8 = new DevExpress.XtraEditors.LabelControl();
+            labelControl7 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).BeginInit();
             this.splitContainerControlPatient.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlSelectedPatientRequestClinicalDetailsArea)).BeginInit();
@@ -74,17 +74,23 @@
             // 
             // labelControlPatientName
             // 
-            labelControlPatientName.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            labelControlPatientName.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             labelControlPatientName.Appearance.Options.UseFont = true;
+            labelControlPatientName.AppearanceDisabled.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearanceDisabled.Options.UseFont = true;
+            labelControlPatientName.AppearanceHovered.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearanceHovered.Options.UseFont = true;
+            labelControlPatientName.AppearancePressed.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearancePressed.Options.UseFont = true;
             labelControlPatientName.Location = new System.Drawing.Point(12, 23);
             labelControlPatientName.Name = "labelControlPatientName";
-            labelControlPatientName.Size = new System.Drawing.Size(85, 15);
+            labelControlPatientName.Size = new System.Drawing.Size(118, 21);
             labelControlPatientName.TabIndex = 0;
             labelControlPatientName.Text = "PATIENT NAME";
             // 
             // labelControl1
             // 
-            labelControl1.Location = new System.Drawing.Point(12, 44);
+            labelControl1.Location = new System.Drawing.Point(12, 50);
             labelControl1.Name = "labelControl1";
             labelControl1.Size = new System.Drawing.Size(49, 13);
             labelControl1.TabIndex = 1;
@@ -106,9 +112,9 @@
             // 
             // groupControlSelectedPatientRequestClinicalDetailsArea
             // 
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControl7);
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(this.listBoxControl1);
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControl8);
-            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControl7);
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControl6);
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControl5);
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControl4);
@@ -193,7 +199,7 @@
             // 
             // labelControl2
             // 
-            labelControl2.Location = new System.Drawing.Point(12, 63);
+            labelControl2.Location = new System.Drawing.Point(12, 69);
             labelControl2.Name = "labelControl2";
             labelControl2.Size = new System.Drawing.Size(47, 13);
             labelControl2.TabIndex = 2;
@@ -201,7 +207,7 @@
             // 
             // labelControl3
             // 
-            labelControl3.Location = new System.Drawing.Point(164, 44);
+            labelControl3.Location = new System.Drawing.Point(167, 50);
             labelControl3.Name = "labelControl3";
             labelControl3.Size = new System.Drawing.Size(44, 13);
             labelControl3.TabIndex = 3;
@@ -209,7 +215,7 @@
             // 
             // labelControl4
             // 
-            labelControl4.Location = new System.Drawing.Point(164, 63);
+            labelControl4.Location = new System.Drawing.Point(167, 69);
             labelControl4.Name = "labelControl4";
             labelControl4.Size = new System.Drawing.Size(67, 13);
             labelControl4.TabIndex = 4;
@@ -217,7 +223,7 @@
             // 
             // labelControl5
             // 
-            labelControl5.Location = new System.Drawing.Point(277, 44);
+            labelControl5.Location = new System.Drawing.Point(280, 50);
             labelControl5.Name = "labelControl5";
             labelControl5.Size = new System.Drawing.Size(39, 13);
             labelControl5.TabIndex = 5;
@@ -225,25 +231,15 @@
             // 
             // labelControl6
             // 
-            labelControl6.Location = new System.Drawing.Point(277, 63);
+            labelControl6.Location = new System.Drawing.Point(280, 69);
             labelControl6.Name = "labelControl6";
             labelControl6.Size = new System.Drawing.Size(103, 13);
             labelControl6.TabIndex = 6;
             labelControl6.Text = "Atoll, Island, Country";
             // 
-            // labelControl7
-            // 
-            labelControl7.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            labelControl7.Appearance.Options.UseFont = true;
-            labelControl7.Location = new System.Drawing.Point(472, 23);
-            labelControl7.Name = "labelControl7";
-            labelControl7.Size = new System.Drawing.Size(71, 15);
-            labelControl7.TabIndex = 7;
-            labelControl7.Text = "SELCTED CIN";
-            // 
             // labelControl8
             // 
-            labelControl8.Location = new System.Drawing.Point(472, 44);
+            labelControl8.Location = new System.Drawing.Point(472, 50);
             labelControl8.Name = "labelControl8";
             labelControl8.Size = new System.Drawing.Size(74, 13);
             labelControl8.TabIndex = 8;
@@ -258,6 +254,22 @@
             this.listBoxControl1.Name = "listBoxControl1";
             this.listBoxControl1.Size = new System.Drawing.Size(223, 66);
             this.listBoxControl1.TabIndex = 9;
+            // 
+            // labelControl7
+            // 
+            labelControl7.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControl7.Appearance.Options.UseFont = true;
+            labelControl7.AppearanceDisabled.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControl7.AppearanceDisabled.Options.UseFont = true;
+            labelControl7.AppearanceHovered.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControl7.AppearanceHovered.Options.UseFont = true;
+            labelControl7.AppearancePressed.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControl7.AppearancePressed.Options.UseFont = true;
+            labelControl7.Location = new System.Drawing.Point(472, 23);
+            labelControl7.Name = "labelControl7";
+            labelControl7.Size = new System.Drawing.Size(107, 21);
+            labelControl7.TabIndex = 10;
+            labelControl7.Text = "SELECTED CIN";
             // 
             // ResultEntryView
             // 
