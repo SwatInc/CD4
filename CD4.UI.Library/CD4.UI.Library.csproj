@@ -93,6 +93,7 @@
     <Compile Include="ViewModel\IMainViewModel.cs" />
     <Compile Include="ViewModel\IOrderEntryViewModel.cs" />
     <Compile Include="ViewModel\IProfilesViewModel.cs" />
+    <Compile Include="ViewModel\IResultEntryViewModel.cs" />
     <Compile Include="ViewModel\IScientistViewModel.cs" />
     <Compile Include="ViewModel\ISitesViewModel.cs" />
     <Compile Include="ViewModel\ITestViewModel.cs" />

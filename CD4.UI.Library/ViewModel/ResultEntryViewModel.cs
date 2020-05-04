@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CD4.UI.Library.ViewModel
 {
-    public class ResultEntryViewModel: INotifyPropertyChanged
+    public class ResultEntryViewModel : INotifyPropertyChanged, IResultEntryViewModel
     {
 
         #region Default Constructor
