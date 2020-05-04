@@ -15,6 +15,7 @@ namespace CD4.UI.Library.ViewModel
         List<AtollModel> Atolls { get; set; }
         DateTime? Birthdate { get; set; }
         string Cin { get; set; }
+        string CinErrorText { get; set; }
         BindingList<ClinicalDetailsOrderEntryModel> ClinicalDetails { get; set; }
         List<CountryModel> Countries { get; set; }
         string EpisodeNumber { get; set; }

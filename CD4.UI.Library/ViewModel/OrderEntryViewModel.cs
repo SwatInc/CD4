@@ -1,4 +1,6 @@
 ﻿using CD4.UI.Library.Model;
+using CD4.UI.Library.Validations;
+using FluentValidation.Results;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -31,6 +33,8 @@ namespace CD4.UI.Library.ViewModel
         private int selectedIslandId;
         private int selectedCountryId;
         private string testToAdd;
+        private string cinErrorText;
+        readonly OrderEntryValidator validator = new OrderEntryValidator();
         #endregion
 
         #region Default Constructor
@@ -74,6 +78,17 @@ namespace CD4.UI.Library.ViewModel
             {
                 if (cin == value) return;
                 cin = value;
+                OnPropertyChanged();
+                ManageValidation();
+            }
+        }
+
+        public string CinErrorText
+        {
+            get => cinErrorText; set
+            {
+                if (cinErrorText == value) return;
+                cinErrorText = value;
                 OnPropertyChanged();
             }
         }
@@ -305,6 +320,36 @@ namespace CD4.UI.Library.ViewModel
         #endregion
 
         #region Private Methods
+
+        private void ManageValidation()
+        {
+            var results = ValidateOrderEntry();
+
+            string errorMessages = null;
+            if (!results.IsValid)
+            {
+                foreach (var message in results.Errors)
+                {
+                    errorMessages += message + "\n";
+                }
+
+                CinErrorText = errorMessages;
+            }
+            else
+            {
+                CinErrorText = null;
+            }
+
+
+        }
+
+
+
+        private ValidationResult ValidateOrderEntry()
+        {
+            return validator.Validate(this);
+        }
+
         private async Task AddTestListToRequestAsync
             (List<TestModel> testModelList)
         {

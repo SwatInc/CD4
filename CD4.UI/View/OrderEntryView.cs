@@ -56,6 +56,10 @@ namespace CD4.UI.View
             textEditCin.DataBindings.Add
                 (new Binding("EditValue", _viewModel, nameof(_viewModel.Cin), false,
                 DataSourceUpdateMode.OnPropertyChanged));
+            //Cin Error Text
+            textEditCin.DataBindings.Add
+                (new Binding("ErrorText", _viewModel, nameof(_viewModel.CinErrorText), false,
+                DataSourceUpdateMode.OnPropertyChanged));
 
             //Site and Selected Site
             lookUpEditSite.Properties.DataSource = _viewModel.Sites;
