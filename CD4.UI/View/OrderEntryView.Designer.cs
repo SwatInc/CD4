@@ -140,10 +140,13 @@
             // 
             this.lookUpEditSite.Location = new System.Drawing.Point(12, 56);
             this.lookUpEditSite.Name = "lookUpEditSite";
+            this.lookUpEditSite.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.lookUpEditSite.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lookUpEditSite.Properties.NullText = "Select Site";
             this.lookUpEditSite.Properties.NullValuePrompt = "Select Site";
+            this.lookUpEditSite.Properties.NullValuePromptShowForEmptyValue = true;
+            this.lookUpEditSite.Properties.ShowNullValuePromptWhenFocused = true;
             this.lookUpEditSite.Size = new System.Drawing.Size(167, 20);
             this.lookUpEditSite.TabIndex = 1;
             // 
@@ -235,10 +238,13 @@
             // 
             this.lookUpEditGender.Location = new System.Drawing.Point(12, 56);
             this.lookUpEditGender.Name = "lookUpEditGender";
+            this.lookUpEditGender.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.lookUpEditGender.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lookUpEditGender.Properties.NullText = "Select Gender";
             this.lookUpEditGender.Properties.NullValuePrompt = "Select Gender";
+            this.lookUpEditGender.Properties.NullValuePromptShowForEmptyValue = true;
+            this.lookUpEditGender.Properties.ShowNullValuePromptWhenFocused = true;
             this.lookUpEditGender.Size = new System.Drawing.Size(167, 20);
             this.lookUpEditGender.TabIndex = 10;
             // 
@@ -263,10 +269,13 @@
             // 
             this.lookUpEditCountry.Location = new System.Drawing.Point(370, 108);
             this.lookUpEditCountry.Name = "lookUpEditCountry";
+            this.lookUpEditCountry.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.lookUpEditCountry.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lookUpEditCountry.Properties.NullText = "Select Country";
             this.lookUpEditCountry.Properties.NullValuePrompt = "Select Country";
+            this.lookUpEditCountry.Properties.NullValuePromptShowForEmptyValue = true;
+            this.lookUpEditCountry.Properties.ShowNullValuePromptWhenFocused = true;
             this.lookUpEditCountry.Size = new System.Drawing.Size(167, 20);
             this.lookUpEditCountry.TabIndex = 8;
             // 
@@ -274,10 +283,13 @@
             // 
             this.lookUpEditIsland.Location = new System.Drawing.Point(370, 82);
             this.lookUpEditIsland.Name = "lookUpEditIsland";
+            this.lookUpEditIsland.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.lookUpEditIsland.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lookUpEditIsland.Properties.NullText = "Select Island";
             this.lookUpEditIsland.Properties.NullValuePrompt = "Select Island";
+            this.lookUpEditIsland.Properties.NullValuePromptShowForEmptyValue = true;
+            this.lookUpEditIsland.Properties.ShowNullValuePromptWhenFocused = true;
             this.lookUpEditIsland.Size = new System.Drawing.Size(167, 20);
             this.lookUpEditIsland.TabIndex = 7;
             // 
@@ -285,10 +297,13 @@
             // 
             this.lookUpEditAtoll.Location = new System.Drawing.Point(370, 56);
             this.lookUpEditAtoll.Name = "lookUpEditAtoll";
+            this.lookUpEditAtoll.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.lookUpEditAtoll.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.lookUpEditAtoll.Properties.NullText = "Select Atoll";
             this.lookUpEditAtoll.Properties.NullValuePrompt = "Select Atoll";
+            this.lookUpEditAtoll.Properties.NullValuePromptShowForEmptyValue = true;
+            this.lookUpEditAtoll.Properties.ShowNullValuePromptWhenFocused = true;
             this.lookUpEditAtoll.Size = new System.Drawing.Size(167, 20);
             this.lookUpEditAtoll.TabIndex = 6;
             // 
