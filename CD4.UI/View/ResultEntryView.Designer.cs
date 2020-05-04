@@ -28,6 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DevExpress.XtraEditors.LabelControl labelControlPatientName;
+            DevExpress.XtraEditors.LabelControl labelControl1;
+            DevExpress.XtraEditors.LabelControl labelControl2;
+            DevExpress.XtraEditors.LabelControl labelControl3;
+            DevExpress.XtraEditors.LabelControl labelControl4;
+            DevExpress.XtraEditors.LabelControl labelControl5;
+            DevExpress.XtraEditors.LabelControl labelControl6;
+            DevExpress.XtraEditors.LabelControl labelControl7;
+            DevExpress.XtraEditors.LabelControl labelControl8;
             this.splitContainerControlPatient = new DevExpress.XtraEditors.SplitContainerControl();
             this.groupControlSelectedPatientRequestClinicalDetailsArea = new DevExpress.XtraEditors.GroupControl();
             this.splitContainerControlFunctions = new DevExpress.XtraEditors.SplitContainerControl();
@@ -37,9 +46,20 @@
             this.gridControl1 = new DevExpress.XtraGrid.GridControl();
             this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.groupControlFunctions = new DevExpress.XtraEditors.GroupControl();
+            this.listBoxControl1 = new DevExpress.XtraEditors.ListBoxControl();
+            labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
+            labelControl1 = new DevExpress.XtraEditors.LabelControl();
+            labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            labelControl3 = new DevExpress.XtraEditors.LabelControl();
+            labelControl4 = new DevExpress.XtraEditors.LabelControl();
+            labelControl5 = new DevExpress.XtraEditors.LabelControl();
+            labelControl6 = new DevExpress.XtraEditors.LabelControl();
+            labelControl7 = new DevExpress.XtraEditors.LabelControl();
+            labelControl8 = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).BeginInit();
             this.splitContainerControlPatient.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlSelectedPatientRequestClinicalDetailsArea)).BeginInit();
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlFunctions)).BeginInit();
             this.splitContainerControlFunctions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlSamplesAndTest)).BeginInit();
@@ -49,7 +69,26 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlFunctions)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listBoxControl1)).BeginInit();
             this.SuspendLayout();
+            // 
+            // labelControlPatientName
+            // 
+            labelControlPatientName.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            labelControlPatientName.Appearance.Options.UseFont = true;
+            labelControlPatientName.Location = new System.Drawing.Point(12, 23);
+            labelControlPatientName.Name = "labelControlPatientName";
+            labelControlPatientName.Size = new System.Drawing.Size(85, 15);
+            labelControlPatientName.TabIndex = 0;
+            labelControlPatientName.Text = "PATIENT NAME";
+            // 
+            // labelControl1
+            // 
+            labelControl1.Location = new System.Drawing.Point(12, 44);
+            labelControl1.Name = "labelControl1";
+            labelControl1.Size = new System.Drawing.Size(49, 13);
+            labelControl1.TabIndex = 1;
+            labelControl1.Text = "NationalId";
             // 
             // splitContainerControlPatient
             // 
@@ -67,6 +106,16 @@
             // 
             // groupControlSelectedPatientRequestClinicalDetailsArea
             // 
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(this.listBoxControl1);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControl8);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControl7);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControl6);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControl5);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControl4);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControl3);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControl2);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControl1);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControlPatientName);
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Location = new System.Drawing.Point(0, 0);
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Name = "groupControlSelectedPatientRequestClinicalDetailsArea";
@@ -142,6 +191,74 @@
             this.groupControlFunctions.TabIndex = 1;
             this.groupControlFunctions.Text = "Functions";
             // 
+            // labelControl2
+            // 
+            labelControl2.Location = new System.Drawing.Point(12, 63);
+            labelControl2.Name = "labelControl2";
+            labelControl2.Size = new System.Drawing.Size(47, 13);
+            labelControl2.TabIndex = 2;
+            labelControl2.Text = "Age / Sex";
+            // 
+            // labelControl3
+            // 
+            labelControl3.Location = new System.Drawing.Point(164, 44);
+            labelControl3.Name = "labelControl3";
+            labelControl3.Size = new System.Drawing.Size(44, 13);
+            labelControl3.TabIndex = 3;
+            labelControl3.Text = "Birthdate";
+            // 
+            // labelControl4
+            // 
+            labelControl4.Location = new System.Drawing.Point(164, 63);
+            labelControl4.Name = "labelControl4";
+            labelControl4.Size = new System.Drawing.Size(67, 13);
+            labelControl4.TabIndex = 4;
+            labelControl4.Text = "PhoneNumber";
+            // 
+            // labelControl5
+            // 
+            labelControl5.Location = new System.Drawing.Point(277, 44);
+            labelControl5.Name = "labelControl5";
+            labelControl5.Size = new System.Drawing.Size(39, 13);
+            labelControl5.TabIndex = 5;
+            labelControl5.Text = "Address";
+            // 
+            // labelControl6
+            // 
+            labelControl6.Location = new System.Drawing.Point(277, 63);
+            labelControl6.Name = "labelControl6";
+            labelControl6.Size = new System.Drawing.Size(103, 13);
+            labelControl6.TabIndex = 6;
+            labelControl6.Text = "Atoll, Island, Country";
+            // 
+            // labelControl7
+            // 
+            labelControl7.Appearance.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            labelControl7.Appearance.Options.UseFont = true;
+            labelControl7.Location = new System.Drawing.Point(472, 23);
+            labelControl7.Name = "labelControl7";
+            labelControl7.Size = new System.Drawing.Size(71, 15);
+            labelControl7.TabIndex = 7;
+            labelControl7.Text = "SELCTED CIN";
+            // 
+            // labelControl8
+            // 
+            labelControl8.Location = new System.Drawing.Point(472, 44);
+            labelControl8.Name = "labelControl8";
+            labelControl8.Size = new System.Drawing.Size(74, 13);
+            labelControl8.TabIndex = 8;
+            labelControl8.Text = "EpisodeNumber";
+            // 
+            // listBoxControl1
+            // 
+            this.listBoxControl1.Appearance.BackColor = System.Drawing.SystemColors.Control;
+            this.listBoxControl1.Appearance.Options.UseBackColor = true;
+            this.listBoxControl1.HorizontalScrollbar = true;
+            this.listBoxControl1.Location = new System.Drawing.Point(613, 21);
+            this.listBoxControl1.Name = "listBoxControl1";
+            this.listBoxControl1.Size = new System.Drawing.Size(223, 66);
+            this.listBoxControl1.TabIndex = 9;
+            // 
             // ResultEntryView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -153,6 +270,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).EndInit();
             this.splitContainerControlPatient.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControlSelectedPatientRequestClinicalDetailsArea)).EndInit();
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.ResumeLayout(false);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlFunctions)).EndInit();
             this.splitContainerControlFunctions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlSamplesAndTest)).EndInit();
@@ -162,6 +281,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlFunctions)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listBoxControl1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -177,5 +297,6 @@
         private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
         private DevExpress.XtraEditors.GroupControl groupControlSelectedPatientRequestClinicalDetailsArea;
         private DevExpress.XtraEditors.GroupControl groupControlFunctions;
+        private DevExpress.XtraEditors.ListBoxControl listBoxControl1;
     }
 }

@@ -17,6 +17,22 @@ namespace CD4.UI.View
         {
             InitializeComponent();
             this.SizeChanged += OnSizeChangedAdjustSplitContainers;
+
+            DemoData();
+        }
+
+        private void DemoData()
+        {
+            var clinicaldetails = new List<string>()
+            {
+                "asjdkjashd",
+                "jhgsdahags",
+                "jhgsdahags",
+                "jhgsdahags",
+                "jhgsdahags","jhgsdahags","jhgsdahags","jhgsdahags","jhgsdahags"
+            };
+
+            listBoxControl1.DataSource = clinicaldetails;
         }
 
         private void OnSizeChangedAdjustSplitContainers(object sender, EventArgs e)
@@ -28,7 +44,6 @@ namespace CD4.UI.View
             var height = this.splitContainerControlFunctions.Size.Height;
             splitContainerControlFunctions.SplitterPosition = (int)((decimal)height - 90m);
         }
-
 
     }
 }
