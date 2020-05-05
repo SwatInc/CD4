@@ -29,54 +29,54 @@
         private void InitializeComponent()
         {
             DevExpress.XtraEditors.LabelControl labelControlPatientName;
-            DevExpress.XtraEditors.LabelControl labelControl1;
-            DevExpress.XtraEditors.LabelControl labelControl2;
-            DevExpress.XtraEditors.LabelControl labelControl3;
-            DevExpress.XtraEditors.LabelControl labelControl4;
-            DevExpress.XtraEditors.LabelControl labelControl5;
-            DevExpress.XtraEditors.LabelControl labelControl6;
-            DevExpress.XtraEditors.LabelControl labelControl8;
-            DevExpress.XtraEditors.LabelControl labelControl7;
-            DevExpress.XtraEditors.LabelControl labelControl9;
+            DevExpress.XtraEditors.LabelControl labelControlNationalId;
+            DevExpress.XtraEditors.LabelControl labelControlAgeSex;
+            DevExpress.XtraEditors.LabelControl labelControlBirthdate;
+            DevExpress.XtraEditors.LabelControl labelControlPhoneNumber;
+            DevExpress.XtraEditors.LabelControl labelControlAddress;
+            DevExpress.XtraEditors.LabelControl labelControlAtollIslandCountry;
+            DevExpress.XtraEditors.LabelControl labelControlEpisodeNumber;
+            DevExpress.XtraEditors.LabelControl labelControlCin;
+            DevExpress.XtraEditors.LabelControl labelControlSite;
             this.splitContainerControlPatient = new DevExpress.XtraEditors.SplitContainerControl();
             this.groupControlSelectedPatientRequestClinicalDetailsArea = new DevExpress.XtraEditors.GroupControl();
-            this.listBoxControl1 = new DevExpress.XtraEditors.ListBoxControl();
+            this.listBoxControlClinicalDetails = new DevExpress.XtraEditors.ListBoxControl();
             this.splitContainerControlFunctions = new DevExpress.XtraEditors.SplitContainerControl();
             this.splitContainerControlSamplesAndTest = new DevExpress.XtraEditors.SplitContainerControl();
-            this.gridControl2 = new DevExpress.XtraGrid.GridControl();
-            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridControl1 = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.groupControlFunctions = new DevExpress.XtraEditors.GroupControl();
+            this.gridControlSamples = new DevExpress.XtraGrid.GridControl();
+            this.gridViewSamples = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumnCin = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnReceivedDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnCollectedDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnSequence = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridControlTests = new DevExpress.XtraGrid.GridControl();
+            this.gridViewTests = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumnTestName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnResult = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnSequence = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.groupControlFunctions = new DevExpress.XtraEditors.GroupControl();
             labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
-            labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            labelControl2 = new DevExpress.XtraEditors.LabelControl();
-            labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            labelControl4 = new DevExpress.XtraEditors.LabelControl();
-            labelControl5 = new DevExpress.XtraEditors.LabelControl();
-            labelControl6 = new DevExpress.XtraEditors.LabelControl();
-            labelControl8 = new DevExpress.XtraEditors.LabelControl();
-            labelControl7 = new DevExpress.XtraEditors.LabelControl();
-            labelControl9 = new DevExpress.XtraEditors.LabelControl();
+            labelControlNationalId = new DevExpress.XtraEditors.LabelControl();
+            labelControlAgeSex = new DevExpress.XtraEditors.LabelControl();
+            labelControlBirthdate = new DevExpress.XtraEditors.LabelControl();
+            labelControlPhoneNumber = new DevExpress.XtraEditors.LabelControl();
+            labelControlAddress = new DevExpress.XtraEditors.LabelControl();
+            labelControlAtollIslandCountry = new DevExpress.XtraEditors.LabelControl();
+            labelControlEpisodeNumber = new DevExpress.XtraEditors.LabelControl();
+            labelControlCin = new DevExpress.XtraEditors.LabelControl();
+            labelControlSite = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).BeginInit();
             this.splitContainerControlPatient.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlSelectedPatientRequestClinicalDetailsArea)).BeginInit();
             this.groupControlSelectedPatientRequestClinicalDetailsArea.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.listBoxControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listBoxControlClinicalDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlFunctions)).BeginInit();
             this.splitContainerControlFunctions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlSamplesAndTest)).BeginInit();
             this.splitContainerControlSamplesAndTest.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlSamples)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewSamples)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlTests)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewTests)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlFunctions)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,11 +84,11 @@
             // 
             labelControlPatientName.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             labelControlPatientName.Appearance.Options.UseFont = true;
-            labelControlPatientName.AppearanceDisabled.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearanceDisabled.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             labelControlPatientName.AppearanceDisabled.Options.UseFont = true;
-            labelControlPatientName.AppearanceHovered.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearanceHovered.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             labelControlPatientName.AppearanceHovered.Options.UseFont = true;
-            labelControlPatientName.AppearancePressed.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearancePressed.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
             labelControlPatientName.AppearancePressed.Options.UseFont = true;
             labelControlPatientName.Location = new System.Drawing.Point(12, 23);
             labelControlPatientName.Name = "labelControlPatientName";
@@ -98,75 +98,83 @@
             // 
             // labelControl1
             // 
-            labelControl1.Location = new System.Drawing.Point(12, 50);
-            labelControl1.Name = "labelControl1";
-            labelControl1.Size = new System.Drawing.Size(49, 13);
-            labelControl1.TabIndex = 1;
-            labelControl1.Text = "NationalId";
+            labelControlNationalId.Location = new System.Drawing.Point(12, 50);
+            labelControlNationalId.Name = "labelControlNationalId";
+            labelControlNationalId.Size = new System.Drawing.Size(49, 13);
+            labelControlNationalId.TabIndex = 1;
+            labelControlNationalId.Text = "NationalId";
             // 
             // labelControl2
             // 
-            labelControl2.Location = new System.Drawing.Point(12, 69);
-            labelControl2.Name = "labelControl2";
-            labelControl2.Size = new System.Drawing.Size(47, 13);
-            labelControl2.TabIndex = 2;
-            labelControl2.Text = "Age / Sex";
+            labelControlAgeSex.Location = new System.Drawing.Point(12, 69);
+            labelControlAgeSex.Name = "labelControlAgeSex";
+            labelControlAgeSex.Size = new System.Drawing.Size(47, 13);
+            labelControlAgeSex.TabIndex = 2;
+            labelControlAgeSex.Text = "Age / Sex";
             // 
             // labelControl3
             // 
-            labelControl3.Location = new System.Drawing.Point(167, 50);
-            labelControl3.Name = "labelControl3";
-            labelControl3.Size = new System.Drawing.Size(44, 13);
-            labelControl3.TabIndex = 3;
-            labelControl3.Text = "Birthdate";
+            labelControlBirthdate.Location = new System.Drawing.Point(167, 50);
+            labelControlBirthdate.Name = "labelControlBirthdate";
+            labelControlBirthdate.Size = new System.Drawing.Size(44, 13);
+            labelControlBirthdate.TabIndex = 3;
+            labelControlBirthdate.Text = "Birthdate";
             // 
             // labelControl4
             // 
-            labelControl4.Location = new System.Drawing.Point(167, 69);
-            labelControl4.Name = "labelControl4";
-            labelControl4.Size = new System.Drawing.Size(67, 13);
-            labelControl4.TabIndex = 4;
-            labelControl4.Text = "PhoneNumber";
+            labelControlPhoneNumber.Location = new System.Drawing.Point(167, 69);
+            labelControlPhoneNumber.Name = "labelControlPhoneNumber";
+            labelControlPhoneNumber.Size = new System.Drawing.Size(67, 13);
+            labelControlPhoneNumber.TabIndex = 4;
+            labelControlPhoneNumber.Text = "PhoneNumber";
             // 
             // labelControl5
             // 
-            labelControl5.Location = new System.Drawing.Point(280, 50);
-            labelControl5.Name = "labelControl5";
-            labelControl5.Size = new System.Drawing.Size(39, 13);
-            labelControl5.TabIndex = 5;
-            labelControl5.Text = "Address";
+            labelControlAddress.Location = new System.Drawing.Point(280, 50);
+            labelControlAddress.Name = "labelControlAddress";
+            labelControlAddress.Size = new System.Drawing.Size(39, 13);
+            labelControlAddress.TabIndex = 5;
+            labelControlAddress.Text = "Address";
             // 
             // labelControl6
             // 
-            labelControl6.Location = new System.Drawing.Point(280, 69);
-            labelControl6.Name = "labelControl6";
-            labelControl6.Size = new System.Drawing.Size(103, 13);
-            labelControl6.TabIndex = 6;
-            labelControl6.Text = "Atoll, Island, Country";
+            labelControlAtollIslandCountry.Location = new System.Drawing.Point(280, 69);
+            labelControlAtollIslandCountry.Name = "labelControlAtollIslandCountry";
+            labelControlAtollIslandCountry.Size = new System.Drawing.Size(103, 13);
+            labelControlAtollIslandCountry.TabIndex = 6;
+            labelControlAtollIslandCountry.Text = "Atoll, Island, Country";
             // 
             // labelControl8
             // 
-            labelControl8.Location = new System.Drawing.Point(472, 50);
-            labelControl8.Name = "labelControl8";
-            labelControl8.Size = new System.Drawing.Size(74, 13);
-            labelControl8.TabIndex = 8;
-            labelControl8.Text = "EpisodeNumber";
+            labelControlEpisodeNumber.Location = new System.Drawing.Point(472, 50);
+            labelControlEpisodeNumber.Name = "labelControlEpisodeNumber";
+            labelControlEpisodeNumber.Size = new System.Drawing.Size(74, 13);
+            labelControlEpisodeNumber.TabIndex = 8;
+            labelControlEpisodeNumber.Text = "EpisodeNumber";
             // 
             // labelControl7
             // 
-            labelControl7.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControl7.Appearance.Options.UseFont = true;
-            labelControl7.AppearanceDisabled.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControl7.AppearanceDisabled.Options.UseFont = true;
-            labelControl7.AppearanceHovered.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControl7.AppearanceHovered.Options.UseFont = true;
-            labelControl7.AppearancePressed.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControl7.AppearancePressed.Options.UseFont = true;
-            labelControl7.Location = new System.Drawing.Point(472, 23);
-            labelControl7.Name = "labelControl7";
-            labelControl7.Size = new System.Drawing.Size(107, 21);
-            labelControl7.TabIndex = 10;
-            labelControl7.Text = "SELECTED CIN";
+            labelControlCin.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlCin.Appearance.Options.UseFont = true;
+            labelControlCin.AppearanceDisabled.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlCin.AppearanceDisabled.Options.UseFont = true;
+            labelControlCin.AppearanceHovered.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlCin.AppearanceHovered.Options.UseFont = true;
+            labelControlCin.AppearancePressed.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlCin.AppearancePressed.Options.UseFont = true;
+            labelControlCin.Location = new System.Drawing.Point(472, 23);
+            labelControlCin.Name = "labelControlCin";
+            labelControlCin.Size = new System.Drawing.Size(107, 21);
+            labelControlCin.TabIndex = 10;
+            labelControlCin.Text = "SELECTED CIN";
+            // 
+            // labelControl9
+            // 
+            labelControlSite.Location = new System.Drawing.Point(472, 69);
+            labelControlSite.Name = "labelControlSite";
+            labelControlSite.Size = new System.Drawing.Size(18, 13);
+            labelControlSite.TabIndex = 11;
+            labelControlSite.Text = "Site";
             // 
             // splitContainerControlPatient
             // 
@@ -184,16 +192,16 @@
             // 
             // groupControlSelectedPatientRequestClinicalDetailsArea
             // 
-            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControl9);
-            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControl7);
-            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(this.listBoxControl1);
-            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControl8);
-            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControl6);
-            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControl5);
-            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControl4);
-            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControl3);
-            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControl2);
-            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControl1);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControlSite);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControlCin);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(this.listBoxControlClinicalDetails);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControlEpisodeNumber);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControlAtollIslandCountry);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControlAddress);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControlPhoneNumber);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControlBirthdate);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControlAgeSex);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControlNationalId);
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControlPatientName);
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Location = new System.Drawing.Point(0, 0);
@@ -204,13 +212,13 @@
             // 
             // listBoxControl1
             // 
-            this.listBoxControl1.Appearance.BackColor = System.Drawing.SystemColors.Control;
-            this.listBoxControl1.Appearance.Options.UseBackColor = true;
-            this.listBoxControl1.HorizontalScrollbar = true;
-            this.listBoxControl1.Location = new System.Drawing.Point(613, 21);
-            this.listBoxControl1.Name = "listBoxControl1";
-            this.listBoxControl1.Size = new System.Drawing.Size(223, 66);
-            this.listBoxControl1.TabIndex = 9;
+            this.listBoxControlClinicalDetails.Appearance.BackColor = System.Drawing.SystemColors.Control;
+            this.listBoxControlClinicalDetails.Appearance.Options.UseBackColor = true;
+            this.listBoxControlClinicalDetails.HorizontalScrollbar = true;
+            this.listBoxControlClinicalDetails.Location = new System.Drawing.Point(613, 21);
+            this.listBoxControlClinicalDetails.Name = "listBoxControl1";
+            this.listBoxControlClinicalDetails.Size = new System.Drawing.Size(223, 66);
+            this.listBoxControlClinicalDetails.TabIndex = 9;
             // 
             // splitContainerControlFunctions
             // 
@@ -231,63 +239,34 @@
             this.splitContainerControlSamplesAndTest.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerControlSamplesAndTest.Location = new System.Drawing.Point(0, 0);
             this.splitContainerControlSamplesAndTest.Name = "splitContainerControlSamplesAndTest";
-            this.splitContainerControlSamplesAndTest.Panel1.Controls.Add(this.gridControl2);
+            this.splitContainerControlSamplesAndTest.Panel1.Controls.Add(this.gridControlSamples);
             this.splitContainerControlSamplesAndTest.Panel1.Text = "Panel1";
-            this.splitContainerControlSamplesAndTest.Panel2.Controls.Add(this.gridControl1);
+            this.splitContainerControlSamplesAndTest.Panel2.Controls.Add(this.gridControlTests);
             this.splitContainerControlSamplesAndTest.Panel2.Text = "Panel2";
             this.splitContainerControlSamplesAndTest.Size = new System.Drawing.Size(839, 224);
             this.splitContainerControlSamplesAndTest.SplitterPosition = 400;
             this.splitContainerControlSamplesAndTest.TabIndex = 0;
             // 
-            // gridControl2
+            // gridControlSamples
             // 
-            this.gridControl2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl2.Location = new System.Drawing.Point(0, 0);
-            this.gridControl2.MainView = this.gridView2;
-            this.gridControl2.Name = "gridControl2";
-            this.gridControl2.Size = new System.Drawing.Size(400, 224);
-            this.gridControl2.TabIndex = 1;
-            this.gridControl2.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView2});
+            this.gridControlSamples.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlSamples.Location = new System.Drawing.Point(0, 0);
+            this.gridControlSamples.MainView = this.gridViewSamples;
+            this.gridControlSamples.Name = "gridControlSamples";
+            this.gridControlSamples.Size = new System.Drawing.Size(400, 224);
+            this.gridControlSamples.TabIndex = 1;
+            this.gridControlSamples.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewSamples});
             // 
-            // gridView2
+            // gridViewSamples
             // 
-            this.gridView2.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridViewSamples.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumnCin,
             this.gridColumnReceivedDate,
             this.gridColumnCollectedDate,
             this.gridColumnSequence});
-            this.gridView2.GridControl = this.gridControl2;
-            this.gridView2.Name = "gridView2";
-            // 
-            // gridControl1
-            // 
-            this.gridControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControl1.Location = new System.Drawing.Point(0, 0);
-            this.gridControl1.MainView = this.gridView1;
-            this.gridControl1.Name = "gridControl1";
-            this.gridControl1.Size = new System.Drawing.Size(434, 224);
-            this.gridControl1.TabIndex = 0;
-            this.gridControl1.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
-            // 
-            // gridView1
-            // 
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumnTestName,
-            this.gridColumnResult});
-            this.gridView1.GridControl = this.gridControl1;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsView.ShowGroupPanel = false;
-            // 
-            // groupControlFunctions
-            // 
-            this.groupControlFunctions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.groupControlFunctions.Location = new System.Drawing.Point(0, 0);
-            this.groupControlFunctions.Name = "groupControlFunctions";
-            this.groupControlFunctions.Size = new System.Drawing.Size(839, 77);
-            this.groupControlFunctions.TabIndex = 1;
-            this.groupControlFunctions.Text = "Functions";
+            this.gridViewSamples.GridControl = this.gridControlSamples;
+            this.gridViewSamples.Name = "gridViewSamples";
             // 
             // gridColumnCin
             // 
@@ -316,6 +295,35 @@
             this.gridColumnCollectedDate.VisibleIndex = 3;
             this.gridColumnCollectedDate.Width = 71;
             // 
+            // gridColumnSequence
+            // 
+            this.gridColumnSequence.Caption = "Seq.";
+            this.gridColumnSequence.FieldName = "Id";
+            this.gridColumnSequence.Name = "gridColumnSequence";
+            this.gridColumnSequence.Visible = true;
+            this.gridColumnSequence.VisibleIndex = 0;
+            this.gridColumnSequence.Width = 33;
+            // 
+            // gridControlTests
+            // 
+            this.gridControlTests.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlTests.Location = new System.Drawing.Point(0, 0);
+            this.gridControlTests.MainView = this.gridViewTests;
+            this.gridControlTests.Name = "gridControlTests";
+            this.gridControlTests.Size = new System.Drawing.Size(434, 224);
+            this.gridControlTests.TabIndex = 0;
+            this.gridControlTests.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewTests});
+            // 
+            // gridViewTests
+            // 
+            this.gridViewTests.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumnTestName,
+            this.gridColumnResult});
+            this.gridViewTests.GridControl = this.gridControlTests;
+            this.gridViewTests.Name = "gridViewTests";
+            this.gridViewTests.OptionsView.ShowGroupPanel = false;
+            // 
             // gridColumnTestName
             // 
             this.gridColumnTestName.Caption = "Test";
@@ -332,22 +340,14 @@
             this.gridColumnResult.VisibleIndex = 1;
             this.gridColumnResult.Width = 460;
             // 
-            // labelControl9
+            // groupControlFunctions
             // 
-            labelControl9.Location = new System.Drawing.Point(472, 69);
-            labelControl9.Name = "labelControl9";
-            labelControl9.Size = new System.Drawing.Size(18, 13);
-            labelControl9.TabIndex = 11;
-            labelControl9.Text = "Site";
-            // 
-            // gridColumnSequence
-            // 
-            this.gridColumnSequence.Caption = "Seq.";
-            this.gridColumnSequence.FieldName = "Id";
-            this.gridColumnSequence.Name = "gridColumnSequence";
-            this.gridColumnSequence.Visible = true;
-            this.gridColumnSequence.VisibleIndex = 0;
-            this.gridColumnSequence.Width = 33;
+            this.groupControlFunctions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControlFunctions.Location = new System.Drawing.Point(0, 0);
+            this.groupControlFunctions.Name = "groupControlFunctions";
+            this.groupControlFunctions.Size = new System.Drawing.Size(839, 77);
+            this.groupControlFunctions.TabIndex = 1;
+            this.groupControlFunctions.Text = "Functions";
             // 
             // ResultEntryView
             // 
@@ -362,15 +362,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControlSelectedPatientRequestClinicalDetailsArea)).EndInit();
             this.groupControlSelectedPatientRequestClinicalDetailsArea.ResumeLayout(false);
             this.groupControlSelectedPatientRequestClinicalDetailsArea.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.listBoxControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listBoxControlClinicalDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlFunctions)).EndInit();
             this.splitContainerControlFunctions.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlSamplesAndTest)).EndInit();
             this.splitContainerControlSamplesAndTest.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridControl1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlSamples)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewSamples)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlTests)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewTests)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlFunctions)).EndInit();
             this.ResumeLayout(false);
 
@@ -381,13 +381,13 @@
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControlPatient;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControlFunctions;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControlSamplesAndTest;
-        private DevExpress.XtraGrid.GridControl gridControl2;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
-        private DevExpress.XtraGrid.GridControl gridControl1;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.GridControl gridControlSamples;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewSamples;
+        private DevExpress.XtraGrid.GridControl gridControlTests;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewTests;
         private DevExpress.XtraEditors.GroupControl groupControlSelectedPatientRequestClinicalDetailsArea;
         private DevExpress.XtraEditors.GroupControl groupControlFunctions;
-        private DevExpress.XtraEditors.ListBoxControl listBoxControl1;
+        private DevExpress.XtraEditors.ListBoxControl listBoxControlClinicalDetails;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnCin;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnReceivedDate;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnCollectedDate;

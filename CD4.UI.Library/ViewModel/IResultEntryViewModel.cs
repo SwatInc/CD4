@@ -7,7 +7,7 @@ namespace CD4.UI.Library.ViewModel
     public interface IResultEntryViewModel
     {
         List<RequestSampleModel> RequestData { get; set; }
-        BindingList<ResultModel> ResultData { get; set; }
+        BindingList<ResultModel> SelectedResultData { get; set; }
         RequestSampleModel SelectedRequestData { get; set; }
 
         event PropertyChangedEventHandler PropertyChanged;

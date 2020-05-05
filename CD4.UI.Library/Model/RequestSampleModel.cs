@@ -8,7 +8,7 @@ namespace CD4.UI.Library.Model
     {
         #region Private properties
         private int id;
-        private string analysisRequestId;
+        private int analysisRequestId;
         private string cin;
         private DateTime collectionDate;
         private DateTime receivedDate;
@@ -36,7 +36,7 @@ namespace CD4.UI.Library.Model
                 OnPropertyChanged();
             }
         }
-        public string AnalysisRequestId
+        public int AnalysisRequestId
         {
             get => analysisRequestId; set
             {

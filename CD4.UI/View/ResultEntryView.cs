@@ -8,31 +8,44 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
+using CD4.UI.Library.ViewModel;
+using DevExpress.XtraGrid.Views.Base;
+using CD4.UI.Library.Model;
 
 namespace CD4.UI.View
 {
     public partial class ResultEntryView : XtraForm
     {
-        public ResultEntryView()
+        private readonly IResultEntryViewModel _viewModel;
+
+        public ResultEntryView(IResultEntryViewModel viewModel)
         {
             InitializeComponent();
-            this.SizeChanged += OnSizeChangedAdjustSplitContainers;
+            _viewModel = viewModel;
+            InitializeBinding();
 
-            DemoData();
+            SizeChanged += OnSizeChangedAdjustSplitContainers;
+            gridViewSamples.FocusedRowChanged += SelectedSampleChanged;
         }
 
-        private void DemoData()
+        private void SelectedSampleChanged(object sender, FocusedRowChangedEventArgs e)
         {
-            var clinicaldetails = new List<string>()
-            {
-                "asjdkjashd",
-                "jhgsdahags",
-                "jhgsdahags",
-                "jhgsdahags",
-                "jhgsdahags","jhgsdahags","jhgsdahags","jhgsdahags","jhgsdahags"
-            };
+            var selectedSample = (RequestSampleModel)gridViewSamples.GetRow(e.FocusedRowHandle);
+        }
 
-            listBoxControl1.DataSource = clinicaldetails;
+        private void InitializeBinding()
+        {
+            #region Samples
+            gridControlSamples.DataSource = _viewModel.RequestData;
+            #endregion
+
+            #region Tests / Result data
+            gridControlTests.DataSource = _viewModel.SelectedResultData;
+            #endregion
+
+            #region Selected Samples data
+            
+            #endregion
         }
 
         private void OnSizeChangedAdjustSplitContainers(object sender, EventArgs e)
