@@ -75,6 +75,8 @@ namespace CD4.UI.View
             labelControlSite.DataBindings.Add
                 (new Binding("Text", _viewModel.SelectedRequestData, nameof(RequestSampleModel.Site)));
 
+            labelControlAddress.DataBindings.Add
+                (new Binding("Text", _viewModel.SelectedRequestData, nameof(RequestSampleModel.Address)));
             #endregion
 
             #region Bind Results

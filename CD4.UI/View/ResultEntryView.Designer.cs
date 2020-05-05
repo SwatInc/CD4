@@ -30,7 +30,6 @@ namespace CD4.UI.View
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
             this.labelControlNationalId = new DevExpress.XtraEditors.LabelControl();
             this.labelControlAgeSex = new DevExpress.XtraEditors.LabelControl();
             this.labelControlBirthdate = new DevExpress.XtraEditors.LabelControl();
@@ -72,22 +71,6 @@ namespace CD4.UI.View
             ((System.ComponentModel.ISupportInitialize)(this.gridViewTests)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlFunctions)).BeginInit();
             this.SuspendLayout();
-            // 
-            // labelControlPatientName
-            // 
-            labelControlPatientName.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.Appearance.Options.UseFont = true;
-            labelControlPatientName.AppearanceDisabled.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.AppearanceDisabled.Options.UseFont = true;
-            labelControlPatientName.AppearanceHovered.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.AppearanceHovered.Options.UseFont = true;
-            labelControlPatientName.AppearancePressed.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.AppearancePressed.Options.UseFont = true;
-            labelControlPatientName.Location = new System.Drawing.Point(12, 23);
-            labelControlPatientName.Name = "labelControlPatientName";
-            labelControlPatientName.Size = new System.Drawing.Size(118, 21);
-            labelControlPatientName.TabIndex = 0;
-            labelControlPatientName.Text = "PATIENT NAME";
             // 
             // labelControlNationalId
             // 
@@ -213,6 +196,22 @@ namespace CD4.UI.View
             this.listBoxControlClinicalDetails.Size = new System.Drawing.Size(223, 66);
             this.listBoxControlClinicalDetails.TabIndex = 9;
             // 
+            // labelControlPatientName
+            // 
+            labelControlPatientName.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.Appearance.Options.UseFont = true;
+            labelControlPatientName.AppearanceDisabled.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearanceDisabled.Options.UseFont = true;
+            labelControlPatientName.AppearanceHovered.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearanceHovered.Options.UseFont = true;
+            labelControlPatientName.AppearancePressed.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearancePressed.Options.UseFont = true;
+            labelControlPatientName.Location = new System.Drawing.Point(12, 23);
+            labelControlPatientName.Name = "labelControlPatientName";
+            labelControlPatientName.Size = new System.Drawing.Size(118, 21);
+            labelControlPatientName.TabIndex = 0;
+            labelControlPatientName.Text = "PATIENT NAME";
+            // 
             // splitContainerControlFunctions
             // 
             this.splitContainerControlFunctions.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -260,6 +259,7 @@ namespace CD4.UI.View
             this.gridColumnSequence});
             this.gridViewSamples.GridControl = this.gridControlSamples;
             this.gridViewSamples.Name = "gridViewSamples";
+            this.gridViewSamples.OptionsBehavior.Editable = false;
             // 
             // gridColumnCin
             // 
@@ -322,6 +322,7 @@ namespace CD4.UI.View
             this.gridColumnTestName.Caption = "Test";
             this.gridColumnTestName.FieldName = "Test";
             this.gridColumnTestName.Name = "gridColumnTestName";
+            this.gridColumnTestName.OptionsColumn.AllowEdit = false;
             this.gridColumnTestName.Visible = true;
             this.gridColumnTestName.VisibleIndex = 0;
             this.gridColumnTestName.Width = 98;
@@ -389,7 +390,6 @@ namespace CD4.UI.View
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnTestName;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnResult;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnSequence;
-        private DevExpress.XtraEditors.LabelControl labelControlPatientName;
         private DevExpress.XtraEditors.LabelControl labelControlNationalId;
         private DevExpress.XtraEditors.LabelControl labelControlAgeSex;
         private DevExpress.XtraEditors.LabelControl labelControlBirthdate;
@@ -399,7 +399,7 @@ namespace CD4.UI.View
         private DevExpress.XtraEditors.LabelControl labelControlEpisodeNumber;
         private DevExpress.XtraEditors.LabelControl labelControlCin;
         private DevExpress.XtraEditors.LabelControl labelControlSite;
-
+        private DevExpress.XtraEditors.LabelControl labelControlPatientName;
 
     }
 }
