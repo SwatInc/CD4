@@ -11,6 +11,7 @@ using DevExpress.XtraEditors;
 using CD4.UI.Library.ViewModel;
 using DevExpress.XtraGrid.Views.Base;
 using CD4.UI.Library.Model;
+using DevExpress.XtraBars;
 
 namespace CD4.UI.View
 {
@@ -28,9 +29,10 @@ namespace CD4.UI.View
             gridViewSamples.FocusedRowChanged += SelectedSampleChanged;
         }
 
-        private void SelectedSampleChanged(object sender, FocusedRowChangedEventArgs e)
+        private async void SelectedSampleChanged(object sender, FocusedRowChangedEventArgs e)
         {
             var selectedSample = (RequestSampleModel)gridViewSamples.GetRow(e.FocusedRowHandle);
+            await _viewModel.SetSelectedSampleAsync(selectedSample);
         }
 
         private void InitializeBinding()
@@ -44,7 +46,39 @@ namespace CD4.UI.View
             #endregion
 
             #region Selected Samples data
-            
+
+            labelControlPatientName.DataBindings.Add
+                (new Binding("Text", _viewModel.SelectedRequestData, nameof(RequestSampleModel.PatientName),
+                true,DataSourceUpdateMode.OnPropertyChanged));
+
+            labelControlNationalId.DataBindings.Add
+                (new Binding("Text", _viewModel.SelectedRequestData, nameof(RequestSampleModel.NationalId)));
+
+            labelControlAgeSex.DataBindings.Add
+                (new Binding("Text", _viewModel.SelectedRequestData, nameof(RequestSampleModel.AgeSex)));
+
+            labelControlBirthdate.DataBindings.Add
+                (new Binding("Text", _viewModel.SelectedRequestData, nameof(RequestSampleModel.Birthdate)));
+
+            labelControlPhoneNumber.DataBindings.Add
+                (new Binding("Text", _viewModel.SelectedRequestData, nameof(RequestSampleModel.PhoneNumber)));
+
+            labelControlAtollIslandCountry.DataBindings.Add
+                (new Binding("Text", _viewModel.SelectedRequestData, nameof(RequestSampleModel.AtollIslandCountry)));
+
+            labelControlCin.DataBindings.Add
+                (new Binding("Text", _viewModel.SelectedRequestData, nameof(RequestSampleModel.Cin)));
+
+            labelControlEpisodeNumber.DataBindings.Add
+                (new Binding("Text", _viewModel.SelectedRequestData, nameof(RequestSampleModel.EpisodeNumber)));
+
+            labelControlSite.DataBindings.Add
+                (new Binding("Text", _viewModel.SelectedRequestData, nameof(RequestSampleModel.Site)));
+
+            #endregion
+
+            #region Bind Results
+            gridControlTests.DataSource = _viewModel.SelectedResultData;
             #endregion
         }
 

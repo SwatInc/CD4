@@ -1,4 +1,6 @@
-﻿namespace CD4.UI.View
+﻿using DevExpress.XtraEditors;
+
+namespace CD4.UI.View
 {
     partial class ResultEntryView
     {
@@ -28,16 +30,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            DevExpress.XtraEditors.LabelControl labelControlPatientName;
-            DevExpress.XtraEditors.LabelControl labelControlNationalId;
-            DevExpress.XtraEditors.LabelControl labelControlAgeSex;
-            DevExpress.XtraEditors.LabelControl labelControlBirthdate;
-            DevExpress.XtraEditors.LabelControl labelControlPhoneNumber;
-            DevExpress.XtraEditors.LabelControl labelControlAddress;
-            DevExpress.XtraEditors.LabelControl labelControlAtollIslandCountry;
-            DevExpress.XtraEditors.LabelControl labelControlEpisodeNumber;
-            DevExpress.XtraEditors.LabelControl labelControlCin;
-            DevExpress.XtraEditors.LabelControl labelControlSite;
+            this.labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
+            this.labelControlNationalId = new DevExpress.XtraEditors.LabelControl();
+            this.labelControlAgeSex = new DevExpress.XtraEditors.LabelControl();
+            this.labelControlBirthdate = new DevExpress.XtraEditors.LabelControl();
+            this.labelControlPhoneNumber = new DevExpress.XtraEditors.LabelControl();
+            this.labelControlAddress = new DevExpress.XtraEditors.LabelControl();
+            this.labelControlAtollIslandCountry = new DevExpress.XtraEditors.LabelControl();
+            this.labelControlEpisodeNumber = new DevExpress.XtraEditors.LabelControl();
+            this.labelControlCin = new DevExpress.XtraEditors.LabelControl();
+            this.labelControlSite = new DevExpress.XtraEditors.LabelControl();
             this.splitContainerControlPatient = new DevExpress.XtraEditors.SplitContainerControl();
             this.groupControlSelectedPatientRequestClinicalDetailsArea = new DevExpress.XtraEditors.GroupControl();
             this.listBoxControlClinicalDetails = new DevExpress.XtraEditors.ListBoxControl();
@@ -55,15 +57,6 @@
             this.gridColumnResult = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControlFunctions = new DevExpress.XtraEditors.GroupControl();
             labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
-            labelControlNationalId = new DevExpress.XtraEditors.LabelControl();
-            labelControlAgeSex = new DevExpress.XtraEditors.LabelControl();
-            labelControlBirthdate = new DevExpress.XtraEditors.LabelControl();
-            labelControlPhoneNumber = new DevExpress.XtraEditors.LabelControl();
-            labelControlAddress = new DevExpress.XtraEditors.LabelControl();
-            labelControlAtollIslandCountry = new DevExpress.XtraEditors.LabelControl();
-            labelControlEpisodeNumber = new DevExpress.XtraEditors.LabelControl();
-            labelControlCin = new DevExpress.XtraEditors.LabelControl();
-            labelControlSite = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).BeginInit();
             this.splitContainerControlPatient.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlSelectedPatientRequestClinicalDetailsArea)).BeginInit();
@@ -96,85 +89,85 @@
             labelControlPatientName.TabIndex = 0;
             labelControlPatientName.Text = "PATIENT NAME";
             // 
-            // labelControl1
+            // labelControlNationalId
             // 
-            labelControlNationalId.Location = new System.Drawing.Point(12, 50);
-            labelControlNationalId.Name = "labelControlNationalId";
-            labelControlNationalId.Size = new System.Drawing.Size(49, 13);
-            labelControlNationalId.TabIndex = 1;
-            labelControlNationalId.Text = "NationalId";
+            this.labelControlNationalId.Location = new System.Drawing.Point(12, 50);
+            this.labelControlNationalId.Name = "labelControlNationalId";
+            this.labelControlNationalId.Size = new System.Drawing.Size(49, 13);
+            this.labelControlNationalId.TabIndex = 1;
+            this.labelControlNationalId.Text = "NationalId";
             // 
-            // labelControl2
+            // labelControlAgeSex
             // 
-            labelControlAgeSex.Location = new System.Drawing.Point(12, 69);
-            labelControlAgeSex.Name = "labelControlAgeSex";
-            labelControlAgeSex.Size = new System.Drawing.Size(47, 13);
-            labelControlAgeSex.TabIndex = 2;
-            labelControlAgeSex.Text = "Age / Sex";
+            this.labelControlAgeSex.Location = new System.Drawing.Point(12, 69);
+            this.labelControlAgeSex.Name = "labelControlAgeSex";
+            this.labelControlAgeSex.Size = new System.Drawing.Size(47, 13);
+            this.labelControlAgeSex.TabIndex = 2;
+            this.labelControlAgeSex.Text = "Age / Sex";
             // 
-            // labelControl3
+            // labelControlBirthdate
             // 
-            labelControlBirthdate.Location = new System.Drawing.Point(167, 50);
-            labelControlBirthdate.Name = "labelControlBirthdate";
-            labelControlBirthdate.Size = new System.Drawing.Size(44, 13);
-            labelControlBirthdate.TabIndex = 3;
-            labelControlBirthdate.Text = "Birthdate";
+            this.labelControlBirthdate.Location = new System.Drawing.Point(167, 50);
+            this.labelControlBirthdate.Name = "labelControlBirthdate";
+            this.labelControlBirthdate.Size = new System.Drawing.Size(44, 13);
+            this.labelControlBirthdate.TabIndex = 3;
+            this.labelControlBirthdate.Text = "Birthdate";
             // 
-            // labelControl4
+            // labelControlPhoneNumber
             // 
-            labelControlPhoneNumber.Location = new System.Drawing.Point(167, 69);
-            labelControlPhoneNumber.Name = "labelControlPhoneNumber";
-            labelControlPhoneNumber.Size = new System.Drawing.Size(67, 13);
-            labelControlPhoneNumber.TabIndex = 4;
-            labelControlPhoneNumber.Text = "PhoneNumber";
+            this.labelControlPhoneNumber.Location = new System.Drawing.Point(167, 69);
+            this.labelControlPhoneNumber.Name = "labelControlPhoneNumber";
+            this.labelControlPhoneNumber.Size = new System.Drawing.Size(67, 13);
+            this.labelControlPhoneNumber.TabIndex = 4;
+            this.labelControlPhoneNumber.Text = "PhoneNumber";
             // 
-            // labelControl5
+            // labelControlAddress
             // 
-            labelControlAddress.Location = new System.Drawing.Point(280, 50);
-            labelControlAddress.Name = "labelControlAddress";
-            labelControlAddress.Size = new System.Drawing.Size(39, 13);
-            labelControlAddress.TabIndex = 5;
-            labelControlAddress.Text = "Address";
+            this.labelControlAddress.Location = new System.Drawing.Point(280, 50);
+            this.labelControlAddress.Name = "labelControlAddress";
+            this.labelControlAddress.Size = new System.Drawing.Size(39, 13);
+            this.labelControlAddress.TabIndex = 5;
+            this.labelControlAddress.Text = "Address";
             // 
-            // labelControl6
+            // labelControlAtollIslandCountry
             // 
-            labelControlAtollIslandCountry.Location = new System.Drawing.Point(280, 69);
-            labelControlAtollIslandCountry.Name = "labelControlAtollIslandCountry";
-            labelControlAtollIslandCountry.Size = new System.Drawing.Size(103, 13);
-            labelControlAtollIslandCountry.TabIndex = 6;
-            labelControlAtollIslandCountry.Text = "Atoll, Island, Country";
+            this.labelControlAtollIslandCountry.Location = new System.Drawing.Point(280, 69);
+            this.labelControlAtollIslandCountry.Name = "labelControlAtollIslandCountry";
+            this.labelControlAtollIslandCountry.Size = new System.Drawing.Size(103, 13);
+            this.labelControlAtollIslandCountry.TabIndex = 6;
+            this.labelControlAtollIslandCountry.Text = "Atoll, Island, Country";
             // 
-            // labelControl8
+            // labelControlEpisodeNumber
             // 
-            labelControlEpisodeNumber.Location = new System.Drawing.Point(472, 50);
-            labelControlEpisodeNumber.Name = "labelControlEpisodeNumber";
-            labelControlEpisodeNumber.Size = new System.Drawing.Size(74, 13);
-            labelControlEpisodeNumber.TabIndex = 8;
-            labelControlEpisodeNumber.Text = "EpisodeNumber";
+            this.labelControlEpisodeNumber.Location = new System.Drawing.Point(472, 50);
+            this.labelControlEpisodeNumber.Name = "labelControlEpisodeNumber";
+            this.labelControlEpisodeNumber.Size = new System.Drawing.Size(74, 13);
+            this.labelControlEpisodeNumber.TabIndex = 8;
+            this.labelControlEpisodeNumber.Text = "EpisodeNumber";
             // 
-            // labelControl7
+            // labelControlCin
             // 
-            labelControlCin.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlCin.Appearance.Options.UseFont = true;
-            labelControlCin.AppearanceDisabled.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlCin.AppearanceDisabled.Options.UseFont = true;
-            labelControlCin.AppearanceHovered.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlCin.AppearanceHovered.Options.UseFont = true;
-            labelControlCin.AppearancePressed.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlCin.AppearancePressed.Options.UseFont = true;
-            labelControlCin.Location = new System.Drawing.Point(472, 23);
-            labelControlCin.Name = "labelControlCin";
-            labelControlCin.Size = new System.Drawing.Size(107, 21);
-            labelControlCin.TabIndex = 10;
-            labelControlCin.Text = "SELECTED CIN";
+            this.labelControlCin.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.labelControlCin.Appearance.Options.UseFont = true;
+            this.labelControlCin.AppearanceDisabled.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.labelControlCin.AppearanceDisabled.Options.UseFont = true;
+            this.labelControlCin.AppearanceHovered.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.labelControlCin.AppearanceHovered.Options.UseFont = true;
+            this.labelControlCin.AppearancePressed.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.labelControlCin.AppearancePressed.Options.UseFont = true;
+            this.labelControlCin.Location = new System.Drawing.Point(472, 23);
+            this.labelControlCin.Name = "labelControlCin";
+            this.labelControlCin.Size = new System.Drawing.Size(107, 21);
+            this.labelControlCin.TabIndex = 10;
+            this.labelControlCin.Text = "SELECTED CIN";
             // 
-            // labelControl9
+            // labelControlSite
             // 
-            labelControlSite.Location = new System.Drawing.Point(472, 69);
-            labelControlSite.Name = "labelControlSite";
-            labelControlSite.Size = new System.Drawing.Size(18, 13);
-            labelControlSite.TabIndex = 11;
-            labelControlSite.Text = "Site";
+            this.labelControlSite.Location = new System.Drawing.Point(472, 69);
+            this.labelControlSite.Name = "labelControlSite";
+            this.labelControlSite.Size = new System.Drawing.Size(18, 13);
+            this.labelControlSite.TabIndex = 11;
+            this.labelControlSite.Text = "Site";
             // 
             // splitContainerControlPatient
             // 
@@ -192,16 +185,16 @@
             // 
             // groupControlSelectedPatientRequestClinicalDetailsArea
             // 
-            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControlSite);
-            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControlCin);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(this.labelControlSite);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(this.labelControlCin);
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(this.listBoxControlClinicalDetails);
-            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControlEpisodeNumber);
-            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControlAtollIslandCountry);
-            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControlAddress);
-            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControlPhoneNumber);
-            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControlBirthdate);
-            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControlAgeSex);
-            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControlNationalId);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(this.labelControlEpisodeNumber);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(this.labelControlAtollIslandCountry);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(this.labelControlAddress);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(this.labelControlPhoneNumber);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(this.labelControlBirthdate);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(this.labelControlAgeSex);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(this.labelControlNationalId);
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControlPatientName);
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Location = new System.Drawing.Point(0, 0);
@@ -210,13 +203,13 @@
             this.groupControlSelectedPatientRequestClinicalDetailsArea.TabIndex = 0;
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Text = "Selected Patient, Request and Clinical Details Information";
             // 
-            // listBoxControl1
+            // listBoxControlClinicalDetails
             // 
             this.listBoxControlClinicalDetails.Appearance.BackColor = System.Drawing.SystemColors.Control;
             this.listBoxControlClinicalDetails.Appearance.Options.UseBackColor = true;
             this.listBoxControlClinicalDetails.HorizontalScrollbar = true;
             this.listBoxControlClinicalDetails.Location = new System.Drawing.Point(613, 21);
-            this.listBoxControlClinicalDetails.Name = "listBoxControl1";
+            this.listBoxControlClinicalDetails.Name = "listBoxControlClinicalDetails";
             this.listBoxControlClinicalDetails.Size = new System.Drawing.Size(223, 66);
             this.listBoxControlClinicalDetails.TabIndex = 9;
             // 
@@ -327,6 +320,7 @@
             // gridColumnTestName
             // 
             this.gridColumnTestName.Caption = "Test";
+            this.gridColumnTestName.FieldName = "Test";
             this.gridColumnTestName.Name = "gridColumnTestName";
             this.gridColumnTestName.Visible = true;
             this.gridColumnTestName.VisibleIndex = 0;
@@ -335,6 +329,7 @@
             // gridColumnResult
             // 
             this.gridColumnResult.Caption = "Result";
+            this.gridColumnResult.FieldName = "Result";
             this.gridColumnResult.Name = "gridColumnResult";
             this.gridColumnResult.Visible = true;
             this.gridColumnResult.VisibleIndex = 1;
@@ -394,5 +389,17 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnTestName;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnResult;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnSequence;
+        private DevExpress.XtraEditors.LabelControl labelControlPatientName;
+        private DevExpress.XtraEditors.LabelControl labelControlNationalId;
+        private DevExpress.XtraEditors.LabelControl labelControlAgeSex;
+        private DevExpress.XtraEditors.LabelControl labelControlBirthdate;
+        private DevExpress.XtraEditors.LabelControl labelControlPhoneNumber;
+        private DevExpress.XtraEditors.LabelControl labelControlAddress;
+        private DevExpress.XtraEditors.LabelControl labelControlAtollIslandCountry;
+        private DevExpress.XtraEditors.LabelControl labelControlEpisodeNumber;
+        private DevExpress.XtraEditors.LabelControl labelControlCin;
+        private DevExpress.XtraEditors.LabelControl labelControlSite;
+
+
     }
 }

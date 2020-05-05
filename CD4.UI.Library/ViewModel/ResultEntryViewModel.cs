@@ -20,6 +20,7 @@ namespace CD4.UI.Library.ViewModel
             SelectedRequestData = new RequestSampleModel();
             AllResultData = new List<ResultModel>();
             GenerateDemoData();
+
         }
 
         private void GenerateDemoData()
@@ -71,7 +72,7 @@ namespace CD4.UI.Library.ViewModel
             {
                 Id = 1,
                 AnalysisRequestId = 1,
-                Cin = "",
+                Cin = "nCoV-1236/20",
                 Test = "E Gene",
                 Result = "",
                 DataType = "Numeric"
@@ -80,7 +81,7 @@ namespace CD4.UI.Library.ViewModel
             {
                 Id = 1,
                 AnalysisRequestId = 1,
-                Cin = "",
+                Cin = "nCoV-324528/20",
                 Test = "RdRp",
                 Result = "",
                 DataType = "Numeric"
@@ -114,12 +115,45 @@ namespace CD4.UI.Library.ViewModel
 
         #region Public Methods
 
-        public void SetSelectedSample(RequestSampleModel requestSampleData)
+        public async Task SetSelectedSampleAsync(RequestSampleModel requestSampleData)
         {
             if (requestSampleData is null) return;
-            SelectedRequestData = requestSampleData;
+            SelectedRequestData.Id = requestSampleData.Id;
+            SelectedRequestData.NationalId = requestSampleData.NationalId;
+            SelectedRequestData.PatientName = requestSampleData.PatientName;
+            SelectedRequestData.PhoneNumber = requestSampleData.PhoneNumber;
+            SelectedRequestData.ReceivedDate = requestSampleData.ReceivedDate;
+            SelectedRequestData.Site = requestSampleData.Site;
+            SelectedRequestData.Address = requestSampleData.Address;
+            SelectedRequestData.AgeSex = requestSampleData.AgeSex;
+            SelectedRequestData.AnalysisRequestId = requestSampleData.AnalysisRequestId;
+            SelectedRequestData.AtollIslandCountry = requestSampleData.AtollIslandCountry;
+            SelectedRequestData.Birthdate = requestSampleData.Birthdate;
+            SelectedRequestData.Cin = requestSampleData.Cin;
+            SelectedRequestData.ClinicalDetails = requestSampleData.ClinicalDetails;
+            SelectedRequestData.CollectionDate = requestSampleData.CollectionDate;
+            SelectedRequestData.EpisodeNumber = requestSampleData.EpisodeNumber;
+
+            await DisplaySelectedSamplesResultsAsync(requestSampleData.Cin).ConfigureAwait(true);
         }
 
+
+        #endregion
+
+
+        #region Private Methods
+        private async Task DisplaySelectedSamplesResultsAsync(string cin)
+        {
+            if (cin is null) return;
+            var selectedResult = await Task.Run(() =>
+            {
+                return AllResultData.SingleOrDefault((r) => r.Cin == cin);
+            });
+
+            if (selectedResult is null) return;
+            SelectedResultData.Clear();
+            SelectedResultData.Add(selectedResult);
+        }
         #endregion
     }
 }
