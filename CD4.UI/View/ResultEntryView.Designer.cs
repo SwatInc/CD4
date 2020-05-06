@@ -54,6 +54,7 @@ namespace CD4.UI.View
             this.gridViewTests = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumnTestName = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnResult = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.repositoryItemLookUpEditCodifiedPhrases = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.groupControlFunctions = new DevExpress.XtraEditors.GroupControl();
             labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).BeginInit();
@@ -69,6 +70,7 @@ namespace CD4.UI.View
             ((System.ComponentModel.ISupportInitialize)(this.gridViewSamples)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlTests)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewTests)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditCodifiedPhrases)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlFunctions)).BeginInit();
             this.SuspendLayout();
             // 
@@ -303,6 +305,8 @@ namespace CD4.UI.View
             this.gridControlTests.Location = new System.Drawing.Point(0, 0);
             this.gridControlTests.MainView = this.gridViewTests;
             this.gridControlTests.Name = "gridControlTests";
+            this.gridControlTests.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemLookUpEditCodifiedPhrases});
             this.gridControlTests.Size = new System.Drawing.Size(434, 224);
             this.gridControlTests.TabIndex = 0;
             this.gridControlTests.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
@@ -330,11 +334,25 @@ namespace CD4.UI.View
             // gridColumnResult
             // 
             this.gridColumnResult.Caption = "Result";
+            this.gridColumnResult.ColumnEdit = this.repositoryItemLookUpEditCodifiedPhrases;
             this.gridColumnResult.FieldName = "Result";
             this.gridColumnResult.Name = "gridColumnResult";
             this.gridColumnResult.Visible = true;
             this.gridColumnResult.VisibleIndex = 1;
             this.gridColumnResult.Width = 460;
+            // 
+            // repositoryItemLookUpEditCodifiedPhrases
+            // 
+            this.repositoryItemLookUpEditCodifiedPhrases.AcceptEditorTextAsNewValue = DevExpress.Utils.DefaultBoolean.True;
+            this.repositoryItemLookUpEditCodifiedPhrases.AutoHeight = false;
+            this.repositoryItemLookUpEditCodifiedPhrases.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.repositoryItemLookUpEditCodifiedPhrases.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("CodifiedValue", "Codified Values")});
+            this.repositoryItemLookUpEditCodifiedPhrases.Name = "repositoryItemLookUpEditCodifiedPhrases";
+            this.repositoryItemLookUpEditCodifiedPhrases.NullText = "";
+            this.repositoryItemLookUpEditCodifiedPhrases.ShowHeader = false;
+            this.repositoryItemLookUpEditCodifiedPhrases.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             // 
             // groupControlFunctions
             // 
@@ -367,6 +385,7 @@ namespace CD4.UI.View
             ((System.ComponentModel.ISupportInitialize)(this.gridViewSamples)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlTests)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewTests)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditCodifiedPhrases)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlFunctions)).EndInit();
             this.ResumeLayout(false);
 
@@ -400,6 +419,6 @@ namespace CD4.UI.View
         private DevExpress.XtraEditors.LabelControl labelControlCin;
         private DevExpress.XtraEditors.LabelControl labelControlSite;
         private DevExpress.XtraEditors.LabelControl labelControlPatientName;
-
+        private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEditCodifiedPhrases;
     }
 }

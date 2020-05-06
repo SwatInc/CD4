@@ -27,6 +27,13 @@ namespace CD4.UI.View
 
             SizeChanged += OnSizeChangedAdjustSplitContainers;
             gridViewSamples.FocusedRowChanged += SelectedSampleChanged;
+            gridViewTests.FocusedRowChanged += SelectedTestChanged;
+        }
+
+        private async void SelectedTestChanged(object sender, FocusedRowChangedEventArgs e)
+        {
+            var selectedTest = (ResultModel)gridViewTests.GetRow(e.FocusedRowHandle);
+            await _viewModel.SetTestCodifiedPhrasesAsync(selectedTest);
         }
 
         private async void SelectedSampleChanged(object sender, FocusedRowChangedEventArgs e)
@@ -81,6 +88,9 @@ namespace CD4.UI.View
 
             #region Bind Results
             gridControlTests.DataSource = _viewModel.SelectedResultData;
+            repositoryItemLookUpEditCodifiedPhrases.DataSource = _viewModel.CodifiedPhrasesForSelectedTest;
+            repositoryItemLookUpEditCodifiedPhrases.DisplayMember = nameof(CodifiedResultsModel.CodifiedValue);
+            repositoryItemLookUpEditCodifiedPhrases.ValueMember = nameof(CodifiedResultsModel.CodifiedValue);
             #endregion
         }
 

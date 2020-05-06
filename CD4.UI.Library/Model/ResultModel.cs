@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -6,7 +7,11 @@ namespace CD4.UI.Library.Model
 {
     public class ResultModel : INotifyPropertyChanged
     {
+        public ResultModel()
+        {
+        }
         #region Private Properties
+
         private int id;
         private int analysisRequestId;
         private string cin;
@@ -14,6 +19,7 @@ namespace CD4.UI.Library.Model
         private string result;
         private DateTime resultDate;
         private string dataType;
+        private string mask;
 
         #endregion
 
@@ -78,6 +84,15 @@ namespace CD4.UI.Library.Model
             {
                 if (dataType == value) return;
                 dataType = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Mask
+        {
+            get => mask; set
+            {
+                if (mask == value) return;
+                mask = value;
                 OnPropertyChanged();
             }
         }

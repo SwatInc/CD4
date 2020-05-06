@@ -11,6 +11,9 @@ namespace CD4.UI.Library.ViewModel
         BindingList<ResultModel> SelectedResultData { get; set; }
         RequestSampleModel SelectedRequestData { get; set; }
         Task SetSelectedSampleAsync(RequestSampleModel requestSampleData);
+        Task SetTestCodifiedPhrasesAsync(ResultModel selectedTest);
+        BindingList<CodifiedResultsModel> CodifiedPhrasesForSelectedTest { get; set; }
+
         event PropertyChangedEventHandler PropertyChanged;
     }
 }

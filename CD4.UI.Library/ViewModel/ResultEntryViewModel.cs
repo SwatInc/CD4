@@ -19,6 +19,9 @@ namespace CD4.UI.Library.ViewModel
             SelectedResultData = new BindingList<ResultModel>();
             SelectedRequestData = new RequestSampleModel();
             AllResultData = new List<ResultModel>();
+            CodifiedPhrasesForSelectedTest = new BindingList<CodifiedResultsModel>();
+            AllCodifiedPhrases = new List<CodifiedResultsModel>();
+            TempCodifiedPhrasesList = new List<CodifiedResultsModel>();
             GenerateDemoData();
 
         }
@@ -41,6 +44,9 @@ namespace CD4.UI.Library.ViewModel
         public BindingList<ResultModel> SelectedResultData { get; set; }
         private List<ResultModel> AllResultData { get; set; }
         public RequestSampleModel SelectedRequestData { get; set; }
+        public BindingList<CodifiedResultsModel> CodifiedPhrasesForSelectedTest { get; set; }
+        public List<CodifiedResultsModel> AllCodifiedPhrases { get; set; }
+        private List<CodifiedResultsModel> TempCodifiedPhrasesList;
 
         #endregion
 
@@ -68,23 +74,65 @@ namespace CD4.UI.Library.ViewModel
             await DisplaySelectedSamplesResultsAsync(requestSampleData.Cin).ConfigureAwait(true);
         }
 
+        public async Task SetTestCodifiedPhrasesAsync(ResultModel selectedTest)
+        {
+
+            if (selectedTest is null || selectedTest.DataType is null || selectedTest.Mask is null)
+            { return; }
+            CodifiedPhrasesForSelectedTest.Clear();
+            TempCodifiedPhrasesList.Clear();
+            if (selectedTest.DataType == "CODIFIED" && selectedTest.Mask.Contains('|'))
+            {
+                var codifiedPhraseIds = selectedTest.Mask.Split('|');
+                TempCodifiedPhrasesList = await Task.Run(() =>
+                {
+                    return GetCodifiedPhrasesForIds(codifiedPhraseIds);
+                }).ConfigureAwait(true);
+
+                if (TempCodifiedPhrasesList.Count == 0) return;
+
+                foreach (var phrase in TempCodifiedPhrasesList)
+                {
+                    CodifiedPhrasesForSelectedTest.Add(phrase);
+                }
+            }
+        }
 
         #endregion
 
         #region Private Methods
+        private List<CodifiedResultsModel> GetCodifiedPhrasesForIds(string[] idsCodifiedPhrase)
+        {
+            var returnList = new List<CodifiedResultsModel>();
+            foreach (var id in idsCodifiedPhrase)
+            {
+                var isIsInt = int.TryParse(id, out int parsedId);
+                if (isIsInt) 
+                {
+                    var match = AllCodifiedPhrases.Find((c) => c.Id == parsedId);
+                    if (match is null) continue;
+                    returnList.Add(match);
+                }
+            }
+            return returnList;
+        }
         private async Task DisplaySelectedSamplesResultsAsync(string cin)
         {
             if (cin is null) return;
             var selectedResult = await Task.Run(() =>
             {
-                return AllResultData.SingleOrDefault((r) => r.Cin == cin);
+                return AllResultData.FindAll((r) => r.Cin == cin);
             });
 
             if (selectedResult is null) return;
             SelectedResultData.Clear();
-            SelectedResultData.Add(selectedResult);
-        }
 
+            foreach (var result in selectedResult)
+            {
+                SelectedResultData.Add(result);
+            }
+
+        }
         private void GenerateDemoData()
         {
             #region Request Data
@@ -137,7 +185,8 @@ namespace CD4.UI.Library.ViewModel
                 Cin = "nCoV-1236/20",
                 Test = "E Gene",
                 Result = "",
-                DataType = "Numeric"
+                DataType = "Numeric",
+                Mask = "###.##"
             };
             var rs1_2 = new ResultModel()
             {
@@ -146,11 +195,32 @@ namespace CD4.UI.Library.ViewModel
                 Cin = "nCoV-324528/20",
                 Test = "RdRp",
                 Result = "",
-                DataType = "Numeric"
+                DataType = "CODIFIED",
+                Mask = "1|2"
             };
 
+            var rs1_3 = new ResultModel()
+            {
+                Id = 1,
+                AnalysisRequestId = 1,
+                Cin = "nCoV-324528/20",
+                Test = "E Gene",
+                Result = "",
+                DataType = "NUMERIC",
+                Mask = "###.##"
+            };
             AllResultData.Add(rs1_1);
             AllResultData.Add(rs1_2);
+            AllResultData.Add(rs1_3);
+            #endregion
+
+            #region All Codified Phrases
+
+            AllCodifiedPhrases.Add(new CodifiedResultsModel() { Id = 1, CodifiedValue = "POSITIVE" });
+            AllCodifiedPhrases.Add(new CodifiedResultsModel() { Id = 2, CodifiedValue = "NEGATIVE" });
+            AllCodifiedPhrases.Add(new CodifiedResultsModel() { Id = 3, CodifiedValue = "NOT DETECTED" });
+            AllCodifiedPhrases.Add(new CodifiedResultsModel() { Id = 4, CodifiedValue = "DETECTED" });
+
             #endregion
         }
 
