@@ -84,6 +84,9 @@ namespace CD4.UI.View
 
             labelControlAddress.DataBindings.Add
                 (new Binding("Text", _viewModel.SelectedRequestData, nameof(RequestSampleModel.Address)));
+
+            //Clinical Details
+            listBoxControlClinicalDetails.DataSource = _viewModel.SelectedClinicalDetails;
             #endregion
 
             #region Bind Results

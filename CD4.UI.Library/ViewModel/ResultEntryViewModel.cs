@@ -17,11 +17,13 @@ namespace CD4.UI.Library.ViewModel
         {
             RequestData = new List<RequestSampleModel>();
             SelectedResultData = new BindingList<ResultModel>();
+            SelectedClinicalDetails = new BindingList<string>();
             SelectedRequestData = new RequestSampleModel();
             AllResultData = new List<ResultModel>();
             CodifiedPhrasesForSelectedTest = new BindingList<CodifiedResultsModel>();
             AllCodifiedPhrases = new List<CodifiedResultsModel>();
             TempCodifiedPhrasesList = new List<CodifiedResultsModel>();
+            
             GenerateDemoData();
 
         }
@@ -45,6 +47,7 @@ namespace CD4.UI.Library.ViewModel
         private List<ResultModel> AllResultData { get; set; }
         public RequestSampleModel SelectedRequestData { get; set; }
         public BindingList<CodifiedResultsModel> CodifiedPhrasesForSelectedTest { get; set; }
+        public BindingList<string> SelectedClinicalDetails { get; set; }
         public List<CodifiedResultsModel> AllCodifiedPhrases { get; set; }
         private List<CodifiedResultsModel> TempCodifiedPhrasesList;
 
@@ -70,6 +73,8 @@ namespace CD4.UI.Library.ViewModel
             SelectedRequestData.ClinicalDetails = requestSampleData.ClinicalDetails;
             SelectedRequestData.CollectionDate = requestSampleData.CollectionDate;
             SelectedRequestData.EpisodeNumber = requestSampleData.EpisodeNumber;
+
+            SetClinicalDetailsForSelectedSample(requestSampleData.ClinicalDetails);
 
             await DisplaySelectedSamplesResultsAsync(requestSampleData.Cin).ConfigureAwait(true);
         }
@@ -101,6 +106,21 @@ namespace CD4.UI.Library.ViewModel
         #endregion
 
         #region Private Methods
+
+        private void SetClinicalDetailsForSelectedSample(string delimitedDetails)
+        {
+            SelectedClinicalDetails.Clear();
+            var details = delimitedDetails.Split(',');
+            if (details.Length == 0) return;
+
+            foreach (var item in details)
+            {
+                SelectedClinicalDetails.Add(item.Trim());
+            }
+            
+
+
+        }
         private List<CodifiedResultsModel> GetCodifiedPhrasesForIds(string[] idsCodifiedPhrase)
         {
             var returnList = new List<CodifiedResultsModel>();
