@@ -117,8 +117,6 @@ namespace CD4.UI.Library.ViewModel
             {
                 SelectedClinicalDetails.Add(item.Trim());
             }
-            
-
 
         }
         private List<CodifiedResultsModel> GetCodifiedPhrasesForIds(string[] idsCodifiedPhrase)
@@ -245,5 +243,6 @@ namespace CD4.UI.Library.ViewModel
         }
 
         #endregion
+
     }
 }

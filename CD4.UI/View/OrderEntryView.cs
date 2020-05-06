@@ -26,7 +26,7 @@ namespace CD4.UI.View
 
         private void RemoveTestFromAR(object sender, EventArgs e)
         {
-            RemoveTestFromAR(this,new KeyEventArgs(Keys.Delete));
+           RemoveTestFromAR(this,new KeyEventArgs(Keys.Delete));
         }
 
         private void RemoveTestFromAR(object sender, KeyEventArgs e)
