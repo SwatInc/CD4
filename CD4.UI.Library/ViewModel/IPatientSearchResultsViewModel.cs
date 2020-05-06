@@ -8,12 +8,13 @@ namespace CD4.UI.Library.ViewModel
 {
     public interface IPatientSearchResultsViewModel
     {
-        List<PatientModel> SearchResults { get; set; }
+        BindingList<PatientModel> SearchResults { get; set; }
 
         event EventHandler<PatientModel> PatientSelected;
         event PropertyChangedEventHandler PropertyChanged;
 
         string PatientNameForSearch { get; set; }
         Task SearchByPatientNameAsync();
+        void UserSelectedPatient(PatientModel row);
     }
 }

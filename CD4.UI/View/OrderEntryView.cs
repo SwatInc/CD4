@@ -18,20 +18,26 @@ namespace CD4.UI.View
             this._viewModel = viewModel;
             InitializeDataBinding();
 
-            simpleButtonSearch.Click += SimpleButtonSearch_Click;
+            //simpleButtonSearch.Click += SimpleButtonSearch_Click;
             lookUpEditTests.Validated += LookUpEditTests_Validated;
             simpleButtonRemoveTest.Click += RemoveTestFromAR;
+            simpleButtonSearch.Click += SimpleButtonSearch_Click1;
             KeyUp += RemoveTestFromAR; ;
+        }
+
+        private void SimpleButtonSearch_Click1(object sender, EventArgs e)
+        {
+            OpenPatientSearchView();
         }
 
         private void RemoveTestFromAR(object sender, EventArgs e)
         {
-           RemoveTestFromAR(this,new KeyEventArgs(Keys.Delete));
+            RemoveTestFromAR(this, new KeyEventArgs(Keys.Delete));
         }
 
         private void RemoveTestFromAR(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete) 
+            if (e.KeyCode == Keys.Delete)
             {
                 var rowsSelected = gridViewRequestedTests.GetSelectedRows();
                 if (rowsSelected.Length > 0)
@@ -54,21 +60,21 @@ namespace CD4.UI.View
             //Ask ViewModel to remove them
             foreach (var rowHandle in selectedRowHandles)
             {
-                var row  = (TestModel)(gridViewRequestedTests.GetRow(rowHandle));
+                var row = (TestModel)(gridViewRequestedTests.GetRow(rowHandle));
                 _viewModel.RemoveTestModelFromAddedTests(row);
             }
         }
 
         private async void LookUpEditTests_Validated(object sender, System.EventArgs e)
         {
-           await _viewModel.ManageAddTestToRequestAsync();
+            await _viewModel.ManageAddTestToRequestAsync();
         }
 
-        private void SimpleButtonSearch_Click(object sender, System.EventArgs e)
-        {
-           var a = JsonConvert.SerializeObject(_viewModel,Formatting.Indented);
-            Clipboard.SetText(a);
-        }
+        //private void SimpleButtonSearch_Click(object sender, System.EventArgs e)
+        //{
+        //    var a = JsonConvert.SerializeObject(_viewModel, Formatting.Indented);
+        //    Clipboard.SetText(a);
+        //}
 
         private void InitializeDataBinding()
         {
@@ -143,7 +149,7 @@ namespace CD4.UI.View
             lookUpEditAtoll.Properties.DisplayMember = nameof(AtollModel.Atoll);
             lookUpEditAtoll.Properties.ValueMember = nameof(AtollModel.Id);
             lookUpEditAtoll.DataBindings.Add
-                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedAtollId),true,
+                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedAtollId), true,
                 DataSourceUpdateMode.OnPropertyChanged));
 
             //Islands and Selected Island
@@ -170,7 +176,7 @@ namespace CD4.UI.View
             lookUpEditTests.Properties.DataSource = _viewModel.AllTestsData;
             lookUpEditTests.Properties.ValueMember = nameof(ProfilesAndTestsDatasourceOeModel.Description);
             lookUpEditTests.Properties.DisplayMember = nameof(ProfilesAndTestsDatasourceOeModel.Description);
-            
+
             //Tests and profiles lookupEdit Editvalue
             lookUpEditTests.DataBindings.Add
                 (new Binding("EditValue", _viewModel, nameof(_viewModel.TestToAdd)));
@@ -184,6 +190,32 @@ namespace CD4.UI.View
                 true, DataSourceUpdateMode.OnPropertyChanged));
             #endregion
 
+        }
+
+        private void OpenPatientSearchView()
+        {
+            var searchViewModel = new PatientSearchResultsViewModel() 
+            { PatientNameForSearch = textEditFullname.Text };
+
+            var searchView = new PatientSearchResultsView(searchViewModel)
+            {
+                MdiParent = this.MdiParent,
+                StartPosition = FormStartPosition.CenterParent
+            };
+            searchViewModel.PatientSelected += SearchViewModel_PatientSelected;
+            searchView.Show();
+            searchView.FormClosed += SearchView_FormClosed;
+
+        }
+
+        private void SearchView_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            ((Form)sender).Dispose();
+        }
+
+        private void SearchViewModel_PatientSelected(object sender, PatientModel e)
+        {
+            throw new NotImplementedException();
         }
     }
 }

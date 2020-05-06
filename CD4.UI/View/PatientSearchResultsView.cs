@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using CD4.UI.Library.ViewModel;
+using CD4.UI.Library.Model;
 
 namespace CD4.UI.View
 {
@@ -22,6 +23,17 @@ namespace CD4.UI.View
             this._viewModel = viewModel;
             InitializeDataBinding();
             InitializeSearchAsync().ConfigureAwait(true);
+
+            gridViewPatientSearchResults.DoubleClick += gridViewPatientSearchResults_DoubleClick;
+        }
+
+        private void gridViewPatientSearchResults_DoubleClick(object sender, EventArgs e)
+        {
+            var selectedRowHandles = gridViewPatientSearchResults.GetSelectedRows();
+            if (selectedRowHandles.Length == 0) return;
+
+            var row = (PatientModel)gridViewPatientSearchResults.GetRow(selectedRowHandles[0]);
+           _viewModel.UserSelectedPatient(row);
         }
 
         private async Task InitializeSearchAsync()

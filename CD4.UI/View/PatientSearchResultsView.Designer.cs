@@ -29,26 +29,27 @@
         private void InitializeComponent()
         {
             this.gridControlPatientSearchResults = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridViewPatientSearchResults = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlPatientSearchResults)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewPatientSearchResults)).BeginInit();
             this.SuspendLayout();
             // 
-            // gridControl1
+            // gridControlPatientSearchResults
             // 
             this.gridControlPatientSearchResults.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControlPatientSearchResults.Location = new System.Drawing.Point(0, 0);
-            this.gridControlPatientSearchResults.MainView = this.gridView1;
-            this.gridControlPatientSearchResults.Name = "gridControl1";
+            this.gridControlPatientSearchResults.MainView = this.gridViewPatientSearchResults;
+            this.gridControlPatientSearchResults.Name = "gridControlPatientSearchResults";
             this.gridControlPatientSearchResults.Size = new System.Drawing.Size(719, 268);
             this.gridControlPatientSearchResults.TabIndex = 0;
             this.gridControlPatientSearchResults.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
+            this.gridViewPatientSearchResults});
             // 
-            // gridView1
+            // gridViewPatientSearchResults
             // 
-            this.gridView1.GridControl = this.gridControlPatientSearchResults;
-            this.gridView1.Name = "gridView1";
+            this.gridViewPatientSearchResults.GridControl = this.gridControlPatientSearchResults;
+            this.gridViewPatientSearchResults.Name = "gridViewPatientSearchResults";
+            this.gridViewPatientSearchResults.OptionsBehavior.Editable = false;
             // 
             // PatientSearchResultsView
             // 
@@ -59,7 +60,7 @@
             this.Name = "PatientSearchResultsView";
             this.Text = "PatientSearchResultsView";
             ((System.ComponentModel.ISupportInitialize)(this.gridControlPatientSearchResults)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewPatientSearchResults)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -67,6 +68,6 @@
         #endregion
 
         private DevExpress.XtraGrid.GridControl gridControlPatientSearchResults;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewPatientSearchResults;
     }
 }
