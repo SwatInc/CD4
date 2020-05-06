@@ -127,6 +127,12 @@
     <Compile Include="View\OrderEntryView.Designer.cs">
       <DependentUpon>OrderEntryView.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\PatientSearchResultsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PatientSearchResultsView.Designer.cs">
+      <DependentUpon>PatientSearchResultsView.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\ProfilesView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -188,6 +194,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\OrderEntryView.resx">
       <DependentUpon>OrderEntryView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PatientSearchResultsView.resx">
+      <DependentUpon>PatientSearchResultsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\ProfilesView.resx">
       <DependentUpon>ProfilesView.cs</DependentUpon>
