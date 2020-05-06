@@ -137,10 +137,15 @@ namespace CD4.UI.Library.ViewModel
         }
         public string Fullname
         {
-            get => fullname; set
+            get
             {
-                if (fullname == value.Trim().ToUpper()) return;
-                fullname = value.Trim().ToUpper();
+                return fullname;
+            }
+
+            set
+            {
+                if (fullname == value) return;
+                fullname = value;
                 OnPropertyChanged();
             }
         }
