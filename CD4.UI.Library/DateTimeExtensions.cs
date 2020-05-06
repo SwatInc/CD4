@@ -16,10 +16,16 @@ namespace CD4.UI.Library
             if (months < 0) { years--; months += 12; }
             var days = (today - dob.AddMonths((years * 12) + months)).Days;
 
-            return string.Format("{0} Y, {1} M, {2} D",
-                                 years,
-                                 months,
-                                 days);
+            if (years != 0)
+            {
+                return string.Format("{0} Y, {1} M, {2} D",years, months,days);
+            }
+            if (months != 0)
+            {
+                return string.Format("{0} M, {1} D",months, days);
+            }
+
+            return string.Format("{0} D", days);
         }
     }
 }
