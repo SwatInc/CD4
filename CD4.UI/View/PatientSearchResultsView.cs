@@ -21,6 +21,13 @@ namespace CD4.UI.View
             InitializeComponent();
             this._viewModel = viewModel;
             InitializeDataBinding();
+            InitializeSearchAsync().ConfigureAwait(true);
+        }
+
+        private async Task InitializeSearchAsync()
+        {
+            if (_viewModel.PatientNameForSearch is null) this.Close();
+            await _viewModel.SearchByPatientNameAsync();
         }
 
         private void InitializeDataBinding()

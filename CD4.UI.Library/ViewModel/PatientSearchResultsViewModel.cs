@@ -14,7 +14,7 @@ namespace CD4.UI.Library.ViewModel
     {
         public event EventHandler<PatientModel> PatientSelected;
         public List<PatientModel> SearchResults { get; set; }
-
+        public string PatientNameForSearch { get; set; }
         #region INotifyPropertyChanged Hookup
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -26,7 +26,7 @@ namespace CD4.UI.Library.ViewModel
 
         #endregion
 
-        public async Task SearchByPatientName(string fullname)
+        public async Task SearchByPatientNameAsync()
         {
             throw new NotImplementedException();
         }
