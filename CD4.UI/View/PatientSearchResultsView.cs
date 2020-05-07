@@ -34,6 +34,7 @@ namespace CD4.UI.View
 
             var row = (PatientModel)gridViewPatientSearchResults.GetRow(selectedRowHandles[0]);
            _viewModel.UserSelectedPatient(row);
+            Close();
         }
 
         private async Task InitializeSearchAsync()

@@ -328,6 +328,19 @@ namespace CD4.UI.Library.ViewModel
             AddedTests.Remove(testModel);
         }
 
+        public void OnReceiveSearchResults(PatientModel results)
+        {
+            Fullname = results.Fullname;
+            NidPp = results.NidPp;
+            Birthdate = results.Birthdate;
+            PhoneNumber = results.PhoneNumber;
+            Address = results.Address;
+            //Gender
+            //Atoll
+            //Island
+            //Country
+        }
+
         #endregion
 
         #region Private Methods

@@ -45,7 +45,7 @@ namespace CD4.UI.Library.ViewModel
 
             var p2 = new PatientModel()
             {
-                Id = 1,
+                Id = 2,
                 Fullname = "Aminath Hussain",
                 NidPp = "A987654",
                 Birthdate = DateTime.Parse("1991-02-14"),
@@ -76,9 +76,9 @@ namespace CD4.UI.Library.ViewModel
 
         public async Task SearchByPatientNameAsync()
         {
-            var results = await Task.Run(() => 
+            var results = await Task.Run(async() => 
             {
-                Task.Delay(3000);
+                await Task.Delay(3000);
                 return DemoPatientData.Where((p) => p.Fullname.Trim().ToLower().Contains(PatientNameForSearch.Trim().ToLower()));
             }).ConfigureAwait(true);
 

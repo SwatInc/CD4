@@ -18,14 +18,13 @@ namespace CD4.UI.View
             this._viewModel = viewModel;
             InitializeDataBinding();
 
-            //simpleButtonSearch.Click += SimpleButtonSearch_Click;
             lookUpEditTests.Validated += LookUpEditTests_Validated;
             simpleButtonRemoveTest.Click += RemoveTestFromAR;
-            simpleButtonSearch.Click += SimpleButtonSearch_Click1;
+            simpleButtonSearch.Click += SimpleButtonSearch_Click;
             KeyUp += RemoveTestFromAR; ;
         }
 
-        private void SimpleButtonSearch_Click1(object sender, EventArgs e)
+        private void SimpleButtonSearch_Click(object sender, EventArgs e)
         {
             OpenPatientSearchView();
         }
@@ -69,12 +68,6 @@ namespace CD4.UI.View
         {
             await _viewModel.ManageAddTestToRequestAsync();
         }
-
-        //private void SimpleButtonSearch_Click(object sender, System.EventArgs e)
-        //{
-        //    var a = JsonConvert.SerializeObject(_viewModel, Formatting.Indented);
-        //    Clipboard.SetText(a);
-        //}
 
         private void InitializeDataBinding()
         {
@@ -215,7 +208,7 @@ namespace CD4.UI.View
 
         private void SearchViewModel_PatientSelected(object sender, PatientModel e)
         {
-            throw new NotImplementedException();
+            _viewModel.OnReceiveSearchResults(e);
         }
     }
 }
