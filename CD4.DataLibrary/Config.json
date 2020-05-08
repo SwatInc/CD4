@@ -1,0 +1,8 @@
+{
+  "ConnectionName": {
+    "Name": "CD4Data",
+    "ConnectionString": "Server=localhost,1333;Database=CD4Data;User Id=sa;Password=Bismillah.123!;",
+    "Provider": "System.Data.SqlClient"
+  }
+}
+

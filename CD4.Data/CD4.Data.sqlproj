@@ -79,6 +79,13 @@
     <Build Include="dbo\Tables\AnalysisRequest_ClinicalDetail.sql" />
     <Build Include="dbo\Tables\Profiles.sql" />
     <Build Include="dbo\Tables\Profile_Tests.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetAllCountries.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetAllSites.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetAllGenders.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetAllAtollAndIslands.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetAllTests.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetAllProfilesAndProfileTests.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetAllClinicalDetails.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
