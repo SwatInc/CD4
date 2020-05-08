@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+option csharp_namespace = "CD4.GrpcServer";
+
+// The greeting service definition.
+service AnalysisRequest {
+  // Sends a greeting
+  rpc SaveAnalysisRequest (AnalysisRequestSaveModel) returns (SaveStatus);
+}
+
+// The request message containing the user's name.
+message AnalysisRequestSaveModel {
+  string cin = 1;
+  int32 siteId = 2;
+  string collectionDate = 3;
+  string ReceivedDate = 4;
+  string nationalIdOrPassportNumber = 5;
+  string fullname = 6;
+  int32 genderId = 7;
+  string age = 8;
+  string phoneNumber = 9;
+  string birthdate = 10;
+  string address = 11;
+  int32 atollId = 12;
+  int32 islandId = 13;
+  int32 countryId=14;
+  string delimitedClinicalDetails =15;
+  string episodeNumber =16;
+  string delimitedRequestedTests=17;
+}
+
+// The response message containing the greetings.
+message SaveStatus {
+  bool success = 1;
+}
