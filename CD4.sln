@@ -9,10 +9,6 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "CD4.Data", "CD4.Data\CD4.Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CD4.UI.Library", "CD4.UI.Library\CD4.UI.Library.csproj", "{87A4ABE4-6121-4D2B-A9A1-D68D053AEAFD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CD4.GrpcServer", "CD4.GrpcServer\CD4.GrpcServer.csproj", "{88CE5CF5-116C-41A3-AFDC-188FD1837598}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CD4.GrpcClient", "CD4.GrpcClient\CD4.GrpcClient.csproj", "{E254F846-D7D0-4D79-8027-54D89DCCC7A5}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,14 +29,6 @@ Global
 		{87A4ABE4-6121-4D2B-A9A1-D68D053AEAFD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87A4ABE4-6121-4D2B-A9A1-D68D053AEAFD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87A4ABE4-6121-4D2B-A9A1-D68D053AEAFD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{88CE5CF5-116C-41A3-AFDC-188FD1837598}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{88CE5CF5-116C-41A3-AFDC-188FD1837598}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{88CE5CF5-116C-41A3-AFDC-188FD1837598}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{88CE5CF5-116C-41A3-AFDC-188FD1837598}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E254F846-D7D0-4D79-8027-54D89DCCC7A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E254F846-D7D0-4D79-8027-54D89DCCC7A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E254F846-D7D0-4D79-8027-54D89DCCC7A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E254F846-D7D0-4D79-8027-54D89DCCC7A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
