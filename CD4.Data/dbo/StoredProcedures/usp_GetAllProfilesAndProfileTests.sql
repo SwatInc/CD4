@@ -2,16 +2,21 @@
 AS
 BEGIN
 SET NOCOUNT ON;
-SELECT [p].[Id] AS [ProfileId]
-, [p].[Description] AS [Profile]
-, [t].[Id] AS [TestId]
-, [t].[Description] AS [Test]
-, [t].[Mask]
-, [t].[ResultDataTypeId]
-, [r].[Id] AS [ResultDataTypeId]
-, [r].[Name] AS [ResultDataType]
-FROM [dbo].[Profiles] [p]
-INNER JOIN [dbo].[Profile_Tests][pt] ON [p].[Id] = [pt].[ProfileId]
-INNER JOIN [dbo].[Test] [t] ON [pt].[TestId] = [t].[Id]
-INNER JOIN [dbo].[ResultDataType] [r] ON [t].[ResultDataTypeId] = [r].[Id];
+
+DECLARE @IsProfile bit;
+SELECT @IsProfile = 1;
+
+SELECT [P].[Id],[P].[Description], @IsProfile AS [IsProfile]
+FROM [dbo].[Profiles] [P];
+
+SELECT [PT].[ProfileId]
+, [T].[Id] AS [TestId] 
+, [T].[Description] AS [Test]
+, [T].[Mask]
+, [T].[Reportable] AS [IsReportable]
+, [RD].[Name] AS [ResultDataType]
+FROM [dbo].[Profile_Tests] [PT] 
+INNER JOIN [dbo].[Test] [T] ON [PT].[TestId] = [T].[Id]
+INNER JOIN [dbo].[ResultDataType] [RD] ON [T].[ResultDataTypeId] = [RD].[Id];
+
 END
