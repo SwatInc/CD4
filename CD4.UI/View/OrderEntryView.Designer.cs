@@ -384,6 +384,7 @@
             this.gridColumnClinicalDetail.Caption = "Clinical Details";
             this.gridColumnClinicalDetail.FieldName = "ClinicalDetail";
             this.gridColumnClinicalDetail.Name = "gridColumnClinicalDetail";
+            this.gridColumnClinicalDetail.OptionsColumn.AllowEdit = false;
             this.gridColumnClinicalDetail.Visible = true;
             this.gridColumnClinicalDetail.VisibleIndex = 1;
             this.gridColumnClinicalDetail.Width = 150;

@@ -150,7 +150,6 @@ namespace CD4.DataLibrary.DataAccess
             {
                 var results = await LoadStaticDataTwoSetsAsync
                     <ProfileDatabaseModel, ProfileTestsDatabaseModel>(storedProcedure);
-
                 return await GetProfileAndTestOeModelFromSearchResults(results);
             }
             catch (Exception)
@@ -175,7 +174,7 @@ namespace CD4.DataLibrary.DataAccess
                     var profileAndTestOeData = new ProfilesAndTestModelOeModel();
 
                     profileAndTestOeData.Id = profile.Id;
-                    profileAndTestOeData.Description = profile.Desciption;
+                    profileAndTestOeData.Description = profile.Description;
                     profileAndTestOeData.IsProfile = profile.IsProfile;
 
                     //Get Tests in profile

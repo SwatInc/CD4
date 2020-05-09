@@ -10,27 +10,44 @@
 --------------------------------------------------------------------------------------
 */
 
-IF EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Sites' )
-DELETE FROM [dbo].[Sites];
-GO
-IF EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Country' )
-DELETE FROM [dbo].[Country];
-GO
-IF EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Gender' )
-DELETE FROM [dbo].[Gender];
-GO
-IF EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Atoll' )
-DELETE FROM [dbo].[Atoll];
-GO
-IF EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'ClinicalDetail' )
-DELETE FROM [dbo].[ClinicalDetail];
-GO
-IF EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Profile_Tests' )
-DELETE FROM [dbo].[Profile_Tests];
-GO
-IF EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Profiles' )
-DELETE FROM [dbo].[Profiles];
-GO
-IF EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Test' )
-DELETE FROM [dbo].[Test];
-GO
+--IF EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Sites' )
+--DELETE FROM [dbo].[Sites];
+--GO
+--IF EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Country' )
+--DELETE FROM [dbo].[Country];
+--GO
+--IF EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Gender' )
+--DELETE FROM [dbo].[Gender];
+--GO
+--IF EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Atoll' )
+--DELETE FROM [dbo].[Atoll];
+--GO
+--IF EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'ClinicalDetail' )
+--DELETE FROM [dbo].[ClinicalDetail];
+--GO
+--IF EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Profile_Tests' )
+--DELETE FROM [dbo].[Profile_Tests];
+--GO
+--IF EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Profiles' )
+--DELETE FROM [dbo].[Profiles];
+--GO
+--IF EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Test' )
+--DELETE FROM [dbo].[Test];
+--GO
+
+--EXEC msdb.dbo.sp_delete_database_backuphistory @database_name = N'CD4Data'
+--GO
+--use [CD4Data];
+--GO
+--use [master];
+--GO
+--USE [master]
+--GO
+--ALTER DATABASE [CD4Data] SET  SINGLE_USER WITH ROLLBACK IMMEDIATE
+--GO
+--USE [master]
+--GO
+
+--DROP DATABASE [CD4Data]
+--GO
+
