@@ -59,6 +59,12 @@
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Sharpbrake.Client, Version=5.0.6.0, Culture=neutral, PublicKeyToken=c5537f4669e4dbaa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sharpbrake.Client.5.0.6\lib\net452\Sharpbrake.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="Sharpbrake.Log4net, Version=2.0.6.0, Culture=neutral, PublicKeyToken=c5537f4669e4dbaa, processorArchitecture=MSIL">
+      <HintPath>..\packages\Sharpbrake.Log4net.2.0.6\lib\net452\Sharpbrake.Log4net.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Configuration" />
@@ -69,6 +75,7 @@
     <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
