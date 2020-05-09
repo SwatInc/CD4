@@ -9,6 +9,7 @@ namespace CD4.UI.View
 {
     public partial class MainView : DevExpress.XtraBars.Ribbon.RibbonForm
     {
+
         private IMainViewModel _viewModel { get; }
 
         public MainView(IMainViewModel viewModel)
@@ -35,6 +36,8 @@ namespace CD4.UI.View
             barButtonItemOrderEntry.ItemClick += OpenOrderEntryView;
             barButtonItemResultEntry.ItemClick += OpenResultEntryView;
             #endregion
+
+            var a = new CD4.DataLibrary.DataAccess.AnalysisRequest();
         }
 
         private void OpenResultEntryView(object sender, ItemClickEventArgs e)

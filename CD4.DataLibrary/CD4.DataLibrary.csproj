@@ -54,10 +54,13 @@
     <Compile Include="Helpers\Helper.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Models\ConnectionName.cs" />
+    <Compile Include="Models\CountryModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Config.json" />
+    <None Include="Config.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

@@ -1,4 +1,6 @@
-﻿using CD4.UI.Library.Model;
+﻿using AutoMapper;
+using CD4.DataLibrary.DataAccess;
+using CD4.UI.Library.Model;
 using CD4.UI.Library.Validations;
 using FluentValidation.Results;
 using Newtonsoft.Json;
@@ -35,10 +37,14 @@ namespace CD4.UI.Library.ViewModel
         private string testToAdd;
         private string cinErrorText;
         readonly OrderEntryValidator validator = new OrderEntryValidator();
+        private readonly IMapper mapper;
+        private StaticData staticData = new StaticData();
         #endregion
 
+        private event EventHandler InitializeStaticData;
+
         #region Default Constructor
-        public OrderEntryViewModel()
+        public OrderEntryViewModel(IMapper mapper)
         {
             Sites = new List<SitesModel>();
             Gender = new List<GenderModel>();
@@ -50,10 +56,15 @@ namespace CD4.UI.Library.ViewModel
             AllAtollsWithCorrespondingIsland = new List<AtollIslandModel>();
             ClinicalDetails = new BindingList<ClinicalDetailsOrderEntryModel>();
 
-            InitializeDemoData();
-            InitializeAtollsDatasource();
+            //InitializeDemoData();
+            this.mapper = mapper;
+            this.InitializeStaticData += OnInitializeStaticDataAsync;
             PropertyChanged += OrderEntryViewModel_PropertyChanged;
+
+
+            InitializeStaticData(this, EventArgs.Empty);
         }
+
         #endregion
 
         #region INotifyPropertyChanged Hookup
@@ -360,9 +371,9 @@ namespace CD4.UI.Library.ViewModel
 
             //Set island based on selected atoll
             await RepopulateIslandDatasource(SelectedAtollId);
-            var island = await Task.Run(() => 
+            var island = await Task.Run(() =>
             {
-               return Islands.SingleOrDefault((i) => i.Island == results.Island).Id;
+                return Islands.SingleOrDefault((i) => i.Island == results.Island).Id;
             });
 
             SelectedIslandId = island;
@@ -436,6 +447,32 @@ namespace CD4.UI.Library.ViewModel
                 return AllTestsData.SingleOrDefault(t => t.Description == testDescription);
             });
         }
+
+
+        #region Load Static Data
+        private async void OnInitializeStaticDataAsync(object sender, EventArgs e)
+        {
+             await LoadAllCountries();
+        }
+
+        private async Task LoadAllCountries()
+        {
+           await Task.Run(() =>
+           {
+               var results =  staticData.GetAllCountries();
+
+               foreach (var item in results)
+               {
+                   this.Countries.Add(mapper.Map<CountryModel>(item));
+               }
+           });
+
+
+
+
+        }
+
+        #endregion
         private void InitializeDemoData()
         {
             //Sites

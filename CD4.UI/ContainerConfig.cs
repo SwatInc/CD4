@@ -1,4 +1,5 @@
 ﻿using Autofac;
+using AutoMapper;
 using CD4.UI.Library.ViewModel;
 using CD4.UI.View;
 using log4net;
@@ -16,6 +17,26 @@ namespace CD4.UI
         public static IContainer Configure()
         {
             var builder = new ContainerBuilder();
+
+            #region Automapper
+
+            builder.Register(context => new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<DataLibrary.Models.CountryModel, Library.Model.CountryModel>();
+                //etc...
+            })).AsSelf().SingleInstance();
+
+            builder.Register(c =>
+            {
+                //This resolves a new context that can be used later.
+                var context = c.Resolve<IComponentContext>();
+                var config = context.Resolve<MapperConfiguration>();
+                return config.CreateMapper(context.Resolve);
+            })
+            .As<IMapper>()
+            .InstancePerLifetimeScope();
+
+            #endregion
 
             //register application start
             builder.RegisterType<Cd4Application>().As<ICd4Application>();
