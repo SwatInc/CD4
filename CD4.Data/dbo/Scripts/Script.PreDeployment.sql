@@ -9,8 +9,11 @@
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-DELETE FROM [dbo].[Sites];
-DELETE FROM [dbo].[Country];
-DELETE FROM [dbo].[Gender];
-DELETE FROM [dbo].[Atoll];
-DELETE FROM [dbo].[ClinicalDetail];
+--DELETE FROM [dbo].[Sites];
+--DELETE FROM [dbo].[Country];
+--DELETE FROM [dbo].[Gender];
+--DELETE FROM [dbo].[Atoll];
+--DELETE FROM [dbo].[ClinicalDetail];
+--DELETE FROM [dbo].[Profile_Tests];
+--DELETE FROM [dbo].[Profiles];
+--DELETE FROM [dbo].[Test];

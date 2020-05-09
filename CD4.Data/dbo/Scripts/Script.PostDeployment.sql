@@ -267,4 +267,42 @@ INSERT INTO [dbo].[ClinicalDetail]([Detail]) VALUES
 ,('Breathing Difficulty')
 ,('Travel History')
 
+INSERT INTO [dbo].[ResultDataType]([Name]) VALUES
+('NUMERIC'),
+('CODIFIED'),
+('TEXTUAL');
+
+DECLARE @CodifiedId int;
+DECLARE @NumericId int;
+SELECT @CodifiedId =  [Id] FROM [dbo].[ResultDataType] [r] WHERE [r].[Name] = 'CODIFIED'; 
+SELECT @NumericId =  [Id] FROM [dbo].[ResultDataType] [r] WHERE [r].[Name] = 'NUMERIC'; 
+
+INSERT INTO [dbo].[Test]([Description],[Mask],[Reportable],[ResultDataTypeId]) VALUES
+('E Gene','##.##',1,@NumericId),
+('EAV (Internal Control)','##.##',1,@NumericId),
+('RdRP Gene','##.##',1,@NumericId),
+('SARS-CoV-2 Result','##.##',1,@CodifiedId);
+
+INSERT INTO [dbo].[Profiles]([Description]) VALUES
+('SARS CoV Profile');
+
+DECLARE @CovProfileId int;
+SELECT @CovProfileId =  [Id] FROM [dbo].[Profiles] [p] WHERE [p].[Description] = 'SARS CoV Profile'; 
+
+DECLARE @egene int;
+DECLARE @eav int;
+DECLARE @rdrp int;
+DECLARE @result int;
+
+SELECT @egene =  [Id] FROM [dbo].[Test] [t] WHERE [t].[Description] = 'E Gene'; 
+SELECT @eav =  [Id] FROM [dbo].[Test] [t] WHERE [t].[Description] = 'EAV (Internal Control)'; 
+SELECT @rdrp =  [Id] FROM [dbo].[Test] [t] WHERE [t].[Description] = 'RdRP Gene'; 
+SELECT @result =  [Id] FROM [dbo].[Test] [t] WHERE [t].[Description] = 'SARS-CoV-2 Result'; 
+
+INSERT INTO [dbo].[Profile_Tests]([ProfileId],[TestId]) VALUES
+(@CovProfileId,@egene),
+(@CovProfileId,@eav),
+(@CovProfileId,@rdrp),
+(@CovProfileId,@result);
+
 

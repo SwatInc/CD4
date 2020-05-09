@@ -457,8 +457,23 @@ namespace CD4.UI.Library.ViewModel
             await LoadAllGenderAsync();
             await LoadAllAtollsAndIslandsAsync();
             await LoadAllClinicalDetailsAsync();
+            await LoadAllTestsAsync();
 
             InitializeAtollsDatasource();
+        }
+
+        private async Task LoadAllTestsAsync()
+        {
+            var results = await Task.Run(() =>
+            {
+                return staticData.GetAllTests();
+
+            }).ConfigureAwait(true);
+
+            foreach (var item in results)
+            {
+                this.AllTestsData.Add(mapper.Map<ProfilesAndTestsDatasourceOeModel>(item));
+            }
         }
 
         private async Task LoadAllClinicalDetailsAsync()

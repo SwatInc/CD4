@@ -59,7 +59,9 @@
     <Compile Include="Models\ConnectionName.cs" />
     <Compile Include="Models\CountryModel.cs" />
     <Compile Include="Models\GenderModel.cs" />
+    <Compile Include="Models\ProfilesAndTestModelOeModel.cs" />
     <Compile Include="Models\SitesModel.cs" />
+    <Compile Include="Models\TestsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

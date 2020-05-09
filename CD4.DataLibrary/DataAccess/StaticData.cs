@@ -99,6 +99,19 @@ namespace CD4.DataLibrary.DataAccess
             }
         }
 
+        public List<ProfilesAndTestModelOeModel> GetAllTests()
+        {
+            string storedProcedure = "[usp_GetAllTests]";
+            try
+            {
+                return LoadStaticData<ProfilesAndTestModelOeModel>(storedProcedure);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
 
 
