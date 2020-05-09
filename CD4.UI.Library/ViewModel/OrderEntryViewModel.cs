@@ -456,8 +456,24 @@ namespace CD4.UI.Library.ViewModel
             await LoadAllSitesAsync();
             await LoadAllGenderAsync();
             await LoadAllAtollsAndIslandsAsync();
+            await LoadAllClinicalDetailsAsync();
 
             InitializeAtollsDatasource();
+        }
+
+        private async Task LoadAllClinicalDetailsAsync()
+        {
+            var results  = await Task.Run(() =>
+            {
+                return staticData.GetAllClinicalDetails();
+
+            }).ConfigureAwait(true);
+
+            foreach (var item in results)
+            {
+                this.ClinicalDetails.Add(mapper.Map<ClinicalDetailsOrderEntryModel>(item));
+            }
+
         }
 
         private async Task LoadAllAtollsAndIslandsAsync()
@@ -469,7 +485,7 @@ namespace CD4.UI.Library.ViewModel
                 {
                     this.AllAtollsWithCorrespondingIsland.Add(mapper.Map<AtollIslandModel>(item));
                 }
-            });
+            }).ConfigureAwait(true);
         }
 
         private async Task LoadAllGenderAsync()

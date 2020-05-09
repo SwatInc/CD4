@@ -259,3 +259,12 @@ INSERT INTO [dbo].[Atoll]([Atoll],[Island]) VALUES
 , ('V','KEYODHOO')
 , ('V','RAKEEDHOO')
 , ('V','THINADHOO');
+
+INSERT INTO [dbo].[ClinicalDetail]([Detail]) VALUES
+('Fever')
+,('Cough')
+,('Runny Nose')
+,('Breathing Difficulty')
+,('Travel History')
+
+

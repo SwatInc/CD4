@@ -9,7 +9,6 @@ namespace CD4.UI.Library.Model
     public class ClinicalDetailsOrderEntryModel : ClinicalDetailsModel
     {
         private bool isSelected;
-
         public bool IsSelected
         {
             get => isSelected; set

@@ -85,6 +85,20 @@ namespace CD4.DataLibrary.DataAccess
             }
         }
 
+        public List<ClinicalDetailsModel> GetAllClinicalDetails()
+        {
+            string storedProcedure = "usp_GetAllClinicalDetails";
+            try
+            {
+                return LoadStaticData<ClinicalDetailsModel>(storedProcedure);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
 
 
 
