@@ -23,6 +23,7 @@ namespace CD4.UI
             builder.Register(context => new MapperConfiguration(cfg =>
             {
                 cfg.CreateMap<DataLibrary.Models.CountryModel, Library.Model.CountryModel>();
+                cfg.CreateMap<DataLibrary.Models.SitesModel, Library.Model.SitesModel>();
                 //etc...
             })).AsSelf().SingleInstance();
 

@@ -28,6 +28,21 @@ namespace CD4.DataLibrary.DataAccess
             return results;
         }
 
+        public List<SitesModel> GetAllSites()
+        {
+            string storedProcedure = "usp_GetAllSites";
+            try
+            {
+                return LoadStaticData<SitesModel>(storedProcedure);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
         public List<CountryModel> GetAllCountries()
         {
             string storedProcedure = "usp_GetAllCountries";
@@ -41,5 +56,7 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
+
+
     }
 }

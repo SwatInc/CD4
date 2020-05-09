@@ -452,24 +452,33 @@ namespace CD4.UI.Library.ViewModel
         #region Load Static Data
         private async void OnInitializeStaticDataAsync(object sender, EventArgs e)
         {
-             await LoadAllCountries();
+            await LoadAllCountries();
+            await LoadAllSites();
+        }
+
+        private async Task LoadAllSites()
+        {
+            await Task.Run(() =>
+            {
+                var results = staticData.GetAllSites();
+                foreach (var item in results)
+                {
+                    this.Sites.Add(mapper.Map<SitesModel>(item));
+                }
+            });
         }
 
         private async Task LoadAllCountries()
         {
-           await Task.Run(() =>
-           {
-               var results =  staticData.GetAllCountries();
+            await Task.Run(() =>
+            {
+                var results = staticData.GetAllCountries();
 
-               foreach (var item in results)
-               {
-                   this.Countries.Add(mapper.Map<CountryModel>(item));
-               }
-           });
-
-
-
-
+                foreach (var item in results)
+                {
+                    this.Countries.Add(mapper.Map<CountryModel>(item));
+                }
+            });
         }
 
         #endregion

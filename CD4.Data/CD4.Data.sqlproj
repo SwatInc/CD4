@@ -60,6 +60,7 @@
     <Folder Include="dbo\Tables" />
     <Folder Include="dbo\StoredProcedures" />
     <Folder Include="dbo\Views" />
+    <Folder Include="dbo\Scripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Patient.sql" />
@@ -92,5 +93,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CD4.Data.publish.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="dbo\Scripts\Script.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <PreDeploy Include="dbo\Scripts\Script.PreDeployment.sql" />
   </ItemGroup>
 </Project>
