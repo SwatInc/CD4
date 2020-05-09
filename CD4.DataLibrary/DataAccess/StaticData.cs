@@ -71,6 +71,22 @@ namespace CD4.DataLibrary.DataAccess
             }
         }
 
+        public List<AtollIslandModel> GetAllAtollsAndIslands()
+        {
+            string storedProcedure = "usp_GetAllAtollAndIslands";
+            try
+            {
+                return LoadStaticData<AtollIslandModel>(storedProcedure);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+
 
     }
 }

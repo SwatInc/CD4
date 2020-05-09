@@ -455,6 +455,21 @@ namespace CD4.UI.Library.ViewModel
             await LoadAllCountriesAsync();
             await LoadAllSitesAsync();
             await LoadAllGenderAsync();
+            await LoadAllAtollsAndIslandsAsync();
+
+            InitializeAtollsDatasource();
+        }
+
+        private async Task LoadAllAtollsAndIslandsAsync()
+        {
+            await Task.Run(() =>
+            {
+                var results = staticData.GetAllAtollsAndIslands();
+                foreach (var item in results)
+                {
+                    this.AllAtollsWithCorrespondingIsland.Add(mapper.Map<AtollIslandModel>(item));
+                }
+            });
         }
 
         private async Task LoadAllGenderAsync()

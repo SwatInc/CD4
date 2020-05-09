@@ -25,6 +25,7 @@ namespace CD4.UI
                 cfg.CreateMap<DataLibrary.Models.CountryModel, Library.Model.CountryModel>();
                 cfg.CreateMap<DataLibrary.Models.SitesModel, Library.Model.SitesModel>();
                 cfg.CreateMap<DataLibrary.Models.GenderModel, Library.Model.GenderModel>();
+                cfg.CreateMap<DataLibrary.Models.AtollIslandModel, Library.Model.AtollIslandModel>();
 
             })).AsSelf().SingleInstance();
 
