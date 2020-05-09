@@ -42,3 +42,8 @@ INSERT INTO [dbo].[Country] ([Country]) VALUES
 ('MALDIVIAN'),
 ('BANGLADESHI'),
 ('INDIAN');
+
+INSERT INTO [dbo].[Gender] ([Gender]) VALUES 
+('MALE'),
+('FEMALE'),
+('UNKNOWN')

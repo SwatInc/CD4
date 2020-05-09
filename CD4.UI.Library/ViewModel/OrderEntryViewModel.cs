@@ -467,7 +467,6 @@ namespace CD4.UI.Library.ViewModel
                 }
             });
         }
-
         private async Task LoadAllCountries()
         {
             await Task.Run(() =>

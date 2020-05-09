@@ -11,3 +11,4 @@
 */
 DELETE FROM [dbo].[Sites];
 DELETE FROM [dbo].[Country];
+DELETE FROM [dbo].[Gender];
