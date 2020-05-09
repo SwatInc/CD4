@@ -9,11 +9,28 @@
                SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
---DELETE FROM [dbo].[Sites];
---DELETE FROM [dbo].[Country];
---DELETE FROM [dbo].[Gender];
---DELETE FROM [dbo].[Atoll];
---DELETE FROM [dbo].[ClinicalDetail];
---DELETE FROM [dbo].[Profile_Tests];
---DELETE FROM [dbo].[Profiles];
---DELETE FROM [dbo].[Test];
+
+IF EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Sites' )
+DELETE FROM [dbo].[Sites];
+GO
+IF EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Country' )
+DELETE FROM [dbo].[Country];
+GO
+IF EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Gender' )
+DELETE FROM [dbo].[Gender];
+GO
+IF EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Atoll' )
+DELETE FROM [dbo].[Atoll];
+GO
+IF EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'ClinicalDetail' )
+DELETE FROM [dbo].[ClinicalDetail];
+GO
+IF EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Profile_Tests' )
+DELETE FROM [dbo].[Profile_Tests];
+GO
+IF EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Profiles' )
+DELETE FROM [dbo].[Profiles];
+GO
+IF EXISTS ( SELECT [name] FROM sys.tables WHERE [name] = 'Test' )
+DELETE FROM [dbo].[Test];
+GO
