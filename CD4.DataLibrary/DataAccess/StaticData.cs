@@ -57,6 +57,20 @@ namespace CD4.DataLibrary.DataAccess
             }
         }
 
+        public List<GenderModel> GetAllGender()
+        {
+            string storedProcedure = "usp_GetAllGenders";
+            try
+            {
+                return LoadStaticData<GenderModel>(storedProcedure);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
 
     }
 }

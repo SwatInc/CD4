@@ -55,6 +55,7 @@
     <Compile Include="Models\Config.cs" />
     <Compile Include="Models\ConnectionName.cs" />
     <Compile Include="Models\CountryModel.cs" />
+    <Compile Include="Models\GenderModel.cs" />
     <Compile Include="Models\SitesModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

@@ -452,11 +452,25 @@ namespace CD4.UI.Library.ViewModel
         #region Load Static Data
         private async void OnInitializeStaticDataAsync(object sender, EventArgs e)
         {
-            await LoadAllCountries();
-            await LoadAllSites();
+            await LoadAllCountriesAsync();
+            await LoadAllSitesAsync();
+            await LoadAllGenderAsync();
         }
 
-        private async Task LoadAllSites()
+        private async Task LoadAllGenderAsync()
+        {
+            await Task.Run(() =>
+            {
+                var results = staticData.GetAllGender();
+                foreach (var item in results)
+                {
+                    this.Gender.Add(mapper.Map<GenderModel>(item));
+                }
+            });
+
+        }
+
+        private async Task LoadAllSitesAsync()
         {
             await Task.Run(() =>
             {
@@ -467,7 +481,7 @@ namespace CD4.UI.Library.ViewModel
                 }
             });
         }
-        private async Task LoadAllCountries()
+        private async Task LoadAllCountriesAsync()
         {
             await Task.Run(() =>
             {
