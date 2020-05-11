@@ -248,6 +248,7 @@ namespace CD4.UI.Library.ViewModel
 
         private string GetAtollById(int atollId)
         {
+            if (atollId == 0) return string.Empty;
             return Atolls.SingleOrDefault((a) => a.Id == atollId).Atoll;
         }
 
@@ -357,8 +358,17 @@ namespace CD4.UI.Library.ViewModel
             var tasks = new List<Task<int>>
             {
                 Task.Run(() => Gender.SingleOrDefault((g) => g.Gender == results.Gender).Id),
-                Task.Run(() => Atolls.SingleOrDefault((a) => a.Atoll == results.Atoll).Id),
-                Task.Run(() => Countries.SingleOrDefault((c) => c.Country == results.Country).Id)
+                Task.Run(() =>
+                {
+                    var atoll  = Atolls.SingleOrDefault((a) => a.Atoll == results.Atoll);
+                    return atoll is null ? -1 : atoll.Id; 
+                }),
+
+                Task.Run(() =>
+                {
+                    var country = Countries.SingleOrDefault((c) => c.Country == results.Country);
+                    return country is null ? -1 : country.Id; 
+                })
             };
 
             var resultIds = await Task.WhenAll(tasks);
@@ -366,17 +376,18 @@ namespace CD4.UI.Library.ViewModel
             //WARNING!: The assignment needs to be in the same order that the tasks were
             //added to the list of tasks. 
             SelectedGenderId = resultIds[0];
-            SelectedAtollId = resultIds[1];
-            SelectedCountryId = resultIds[2];
+            if (!(resultIds[1] == -1)) { SelectedAtollId = resultIds[1]; }
+            if (!(resultIds[2] == -1)) { SelectedCountryId = resultIds[2]; }
 
             //Set island based on selected atoll
             await RepopulateIslandDatasource(SelectedAtollId);
             var island = await Task.Run(() =>
             {
-                return Islands.SingleOrDefault((i) => i.Island == results.Island).Id;
+                var result =  Islands.SingleOrDefault((i) => i.Island == results.Island);
+                return result is null ? -1 : result.Id;
             });
 
-            SelectedIslandId = island;
+            if (island > 0) { SelectedIslandId = island; }
         }
 
         #endregion
@@ -465,7 +476,7 @@ namespace CD4.UI.Library.ViewModel
 
         private async Task LoadAllProfilesAsync()
         {
-            await Task.Run(async() =>
+            await Task.Run(async () =>
             {
                 var results = await staticData.GetAllProfileTests();
                 foreach (var item in results)
@@ -482,7 +493,7 @@ namespace CD4.UI.Library.ViewModel
         {
             await Task.Run(() =>
             {
-                var results =  staticData.GetAllTests();
+                var results = staticData.GetAllTests();
                 foreach (var item in results)
                 {
                     this.AllTestsData.Add(mapper.Map<ProfilesAndTestsDatasourceOeModel>(item));
@@ -494,11 +505,11 @@ namespace CD4.UI.Library.ViewModel
 
         private async Task LoadAllClinicalDetailsAsync()
         {
-            var results  = await Task.Run(() =>
-            {
-                return staticData.GetAllClinicalDetails();
+            var results = await Task.Run(() =>
+           {
+               return staticData.GetAllClinicalDetails();
 
-            }).ConfigureAwait(true);
+           }).ConfigureAwait(true);
 
             foreach (var item in results)
             {

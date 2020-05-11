@@ -159,7 +159,6 @@ namespace CD4.DataLibrary.DataAccess
             }
         }
 
-
         private async Task<List<ProfilesAndTestModelOeModel>> GetProfileAndTestOeModelFromSearchResults
             (GenericTwoListModel searchResults)
         {
