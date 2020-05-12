@@ -9,6 +9,8 @@ namespace CD4.UI.Library.ViewModel
     public interface IOrderEntryViewModel
     {
         BindingList<TestModel> AddedTests { get; set; }
+
+        bool LoadingStaticData { get; set; }
         string Address { get; set; }
         string Age { get; set; }
         List<ProfilesAndTestsDatasourceOeModel> AllTestsData { get; set; }
@@ -38,5 +40,7 @@ namespace CD4.UI.Library.ViewModel
         Task OnReceiveSearchResults(PatientModel results);
 
         event PropertyChangedEventHandler PropertyChanged;
+        event EventHandler<string> PushingLogs;
+        event EventHandler<string> PushingMessages;
     }
 }

@@ -14,18 +14,16 @@ namespace CD4.DataLibrary.DataAccess
         public void LoadAll()
         {
         }
-
-        private List<T> LoadStaticData<T>(string storedProcedure)
+        private async Task<List<T>> LoadStaticDataAsync<T>(string storedProcedure)
         {
-            List<T> results = new List<T>();
+            IEnumerable<T> results = new List<T>();
             using (IDbConnection connection = new SqlConnection(helper.GetConnectionString()))
             {
-                results = connection.Query<T>(storedProcedure, CommandType.StoredProcedure).ToList();
+                results = await connection.QueryAsync<T>(storedProcedure, CommandType.StoredProcedure);
             }
 
-            return results;
+            return results.ToList();
         }
-
         /// <summary>
         /// NOTE: T should be the first type of data set returned by the query / procedure
         /// NOTE: U should be the second type of data set returned by the query / procedure
@@ -56,14 +54,12 @@ namespace CD4.DataLibrary.DataAccess
             returnData.U1 = ListU;
             return returnData;
         }
-
-
-        public List<SitesModel> GetAllSites()
+        public async Task<List<SitesModel>> GetAllSitesAsync()
         {
             string storedProcedure = "usp_GetAllSites";
             try
             {
-                return LoadStaticData<SitesModel>(storedProcedure);
+                return await LoadStaticDataAsync<SitesModel>(storedProcedure);
             }
             catch (Exception)
             {
@@ -72,13 +68,12 @@ namespace CD4.DataLibrary.DataAccess
             }
 
         }
-
-        public List<CountryModel> GetAllCountries()
+        public async Task<List<CountryModel>> GetAllCountriesAsync()
         {
             string storedProcedure = "usp_GetAllCountries";
             try
             {
-                return LoadStaticData<CountryModel>(storedProcedure);
+                return await LoadStaticDataAsync<CountryModel>(storedProcedure);
             }
             catch (Exception)
             {
@@ -86,13 +81,12 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
-
-        public List<GenderModel> GetAllGender()
+        public async Task<List<GenderModel>> GetAllGenderAsync()
         {
             string storedProcedure = "usp_GetAllGenders";
             try
             {
-                return LoadStaticData<GenderModel>(storedProcedure);
+                return await LoadStaticDataAsync<GenderModel>(storedProcedure);
             }
             catch (Exception)
             {
@@ -100,13 +94,12 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
-
-        public List<AtollIslandModel> GetAllAtollsAndIslands()
+        public async Task<List<AtollIslandModel>> GetAllAtollsAndIslandsAsync()
         {
             string storedProcedure = "usp_GetAllAtollAndIslands";
             try
             {
-                return LoadStaticData<AtollIslandModel>(storedProcedure);
+                return await LoadStaticDataAsync<AtollIslandModel>(storedProcedure);
             }
             catch (Exception)
             {
@@ -114,13 +107,12 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
-
-        public List<ClinicalDetailsModel> GetAllClinicalDetails()
+        public async Task<List<ClinicalDetailsModel>> GetAllClinicalDetailsAsync()
         {
             string storedProcedure = "usp_GetAllClinicalDetails";
             try
             {
-                return LoadStaticData<ClinicalDetailsModel>(storedProcedure);
+                return await LoadStaticDataAsync<ClinicalDetailsModel>(storedProcedure);
             }
             catch (Exception)
             {
@@ -128,13 +120,12 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
-
-        public List<ProfilesAndTestModelOeModel> GetAllTests()
+        public async Task<List<ProfilesAndTestModelOeModel>> GetAllTestsAsync()
         {
             string storedProcedure = "[usp_GetAllTests]";
             try
             {
-                return LoadStaticData<ProfilesAndTestModelOeModel>(storedProcedure);
+                return await LoadStaticDataAsync<ProfilesAndTestModelOeModel>(storedProcedure);
             }
             catch (Exception)
             {
@@ -142,15 +133,14 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
-
-        public async Task<List<ProfilesAndTestModelOeModel>> GetAllProfileTests()
+        public async Task<List<ProfilesAndTestModelOeModel>> GetAllProfileTestsAsync()
         {
             string storedProcedure = "[usp_GetAllProfilesAndProfileTests]";
             try
             {
                 var results = await LoadStaticDataTwoSetsAsync
                     <ProfileDatabaseModel, ProfileTestsDatabaseModel>(storedProcedure);
-                return await GetProfileAndTestOeModelFromSearchResults(results);
+                return await GetProfileAndTestOeModelFromSearchResultsAsync(results);
             }
             catch (Exception)
             {
@@ -158,8 +148,7 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
-
-        private async Task<List<ProfilesAndTestModelOeModel>> GetProfileAndTestOeModelFromSearchResults
+        private async Task<List<ProfilesAndTestModelOeModel>> GetProfileAndTestOeModelFromSearchResultsAsync
             (GenericTwoListModel searchResults)
         {
             var profileAndTestOeDataList = new List<ProfilesAndTestModelOeModel>();

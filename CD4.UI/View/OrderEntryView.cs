@@ -3,7 +3,9 @@ using CD4.UI.Library.ViewModel;
 using DevExpress.XtraEditors;
 using Newtonsoft.Json;
 using System;
+using System.ComponentModel;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace CD4.UI.View
@@ -22,6 +24,47 @@ namespace CD4.UI.View
             simpleButtonRemoveTest.Click += RemoveTestFromAR;
             simpleButtonSearch.Click += SimpleButtonSearch_Click;
             KeyUp += RemoveTestFromAR; ;
+            _viewModel.PropertyChanged += OnPropertyChanged;
+            _viewModel.PushingMessages += OnPushMessage;
+        }
+
+        private void OnPushMessage(object sender, string e)
+        {
+            MessageBox.Show(e);
+        }
+
+        private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            //Handle LoadingStaticData property
+            if (e.PropertyName == nameof(_viewModel.LoadingStaticData))
+            {
+                switch (_viewModel.LoadingStaticData)
+                {
+                    case true:
+                        ChangeLoadingDataUiState(true);
+                        break;
+                    case false:
+                        ChangeLoadingDataUiState(false);
+                        break;
+                    default:
+                }
+            }
+        }
+
+        private void ChangeLoadingDataUiState(bool uiState)
+        {
+            if(uiState)
+            {
+                progressPanelRequestData.Visible = true;
+                progressPanelRequestData.Dock = DockStyle.Fill;
+            }
+
+            if(!uiState)
+            {
+                progressPanelRequestData.Visible = false;
+                progressPanelRequestData.Dock = DockStyle.None;
+
+            }
         }
 
         private void SimpleButtonSearch_Click(object sender, EventArgs e)
@@ -32,6 +75,7 @@ namespace CD4.UI.View
         private void RemoveTestFromAR(object sender, EventArgs e)
         {
             RemoveTestFromAR(this, new KeyEventArgs(Keys.Delete));
+
         }
 
         private void RemoveTestFromAR(object sender, KeyEventArgs e)

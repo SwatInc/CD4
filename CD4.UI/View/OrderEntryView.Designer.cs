@@ -58,6 +58,7 @@
             this.textEditEpisodeNumber = new DevExpress.XtraEditors.TextEdit();
             this.lookUpEditTests = new DevExpress.XtraEditors.LookUpEdit();
             this.simpleButtonRemoveTest = new DevExpress.XtraEditors.SimpleButton();
+            this.progressPanelRequestData = new DevExpress.XtraWaitForm.ProgressPanel();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlRequestData)).BeginInit();
             this.groupControlRequestData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditSampleReceived.Properties.CalendarTimeProperties)).BeginInit();
@@ -436,6 +437,7 @@
             // 
             // groupControlTestSelection
             // 
+            this.groupControlTestSelection.Controls.Add(this.progressPanelRequestData);
             this.groupControlTestSelection.Controls.Add(this.textEditEpisodeNumber);
             this.groupControlTestSelection.Controls.Add(this.lookUpEditTests);
             this.groupControlTestSelection.Location = new System.Drawing.Point(563, 155);
@@ -479,6 +481,18 @@
             this.simpleButtonRemoveTest.Size = new System.Drawing.Size(98, 23);
             this.simpleButtonRemoveTest.TabIndex = 6;
             this.simpleButtonRemoveTest.Text = "Remove [ Del ]";
+            // 
+            // progressPanelRequestData
+            // 
+            this.progressPanelRequestData.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.progressPanelRequestData.Appearance.Options.UseBackColor = true;
+            this.progressPanelRequestData.BarAnimationElementThickness = 2;
+            this.progressPanelRequestData.Location = new System.Drawing.Point(29, 111);
+            this.progressPanelRequestData.Name = "progressPanelRequestData";
+            this.progressPanelRequestData.Size = new System.Drawing.Size(132, 54);
+            this.progressPanelRequestData.TabIndex = 15;
+            this.progressPanelRequestData.Text = "Request data";
+            this.progressPanelRequestData.Visible = false;
             // 
             // OrderEntryView
             // 
@@ -568,5 +582,6 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnIsSelected;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnClinicalDetail;
         private DevExpress.XtraEditors.SimpleButton simpleButtonRemoveTest;
+        private DevExpress.XtraWaitForm.ProgressPanel progressPanelRequestData;
     }
 }

@@ -17,6 +17,7 @@ namespace CD4.UI.Library.ViewModel
 {
     public class OrderEntryViewModel : INotifyPropertyChanged, IOrderEntryViewModel
     {
+
         #region Private Properties
         private CultureInfo cultureInfo = new CultureInfo("en-US");
         private string cin;
@@ -39,8 +40,11 @@ namespace CD4.UI.Library.ViewModel
         readonly OrderEntryValidator validator = new OrderEntryValidator();
         private readonly IMapper mapper;
         private StaticData staticData = new StaticData();
+        private bool loadingStaticData;
         #endregion
 
+        public event EventHandler<string> PushingLogs;
+        public event EventHandler<string> PushingMessages;
         private event EventHandler InitializeStaticData;
 
         #region Default Constructor
@@ -79,7 +83,15 @@ namespace CD4.UI.Library.ViewModel
         #endregion
 
         #region Public Properties
-
+        public bool LoadingStaticData
+        {
+            get => loadingStaticData; set
+            {
+                if (loadingStaticData == value) return;
+                loadingStaticData = value;
+                OnPropertyChanged();
+            }
+        }
         private List<AtollIslandModel> AllAtollsWithCorrespondingIsland { get; set; }
 
         #region Request
@@ -361,13 +373,13 @@ namespace CD4.UI.Library.ViewModel
                 Task.Run(() =>
                 {
                     var atoll  = Atolls.SingleOrDefault((a) => a.Atoll == results.Atoll);
-                    return atoll is null ? -1 : atoll.Id; 
+                    return atoll is null ? -1 : atoll.Id;
                 }),
 
                 Task.Run(() =>
                 {
                     var country = Countries.SingleOrDefault((c) => c.Country == results.Country);
-                    return country is null ? -1 : country.Id; 
+                    return country is null ? -1 : country.Id;
                 })
             };
 
@@ -383,7 +395,7 @@ namespace CD4.UI.Library.ViewModel
             await RepopulateIslandDatasource(SelectedAtollId);
             var island = await Task.Run(() =>
             {
-                var result =  Islands.SingleOrDefault((i) => i.Island == results.Island);
+                var result = Islands.SingleOrDefault((i) => i.Island == results.Island);
                 return result is null ? -1 : result.Id;
             });
 
@@ -463,13 +475,27 @@ namespace CD4.UI.Library.ViewModel
         #region Load Static Data
         private async void OnInitializeStaticDataAsync(object sender, EventArgs e)
         {
-            await LoadAllCountriesAsync();
-            await LoadAllSitesAsync();
-            await LoadAllGenderAsync();
-            await LoadAllAtollsAndIslandsAsync();
-            await LoadAllClinicalDetailsAsync();
-            await LoadAllTestsAsync();
-            await LoadAllProfilesAsync();
+            try
+            {
+                LoadingStaticData = true;
+
+                await LoadAllCountriesAsync();
+                await LoadAllSitesAsync();
+                await LoadAllGenderAsync();
+                await LoadAllAtollsAndIslandsAsync();
+                await LoadAllClinicalDetailsAsync();
+                await LoadAllTestsAsync();
+                await LoadAllProfilesAsync();
+
+            }
+            catch (Exception ex)
+            {
+                PushingMessages(this, ex.Message);
+            }
+            finally
+            {
+                LoadingStaticData = false;
+            }
 
             InitializeAtollsDatasource();
         }
@@ -478,7 +504,7 @@ namespace CD4.UI.Library.ViewModel
         {
             await Task.Run(async () =>
             {
-                var results = await staticData.GetAllProfileTests();
+                var results = await staticData.GetAllProfileTestsAsync();
                 foreach (var item in results)
                 {
                     this.AllTestsData.Add(mapper.Map<ProfilesAndTestsDatasourceOeModel>(item));
@@ -491,25 +517,16 @@ namespace CD4.UI.Library.ViewModel
 
         private async Task LoadAllTestsAsync()
         {
-            await Task.Run(() =>
+            var results = await staticData.GetAllTestsAsync();
+            foreach (var item in results)
             {
-                var results = staticData.GetAllTests();
-                foreach (var item in results)
-                {
-                    this.AllTestsData.Add(mapper.Map<ProfilesAndTestsDatasourceOeModel>(item));
-                }
-
-            }).ConfigureAwait(true);
-
+                this.AllTestsData.Add(mapper.Map<ProfilesAndTestsDatasourceOeModel>(item));
+            }
         }
 
         private async Task LoadAllClinicalDetailsAsync()
         {
-            var results = await Task.Run(() =>
-           {
-               return staticData.GetAllClinicalDetails();
-
-           }).ConfigureAwait(true);
+            var results = await staticData.GetAllClinicalDetailsAsync();
 
             foreach (var item in results)
             {
@@ -520,51 +537,42 @@ namespace CD4.UI.Library.ViewModel
 
         private async Task LoadAllAtollsAndIslandsAsync()
         {
-            await Task.Run(() =>
+            var results = await staticData.GetAllAtollsAndIslandsAsync();
+            foreach (var item in results)
             {
-                var results = staticData.GetAllAtollsAndIslands();
-                foreach (var item in results)
-                {
-                    this.AllAtollsWithCorrespondingIsland.Add(mapper.Map<AtollIslandModel>(item));
-                }
-            }).ConfigureAwait(true);
+                this.AllAtollsWithCorrespondingIsland.Add(mapper.Map<AtollIslandModel>(item));
+            }
         }
 
         private async Task LoadAllGenderAsync()
         {
-            await Task.Run(() =>
+
+            var results = await staticData.GetAllGenderAsync();
+            foreach (var item in results)
             {
-                var results = staticData.GetAllGender();
-                foreach (var item in results)
-                {
-                    this.Gender.Add(mapper.Map<GenderModel>(item));
-                }
-            });
+                this.Gender.Add(mapper.Map<GenderModel>(item));
+            }
 
         }
 
         private async Task LoadAllSitesAsync()
         {
-            await Task.Run(() =>
+            var results = await staticData.GetAllSitesAsync();
+            foreach (var item in results)
             {
-                var results = staticData.GetAllSites();
-                foreach (var item in results)
-                {
-                    this.Sites.Add(mapper.Map<SitesModel>(item));
-                }
-            });
+                this.Sites.Add(mapper.Map<SitesModel>(item));
+            }
         }
         private async Task LoadAllCountriesAsync()
         {
-            await Task.Run(() =>
-            {
-                var results = staticData.GetAllCountries();
 
-                foreach (var item in results)
-                {
-                    this.Countries.Add(mapper.Map<CountryModel>(item));
-                }
-            });
+            var results = await staticData.GetAllCountriesAsync();
+
+            foreach (var item in results)
+            {
+                this.Countries.Add(mapper.Map<CountryModel>(item));
+            }
+
         }
 
         #endregion
