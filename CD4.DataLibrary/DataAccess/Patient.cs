@@ -25,5 +25,23 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
+
+        public async Task<List<PatientModel>> GetPatientByNidPp(string NidPp)
+        {
+            var storedProcedure = "[dbo].[usp_SearchPatientByPartialName]";
+            var parameter = new PatientByNidPpSearchModel() { NidPp = NidPp };
+            try
+            {
+                var results = await LoadDataWithParameterAsync<PatientModel, PatientByNidPpSearchModel>
+                    (storedProcedure, parameter);
+                return results;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }

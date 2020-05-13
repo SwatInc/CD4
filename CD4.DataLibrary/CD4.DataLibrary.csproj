@@ -61,6 +61,7 @@
     <Compile Include="Models\CountryModel.cs" />
     <Compile Include="Models\GenderModel.cs" />
     <Compile Include="Models\GenericTwoListModel.cs" />
+    <Compile Include="Models\PatientByNidPpSearchModel.cs" />
     <Compile Include="Models\PatientModel.cs" />
     <Compile Include="Models\PatientNameSearchModel.cs" />
     <Compile Include="Models\ProfileDatabaseModel.cs" />
