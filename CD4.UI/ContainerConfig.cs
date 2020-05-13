@@ -29,6 +29,7 @@ namespace CD4.UI
                 cfg.CreateMap<DataLibrary.Models.ClinicalDetailsModel, Library.Model.ClinicalDetailsOrderEntryModel>();
                 cfg.CreateMap<DataLibrary.Models.TestsModel, Library.Model.TestModel>();
                 cfg.CreateMap<DataLibrary.Models.ProfilesAndTestModelOeModel, Library.Model.ProfilesAndTestsDatasourceOeModel>();
+                cfg.CreateMap<DataLibrary.Models.PatientModel, Library.Model.PatientModel>();
 
             })).AsSelf().SingleInstance();
 

@@ -1,4 +1,6 @@
-﻿using CD4.UI.Library.Model;
+﻿using AutoMapper;
+using CD4.DataLibrary.DataAccess;
+using CD4.UI.Library.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,19 +14,21 @@ namespace CD4.UI.Library.ViewModel
 {
     public class PatientSearchResultsViewModel : INotifyPropertyChanged, IPatientSearchResultsViewModel
     {
+        private readonly IMapper mapper;
+        private Patient patientData = new Patient();
         public event EventHandler<PatientModel> PatientSelected;
         public BindingList<PatientModel> SearchResults { get; set; }
 
         private List<PatientModel> DemoPatientData { get; set; }
         public string PatientNameForSearch { get; set; }
 
-        public PatientSearchResultsViewModel()
+        public PatientSearchResultsViewModel(IMapper mapper)
         {
             SearchResults = new BindingList<PatientModel>();
             DemoPatientData = new List<PatientModel>();
+            this.mapper = mapper;
 
-            InitializeDemoData();
-
+            //InitializeDemoData();
         }
 
         private void InitializeDemoData()
@@ -76,13 +80,8 @@ namespace CD4.UI.Library.ViewModel
 
         public async Task SearchByPatientNameAsync()
         {
-            var results = await Task.Run(async() => 
-            {
-                await Task.Delay(3000);
-                return DemoPatientData.Where((p) => p.Fullname.Trim().ToLower().Contains(PatientNameForSearch.Trim().ToLower()));
-            }).ConfigureAwait(true);
-
-            ManageSearchResults(results);
+            var results = await patientData.GetPatientByPartialName(PatientNameForSearch);
+            ManageSearchResults(mapper.Map<List<PatientModel>>(results));
         }
         public void UserSelectedPatient(PatientModel row)
         {

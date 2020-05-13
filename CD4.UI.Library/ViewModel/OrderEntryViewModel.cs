@@ -62,10 +62,8 @@ namespace CD4.UI.Library.ViewModel
 
             //InitializeDemoData();
             this.mapper = mapper;
-            this.InitializeStaticData += OnInitializeStaticDataAsync;
             PropertyChanged += OrderEntryViewModel_PropertyChanged;
-
-
+            InitializeStaticData += OnInitializeStaticDataAsync;
             InitializeStaticData(this, EventArgs.Empty);
         }
 
@@ -83,11 +81,10 @@ namespace CD4.UI.Library.ViewModel
         #endregion
 
         #region Public Properties
-        public bool LoadingStaticData
+        public bool LoadingStaticDataStatus
         {
             get => loadingStaticData; set
             {
-                if (loadingStaticData == value) return;
                 loadingStaticData = value;
                 OnPropertyChanged();
             }
@@ -475,10 +472,10 @@ namespace CD4.UI.Library.ViewModel
         #region Load Static Data
         private async void OnInitializeStaticDataAsync(object sender, EventArgs e)
         {
+            LoadingStaticDataStatus = true;
+
             try
             {
-                LoadingStaticData = true;
-
                 await LoadAllCountriesAsync();
                 await LoadAllSitesAsync();
                 await LoadAllGenderAsync();
@@ -490,11 +487,11 @@ namespace CD4.UI.Library.ViewModel
             }
             catch (Exception ex)
             {
-                PushingMessages(this, ex.Message);
+                PushingMessages?.Invoke(this, ex.Message);
             }
             finally
             {
-                LoadingStaticData = false;
+                LoadingStaticDataStatus = false;
             }
 
             InitializeAtollsDatasource();
@@ -700,6 +697,11 @@ namespace CD4.UI.Library.ViewModel
             if (e.PropertyName == nameof(this.selectedSiteId))
             {
                 Debug.WriteLine(JsonConvert.SerializeObject(SelectedSite, Formatting.Indented));
+            }
+
+            if(e.PropertyName == nameof(LoadingStaticDataStatus))
+            {
+                Debug.WriteLine($"LoadingDataStatus: {LoadingStaticDataStatus}");
             }
 
             Debug.WriteLine("============ Property Change Handling COMPLETE ==========");

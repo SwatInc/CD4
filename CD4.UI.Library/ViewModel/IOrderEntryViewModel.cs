@@ -10,7 +10,7 @@ namespace CD4.UI.Library.ViewModel
     {
         BindingList<TestModel> AddedTests { get; set; }
 
-        bool LoadingStaticData { get; set; }
+        bool LoadingStaticDataStatus { get; set; }
         string Address { get; set; }
         string Age { get; set; }
         List<ProfilesAndTestsDatasourceOeModel> AllTestsData { get; set; }

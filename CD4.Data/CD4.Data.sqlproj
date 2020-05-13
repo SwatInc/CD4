@@ -87,6 +87,7 @@
     <Build Include="dbo\StoredProcedures\usp_GetAllTests.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetAllProfilesAndProfileTests.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetAllClinicalDetails.sql" />
+    <Build Include="dbo\StoredProcedures\usp_SearchPatientByPartialName.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />

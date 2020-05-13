@@ -305,4 +305,27 @@ INSERT INTO [dbo].[Profile_Tests]([ProfileId],[TestId]) VALUES
 (@CovProfileId,@rdrp),
 (@CovProfileId,@result);
 
+--Preparing to insert patient
+DECLARE @MaleGenderId int;
+DECLARE @SHithadhooId int;
+DECLARE @MaldivesCountryId int;
+
+SELECT @MaleGenderId = [Id] FROM [dbo].[Gender] WHERE [Gender] = 'MALE';
+SELECT @SHithadhooId = [Id] FROM [dbo].[Atoll] WHERE [Atoll] = 'S' AND [Island] = 'Hithadhoo';
+SELECT @MaldivesCountryId = [Id] FROM [dbo].[Country] WHERE [Country] = 'MALDIVIAN';
+
+INSERT INTO [dbo].[Patient] 
+([FullName],[NidPp],[Birthdate],[GenderId],[AtollId],[CountryId],[Address],[PhoneNumber]) VALUES
+('Ahmed Hussain','A1234567','19910214',@MaleGenderId,@SHithadhooId,@MaldivesCountryId,'Some Address','772342300');
+
+SELECT @MaleGenderId = [Id] FROM [dbo].[Gender] WHERE [Gender] = 'FEMALE';
+SELECT @SHithadhooId = [Id] FROM [dbo].[Atoll] WHERE [Atoll] = 'K' AND [Island] = 'MALE';
+SELECT @MaldivesCountryId = [Id] FROM [dbo].[Country] WHERE [Country] = 'BANGLADESHI';
+
+INSERT INTO [dbo].[Patient] 
+([FullName],[NidPp],[Birthdate],[GenderId],[AtollId],[CountryId],[Address],[PhoneNumber]) VALUES
+('Aminath Hussain','A987654','19800214',@MaleGenderId,@SHithadhooId,@MaldivesCountryId,'Some Some Address','973465347');
+
+
+
 

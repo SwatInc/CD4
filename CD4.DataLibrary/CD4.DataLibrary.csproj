@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="DataAccess\AnalysisRequest.cs" />
     <Compile Include="DataAccess\DataAccessBase.cs" />
+    <Compile Include="DataAccess\Patient.cs" />
     <Compile Include="DataAccess\StaticData.cs" />
     <Compile Include="DiskIO\Read.cs" />
     <Compile Include="Helpers\Helper.cs" />
@@ -60,6 +61,8 @@
     <Compile Include="Models\CountryModel.cs" />
     <Compile Include="Models\GenderModel.cs" />
     <Compile Include="Models\GenericTwoListModel.cs" />
+    <Compile Include="Models\PatientModel.cs" />
+    <Compile Include="Models\PatientNameSearchModel.cs" />
     <Compile Include="Models\ProfileDatabaseModel.cs" />
     <Compile Include="Models\ProfilesAndTestModelOeModel.cs" />
     <Compile Include="Models\ProfileTestsDatabaseModel.cs" />

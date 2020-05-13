@@ -1,4 +1,5 @@
-﻿using CD4.UI.Library.Model;
+﻿using AutoMapper;
+using CD4.UI.Library.Model;
 using CD4.UI.Library.ViewModel;
 using DevExpress.XtraEditors;
 using Newtonsoft.Json;
@@ -13,19 +14,22 @@ namespace CD4.UI.View
     public partial class OrderEntryView : DevExpress.XtraEditors.XtraForm
     {
         private readonly IOrderEntryViewModel _viewModel;
+        private readonly IMapper mapper;
 
-        public OrderEntryView(IOrderEntryViewModel viewModel)
+        public OrderEntryView(IOrderEntryViewModel viewModel, IMapper mapper)
         {
             InitializeComponent();
             this._viewModel = viewModel;
+            this.mapper = mapper;
             InitializeDataBinding();
 
             lookUpEditTests.Validated += LookUpEditTests_Validated;
             simpleButtonRemoveTest.Click += RemoveTestFromAR;
             simpleButtonSearch.Click += SimpleButtonSearch_Click;
             KeyUp += RemoveTestFromAR; ;
-            _viewModel.PropertyChanged += OnPropertyChanged;
             _viewModel.PushingMessages += OnPushMessage;
+            _viewModel.PropertyChanged += OnPropertyChanged;
+
         }
 
         private void OnPushMessage(object sender, string e)
@@ -36,9 +40,9 @@ namespace CD4.UI.View
         private void OnPropertyChanged(object sender, PropertyChangedEventArgs e)
         {
             //Handle LoadingStaticData property
-            if (e.PropertyName == nameof(_viewModel.LoadingStaticData))
+            if (e.PropertyName == nameof(_viewModel.LoadingStaticDataStatus))
             {
-                switch (_viewModel.LoadingStaticData)
+                switch (_viewModel.LoadingStaticDataStatus)
                 {
                     case true:
                         ChangeLoadingDataUiState(true);
@@ -55,15 +59,25 @@ namespace CD4.UI.View
         {
             if(uiState)
             {
-                progressPanelRequestData.Visible = true;
-                progressPanelRequestData.Dock = DockStyle.Fill;
+                progressPanelTestData.Visible = true;
+                progressPanelPatientData.Visible = true;
+                progressPanelRequest.Visible = true;
+
+                progressPanelTestData.Dock = DockStyle.Fill;
+                progressPanelPatientData.Dock = DockStyle.Fill;
+                progressPanelRequest.Dock = DockStyle.Fill;
+
             }
 
-            if(!uiState)
+            if (!uiState)
             {
-                progressPanelRequestData.Visible = false;
-                progressPanelRequestData.Dock = DockStyle.None;
+                progressPanelTestData.Visible = false;
+                progressPanelPatientData.Visible = false;
+                progressPanelRequest.Visible = false;
 
+                progressPanelTestData.Dock = DockStyle.None;
+                progressPanelPatientData.Dock = DockStyle.None;
+                progressPanelRequest.Dock = DockStyle.None;
             }
         }
 
@@ -231,7 +245,7 @@ namespace CD4.UI.View
 
         private void OpenPatientSearchView()
         {
-            var searchViewModel = new PatientSearchResultsViewModel() 
+            var searchViewModel = new PatientSearchResultsViewModel(mapper) 
             { PatientNameForSearch = textEditFullname.Text };
 
             var searchView = new PatientSearchResultsView(searchViewModel)

@@ -58,7 +58,9 @@
             this.textEditEpisodeNumber = new DevExpress.XtraEditors.TextEdit();
             this.lookUpEditTests = new DevExpress.XtraEditors.LookUpEdit();
             this.simpleButtonRemoveTest = new DevExpress.XtraEditors.SimpleButton();
-            this.progressPanelRequestData = new DevExpress.XtraWaitForm.ProgressPanel();
+            this.progressPanelTestData = new DevExpress.XtraWaitForm.ProgressPanel();
+            this.progressPanelPatientData = new DevExpress.XtraWaitForm.ProgressPanel();
+            this.progressPanelRequest = new DevExpress.XtraWaitForm.ProgressPanel();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlRequestData)).BeginInit();
             this.groupControlRequestData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditSampleReceived.Properties.CalendarTimeProperties)).BeginInit();
@@ -96,6 +98,7 @@
             // 
             // groupControlRequestData
             // 
+            this.groupControlRequestData.Controls.Add(this.progressPanelRequest);
             this.groupControlRequestData.Controls.Add(this.dateEditSampleReceived);
             this.groupControlRequestData.Controls.Add(this.dateEditCollectedDate);
             this.groupControlRequestData.Controls.Add(this.lookUpEditSite);
@@ -173,6 +176,7 @@
             // 
             // groupControlPatientData
             // 
+            this.groupControlPatientData.Controls.Add(this.progressPanelPatientData);
             this.groupControlPatientData.Controls.Add(this.textEditPhoneNumber);
             this.groupControlPatientData.Controls.Add(this.textEditAge);
             this.groupControlPatientData.Controls.Add(this.textEditAddress);
@@ -437,7 +441,7 @@
             // 
             // groupControlTestSelection
             // 
-            this.groupControlTestSelection.Controls.Add(this.progressPanelRequestData);
+            this.groupControlTestSelection.Controls.Add(this.progressPanelTestData);
             this.groupControlTestSelection.Controls.Add(this.textEditEpisodeNumber);
             this.groupControlTestSelection.Controls.Add(this.lookUpEditTests);
             this.groupControlTestSelection.Location = new System.Drawing.Point(563, 155);
@@ -482,17 +486,44 @@
             this.simpleButtonRemoveTest.TabIndex = 6;
             this.simpleButtonRemoveTest.Text = "Remove [ Del ]";
             // 
-            // progressPanelRequestData
+            // progressPanelTestData
             // 
-            this.progressPanelRequestData.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.progressPanelRequestData.Appearance.Options.UseBackColor = true;
-            this.progressPanelRequestData.BarAnimationElementThickness = 2;
-            this.progressPanelRequestData.Location = new System.Drawing.Point(29, 111);
-            this.progressPanelRequestData.Name = "progressPanelRequestData";
-            this.progressPanelRequestData.Size = new System.Drawing.Size(132, 54);
-            this.progressPanelRequestData.TabIndex = 15;
-            this.progressPanelRequestData.Text = "Request data";
-            this.progressPanelRequestData.Visible = false;
+            this.progressPanelTestData.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.progressPanelTestData.Appearance.Options.UseBackColor = true;
+            this.progressPanelTestData.BarAnimationElementThickness = 2;
+            this.progressPanelTestData.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.progressPanelTestData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressPanelTestData.Location = new System.Drawing.Point(2, 20);
+            this.progressPanelTestData.Name = "progressPanelTestData";
+            this.progressPanelTestData.Size = new System.Drawing.Size(192, 164);
+            this.progressPanelTestData.TabIndex = 15;
+            this.progressPanelTestData.Text = "Request data";
+            // 
+            // progressPanelPatientData
+            // 
+            this.progressPanelPatientData.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.progressPanelPatientData.Appearance.Options.UseBackColor = true;
+            this.progressPanelPatientData.BarAnimationElementThickness = 2;
+            this.progressPanelPatientData.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.progressPanelPatientData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressPanelPatientData.Location = new System.Drawing.Point(2, 20);
+            this.progressPanelPatientData.Name = "progressPanelPatientData";
+            this.progressPanelPatientData.Size = new System.Drawing.Size(546, 119);
+            this.progressPanelPatientData.TabIndex = 16;
+            this.progressPanelPatientData.Text = "Request data";
+            // 
+            // progressPanelRequest
+            // 
+            this.progressPanelRequest.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.progressPanelRequest.Appearance.Options.UseBackColor = true;
+            this.progressPanelRequest.BarAnimationElementThickness = 2;
+            this.progressPanelRequest.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.progressPanelRequest.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressPanelRequest.Location = new System.Drawing.Point(2, 20);
+            this.progressPanelRequest.Name = "progressPanelRequest";
+            this.progressPanelRequest.Size = new System.Drawing.Size(192, 119);
+            this.progressPanelRequest.TabIndex = 16;
+            this.progressPanelRequest.Text = "Request data";
             // 
             // OrderEntryView
             // 
@@ -582,6 +613,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnIsSelected;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnClinicalDetail;
         private DevExpress.XtraEditors.SimpleButton simpleButtonRemoveTest;
-        private DevExpress.XtraWaitForm.ProgressPanel progressPanelRequestData;
+        private DevExpress.XtraWaitForm.ProgressPanel progressPanelTestData;
+        private DevExpress.XtraWaitForm.ProgressPanel progressPanelRequest;
+        private DevExpress.XtraWaitForm.ProgressPanel progressPanelPatientData;
     }
 }
