@@ -1,12 +1,16 @@
-﻿using System.Data;
+﻿using CD4.DataLibrary.Models;
+using System;
+using System.Data;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 
 namespace CD4.DataLibrary.DataAccess
 {
     public class AnalysisRequest : DataAccessBase, IAnalysisRequest
     {
-        public void ConfirmRequest()
+        public async Task<bool> ConfirmRequest(AnalysisRequestDataModel request)
         {
+            throw new NotImplementedException();
             /*STEPS
              * Does the request exist on database?
              * YES: 
