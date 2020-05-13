@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace CD4.DataLibrary.DataAccess
 {
-    public class StaticData : DataAccessBase
+    public class StaticDataDataAccess : DataAccessBase, IStaticDataDataAccess
     {
         public void LoadAll()
         {
@@ -33,7 +33,7 @@ namespace CD4.DataLibrary.DataAccess
             string storedProcedure = "usp_GetAllCountries";
             try
             {
-                return  await LoadDataAsync<CountryModel>(storedProcedure);
+                return await LoadDataAsync<CountryModel>(storedProcedure);
             }
             catch (Exception)
             {
@@ -115,42 +115,42 @@ namespace CD4.DataLibrary.DataAccess
             var profiles = (List<ProfileDatabaseModel>)searchResults.T1; //Liver
             var ProfileTests = (List<ProfileTestsDatabaseModel>)searchResults.U1; //TBIL, DBIL, ....
 
-            return  await Task.Run(() =>
-            {
-                foreach (var profile in profiles)
-                {
-                    var profileAndTestOeData = new ProfilesAndTestModelOeModel();
+            return await Task.Run(() =>
+           {
+               foreach (var profile in profiles)
+               {
+                   var profileAndTestOeData = new ProfilesAndTestModelOeModel();
 
-                    profileAndTestOeData.Id = profile.Id;
-                    profileAndTestOeData.Description = profile.Description;
-                    profileAndTestOeData.IsProfile = profile.IsProfile;
+                   profileAndTestOeData.Id = profile.Id;
+                   profileAndTestOeData.Description = profile.Description;
+                   profileAndTestOeData.IsProfile = profile.IsProfile;
 
-                    //Get Tests in profile
-                    var testsInProfile = ProfileTests.Where((pt) =>
-                    {
-                        return pt.ProfileId == profile.Id;
-                    }).ToList();
+                   //Get Tests in profile
+                   var testsInProfile = ProfileTests.Where((pt) =>
+                  {
+                      return pt.ProfileId == profile.Id;
+                  }).ToList();
 
 
-                    foreach (var test in testsInProfile)
-                    {
-                        var readyTestsInProfile = new TestsModel()
-                        {
-                            Id = test.TestId,
-                            Description = test.Test,
-                            IsReportable = test.IsReportable,
-                            Mask = test.Mask,
-                            ResultDataType = test.ResultDataType
-                        };
+                   foreach (var test in testsInProfile)
+                   {
+                       var readyTestsInProfile = new TestsModel()
+                       {
+                           Id = test.TestId,
+                           Description = test.Test,
+                           IsReportable = test.IsReportable,
+                           Mask = test.Mask,
+                           ResultDataType = test.ResultDataType
+                       };
 
-                        profileAndTestOeData.TestsInProfile.Add(readyTestsInProfile);
-                    }
+                       profileAndTestOeData.TestsInProfile.Add(readyTestsInProfile);
+                   }
 
-                    profileAndTestOeDataList.Add(profileAndTestOeData);
-                }
+                   profileAndTestOeDataList.Add(profileAndTestOeData);
+               }
 
-                return profileAndTestOeDataList;
-            });
+               return profileAndTestOeDataList;
+           });
 
 
         }

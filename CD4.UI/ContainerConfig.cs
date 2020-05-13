@@ -59,6 +59,12 @@ namespace CD4.UI
                 .Where(t => t.Namespace.Contains("ViewModel"))
                 .As(t => t.GetInterfaces().FirstOrDefault(i => i.Name == $"I{t.Name}"));
 
+            //Register Data Access Library interfaces
+            builder.RegisterAssemblyTypes(Assembly.Load("CD4.DataLibrary"))
+                .Where(t => t.Namespace.Contains("DataAccess"))
+                .Where(t => t.FullName.Contains("Base") != true )
+                .As(t => t.GetInterfaces().FirstOrDefault(i => i.Name == $"I{t.Name}"));
+
             return builder.Build();
         }
     }

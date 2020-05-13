@@ -15,18 +15,20 @@ namespace CD4.UI.Library.ViewModel
     public class PatientSearchResultsViewModel : INotifyPropertyChanged, IPatientSearchResultsViewModel
     {
         private readonly IMapper mapper;
-        private Patient patientData = new Patient();
+        private readonly IPatientDataAccess patientDataAccess;
+
         public event EventHandler<PatientModel> PatientSelected;
         public BindingList<PatientModel> SearchResults { get; set; }
 
         private List<PatientModel> DemoPatientData { get; set; }
         public string PatientNameForSearch { get; set; }
 
-        public PatientSearchResultsViewModel(IMapper mapper)
+        public PatientSearchResultsViewModel(IMapper mapper, IPatientDataAccess patientDataAccess)
         {
             SearchResults = new BindingList<PatientModel>();
             DemoPatientData = new List<PatientModel>();
             this.mapper = mapper;
+            this.patientDataAccess = patientDataAccess;
 
             //InitializeDemoData();
         }
@@ -80,7 +82,7 @@ namespace CD4.UI.Library.ViewModel
 
         public async Task SearchByPatientNameAsync()
         {
-            var results = await patientData.GetPatientByPartialName(PatientNameForSearch);
+            var results = await patientDataAccess.GetPatientByPartialName(PatientNameForSearch);
             ManageSearchResults(mapper.Map<List<PatientModel>>(results));
         }
         public void UserSelectedPatient(PatientModel row)

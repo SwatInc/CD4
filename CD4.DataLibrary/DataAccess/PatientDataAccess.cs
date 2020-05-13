@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CD4.DataLibrary.DataAccess
 {
-    public class Patient: DataAccessBase
+    public class PatientDataAccess : DataAccessBase, IPatientDataAccess
     {
         public async Task<List<PatientModel>> GetPatientByPartialName(string partialName)
         {
@@ -15,7 +15,7 @@ namespace CD4.DataLibrary.DataAccess
             var parameter = new PatientNameSearchModel() { PartialPatientName = partialName };
             try
             {
-                var results =  await LoadDataWithParameterAsync<PatientModel,PatientNameSearchModel>
+                var results = await LoadDataWithParameterAsync<PatientModel, PatientNameSearchModel>
                     (storedProcedure, parameter);
                 return results;
             }
@@ -25,7 +25,6 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
-
         public async Task<List<PatientModel>> GetPatientByNidPp(string NidPp)
         {
             var storedProcedure = "[dbo].[usp_SearchPatientByPartialName]";

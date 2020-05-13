@@ -39,7 +39,7 @@ namespace CD4.UI.Library.ViewModel
         private string cinErrorText;
         readonly OrderEntryValidator validator = new OrderEntryValidator();
         private readonly IMapper mapper;
-        private StaticData staticData = new StaticData();
+        private readonly IStaticDataDataAccess staticData;
         private bool loadingStaticData;
         #endregion
 
@@ -48,7 +48,7 @@ namespace CD4.UI.Library.ViewModel
         private event EventHandler InitializeStaticData;
 
         #region Default Constructor
-        public OrderEntryViewModel(IMapper mapper)
+        public OrderEntryViewModel(IMapper mapper, IStaticDataDataAccess staticData)
         {
             Sites = new List<SitesModel>();
             Gender = new List<GenderModel>();
@@ -62,6 +62,7 @@ namespace CD4.UI.Library.ViewModel
 
             //InitializeDemoData();
             this.mapper = mapper;
+            this.staticData = staticData;
             PropertyChanged += OrderEntryViewModel_PropertyChanged;
             InitializeStaticData += OnInitializeStaticDataAsync;
             InitializeStaticData(this, EventArgs.Empty);

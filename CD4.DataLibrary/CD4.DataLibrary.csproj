@@ -49,8 +49,11 @@
   <ItemGroup>
     <Compile Include="DataAccess\AnalysisRequest.cs" />
     <Compile Include="DataAccess\DataAccessBase.cs" />
-    <Compile Include="DataAccess\Patient.cs" />
-    <Compile Include="DataAccess\StaticData.cs" />
+    <Compile Include="DataAccess\IAnalysisRequest.cs" />
+    <Compile Include="DataAccess\IPatientDataAccess.cs" />
+    <Compile Include="DataAccess\IStaticDataDataAccess.cs" />
+    <Compile Include="DataAccess\PatientDataAccess.cs" />
+    <Compile Include="DataAccess\StaticDataDataAccess.cs" />
     <Compile Include="DiskIO\Read.cs" />
     <Compile Include="Helpers\Helper.cs" />
     <Compile Include="Models\AtollIslandModel.cs" />
@@ -77,6 +80,5 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using CD4.DataLibrary.DataAccess;
 using CD4.UI.Library.Model;
 using CD4.UI.Library.ViewModel;
 using DevExpress.XtraEditors;
@@ -15,12 +16,15 @@ namespace CD4.UI.View
     {
         private readonly IOrderEntryViewModel _viewModel;
         private readonly IMapper mapper;
+        private readonly IPatientDataAccess dataAccess;
 
-        public OrderEntryView(IOrderEntryViewModel viewModel, IMapper mapper)
+        public OrderEntryView(IOrderEntryViewModel viewModel,
+            IMapper mapper, IPatientDataAccess dataAccess)
         {
             InitializeComponent();
             this._viewModel = viewModel;
             this.mapper = mapper;
+            this.dataAccess = dataAccess;
             InitializeDataBinding();
 
             lookUpEditTests.Validated += LookUpEditTests_Validated;
@@ -245,7 +249,7 @@ namespace CD4.UI.View
 
         private void OpenPatientSearchView()
         {
-            var searchViewModel = new PatientSearchResultsViewModel(mapper) 
+            var searchViewModel = new PatientSearchResultsViewModel(mapper, dataAccess) 
             { PatientNameForSearch = textEditFullname.Text };
 
             var searchView = new PatientSearchResultsView(searchViewModel)

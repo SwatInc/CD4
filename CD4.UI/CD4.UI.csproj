@@ -237,10 +237,6 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\CD4.DataInterfaces\CD4.DataInterfaces.csproj">
-      <Project>{1955ca79-a3b3-4726-baf2-31ae71833154}</Project>
-      <Name>CD4.DataInterfaces</Name>
-    </ProjectReference>
     <ProjectReference Include="..\CD4.DataLibrary\CD4.DataLibrary.csproj">
       <Project>{66fb9baf-b529-4dfd-b0e9-e41b78f4ea76}</Project>
       <Name>CD4.DataLibrary</Name>
