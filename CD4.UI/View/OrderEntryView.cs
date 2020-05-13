@@ -2,13 +2,10 @@
 using CD4.DataLibrary.DataAccess;
 using CD4.UI.Library.Model;
 using CD4.UI.Library.ViewModel;
-using DevExpress.Utils.ScrollAnnotations;
 using DevExpress.XtraEditors;
 using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace CD4.UI.View
@@ -34,7 +31,14 @@ namespace CD4.UI.View
             KeyUp += RemoveTestFromAR; ;
             _viewModel.PushingMessages += OnPushMessage;
             _viewModel.PropertyChanged += OnPropertyChanged;
+            simpleButtonConfirm.Click += SimpleButtonConfirm_Click;
 
+        }
+
+        private void SimpleButtonConfirm_Click(object sender, EventArgs e)
+        {
+            var jsonRequestData = JsonConvert.SerializeObject(_viewModel, Formatting.Indented);
+            Clipboard.SetText(jsonRequestData);
         }
 
         private void OnPushMessage(object sender, string e)
@@ -62,7 +66,7 @@ namespace CD4.UI.View
 
         private void ChangeLoadingDataUiState(bool uiState)
         {
-            if(uiState)
+            if (uiState)
             {
                 progressPanelTestData.Visible = true;
                 progressPanelPatientData.Visible = true;
@@ -255,13 +259,13 @@ namespace CD4.UI.View
             {
                 XtraMessageBox.Show("<b>Patient fullname</b> <u>OR</u> <b>ID card / passport</b> is required for search!",
                     "Search Requirement",
-                    buttons: MessageBoxButtons.OK, 
+                    buttons: MessageBoxButtons.OK,
                     icon: MessageBoxIcon.Exclamation,
                     allowHtmlText: DevExpress.Utils.DefaultBoolean.True);
-                return; 
+                return;
             }
-            var searchViewModel = new PatientSearchResultsViewModel(mapper, dataAccess) 
-            { 
+            var searchViewModel = new PatientSearchResultsViewModel(mapper, dataAccess)
+            {
                 SearchTerm = searchTerm,
                 SearchType = GetSearchType()
             };
@@ -288,10 +292,10 @@ namespace CD4.UI.View
 
         private string GetSearchTerm()
         {
-            if(!string.IsNullOrEmpty(_viewModel.NidPp)) 
+            if (!string.IsNullOrEmpty(_viewModel.NidPp))
             {
                 _viewModel.Fullname = null;
-                return _viewModel.NidPp; 
+                return _viewModel.NidPp;
             }
             return _viewModel.Fullname;
         }
