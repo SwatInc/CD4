@@ -60,6 +60,7 @@
     <Compile Include="Models\AtollIslandModel.cs" />
     <Compile Include="Models\AtollModel.cs" />
     <Compile Include="Models\ClinicalDetailsModel.cs" />
+    <Compile Include="Models\ClinicalDetailsSelectionModel.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Models\ConnectionName.cs" />
     <Compile Include="Models\CountryModel.cs" />

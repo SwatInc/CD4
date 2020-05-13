@@ -30,8 +30,8 @@ namespace CD4.DataLibrary.Models
         #endregion
 
         #region Clinical Details, Tests, Episode Number
-        public List<ClinicalDetailsOrderEntryModel> ClinicalDetails { get; set; }
-        public List<TestModel> Tests { get; set; }
+        public List<ClinicalDetailsSelectionModel> ClinicalDetails { get; set; }
+        public List<TestsModel> Tests { get; set; }
         public string EpisodeNumber { get; set; }
 
         #endregion
