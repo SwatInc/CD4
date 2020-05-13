@@ -231,6 +231,7 @@ namespace CD4.UI.Library.ViewModel
 
         private async Task RepopulateIslandDatasource(int atollId)
         {
+            if (atollId == -1) return;
             var islandSearchResults = await SearchIslandsByAtoll
                                                 (GetAtollById(atollId));
 
@@ -352,6 +353,22 @@ namespace CD4.UI.Library.ViewModel
 
         public async Task OnReceiveSearchResults(PatientModel results)
         {
+            if (results is null)
+            {
+                NidPp = null;
+                Fullname = null;
+                Birthdate = null;
+                SelectedGenderId = -1;
+                Age = null;
+                Address = null;
+                SelectedAtollId = -1;
+                SelectedIslandId = -1;
+                SelectedCountryId = -1;
+                PhoneNumber = null;
+
+                return;
+            }
+
             Fullname = results.Fullname;
             NidPp = results.NidPp;
             Birthdate = results.Birthdate;
@@ -367,7 +384,11 @@ namespace CD4.UI.Library.ViewModel
             if (results is null) return;
             var tasks = new List<Task<int>>
             {
-                Task.Run(() => Gender.SingleOrDefault((g) => g.Gender == results.Gender).Id),
+                Task.Run(() =>
+                {
+                    var gender = Gender.SingleOrDefault((g) => g.Gender == results.Gender);
+                    return gender is null ? -1 : gender.Id; 
+                }),
                 Task.Run(() =>
                 {
                     var atoll  = Atolls.SingleOrDefault((a) => a.Atoll == results.Atoll);
@@ -385,7 +406,7 @@ namespace CD4.UI.Library.ViewModel
 
             //WARNING!: The assignment needs to be in the same order that the tasks were
             //added to the list of tasks. 
-            SelectedGenderId = resultIds[0];
+            if (!(resultIds[0] == -1)) { SelectedGenderId = resultIds[0]; }
             if (!(resultIds[1] == -1)) { SelectedAtollId = resultIds[1]; }
             if (!(resultIds[2] == -1)) { SelectedCountryId = resultIds[2]; }
 
@@ -700,7 +721,7 @@ namespace CD4.UI.Library.ViewModel
                 Debug.WriteLine(JsonConvert.SerializeObject(SelectedSite, Formatting.Indented));
             }
 
-            if(e.PropertyName == nameof(LoadingStaticDataStatus))
+            if (e.PropertyName == nameof(LoadingStaticDataStatus))
             {
                 Debug.WriteLine($"LoadingDataStatus: {LoadingStaticDataStatus}");
             }

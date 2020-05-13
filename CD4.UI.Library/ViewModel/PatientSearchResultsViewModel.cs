@@ -21,7 +21,14 @@ namespace CD4.UI.Library.ViewModel
         public BindingList<PatientModel> SearchResults { get; set; }
 
         private List<PatientModel> DemoPatientData { get; set; }
-        public string PatientNameForSearch { get; set; }
+        public string SearchTerm { get; set; }
+        public SearchTermType SearchType { get; set; }
+
+        public enum SearchTermType
+        {
+            PatientName,
+            NidPp
+        }
 
         public PatientSearchResultsViewModel(IMapper mapper, IPatientDataAccess patientDataAccess)
         {
@@ -82,7 +89,18 @@ namespace CD4.UI.Library.ViewModel
 
         public async Task SearchByPatientNameAsync()
         {
-            var results = await patientDataAccess.GetPatientByPartialName(PatientNameForSearch);
+            List<DataLibrary.Models.PatientModel> results = new List<DataLibrary.Models.PatientModel>();
+            switch (SearchType)
+            {
+                case SearchTermType.PatientName:
+                    results = await patientDataAccess.GetPatientByPartialName(SearchTerm);
+                    break;
+                case SearchTermType.NidPp:
+                    results = await patientDataAccess.GetPatientByNidPp(SearchTerm);
+                    break;
+                default:
+                    break;
+            }
             ManageSearchResults(mapper.Map<List<PatientModel>>(results));
         }
         public void UserSelectedPatient(PatientModel row)
@@ -91,9 +109,27 @@ namespace CD4.UI.Library.ViewModel
         }
         private void ManageSearchResults(IEnumerable<PatientModel> results)
         {
-            //display to user for choosing.
+            if (results is null)
+            {
+                PatientSelected?.Invoke(this,null);
+                return; 
+            }
             SearchResults.Clear();
-            if (results is null) return;
+
+            //If result yeilds one or zero(close results window), choose the one
+            if(results.Count() == 1 )
+            {
+                PatientSelected?.Invoke(this, results.FirstOrDefault());
+                    return;
+            }
+
+            if (results.Count() == 0)
+            {
+                PatientSelected?.Invoke(this, null);
+                return;
+            }
+
+            //If results yeld more than one, let the user choose.
             foreach (var item in results)
             {
                 SearchResults.Add(item);

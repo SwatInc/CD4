@@ -2,6 +2,6 @@
 {
     public interface IAnalysisRequest
     {
-        void Save();
+        void ConfirmRequest();
     }
 }

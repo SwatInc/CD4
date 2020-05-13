@@ -2,6 +2,7 @@
 using CD4.DataLibrary.DataAccess;
 using CD4.UI.Library.Model;
 using CD4.UI.Library.ViewModel;
+using DevExpress.Utils.ScrollAnnotations;
 using DevExpress.XtraEditors;
 using Newtonsoft.Json;
 using System;
@@ -12,7 +13,7 @@ using System.Windows.Forms;
 
 namespace CD4.UI.View
 {
-    public partial class OrderEntryView : DevExpress.XtraEditors.XtraForm
+    public partial class OrderEntryView : XtraForm
     {
         private readonly IOrderEntryViewModel _viewModel;
         private readonly IMapper mapper;
@@ -249,8 +250,21 @@ namespace CD4.UI.View
 
         private void OpenPatientSearchView()
         {
+            var searchTerm = GetSearchTerm();
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                XtraMessageBox.Show("<b>Patient fullname</b> <u>OR</u> <b>ID card / passport</b> is required for search!",
+                    "Search Requirement",
+                    buttons: MessageBoxButtons.OK, 
+                    icon: MessageBoxIcon.Exclamation,
+                    allowHtmlText: DevExpress.Utils.DefaultBoolean.True);
+                return; 
+            }
             var searchViewModel = new PatientSearchResultsViewModel(mapper, dataAccess) 
-            { PatientNameForSearch = textEditFullname.Text };
+            { 
+                SearchTerm = searchTerm,
+                SearchType = GetSearchType()
+            };
 
             var searchView = new PatientSearchResultsView(searchViewModel)
             {
@@ -261,6 +275,25 @@ namespace CD4.UI.View
             searchView.Show();
             searchView.FormClosed += SearchView_FormClosed;
 
+        }
+
+        private PatientSearchResultsViewModel.SearchTermType GetSearchType()
+        {
+            if (_viewModel.NidPp != null)
+            {
+                return PatientSearchResultsViewModel.SearchTermType.NidPp;
+            }
+            return PatientSearchResultsViewModel.SearchTermType.PatientName;
+        }
+
+        private string GetSearchTerm()
+        {
+            if(!string.IsNullOrEmpty(_viewModel.NidPp)) 
+            {
+                _viewModel.Fullname = null;
+                return _viewModel.NidPp; 
+            }
+            return _viewModel.Fullname;
         }
 
         private void SearchView_FormClosed(object sender, FormClosedEventArgs e)

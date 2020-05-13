@@ -24,7 +24,13 @@ namespace CD4.UI.View
             InitializeDataBinding();
             InitializeSearchAsync().ConfigureAwait(true);
 
+            _viewModel.PatientSelected += OnPatientSelected;
             gridViewPatientSearchResults.DoubleClick += gridViewPatientSearchResults_DoubleClick;
+        }
+
+        private void OnPatientSelected(object sender, PatientModel e)
+        {
+            Close();
         }
 
         private void gridViewPatientSearchResults_DoubleClick(object sender, EventArgs e)
@@ -34,12 +40,11 @@ namespace CD4.UI.View
 
             var row = (PatientModel)gridViewPatientSearchResults.GetRow(selectedRowHandles[0]);
            _viewModel.UserSelectedPatient(row);
-            Close();
         }
 
         private async Task InitializeSearchAsync()
         {
-            if (_viewModel.PatientNameForSearch is null) this.Close();
+            if (_viewModel.SearchTerm is null) this.Close();
             await _viewModel.SearchByPatientNameAsync();
         }
 

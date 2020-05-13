@@ -27,7 +27,7 @@ namespace CD4.DataLibrary.DataAccess
         }
         public async Task<List<PatientModel>> GetPatientByNidPp(string NidPp)
         {
-            var storedProcedure = "[dbo].[usp_SearchPatientByPartialName]";
+            var storedProcedure = "[dbo].[usp_SearchPatientByNidPp]";
             var parameter = new PatientByNidPpSearchModel() { NidPp = NidPp };
             try
             {

@@ -13,7 +13,7 @@ namespace CD4.UI.Library.ViewModel
         event EventHandler<PatientModel> PatientSelected;
         event PropertyChangedEventHandler PropertyChanged;
 
-        string PatientNameForSearch { get; set; }
+        string SearchTerm { get; set; }
         Task SearchByPatientNameAsync();
         void UserSelectedPatient(PatientModel row);
     }
