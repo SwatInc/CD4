@@ -40,6 +40,7 @@ namespace CD4.UI.Library.ViewModel
         readonly OrderEntryValidator validator = new OrderEntryValidator();
         private readonly IMapper mapper;
         private readonly IStaticDataDataAccess staticData;
+        private readonly IAnalysisRequest request;
         private bool loadingStaticData;
         #endregion
 
@@ -48,7 +49,8 @@ namespace CD4.UI.Library.ViewModel
         private event EventHandler InitializeStaticData;
 
         #region Default Constructor
-        public OrderEntryViewModel(IMapper mapper, IStaticDataDataAccess staticData)
+        public OrderEntryViewModel(IMapper mapper,
+            IStaticDataDataAccess staticData, IAnalysisRequest request)
         {
             Sites = new List<SitesModel>();
             Gender = new List<GenderModel>();
@@ -63,6 +65,7 @@ namespace CD4.UI.Library.ViewModel
             //InitializeDemoData();
             this.mapper = mapper;
             this.staticData = staticData;
+            this.request = request;
             PropertyChanged += OrderEntryViewModel_PropertyChanged;
             InitializeStaticData += OnInitializeStaticDataAsync;
             InitializeStaticData(this, EventArgs.Empty);
@@ -321,6 +324,15 @@ namespace CD4.UI.Library.ViewModel
         #endregion
 
         #region Public Methods
+
+        public async Task<bool> ConfirmAnalysisRequest()
+        {
+            var result = await request.ConfirmRequest
+                (new DataLibrary.Models.AnalysisRequestDataModel());
+
+            return result;
+        }
+
         public async Task ManageAddTestToRequestAsync()
         {
             Debug.WriteLine("Called: ManageAddTestToRequestAsync");

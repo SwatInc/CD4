@@ -33,6 +33,9 @@ namespace CD4.UI.Library.ViewModel
         int SelectedGenderId { get; set; }
         int SelectedIslandId { get; set; }
         int SelectedSiteId { get; set; }
+
+        Task<bool> ConfirmAnalysisRequest();
+
         List<SitesModel> Sites { get; set; }
         string TestToAdd { get; set; }
         Task ManageAddTestToRequestAsync();

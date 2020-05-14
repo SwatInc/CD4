@@ -31,14 +31,21 @@ namespace CD4.UI.View
             KeyUp += RemoveTestFromAR; ;
             _viewModel.PushingMessages += OnPushMessage;
             _viewModel.PropertyChanged += OnPropertyChanged;
-            simpleButtonConfirm.Click += SimpleButtonConfirm_Click;
+            simpleButtonConfirm.Click += OnConfirmAnalysisRequest;
 
         }
 
-        private void SimpleButtonConfirm_Click(object sender, EventArgs e)
+        private async void OnConfirmAnalysisRequest(object sender, EventArgs e)
         {
-            var jsonRequestData = JsonConvert.SerializeObject(_viewModel, Formatting.Indented);
-            Clipboard.SetText(jsonRequestData);
+            var status = await _viewModel.ConfirmAnalysisRequest();
+            if(status)
+            {
+                XtraMessageBox.Show("The analysis request is confirmed!");
+            }
+            else 
+            {
+                XtraMessageBox.Show("Failed to confirm analysis request!"); 
+            }
         }
 
         private void OnPushMessage(object sender, string e)
