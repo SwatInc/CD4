@@ -27,9 +27,19 @@ namespace CD4.UI
                 cfg.CreateMap<DataLibrary.Models.GenderModel, Library.Model.GenderModel>();
                 cfg.CreateMap<DataLibrary.Models.AtollIslandModel, Library.Model.AtollIslandModel>();
                 cfg.CreateMap<DataLibrary.Models.ClinicalDetailsModel, Library.Model.ClinicalDetailsOrderEntryModel>();
-                cfg.CreateMap<DataLibrary.Models.TestsModel, Library.Model.TestModel>();
+                cfg.CreateMap<DataLibrary.Models.TestsModel, Library.Model.TestModel>().ReverseMap();
                 cfg.CreateMap<DataLibrary.Models.ProfilesAndTestModelOeModel, Library.Model.ProfilesAndTestsDatasourceOeModel>();
                 cfg.CreateMap<DataLibrary.Models.PatientModel, Library.Model.PatientModel>();
+                cfg.CreateMap<DataLibrary.Models.ClinicalDetailsSelectionModel, Library.Model.ClinicalDetailsOrderEntryModel>().ReverseMap();
+
+                cfg.CreateMap<DataLibrary.Models.AnalysisRequestDataModel, Library.ViewModel.OrderEntryViewModel>()
+                .ForMember(dest => dest.SelectedSiteId, opt => opt.MapFrom(src => src.SiteId))
+                .ForMember(dest => dest.NidPp, opt => opt.MapFrom(src => src.NationalIdPassport))
+                .ForMember(dest => dest.SelectedGenderId, opt => opt.MapFrom(src => src.GenderId))
+                .ForMember(dest => dest.SelectedAtollId, opt => opt.MapFrom(src => src.AtollId))
+                .ForMember(dest => dest.SelectedCountryId, opt => opt.MapFrom(src => src.CountryId))
+                .ForMember(dest => dest.AddedTests, opt => opt.MapFrom(src => src.Tests))
+                .ReverseMap();
 
             })).AsSelf().SingleInstance();
 

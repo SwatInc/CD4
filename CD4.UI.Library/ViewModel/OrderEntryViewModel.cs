@@ -327,8 +327,9 @@ namespace CD4.UI.Library.ViewModel
 
         public async Task<bool> ConfirmAnalysisRequest()
         {
+            var mappedRequest = mapper.Map<DataLibrary.Models.AnalysisRequestDataModel>(this);
             var result = await request.ConfirmRequest
-                (new DataLibrary.Models.AnalysisRequestDataModel());
+                (mappedRequest);
 
             return result;
         }

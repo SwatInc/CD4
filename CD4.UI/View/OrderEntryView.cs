@@ -37,14 +37,23 @@ namespace CD4.UI.View
 
         private async void OnConfirmAnalysisRequest(object sender, EventArgs e)
         {
-            var status = await _viewModel.ConfirmAnalysisRequest();
-            if(status)
+            try
             {
-                XtraMessageBox.Show("The analysis request is confirmed!");
+                var status = await _viewModel.ConfirmAnalysisRequest();
+                if (status)
+                {
+                    XtraMessageBox.Show("The analysis request is confirmed!");
+                }
+                else
+                {
+                    XtraMessageBox.Show("Failed to confirm analysis request!");
+                }
+
             }
-            else 
+            catch (Exception ex)
             {
-                XtraMessageBox.Show("Failed to confirm analysis request!"); 
+
+                XtraMessageBox.Show(ex.Message +"\n" +ex.StackTrace);
             }
         }
 

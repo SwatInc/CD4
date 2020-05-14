@@ -10,7 +10,7 @@ namespace CD4.DataLibrary.Models
     {
         #region Request Fields
         public string Cin { get; set; }
-        public int SelectedSiteId { get; set; }
+        public int SiteId { get; set; }
         public DateTime SampleCollectionDate { get; set; }
         public DateTime SampleReceivedDate { get; set; }
 
