@@ -48,6 +48,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess\AnalysisRequestDataAccess.cs" />
+    <Compile Include="DataAccess\ClinicalDetailsDataAccess.cs" />
     <Compile Include="DataAccess\DataAccessBase.cs" />
     <Compile Include="DataAccess\IAnalysisRequestDataAccess.cs" />
     <Compile Include="DataAccess\IPatientDataAccess.cs" />
@@ -59,6 +60,7 @@
     <Compile Include="Models\AnalysisRequestDataModel.cs" />
     <Compile Include="Models\AtollIslandModel.cs" />
     <Compile Include="Models\AtollModel.cs" />
+    <Compile Include="Models\ClinicalDetailsDatabaseModel.cs" />
     <Compile Include="Models\ClinicalDetailsModel.cs" />
     <Compile Include="Models\ClinicalDetailsSelectionModel.cs" />
     <Compile Include="Models\Config.cs" />

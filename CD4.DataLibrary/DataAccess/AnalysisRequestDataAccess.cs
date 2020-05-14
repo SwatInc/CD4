@@ -34,6 +34,12 @@ namespace CD4.DataLibrary.DataAccess
             var requestAndSample = await GetSampleByIdAsync(request.Cin);
             var patient = (await patientData.GetPatientByNidPp(request.NationalIdPassport)).FirstOrDefault();
 
+            ClinicalDetailsDatabaseModel clinicalDetails;
+            if(requestAndSample != null)
+            {
+            }
+
+
             #endregion
 
             #region Determine request and sample status
