@@ -36,7 +36,8 @@ namespace CD4.UI
                 .ForMember(dest => dest.SelectedSiteId, opt => opt.MapFrom(src => src.SiteId))
                 .ForMember(dest => dest.NidPp, opt => opt.MapFrom(src => src.NationalIdPassport))
                 .ForMember(dest => dest.SelectedGenderId, opt => opt.MapFrom(src => src.GenderId))
-                .ForMember(dest => dest.SelectedAtollId, opt => opt.MapFrom(src => src.AtollId))
+                .ForMember(dest => dest.SelectedAtoll, opt => opt.MapFrom(src => src.Atoll))
+                .ForMember(dest => dest.SelectedIsland, opt => opt.MapFrom(src => src.Island))
                 .ForMember(dest => dest.SelectedCountryId, opt => opt.MapFrom(src => src.CountryId))
                 .ForMember(dest => dest.AddedTests, opt => opt.MapFrom(src => src.Tests))
                 .ReverseMap();

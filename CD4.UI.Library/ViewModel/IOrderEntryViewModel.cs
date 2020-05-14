@@ -28,10 +28,10 @@ namespace CD4.UI.Library.ViewModel
         string PhoneNumber { get; set; }
         DateTime? SampleCollectionDate { get; set; }
         DateTime? SampleReceivedDate { get; set; }
-        int SelectedAtollId { get; set; }
+        string SelectedAtoll { get; set; }
         int SelectedCountryId { get; set; }
         int SelectedGenderId { get; set; }
-        int SelectedIslandId { get; set; }
+        string SelectedIsland { get; set; }
         int SelectedSiteId { get; set; }
 
         Task<bool> ConfirmAnalysisRequest();

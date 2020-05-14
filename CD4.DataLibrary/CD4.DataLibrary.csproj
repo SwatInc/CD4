@@ -47,9 +47,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataAccess\AnalysisRequest.cs" />
+    <Compile Include="DataAccess\AnalysisRequestDataAccess.cs" />
     <Compile Include="DataAccess\DataAccessBase.cs" />
-    <Compile Include="DataAccess\IAnalysisRequest.cs" />
+    <Compile Include="DataAccess\IAnalysisRequestDataAccess.cs" />
     <Compile Include="DataAccess\IPatientDataAccess.cs" />
     <Compile Include="DataAccess\IStaticDataDataAccess.cs" />
     <Compile Include="DataAccess\PatientDataAccess.cs" />
@@ -72,6 +72,8 @@
     <Compile Include="Models\ProfileDatabaseModel.cs" />
     <Compile Include="Models\ProfilesAndTestModelOeModel.cs" />
     <Compile Include="Models\ProfileTestsDatabaseModel.cs" />
+    <Compile Include="Models\RequestAndSampleDatabaseModel.cs" />
+    <Compile Include="Models\SampleNumberParameterModel.cs" />
     <Compile Include="Models\SitesModel.cs" />
     <Compile Include="Models\TestsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

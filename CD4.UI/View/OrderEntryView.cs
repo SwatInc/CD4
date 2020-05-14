@@ -223,17 +223,17 @@ namespace CD4.UI.View
             //Atolls and Selected Atoll
             lookUpEditAtoll.Properties.DataSource = _viewModel.Atolls;
             lookUpEditAtoll.Properties.DisplayMember = nameof(AtollModel.Atoll);
-            lookUpEditAtoll.Properties.ValueMember = nameof(AtollModel.Id);
+            lookUpEditAtoll.Properties.ValueMember = nameof(AtollModel.Atoll);
             lookUpEditAtoll.DataBindings.Add
-                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedAtollId), true,
+                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedAtoll), true,
                 DataSourceUpdateMode.OnPropertyChanged));
 
             //Islands and Selected Island
             lookUpEditIsland.Properties.DataSource = _viewModel.Islands;
             lookUpEditIsland.Properties.DisplayMember = nameof(IslandModel.Island);
-            lookUpEditIsland.Properties.ValueMember = nameof(IslandModel.Id);
+            lookUpEditIsland.Properties.ValueMember = nameof(IslandModel.Island);
             lookUpEditIsland.DataBindings.Add
-                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedIslandId)));
+                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedIsland)));
 
             //Countries and Selected Country
             lookUpEditCountry.Properties.DataSource = _viewModel.Countries;

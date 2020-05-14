@@ -32,15 +32,15 @@ namespace CD4.UI.Library.ViewModel
         private string episodeNumber;
         private int selectedSiteId;
         private int selectedGenderId;
-        private int selectedAtollId;
-        private int selectedIslandId;
+        private string selectedAtoll;
+        private string selectedIsland;
         private int selectedCountryId;
         private string testToAdd;
         private string cinErrorText;
         readonly OrderEntryValidator validator = new OrderEntryValidator();
         private readonly IMapper mapper;
         private readonly IStaticDataDataAccess staticData;
-        private readonly IAnalysisRequest request;
+        private readonly IAnalysisRequestDataAccess request;
         private bool loadingStaticData;
         #endregion
 
@@ -50,7 +50,7 @@ namespace CD4.UI.Library.ViewModel
 
         #region Default Constructor
         public OrderEntryViewModel(IMapper mapper,
-            IStaticDataDataAccess staticData, IAnalysisRequest request)
+            IStaticDataDataAccess staticData, IAnalysisRequestDataAccess request)
         {
             Sites = new List<SitesModel>();
             Gender = new List<GenderModel>();
@@ -221,22 +221,22 @@ namespace CD4.UI.Library.ViewModel
             }
         }
         public List<AtollModel> Atolls { get; set; }
-        public int SelectedAtollId
+        public string SelectedAtoll
         {
-            get => selectedAtollId; set
+            get => selectedAtoll; set
             {
-                if (selectedAtollId == value) return;
-                selectedAtollId = value;
+                if (selectedAtoll == value) return;
+                selectedAtoll = value;
                 RepopulateIslandDatasource(value).ConfigureAwait(true);
                 OnPropertyChanged();
             }
         }
 
-        private async Task RepopulateIslandDatasource(int atollId)
+        private async Task RepopulateIslandDatasource(string atoll)
         {
-            if (atollId == -1) return;
+            if (string.IsNullOrEmpty(atoll)) return;
             var islandSearchResults = await SearchIslandsByAtoll
-                                                (GetAtollById(atollId));
+                                                (GetAtollByName(atoll));
 
             //Clear the island list and add the new islands
             Islands.Clear();
@@ -260,19 +260,19 @@ namespace CD4.UI.Library.ViewModel
             });
         }
 
-        private string GetAtollById(int atollId)
+        private string GetAtollByName(string atollName)
         {
-            if (atollId == 0) return string.Empty;
-            return Atolls.SingleOrDefault((a) => a.Id == atollId).Atoll;
+            if (string.IsNullOrEmpty(atollName)) return string.Empty;
+            return Atolls.SingleOrDefault((a) => a.Atoll == atollName).Atoll;
         }
 
         public BindingList<IslandModel> Islands { get; set; }
-        public int SelectedIslandId
+        public string SelectedIsland
         {
-            get => selectedIslandId; set
+            get => selectedIsland; set
             {
-                if (selectedIslandId == value) return;
-                selectedIslandId = value;
+                if (selectedIsland == value) return;
+                selectedIsland = value;
                 OnPropertyChanged();
             }
         }
@@ -328,7 +328,14 @@ namespace CD4.UI.Library.ViewModel
         public async Task<bool> ConfirmAnalysisRequest()
         {
             var mappedRequest = mapper.Map<DataLibrary.Models.AnalysisRequestDataModel>(this);
-            var result = await request.ConfirmRequest
+
+            //add gender, Country, Atoll and, island decriptions 
+            mappedRequest.Gender = GetGenderById(mappedRequest.GenderId).Gender;
+            mappedRequest.Country = (await GetCountryByIdAsync(mappedRequest.CountryId)).Country;
+            var atollIslandData = GetAtollModelByAtollAndIslandName(mappedRequest.Atoll, mappedRequest.Island);
+            mappedRequest.AtollId = atollIslandData.Id;
+
+            var result = await request.ConfirmRequestAsync
                 (mappedRequest);
 
             return result;
@@ -374,8 +381,8 @@ namespace CD4.UI.Library.ViewModel
                 SelectedGenderId = -1;
                 Age = null;
                 Address = null;
-                SelectedAtollId = -1;
-                SelectedIslandId = -1;
+                SelectedAtoll = "";
+                SelectedIsland  = "";
                 SelectedCountryId = -1;
                 PhoneNumber = null;
 
@@ -395,43 +402,45 @@ namespace CD4.UI.Library.ViewModel
         private async Task SetSelectedItemsForLookups(PatientModel results)
         {
             if (results is null) return;
-            var tasks = new List<Task<int>>
+            var tasks = new List<Task<string>>
             {
                 Task.Run(() =>
                 {
                     var gender = Gender.SingleOrDefault((g) => g.Gender == results.Gender);
-                    return gender is null ? -1 : gender.Id; 
+                    return (gender is null ? -1 : gender.Id).ToString(); 
                 }),
                 Task.Run(() =>
                 {
                     var atoll  = Atolls.SingleOrDefault((a) => a.Atoll == results.Atoll);
-                    return atoll is null ? -1 : atoll.Id;
+                    return atoll is null ? string.Empty : atoll.Atoll;
                 }),
 
                 Task.Run(() =>
                 {
                     var country = Countries.SingleOrDefault((c) => c.Country == results.Country);
-                    return country is null ? -1 : country.Id;
+                    return (country is null ? -1 : country.Id).ToString();
                 })
             };
 
             var resultIds = await Task.WhenAll(tasks);
 
+            var genderId = int.Parse(resultIds[0]);
+            var countryId = int.Parse(resultIds[2]);
             //WARNING!: The assignment needs to be in the same order that the tasks were
             //added to the list of tasks. 
-            if (!(resultIds[0] == -1)) { SelectedGenderId = resultIds[0]; }
-            if (!(resultIds[1] == -1)) { SelectedAtollId = resultIds[1]; }
-            if (!(resultIds[2] == -1)) { SelectedCountryId = resultIds[2]; }
+            if (!(genderId == -1)) { SelectedGenderId = genderId; }
+            if (!string.IsNullOrEmpty(resultIds[1])) { SelectedAtoll = resultIds[1]; }
+            if (!(countryId == -1)) { SelectedCountryId = countryId; }
 
             //Set island based on selected atoll
-            await RepopulateIslandDatasource(SelectedAtollId);
+            await RepopulateIslandDatasource(SelectedAtoll);
             var island = await Task.Run(() =>
             {
                 var result = Islands.SingleOrDefault((i) => i.Island == results.Island);
-                return result is null ? -1 : result.Id;
+                return result is null ? string.Empty : result.Island;
             });
 
-            if (island > 0) { SelectedIslandId = island; }
+            if (!string.IsNullOrEmpty(island)) { SelectedIsland = island; }
         }
 
         #endregion
@@ -710,6 +719,10 @@ namespace CD4.UI.Library.ViewModel
             Age = DateTimeExtensions.ToAgeString(birthdate);
         }
 
+        /// <summary>
+        /// Adds distinct atoll letters to the datasource for 
+        /// atoll selection by user.
+        /// </summary>
         private void InitializeAtollsDatasource()
         {
             var distinctAtoll = AllAtollsWithCorrespondingIsland
@@ -742,7 +755,8 @@ namespace CD4.UI.Library.ViewModel
             Debug.WriteLine("============ Property Change Handling COMPLETE ==========");
         }
 
-        private async Task SetSelectedSiteAsync(int siteId, [CallerMemberName] string propertyName = "")
+        private async Task SetSelectedSiteAsync
+            (int siteId, [CallerMemberName] string propertyName = "")
         {
             Debug.WriteLine($"called {nameof(SetSelectedSiteAsync)}");
             var site = await GetSiteByIdAsync(siteId);
@@ -764,6 +778,24 @@ namespace CD4.UI.Library.ViewModel
             {
                 return Sites.SingleOrDefault(s => s.Id == siteId);
             });
+        }
+        private GenderModel GetGenderById(int genderId)
+        {
+           return Gender.Where((g) => g.Id == genderId).FirstOrDefault();
+        }
+
+        private async Task<CountryModel> GetCountryByIdAsync( int countryId)
+        {
+            return (await Task.Run(() =>
+            {
+                return Countries.Where((c) => c.Id == countryId);
+            })).FirstOrDefault();
+            
+        }
+
+        private AtollIslandModel GetAtollModelByAtollAndIslandName(string atollName, string IslandName)
+        {
+            return (AllAtollsWithCorrespondingIsland.Where((a) => a.Atoll == atollName && a.Island == IslandName)).FirstOrDefault();
         }
         #endregion
     }

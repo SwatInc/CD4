@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CD4.DataLibrary.Models
@@ -129,5 +129,20 @@ namespace CD4.DataLibrary.Models
 
         #endregion
 
+        public bool ArePatientDetailsAMatch(AnalysisRequestDataModel dataToCompare)
+        {
+            if (dataToCompare.Fullname != this.fullname) return false;
+            if (dataToCompare.NationalIdPassport != this.NidPp) return false;
+            if (dataToCompare.Birthdate.ToString("yyyyMMdd") != this.Birthdate.ToString("yyyyMMdd")) return false;
+            //if (dataToCompare.GenderId != this.fullname) return false;
+            //if (dataToCompare.Fullname != this.fullname) return false;
+            //if (dataToCompare.Fullname != this.fullname) return false;
+            //if (dataToCompare.Fullname != this.fullname) return false;
+            //if (dataToCompare.Fullname != this.fullname) return false;
+            //if (dataToCompare.Fullname != this.fullname) return false;
+
+            //PASS IN THE GENDER, ATOLL, COUNTRY along with the model
+            throw new NotImplementedException();
+        }
     }
 }

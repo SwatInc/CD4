@@ -37,7 +37,6 @@ namespace CD4.UI.View
             barButtonItemResultEntry.ItemClick += OpenResultEntryView;
             #endregion
 
-            var a = new CD4.DataLibrary.DataAccess.AnalysisRequest();
         }
 
         private void OpenResultEntryView(object sender, ItemClickEventArgs e)
