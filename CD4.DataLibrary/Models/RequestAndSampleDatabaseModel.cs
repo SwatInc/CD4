@@ -14,5 +14,15 @@ namespace CD4.DataLibrary.Models
         public int SiteId { get; set; }
         public DateTime CollectionDate { get; set; }
         public DateTime ReceivedDate { get; set; }
+
+        public bool AreEqual(AnalysisRequestDataModel request)
+        {
+            if (Age != request.Age) return false;
+            if (Cin != request.Cin) return false;
+            if (SiteId != request.SiteId) return false;
+            if (CollectionDate.ToString("yyyMMdd") != request.SampleCollectionDate.ToString("yyyMMdd")) return false;
+            if (ReceivedDate.ToString("yyyMMdd") != request.SampleReceivedDate.ToString("yyyMMdd")) return false;
+            return true;
+        }
     }
 }

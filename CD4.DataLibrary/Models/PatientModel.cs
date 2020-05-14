@@ -134,15 +134,14 @@ namespace CD4.DataLibrary.Models
             if (dataToCompare.Fullname != this.fullname) return false;
             if (dataToCompare.NationalIdPassport != this.NidPp) return false;
             if (dataToCompare.Birthdate.ToString("yyyyMMdd") != this.Birthdate.ToString("yyyyMMdd")) return false;
-            //if (dataToCompare.GenderId != this.fullname) return false;
-            //if (dataToCompare.Fullname != this.fullname) return false;
-            //if (dataToCompare.Fullname != this.fullname) return false;
-            //if (dataToCompare.Fullname != this.fullname) return false;
-            //if (dataToCompare.Fullname != this.fullname) return false;
-            //if (dataToCompare.Fullname != this.fullname) return false;
+            if (dataToCompare.Gender != this.Gender) return false;
+            if (dataToCompare.Atoll != this.Atoll) return false;
+            if (dataToCompare.Island != this.Island) return false;
+            if (dataToCompare.Country != this.Country) return false;
+            if (dataToCompare.Address != this.Address) return false;
+            if (dataToCompare.PhoneNumber != this.phoneNumber) return false;
 
-            //PASS IN THE GENDER, ATOLL, COUNTRY along with the model
-            throw new NotImplementedException();
+            return true;
         }
     }
 }

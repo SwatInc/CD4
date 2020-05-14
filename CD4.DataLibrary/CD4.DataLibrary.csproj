@@ -73,6 +73,7 @@
     <Compile Include="Models\ProfilesAndTestModelOeModel.cs" />
     <Compile Include="Models\ProfileTestsDatabaseModel.cs" />
     <Compile Include="Models\RequestAndSampleDatabaseModel.cs" />
+    <Compile Include="Models\RequestDataStatus.cs" />
     <Compile Include="Models\SampleNumberParameterModel.cs" />
     <Compile Include="Models\SitesModel.cs" />
     <Compile Include="Models\TestsModel.cs" />
