@@ -20,15 +20,27 @@ namespace CD4.DataLibrary.DataAccess
             RequestDataStatus patientStatus = RequestDataStatus.New;
             RequestDataStatus clinicalDetailsStatus = RequestDataStatus.New;
 
+            #region Request Rejection Criteria
+
             if (string.IsNullOrEmpty(request.Cin))
             {
                 throw new ArgumentNullException("CIN", "COVID Identification number cannot be null! Analysis request not saved!"); 
             }
 
-            var sample = await GetSampleByIdAsync(request.Cin);
-            if (sample != null)
+            #endregion
+
+            #region Fetch Present data
+
+            var requestAndSample = await GetSampleByIdAsync(request.Cin);
+            var patient = (await patientData.GetPatientByNidPp(request.NationalIdPassport)).FirstOrDefault();
+
+            #endregion
+
+            #region Determine request and sample status
+
+            if (requestAndSample != null)
             {
-                if (!sample.AreEqual(request))
+                if (!requestAndSample.AreEqual(request))
                 {
                     requestSampleStatus = RequestDataStatus.Dirty;
                     //This will require an update.
@@ -39,18 +51,23 @@ namespace CD4.DataLibrary.DataAccess
                 }
             }
 
+            #endregion
 
-            if (sample is null)
+            #region DeterminePatientStatus
+
+            if(patient != null)
             {
-
-                var patient = (await patientData.GetPatientByNidPp(request.NationalIdPassport)).FirstOrDefault();
-                var IsPatientDemographicsChanged = patient.ArePatientDetailsAMatch(request);
-
+                if(!patient.AreEqual(request))
+                {
+                    patientStatus = RequestDataStatus.Dirty;
+                }
+                else
+                {
+                    patientStatus = RequestDataStatus.Clean;
+                }
             }
-            else
-            {
-                //Check for equality, update if necessary
-            }
+
+            #endregion
 
             return true;
         }

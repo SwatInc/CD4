@@ -129,7 +129,7 @@ namespace CD4.DataLibrary.Models
 
         #endregion
 
-        public bool ArePatientDetailsAMatch(AnalysisRequestDataModel dataToCompare)
+        public bool AreEqual(AnalysisRequestDataModel dataToCompare)
         {
             if (dataToCompare.Fullname != this.fullname) return false;
             if (dataToCompare.NationalIdPassport != this.NidPp) return false;
