@@ -46,7 +46,8 @@ INSERT INTO [dbo].[Country] ([Country]) VALUES
 INSERT INTO [dbo].[Gender] ([Gender]) VALUES 
 ('MALE'),
 ('FEMALE'),
-('UNKNOWN')
+('UNKNOWN'),
+('NOT AVAILABLE')
 
 INSERT INTO [dbo].[Atoll]([Atoll],[Island]) VALUES
 ('AA','BODUFOLHUDHOO')
@@ -334,6 +335,8 @@ DECLARE @InsertedRequestId int;
 DECLARE @SiteId int;
 DECLARE @TestId_One int;
 DECLARE @TestId_Two int;
+DECLARE @ClinicalDetail_One int;
+DECLARE @ClinicalDetail_Two int;
 DECLARE @Cin varchar(50) = 'nCoV-2346/20';
 
 
@@ -350,6 +353,14 @@ INSERT INTO [dbo].[AnalysisRequest] ([PatientId], [Age], [CheckedBy], [ApprovedB
 
 SET @InsertedRequestId = (SELECT TOP(1)Id FROM [dbo].[AnalysisRequest] ORDER BY [Id] DESC);
 SET @SiteId  = (SELECT TOP(1)Id FROM [dbo].[Sites]);
+
+--insert Clinical details
+SET @ClinicalDetail_One = (SELECT TOP(1)[Id] FROM [dbo].[ClinicalDetail] ORDER BY [Id] ASC);
+SET @ClinicalDetail_Two = (SELECT TOP(1)[Id] FROM [dbo].[ClinicalDetail] ORDER BY [Id] DESC);
+
+INSERT INTO [dbo].[AnalysisRequest_ClinicalDetail]([AnalysisRequestId], [ClinicalDetailsId]) VALUES
+(@InsertedRequestId, @ClinicalDetail_One),
+(@InsertedRequestId, @ClinicalDetail_Two);
 
 --Insert Sample
 INSERT INTO [dbo].[Sample] ([Cin], [AnalysisRequestId], [SiteId], [CollectionDate],[ReceivedDate])

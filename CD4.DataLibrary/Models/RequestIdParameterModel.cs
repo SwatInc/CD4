@@ -8,6 +8,6 @@ namespace CD4.DataLibrary.Models
 {
     public class RequestIdParameterModel
     {
-        public int RequestId { get; set; }
+        public int AnalysisRequestId { get; set; }
     }
 }

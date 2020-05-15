@@ -8,7 +8,7 @@ namespace CD4.DataLibrary.DataAccess
     {
         public async Task<List<ClinicalDetailsDatabaseModel>> GetClinicalDetailsByRequestId(int requestId)
         {
-            var parameter = new RequestIdParameterModel() { RequestId = requestId };
+            var parameter = new RequestIdParameterModel() { AnalysisRequestId = requestId };
             var storedProcedure = "[dbo].[usp_GetClinicalDetailsByRequestId]";
             return await LoadDataWithParameterAsync<ClinicalDetailsDatabaseModel, RequestIdParameterModel>(storedProcedure,parameter);
         }

@@ -382,7 +382,7 @@ namespace CD4.UI.Library.ViewModel
                 Age = null;
                 Address = null;
                 SelectedAtoll = "";
-                SelectedIsland  = "";
+                SelectedIsland = "";
                 SelectedCountryId = -1;
                 PhoneNumber = null;
 
@@ -407,7 +407,7 @@ namespace CD4.UI.Library.ViewModel
                 Task.Run(() =>
                 {
                     var gender = Gender.SingleOrDefault((g) => g.Gender == results.Gender);
-                    return (gender is null ? -1 : gender.Id).ToString(); 
+                    return (gender is null ? -1 : gender.Id).ToString();
                 }),
                 Task.Run(() =>
                 {
@@ -781,16 +781,19 @@ namespace CD4.UI.Library.ViewModel
         }
         private GenderModel GetGenderById(int genderId)
         {
-           return Gender.Where((g) => g.Id == genderId).FirstOrDefault();
+            var gender = Gender.Where((g) => g.Id == genderId).FirstOrDefault();
+            if (gender != null) return gender;
+            return Gender.Where((g) => g.Gender == "NOT AVAILABLE").FirstOrDefault();
+
         }
 
-        private async Task<CountryModel> GetCountryByIdAsync( int countryId)
+        private async Task<CountryModel> GetCountryByIdAsync(int countryId)
         {
             return (await Task.Run(() =>
             {
                 return Countries.Where((c) => c.Id == countryId);
             })).FirstOrDefault();
-            
+
         }
 
         private AtollIslandModel GetAtollModelByAtollAndIslandName(string atollName, string IslandName)

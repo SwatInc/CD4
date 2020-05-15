@@ -37,8 +37,8 @@ namespace CD4.DataLibrary.DataAccess
             var requestAndSample = await GetSampleByIdAsync(request.Cin);
             var patient = (await patientData.GetPatientByNidPp(request.NationalIdPassport)).FirstOrDefault();
 
-            List<ClinicalDetailsDatabaseModel> clinicalDetails;
-            List<ResultsDatabaseModel> requestedTests;
+            List<ClinicalDetailsDatabaseModel> clinicalDetails = new List<ClinicalDetailsDatabaseModel>();
+            List<ResultsDatabaseModel> requestedTests = new List<ResultsDatabaseModel>();
             if(requestAndSample != null)
             {
                 clinicalDetails = await clinicalDetailsData.GetClinicalDetailsByRequestId(requestAndSample.RequestId);
@@ -80,6 +80,25 @@ namespace CD4.DataLibrary.DataAccess
 
             #endregion
 
+            #region Determine Clinical Details Status
+            if (requestAndSample != null)
+            {
+                if (!ClinicalDetailsDatabaseModel.AreEqual(request.ClinicalDetails, clinicalDetails))
+                {
+                    clinicalDetailsStatus = RequestDataStatus.Dirty;
+                }
+                else
+                {
+                    clinicalDetailsStatus = RequestDataStatus.Clean;
+                }
+
+            }
+            #endregion
+
+            #region SelectedTestsStatus
+
+            #endregion
+            
             return true;
         }
 
@@ -94,8 +113,8 @@ namespace CD4.DataLibrary.DataAccess
 
         public async Task<List<ResultsDatabaseModel>> GetRequestedTestsByRequestId(int requestId)
         {
-            var storedProcedure = "";
-            var parameter = new RequestIdParameterModel() { RequestId = requestId};
+            var storedProcedure = "[dbo].[usp_GetTestWithResultsByRequestId]";
+            var parameter = new RequestIdParameterModel() { AnalysisRequestId = requestId};
             return await LoadDataWithParameterAsync<ResultsDatabaseModel, RequestIdParameterModel>(storedProcedure, parameter);
         
         }
