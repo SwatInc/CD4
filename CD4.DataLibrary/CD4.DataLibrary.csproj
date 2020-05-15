@@ -51,6 +51,7 @@
     <Compile Include="DataAccess\ClinicalDetailsDataAccess.cs" />
     <Compile Include="DataAccess\DataAccessBase.cs" />
     <Compile Include="DataAccess\IAnalysisRequestDataAccess.cs" />
+    <Compile Include="DataAccess\IClinicalDetailsDataAccess.cs" />
     <Compile Include="DataAccess\IPatientDataAccess.cs" />
     <Compile Include="DataAccess\IStaticDataDataAccess.cs" />
     <Compile Include="DataAccess\PatientDataAccess.cs" />
@@ -76,6 +77,8 @@
     <Compile Include="Models\ProfileTestsDatabaseModel.cs" />
     <Compile Include="Models\RequestAndSampleDatabaseModel.cs" />
     <Compile Include="Models\RequestDataStatus.cs" />
+    <Compile Include="Models\RequestIdParameterModel.cs" />
+    <Compile Include="Models\ResultsDatabaseModel.cs" />
     <Compile Include="Models\SampleNumberParameterModel.cs" />
     <Compile Include="Models\SitesModel.cs" />
     <Compile Include="Models\TestsModel.cs" />

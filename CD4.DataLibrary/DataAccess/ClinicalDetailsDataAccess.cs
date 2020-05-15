@@ -4,12 +4,13 @@ using System.Threading.Tasks;
 
 namespace CD4.DataLibrary.DataAccess
 {
-    public class ClinicalDetailsDataAccess : DataAccessBase
+    public class ClinicalDetailsDataAccess : DataAccessBase, IClinicalDetailsDataAccess
     {
         public async Task<List<ClinicalDetailsDatabaseModel>> GetClinicalDetailsByRequestId(int requestId)
         {
-            var storedProcedure = "";
-            return await LoadDataAsync<ClinicalDetailsDatabaseModel>(storedProcedure);
+            var parameter = new RequestIdParameterModel() { RequestId = requestId };
+            var storedProcedure = "[dbo].[usp_GetClinicalDetailsByRequestId]";
+            return await LoadDataWithParameterAsync<ClinicalDetailsDatabaseModel, RequestIdParameterModel>(storedProcedure,parameter);
         }
     }
 }

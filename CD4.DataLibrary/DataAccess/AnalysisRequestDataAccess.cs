@@ -1,5 +1,6 @@
 ﻿using CD4.DataLibrary.Models;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,10 +10,12 @@ namespace CD4.DataLibrary.DataAccess
     public class AnalysisRequestDataAccess : DataAccessBase, IAnalysisRequestDataAccess
     {
         private readonly IPatientDataAccess patientData;
+        private readonly IClinicalDetailsDataAccess clinicalDetailsData;
 
-        public AnalysisRequestDataAccess(IPatientDataAccess patientData)
+        public AnalysisRequestDataAccess(IPatientDataAccess patientData, IClinicalDetailsDataAccess clinicalDetailsData)
         {
             this.patientData = patientData;
+            this.clinicalDetailsData = clinicalDetailsData;
         }
         public async Task<bool> ConfirmRequestAsync(AnalysisRequestDataModel request)
         {
@@ -34,11 +37,13 @@ namespace CD4.DataLibrary.DataAccess
             var requestAndSample = await GetSampleByIdAsync(request.Cin);
             var patient = (await patientData.GetPatientByNidPp(request.NationalIdPassport)).FirstOrDefault();
 
-            ClinicalDetailsDatabaseModel clinicalDetails;
+            List<ClinicalDetailsDatabaseModel> clinicalDetails;
+            List<ResultsDatabaseModel> requestedTests;
             if(requestAndSample != null)
             {
+                clinicalDetails = await clinicalDetailsData.GetClinicalDetailsByRequestId(requestAndSample.RequestId);
+                requestedTests = await GetRequestedTestsByRequestId(requestAndSample.RequestId);
             }
-
 
             #endregion
 
@@ -85,6 +90,14 @@ namespace CD4.DataLibrary.DataAccess
 
             var sampleAndRequest = await LoadDataWithParameterAsync<RequestAndSampleDatabaseModel, SampleNumberParameterModel>(storedProcedure, parameter);
             return sampleAndRequest.FirstOrDefault();
+        }
+
+        public async Task<List<ResultsDatabaseModel>> GetRequestedTestsByRequestId(int requestId)
+        {
+            var storedProcedure = "";
+            var parameter = new RequestIdParameterModel() { RequestId = requestId};
+            return await LoadDataWithParameterAsync<ResultsDatabaseModel, RequestIdParameterModel>(storedProcedure, parameter);
+        
         }
     }
 }
