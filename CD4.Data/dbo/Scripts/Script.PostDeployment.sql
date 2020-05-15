@@ -327,5 +327,45 @@ INSERT INTO [dbo].[Patient]
 ('Aminath Hussain','A987654','19800214',@MaleGenderId,@SHithadhooId,@MaldivesCountryId,'Some Some Address','973465347');
 
 
+--Get a patient Id
+DECLARE @PatientId int;
+DECLARE @ScientistId int;
+DECLARE @InsertedRequestId int;
+DECLARE @SiteId int;
+DECLARE @TestId_One int;
+DECLARE @TestId_Two int;
+DECLARE @Cin varchar(50) = 'nCoV-2346/20';
+
+
+SET @PatientId = (SELECT TOP(1) [P].[Id] FROM [dbo].[Patient] [P]);
+
+--Insert a scientist
+INSERT INTO [dbo].[Scientist] ([Name]) VALUES 
+('Some Scientist')
+SET @ScientistId = (SELECT TOP(1)Id FROM [dbo].[Scientist] ORDER BY [Id] DESC);
+
+--Insert the Analysis Request
+INSERT INTO [dbo].[AnalysisRequest] ([PatientId], [Age], [CheckedBy], [ApprovedBy]) VALUES
+(@PatientId, 23, @ScientistId,@ScientistId);
+
+SET @InsertedRequestId = (SELECT TOP(1)Id FROM [dbo].[AnalysisRequest] ORDER BY [Id] DESC);
+SET @SiteId  = (SELECT TOP(1)Id FROM [dbo].[Sites]);
+
+--Insert Sample
+INSERT INTO [dbo].[Sample] ([Cin], [AnalysisRequestId], [SiteId], [CollectionDate],[ReceivedDate])
+VALUES
+(@Cin, @InsertedRequestId, @SiteId, GETDATE(), GETDATE());
+
+--Get Some Test Ids
+SET @TestId_One = (SELECT TOP(1)[T].[Id] FROM [dbo].[Test] [T] ORDER BY [T].[Id] ASC);
+SET @TestId_Two = (SELECT TOP(1)[T].[Id] FROM [dbo].[Test] [T] ORDER BY [T].[Id] DESC);
+
+
+--Insert Result
+INSERT INTO [dbo].[Result] ([AnalysisRequestId], [Sample_Cin], [TestId]) VALUES
+(@InsertedRequestId,@Cin, @TestId_One),
+(@InsertedRequestId,@Cin, @TestId_Two);
+
+
 
 
