@@ -1,12 +1,12 @@
 {
   "ConnectionName": {
     "Name": "CD4Data",
-    "ConnectionString": "Server=tcp:cd4dataserver.database.windows.net,1433;Initial Catalog=CD4Data;Persist Security Info=False;User ID=username;Password=pass;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+    "ConnectionString": "Server=localhost,1444;Database=CD4Data;User Id=sa;Password=Bismillah.123!;",
     "Provider": "System.Data.SqlClient"
   },
   "ConnectionNameDefault": {
     "Name": "CD4DataDefault",
-    "ConnectionString": "Server=localhost,1444;Database=CD4Data;User Id=sa;Password=Bismillah.123!;",
+    "ConnectionString": "Server=tcp:cd4dataserver.database.windows.net,1433;Initial Catalog=CD4Data;Persist Security Info=False;User ID=ibrahimhucyn;Password=Bismillah.123!;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
     "Provider": "System.Data.SqlClient"
   }
 }

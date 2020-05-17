@@ -12,5 +12,5 @@ BEGIN
 SET NOCOUNT ON;
 	INSERT INTO [dbo].[Patient] ([FullName], [NidPp], [Birthdate],[GenderId], [AtollId], [CountryId], [Address], [PhoneNumber])
 	OUTPUT INSERTED.Id
-	VALUES (@Fullname, @NidPp, @Birthdate, @GenderId, @AtollId, @CountryId, @Address);
+	VALUES (@Fullname, @NidPp, @Birthdate, @GenderId, @AtollId, @CountryId, @Address, @PhoneNumber);
 END

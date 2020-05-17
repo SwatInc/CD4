@@ -8,5 +8,7 @@ namespace CD4.DataLibrary.DataAccess
     {
         Task<List<PatientModel>> GetPatientByNidPp(string NidPp);
         Task<List<PatientModel>> GetPatientByPartialName(string partialName);
+        Task<int> InsertPatient(PatientInsertDatabaseModel patient);
+        Task<bool> UpdatePatient(PatientUpdateDatabaseModel patient);
     }
 }

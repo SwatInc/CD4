@@ -74,7 +74,20 @@ namespace CD4.DataLibrary.DataAccess
 
             if (patientStatus == RequestDataStatus.Dirty)
             {
-                //update patient
+                var patientToUpdate = new PatientUpdateDatabaseModel()
+                {
+                    Id = patient.Id,
+                    Fullname = request.Fullname,
+                    NidPp = request.NationalIdPassport,
+                    Birthdate = request.Birthdate.ToString("yyyyMMdd"),
+                    GenderId = request.GenderId,
+                    AtollId = request.AtollId,
+                    CountryId = request.CountryId,
+                    Address = request.Address,
+                    PhoneNumber = request.PhoneNumber
+                };
+                var isPatientUpdated = await patientData.UpdatePatient(patientToUpdate);
+                if (!isPatientUpdated) { throw new Exception("Cannot update patient data!"); }
             }
 
             if (patientStatus == RequestDataStatus.New)
