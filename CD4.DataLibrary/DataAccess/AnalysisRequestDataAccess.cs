@@ -37,6 +37,10 @@ namespace CD4.DataLibrary.DataAccess
             {
                 throw new ArgumentNullException("CIN", "COVID Identification number cannot be null! Analysis request not saved!");
             }
+            if (request.Tests.Count == 0)
+            {
+                throw new ArgumentException("A minimum of one test is mandatory to confirm the request!");
+            }
 
             #endregion
 
