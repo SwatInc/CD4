@@ -1,8 +1,6 @@
 ﻿using CD4.DataLibrary.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CD4.DataLibrary.DataAccess
@@ -40,6 +38,20 @@ namespace CD4.DataLibrary.DataAccess
 
                 throw;
             }
+        }
+
+        public async Task<int> InsertPatient(PatientInsertDatabaseModel patient)
+        {
+            var storedProcedure = "[dbo].[usp_InsertPatient]";
+            return await InsertOrUpdate<int, PatientInsertDatabaseModel>
+                (storedProcedure, patient);
+        }
+
+        public async Task<bool> UpdatePatient(PatientUpdateDatabaseModel patient)
+        {
+            var storedProcedure = "[dbo].[usp_UpdatePatientWithId]";
+            return await InsertOrUpdate<bool, PatientUpdateDatabaseModel>
+                (storedProcedure, patient);
         }
 
     }

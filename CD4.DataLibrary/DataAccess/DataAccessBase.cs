@@ -77,5 +77,14 @@ namespace CD4.DataLibrary.DataAccess
             return returnData;
         }
 
+        internal async Task<T> InsertOrUpdate<T,U>(string storedProcedure, U parameters)
+        {
+            using (IDbConnection connection = new SqlConnection(helper.GetConnectionString()))
+            {
+                return await connection.QueryFirstOrDefaultAsync<T>
+                    (storedProcedure,parameters,commandType: CommandType.StoredProcedure);
+            }
+
+        }
     }
 }
