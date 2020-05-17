@@ -95,6 +95,7 @@
     <Build Include="dbo\StoredProcedures\usp_InsertPatient.sql" />
     <Build Include="dbo\StoredProcedures\usp_UpdatePatientWithId.sql" />
     <Build Include="dbo\StoredProcedures\usp_UpdateAnalysisRequest.sql" />
+    <Build Include="dbo\StoredProcedures\usp_InsertAnalysisRequest.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
