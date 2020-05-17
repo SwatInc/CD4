@@ -119,12 +119,22 @@ namespace CD4.DataLibrary.DataAccess
             #region Insert / Update request and sample
             if (requestSampleStatus == RequestDataStatus.Dirty)
             {
-                //update request and sample
+                //var isPatientUpdated = await patientData.UpdatePatient(patientToUpdate);
+                //if (!isPatientUpdated) { throw new Exception("Cannot update patient data!"); }
+                var requestToUpdate = new AnalysisRequestUpdateDatabaseModel()
+                {
+                    Id = requestAndSample.RequestId,
+                    PatientId = patient.Id,
+                    EpisodeNumber = request.EpisodeNumber,
+                    Age = request.Age
+                };
+
+                var isRequestUpdated = await UpdateRequest(requestToUpdate);
             }
 
             if (requestSampleStatus == RequestDataStatus.New)
             {
-                //insert request and sample
+                //insert request and then sample
             }
 
             #endregion
@@ -281,6 +291,28 @@ namespace CD4.DataLibrary.DataAccess
             }
             return listOfTestsToRemove;
 
+        }
+
+        public async Task<int> InsertRequest(AnalysisRequestInsertDatabaseModel request)
+        {
+            var storedProcedure = "[dbo].[usp_InsertAnalysisRequest]";
+            return await InsertOrUpdate<int, AnalysisRequestInsertDatabaseModel>
+                (storedProcedure, request);
+        }
+
+        public async Task<bool> UpdateRequest(AnalysisRequestUpdateDatabaseModel request)
+        {
+            try
+            {
+                var storedProcedure = "[dbo].[usp_UpdateAnalysisRequest]";
+                _ = await InsertOrUpdate<bool, AnalysisRequestUpdateDatabaseModel>
+                    (storedProcedure, request);
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

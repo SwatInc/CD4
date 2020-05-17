@@ -59,6 +59,8 @@
     <Compile Include="DiskIO\Read.cs" />
     <Compile Include="Helpers\Helper.cs" />
     <Compile Include="Models\AnalysisRequestDataModel.cs" />
+    <Compile Include="Models\AnalysisRequestInsertDatabaseModel.cs" />
+    <Compile Include="Models\AnalysisRequestUpdateDatabaseModel.cs" />
     <Compile Include="Models\AtollIslandModel.cs" />
     <Compile Include="Models\AtollModel.cs" />
     <Compile Include="Models\ClinicalDetailsDatabaseModel.cs" />
