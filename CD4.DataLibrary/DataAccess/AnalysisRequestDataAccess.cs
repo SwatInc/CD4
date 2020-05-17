@@ -66,6 +66,57 @@ namespace CD4.DataLibrary.DataAccess
 
             #endregion
 
+            #region Insert / Update / Delete from database
+
+            #region Database IO
+
+            #region insert / update patient
+
+            if (patientStatus == RequestDataStatus.Dirty)
+            {
+                //update patient
+            }
+
+            if (patientStatus == RequestDataStatus.New)
+            {
+                //insert patient
+            }
+
+            #endregion
+
+            #region Insert / Update request and sample
+            if (requestSampleStatus == RequestDataStatus.Dirty)
+            {
+                //update request and sample
+            }
+
+            if (requestSampleStatus == RequestDataStatus.New)
+            {
+                //insert request and sample
+            }
+
+            #endregion
+
+            #region results table IO for tests in request.
+
+            if(TestsToRemove.Count > 0)
+            {
+                //delete tests
+            }
+
+            if (TestsToInsert.Count > 0)
+            {
+                //insert tests
+            }
+
+            #endregion
+
+            #endregion
+
+
+
+
+            #endregion
             return true;
         }
 
