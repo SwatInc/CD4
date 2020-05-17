@@ -91,7 +91,6 @@ namespace CD4.DataLibrary.DataAccess
                 var isPatientUpdated = await patientData.UpdatePatient(patientToUpdate);
                 if (!isPatientUpdated) { throw new Exception("Cannot update patient data!"); }
             }
-
             if (patientStatus == RequestDataStatus.New)
             {
                 //insert patient
@@ -133,10 +132,19 @@ namespace CD4.DataLibrary.DataAccess
                     throw new Exception("Cannot update request data! [ either episode number, age or patient associated with request was not updated ]");
                 }
             }
-
             if (requestSampleStatus == RequestDataStatus.New)
             {
-                //insert request and then sample
+                var requestToInsert = new AnalysisRequestInsertDatabaseModel()
+                {
+                    PatientId = GetPatientId(patient, InsertedPatientId),
+                    EpisodeNumber = request.EpisodeNumber,
+                    Age = request.Age
+                };
+                InsertedRequestId = await InsertRequest(requestToInsert);
+                if (InsertedRequestId == 0)
+                {
+                    throw new Exception("An error occured. Cannot insert the request data! [Age and Episode number | cannot associate patient with request.]");
+                }
             }
 
             #endregion
@@ -162,6 +170,21 @@ namespace CD4.DataLibrary.DataAccess
 
             #endregion
             return true;
+        }
+
+        /// <summary>
+        /// Determined which of the variable holds the patient Id, either will have the Id but not both.
+        /// </summary>
+        /// <param name="patient"> The patient record fetched from database. </param>
+        /// <param name="insertedPatientId"> Inserted patient Id</param>
+        /// <returns> return the patient Id associated with the patient of current request</returns>
+        private int GetPatientId(PatientModel patient, int insertedPatientId)
+        {
+            if(patient is null)
+            {
+                return insertedPatientId;
+            }
+            return patient.Id;
         }
 
         private RequestDataStatus AssesClinicalDetailStatus
