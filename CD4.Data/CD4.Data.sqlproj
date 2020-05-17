@@ -61,6 +61,7 @@
     <Folder Include="dbo\StoredProcedures" />
     <Folder Include="dbo\Views" />
     <Folder Include="dbo\Scripts" />
+    <Folder Include="dbo\Types" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Patient.sql" />
@@ -98,6 +99,7 @@
     <Build Include="dbo\StoredProcedures\usp_InsertAnalysisRequest.sql" />
     <Build Include="dbo\StoredProcedures\usp_InsertSample.sql" />
     <Build Include="dbo\StoredProcedures\usp_InsertSampleAssociatedTests.sql" />
+    <Build Include="dbo\Types\tvp_ResultTableData.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
