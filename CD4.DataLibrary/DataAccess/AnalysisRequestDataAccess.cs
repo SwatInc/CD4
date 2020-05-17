@@ -23,6 +23,7 @@ namespace CD4.DataLibrary.DataAccess
             RequestDataStatus patientStatus = RequestDataStatus.New;
             RequestDataStatus clinicalDetailsStatus = RequestDataStatus.New;
             int InsertedPatientId = 0;
+            int InsertedRequestId = 0;
 
             List<TestsModel> TestsToInsert = new List<TestsModel>();
             List<TestsModel> TestsToRemove = new List<TestsModel>();
@@ -119,8 +120,6 @@ namespace CD4.DataLibrary.DataAccess
             #region Insert / Update request and sample
             if (requestSampleStatus == RequestDataStatus.Dirty)
             {
-                //var isPatientUpdated = await patientData.UpdatePatient(patientToUpdate);
-                //if (!isPatientUpdated) { throw new Exception("Cannot update patient data!"); }
                 var requestToUpdate = new AnalysisRequestUpdateDatabaseModel()
                 {
                     Id = requestAndSample.RequestId,
@@ -128,8 +127,11 @@ namespace CD4.DataLibrary.DataAccess
                     EpisodeNumber = request.EpisodeNumber,
                     Age = request.Age
                 };
-
                 var isRequestUpdated = await UpdateRequest(requestToUpdate);
+                if (!isRequestUpdated)
+                {
+                    throw new Exception("Cannot update request data! [ either episode number, age or patient associated with request was not updated ]");
+                }
             }
 
             if (requestSampleStatus == RequestDataStatus.New)
