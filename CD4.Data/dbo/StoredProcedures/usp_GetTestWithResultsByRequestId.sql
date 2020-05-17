@@ -3,7 +3,9 @@
 AS
 BEGIN
 SET NOCOUNT ON;
-SELECT [R].[Id], [R].[AnalysisRequestId], [R].[Sample_Cin], [R].[TestId], [R].[Result], [R].[ResultDate]
+SELECT [R].[Id], [S].[AnalysisRequestId], [R].[Sample_Cin], [R].[TestId], [R].[Result], [R].[ResultDate]
 FROM [dbo].[Result] [R]
-WHERE [R].[AnalysisRequestId] = @AnalysisRequestId;
+INNER JOIN [dbo].[Sample] [S] ON [S].[Cin] = [R].[Sample_Cin]
+INNER JOIN [dbo].[AnalysisRequest] [AR] ON [AR].[Id] = [S].[AnalysisRequestId]
+WHERE [S].[AnalysisRequestId] = @AnalysisRequestId;
 END

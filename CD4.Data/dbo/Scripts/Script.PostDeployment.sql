@@ -374,9 +374,9 @@ SET @TestId_Two = (SELECT TOP(1)[T].[Id] FROM [dbo].[Test] [T] ORDER BY [T].[Id]
 
 
 --Insert Result
-INSERT INTO [dbo].[Result] ([AnalysisRequestId], [Sample_Cin], [TestId]) VALUES
-(@InsertedRequestId,@Cin, @TestId_One),
-(@InsertedRequestId,@Cin, @TestId_Two);
+INSERT INTO [dbo].[Result] ([Sample_Cin], [TestId]) VALUES
+(@Cin, @TestId_One),
+(@Cin, @TestId_Two);
 
 
 
