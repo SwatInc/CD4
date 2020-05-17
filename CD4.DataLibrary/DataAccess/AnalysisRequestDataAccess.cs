@@ -1,7 +1,6 @@
 ﻿using CD4.DataLibrary.Models;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,25 +10,30 @@ namespace CD4.DataLibrary.DataAccess
     {
         private readonly IPatientDataAccess patientData;
         private readonly IClinicalDetailsDataAccess clinicalDetailsData;
-        private List<TestsModel> TestsToInsert  = new List<TestsModel>();
-        private List<TestsModel> TestsToRemove = new List<TestsModel>();
 
         public AnalysisRequestDataAccess(IPatientDataAccess patientData, IClinicalDetailsDataAccess clinicalDetailsData)
         {
             this.patientData = patientData;
             this.clinicalDetailsData = clinicalDetailsData;
         }
+
         public async Task<bool> ConfirmRequestAsync(AnalysisRequestDataModel request)
         {
             RequestDataStatus requestSampleStatus = RequestDataStatus.New;
             RequestDataStatus patientStatus = RequestDataStatus.New;
             RequestDataStatus clinicalDetailsStatus = RequestDataStatus.New;
 
+            List<TestsModel> TestsToInsert = new List<TestsModel>();
+            List<TestsModel> TestsToRemove = new List<TestsModel>();
+            List<ClinicalDetailsDatabaseModel> clinicalDetails = new List<ClinicalDetailsDatabaseModel>();
+            List<ResultsDatabaseModel> databaseTestsForRequest = new List<ResultsDatabaseModel>();
+
+
             #region Request Rejection Criteria
 
             if (string.IsNullOrEmpty(request.Cin))
             {
-                throw new ArgumentNullException("CIN", "COVID Identification number cannot be null! Analysis request not saved!"); 
+                throw new ArgumentNullException("CIN", "COVID Identification number cannot be null! Analysis request not saved!");
             }
 
             #endregion
@@ -39,9 +43,7 @@ namespace CD4.DataLibrary.DataAccess
             var requestAndSample = await GetSampleByIdAsync(request.Cin);
             var patient = (await patientData.GetPatientByNidPp(request.NationalIdPassport)).FirstOrDefault();
 
-            List<ClinicalDetailsDatabaseModel> clinicalDetails = new List<ClinicalDetailsDatabaseModel>();
-            List<ResultsDatabaseModel> databaseTestsForRequest = new List<ResultsDatabaseModel>();
-            if(requestAndSample != null)
+            if (requestAndSample != null)
             {
                 clinicalDetails = await clinicalDetailsData.GetClinicalDetailsByRequestId(requestAndSample.RequestId);
                 databaseTestsForRequest = await GetRequestedTestsByRequestId(requestAndSample.RequestId);
@@ -49,68 +51,87 @@ namespace CD4.DataLibrary.DataAccess
 
             #endregion
 
-            #region Set Status for Data [GETTING READY MANIPULATE DATABASE]
+            #region Determine request, sample and , clinical details status | Test to insert / delete
 
-            #region Determine request and sample status
+            requestSampleStatus = AssesRequestAndSampleStatus(requestAndSample, request);
+            patientStatus = AssesPatientStatus(patient, request);
 
+            if (requestAndSample != null)
+            {
+                clinicalDetailsStatus = AssesClinicalDetailStatus(request, clinicalDetails);
+                TestsToInsert = GetTestsToInsert(request.Tests, databaseTestsForRequest);
+                TestsToRemove = GetTestsToRemove(request.Tests, databaseTestsForRequest);
+
+            }
+
+            #endregion
+
+            return true;
+        }
+
+        private RequestDataStatus AssesClinicalDetailStatus
+            (AnalysisRequestDataModel request, List<ClinicalDetailsDatabaseModel> clinicalDetails)
+        {
+            var status = RequestDataStatus.New;
+            if (!ClinicalDetailsDatabaseModel.AreEqual(request.ClinicalDetails, clinicalDetails))
+            {
+                status = RequestDataStatus.Dirty;
+            }
+            else
+            {
+                status = RequestDataStatus.Clean;
+            }
+
+            return status;
+
+        }
+
+        private RequestDataStatus AssesPatientStatus
+            (PatientModel patient, AnalysisRequestDataModel request)
+        {
+            var status = RequestDataStatus.New;
+            if (patient != null)
+            {
+                if (!patient.AreEqual(request))
+                {
+                    status = RequestDataStatus.Dirty;
+                }
+                else
+                {
+                    status = RequestDataStatus.Clean;
+                }
+            }
+            return status;
+        }
+
+        /// <summary>
+        /// Asses the status of request and sample data supplied by 
+        /// UI compared with that on database
+        /// </summary>
+        /// <param name="requestAndSample"></param>
+        /// <param name="request"></param>
+        /// <returns>An enum indicating new, dirty or clean status of supplied data
+        /// in comparision with database.
+        /// </returns>
+        private RequestDataStatus AssesRequestAndSampleStatus
+            (RequestAndSampleDatabaseModel requestAndSample, AnalysisRequestDataModel request)
+        {
+            var status = RequestDataStatus.New;
             if (requestAndSample != null)
             {
                 //checks Age, Cin, Site, Collection Date and received date
                 if (!requestAndSample.AreEqual(request))
                 {
-                    requestSampleStatus = RequestDataStatus.Dirty;
+                    status = RequestDataStatus.Dirty;
                     //This will require an update. updates will be done in a later step.
                 }
                 else
                 {
-                    requestSampleStatus = RequestDataStatus.Clean;
+                    status = RequestDataStatus.Clean;
                 }
             }
 
-            #endregion
-
-            #region DeterminePatientStatus
-
-            if(patient != null)
-            {
-                if(!patient.AreEqual(request))
-                {
-                    patientStatus = RequestDataStatus.Dirty;
-                }
-                else
-                {
-                    patientStatus = RequestDataStatus.Clean;
-                }
-            }
-
-            #endregion
-
-            #region Determine Clinical Details Status
-            if (requestAndSample != null)
-            {
-                if (!ClinicalDetailsDatabaseModel.AreEqual(request.ClinicalDetails, clinicalDetails))
-                {
-                    clinicalDetailsStatus = RequestDataStatus.Dirty;
-                }
-                else
-                {
-                    clinicalDetailsStatus = RequestDataStatus.Clean;
-                }
-
-            }
-            #endregion
-
-            #region Setup tests to insert and remove from database
-
-            TestsToInsert = GetTestsToInsert(request.Tests, databaseTestsForRequest);
-            TestsToRemove = GetTestsToRemove(request.Tests, databaseTestsForRequest);
-
-            #endregion
-
-            #endregion
-
-
-            return true;
+            return status;
         }
 
         private async Task<RequestAndSampleDatabaseModel> GetSampleByIdAsync(string cin)
@@ -125,9 +146,9 @@ namespace CD4.DataLibrary.DataAccess
         public async Task<List<ResultsDatabaseModel>> GetRequestedTestsByRequestId(int requestId)
         {
             var storedProcedure = "[dbo].[usp_GetTestWithResultsByRequestId]";
-            var parameter = new RequestIdParameterModel() { AnalysisRequestId = requestId};
+            var parameter = new RequestIdParameterModel() { AnalysisRequestId = requestId };
             return await LoadDataWithParameterAsync<ResultsDatabaseModel, RequestIdParameterModel>(storedProcedure, parameter);
-        
+
         }
 
         private List<TestsModel> GetTestsToInsert(List<TestsModel> userInputList, List<ResultsDatabaseModel> requestedTestsOnDatabase)
