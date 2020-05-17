@@ -22,6 +22,7 @@ namespace CD4.DataLibrary.DataAccess
             RequestDataStatus requestSampleStatus = RequestDataStatus.New;
             RequestDataStatus patientStatus = RequestDataStatus.New;
             RequestDataStatus clinicalDetailsStatus = RequestDataStatus.New;
+            int InsertedPatientId = 0;
 
             List<TestsModel> TestsToInsert = new List<TestsModel>();
             List<TestsModel> TestsToRemove = new List<TestsModel>();
@@ -93,6 +94,24 @@ namespace CD4.DataLibrary.DataAccess
             if (patientStatus == RequestDataStatus.New)
             {
                 //insert patient
+                var patientToInsert = new PatientInsertDatabaseModel()
+                {
+                    Fullname = request.Fullname,
+                    NidPp = request.NationalIdPassport,
+                    Birthdate = request.Birthdate.ToString("yyyyMMdd"),
+                    GenderId = request.GenderId,
+                    AtollId = request.AtollId,
+                    CountryId = request.CountryId,
+                    Address = request.Address,
+                    PhoneNumber = request.PhoneNumber
+                };
+                InsertedPatientId = await patientData.InsertPatient(patientToInsert);
+
+                if (InsertedPatientId == 0)
+                {
+                    throw new Exception("An error occured. Cannot insert the patient!");
+                }
+
             }
 
             #endregion
@@ -112,7 +131,7 @@ namespace CD4.DataLibrary.DataAccess
 
             #region results table IO for tests in request.
 
-            if(TestsToRemove.Count > 0)
+            if (TestsToRemove.Count > 0)
             {
                 //delete tests
             }
