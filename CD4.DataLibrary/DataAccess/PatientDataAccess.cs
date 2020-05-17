@@ -40,6 +40,11 @@ namespace CD4.DataLibrary.DataAccess
             }
         }
 
+        /// <summary>
+        /// Inserts a patient to the database.
+        /// </summary>
+        /// <param name="patient"></param>
+        /// <returns>An integer representing inserted patient Id</returns>
         public async Task<int> InsertPatient(PatientInsertDatabaseModel patient)
         {
             var storedProcedure = "[dbo].[usp_InsertPatient]";
