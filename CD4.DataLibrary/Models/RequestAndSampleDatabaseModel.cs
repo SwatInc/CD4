@@ -9,6 +9,7 @@ namespace CD4.DataLibrary.Models
     public class RequestAndSampleDatabaseModel
     {
         public int RequestId { get; set; }
+        public string EpisodeNumber { get; set; }
         public string Age { get; set; }
         public string Cin { get; set; }
         public int SiteId { get; set; }
@@ -22,6 +23,7 @@ namespace CD4.DataLibrary.Models
             if (SiteId != request.SiteId) return false;
             if (CollectionDate.ToString("yyyMMdd") != request.SampleCollectionDate.ToString("yyyMMdd")) return false;
             if (ReceivedDate.ToString("yyyMMdd") != request.SampleReceivedDate.ToString("yyyMMdd")) return false;
+            if (EpisodeNumber != request.EpisodeNumber) return false;
             return true;
         }
     }
