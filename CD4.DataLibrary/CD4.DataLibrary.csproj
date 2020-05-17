@@ -70,8 +70,10 @@
     <Compile Include="Models\GenderModel.cs" />
     <Compile Include="Models\GenericTwoListModel.cs" />
     <Compile Include="Models\NidPpParameterModel.cs" />
+    <Compile Include="Models\PatientInsertDatabaseModel.cs" />
     <Compile Include="Models\PatientModel.cs" />
     <Compile Include="Models\PatientNameParameterModel.cs" />
+    <Compile Include="Models\PatientUpdateDatabaseModel.cs" />
     <Compile Include="Models\ProfileDatabaseModel.cs" />
     <Compile Include="Models\ProfilesAndTestModelOeModel.cs" />
     <Compile Include="Models\ProfileTestsDatabaseModel.cs" />
