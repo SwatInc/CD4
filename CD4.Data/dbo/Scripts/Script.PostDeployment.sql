@@ -338,6 +338,7 @@ DECLARE @TestId_Two int;
 DECLARE @ClinicalDetail_One int;
 DECLARE @ClinicalDetail_Two int;
 DECLARE @Cin varchar(50) = 'nCoV-2346/20';
+DECLARE @EpisodeNumber varchar(15) = 'BS1234567';
 
 
 SET @PatientId = (SELECT TOP(1) [P].[Id] FROM [dbo].[Patient] [P]);
@@ -348,8 +349,8 @@ INSERT INTO [dbo].[Scientist] ([Name]) VALUES
 SET @ScientistId = (SELECT TOP(1)Id FROM [dbo].[Scientist] ORDER BY [Id] DESC);
 
 --Insert the Analysis Request
-INSERT INTO [dbo].[AnalysisRequest] ([PatientId], [Age], [CheckedBy], [ApprovedBy]) VALUES
-(@PatientId, 23, @ScientistId,@ScientistId);
+INSERT INTO [dbo].[AnalysisRequest] ([PatientId],[EpisodeNumber], [Age], [CheckedBy], [ApprovedBy]) VALUES
+(@PatientId,@EpisodeNumber,23, @ScientistId,@ScientistId);
 
 SET @InsertedRequestId = (SELECT TOP(1)Id FROM [dbo].[AnalysisRequest] ORDER BY [Id] DESC);
 SET @SiteId  = (SELECT TOP(1)Id FROM [dbo].[Sites]);

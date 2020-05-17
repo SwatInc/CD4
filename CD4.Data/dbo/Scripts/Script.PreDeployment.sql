@@ -35,6 +35,7 @@
 --DELETE FROM [dbo].[Test];
 --GO
 
+
 --EXEC msdb.dbo.sp_delete_database_backuphistory @database_name = N'CD4Data'
 --GO
 --use [CD4Data];
@@ -51,3 +52,15 @@
 --DROP DATABASE [CD4Data]
 --GO
 
+--DECLARE @DoesDatabaseExist int;
+
+--SET @DoesDatabaseExist = (SELECT COUNT(*) FROM [dbo].[sysdatabases] [d] WHERE [d].[name] = N'CD4Data');
+
+--IF (@DoesDatabaseExist > 0)
+--BEGIN
+
+--EXEC msdb.dbo.sp_delete_database_backuphistory @database_name = N'CD4Data';
+--USE [master];
+--DROP DATABASE [CD4Data];
+
+--END
