@@ -92,6 +92,7 @@
     <Build Include="dbo\StoredProcedures\usp_GetRequestAndSample.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetClinicalDetailsByRequestId.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetTestWithResultsByRequestId.sql" />
+    <Build Include="dbo\StoredProcedures\usp_InsertPatient.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
