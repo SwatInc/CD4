@@ -49,9 +49,17 @@ namespace CD4.DataLibrary.DataAccess
 
         public async Task<bool> UpdatePatient(PatientUpdateDatabaseModel patient)
         {
-            var storedProcedure = "[dbo].[usp_UpdatePatientWithId]";
-            return await InsertOrUpdate<bool, PatientUpdateDatabaseModel>
-                (storedProcedure, patient);
+            try
+            {
+                var storedProcedure = "[dbo].[usp_UpdatePatientWithId]";
+                _ = await InsertOrUpdate<bool, PatientUpdateDatabaseModel>
+                    (storedProcedure, patient);
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
     }
