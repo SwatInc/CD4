@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CD4.DataLibrary.Models
 {
-    public class SampleNumberParameterModel
+    public class CinParameterModel
     {
         public string Cin { get; set; }
     }

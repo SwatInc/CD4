@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace CD4.DataLibrary.Models
 {
-    public class PatientNameSearchModel
+    public class NidPpParameterModel
     {
-        public string PartialPatientName { get; set; }
+        public string NidPp { get; set; }
     }
 }

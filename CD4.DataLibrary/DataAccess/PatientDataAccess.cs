@@ -12,10 +12,10 @@ namespace CD4.DataLibrary.DataAccess
         public async Task<List<PatientModel>> GetPatientByPartialName(string partialName)
         {
             var storedProcedure = "[dbo].[usp_SearchPatientByPartialName]";
-            var parameter = new PatientNameSearchModel() { PartialPatientName = partialName };
+            var parameter = new PatientNameParameterModel() { PartialPatientName = partialName };
             try
             {
-                var results = await LoadDataWithParameterAsync<PatientModel, PatientNameSearchModel>
+                var results = await LoadDataWithParameterAsync<PatientModel, PatientNameParameterModel>
                     (storedProcedure, parameter);
                 return results;
             }
@@ -28,10 +28,10 @@ namespace CD4.DataLibrary.DataAccess
         public async Task<List<PatientModel>> GetPatientByNidPp(string NidPp)
         {
             var storedProcedure = "[dbo].[usp_SearchPatientByNidPp]";
-            var parameter = new PatientByNidPpSearchModel() { NidPp = NidPp };
+            var parameter = new NidPpParameterModel() { NidPp = NidPp };
             try
             {
-                var results = await LoadDataWithParameterAsync<PatientModel, PatientByNidPpSearchModel>
+                var results = await LoadDataWithParameterAsync<PatientModel, NidPpParameterModel>
                     (storedProcedure, parameter);
                 return results;
             }

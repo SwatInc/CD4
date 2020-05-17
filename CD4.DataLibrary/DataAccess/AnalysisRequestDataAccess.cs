@@ -188,9 +188,9 @@ namespace CD4.DataLibrary.DataAccess
         private async Task<RequestAndSampleDatabaseModel> GetSampleByIdAsync(string cin)
         {
             var storedProcedure = "[dbo].[usp_GetRequestAndSample]";
-            var parameter = new SampleNumberParameterModel() { Cin = cin };
+            var parameter = new CinParameterModel() { Cin = cin };
 
-            var sampleAndRequest = await LoadDataWithParameterAsync<RequestAndSampleDatabaseModel, SampleNumberParameterModel>(storedProcedure, parameter);
+            var sampleAndRequest = await LoadDataWithParameterAsync<RequestAndSampleDatabaseModel, CinParameterModel>(storedProcedure, parameter);
             return sampleAndRequest.FirstOrDefault();
         }
 
