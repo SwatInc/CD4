@@ -97,6 +97,7 @@
     <Build Include="dbo\StoredProcedures\usp_UpdateAnalysisRequest.sql" />
     <Build Include="dbo\StoredProcedures\usp_InsertAnalysisRequest.sql" />
     <Build Include="dbo\StoredProcedures\usp_InsertSample.sql" />
+    <Build Include="dbo\StoredProcedures\usp_InsertSampleAssociatedTests.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
