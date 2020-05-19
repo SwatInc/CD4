@@ -11,7 +11,9 @@ namespace CD4.DataLibrary.Models
 {
     public class RequestSampleAndClinicalDetailsInsertDatabaseModel
     {
-        public RequestSampleAndClinicalDetailsInsertDatabaseModel(int patientId, AnalysisRequestDataModel request)
+        #region Default Constructor
+        public RequestSampleAndClinicalDetailsInsertDatabaseModel
+            (int patientId, AnalysisRequestDataModel request)
         {
             PatientId = patientId;
             EpisodeNumber = request.EpisodeNumber;
@@ -24,6 +26,9 @@ namespace CD4.DataLibrary.Models
             RequestedTestData = RequestedTestsTable(request);
         }
 
+        #endregion
+
+        #region Private Methods
         private SqlMapper.ICustomQueryParameter RequestedTestsTable
             (AnalysisRequestDataModel request)
         {
@@ -46,12 +51,16 @@ namespace CD4.DataLibrary.Models
             foreach (var item in clinicalDetails)
             {
                 if (!item.IsSelected) continue;
-                if (string.IsNullOrEmpty(returnValue)) { returnValue = $"{item},"; }
-                returnValue = $"{returnValue},{item}";
+                if (string.IsNullOrEmpty(returnValue)) { returnValue = $"{item.Id}"; }
+                returnValue = $"{returnValue},{item.Id}";
             }
 
             return returnValue;
         }
+
+        #endregion
+
+        #region Public properties
 
         public int PatientId { get; private set; }
         public string EpisodeNumber { get; private set; }
@@ -63,15 +72,6 @@ namespace CD4.DataLibrary.Models
         public string CommaDelimitedClinicalDetailsIds { get; private set; }
         public SqlMapper.ICustomQueryParameter RequestedTestData { get; set; }
 
-        //int patientId,
-        //    string episodeNumber,
-        //    string Age,
-        //    string Cin,
-        //    int SiteId,
-        //    DateTime? CollectionDate,
-        //    DateTime? ReceivedDate,
-        //    List<ClinicalDetailsSelectionModel> clinicalDetails,
-        //    List<TestsModel> tests
-
+        #endregion
     }
 }

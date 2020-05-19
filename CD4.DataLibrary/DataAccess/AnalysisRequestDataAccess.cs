@@ -137,25 +137,12 @@ namespace CD4.DataLibrary.DataAccess
                     throw new Exception("Cannot update request data! [ either episode number, age or patient associated with request was not updated ]");
                 }
             }
+
             if (requestSampleStatus == RequestDataStatus.New)
             {
                 //IF REQUEST IS NEW:: CLINICAL DETAILS, SAMPLE AND REQUESTED TESTS
                 //WILL BE NEW FOR SURE. SO HANDLE THEM ALL AT THE SAME TIME
-
-            }
-
-            #endregion
-
-            #region results table IO for tests in request.
-
-            if (TestsToRemove.Count > 0)
-            {
-                //delete tests
-            }
-
-            if (TestsToInsert.Count > 0)
-            {
-                //insert tests
+                var output = await InsertNewCompleteRequest(GetPatientId(patient, InsertedPatientId), request);
             }
 
             #endregion
@@ -167,6 +154,14 @@ namespace CD4.DataLibrary.DataAccess
             return true;
         }
 
+        private async Task<bool> InsertNewCompleteRequest(int patientId, AnalysisRequestDataModel request)
+        {
+            var insertData = new RequestSampleAndClinicalDetailsInsertDatabaseModel(patientId, request);
+            return await InsertOrUpdate<bool, RequestSampleAndClinicalDetailsInsertDatabaseModel>
+                ("[dbo].[usp_InsertAnalysisRequestSampleAndRequestedTests]", insertData);
+        }
+
+
         /// <summary>
         /// Determined which of the variable holds the patient Id, either will have the Id but not both.
         /// </summary>
@@ -175,7 +170,7 @@ namespace CD4.DataLibrary.DataAccess
         /// <returns> return the patient Id associated with the patient of current request</returns>
         private int GetPatientId(PatientModel patient, int insertedPatientId)
         {
-            if(patient is null)
+            if (patient is null)
             {
                 return insertedPatientId;
             }
