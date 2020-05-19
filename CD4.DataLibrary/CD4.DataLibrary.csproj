@@ -82,6 +82,7 @@
     <Compile Include="Models\RequestAndSampleDatabaseModel.cs" />
     <Compile Include="Models\RequestDataStatus.cs" />
     <Compile Include="Models\RequestIdParameterModel.cs" />
+    <Compile Include="Models\RequestSampleAndClinicalDetailsInsertDatabaseModel.cs" />
     <Compile Include="Models\ResultsDatabaseModel.cs" />
     <Compile Include="Models\CinParameterModel.cs" />
     <Compile Include="Models\SitesModel.cs" />

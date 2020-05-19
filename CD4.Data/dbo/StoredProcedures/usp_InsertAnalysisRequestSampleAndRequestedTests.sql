@@ -3,11 +3,11 @@
 	@EpisodeNumber varchar(15),
 	@Age varchar(20),
 	@Cin varchar(50),
-	@AnalysisRequestId int,
 	@SiteId int,
 	@CollectionDate char(8),
 	@ReceivedDate char(8),
-	@requestedTestData [dbo].[ResultTableInsertDataUDT] READONLY
+	@CommaDelimitedClinicalDetailsIds varchar(100),
+	@RequestedTestData [dbo].[ResultTableInsertDataUDT] READONLY
 AS
 BEGIN
 SET NOCOUNT ON;
@@ -15,6 +15,10 @@ SET XACT_ABORT ON;
     BEGIN TRANSACTION;
     SAVE TRANSACTION SavePoint;
 		BEGIN TRY
+				
+				DECLARE @AnalysisRequestId int;
+				DECLARE @ReturnValue bit = 1;
+
 				--used to catch all inserted ids
 				DECLARE @InsertedId TABLE ([Id] int);
 
@@ -26,6 +30,11 @@ SET XACT_ABORT ON;
 				--set inserted analysis requestId
 				SELECT @AnalysisRequestId =  [Id] FROM @InsertedId;
 
+				--insert clincial details
+				INSERT INTO [dbo].[AnalysisRequest_ClinicalDetail]([AnalysisRequestId],[ClinicalDetailsId])
+				SELECT @AnalysisRequestId AS [AnalysisRequestId] ,CAST(value as int) AS [ClinicalDetailsId] 
+				FROM STRING_SPLIT(@CommaDelimitedClinicalDetailsIds,',');
+
 				--insert into dbo.Sample
 				INSERT INTO [dbo].[Sample]([Cin], [AnalysisRequestId], [SiteId], [CollectionDate], [ReceivedDate])
 				VALUES (@Cin,@AnalysisRequestId , @SiteId, @CollectionDate, @ReceivedDate);
@@ -33,8 +42,9 @@ SET XACT_ABORT ON;
 				--insert into dbo.Result
 				INSERT INTO [dbo].[Result] ([Sample_Cin], [TestId])
 				SELECT [TD].[Sample_Cin], [TD].[TestId]
-				FROM @requestedTestData [TD];
+				FROM @RequestedTestData [TD];
 				COMMIT TRANSACTION; 
+				RETURN @ReturnValue;
 		END TRY
 		BEGIN CATCH
 				IF (XACT_STATE()) = -1  

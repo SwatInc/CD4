@@ -1,6 +1,7 @@
 ﻿using CD4.DataLibrary.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -57,7 +58,7 @@ namespace CD4.DataLibrary.DataAccess
 
             #endregion
 
-            #region Determine request, sample and , clinical details status | Test to insert / delete
+            #region Determine request, sample and , clinical details status | Determine Tests to insert / delete
 
             requestSampleStatus = AssesRequestAndSampleStatus(requestAndSample, request);
             patientStatus = AssesPatientStatus(patient, request);
@@ -138,17 +139,9 @@ namespace CD4.DataLibrary.DataAccess
             }
             if (requestSampleStatus == RequestDataStatus.New)
             {
-                var requestToInsert = new AnalysisRequestInsertDatabaseModel()
-                {
-                    PatientId = GetPatientId(patient, InsertedPatientId),
-                    EpisodeNumber = request.EpisodeNumber,
-                    Age = request.Age
-                };
-                InsertedRequestId = await InsertRequest(requestToInsert);
-                if (InsertedRequestId == 0)
-                {
-                    throw new Exception("An error occured. Cannot insert the request data! [Age and Episode number | cannot associate patient with request.]");
-                }
+                //IF REQUEST IS NEW:: CLINICAL DETAILS, SAMPLE AND REQUESTED TESTS
+                //WILL BE NEW FOR SURE. SO HANDLE THEM ALL AT THE SAME TIME
+
             }
 
             #endregion
@@ -168,8 +161,6 @@ namespace CD4.DataLibrary.DataAccess
             #endregion
 
             #endregion
-
-
 
 
             #endregion
