@@ -51,7 +51,11 @@ namespace CD4.DataLibrary.Models
             foreach (var item in clinicalDetails)
             {
                 if (!item.IsSelected) continue;
-                if (string.IsNullOrEmpty(returnValue)) { returnValue = $"{item.Id}"; }
+                if (string.IsNullOrEmpty(returnValue)) 
+                {
+                    returnValue = $"{item.Id}";
+                    continue;
+                }
                 returnValue = $"{returnValue},{item.Id}";
             }
 

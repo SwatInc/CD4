@@ -328,55 +328,55 @@ INSERT INTO [dbo].[Patient]
 ('Aminath Hussain','A987654','19800214',@MaleGenderId,@SHithadhooId,@MaldivesCountryId,'Some Some Address','973465347');
 
 
---Get a patient Id
-DECLARE @PatientId int;
-DECLARE @ScientistId int;
-DECLARE @InsertedRequestId int;
-DECLARE @SiteId int;
-DECLARE @TestId_One int;
-DECLARE @TestId_Two int;
-DECLARE @ClinicalDetail_One int;
-DECLARE @ClinicalDetail_Two int;
-DECLARE @Cin varchar(50) = 'nCoV-2346/20';
-DECLARE @EpisodeNumber varchar(15) = 'BS1234567';
+----Get a patient Id
+--DECLARE @PatientId int;
+--DECLARE @ScientistId int;
+--DECLARE @InsertedRequestId int;
+--DECLARE @SiteId int;
+--DECLARE @TestId_One int;
+--DECLARE @TestId_Two int;
+--DECLARE @ClinicalDetail_One int;
+--DECLARE @ClinicalDetail_Two int;
+--DECLARE @Cin varchar(50) = 'nCoV-2346/20';
+--DECLARE @EpisodeNumber varchar(15) = 'BS1234567';
 
 
-SET @PatientId = (SELECT TOP(1) [P].[Id] FROM [dbo].[Patient] [P]);
+--SET @PatientId = (SELECT TOP(1) [P].[Id] FROM [dbo].[Patient] [P]);
 
---Insert a scientist
-INSERT INTO [dbo].[Scientist] ([Name]) VALUES 
-('Some Scientist')
-SET @ScientistId = (SELECT TOP(1)Id FROM [dbo].[Scientist] ORDER BY [Id] DESC);
+----Insert a scientist
+--INSERT INTO [dbo].[Scientist] ([Name]) VALUES 
+--('Some Scientist')
+--SET @ScientistId = (SELECT TOP(1)Id FROM [dbo].[Scientist] ORDER BY [Id] DESC);
 
---Insert the Analysis Request
-INSERT INTO [dbo].[AnalysisRequest] ([PatientId],[EpisodeNumber], [Age], [CheckedBy], [ApprovedBy]) VALUES
-(@PatientId,@EpisodeNumber,23, @ScientistId,@ScientistId);
+----Insert the Analysis Request
+--INSERT INTO [dbo].[AnalysisRequest] ([PatientId],[EpisodeNumber], [Age], [CheckedBy], [ApprovedBy]) VALUES
+--(@PatientId,@EpisodeNumber,23, @ScientistId,@ScientistId);
 
-SET @InsertedRequestId = (SELECT TOP(1)Id FROM [dbo].[AnalysisRequest] ORDER BY [Id] DESC);
-SET @SiteId  = (SELECT TOP(1)Id FROM [dbo].[Sites]);
+--SET @InsertedRequestId = (SELECT TOP(1)Id FROM [dbo].[AnalysisRequest] ORDER BY [Id] DESC);
+--SET @SiteId  = (SELECT TOP(1)Id FROM [dbo].[Sites]);
 
---insert Clinical details
-SET @ClinicalDetail_One = (SELECT TOP(1)[Id] FROM [dbo].[ClinicalDetail] ORDER BY [Id] ASC);
-SET @ClinicalDetail_Two = (SELECT TOP(1)[Id] FROM [dbo].[ClinicalDetail] ORDER BY [Id] DESC);
+----insert Clinical details
+--SET @ClinicalDetail_One = (SELECT TOP(1)[Id] FROM [dbo].[ClinicalDetail] ORDER BY [Id] ASC);
+--SET @ClinicalDetail_Two = (SELECT TOP(1)[Id] FROM [dbo].[ClinicalDetail] ORDER BY [Id] DESC);
 
-INSERT INTO [dbo].[AnalysisRequest_ClinicalDetail]([AnalysisRequestId], [ClinicalDetailsId]) VALUES
-(@InsertedRequestId, @ClinicalDetail_One),
-(@InsertedRequestId, @ClinicalDetail_Two);
+--INSERT INTO [dbo].[AnalysisRequest_ClinicalDetail]([AnalysisRequestId], [ClinicalDetailsId]) VALUES
+--(@InsertedRequestId, @ClinicalDetail_One),
+--(@InsertedRequestId, @ClinicalDetail_Two);
 
---Insert Sample
-INSERT INTO [dbo].[Sample] ([Cin], [AnalysisRequestId], [SiteId], [CollectionDate],[ReceivedDate])
-VALUES
-(@Cin, @InsertedRequestId, @SiteId, GETDATE(), GETDATE());
+----Insert Sample
+--INSERT INTO [dbo].[Sample] ([Cin], [AnalysisRequestId], [SiteId], [CollectionDate],[ReceivedDate])
+--VALUES
+--(@Cin, @InsertedRequestId, @SiteId, GETDATE(), GETDATE());
 
---Get Some Test Ids
-SET @TestId_One = (SELECT TOP(1)[T].[Id] FROM [dbo].[Test] [T] ORDER BY [T].[Id] ASC);
-SET @TestId_Two = (SELECT TOP(1)[T].[Id] FROM [dbo].[Test] [T] ORDER BY [T].[Id] DESC);
+----Get Some Test Ids
+--SET @TestId_One = (SELECT TOP(1)[T].[Id] FROM [dbo].[Test] [T] ORDER BY [T].[Id] ASC);
+--SET @TestId_Two = (SELECT TOP(1)[T].[Id] FROM [dbo].[Test] [T] ORDER BY [T].[Id] DESC);
 
 
---Insert Result
-INSERT INTO [dbo].[Result] ([Sample_Cin], [TestId]) VALUES
-(@Cin, @TestId_One),
-(@Cin, @TestId_Two);
+----Insert Result
+--INSERT INTO [dbo].[Result] ([Sample_Cin], [TestId]) VALUES
+--(@Cin, @TestId_One),
+--(@Cin, @TestId_Two);
 
 
 
