@@ -7,6 +7,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using CD4.DataLibrary.DataAccess;
+using CD4.DataLibrary.Helpers;
 using Dapper;
 
 namespace CD4.DataLibrary.Models
@@ -22,8 +23,8 @@ namespace CD4.DataLibrary.Models
             Age = request.Age;
             Cin = request.Cin;
             SiteId = request.SiteId;
-            CollectionDate = request.SampleCollectionDate.ToString("yyyyMMdd");
-            ReceivedDate = request.SampleReceivedDate.ToString("yyyyMMdd");
+            CollectionDate = DateHelper.GetCD4FormatDate(request.SampleCollectionDate);
+            ReceivedDate = DateHelper.GetCD4FormatDate(request.SampleReceivedDate);
             CommaDelimitedClinicalDetailsIds = ClinicalDetailsDataAccess.GetCsvClinicalDetails(request.ClinicalDetails);
             RequestedTestData = ResultDataAccess.GetTestsTable(request.Tests, request.Cin);
         }

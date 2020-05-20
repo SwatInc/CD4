@@ -1,4 +1,5 @@
-﻿using CD4.DataLibrary.Models;
+﻿using CD4.DataLibrary.Helpers;
+using CD4.DataLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -93,7 +94,7 @@ namespace CD4.DataLibrary.DataAccess
                     Id = patient.Id,
                     Fullname = request.Fullname,
                     NidPp = request.NationalIdPassport,
-                    Birthdate = request.Birthdate.ToString("yyyyMMdd"),
+                    Birthdate = DateHelper.GetCD4FormatDate(request.Birthdate),
                     GenderId = request.GenderId,
                     AtollId = request.AtollId,
                     CountryId = request.CountryId,
@@ -110,7 +111,7 @@ namespace CD4.DataLibrary.DataAccess
                 {
                     Fullname = request.Fullname,
                     NidPp = request.NationalIdPassport,
-                    Birthdate = request.Birthdate.ToString("yyyyMMdd"),
+                    Birthdate = DateHelper.GetCD4FormatDate(request.Birthdate),
                     GenderId = request.GenderId,
                     AtollId = request.AtollId,
                     CountryId = request.CountryId,

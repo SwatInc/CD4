@@ -11,8 +11,8 @@ namespace CD4.DataLibrary.Models
         #region Request Fields
         public string Cin { get; set; }
         public int SiteId { get; set; }
-        public DateTime SampleCollectionDate { get; set; }
-        public DateTime SampleReceivedDate { get; set; }
+        public DateTime? SampleCollectionDate { get; set; }
+        public DateTime? SampleReceivedDate { get; set; }
 
         #endregion
 
@@ -23,7 +23,7 @@ namespace CD4.DataLibrary.Models
         public int GenderId { get; set; }
         public string Age { get; set; }
         public string PhoneNumber { get; set; }
-        public DateTime Birthdate { get; set; }
+        public DateTime? Birthdate { get; set; }
         public string Address { get; set; }
         public string Atoll { get; set; }
         public string Island { get; set; }

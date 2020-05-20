@@ -61,6 +61,7 @@
     <Compile Include="DataAccess\SampleDataAccess.cs" />
     <Compile Include="DataAccess\StaticDataDataAccess.cs" />
     <Compile Include="DiskIO\Read.cs" />
+    <Compile Include="Helpers\DateHelper.cs" />
     <Compile Include="Helpers\Helper.cs" />
     <Compile Include="Models\AnalysisRequestDataModel.cs" />
     <Compile Include="Models\AnalysisRequestInsertDatabaseModel.cs" />

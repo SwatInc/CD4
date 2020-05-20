@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using CD4.DataLibrary.Helpers;
+using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
 using System.IO;
@@ -14,7 +15,7 @@ namespace CD4.DataLibrary.Models
         private int id;
         private string fullname;
         private string nidPp;
-        private DateTime birthdate;
+        private DateTime? birthdate;
         private string gender;
         private string atoll;
         private string island;
@@ -52,7 +53,7 @@ namespace CD4.DataLibrary.Models
                 OnPropertyChanged();
             }
         }
-        public DateTime Birthdate
+        public DateTime? Birthdate
         {
             get => birthdate; set
             {
@@ -133,7 +134,7 @@ namespace CD4.DataLibrary.Models
         {
             if (dataToCompare.Fullname != this.fullname) return false;
             if (dataToCompare.NationalIdPassport != this.NidPp) return false;
-            if (dataToCompare.Birthdate.ToString("yyyyMMdd") != this.Birthdate.ToString("yyyyMMdd")) return false;
+            if (DateHelper.GetCD4FormatDate(dataToCompare.Birthdate) != DateHelper.GetCD4FormatDate(this.Birthdate)) return false;
             if (dataToCompare.Gender != this.Gender) return false;
             if (dataToCompare.Atoll != this.Atoll) return false;
             if (dataToCompare.Island != this.Island) return false;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CD4.DataLibrary.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,16 +14,16 @@ namespace CD4.DataLibrary.Models
         public string Age { get; set; }
         public string Cin { get; set; }
         public int SiteId { get; set; }
-        public DateTime CollectionDate { get; set; }
-        public DateTime ReceivedDate { get; set; }
+        public DateTime? CollectionDate { get; set; }
+        public DateTime? ReceivedDate { get; set; }
 
         public bool AreEqual(AnalysisRequestDataModel request)
         {
             if (Age != request.Age) return false;
             if (Cin != request.Cin) return false;
             if (SiteId != request.SiteId) return false;
-            if (CollectionDate.ToString("yyyMMdd") != request.SampleCollectionDate.ToString("yyyMMdd")) return false;
-            if (ReceivedDate.ToString("yyyMMdd") != request.SampleReceivedDate.ToString("yyyMMdd")) return false;
+            if (DateHelper.GetCD4FormatDate(CollectionDate) != DateHelper.GetCD4FormatDate(request.SampleCollectionDate)) return false;
+            if (DateHelper.GetCD4FormatDate(ReceivedDate) != DateHelper.GetCD4FormatDate(request.SampleReceivedDate)) return false;
             if (EpisodeNumber != request.EpisodeNumber) return false;
             return true;
         }
