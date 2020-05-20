@@ -15,7 +15,7 @@ namespace CD4.DataLibrary.DataAccess
         private readonly ISampleDataAccess sampleDataAccess;
         private readonly IResultDataAccess resultDataAccess;
 
-        public AnalysisRequestDataAccess(IPatientDataAccess patientData, 
+        public AnalysisRequestDataAccess(IPatientDataAccess patientData,
             IClinicalDetailsDataAccess clinicalDetailsData,
             ISampleDataAccess sampleDataAccess,
             IResultDataAccess resultDataAccess)
@@ -176,7 +176,7 @@ namespace CD4.DataLibrary.DataAccess
                 };
 
                 var output = await sampleDataAccess.UpdateSample(sampleToUpdate);
-                if(!output)
+                if (!output)
                 {
                     throw new Exception("Cannot sample details. [May include: Site, collected date or received date]. Please verify!");
                 }
@@ -187,7 +187,7 @@ namespace CD4.DataLibrary.DataAccess
 
             #region Update Results Table [Test data | NOT ACTUAL SAMPLE RESULTS]
 
-            if(TestsToInsert.Count > 0 || TestsToRemove.Count > 0)
+            if (TestsToInsert.Count > 0 || TestsToRemove.Count > 0)
             {
                 var output = await resultDataAccess.SyncRequestedTestData(TestsToInsert, TestsToRemove, request.Cin);
                 if (!output)
@@ -202,7 +202,7 @@ namespace CD4.DataLibrary.DataAccess
             if (clinicalDetailsStatus == RequestDataStatus.Dirty)
             {
                 //Sync
-                string csvClinicalDetails = 
+                string csvClinicalDetails =
                     ClinicalDetailsDataAccess.GetCsvClinicalDetails(request.ClinicalDetails);
                 var output = await clinicalDetailsData.SyncClinicalDetails
                     (csvClinicalDetails, requestAndSample.RequestId);

@@ -28,7 +28,7 @@ namespace CD4.UI.View
             lookUpEditTests.Validated += LookUpEditTests_Validated;
             simpleButtonRemoveTest.Click += RemoveTestFromAR;
             simpleButtonSearch.Click += SimpleButtonSearch_Click;
-            KeyUp += RemoveTestFromAR; ;
+            KeyUp += ManageKeyUpEvents; ;
             _viewModel.PushingMessages += OnPushMessage;
             _viewModel.PropertyChanged += OnPropertyChanged;
             simpleButtonConfirm.Click += OnConfirmAnalysisRequest;
@@ -114,23 +114,27 @@ namespace CD4.UI.View
 
         private void RemoveTestFromAR(object sender, EventArgs e)
         {
-            RemoveTestFromAR(this, new KeyEventArgs(Keys.Delete));
+            var rowsSelected = gridViewRequestedTests.GetSelectedRows();
+            if (rowsSelected.Length > 0)
+            {
+                if (XtraMessageBox.Show($"Do you want to selected {rowsSelected.Length} tests?",
+                    "Confirmation", MessageBoxButtons.YesNo) != DialogResult.No)
+                {
+                    DeleteSelectedRow();
+                }
+            }
 
         }
 
-        private void RemoveTestFromAR(object sender, KeyEventArgs e)
+        private void ManageKeyUpEvents(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete)
+            switch (e.KeyCode)
             {
-                var rowsSelected = gridViewRequestedTests.GetSelectedRows();
-                if (rowsSelected.Length > 0)
-                {
-                    if (XtraMessageBox.Show($"Do you want to selected {rowsSelected.Length} tests?",
-                        "Confirmation", MessageBoxButtons.YesNo) != DialogResult.No)
-                    {
-                        DeleteSelectedRow();
-                    }
-                }
+                case Keys.Delete:
+                    RemoveTestFromAR(this, EventArgs.Empty);
+                    break;
+                default:
+                    break;
             }
         }
 
