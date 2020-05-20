@@ -11,11 +11,15 @@ namespace CD4.DataLibrary.DataAccess
     {
         private readonly IPatientDataAccess patientData;
         private readonly IClinicalDetailsDataAccess clinicalDetailsData;
+        private readonly ISampleDataAccess sampleDataAccess;
 
-        public AnalysisRequestDataAccess(IPatientDataAccess patientData, IClinicalDetailsDataAccess clinicalDetailsData)
+        public AnalysisRequestDataAccess(IPatientDataAccess patientData, 
+            IClinicalDetailsDataAccess clinicalDetailsData,
+            ISampleDataAccess sampleDataAccess)
         {
             this.patientData = patientData;
             this.clinicalDetailsData = clinicalDetailsData;
+            this.sampleDataAccess = sampleDataAccess;
         }
 
         public async Task<bool> ConfirmRequestAsync(AnalysisRequestDataModel request)
@@ -158,6 +162,20 @@ namespace CD4.DataLibrary.DataAccess
 
             if (requestSampleStatus == RequestDataStatus.Dirty)
             {
+                var sampleToUpdate = new SampleUpdateDatabaseModel()
+                {
+                    Cin = request.Cin,
+                    SiteId = request.SiteId,
+                    CollectionDate = request.SampleCollectionDate,
+                    ReceivedDate = request.SampleReceivedDate
+
+                };
+
+                var output = await sampleDataAccess.UpdateSample(sampleToUpdate);
+                if(!output)
+                {
+                    throw new Exception("Cannot sample details. [May include: Site, collected date or received date]. Please verify!");
+                }
 
             }
 
