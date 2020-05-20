@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
+using CD4.DataLibrary.DataAccess;
 using Dapper;
 
 namespace CD4.DataLibrary.Models
@@ -24,26 +25,12 @@ namespace CD4.DataLibrary.Models
             CollectionDate = request.SampleCollectionDate.ToString("yyyyMMdd");
             ReceivedDate = request.SampleReceivedDate.ToString("yyyyMMdd");
             CommaDelimitedClinicalDetailsIds = GetCsvClinicalDetails(request.ClinicalDetails);
-            RequestedTestData = RequestedTestsTable(request);
+            RequestedTestData = ResultDataAccess.GetTestsTable(request.Tests, request.Cin);
         }
 
         #endregion
 
         #region Private Methods
-        private SqlMapper.ICustomQueryParameter RequestedTestsTable
-            (AnalysisRequestDataModel request)
-        {
-            var returnTable = new DataTable();
-            returnTable.Columns.Add("TestId");
-            returnTable.Columns.Add("Sample_Cin");
-
-            foreach (var item in request.Tests)
-            {
-                returnTable.Rows.Add(item.Id, request.Cin);
-            }
-
-            return returnTable.AsTableValuedParameter("ResultTableInsertDataUDT");
-        }
 
         private string GetCsvClinicalDetails
             (List<ClinicalDetailsSelectionModel> clinicalDetails)

@@ -103,6 +103,7 @@
     <Build Include="dbo\StoredProcedures\usp_InsertAnalysisRequestClinicalDetailsSampleAndRequestedTests.sql" />
     <Build Include="dbo\StoredProcedures\usp_InsertAnalysisRequestSampleAndRequestedTests.sql" />
     <Build Include="dbo\StoredProcedures\usp_UpdateSampleWithCin.sql" />
+    <Build Include="dbo\StoredProcedures\usp_SyncResultsTableData.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />

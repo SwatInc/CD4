@@ -12,14 +12,17 @@ namespace CD4.DataLibrary.DataAccess
         private readonly IPatientDataAccess patientData;
         private readonly IClinicalDetailsDataAccess clinicalDetailsData;
         private readonly ISampleDataAccess sampleDataAccess;
+        private readonly IResultDataAccess resultDataAccess;
 
         public AnalysisRequestDataAccess(IPatientDataAccess patientData, 
             IClinicalDetailsDataAccess clinicalDetailsData,
-            ISampleDataAccess sampleDataAccess)
+            ISampleDataAccess sampleDataAccess,
+            IResultDataAccess resultDataAccess)
         {
             this.patientData = patientData;
             this.clinicalDetailsData = clinicalDetailsData;
             this.sampleDataAccess = sampleDataAccess;
+            this.resultDataAccess = resultDataAccess;
         }
 
         public async Task<bool> ConfirmRequestAsync(AnalysisRequestDataModel request)
@@ -177,6 +180,19 @@ namespace CD4.DataLibrary.DataAccess
                     throw new Exception("Cannot sample details. [May include: Site, collected date or received date]. Please verify!");
                 }
 
+            }
+
+            #endregion
+
+            #region Update Results Table [Test data | NOT ACTUAL SAMPLE RESULTS]
+
+            if(TestsToInsert.Count > 0 || TestsToRemove.Count > 0)
+            {
+                var output = await resultDataAccess.SyncRequestedTestData(TestsToInsert, TestsToRemove, request.Cin);
+                if (!output)
+                {
+                    throw new Exception("Error adding or removing requested tests!");
+                }
             }
 
             #endregion
@@ -342,7 +358,7 @@ namespace CD4.DataLibrary.DataAccess
                 {
                     listOfTestsToRemove.Add(new TestsModel()
                     {
-                        Id = test.Id,
+                        Id = test.TestId,
                     });
                 }
             }

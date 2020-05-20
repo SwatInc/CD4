@@ -53,9 +53,11 @@
     <Compile Include="DataAccess\IAnalysisRequestDataAccess.cs" />
     <Compile Include="DataAccess\IClinicalDetailsDataAccess.cs" />
     <Compile Include="DataAccess\IPatientDataAccess.cs" />
+    <Compile Include="DataAccess\IResultDataAccess.cs" />
     <Compile Include="DataAccess\ISampleDataAccess.cs" />
     <Compile Include="DataAccess\IStaticDataDataAccess.cs" />
     <Compile Include="DataAccess\PatientDataAccess.cs" />
+    <Compile Include="DataAccess\ResultDataAccess.cs" />
     <Compile Include="DataAccess\SampleDataAccess.cs" />
     <Compile Include="DataAccess\StaticDataDataAccess.cs" />
     <Compile Include="DiskIO\Read.cs" />
