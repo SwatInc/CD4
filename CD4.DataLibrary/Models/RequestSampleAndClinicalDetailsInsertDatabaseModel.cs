@@ -24,30 +24,8 @@ namespace CD4.DataLibrary.Models
             SiteId = request.SiteId;
             CollectionDate = request.SampleCollectionDate.ToString("yyyyMMdd");
             ReceivedDate = request.SampleReceivedDate.ToString("yyyyMMdd");
-            CommaDelimitedClinicalDetailsIds = GetCsvClinicalDetails(request.ClinicalDetails);
+            CommaDelimitedClinicalDetailsIds = ClinicalDetailsDataAccess.GetCsvClinicalDetails(request.ClinicalDetails);
             RequestedTestData = ResultDataAccess.GetTestsTable(request.Tests, request.Cin);
-        }
-
-        #endregion
-
-        #region Private Methods
-
-        private string GetCsvClinicalDetails
-            (List<ClinicalDetailsSelectionModel> clinicalDetails)
-        {
-            var returnValue = string.Empty;
-            foreach (var item in clinicalDetails)
-            {
-                if (!item.IsSelected) continue;
-                if (string.IsNullOrEmpty(returnValue)) 
-                {
-                    returnValue = $"{item.Id}";
-                    continue;
-                }
-                returnValue = $"{returnValue},{item.Id}";
-            }
-
-            return returnValue;
         }
 
         #endregion

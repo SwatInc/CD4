@@ -197,6 +197,16 @@ namespace CD4.DataLibrary.DataAccess
 
             #endregion
 
+            #region Sync Clinical details data
+            if (clinicalDetailsStatus == RequestDataStatus.Dirty)
+            {
+                //Sync
+                string csvClinicalDetails = ClinicalDetailsDataAccess.GetCsvClinicalDetails(request.ClinicalDetails);
+
+            }
+            #endregion
+
+
             #endregion
 
 
