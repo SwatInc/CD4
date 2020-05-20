@@ -27,7 +27,7 @@ namespace CD4.UI.View
 
             lookUpEditTests.Validated += LookUpEditTests_Validated;
             simpleButtonRemoveTest.Click += RemoveTestFromAR;
-            simpleButtonSearch.Click += SimpleButtonSearch_Click;
+            simpleButtonSearch.Click += OnPatientSearch;
             KeyUp += ManageKeyUpEvents; ;
             _viewModel.PushingMessages += OnPushMessage;
             _viewModel.PropertyChanged += OnPropertyChanged;
@@ -107,7 +107,7 @@ namespace CD4.UI.View
             }
         }
 
-        private void SimpleButtonSearch_Click(object sender, EventArgs e)
+        private void OnPatientSearch(object sender, EventArgs e)
         {
             OpenPatientSearchView();
         }
@@ -132,6 +132,12 @@ namespace CD4.UI.View
             {
                 case Keys.Delete:
                     RemoveTestFromAR(this, EventArgs.Empty);
+                    break;
+                case Keys.F6:
+                    OnConfirmAnalysisRequest(this, EventArgs.Empty);
+                    break;
+                case Keys.F2:
+                    OnPatientSearch(this, EventArgs.Empty);
                     break;
                 default:
                     break;

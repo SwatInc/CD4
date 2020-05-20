@@ -29,11 +29,13 @@
         private void InitializeComponent()
         {
             this.groupControlRequestData = new DevExpress.XtraEditors.GroupControl();
+            this.progressPanelRequest = new DevExpress.XtraWaitForm.ProgressPanel();
             this.dateEditSampleReceived = new DevExpress.XtraEditors.DateEdit();
             this.dateEditCollectedDate = new DevExpress.XtraEditors.DateEdit();
             this.lookUpEditSite = new DevExpress.XtraEditors.LookUpEdit();
             this.textEditCin = new DevExpress.XtraEditors.TextEdit();
             this.groupControlPatientData = new DevExpress.XtraEditors.GroupControl();
+            this.progressPanelPatientData = new DevExpress.XtraWaitForm.ProgressPanel();
             this.textEditPhoneNumber = new DevExpress.XtraEditors.TextEdit();
             this.textEditAge = new DevExpress.XtraEditors.TextEdit();
             this.textEditAddress = new DevExpress.XtraEditors.TextEdit();
@@ -55,12 +57,10 @@
             this.simpleButtonSearch = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButtonConfirm = new DevExpress.XtraEditors.SimpleButton();
             this.groupControlTestSelection = new DevExpress.XtraEditors.GroupControl();
+            this.progressPanelTestData = new DevExpress.XtraWaitForm.ProgressPanel();
             this.textEditEpisodeNumber = new DevExpress.XtraEditors.TextEdit();
             this.lookUpEditTests = new DevExpress.XtraEditors.LookUpEdit();
             this.simpleButtonRemoveTest = new DevExpress.XtraEditors.SimpleButton();
-            this.progressPanelTestData = new DevExpress.XtraWaitForm.ProgressPanel();
-            this.progressPanelPatientData = new DevExpress.XtraWaitForm.ProgressPanel();
-            this.progressPanelRequest = new DevExpress.XtraWaitForm.ProgressPanel();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlRequestData)).BeginInit();
             this.groupControlRequestData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditSampleReceived.Properties.CalendarTimeProperties)).BeginInit();
@@ -108,6 +108,19 @@
             this.groupControlRequestData.Size = new System.Drawing.Size(196, 141);
             this.groupControlRequestData.TabIndex = 0;
             this.groupControlRequestData.Text = "Request Data";
+            // 
+            // progressPanelRequest
+            // 
+            this.progressPanelRequest.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.progressPanelRequest.Appearance.Options.UseBackColor = true;
+            this.progressPanelRequest.BarAnimationElementThickness = 2;
+            this.progressPanelRequest.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.progressPanelRequest.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressPanelRequest.Location = new System.Drawing.Point(2, 20);
+            this.progressPanelRequest.Name = "progressPanelRequest";
+            this.progressPanelRequest.Size = new System.Drawing.Size(192, 119);
+            this.progressPanelRequest.TabIndex = 16;
+            this.progressPanelRequest.Text = "Request data";
             // 
             // dateEditSampleReceived
             // 
@@ -192,6 +205,19 @@
             this.groupControlPatientData.Size = new System.Drawing.Size(550, 141);
             this.groupControlPatientData.TabIndex = 3;
             this.groupControlPatientData.Text = "Patient Data";
+            // 
+            // progressPanelPatientData
+            // 
+            this.progressPanelPatientData.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.progressPanelPatientData.Appearance.Options.UseBackColor = true;
+            this.progressPanelPatientData.BarAnimationElementThickness = 2;
+            this.progressPanelPatientData.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.progressPanelPatientData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressPanelPatientData.Location = new System.Drawing.Point(2, 20);
+            this.progressPanelPatientData.Name = "progressPanelPatientData";
+            this.progressPanelPatientData.Size = new System.Drawing.Size(546, 119);
+            this.progressPanelPatientData.TabIndex = 16;
+            this.progressPanelPatientData.Text = "Request data";
             // 
             // textEditPhoneNumber
             // 
@@ -429,7 +455,7 @@
             this.simpleButtonSearch.Name = "simpleButtonSearch";
             this.simpleButtonSearch.Size = new System.Drawing.Size(98, 23);
             this.simpleButtonSearch.TabIndex = 1;
-            this.simpleButtonSearch.Text = "Search";
+            this.simpleButtonSearch.Text = "Search [ F2 ]";
             // 
             // simpleButtonConfirm
             // 
@@ -437,7 +463,7 @@
             this.simpleButtonConfirm.Name = "simpleButtonConfirm";
             this.simpleButtonConfirm.Size = new System.Drawing.Size(98, 23);
             this.simpleButtonConfirm.TabIndex = 0;
-            this.simpleButtonConfirm.Text = "Confirm";
+            this.simpleButtonConfirm.Text = "Confirm [ F6 ]";
             // 
             // groupControlTestSelection
             // 
@@ -449,6 +475,19 @@
             this.groupControlTestSelection.Size = new System.Drawing.Size(196, 186);
             this.groupControlTestSelection.TabIndex = 5;
             this.groupControlTestSelection.Text = "Test Selection";
+            // 
+            // progressPanelTestData
+            // 
+            this.progressPanelTestData.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.progressPanelTestData.Appearance.Options.UseBackColor = true;
+            this.progressPanelTestData.BarAnimationElementThickness = 2;
+            this.progressPanelTestData.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.progressPanelTestData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressPanelTestData.Location = new System.Drawing.Point(2, 20);
+            this.progressPanelTestData.Name = "progressPanelTestData";
+            this.progressPanelTestData.Size = new System.Drawing.Size(192, 164);
+            this.progressPanelTestData.TabIndex = 15;
+            this.progressPanelTestData.Text = "Request data";
             // 
             // textEditEpisodeNumber
             // 
@@ -485,45 +524,6 @@
             this.simpleButtonRemoveTest.Size = new System.Drawing.Size(98, 23);
             this.simpleButtonRemoveTest.TabIndex = 6;
             this.simpleButtonRemoveTest.Text = "Remove [ Del ]";
-            // 
-            // progressPanelTestData
-            // 
-            this.progressPanelTestData.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.progressPanelTestData.Appearance.Options.UseBackColor = true;
-            this.progressPanelTestData.BarAnimationElementThickness = 2;
-            this.progressPanelTestData.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.progressPanelTestData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.progressPanelTestData.Location = new System.Drawing.Point(2, 20);
-            this.progressPanelTestData.Name = "progressPanelTestData";
-            this.progressPanelTestData.Size = new System.Drawing.Size(192, 164);
-            this.progressPanelTestData.TabIndex = 15;
-            this.progressPanelTestData.Text = "Request data";
-            // 
-            // progressPanelPatientData
-            // 
-            this.progressPanelPatientData.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.progressPanelPatientData.Appearance.Options.UseBackColor = true;
-            this.progressPanelPatientData.BarAnimationElementThickness = 2;
-            this.progressPanelPatientData.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.progressPanelPatientData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.progressPanelPatientData.Location = new System.Drawing.Point(2, 20);
-            this.progressPanelPatientData.Name = "progressPanelPatientData";
-            this.progressPanelPatientData.Size = new System.Drawing.Size(546, 119);
-            this.progressPanelPatientData.TabIndex = 16;
-            this.progressPanelPatientData.Text = "Request data";
-            // 
-            // progressPanelRequest
-            // 
-            this.progressPanelRequest.Appearance.BackColor = System.Drawing.Color.Transparent;
-            this.progressPanelRequest.Appearance.Options.UseBackColor = true;
-            this.progressPanelRequest.BarAnimationElementThickness = 2;
-            this.progressPanelRequest.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.progressPanelRequest.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.progressPanelRequest.Location = new System.Drawing.Point(2, 20);
-            this.progressPanelRequest.Name = "progressPanelRequest";
-            this.progressPanelRequest.Size = new System.Drawing.Size(192, 119);
-            this.progressPanelRequest.TabIndex = 16;
-            this.progressPanelRequest.Text = "Request data";
             // 
             // OrderEntryView
             // 
