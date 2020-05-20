@@ -1,5 +1,4 @@
-﻿--THIS PROCEDURE IS CALLED IF THE INSERTED REQUEST DOES NOT HAVE ANY CLINICAL DETAILS
-CREATE PROCEDURE [dbo].[usp_InsertAnalysisRequestSampleAndRequestedTests]
+﻿CREATE PROCEDURE [dbo].[usp_InsertAnalysisRequestClinicalDetailsSampleAndRequestedTests]
 	@PatientId int,
 	@EpisodeNumber varchar(15),
 	@Age varchar(20),
@@ -7,6 +6,7 @@ CREATE PROCEDURE [dbo].[usp_InsertAnalysisRequestSampleAndRequestedTests]
 	@SiteId int,
 	@CollectionDate char(8),
 	@ReceivedDate char(8),
+	@CommaDelimitedClinicalDetailsIds varchar(100),
 	@RequestedTestData [dbo].[ResultTableInsertDataUDT] READONLY
 AS
 BEGIN
@@ -28,6 +28,11 @@ DECLARE @ReturnValue bit = 0;
 
 				--set inserted analysis requestId
 				SELECT @AnalysisRequestId =  [Id] FROM @InsertedId;
+
+				--insert clincial details
+				INSERT INTO [dbo].[AnalysisRequest_ClinicalDetail]([AnalysisRequestId],[ClinicalDetailsId])
+				SELECT @AnalysisRequestId AS [AnalysisRequestId] ,CAST(value as int) AS [ClinicalDetailsId] 
+				FROM STRING_SPLIT(@CommaDelimitedClinicalDetailsIds,',');
 
 				--insert into dbo.Sample
 				INSERT INTO [dbo].[Sample]([Cin], [AnalysisRequestId], [SiteId], [CollectionDate], [ReceivedDate])

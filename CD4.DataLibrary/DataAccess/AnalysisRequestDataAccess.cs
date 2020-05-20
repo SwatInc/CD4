@@ -143,6 +143,7 @@ namespace CD4.DataLibrary.DataAccess
                 //IF REQUEST IS NEW:: CLINICAL DETAILS, SAMPLE AND REQUESTED TESTS
                 //WILL BE NEW FOR SURE. SO HANDLE THEM ALL AT THE SAME TIME
                 var output = await InsertNewCompleteRequest(GetPatientId(patient, InsertedPatientId), request);
+
             }
 
             #endregion
@@ -157,8 +158,16 @@ namespace CD4.DataLibrary.DataAccess
         private async Task<bool> InsertNewCompleteRequest(int patientId, AnalysisRequestDataModel request)
         {
             var insertData = new RequestSampleAndClinicalDetailsInsertDatabaseModel(patientId, request);
+
+            if (string.IsNullOrEmpty(insertData.CommaDelimitedClinicalDetailsIds))
+            {
+                // when clinical details are not available.
+                return await InsertOrUpdate<bool, dynamic>
+                    ("[dbo].[usp_InsertAnalysisRequestSampleAndRequestedTests]", insertData.GetWithoutClinicalDetails());
+            }
+
             return await InsertOrUpdate<bool, RequestSampleAndClinicalDetailsInsertDatabaseModel>
-                ("[dbo].[usp_InsertAnalysisRequestSampleAndRequestedTests]", insertData);
+                ("[dbo].[usp_InsertAnalysisRequestClinicalDetailsSampleAndRequestedTests]", insertData);
         }
 
 

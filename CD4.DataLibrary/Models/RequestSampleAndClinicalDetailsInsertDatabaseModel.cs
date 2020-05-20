@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
@@ -63,6 +64,23 @@ namespace CD4.DataLibrary.Models
         }
 
         #endregion
+
+        public dynamic GetWithoutClinicalDetails()
+        {
+            var excludingClinicalDetails = new
+            {
+                PatientId,
+                EpisodeNumber,
+                Age,
+                Cin,
+                SiteId,
+                CollectionDate,
+                ReceivedDate,
+                RequestedTestData
+            };
+
+            return excludingClinicalDetails;
+        }
 
         #region Public properties
 

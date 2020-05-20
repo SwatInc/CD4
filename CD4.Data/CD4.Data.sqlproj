@@ -100,6 +100,7 @@
     <Build Include="dbo\StoredProcedures\usp_InsertSample.sql" />
     <Build Include="dbo\StoredProcedures\usp_InsertSampleAssociatedTests.sql" />
     <Build Include="dbo\Types\ResultTableInsertDataUDT.sql" />
+    <Build Include="dbo\StoredProcedures\dbo.usp_InsertAnalysisRequestClinicalDetailsSampleAndRequestedTests.sql" />
     <Build Include="dbo\StoredProcedures\usp_InsertAnalysisRequestSampleAndRequestedTests.sql" />
   </ItemGroup>
   <ItemGroup>
