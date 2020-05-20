@@ -1,10 +1,7 @@
 ﻿using CD4.DataLibrary.Models;
 using Dapper;
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CD4.DataLibrary.DataAccess
@@ -37,7 +34,6 @@ namespace CD4.DataLibrary.DataAccess
             {
                 returnTable.Rows.Add(item.Id, cin);
             }
-
             return returnTable.AsTableValuedParameter("ResultTableInsertDataUDT");
         }
     }
