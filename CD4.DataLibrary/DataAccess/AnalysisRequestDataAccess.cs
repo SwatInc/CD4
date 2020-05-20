@@ -201,7 +201,14 @@ namespace CD4.DataLibrary.DataAccess
             if (clinicalDetailsStatus == RequestDataStatus.Dirty)
             {
                 //Sync
-                string csvClinicalDetails = ClinicalDetailsDataAccess.GetCsvClinicalDetails(request.ClinicalDetails);
+                string csvClinicalDetails = 
+                    ClinicalDetailsDataAccess.GetCsvClinicalDetails(request.ClinicalDetails);
+                var output = await clinicalDetailsData.SyncClinicalDetails
+                    (csvClinicalDetails, requestAndSample.RequestId);
+                if (!output)
+                {
+                    throw new Exception("Cannot update clinical details for the request.");
+                }
 
             }
             #endregion

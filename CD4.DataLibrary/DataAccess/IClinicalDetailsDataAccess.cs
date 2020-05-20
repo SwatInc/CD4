@@ -7,5 +7,6 @@ namespace CD4.DataLibrary.DataAccess
     public interface IClinicalDetailsDataAccess
     {
         Task<List<ClinicalDetailsDatabaseModel>> GetClinicalDetailsByRequestId(int requestId);
+        Task<bool> SyncClinicalDetails(string csvClinicalDetails, int analysisRequestId);
     }
 }
