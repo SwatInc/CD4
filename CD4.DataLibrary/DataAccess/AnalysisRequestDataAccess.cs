@@ -121,7 +121,20 @@ namespace CD4.DataLibrary.DataAccess
 
             #endregion
 
-            #region Insert / Update request and sample
+            #region Case New Request, Everything below the tree is new, Insert all
+
+            if (requestSampleStatus == RequestDataStatus.New)
+            {
+                //IF REQUEST IS NEW:: CLINICAL DETAILS, SAMPLE AND REQUESTED TESTS
+                //WILL BE NEW FOR SURE. SO HANDLE THEM ALL AT THE SAME TIME
+                return await InsertNewCompleteRequest(GetPatientId(patient, InsertedPatientId), request);
+
+            }
+
+            #endregion
+
+            #region Update request
+
             if (requestSampleStatus == RequestDataStatus.Dirty)
             {
                 var requestToUpdate = new AnalysisRequestUpdateDatabaseModel()
@@ -138,11 +151,13 @@ namespace CD4.DataLibrary.DataAccess
                 }
             }
 
-            if (requestSampleStatus == RequestDataStatus.New)
+
+            #endregion
+
+            #region Update Sample
+
+            if (requestSampleStatus == RequestDataStatus.Dirty)
             {
-                //IF REQUEST IS NEW:: CLINICAL DETAILS, SAMPLE AND REQUESTED TESTS
-                //WILL BE NEW FOR SURE. SO HANDLE THEM ALL AT THE SAME TIME
-                var output = await InsertNewCompleteRequest(GetPatientId(patient, InsertedPatientId), request);
 
             }
 
