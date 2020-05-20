@@ -53,7 +53,8 @@ namespace CD4.UI.View
             catch (Exception ex)
             {
 
-                XtraMessageBox.Show(ex.Message +"\n" +ex.StackTrace);
+                //XtraMessageBox.Show(ex.Message +"\n" +ex.StackTrace);
+                XtraMessageBox.Show(ex.Message);
             }
         }
 
