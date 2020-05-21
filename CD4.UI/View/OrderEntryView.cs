@@ -33,6 +33,13 @@ namespace CD4.UI.View
             _viewModel.PropertyChanged += OnPropertyChanged;
             simpleButtonConfirm.Click += OnConfirmAnalysisRequest;
 
+            this.DoubleClick += SearchDataExperimentation;
+
+        }
+
+        private async void SearchDataExperimentation(object sender, EventArgs e)
+        {
+            await _viewModel.SearchDataExperimentation();
         }
 
         private async void OnConfirmAnalysisRequest(object sender, EventArgs e)

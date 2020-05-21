@@ -396,7 +396,6 @@ namespace CD4.UI.Library.ViewModel
             Address = results.Address;
 
             await SetSelectedItemsForLookups(results);
-
         }
 
         private async Task SetSelectedItemsForLookups(PatientModel results)
@@ -617,6 +616,49 @@ namespace CD4.UI.Library.ViewModel
         }
 
         #endregion
+
+        public async Task SearchDataExperimentation()
+        {
+
+            this.Cin = "nCoV-4656/20";
+            this.SelectedSiteId = 1;
+            this.SampleCollectionDate = DateTime.Today;
+            this.SampleReceivedDate = DateTime.Today;
+
+            this.NidPp = "A348756";
+            this.Fullname = "Ahmed Ahmed";
+            this.SelectedGenderId = 1;
+            this.PhoneNumber = "937645734";
+            this.Birthdate = DateTime.Parse("2019-01-01");
+            this.Address = "Searched Address";
+            /*
+            var atollAndIsland = GetAtollModelByAtollAndIslandName("S", "HITHADHOO");
+            */
+
+            this.SelectedAtoll = "S"; //assign/select the atoll 
+            await RepopulateIslandDatasource(SelectedAtoll); //filter the islands by selected atoll
+            this.SelectedIsland = "HITHADHOO";//Select the island
+            this.SelectedCountryId = 1;
+            //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+            foreach (var item in this.ClinicalDetails)
+            {//select all clinical details
+                if (item.Id == 1 || item.ClinicalDetail == "")
+                {
+
+                }
+                item.IsSelected = true;
+            }//Just need to know the clincial detail id selected, or the clinical detail name. Thats' all
+
+
+            string[] t = { "Test1", "Test2", "Test3" };
+            foreach (var item in t)
+            {
+                await AddSingleTestToRequestAsync(new TestModel() { Description = item });
+            }
+
+            this.EpisodeNumber = "BS398673987";
+        }
         private void InitializeDemoData()
         {
             //Sites

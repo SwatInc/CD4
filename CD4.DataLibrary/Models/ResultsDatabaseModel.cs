@@ -13,7 +13,6 @@ namespace CD4.DataLibrary.Models
     public class ResultsDatabaseModel
     {
         public int Id { get; set; }
-        public int AnalysisRequestId { get; set; }
         public string Sample_Cin { get; set; }
         public int TestId { get; set; }
         public string Result { get; set; }

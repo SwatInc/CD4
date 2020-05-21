@@ -37,6 +37,9 @@ namespace CD4.UI.Library.ViewModel
         Task<bool> ConfirmAnalysisRequest();
 
         List<SitesModel> Sites { get; set; }
+
+        Task SearchDataExperimentation();
+
         string TestToAdd { get; set; }
         Task ManageAddTestToRequestAsync();
         void RemoveTestModelFromAddedTests(TestModel testModel);

@@ -105,6 +105,8 @@
     <Build Include="dbo\StoredProcedures\usp_UpdateSampleWithCin.sql" />
     <Build Include="dbo\StoredProcedures\usp_SyncResultsTableData.sql" />
     <Build Include="dbo\StoredProcedures\usp_SyncClinicalDetails.sql" />
+    <Build Include="dbo\Views\RequestSearchData.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetCompleteRequestByCin.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
