@@ -24,8 +24,6 @@ namespace CD4.DataLibrary.DataAccess
             this.clinicalDetailsData = clinicalDetailsData;
             this.sampleDataAccess = sampleDataAccess;
             this.resultDataAccess = resultDataAccess;
-
-           SearchRequestByCinAsync();
         }
 
         public async Task<bool> ConfirmRequestAsync(AnalysisRequestDataModel request)
@@ -416,8 +414,7 @@ namespace CD4.DataLibrary.DataAccess
             var storedProcedure = "[dbo].[usp_GetCompleteRequestByCin]";
             var parameter = new CinParameterModel() { Cin = cin };
 
-            var a  =  await SelectMultiple(storedProcedure, parameter);
-            return a;
+            return await SelectMultiple(storedProcedure, parameter);
         }
     }
 }

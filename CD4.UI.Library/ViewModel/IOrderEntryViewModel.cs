@@ -44,6 +44,7 @@ namespace CD4.UI.Library.ViewModel
         Task ManageAddTestToRequestAsync();
         void RemoveTestModelFromAddedTests(TestModel testModel);
         Task OnReceiveSearchResults(PatientModel results);
+        Task SearchRequestByCinAsync();
 
         event PropertyChangedEventHandler PropertyChanged;
         event EventHandler<string> PushingLogs;

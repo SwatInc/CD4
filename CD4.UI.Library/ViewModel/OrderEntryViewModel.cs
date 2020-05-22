@@ -325,6 +325,55 @@ namespace CD4.UI.Library.ViewModel
 
         #region Public Methods
 
+        public async Task SearchRequestByCinAsync()
+        {
+            var result = await request.SearchRequestByCinAsync(Cin);
+
+            this.Cin = result.RequestPatientSampleData.Cin;
+            this.SelectedSiteId = result.RequestPatientSampleData.SiteId;
+            this.SampleCollectionDate = result.RequestPatientSampleData.CollectionDate;
+            this.SampleReceivedDate = result.RequestPatientSampleData.ReceivedDate;
+            this.NidPp = result.RequestPatientSampleData.NidPp;
+            this.Fullname = result.RequestPatientSampleData.Fullname;
+            this.SelectedGenderId = result.RequestPatientSampleData.GenderId;
+            this.PhoneNumber = result.RequestPatientSampleData.PhoneNumber;
+            this.Birthdate = result.RequestPatientSampleData.Birthdate;
+            this.Address = result.RequestPatientSampleData.Address;
+            this.SelectedAtoll = result.RequestPatientSampleData.Atoll;
+            await RepopulateIslandDatasource(SelectedAtoll); //filter the islands by selected atoll
+
+            this.SelectedIsland = result.RequestPatientSampleData.Island;
+            this.SelectedCountryId = result.RequestPatientSampleData.CountryId;
+
+            //clinical details
+            foreach (var item in ClinicalDetails)
+            {
+                item.IsSelected = false;
+                var model = (result.ClinicalDetailIds.Where((c) => c.ClinicalDetailsId == item.Id).FirstOrDefault());
+                if (model != null)
+                {
+                    item.IsSelected = true;
+                }
+            }
+
+            //requested tests
+            AddedTests.Clear();
+            foreach (var item in result.RequestedTestsData)
+            {
+                var match = AllTestsData.Where((t) => t.Id == item.TestId).FirstOrDefault();
+                await AddSingleTestToRequestAsync(new TestModel()
+                {
+                    Id = match.Id,
+                    Description = match.Description,
+                    ResultDataType = match.ResultDataType,
+                    Mask = match.Mask,
+                    IsReportable = match.IsReportable
+                });
+            }
+
+
+        }
+
         public async Task<bool> ConfirmAnalysisRequest()
         {
             var mappedRequest = mapper.Map<DataLibrary.Models.AnalysisRequestDataModel>(this);

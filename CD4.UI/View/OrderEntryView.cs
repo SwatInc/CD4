@@ -2,10 +2,12 @@
 using CD4.DataLibrary.DataAccess;
 using CD4.UI.Library.Model;
 using CD4.UI.Library.ViewModel;
+using DevExpress.Utils.MVVM;
 using DevExpress.XtraEditors;
 using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CD4.UI.View
@@ -32,14 +34,17 @@ namespace CD4.UI.View
             _viewModel.PushingMessages += OnPushMessage;
             _viewModel.PropertyChanged += OnPropertyChanged;
             simpleButtonConfirm.Click += OnConfirmAnalysisRequest;
-
-            this.DoubleClick += SearchDataExperimentation;
-
+            simpleButtonSearchRequest.Click+= OnSearchRequest;
         }
 
-        private async void SearchDataExperimentation(object sender, EventArgs e)
+        private async void OnSearchRequest(object sender, EventArgs e)
         {
-            await _viewModel.SearchDataExperimentation();
+            await InitializeRequestSearchByCinAsync();
+        }
+
+        private async Task InitializeRequestSearchByCinAsync()
+        {
+            await _viewModel.SearchRequestByCinAsync();
         }
 
         private async void OnConfirmAnalysisRequest(object sender, EventArgs e)
@@ -133,7 +138,7 @@ namespace CD4.UI.View
 
         }
 
-        private void ManageKeyUpEvents(object sender, KeyEventArgs e)
+        private async void ManageKeyUpEvents(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {
@@ -145,6 +150,9 @@ namespace CD4.UI.View
                     break;
                 case Keys.F2:
                     OnPatientSearch(this, EventArgs.Empty);
+                    break;
+                case Keys.F7:
+                    await this.InitializeRequestSearchByCinAsync();
                     break;
                 default:
                     break;
