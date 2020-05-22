@@ -68,10 +68,11 @@
     <Compile Include="Models\AnalysisRequestUpdateDatabaseModel.cs" />
     <Compile Include="Models\AtollIslandModel.cs" />
     <Compile Include="Models\AtollModel.cs" />
-    <Compile Include="Models\ClinicalDetailIdsCsvModel.cs" />
+    <Compile Include="Models\ClinicalDetailIdsModel.cs" />
     <Compile Include="Models\ClinicalDetailsDatabaseModel.cs" />
     <Compile Include="Models\ClinicalDetailsModel.cs" />
     <Compile Include="Models\ClinicalDetailsSelectionModel.cs" />
+    <Compile Include="Models\CompleteRequestSearchResultsModel.cs" />
     <Compile Include="Models\RequestSearchDataModel.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Models\ConnectionName.cs" />

@@ -6,5 +6,6 @@ namespace CD4.DataLibrary.DataAccess
     public interface IAnalysisRequestDataAccess
     {
         Task<bool> ConfirmRequestAsync(AnalysisRequestDataModel request);
+        Task<CompleteRequestSearchResultsModel> SearchRequestByCinAsync(string cin = "nCoV-4654/20");
     }
 }

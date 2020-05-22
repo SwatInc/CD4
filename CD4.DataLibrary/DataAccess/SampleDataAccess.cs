@@ -12,7 +12,7 @@ namespace CD4.DataLibrary.DataAccess
         public async Task<bool> UpdateSample(SampleUpdateDatabaseModel sample)
         {
             var storedProcedure = "[dbo].[usp_UpdateSampleWithCin]";
-            return await InsertOrUpdate<bool, SampleUpdateDatabaseModel>(storedProcedure, sample);
+            return await SelectInsertOrUpdate<bool, SampleUpdateDatabaseModel>(storedProcedure, sample);
         }
     }
 }

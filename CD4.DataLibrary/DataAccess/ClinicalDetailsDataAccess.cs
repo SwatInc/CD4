@@ -23,7 +23,7 @@ namespace CD4.DataLibrary.DataAccess
                 AnalysisRequestId = analysisRequestId
             };
 
-            return await InsertOrUpdate<bool, dynamic>(storedProcedure, syncData);
+            return await SelectInsertOrUpdate<bool, dynamic>(storedProcedure, syncData);
         }
 
         /// <summary>

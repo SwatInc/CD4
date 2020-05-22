@@ -24,6 +24,8 @@ namespace CD4.DataLibrary.DataAccess
             this.clinicalDetailsData = clinicalDetailsData;
             this.sampleDataAccess = sampleDataAccess;
             this.resultDataAccess = resultDataAccess;
+
+           SearchRequestByCinAsync();
         }
 
         public async Task<bool> ConfirmRequestAsync(AnalysisRequestDataModel request)
@@ -61,7 +63,7 @@ namespace CD4.DataLibrary.DataAccess
             if (requestAndSample != null)
             {
                 clinicalDetails = await clinicalDetailsData.GetClinicalDetailsByRequestId(requestAndSample.RequestId);
-                databaseTestsForRequest = await GetRequestedTestsByRequestId(requestAndSample.RequestId);
+                databaseTestsForRequest = await GetRequestedTestsByRequestIdAsync(requestAndSample.RequestId);
             }
 
             #endregion
@@ -152,7 +154,7 @@ namespace CD4.DataLibrary.DataAccess
                     EpisodeNumber = request.EpisodeNumber,
                     Age = request.Age
                 };
-                var isRequestUpdated = await UpdateRequest(requestToUpdate);
+                var isRequestUpdated = await UpdateRequestAsync(requestToUpdate);
                 if (!isRequestUpdated)
                 {
                     throw new Exception("Cannot update request data! [ either episode number, age or patient associated with request was not updated ]");
@@ -222,21 +224,21 @@ namespace CD4.DataLibrary.DataAccess
             return true;
         }
 
-        private async Task<bool> InsertNewCompleteRequest(int patientId, AnalysisRequestDataModel request)
+        private async Task<bool> InsertNewCompleteRequest
+            (int patientId, AnalysisRequestDataModel request)
         {
             var insertData = new RequestSampleAndClinicalDetailsInsertDatabaseModel(patientId, request);
 
             if (string.IsNullOrEmpty(insertData.CommaDelimitedClinicalDetailsIds))
             {
                 // when clinical details are not available.
-                return await InsertOrUpdate<bool, dynamic>
+                return await SelectInsertOrUpdate<bool, dynamic>
                     ("[dbo].[usp_InsertAnalysisRequestSampleAndRequestedTests]", insertData.GetWithoutClinicalDetails());
             }
 
-            return await InsertOrUpdate<bool, RequestSampleAndClinicalDetailsInsertDatabaseModel>
+            return await SelectInsertOrUpdate<bool, RequestSampleAndClinicalDetailsInsertDatabaseModel>
                 ("[dbo].[usp_InsertAnalysisRequestClinicalDetailsSampleAndRequestedTests]", insertData);
         }
-
 
         /// <summary>
         /// Determined which of the variable holds the patient Id, either will have the Id but not both.
@@ -327,7 +329,8 @@ namespace CD4.DataLibrary.DataAccess
             return sampleAndRequest.FirstOrDefault();
         }
 
-        public async Task<List<ResultsDatabaseModel>> GetRequestedTestsByRequestId(int requestId)
+        public async Task<List<ResultsDatabaseModel>> GetRequestedTestsByRequestIdAsync
+            (int requestId)
         {
             var storedProcedure = "[dbo].[usp_GetTestWithResultsByRequestId]";
             var parameter = new RequestIdParameterModel() { AnalysisRequestId = requestId };
@@ -359,7 +362,8 @@ namespace CD4.DataLibrary.DataAccess
         /// <param name="userInputList"></param>
         /// <param name="requestedTestsOnDatabase"></param>
         /// <returns>List of TestsModel</returns>
-        private List<TestsModel> GetTestsToRemove(List<TestsModel> userInputList, List<ResultsDatabaseModel> requestedTestsOnDatabase)
+        private List<TestsModel> GetTestsToRemove
+            (List<TestsModel> userInputList, List<ResultsDatabaseModel> requestedTestsOnDatabase)
         {
             var errorMessageOnZeroUserInput = "A minimum of one test need to be selected per request!";
             if (requestedTestsOnDatabase is null) return new List<TestsModel>();
@@ -384,19 +388,19 @@ namespace CD4.DataLibrary.DataAccess
 
         }
 
-        public async Task<int> InsertRequest(AnalysisRequestInsertDatabaseModel request)
+        public async Task<int> InsertRequestAsync(AnalysisRequestInsertDatabaseModel request)
         {
             var storedProcedure = "[dbo].[usp_InsertAnalysisRequest]";
-            return await InsertOrUpdate<int, AnalysisRequestInsertDatabaseModel>
+            return await SelectInsertOrUpdate<int, AnalysisRequestInsertDatabaseModel>
                 (storedProcedure, request);
         }
 
-        public async Task<bool> UpdateRequest(AnalysisRequestUpdateDatabaseModel request)
+        public async Task<bool> UpdateRequestAsync(AnalysisRequestUpdateDatabaseModel request)
         {
             try
             {
                 var storedProcedure = "[dbo].[usp_UpdateAnalysisRequest]";
-                _ = await InsertOrUpdate<bool, AnalysisRequestUpdateDatabaseModel>
+                _ = await SelectInsertOrUpdate<bool, AnalysisRequestUpdateDatabaseModel>
                     (storedProcedure, request);
                 return true;
             }
@@ -404,6 +408,16 @@ namespace CD4.DataLibrary.DataAccess
             {
                 throw;
             }
+        }
+
+        public async Task<CompleteRequestSearchResultsModel>SearchRequestByCinAsync
+            (string cin = "nCoV-4654/20")
+        {
+            var storedProcedure = "[dbo].[usp_GetCompleteRequestByCin]";
+            var parameter = new CinParameterModel() { Cin = cin };
+
+            var a  =  await SelectMultiple(storedProcedure, parameter);
+            return a;
         }
     }
 }

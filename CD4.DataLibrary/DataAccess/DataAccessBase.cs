@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -77,7 +78,7 @@ namespace CD4.DataLibrary.DataAccess
             return returnData;
         }
 
-        internal async Task<T> InsertOrUpdate<T,U>(string storedProcedure, U parameters)
+        internal async Task<T> SelectInsertOrUpdate<T,U>(string storedProcedure, U parameters)
         {
             using (IDbConnection connection = new SqlConnection(helper.GetConnectionString()))
             {
@@ -86,5 +87,42 @@ namespace CD4.DataLibrary.DataAccess
             }
 
         }
+
+        internal async Task<CompleteRequestSearchResultsModel> SelectMultiple<T>(string storedProcedure, T parameters)
+        {
+            var requestPatientSampleData = new RequestSearchDataModel();
+            var clinicalDetailIds  = new List<ClinicalDetailIdsModel>();
+            var requestedTestsData = new List<ResultsDatabaseModel>();
+
+            try
+            {
+                using (IDbConnection connection = new SqlConnection(helper.GetConnectionString()))
+                {
+                    using (var reader = await connection.QueryMultipleAsync
+                        (storedProcedure, parameters, commandType: CommandType.StoredProcedure))
+                    {
+                        requestPatientSampleData = reader.Read<RequestSearchDataModel>().FirstOrDefault();
+                        clinicalDetailIds = reader.Read<ClinicalDetailIdsModel>().ToList();
+                        requestedTestsData = reader.Read<ResultsDatabaseModel>().ToList();
+                    }
+
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+
+            if (requestPatientSampleData is null) { return new CompleteRequestSearchResultsModel(); }
+            return new CompleteRequestSearchResultsModel()
+            {
+                RequestPatientSampleData = requestPatientSampleData,
+                ClinicalDetailIds = clinicalDetailIds,
+                RequestedTestsData = requestedTestsData
+            };
+        }
+
     }
 }

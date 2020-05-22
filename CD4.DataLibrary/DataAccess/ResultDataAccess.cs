@@ -21,7 +21,7 @@ namespace CD4.DataLibrary.DataAccess
                 TestsToRemove = testToRemoveTable
             };
 
-            return await InsertOrUpdate<bool, dynamic>(storedProcedure, syncData);
+            return await SelectInsertOrUpdate<bool, dynamic>(storedProcedure, syncData);
         }
 
         public static SqlMapper.ICustomQueryParameter GetTestsTable(List<TestsModel> tests, string cin)

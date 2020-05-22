@@ -27,8 +27,8 @@ SET NOCOUNT ON;
 	FROM [dbo].[Sample] [S] 
 	WHERE [S].[Cin] = @Cin);
 
-	--Get CSV of clinical details for the request
-	SELECT STRING_AGG([AC].[ClinicalDetailsId], ',') AS [CsvClinicalDetails] 
+	--Get clinical details ids for the request
+	SELECT [AC].[ClinicalDetailsId] 
 	FROM [dbo].[AnalysisRequest_ClinicalDetail] [AC] 
 	WHERE [AC].[AnalysisRequestId] = @RequestId;
 
