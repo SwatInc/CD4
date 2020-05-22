@@ -7,6 +7,7 @@ SET NOCOUNT ON;
 
 	--Get request data from view
 	SELECT [Cin],
+	[EpisodeNumber],
 	[SiteId],
 	[CollectionDate],
 	[ReceivedDate],
@@ -18,7 +19,7 @@ SET NOCOUNT ON;
 	[Address],
 	[Atoll],
 	[Island],
-	[CountryId] 
+	[CountryId]
 	FROM [dbo].[RequestSearchData] 
 	WHERE [Cin] = @Cin;
 

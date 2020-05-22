@@ -10,6 +10,7 @@ namespace CD4.DataLibrary.Models
     public class RequestSearchDataModel
     {
         public string Cin { get; set; }
+        public string EpisodeNumber { get; set; }
         public int SiteId { get; set; }
         public DateTime? CollectionDate { get; set; }
         public DateTime? ReceivedDate { get; set; }

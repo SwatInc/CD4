@@ -330,6 +330,7 @@ namespace CD4.UI.Library.ViewModel
             var result = await request.SearchRequestByCinAsync(Cin);
 
             this.Cin = result.RequestPatientSampleData.Cin;
+            this.EpisodeNumber = result.RequestPatientSampleData.EpisodeNumber;
             this.SelectedSiteId = result.RequestPatientSampleData.SiteId;
             this.SampleCollectionDate = result.RequestPatientSampleData.CollectionDate;
             this.SampleReceivedDate = result.RequestPatientSampleData.ReceivedDate;
