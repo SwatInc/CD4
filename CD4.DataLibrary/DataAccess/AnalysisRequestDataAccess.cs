@@ -376,6 +376,10 @@ namespace CD4.DataLibrary.DataAccess
                 var userSelectedTest = userInputList.Where((t) => t.Id == test.TestId).FirstOrDefault();
                 if (userSelectedTest is null && string.IsNullOrEmpty(test.Result))
                 {
+                    //make sure that a dulicate test is not added to remove test list under any circumstance, 
+                    //That would crash the stored procedure, UDT has PK on testID column
+                    var isTestToRemoveDublicate = listOfTestsToRemove.Where((t) => t.Id == test.TestId).FirstOrDefault();
+                    if (isTestToRemoveDublicate != null) continue;
                     listOfTestsToRemove.Add(new TestsModel()
                     {
                         Id = test.TestId,
