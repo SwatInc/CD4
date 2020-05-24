@@ -10,4 +10,5 @@
     CONSTRAINT [PK_Id_Cin] PRIMARY KEY ([Id],[Sample_Cin]))
 GO
 
-CREATE INDEX [IX_Result_Column] ON [dbo].[Result] ([Sample_Cin])
+
+CREATE INDEX [IX_Result_Result] ON [dbo].[Result] ([Result])
