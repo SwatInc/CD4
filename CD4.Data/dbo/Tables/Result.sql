@@ -15,3 +15,7 @@ CREATE NONCLUSTERED INDEX [IX_Result_Result_TestId]
 ON [dbo].[Result] ([Result])
 INCLUDE ([TestId]);
 GO
+CREATE NONCLUSTERED INDEX [IX_SampleCin_Result]
+ON [dbo].[Result] ([Sample_Cin],[Result])
+GO
+GO
