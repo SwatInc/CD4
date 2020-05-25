@@ -25,11 +25,11 @@ SELECT [R].[Id],
        [S].[ReceivedDate],
        [P].[FullName],
        [P].[NidPp],
-	   CONCAT([AR].[AGE],' / ',[G].[Gender]) AS [AgeSex],
+	   ISNULL(CONCAT([AR].[AGE],' / ',[G].[Gender]) ,'')AS [AgeSex],
        [P].[Birthdate],
        [P].[PhoneNumber],
        [P].[Address],
-	   CONCAT([A].[Atoll],'. ',[A].[Island],', ',[C].[Country]) AS [AtollIslandCountry],
+	   ISNULL(CONCAT([A].[Atoll],'. ',[A].[Island],', ',[C].[Country]),'')AS [AtollIslandCountry],
 	   [AR].[EpisodeNumber],
 	   [SI].[NAME] AS [Site]
 FROM [dbo].[Result] [R] 
@@ -40,5 +40,9 @@ INNER JOIN [dbo].[Gender] [G] ON [P].[GenderId] = [G].[Id]
 INNER JOIN [dbo].[Atoll] [A] ON [P].[AtollId] = [A].[Id]
 INNER JOIN [dbo].[Country] [C] ON [P].[CountryId]  = [C].[Id] 
 INNER JOIN [dbo].[Sites] [SI] ON [S].[SiteId] = [SI].[Id]
-WHERE [R].[Result] IS NULL
+WHERE [R].[Result] IS NULL OR [R].[Result] = ''
 )
+GO
+CREATE UNIQUE CLUSTERED INDEX IX_RequestDataForWorksheet_Id
+ON [dbo].[RequestDataForWorksheet]([Id]);
+GO
