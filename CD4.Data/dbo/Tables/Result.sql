@@ -9,6 +9,9 @@
     CONSTRAINT [FK_Result_Sample] FOREIGN KEY ([Sample_Cin]) REFERENCES [dbo].[Sample]([Cin]), 
     CONSTRAINT [PK_Id_Cin] PRIMARY KEY ([Id],[Sample_Cin]))
 GO
-
-
-CREATE INDEX [IX_Result_Result] ON [dbo].[Result] ([Result])
+CREATE INDEX [IX_Result_Result] ON [dbo].[Result] ([Result]);
+GO
+CREATE NONCLUSTERED INDEX [IX_Result_Result_TestId]
+ON [dbo].[Result] ([Result])
+INCLUDE ([TestId]);
+GO
