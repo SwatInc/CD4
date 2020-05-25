@@ -107,7 +107,7 @@
     <Build Include="dbo\StoredProcedures\usp_SyncClinicalDetails.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetCompleteRequestByCin.sql" />
     <Build Include="dbo\Views\RequestedSearchData.sql" />
-    <Build Include="dbo\Views\RequestDataforWorksheet.sql" />
+    <Build Include="dbo\Views\RequestDataForWorksheet.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
@@ -115,6 +115,7 @@
   <ItemGroup>
     <None Include="CD4.Data.publish.xml" />
     <None Include="Azure.CD4.Data.publish.xml" />
+    <None Include="dbo\Views\WorkSheetResultData.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\Scripts\Script.PostDeployment.sql" />

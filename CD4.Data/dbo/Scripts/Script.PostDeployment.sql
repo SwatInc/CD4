@@ -378,9 +378,7 @@ Post-Deployment Script Template
 --(@Cin, @TestId_One),
 --(@Cin, @TestId_Two);
 --GO
-CREATE UNIQUE CLUSTERED INDEX IX_RequestDataForWorksheet_Id
-ON [dbo].[RequestDataForWorksheet]([Id]);
-GO
+
 --CREATE NONCLUSTERED INDEX [RequestDataForWorksheet_PatientId_EpisodeNumber]
 --ON [dbo].[AnalysisRequest] ([PatientId])
 --INCLUDE ([EpisodeNumber])
@@ -391,4 +389,6 @@ GO
 --ON [dbo].[Sample] ([AnalysisRequestId])
 --INCLUDE ([Cin],[SiteId],[CollectionDate],[ReceivedDate])
 --GO
+
+
 
