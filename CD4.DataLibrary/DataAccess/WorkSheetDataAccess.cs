@@ -13,7 +13,7 @@ namespace CD4.DataLibrary.DataAccess
     {
         public async Task<WorklistModel> GetNotValidatedWorklistAsync(DateTime? startDate = null)
         {
-            var storedProcedure = "[dbo].[GetWorksheetWithIncompleteRequests]";
+            var storedProcedure = "[dbo].[usp_GetWorksheetWithIncompleteRequests]";
             var parameter = new { StartDate = GetStartDate(startDate) };
 
             var results = await SelectWorksheetDatasets<dynamic>(storedProcedure, parameter);

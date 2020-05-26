@@ -17,7 +17,8 @@ namespace CD4.UI.Library.ViewModel
     {
 
         #region Default Constructor
-        public ResultEntryViewModel(IWorkSheetDataAccess workSheetDataAccess, IMapper mapper)
+        public ResultEntryViewModel
+            (IWorkSheetDataAccess workSheetDataAccess, IMapper mapper, IResultDataAccess resultDataAccess)
         {
             RequestData = new List<RequestSampleModel>();
             SelectedResultData = new BindingList<ResultModel>();
@@ -31,18 +32,9 @@ namespace CD4.UI.Library.ViewModel
             GenerateDemoData();
             this.workSheetDataAccess = workSheetDataAccess;
             this.mapper = mapper;
+            this.resultDataAccess = resultDataAccess;
             GetWorkSheet().ConfigureAwait(true);
             SelectedResultData.ListChanged += UpdateDatabaseResults;
-        }
-
-        private void UpdateDatabaseResults(object sender, ListChangedEventArgs e)
-        {
-            //detect when a result is modified.
-            if (e.ListChangedType== ListChangedType.ItemChanged)
-            {
-                var testData = SelectedResultData.ElementAt(e.NewIndex);
-                MessageBox.Show(JsonConvert.SerializeObject(testData, Formatting.Indented));
-            }
         }
 
         #endregion
@@ -69,6 +61,7 @@ namespace CD4.UI.Library.ViewModel
         private List<CodifiedResultsModel> TempCodifiedPhrasesList;
         private readonly IWorkSheetDataAccess workSheetDataAccess;
         private readonly IMapper mapper;
+        private readonly IResultDataAccess resultDataAccess;
 
         #endregion
 
@@ -125,6 +118,21 @@ namespace CD4.UI.Library.ViewModel
         #endregion
 
         #region Private Methods
+
+        private async void UpdateDatabaseResults(object sender, ListChangedEventArgs e)
+        {
+            //detect when a result is modified.
+            if (e.ListChangedType == ListChangedType.ItemChanged)
+            {
+                var testData = SelectedResultData.ElementAt(e.NewIndex);
+                await InsertUpdateResultByIdAsync(testData.Result, testData.Id);
+            }
+        }
+
+        private async Task InsertUpdateResultByIdAsync(string result, int resultId)
+        {
+            var response = await resultDataAccess.InsertUpdateResultByResultIdAsync(resultId, result);
+        }
 
         private void SetClinicalDetailsForSelectedSample(string delimitedDetails)
         {

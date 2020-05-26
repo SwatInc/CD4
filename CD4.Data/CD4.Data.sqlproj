@@ -108,7 +108,8 @@
     <Build Include="dbo\StoredProcedures\usp_GetCompleteRequestByCin.sql" />
     <Build Include="dbo\Views\RequestedSearchData.sql" />
     <Build Include="dbo\Views\RequestDataForWorksheet.sql" />
-    <Build Include="dbo\StoredProcedures\GetWorksheetWithIncompleteRequests.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetWorksheetWithIncompleteRequests.sql" />
+    <Build Include="dbo\StoredProcedures\usp_UpdateResultByResultId.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />

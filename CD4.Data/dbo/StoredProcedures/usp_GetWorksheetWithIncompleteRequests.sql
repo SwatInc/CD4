@@ -4,10 +4,10 @@ returns two lists of data
 	Other with results data.
 
 CONDITION: 
-Data returned will be filtered form date. i.e. >= to the date specified.
+Data returned will be filtered form date. i.e. >= to the date specified.C:\Users\ibrah\source\repos\CD4\CD4.Data\dbo\StoredProcedures\GetWorksheetWithIncompleteRequests.sql
 If no date is specified, the procedure not return anything.
 */
-CREATE PROCEDURE [dbo].[GetWorksheetWithIncompleteRequests]
+CREATE PROCEDURE [dbo].[usp_GetWorksheetWithIncompleteRequests]
 	@StartDate VARCHAR(8)
 	--pass in todays date if no date is specified.
 	-- Format: yyyyMMdd

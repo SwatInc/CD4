@@ -1,5 +1,6 @@
 ﻿using CD4.DataLibrary.Models;
 using Dapper;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
@@ -8,7 +9,7 @@ namespace CD4.DataLibrary.DataAccess
 {
     public class ResultDataAccess : DataAccessBase, IResultDataAccess
     {
-        public async Task<bool> SyncRequestedTestData
+        public async Task<bool> SyncRequestedTestDataAsync
             (List<TestsModel> testsToInsert, List<TestsModel> testsToRemove, string cin)
         {
             var testToInsertTable = GetTestsTable(testsToInsert, cin);
@@ -35,6 +36,15 @@ namespace CD4.DataLibrary.DataAccess
                 returnTable.Rows.Add(item.Id, cin);
             }
             return returnTable.AsTableValuedParameter("ResultTableInsertDataUDT");
+        }
+
+        public async Task<bool> InsertUpdateResultByResultIdAsync(int resultId, string result)
+        {
+            var storedProcedure = "[dbo].[usp_UpdateResultByResultId]";
+            var parameter = new { Result = result, ResultId = resultId };
+
+            var output = await SelectInsertOrUpdate<bool, dynamic>(storedProcedure, parameter);
+            return output;
         }
     }
 }

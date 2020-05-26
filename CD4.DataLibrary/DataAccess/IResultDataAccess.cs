@@ -6,6 +6,7 @@ namespace CD4.DataLibrary.DataAccess
 {
     public interface IResultDataAccess
     {
-        Task<bool> SyncRequestedTestData(List<TestsModel> testsToInsert, List<TestsModel> testsToRemove, string cin);
+        Task<bool> InsertUpdateResultByResultIdAsync(int resultId, string result);
+        Task<bool> SyncRequestedTestDataAsync(List<TestsModel> testsToInsert, List<TestsModel> testsToRemove, string cin);
     }
 }
