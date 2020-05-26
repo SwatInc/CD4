@@ -6,6 +6,6 @@ namespace CD4.DataLibrary.DataAccess
 {
     public interface IWorkSheetDataAccess
     {
-        Task<WorklistModel> GetNotValidatedWorklist(DateTime? startDate = null);
+        Task<WorklistModel> GetNotValidatedWorklistAsync(DateTime? startDate = null);
     }
 }

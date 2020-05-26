@@ -11,7 +11,7 @@ namespace CD4.DataLibrary.DataAccess
 {
     public class WorkSheetDataAccess : DataAccessBase, IWorkSheetDataAccess
     {
-        public async Task<WorklistModel> GetNotValidatedWorklist(DateTime? startDate = null)
+        public async Task<WorklistModel> GetNotValidatedWorklistAsync(DateTime? startDate = null)
         {
             var storedProcedure = "[dbo].[GetWorksheetWithIncompleteRequests]";
             var parameter = new { StartDate = GetStartDate(startDate) };

@@ -1,4 +1,5 @@
-﻿using CD4.DataLibrary.DataAccess;
+﻿using AutoMapper;
+using CD4.DataLibrary.DataAccess;
 using CD4.UI.Library.Model;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace CD4.UI.Library.ViewModel
     {
 
         #region Default Constructor
-        public ResultEntryViewModel(IWorkSheetDataAccess workSheetDataAccess)
+        public ResultEntryViewModel(IWorkSheetDataAccess workSheetDataAccess, IMapper mapper)
         {
             RequestData = new List<RequestSampleModel>();
             SelectedResultData = new BindingList<ResultModel>();
@@ -27,7 +28,8 @@ namespace CD4.UI.Library.ViewModel
             
             GenerateDemoData();
             this.workSheetDataAccess = workSheetDataAccess;
-            workSheetDataAccess.GetNotValidatedWorklist(new DateTime(2019,05,01));
+            this.mapper = mapper;
+            GetWorkSheet().ConfigureAwait(true);
         }
 
         #endregion
@@ -53,6 +55,7 @@ namespace CD4.UI.Library.ViewModel
         public List<CodifiedResultsModel> AllCodifiedPhrases { get; set; }
         private List<CodifiedResultsModel> TempCodifiedPhrasesList;
         private readonly IWorkSheetDataAccess workSheetDataAccess;
+        private readonly IMapper mapper;
 
         #endregion
 
@@ -113,6 +116,7 @@ namespace CD4.UI.Library.ViewModel
         private void SetClinicalDetailsForSelectedSample(string delimitedDetails)
         {
             SelectedClinicalDetails.Clear();
+            if (delimitedDetails is null) { return; }
             var details = delimitedDetails.Split(',');
             if (details.Length == 0) return;
 
@@ -245,6 +249,29 @@ namespace CD4.UI.Library.ViewModel
             #endregion
         }
 
+        private async Task GetWorkSheet()
+        {
+            var worksheet = await workSheetDataAccess.GetNotValidatedWorklistAsync
+                (new DateTime(2019, 05, 01));
+            await DisplayWorksheet(worksheet);
+
+        }
+
+        private async Task DisplayWorksheet(CD4.DataLibrary.Models.WorklistModel worklist)
+        {
+            //map out request data
+            foreach (var item in worklist.PatientData)
+            {
+                RequestData.Add(mapper.Map<RequestSampleModel>(item));
+            }
+
+            //map out result data
+            foreach (var item in worklist.TestResultsData)
+            {
+                AllResultData.Add(mapper.Map<ResultModel>(item));
+            }
+
+        }
         #endregion
 
     }

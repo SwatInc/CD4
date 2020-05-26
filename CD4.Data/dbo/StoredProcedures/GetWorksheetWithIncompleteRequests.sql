@@ -34,12 +34,13 @@ BEGIN
         GROUP BY [ACD].[AnalysisRequestId];
 
 		--fetch request data and join with clinical details :)
-		SELECT DISTINCT([RW].[AnalysisRequestId]),
+		SELECT DISTINCT([RW].[AnalysisRequestId]) AS [Id],
+               [RW].[AnalysisRequestId],
                [RW].[Cin],
                [RW].[CollectionDate],
                [RW].[ReceivedDate],
-               [RW].[FullName],
-               [RW].[NidPp],
+               [RW].[FullName] AS [PatientName],
+               [RW].[NidPp] AS [NationalId],
                [RW].[AgeSex],
                [RW].[Birthdate],
                [RW].[PhoneNumber],
@@ -47,7 +48,7 @@ BEGIN
                [RW].[AtollIslandCountry],
                [RW].[EpisodeNumber],
                [RW].[Site],
-               [C].[Detail] AS [CsvClinicalDetails]
+               [C].[Detail] AS [ClinicalDetails]
 		FROM [dbo].[RequestDataForWorksheet] [RW] WITH (NOEXPAND)
         INNER JOIN @TempClinicalDetails [C] ON [RW].[AnalysisRequestId] = [C].[AnalysisRequestId]
 		WHERE [RW].[ReceivedDate] > @StartDateInUse;
@@ -57,7 +58,7 @@ BEGIN
         SELECT [Id],
                [AnalysisRequestId],
                [Cin],
-               [Description],
+               [Description] AS [Test],
                [Result],
                [DataType],
                [Mask] 
