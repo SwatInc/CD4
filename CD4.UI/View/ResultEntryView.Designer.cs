@@ -31,6 +31,7 @@ namespace CD4.UI.View
         private void InitializeComponent()
         {
             this.labelControlNationalId = new DevExpress.XtraEditors.LabelControl();
+            this.labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
             this.labelControlAgeSex = new DevExpress.XtraEditors.LabelControl();
             this.labelControlBirthdate = new DevExpress.XtraEditors.LabelControl();
             this.labelControlPhoneNumber = new DevExpress.XtraEditors.LabelControl();
@@ -56,7 +57,6 @@ namespace CD4.UI.View
             this.gridColumnResult = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemLookUpEditCodifiedPhrases = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.groupControlFunctions = new DevExpress.XtraEditors.GroupControl();
-            labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).BeginInit();
             this.splitContainerControlPatient.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlSelectedPatientRequestClinicalDetailsArea)).BeginInit();

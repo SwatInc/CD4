@@ -16,5 +16,6 @@ namespace CD4.UI.Library.ViewModel
         BindingList<string> SelectedClinicalDetails { get; set; }
 
         event PropertyChangedEventHandler PropertyChanged;
+
     }
 }

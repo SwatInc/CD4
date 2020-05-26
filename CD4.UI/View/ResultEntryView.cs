@@ -26,8 +26,14 @@ namespace CD4.UI.View
             InitializeBinding();
 
             SizeChanged += OnSizeChangedAdjustSplitContainers;
+            labelControlCin.DoubleClick += CopyCinToClipBoard;
             gridViewSamples.FocusedRowChanged += SelectedSampleChanged;
             gridViewTests.FocusedRowChanged += SelectedTestChanged;
+        }
+
+        private void CopyCinToClipBoard(object sender, EventArgs e)
+        {
+            Clipboard.SetText(labelControlCin.Text);
         }
 
         private async void SelectedTestChanged(object sender, FocusedRowChangedEventArgs e)
