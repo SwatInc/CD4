@@ -13,3 +13,5 @@
     CONSTRAINT [AK_Patient_NidPp] UNIQUE ([NidPp]), 
     CONSTRAINT [FK_Patient_Atoll] FOREIGN KEY ([AtollId]) REFERENCES [dbo].[Atoll]([Id]), 
     CONSTRAINT [FK_Patient_Country] FOREIGN KEY ([CountryId]) REFERENCES [dbo].[Country]([Id]))
+    GO
+    CREATE NONCLUSTERED INDEX [IX_Patient_Fullname] ON [dbo].[Patient]([FullName] ASC)
