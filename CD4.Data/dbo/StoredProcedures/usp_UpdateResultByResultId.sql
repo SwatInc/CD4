@@ -10,7 +10,8 @@ DECLARE @ReturnValue bit = 0;
 		BEGIN TRY
 
 			UPDATE [dbo].[Result]
-			SET [Result] = @Result
+			SET [Result] = @Result,
+				[ResultDate] = GETDATE()
 			WHERE [Id] = @ResultId;
 		
 		COMMIT TRANSACTION;
