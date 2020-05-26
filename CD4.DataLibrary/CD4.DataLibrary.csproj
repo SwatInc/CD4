@@ -56,10 +56,12 @@
     <Compile Include="DataAccess\IResultDataAccess.cs" />
     <Compile Include="DataAccess\ISampleDataAccess.cs" />
     <Compile Include="DataAccess\IStaticDataDataAccess.cs" />
+    <Compile Include="DataAccess\IWorkSheetDataAccess.cs" />
     <Compile Include="DataAccess\PatientDataAccess.cs" />
     <Compile Include="DataAccess\ResultDataAccess.cs" />
     <Compile Include="DataAccess\SampleDataAccess.cs" />
     <Compile Include="DataAccess\StaticDataDataAccess.cs" />
+    <Compile Include="DataAccess\WorkSheetDataAccess.cs" />
     <Compile Include="DiskIO\Read.cs" />
     <Compile Include="Helpers\DateHelper.cs" />
     <Compile Include="Helpers\Helper.cs" />
@@ -96,6 +98,9 @@
     <Compile Include="Models\SampleUpdateDatabaseModel.cs" />
     <Compile Include="Models\SitesModel.cs" />
     <Compile Include="Models\TestsModel.cs" />
+    <Compile Include="Models\WorklistModel.cs" />
+    <Compile Include="Models\WorklistPatientDataModel.cs" />
+    <Compile Include="Models\WorkListResultsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

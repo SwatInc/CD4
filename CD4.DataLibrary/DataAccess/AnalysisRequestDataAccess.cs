@@ -418,7 +418,7 @@ namespace CD4.DataLibrary.DataAccess
             var storedProcedure = "[dbo].[usp_GetCompleteRequestByCin]";
             var parameter = new CinParameterModel() { Cin = cin };
 
-            return await SelectMultiple(storedProcedure, parameter);
+            return await SelectMultipleRequestDataSets(storedProcedure, parameter);
         }
     }
 }

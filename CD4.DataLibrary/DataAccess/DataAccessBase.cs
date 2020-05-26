@@ -88,7 +88,7 @@ namespace CD4.DataLibrary.DataAccess
 
         }
 
-        internal async Task<CompleteRequestSearchResultsModel> SelectMultiple<T>(string storedProcedure, T parameters)
+        internal async Task<CompleteRequestSearchResultsModel> SelectMultipleRequestDataSets<T>(string storedProcedure, T parameters)
         {
             var requestPatientSampleData = new RequestSearchDataModel();
             var clinicalDetailIds  = new List<ClinicalDetailIdsModel>();
@@ -123,6 +123,39 @@ namespace CD4.DataLibrary.DataAccess
                 RequestedTestsData = requestedTestsData
             };
         }
+
+        internal async Task<WorklistModel> SelectWorksheetDatasets<T>(string storedProcedure, T parameters)
+        {
+            var patientData = new List<WorklistPatientDataModel>();
+            var resultData = new List<WorkListResultsModel>();
+            try
+            {
+                using (IDbConnection connection = new SqlConnection(helper.GetConnectionString()))
+                {
+                    using (var reader = await connection.QueryMultipleAsync
+                        (storedProcedure, parameters, commandType: CommandType.StoredProcedure))
+                    {
+                        patientData = reader.Read<WorklistPatientDataModel>().ToList();
+                        resultData = reader.Read<WorkListResultsModel>().ToList();
+                    }
+
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+
+            if (patientData.Count == 0) { return new WorklistModel(); }
+            return new WorklistModel()
+            {
+                 PatientData = patientData,
+                 TestResultsData = resultData
+            };
+        }
+
 
     }
 }

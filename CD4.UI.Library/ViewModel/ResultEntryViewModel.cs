@@ -1,4 +1,5 @@
-﻿using CD4.UI.Library.Model;
+﻿using CD4.DataLibrary.DataAccess;
+using CD4.UI.Library.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,7 +14,7 @@ namespace CD4.UI.Library.ViewModel
     {
 
         #region Default Constructor
-        public ResultEntryViewModel()
+        public ResultEntryViewModel(IWorkSheetDataAccess workSheetDataAccess)
         {
             RequestData = new List<RequestSampleModel>();
             SelectedResultData = new BindingList<ResultModel>();
@@ -25,7 +26,8 @@ namespace CD4.UI.Library.ViewModel
             TempCodifiedPhrasesList = new List<CodifiedResultsModel>();
             
             GenerateDemoData();
-
+            this.workSheetDataAccess = workSheetDataAccess;
+            workSheetDataAccess.GetNotValidatedWorklist(new DateTime(2019,05,01));
         }
 
         #endregion
@@ -50,6 +52,7 @@ namespace CD4.UI.Library.ViewModel
         public BindingList<string> SelectedClinicalDetails { get; set; }
         public List<CodifiedResultsModel> AllCodifiedPhrases { get; set; }
         private List<CodifiedResultsModel> TempCodifiedPhrasesList;
+        private readonly IWorkSheetDataAccess workSheetDataAccess;
 
         #endregion
 
