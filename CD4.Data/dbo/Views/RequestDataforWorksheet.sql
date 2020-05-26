@@ -46,3 +46,6 @@ GO
 CREATE UNIQUE CLUSTERED INDEX IX_RequestDataForWorksheet_Id
 ON [dbo].[RequestDataForWorksheet]([Id]);
 GO
+CREATE NONCLUSTERED INDEX IX_ReceivedDate
+ON [dbo].[RequestDataForWorksheet]([ReceivedDate]);
+GO
