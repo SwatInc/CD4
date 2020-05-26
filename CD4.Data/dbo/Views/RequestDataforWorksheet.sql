@@ -31,7 +31,7 @@ SELECT [R].[Id],
        [P].[Address],
 	   ISNULL(CONCAT([A].[Atoll],'. ',[A].[Island],', ',[C].[Country]),'')AS [AtollIslandCountry],
 	   [AR].[EpisodeNumber],
-	   [SI].[NAME] AS [Site]
+	   [SI].[Name] AS [Site]
 FROM [dbo].[Result] [R] 
 INNER JOIN [dbo].[Sample] [S] ON [R].[Sample_Cin] = [S].[Cin]
 INNER JOIN [dbo].[AnalysisRequest] [AR] ON [S].[AnalysisRequestId] = [AR].[Id]
