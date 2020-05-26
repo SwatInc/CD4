@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CD4.DataLibrary.DataAccess;
 using CD4.UI.Library.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,6 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace CD4.UI.Library.ViewModel
 {
@@ -30,6 +32,17 @@ namespace CD4.UI.Library.ViewModel
             this.workSheetDataAccess = workSheetDataAccess;
             this.mapper = mapper;
             GetWorkSheet().ConfigureAwait(true);
+            SelectedResultData.ListChanged += UpdateDatabaseResults;
+        }
+
+        private void UpdateDatabaseResults(object sender, ListChangedEventArgs e)
+        {
+            //detect when a result is modified.
+            if (e.ListChangedType== ListChangedType.ItemChanged)
+            {
+                var testData = SelectedResultData.ElementAt(e.NewIndex);
+                MessageBox.Show(JsonConvert.SerializeObject(testData, Formatting.Indented));
+            }
         }
 
         #endregion
