@@ -11,3 +11,6 @@
     CONSTRAINT [FK_Sample_Sites] FOREIGN KEY ([SiteId]) REFERENCES [dbo].[Sites]([Id]), 
     CONSTRAINT [FK_Sample_ToTable] FOREIGN KEY ([AnalysisRequestId]) REFERENCES [dbo].[AnalysisRequest]([Id]), 
     CONSTRAINT [PK_Sample] PRIMARY KEY ([Id]))
+    GO
+    CREATE NONCLUSTERED INDEX [IX_Cin_ArId] ON [dbo].[Sample] ([Cin],[AnalysisRequestId])
+    GO

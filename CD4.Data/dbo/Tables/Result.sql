@@ -18,4 +18,10 @@ GO
 CREATE NONCLUSTERED INDEX [IX_SampleCin_Result]
 ON [dbo].[Result] ([Sample_Cin],[Result])
 GO
+CREATE NONCLUSTERED INDEX [IX_TestId_Composite_Result]
+ON [dbo].[Result] ([TestId],[Result])
+GO
+CREATE NONCLUSTERED INDEX [ReceivedDate_Include_Cin]
+ON [dbo].[Sample] ([ReceivedDate])
+INCLUDE ([Cin])
 GO
