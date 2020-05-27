@@ -1,6 +1,7 @@
 ﻿using CD4.DataLibrary.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace CD4.DataLibrary.DataAccess
@@ -32,6 +33,23 @@ namespace CD4.DataLibrary.DataAccess
                 var results = await LoadDataWithParameterAsync<PatientModel, NidPpParameterModel>
                     (storedProcedure, parameter);
                 return results;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<PatientNidPpAndNameModel> GetPatientBySamplCin(string cin)
+        {
+            var storedProcedure = "[dbo].[usp_GetPatientIdFullnameByCin]";
+            var parameter = new { Cin = cin };
+            try
+            {
+                var results = await LoadDataWithParameterAsync<PatientNidPpAndNameModel, dynamic>
+                    (storedProcedure, parameter);
+                return results.FirstOrDefault();
             }
             catch (Exception)
             {

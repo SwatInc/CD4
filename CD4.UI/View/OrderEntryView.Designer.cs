@@ -120,12 +120,14 @@
             this.progressPanelRequest.Location = new System.Drawing.Point(2, 20);
             this.progressPanelRequest.Name = "progressPanelRequest";
             this.progressPanelRequest.Size = new System.Drawing.Size(192, 119);
-            this.progressPanelRequest.TabIndex = 16;
+            this.progressPanelRequest.TabIndex = 0;
+            this.progressPanelRequest.TabStop = false;
             this.progressPanelRequest.Text = "Request data";
             // 
             // dateEditSampleReceived
             // 
             this.dateEditSampleReceived.EditValue = null;
+            this.dateEditSampleReceived.EnterMoveNextControl = true;
             this.dateEditSampleReceived.Location = new System.Drawing.Point(12, 108);
             this.dateEditSampleReceived.Name = "dateEditSampleReceived";
             this.dateEditSampleReceived.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -136,12 +138,14 @@
             this.dateEditSampleReceived.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.dateEditSampleReceived.Properties.NullText = "Sample received date";
             this.dateEditSampleReceived.Properties.NullValuePrompt = "Sample received date";
+            this.dateEditSampleReceived.Properties.ValidateOnEnterKey = true;
             this.dateEditSampleReceived.Size = new System.Drawing.Size(167, 20);
-            this.dateEditSampleReceived.TabIndex = 2;
+            this.dateEditSampleReceived.TabIndex = 4;
             // 
             // dateEditCollectedDate
             // 
             this.dateEditCollectedDate.EditValue = null;
+            this.dateEditCollectedDate.EnterMoveNextControl = true;
             this.dateEditCollectedDate.Location = new System.Drawing.Point(12, 82);
             this.dateEditCollectedDate.Name = "dateEditCollectedDate";
             this.dateEditCollectedDate.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -152,11 +156,13 @@
             this.dateEditCollectedDate.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.dateEditCollectedDate.Properties.NullText = "Sample Collection date";
             this.dateEditCollectedDate.Properties.NullValuePrompt = "Sample Collection date";
+            this.dateEditCollectedDate.Properties.ValidateOnEnterKey = true;
             this.dateEditCollectedDate.Size = new System.Drawing.Size(167, 20);
-            this.dateEditCollectedDate.TabIndex = 1;
+            this.dateEditCollectedDate.TabIndex = 3;
             // 
             // lookUpEditSite
             // 
+            this.lookUpEditSite.EnterMoveNextControl = true;
             this.lookUpEditSite.Location = new System.Drawing.Point(12, 56);
             this.lookUpEditSite.Name = "lookUpEditSite";
             this.lookUpEditSite.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
@@ -166,11 +172,13 @@
             this.lookUpEditSite.Properties.NullValuePrompt = "Select Site";
             this.lookUpEditSite.Properties.NullValuePromptShowForEmptyValue = true;
             this.lookUpEditSite.Properties.ShowNullValuePromptWhenFocused = true;
+            this.lookUpEditSite.Properties.ValidateOnEnterKey = true;
             this.lookUpEditSite.Size = new System.Drawing.Size(167, 20);
-            this.lookUpEditSite.TabIndex = 1;
+            this.lookUpEditSite.TabIndex = 2;
             // 
             // textEditCin
             // 
+            this.textEditCin.EnterMoveNextControl = true;
             this.textEditCin.Location = new System.Drawing.Point(12, 30);
             this.textEditCin.Name = "textEditCin";
             this.textEditCin.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
@@ -185,6 +193,7 @@
             this.textEditCin.Properties.NullText = "CIN";
             this.textEditCin.Properties.NullValuePrompt = "CIN";
             this.textEditCin.Properties.NullValuePromptShowForEmptyValue = true;
+            this.textEditCin.Properties.ValidateOnEnterKey = true;
             this.textEditCin.Size = new System.Drawing.Size(167, 20);
             this.textEditCin.TabIndex = 1;
             // 
@@ -204,7 +213,7 @@
             this.groupControlPatientData.Location = new System.Drawing.Point(209, 8);
             this.groupControlPatientData.Name = "groupControlPatientData";
             this.groupControlPatientData.Size = new System.Drawing.Size(550, 141);
-            this.groupControlPatientData.TabIndex = 3;
+            this.groupControlPatientData.TabIndex = 0;
             this.groupControlPatientData.Text = "Patient Data";
             // 
             // progressPanelPatientData
@@ -217,44 +226,52 @@
             this.progressPanelPatientData.Location = new System.Drawing.Point(2, 20);
             this.progressPanelPatientData.Name = "progressPanelPatientData";
             this.progressPanelPatientData.Size = new System.Drawing.Size(546, 119);
-            this.progressPanelPatientData.TabIndex = 16;
+            this.progressPanelPatientData.TabIndex = 0;
+            this.progressPanelPatientData.TabStop = false;
             this.progressPanelPatientData.Text = "Request data";
             // 
             // textEditPhoneNumber
             // 
+            this.textEditPhoneNumber.EnterMoveNextControl = true;
             this.textEditPhoneNumber.Location = new System.Drawing.Point(12, 82);
             this.textEditPhoneNumber.Name = "textEditPhoneNumber";
             this.textEditPhoneNumber.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.textEditPhoneNumber.Properties.NullText = "Phone Number";
             this.textEditPhoneNumber.Properties.NullValuePrompt = "Phone Number";
             this.textEditPhoneNumber.Properties.NullValuePromptShowForEmptyValue = true;
+            this.textEditPhoneNumber.Properties.ValidateOnEnterKey = true;
             this.textEditPhoneNumber.Size = new System.Drawing.Size(167, 20);
-            this.textEditPhoneNumber.TabIndex = 15;
+            this.textEditPhoneNumber.TabIndex = 9;
             // 
             // textEditAge
             // 
+            this.textEditAge.EnterMoveNextControl = true;
             this.textEditAge.Location = new System.Drawing.Point(185, 56);
             this.textEditAge.Name = "textEditAge";
             this.textEditAge.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.textEditAge.Properties.NullText = "Age";
             this.textEditAge.Properties.NullValuePrompt = "Age";
             this.textEditAge.Properties.NullValuePromptShowForEmptyValue = true;
+            this.textEditAge.Properties.ValidateOnEnterKey = true;
             this.textEditAge.Size = new System.Drawing.Size(167, 20);
-            this.textEditAge.TabIndex = 14;
+            this.textEditAge.TabIndex = 8;
             // 
             // textEditAddress
             // 
+            this.textEditAddress.EnterMoveNextControl = true;
             this.textEditAddress.Location = new System.Drawing.Point(370, 30);
             this.textEditAddress.Name = "textEditAddress";
             this.textEditAddress.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.textEditAddress.Properties.NullText = "Address";
             this.textEditAddress.Properties.NullValuePrompt = "Address";
             this.textEditAddress.Properties.NullValuePromptShowForEmptyValue = true;
+            this.textEditAddress.Properties.ValidateOnEnterKey = true;
             this.textEditAddress.Size = new System.Drawing.Size(167, 20);
-            this.textEditAddress.TabIndex = 13;
+            this.textEditAddress.TabIndex = 11;
             // 
             // textEditFullname
             // 
+            this.textEditFullname.EnterMoveNextControl = true;
             this.textEditFullname.Location = new System.Drawing.Point(185, 30);
             this.textEditFullname.Name = "textEditFullname";
             this.textEditFullname.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
@@ -277,11 +294,13 @@
             this.textEditFullname.Properties.NullText = "Fullname";
             this.textEditFullname.Properties.NullValuePrompt = "Fullname";
             this.textEditFullname.Properties.NullValuePromptShowForEmptyValue = true;
+            this.textEditFullname.Properties.ValidateOnEnterKey = true;
             this.textEditFullname.Size = new System.Drawing.Size(167, 20);
-            this.textEditFullname.TabIndex = 12;
+            this.textEditFullname.TabIndex = 6;
             // 
             // textEditNidPp
             // 
+            this.textEditNidPp.EnterMoveNextControl = true;
             this.textEditNidPp.Location = new System.Drawing.Point(12, 30);
             this.textEditNidPp.Name = "textEditNidPp";
             this.textEditNidPp.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
@@ -296,11 +315,13 @@
             this.textEditNidPp.Properties.NullText = "National ID Card / Passport";
             this.textEditNidPp.Properties.NullValuePrompt = "National ID Card / Passport";
             this.textEditNidPp.Properties.NullValuePromptShowForEmptyValue = true;
+            this.textEditNidPp.Properties.ValidateOnEnterKey = true;
             this.textEditNidPp.Size = new System.Drawing.Size(167, 20);
-            this.textEditNidPp.TabIndex = 3;
+            this.textEditNidPp.TabIndex = 5;
             // 
             // lookUpEditGender
             // 
+            this.lookUpEditGender.EnterMoveNextControl = true;
             this.lookUpEditGender.Location = new System.Drawing.Point(12, 56);
             this.lookUpEditGender.Name = "lookUpEditGender";
             this.lookUpEditGender.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
@@ -310,12 +331,14 @@
             this.lookUpEditGender.Properties.NullValuePrompt = "Select Gender";
             this.lookUpEditGender.Properties.NullValuePromptShowForEmptyValue = true;
             this.lookUpEditGender.Properties.ShowNullValuePromptWhenFocused = true;
+            this.lookUpEditGender.Properties.ValidateOnEnterKey = true;
             this.lookUpEditGender.Size = new System.Drawing.Size(167, 20);
-            this.lookUpEditGender.TabIndex = 10;
+            this.lookUpEditGender.TabIndex = 7;
             // 
             // dateEditBirthdate
             // 
             this.dateEditBirthdate.EditValue = null;
+            this.dateEditBirthdate.EnterMoveNextControl = true;
             this.dateEditBirthdate.Location = new System.Drawing.Point(185, 82);
             this.dateEditBirthdate.Name = "dateEditBirthdate";
             this.dateEditBirthdate.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
@@ -327,11 +350,13 @@
             this.dateEditBirthdate.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.dateEditBirthdate.Properties.NullText = "Birthdate";
             this.dateEditBirthdate.Properties.NullValuePrompt = "Birthdate";
+            this.dateEditBirthdate.Properties.ValidateOnEnterKey = true;
             this.dateEditBirthdate.Size = new System.Drawing.Size(167, 20);
-            this.dateEditBirthdate.TabIndex = 3;
+            this.dateEditBirthdate.TabIndex = 10;
             // 
             // lookUpEditCountry
             // 
+            this.lookUpEditCountry.EnterMoveNextControl = true;
             this.lookUpEditCountry.Location = new System.Drawing.Point(370, 108);
             this.lookUpEditCountry.Name = "lookUpEditCountry";
             this.lookUpEditCountry.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
@@ -341,11 +366,13 @@
             this.lookUpEditCountry.Properties.NullValuePrompt = "Select Country";
             this.lookUpEditCountry.Properties.NullValuePromptShowForEmptyValue = true;
             this.lookUpEditCountry.Properties.ShowNullValuePromptWhenFocused = true;
+            this.lookUpEditCountry.Properties.ValidateOnEnterKey = true;
             this.lookUpEditCountry.Size = new System.Drawing.Size(167, 20);
-            this.lookUpEditCountry.TabIndex = 8;
+            this.lookUpEditCountry.TabIndex = 14;
             // 
             // lookUpEditIsland
             // 
+            this.lookUpEditIsland.EnterMoveNextControl = true;
             this.lookUpEditIsland.Location = new System.Drawing.Point(370, 82);
             this.lookUpEditIsland.Name = "lookUpEditIsland";
             this.lookUpEditIsland.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
@@ -355,11 +382,13 @@
             this.lookUpEditIsland.Properties.NullValuePrompt = "Select Island";
             this.lookUpEditIsland.Properties.NullValuePromptShowForEmptyValue = true;
             this.lookUpEditIsland.Properties.ShowNullValuePromptWhenFocused = true;
+            this.lookUpEditIsland.Properties.ValidateOnEnterKey = true;
             this.lookUpEditIsland.Size = new System.Drawing.Size(167, 20);
-            this.lookUpEditIsland.TabIndex = 7;
+            this.lookUpEditIsland.TabIndex = 13;
             // 
             // lookUpEditAtoll
             // 
+            this.lookUpEditAtoll.EnterMoveNextControl = true;
             this.lookUpEditAtoll.Location = new System.Drawing.Point(370, 56);
             this.lookUpEditAtoll.Name = "lookUpEditAtoll";
             this.lookUpEditAtoll.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
@@ -369,8 +398,9 @@
             this.lookUpEditAtoll.Properties.NullValuePrompt = "Select Atoll";
             this.lookUpEditAtoll.Properties.NullValuePromptShowForEmptyValue = true;
             this.lookUpEditAtoll.Properties.ShowNullValuePromptWhenFocused = true;
+            this.lookUpEditAtoll.Properties.ValidateOnEnterKey = true;
             this.lookUpEditAtoll.Size = new System.Drawing.Size(167, 20);
-            this.lookUpEditAtoll.TabIndex = 6;
+            this.lookUpEditAtoll.TabIndex = 12;
             // 
             // groupControlClinicalDetails
             // 
@@ -378,7 +408,7 @@
             this.groupControlClinicalDetails.Location = new System.Drawing.Point(7, 155);
             this.groupControlClinicalDetails.Name = "groupControlClinicalDetails";
             this.groupControlClinicalDetails.Size = new System.Drawing.Size(196, 186);
-            this.groupControlClinicalDetails.TabIndex = 3;
+            this.groupControlClinicalDetails.TabIndex = 0;
             this.groupControlClinicalDetails.Text = "Clinical Details";
             // 
             // gridControlClinicalDetails
@@ -427,7 +457,7 @@
             this.groupControlSelectedTestData.Location = new System.Drawing.Point(209, 155);
             this.groupControlSelectedTestData.Name = "groupControlSelectedTestData";
             this.groupControlSelectedTestData.Size = new System.Drawing.Size(350, 186);
-            this.groupControlSelectedTestData.TabIndex = 3;
+            this.groupControlSelectedTestData.TabIndex = 0;
             this.groupControlSelectedTestData.Text = "Selected Tests Data";
             // 
             // gridControlRequestedTests
@@ -474,7 +504,7 @@
             this.groupControlTestSelection.Location = new System.Drawing.Point(563, 155);
             this.groupControlTestSelection.Name = "groupControlTestSelection";
             this.groupControlTestSelection.Size = new System.Drawing.Size(196, 186);
-            this.groupControlTestSelection.TabIndex = 5;
+            this.groupControlTestSelection.TabIndex = 0;
             this.groupControlTestSelection.Text = "Test Selection";
             // 
             // progressPanelTestData
@@ -487,7 +517,8 @@
             this.progressPanelTestData.Location = new System.Drawing.Point(2, 20);
             this.progressPanelTestData.Name = "progressPanelTestData";
             this.progressPanelTestData.Size = new System.Drawing.Size(192, 164);
-            this.progressPanelTestData.TabIndex = 15;
+            this.progressPanelTestData.TabIndex = 0;
+            this.progressPanelTestData.TabStop = false;
             this.progressPanelTestData.Text = "Request data";
             // 
             // textEditEpisodeNumber
@@ -499,7 +530,7 @@
             this.textEditEpisodeNumber.Properties.NullValuePrompt = "EpisodeNumber";
             this.textEditEpisodeNumber.Properties.NullValuePromptShowForEmptyValue = true;
             this.textEditEpisodeNumber.Size = new System.Drawing.Size(167, 20);
-            this.textEditEpisodeNumber.TabIndex = 14;
+            this.textEditEpisodeNumber.TabIndex = 16;
             // 
             // lookUpEditTests
             // 
@@ -516,7 +547,7 @@
             this.lookUpEditTests.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.lookUpEditTests.Properties.ValidateOnEnterKey = true;
             this.lookUpEditTests.Size = new System.Drawing.Size(167, 20);
-            this.lookUpEditTests.TabIndex = 13;
+            this.lookUpEditTests.TabIndex = 15;
             // 
             // simpleButtonRemoveTest
             // 

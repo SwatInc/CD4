@@ -82,6 +82,22 @@ namespace CD4.UI.View
             this.labelControlNationalId.TabIndex = 1;
             this.labelControlNationalId.Text = "NationalId";
             // 
+            // labelControlPatientName
+            // 
+            labelControlPatientName.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.Appearance.Options.UseFont = true;
+            labelControlPatientName.AppearanceDisabled.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearanceDisabled.Options.UseFont = true;
+            labelControlPatientName.AppearanceHovered.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearanceHovered.Options.UseFont = true;
+            labelControlPatientName.AppearancePressed.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearancePressed.Options.UseFont = true;
+            labelControlPatientName.Location = new System.Drawing.Point(12, 23);
+            labelControlPatientName.Name = "labelControlPatientName";
+            labelControlPatientName.Size = new System.Drawing.Size(118, 21);
+            labelControlPatientName.TabIndex = 0;
+            labelControlPatientName.Text = "PATIENT NAME";
+            // 
             // labelControlAgeSex
             // 
             this.labelControlAgeSex.Location = new System.Drawing.Point(12, 69);
@@ -197,22 +213,6 @@ namespace CD4.UI.View
             this.listBoxControlClinicalDetails.Name = "listBoxControlClinicalDetails";
             this.listBoxControlClinicalDetails.Size = new System.Drawing.Size(223, 66);
             this.listBoxControlClinicalDetails.TabIndex = 9;
-            // 
-            // labelControlPatientName
-            // 
-            labelControlPatientName.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.Appearance.Options.UseFont = true;
-            labelControlPatientName.AppearanceDisabled.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.AppearanceDisabled.Options.UseFont = true;
-            labelControlPatientName.AppearanceHovered.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.AppearanceHovered.Options.UseFont = true;
-            labelControlPatientName.AppearancePressed.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.AppearancePressed.Options.UseFont = true;
-            labelControlPatientName.Location = new System.Drawing.Point(12, 23);
-            labelControlPatientName.Name = "labelControlPatientName";
-            labelControlPatientName.Size = new System.Drawing.Size(118, 21);
-            labelControlPatientName.TabIndex = 0;
-            labelControlPatientName.Text = "PATIENT NAME";
             // 
             // splitContainerControlFunctions
             // 

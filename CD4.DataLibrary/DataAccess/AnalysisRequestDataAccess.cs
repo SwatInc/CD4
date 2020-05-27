@@ -40,7 +40,7 @@ namespace CD4.DataLibrary.DataAccess
             List<ResultsDatabaseModel> databaseTestsForRequest = new List<ResultsDatabaseModel>();
 
 
-            #region Request Rejection Criteria
+            #region Request Rejection Criteria - Primary
 
             if (string.IsNullOrEmpty(request.Cin))
             {
@@ -51,12 +51,21 @@ namespace CD4.DataLibrary.DataAccess
                 throw new ArgumentException("A minimum of one test is mandatory to confirm the request!");
             }
 
+            var PatientDataValidityForAnalysisRequest = await IsPatientDifferentForAnalysisRequest(request);
+            //if the data update criteria for existing request fails, throw an exception saying so...
+            if (PatientDataValidityForAnalysisRequest.IsAnalysisRequestsPatientChanged)
+            {
+                throw new Exception("Cannot confirm request. Cannot change patient for a previously confirmed request!\n" +
+                    $"Previous details: {request.Cin}: {PatientDataValidityForAnalysisRequest.DatabasePatient.NidPp} ( {PatientDataValidityForAnalysisRequest.DatabasePatient.Fullname} )\n" +
+                    $"Current details: {request.Cin}: {request.NationalIdPassport} ( {request.Fullname} )");
+            }
+
             #endregion
 
             #region Fetch Present data
 
             var requestAndSample = await GetSampleByIdAsync(request.Cin);
-            var patient = (await patientData.GetPatientByNidPp(request.NationalIdPassport)).FirstOrDefault();
+            PatientModel patient = (await patientData.GetPatientByNidPp(request.NationalIdPassport)).FirstOrDefault();
 
             if (requestAndSample != null)
             {
@@ -219,7 +228,46 @@ namespace CD4.DataLibrary.DataAccess
 
 
             #endregion
+
             return true;
+        }
+
+        /// <summary>
+        /// Determines whether the patient or an existing analysis request is changed to another patient 
+        /// with current submitted request confirmation. Changing patient to a whole another patient is not allowed, but
+        /// updating patient details is allowed except for NationalId / PP
+        /// </summary>
+        /// <param name="request">user submitted request data via UI</param>
+        /// <returns>Returns true if the Nid/Pp does not match with the request of the same CIN on the database</returns>
+        private async Task<ExistingRequestsPatientComparisionArgs> IsPatientDifferentForAnalysisRequest
+            (AnalysisRequestDataModel request)
+        {
+            //get database patient details for the CIN
+            var patient  = await patientData.GetPatientBySamplCin(request.Cin);
+
+            //If no records found on the database for the CIN, return false.
+            if (patient is null)
+            {
+                return new ExistingRequestsPatientComparisionArgs() { IsAnalysisRequestsPatientChanged = false };
+            }
+
+            //If NidPp matches with the user input, return false.
+            if (patient.IsMatch(request))
+            {
+                return new ExistingRequestsPatientComparisionArgs() { IsAnalysisRequestsPatientChanged = false };
+            }
+
+            // if none of the above matches, It means that the patient changed to another patient for an existing request.
+            //  So return true with database patient data.
+            return new ExistingRequestsPatientComparisionArgs() 
+            {
+                 IsAnalysisRequestsPatientChanged = true,
+                 DatabasePatient = new PatientNidPpAndNameModel()
+                 {
+                     Fullname = patient.Fullname,
+                     NidPp  = patient.NidPp
+                 }
+            };
         }
 
         private async Task<bool> InsertNewCompleteRequest
