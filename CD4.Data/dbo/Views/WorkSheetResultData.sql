@@ -16,9 +16,9 @@ INNER JOIN [dbo].[Sample] [S] ON [R].[Sample_Cin] = [S].[Cin]
 INNER JOIN [dbo].[Test] [T] ON [R].[TestId] = [T].[Id]
 INNER JOIN [dbo].[ResultDataType] [DT] ON [T].[ResultDataTypeId] = [DT].[Id]
 GO
+CREATE UNIQUE CLUSTERED INDEX [IX_Id_WorkSheetResultData]
+ON [dbo].[WorkSheetResultData] ([Id])
 GO
 CREATE NONCLUSTERED INDEX [IX_Cin_WorkSheetResultData]
 ON [dbo].[WorkSheetResultData] ([Cin])
-
-GO
 GO

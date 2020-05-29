@@ -182,82 +182,82 @@ namespace CD4.UI.Library.ViewModel
         private void GenerateDemoData()
         {
             #region Request Data
-            var rq1 = new RequestSampleModel()
-            {
-                Id = 1,
-                AnalysisRequestId = 1,
-                Cin = "nCoV-1236/20",
-                CollectionDate = DateTime.Today,
-                ReceivedDate = DateTime.Today,
-                PatientName = "Ahmed Hussain",
-                NationalId = "A29837",
-                AgeSex = "30Y 3M 27D / MALE",
-                Birthdate = DateTime.Today,
-                PhoneNumber = "71261888",
-                Address = "Some Adddress",
-                AtollIslandCountry = "L. Gan, Maldives",
-                EpisodeNumber = "SW7289889",
-                Site = "FARUKOLHU",
-                ClinicalDetails = "Fever, Cough"
-            };
-            var rq2 = new RequestSampleModel()
-            {
-                Id = 2,
-                AnalysisRequestId = 2,
-                Cin = "nCoV-324528/20",
-                CollectionDate = DateTime.Today,
-                ReceivedDate = DateTime.Today,
-                PatientName = "Kamal Nasir",
-                NationalId = "A2346288",
-                AgeSex = "30Y 3M 27D / MALE",
-                Birthdate = DateTime.Today,
-                PhoneNumber = "0917266767",
-                Address = "Some Some Adddress",
-                AtollIslandCountry = "Hulhumale, Male', Maldives",
-                EpisodeNumber = "SW989787656",
-                Site = "IGMH",
-                ClinicalDetails = "SOB, Fever, Cough"
-            };
+            //var rq1 = new RequestSampleModel()
+            //{
+            //    Id = 1,
+            //    AnalysisRequestId = 1,
+            //    Cin = "nCoV-1236/20",
+            //    CollectionDate = DateTime.Today,
+            //    ReceivedDate = DateTime.Today,
+            //    PatientName = "Ahmed Hussain",
+            //    NationalId = "A29837",
+            //    AgeSex = "30Y 3M 27D / MALE",
+            //    Birthdate = DateTime.Today,
+            //    PhoneNumber = "71261888",
+            //    Address = "Some Adddress",
+            //    AtollIslandCountry = "L. Gan, Maldives",
+            //    EpisodeNumber = "SW7289889",
+            //    Site = "FARUKOLHU",
+            //    ClinicalDetails = "Fever, Cough"
+            //};
+            //var rq2 = new RequestSampleModel()
+            //{
+            //    Id = 2,
+            //    AnalysisRequestId = 2,
+            //    Cin = "nCoV-324528/20",
+            //    CollectionDate = DateTime.Today,
+            //    ReceivedDate = DateTime.Today,
+            //    PatientName = "Kamal Nasir",
+            //    NationalId = "A2346288",
+            //    AgeSex = "30Y 3M 27D / MALE",
+            //    Birthdate = DateTime.Today,
+            //    PhoneNumber = "0917266767",
+            //    Address = "Some Some Adddress",
+            //    AtollIslandCountry = "Hulhumale, Male', Maldives",
+            //    EpisodeNumber = "SW989787656",
+            //    Site = "IGMH",
+            //    ClinicalDetails = "SOB, Fever, Cough"
+            //};
 
-            RequestData.Add(rq1);
-            RequestData.Add(rq2);
+            //RequestData.Add(rq1);
+            //RequestData.Add(rq2);
             #endregion
 
             #region AllResultsData
-            var rs1_1 = new ResultModel()
-            {
-                Id = 1,
-                AnalysisRequestId = 1,
-                Cin = "nCoV-1236/20",
-                Test = "E Gene",
-                Result = "",
-                DataType = "Numeric",
-                Mask = "###.##"
-            };
-            var rs1_2 = new ResultModel()
-            {
-                Id = 1,
-                AnalysisRequestId = 1,
-                Cin = "nCoV-324528/20",
-                Test = "RdRp",
-                Result = "",
-                DataType = "CODIFIED",
-                Mask = "1|2"
-            };
+            //var rs1_1 = new ResultModel()
+            //{
+            //    Id = 1,
+            //    AnalysisRequestId = 1,
+            //    Cin = "nCoV-1236/20",
+            //    Test = "E Gene",
+            //    Result = "",
+            //    DataType = "Numeric",
+            //    Mask = "###.##"
+            //};
+            //var rs1_2 = new ResultModel()
+            //{
+            //    Id = 1,
+            //    AnalysisRequestId = 1,
+            //    Cin = "nCoV-324528/20",
+            //    Test = "RdRp",
+            //    Result = "",
+            //    DataType = "CODIFIED",
+            //    Mask = "1|2"
+            //};
 
-            var rs1_3 = new ResultModel()
-            {
-                Id = 1,
-                AnalysisRequestId = 1,
-                Cin = "nCoV-324528/20",
-                Test = "E Gene",
-                Result = "",
-                DataType = "NUMERIC",
-                Mask = "###.##"
-            };
-            AllResultData.Add(rs1_1);
-            AllResultData.Add(rs1_2);
-            AllResultData.Add(rs1_3);
+            //var rs1_3 = new ResultModel()
+            //{
+            //    Id = 1,
+            //    AnalysisRequestId = 1,
+            //    Cin = "nCoV-324528/20",
+            //    Test = "E Gene",
+            //    Result = "",
+            //    DataType = "NUMERIC",
+            //    Mask = "###.##"
+            //};
+            //AllResultData.Add(rs1_1);
+            //AllResultData.Add(rs1_2);
+            //AllResultData.Add(rs1_3);
             #endregion
 
             #region All Codified Phrases

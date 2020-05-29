@@ -119,7 +119,7 @@
   <ItemGroup>
     <None Include="CD4.Data.publish.xml" />
     <None Include="Azure.CD4.Data.publish.xml" />
-    <None Include="dbo\Views\WorkSheetResultData.sql" />
+    <Build Include="dbo\Views\WorkSheetResultData.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\Scripts\Script.PostDeployment.sql" />
