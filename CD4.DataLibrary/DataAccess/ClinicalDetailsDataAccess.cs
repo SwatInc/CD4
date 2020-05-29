@@ -16,14 +16,47 @@ namespace CD4.DataLibrary.DataAccess
 
         public async Task<bool> SyncClinicalDetails(string csvClinicalDetails, int analysisRequestId)
         {
-            var storedProcedure = "[dbo].[usp_SyncClinicalDetails]";
-            var syncData = new
-            {
-                CsvClinicalDetailIds = csvClinicalDetails,
-                AnalysisRequestId = analysisRequestId
-            };
+            var storedProcedureForFullSync = "[dbo].[usp_SyncClinicalDetails]";
+            var storedProcedureForDeletion = "[dbo].[usp_DeleteAnalysisRequestClinicalDetails]";
+            var storedProcedureInUse = "";
+            dynamic data;
 
-            return await SelectInsertOrUpdate<bool, dynamic>(storedProcedure, syncData);
+            //determine whether to do a fullsync or just a complete deletion of Clinical details for AR
+            if (ProceedWithFullSync(csvClinicalDetails))
+            {
+                storedProcedureInUse = storedProcedureForFullSync;
+                data = new
+                {
+                    CsvClinicalDetailIds = csvClinicalDetails,
+                    AnalysisRequestId = analysisRequestId
+                };
+            }
+            else
+            {
+                storedProcedureInUse = storedProcedureForDeletion;
+                data = new
+                {
+                    AnalysisRequestId = analysisRequestId
+                };
+
+            }
+
+            return await SelectInsertOrUpdate<bool, dynamic>(storedProcedureInUse, data);
+        }
+
+        /// <summary>
+        /// Looks for the number of clinical details in the csvClinicalDetails and determines whether database needs to synced or
+        /// proceed with a full deletion of clinical details for the analysis request
+        /// </summary>
+        /// <param name="csvClinicalDetails">Comma saperated clinical detail ids</param>
+        /// <returns>True if a fullsync needs to be done. False for deletion of Clinical details for Analysis Request</returns>
+        private bool ProceedWithFullSync(string csvClinicalDetails)
+        {
+            if (!string.IsNullOrEmpty(csvClinicalDetails))
+            {
+                return true;
+            }
+            return false;
         }
 
         /// <summary>

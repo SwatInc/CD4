@@ -143,15 +143,27 @@ namespace CD4.UI.View
             switch (e.KeyCode)
             {
                 case Keys.Delete:
+                    //change focus to make sure that everything is validated.
+                    simpleButtonRemoveTest.Focus();
+                    //execute remove test.
                     RemoveTestFromAR(this, EventArgs.Empty);
                     break;
                 case Keys.F6:
+                    //change focus to confim to which validates any control that has focus and thereby updating view model
+                    simpleButtonConfirm.Focus();
+                    //execute confim analysis request.
                     OnConfirmAnalysisRequest(this, EventArgs.Empty);
                     break;
                 case Keys.F2:
+                    //change focus to search button to which validates any control that has focus and thereby updating view model
+                    simpleButtonSearch.Focus();
+                    //execute search
                     OnPatientSearch(this, EventArgs.Empty);
                     break;
                 case Keys.F7:
+                    //change focus to search request button to which validates any control that has focus and thereby updating view model
+                    simpleButtonSearchRequest.Focus();
+                    //execute search
                     await this.InitializeRequestSearchByCinAsync();
                     break;
                 default:
