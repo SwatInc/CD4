@@ -2,7 +2,6 @@
 using CD4.DataLibrary.DataAccess;
 using CD4.UI.Library.Model;
 using CD4.UI.Library.ViewModel;
-using DevExpress.Utils.MVVM;
 using DevExpress.XtraEditors;
 using Newtonsoft.Json;
 using System;

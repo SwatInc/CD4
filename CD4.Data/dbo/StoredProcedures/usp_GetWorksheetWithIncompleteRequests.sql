@@ -16,6 +16,7 @@ BEGIN
 	WHILE (@StartDate IS NOT NULL) AND (@StartDate <> '')
 	BEGIN
 		DECLARE @StartDateInUse DATE = CAST(@StartDate AS DATE);
+
         DECLARE @TempCins TABLE ([Cin] VARCHAR(20) PRIMARY KEY, [AnalysisRequestId] INT NOT NULL);
 		DECLARE @TempClinicalDetails TABLE([AnalysisRequestId] INT PRIMARY KEY, [Detail] VARCHAR(100) NULL);
         --get distinct Cins
@@ -27,11 +28,11 @@ BEGIN
 
         --Get Clinical details
         INSERT INTO @TempClinicalDetails
-        SELECT [ACD].[AnalysisRequestId], STRING_AGG([CD].[Detail],',')
-        FROM [dbo].[AnalysisRequest_ClinicalDetail] [ACD]
-        INNER JOIN [dbo].[ClinicalDetail] [CD] ON [ACD].[ClinicalDetailsId] = [CD].[Id]
-        WHERE [ACD].[AnalysisRequestId] IN (SELECT [AnalysisRequestId] FROM @TempCins)
-        GROUP BY [ACD].[AnalysisRequestId];
+        SELECT [TC].[AnalysisRequestId],STRING_AGG(ISNULL([CD].[Detail],''),',') 
+        FROM @TempCins [TC]
+        LEFT JOIN [dbo].[AnalysisRequest_ClinicalDetail] [ACD] ON [TC].[AnalysisRequestId] = [ACD].[AnalysisRequestId]
+        FULL JOIN [dbo].[ClinicalDetail] [CD] ON [ACD].[ClinicalDetailsId] = [CD].Id
+        GROUP BY [TC].[AnalysisRequestId];
 
 		--fetch request data and join with clinical details :)
 		SELECT DISTINCT([RW].[AnalysisRequestId]) AS [Id],
@@ -47,8 +48,8 @@ BEGIN
                [RW].[Address],
                [RW].[AtollIslandCountry],
                [RW].[EpisodeNumber],
-               [RW].[Site],
-               [C].[Detail] AS [ClinicalDetails]
+               [RW].[Site]
+               ,ISNULL([C].[Detail],'') AS [ClinicalDetails]
 		FROM [dbo].[RequestDataForWorksheet] [RW] WITH (NOEXPAND)
         INNER JOIN @TempClinicalDetails [C] ON [RW].[AnalysisRequestId] = [C].[AnalysisRequestId]
 		WHERE [RW].[ReceivedDate] > @StartDateInUse;

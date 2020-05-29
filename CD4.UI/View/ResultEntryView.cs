@@ -12,13 +12,15 @@ using CD4.UI.Library.ViewModel;
 using DevExpress.XtraGrid.Views.Base;
 using CD4.UI.Library.Model;
 using DevExpress.XtraBars;
+using System.Timers;
+using System.Diagnostics;
 
 namespace CD4.UI.View
 {
     public partial class ResultEntryView : XtraForm
     {
         private readonly IResultEntryViewModel _viewModel;
-
+        System.Windows.Forms.Timer dataRefreshTimer = new System.Windows.Forms.Timer() { Enabled = true, Interval = 1000};
         public ResultEntryView(IResultEntryViewModel viewModel)
         {
             InitializeComponent();
@@ -29,7 +31,19 @@ namespace CD4.UI.View
             labelControlCin.DoubleClick += CopyCinToClipBoard;
             gridViewSamples.FocusedRowChanged += SelectedSampleChanged;
             gridViewTests.FocusedRowChanged += SelectedTestChanged;
+            dataRefreshTimer.Tick += RefreshViewData;
+
         }
+
+        private void RefreshViewData(object sender, EventArgs e)
+        {
+            dataRefreshTimer.Enabled = false;
+            gridControlSamples.RefreshDataSource();
+        }
+
+        /// <summary>
+        /// The datagrids does not show view model data without refresh. This method refreshes the view. The is NOT a refresh from database.
+        /// </summary>
 
         private void CopyCinToClipBoard(object sender, EventArgs e)
         {
