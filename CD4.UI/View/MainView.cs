@@ -1,4 +1,5 @@
-﻿using CD4.UI.Library.ViewModel;
+﻿using CD4.DataLibrary.DataAccess;
+using CD4.UI.Library.ViewModel;
 using DevExpress.Skins;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
@@ -9,15 +10,17 @@ namespace CD4.UI.View
 {
     public partial class MainView : DevExpress.XtraBars.Ribbon.RibbonForm
     {
+        private readonly IReportsDataAccess reportsDataAccess;
 
         private IMainViewModel _viewModel { get; }
 
-        public MainView(IMainViewModel viewModel)
+        public MainView(IMainViewModel viewModel, IReportsDataAccess reportsDataAccess)
         {
             InitializeComponent();
             SkinManager.EnableFormSkins();
             SkinManager.EnableMdiFormSkins();
             _viewModel = viewModel;
+            this.reportsDataAccess = reportsDataAccess;
 
             #region Event Subscriptions
 
@@ -104,15 +107,37 @@ namespace CD4.UI.View
             GC.Collect();
         }
 
-        public void OpenMdiForm<T>() where T : Form
+        public void OpenMdiForm<T>(string parameter = null) where T : Form
         {
-            var form = FormFactory.Create<T>();
 
+            var form = FormFactory.Create<T>();
+            //subscribe for required form events
+            if (typeof(T) == typeof(ResultEntryView))
+            {
+                //cast form as ResultEntryView
+                var resultView = (ResultEntryView)Convert.ChangeType(form, typeof(ResultEntryView));
+                //subscribe for events
+                //GenerateReportByCin event
+                resultView.GenerateReportByCin += ResultView_OnGenerateReportByCin;
+
+            }
+
+            //if parameter is not null, assign it to form tag
+            form.Tag = parameter;
             form.MdiParent = this;
             form.Show();
-
+            
             form.FormClosed += Form_FormClosed;
 
+        }
+
+        private void ResultView_OnGenerateReportByCin(object sender, string cin)
+        {
+            //open report view
+            // this.OpenMdiForm<ReportView>(cin);
+
+            var reportView = new ReportView(reportsDataAccess, cin) { MdiParent = this};
+            reportView.Show();
         }
     }
 }

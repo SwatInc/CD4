@@ -21,6 +21,9 @@ namespace CD4.UI.View
     {
         private readonly IResultEntryViewModel _viewModel;
         System.Windows.Forms.Timer dataRefreshTimer = new System.Windows.Forms.Timer() { Enabled = true, Interval = 1000};
+
+        public event EventHandler<string> GenerateReportByCin;
+
         public ResultEntryView(IResultEntryViewModel viewModel)
         {
             InitializeComponent();
@@ -32,18 +35,33 @@ namespace CD4.UI.View
             gridViewSamples.FocusedRowChanged += SelectedSampleChanged;
             gridViewTests.FocusedRowChanged += SelectedTestChanged;
             dataRefreshTimer.Tick += RefreshViewData;
-
+            simpleButtonReport.Click += SimpleButtonReport_Click;
+            
         }
 
+        private void SimpleButtonReport_Click(object sender, EventArgs e)
+        {
+            //Get the Cin of the selected record.
+            var cin = GetSelectedCin();
+            //Ask to select a record, if no record is selected.
+            if (cin is null)
+            {
+                XtraMessageBox.Show("Please select a sample to view the report!");
+            }
+
+            //Raise an event indicating that a sample report is requested.
+            GenerateReportByCin?.Invoke(this, cin);
+        }
+
+        /// <summary>
+        /// The datagrids does not show view model data without refresh. This method refreshes the view. The is NOT a refresh from database.
+        /// </summary>
         private void RefreshViewData(object sender, EventArgs e)
         {
             dataRefreshTimer.Enabled = false;
             gridControlSamples.RefreshDataSource();
         }
 
-        /// <summary>
-        /// The datagrids does not show view model data without refresh. This method refreshes the view. The is NOT a refresh from database.
-        /// </summary>
 
         private void CopyCinToClipBoard(object sender, EventArgs e)
         {
@@ -60,6 +78,25 @@ namespace CD4.UI.View
         {
             var selectedSample = (RequestSampleModel)gridViewSamples.GetRow(e.FocusedRowHandle);
             await _viewModel.SetSelectedSampleAsync(selectedSample);
+        }
+
+        /// <summary>
+        /// Gets the selected Cin
+        /// </summary>
+        /// <returns>Returns selected Cin or null</returns>
+        private string GetSelectedCin()
+        {
+            //Get row handles of selected rows
+            var selectedRowHandles = gridViewSamples.GetSelectedRows();
+            //return null if no rows selected
+            if (selectedRowHandles.Length==0)
+            {
+                return null;
+            }
+            //Get the row at handle 0
+            var selectedRow = (RequestSampleModel)gridViewSamples.GetRow(selectedRowHandles[0]);
+            //return Cin
+            return selectedRow.Cin;
         }
 
         private void InitializeBinding()

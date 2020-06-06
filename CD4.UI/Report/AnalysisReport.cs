@@ -6,9 +6,9 @@ using DevExpress.XtraReports.UI;
 
 namespace CD4.UI.Report
 {
-    public partial class TabularReport : DevExpress.XtraReports.UI.XtraReport
+    public partial class AnalysisReport : DevExpress.XtraReports.UI.XtraReport
     {
-        public TabularReport()
+        public AnalysisReport()
         {
             InitializeComponent();
         }

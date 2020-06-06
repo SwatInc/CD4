@@ -31,6 +31,7 @@ namespace CD4.UI.View
         private void InitializeComponent()
         {
             this.labelControlNationalId = new DevExpress.XtraEditors.LabelControl();
+            this.labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
             this.labelControlAgeSex = new DevExpress.XtraEditors.LabelControl();
             this.labelControlBirthdate = new DevExpress.XtraEditors.LabelControl();
             this.labelControlPhoneNumber = new DevExpress.XtraEditors.LabelControl();
@@ -56,7 +57,7 @@ namespace CD4.UI.View
             this.gridColumnResult = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemLookUpEditCodifiedPhrases = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.groupControlFunctions = new DevExpress.XtraEditors.GroupControl();
-            this.labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
+            this.simpleButtonReport = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).BeginInit();
             this.splitContainerControlPatient.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlSelectedPatientRequestClinicalDetailsArea)).BeginInit();
@@ -72,6 +73,7 @@ namespace CD4.UI.View
             ((System.ComponentModel.ISupportInitialize)(this.gridViewTests)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditCodifiedPhrases)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlFunctions)).BeginInit();
+            this.groupControlFunctions.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelControlNationalId
@@ -81,22 +83,6 @@ namespace CD4.UI.View
             this.labelControlNationalId.Size = new System.Drawing.Size(49, 13);
             this.labelControlNationalId.TabIndex = 1;
             this.labelControlNationalId.Text = "NationalId";
-            // 
-            // labelControlPatientName
-            // 
-            labelControlPatientName.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.Appearance.Options.UseFont = true;
-            labelControlPatientName.AppearanceDisabled.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.AppearanceDisabled.Options.UseFont = true;
-            labelControlPatientName.AppearanceHovered.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.AppearanceHovered.Options.UseFont = true;
-            labelControlPatientName.AppearancePressed.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.AppearancePressed.Options.UseFont = true;
-            labelControlPatientName.Location = new System.Drawing.Point(12, 23);
-            labelControlPatientName.Name = "labelControlPatientName";
-            labelControlPatientName.Size = new System.Drawing.Size(118, 21);
-            labelControlPatientName.TabIndex = 0;
-            labelControlPatientName.Text = "PATIENT NAME";
             // 
             // labelControlAgeSex
             // 
@@ -214,6 +200,22 @@ namespace CD4.UI.View
             this.listBoxControlClinicalDetails.Name = "listBoxControlClinicalDetails";
             this.listBoxControlClinicalDetails.Size = new System.Drawing.Size(223, 66);
             this.listBoxControlClinicalDetails.TabIndex = 9;
+            // 
+            // labelControlPatientName
+            // 
+            labelControlPatientName.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.Appearance.Options.UseFont = true;
+            labelControlPatientName.AppearanceDisabled.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearanceDisabled.Options.UseFont = true;
+            labelControlPatientName.AppearanceHovered.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearanceHovered.Options.UseFont = true;
+            labelControlPatientName.AppearancePressed.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearancePressed.Options.UseFont = true;
+            labelControlPatientName.Location = new System.Drawing.Point(12, 23);
+            labelControlPatientName.Name = "labelControlPatientName";
+            labelControlPatientName.Size = new System.Drawing.Size(118, 21);
+            labelControlPatientName.TabIndex = 0;
+            labelControlPatientName.Text = "PATIENT NAME";
             // 
             // splitContainerControlFunctions
             // 
@@ -357,12 +359,21 @@ namespace CD4.UI.View
             // 
             // groupControlFunctions
             // 
+            this.groupControlFunctions.Controls.Add(this.simpleButtonReport);
             this.groupControlFunctions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControlFunctions.Location = new System.Drawing.Point(0, 0);
             this.groupControlFunctions.Name = "groupControlFunctions";
             this.groupControlFunctions.Size = new System.Drawing.Size(839, 77);
             this.groupControlFunctions.TabIndex = 1;
             this.groupControlFunctions.Text = "Functions";
+            // 
+            // simpleButtonReport
+            // 
+            this.simpleButtonReport.Location = new System.Drawing.Point(752, 33);
+            this.simpleButtonReport.Name = "simpleButtonReport";
+            this.simpleButtonReport.Size = new System.Drawing.Size(75, 23);
+            this.simpleButtonReport.TabIndex = 0;
+            this.simpleButtonReport.Text = "Report";
             // 
             // ResultEntryView
             // 
@@ -388,6 +399,7 @@ namespace CD4.UI.View
             ((System.ComponentModel.ISupportInitialize)(this.gridViewTests)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditCodifiedPhrases)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlFunctions)).EndInit();
+            this.groupControlFunctions.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -421,5 +433,6 @@ namespace CD4.UI.View
         private DevExpress.XtraEditors.LabelControl labelControlSite;
         private DevExpress.XtraEditors.LabelControl labelControlPatientName;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEditCodifiedPhrases;
+        private SimpleButton simpleButtonReport;
     }
 }
