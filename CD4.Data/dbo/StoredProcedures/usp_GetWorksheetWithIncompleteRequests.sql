@@ -50,7 +50,7 @@ BEGIN
                [RW].[EpisodeNumber],
                [RW].[Site]
                ,ISNULL([C].[Detail],'') AS [ClinicalDetails]
-		FROM [dbo].[RequestDataForWorksheet] [RW] WITH (NOEXPAND)
+		FROM [dbo].[RequestsWithTestsWithoutResults] [RW] WITH (NOEXPAND)
         INNER JOIN @TempClinicalDetails [C] ON [RW].[AnalysisRequestId] = [C].[AnalysisRequestId]
 		WHERE [RW].[ReceivedDate] > @StartDateInUse;
 

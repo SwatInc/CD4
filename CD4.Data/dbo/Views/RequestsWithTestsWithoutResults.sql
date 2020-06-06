@@ -1,4 +1,4 @@
-﻿CREATE VIEW [dbo].[RequestDataForWorksheet]
+﻿CREATE VIEW [dbo].[RequestsWithTestsWithoutResults]
 (
        [Id],
        [AnalysisRequestId],
@@ -44,8 +44,8 @@ WHERE [R].[Result] IS NULL OR [R].[Result] = ''
 )
 GO
 CREATE UNIQUE CLUSTERED INDEX IX_RequestDataForWorksheet_Id
-ON [dbo].[RequestDataForWorksheet]([Id]);
+ON [dbo].[RequestsWithTestsWithoutResults]([Id]);
 GO
 CREATE NONCLUSTERED INDEX IX_ReceivedDate
-ON [dbo].[RequestDataForWorksheet]([ReceivedDate]);
+ON [dbo].[RequestsWithTestsWithoutResults]([ReceivedDate]);
 GO
