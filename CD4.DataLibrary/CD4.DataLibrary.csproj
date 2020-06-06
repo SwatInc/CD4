@@ -53,11 +53,13 @@
     <Compile Include="DataAccess\IAnalysisRequestDataAccess.cs" />
     <Compile Include="DataAccess\IClinicalDetailsDataAccess.cs" />
     <Compile Include="DataAccess\IPatientDataAccess.cs" />
+    <Compile Include="DataAccess\IReportsDataAccess.cs" />
     <Compile Include="DataAccess\IResultDataAccess.cs" />
     <Compile Include="DataAccess\ISampleDataAccess.cs" />
     <Compile Include="DataAccess\IStaticDataDataAccess.cs" />
     <Compile Include="DataAccess\IWorkSheetDataAccess.cs" />
     <Compile Include="DataAccess\PatientDataAccess.cs" />
+    <Compile Include="DataAccess\ReportsDataAccess.cs" />
     <Compile Include="DataAccess\ResultDataAccess.cs" />
     <Compile Include="DataAccess\SampleDataAccess.cs" />
     <Compile Include="DataAccess\StaticDataDataAccess.cs" />
@@ -77,6 +79,12 @@
     <Compile Include="Models\CompleteRequestSearchResultsModel.cs" />
     <Compile Include="Models\ExistingRequestsPatientComparisionArgs.cs" />
     <Compile Include="Models\PatientNidPpAndNameModel.cs" />
+    <Compile Include="Models\ReportModels\AnalysisReportDatabaseModel.cs" />
+    <Compile Include="Models\ReportModels\AnalysisRequestReportModel.cs" />
+    <Compile Include="Models\ReportModels\AssaysModel.cs" />
+    <Compile Include="Models\ReportModels\PatientForReportDatabaseModel.cs" />
+    <Compile Include="Models\ReportModels\PatientModel.cs" />
+    <Compile Include="Models\ReportModels\ResultsForAnalysisReportDatabaseModel.cs" />
     <Compile Include="Models\RequestSearchDataModel.cs" />
     <Compile Include="Models\Config.cs" />
     <Compile Include="Models\ConnectionName.cs" />

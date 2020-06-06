@@ -1,5 +1,6 @@
 ﻿using CD4.DataLibrary.Helpers;
 using CD4.DataLibrary.Models;
+using CD4.DataLibrary.Models.ReportModels;
 using Dapper;
 using System;
 using System.Collections.Generic;
@@ -156,6 +157,59 @@ namespace CD4.DataLibrary.DataAccess
             };
         }
 
+        /// <summary>
+        /// Gets data needed to generate an analysis report by using the provided Cin(Parameter) and stored procedure
+        /// </summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="storedProcedure">Stored procedure name</param>
+        /// <param name="parameters">An instance with the required parameter, Cin</param>
+        /// <returns>A Task of AnalysisReportDatabaseModel</returns>
+        internal async Task<AnalysisReportDatabaseModel> LoadAnalysisReportByCinAsync<T>(string storedProcedure, T parameters)
+        {
+            //initialize patient and results models
+            var patient = new PatientForAnalysisReportDatabaseModel();
+            var results = new List<ResultsForAnalysisReportDatabaseModel>();
+
+            //open try catch block
+            try
+            {
+                //Initialize connection
+                using (IDbConnection connection = new SqlConnection(helper.GetConnectionString()))
+                {
+                    //execute query to get multiple datasets, for patient and results
+                    using (var reader = await connection.QueryMultipleAsync
+                        (storedProcedure, parameters, commandType: CommandType.StoredProcedure))
+                    {
+                        //read results list
+                        results = reader.Read<ResultsForAnalysisReportDatabaseModel>().ToList();
+                        //read patient data
+                        patient = reader.Read<PatientForAnalysisReportDatabaseModel>().FirstOrDefault();
+
+                    }
+
+                }
+            }
+            catch (Exception)
+            {
+                //throw any exceptions without handling them.
+                //will be caught and handled in UI layer.
+                throw;
+            }
+
+            //if query yielded no results, return an empty report model
+            if (results.Count == 0)
+            {
+                return new AnalysisReportDatabaseModel();
+            }
+
+            //assign the patient and results models to a new instance of report model and return
+            return new AnalysisReportDatabaseModel()
+            {
+                Patient = patient,
+                Results = results
+            };
+
+        }
 
     }
 }
