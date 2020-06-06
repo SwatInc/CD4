@@ -7,8 +7,10 @@ AS
 SELECT [R].[Id],
 	   [S].[AnalysisRequestId],
 	   [S].[Cin],
+	   [T].[Discipline],
 	   [T].[Description],
 	   [R].[Result],
+	   [T].[Unit],
 	   [DT].[Name] AS [DataType],
 	   [T].[Mask]
 FROM [dbo].[Result] [R]
