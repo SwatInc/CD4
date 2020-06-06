@@ -1,5 +1,6 @@
 ﻿using CD4.DataLibrary.DataAccess;
 using CD4.UI.Report;
+using DevExpress.DataProcessing;
 using DevExpress.XtraEditors;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraReports.UI;
@@ -99,8 +100,10 @@ namespace CD4.UI.View
                 assays.Add(new Assays()
                 {
                     Cin = assay.Cin,
+                    Discipline = assay.Discipline,
                     Assay = assay.Assay,
-                    Result = assay.Result
+                    Result = assay.Result,
+                    Unit = assay.Unit
                 });
             }
 
@@ -209,8 +212,10 @@ namespace CD4.UI.View
     public class Assays
     {
         public string Cin { get; set; }
+        public string Discipline { get; set; }
         public string Assay { get; set; }
         public string Result { get; set; }
+        public string Unit { get; set; }
     }
 
     public class Patient

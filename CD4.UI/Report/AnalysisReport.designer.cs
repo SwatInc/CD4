@@ -74,11 +74,13 @@
             this.xrLine5 = new DevExpress.XtraReports.UI.XRLine();
             this.xrLabelAbalysisHeading = new DevExpress.XtraReports.UI.XRLabel();
             this.GroupHeaderCin = new DevExpress.XtraReports.UI.GroupHeaderBand();
-            this.xrLabelAnalysisUnit = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel15 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel16 = new DevExpress.XtraReports.UI.XRLabel();
             this.Detail1 = new DevExpress.XtraReports.UI.DetailBand();
             this.DetailReport = new DevExpress.XtraReports.UI.DetailReportBand();
+            this.xrLabel17 = new DevExpress.XtraReports.UI.XRLabel();
+            this.GroupHeaderDiscipline = new DevExpress.XtraReports.UI.GroupHeaderBand();
+            this.xrLabel18 = new DevExpress.XtraReports.UI.XRLabel();
             this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -570,21 +572,8 @@
             this.xrLabelResultHeading,
             this.xrLabel14});
             this.GroupHeaderCin.HeightF = 49.20836F;
+            this.GroupHeaderCin.Level = 1;
             this.GroupHeaderCin.Name = "GroupHeaderCin";
-            // 
-            // xrLabelAnalysisUnit
-            // 
-            this.xrLabelAnalysisUnit.CanShrink = true;
-            this.xrLabelAnalysisUnit.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.xrLabelAnalysisUnit.LocationFloat = new DevExpress.Utils.PointFloat(405.8752F, 0F);
-            this.xrLabelAnalysisUnit.Name = "xrLabelAnalysisUnit";
-            this.xrLabelAnalysisUnit.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabelAnalysisUnit.SizeF = new System.Drawing.SizeF(102.0833F, 22.99999F);
-            this.xrLabelAnalysisUnit.StylePriority.UseFont = false;
-            this.xrLabelAnalysisUnit.StylePriority.UseTextAlignment = false;
-            this.xrLabelAnalysisUnit.Text = "IU";
-            this.xrLabelAnalysisUnit.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
-            this.xrLabelAnalysisUnit.WordWrap = false;
             // 
             // xrLabel15
             // 
@@ -614,9 +603,9 @@
             // Detail1
             // 
             this.Detail1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrLabel17,
             this.xrLabel16,
-            this.xrLabel15,
-            this.xrLabelAnalysisUnit});
+            this.xrLabel15});
             this.Detail1.HeightF = 25.70836F;
             this.Detail1.KeepTogether = true;
             this.Detail1.Name = "Detail1";
@@ -625,11 +614,48 @@
             // 
             this.DetailReport.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
             this.Detail1,
-            this.GroupHeaderCin});
+            this.GroupHeaderCin,
+            this.GroupHeaderDiscipline});
             this.DetailReport.DataMember = "Assays";
             this.DetailReport.DataSource = this.bindingSource;
             this.DetailReport.Level = 0;
             this.DetailReport.Name = "DetailReport";
+            // 
+            // xrLabel17
+            // 
+            this.xrLabel17.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Unit]")});
+            this.xrLabel17.LocationFloat = new DevExpress.Utils.PointFloat(405.8752F, 0F);
+            this.xrLabel17.Multiline = true;
+            this.xrLabel17.Name = "xrLabel17";
+            this.xrLabel17.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel17.SizeF = new System.Drawing.SizeF(100F, 23F);
+            this.xrLabel17.Text = "xrLabel17";
+            // 
+            // GroupHeaderDiscipline
+            // 
+            this.GroupHeaderDiscipline.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrLabel18});
+            this.GroupHeaderDiscipline.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
+            new DevExpress.XtraReports.UI.GroupField("Discipline", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
+            this.GroupHeaderDiscipline.HeightF = 33.00001F;
+            this.GroupHeaderDiscipline.KeepTogether = true;
+            this.GroupHeaderDiscipline.Name = "GroupHeaderDiscipline";
+            // 
+            // xrLabel18
+            // 
+            this.xrLabel18.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Discipline]")});
+            this.xrLabel18.Font = new System.Drawing.Font("Segoe UI", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))));
+            this.xrLabel18.LocationFloat = new DevExpress.Utils.PointFloat(36F, 10.00001F);
+            this.xrLabel18.Multiline = true;
+            this.xrLabel18.Name = "xrLabel18";
+            this.xrLabel18.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel18.SizeF = new System.Drawing.SizeF(585.4999F, 23F);
+            this.xrLabel18.StylePriority.UseFont = false;
+            this.xrLabel18.StylePriority.UseTextAlignment = false;
+            this.xrLabel18.Text = "xrLabel18";
+            this.xrLabel18.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             // 
             // bindingSource
             // 
@@ -699,11 +725,13 @@
         private DevExpress.XtraReports.UI.XRLine xrLine5;
         private DevExpress.XtraReports.UI.XRLabel xrLabelAbalysisHeading;
         private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeaderCin;
-        private DevExpress.XtraReports.UI.XRLabel xrLabelAnalysisUnit;
         private DevExpress.XtraReports.UI.XRLabel xrLabel15;
         private DevExpress.XtraReports.UI.XRLabel xrLabel16;
         private DevExpress.XtraReports.UI.DetailBand Detail1;
         private DevExpress.XtraReports.UI.DetailReportBand DetailReport;
         private System.Windows.Forms.BindingSource bindingSource;
+        private DevExpress.XtraReports.UI.XRLabel xrLabel17;
+        private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeaderDiscipline;
+        private DevExpress.XtraReports.UI.XRLabel xrLabel18;
     }
 }

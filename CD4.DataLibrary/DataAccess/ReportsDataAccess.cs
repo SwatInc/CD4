@@ -61,8 +61,10 @@ namespace CD4.DataLibrary.DataAccess
                 reportModel.Assays.Add(new AssaysModel
                 {
                      Assay = assay.Assay,
+                     Discipline = assay.Discipline,
                      Cin  = assay.Cin,
-                     Result = assay.Result
+                     Result = assay.Result,
+                     Unit = assay.Unit
                 });
             }
 
