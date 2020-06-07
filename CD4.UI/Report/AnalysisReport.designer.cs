@@ -76,7 +76,7 @@
             this.GroupHeaderCin = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.xrLabel15 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel16 = new DevExpress.XtraReports.UI.XRLabel();
-            this.Detail1 = new DevExpress.XtraReports.UI.DetailBand();
+            this.DetailResults = new DevExpress.XtraReports.UI.DetailBand();
             this.DetailReport = new DevExpress.XtraReports.UI.DetailReportBand();
             this.xrLabel17 = new DevExpress.XtraReports.UI.XRLabel();
             this.GroupHeaderDiscipline = new DevExpress.XtraReports.UI.GroupHeaderBand();
@@ -574,6 +574,7 @@
             this.GroupHeaderCin.HeightF = 49.20836F;
             this.GroupHeaderCin.Level = 1;
             this.GroupHeaderCin.Name = "GroupHeaderCin";
+            this.GroupHeaderCin.RepeatEveryPage = true;
             // 
             // xrLabel15
             // 
@@ -600,20 +601,20 @@
             this.xrLabel16.Text = "xrLabel16";
             this.xrLabel16.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
             // 
-            // Detail1
+            // DetailResults
             // 
-            this.Detail1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.DetailResults.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrLabel17,
             this.xrLabel16,
             this.xrLabel15});
-            this.Detail1.HeightF = 25.70836F;
-            this.Detail1.KeepTogether = true;
-            this.Detail1.Name = "Detail1";
+            this.DetailResults.HeightF = 23F;
+            this.DetailResults.KeepTogether = true;
+            this.DetailResults.Name = "DetailResults";
             // 
             // DetailReport
             // 
             this.DetailReport.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
-            this.Detail1,
+            this.DetailResults,
             this.GroupHeaderCin,
             this.GroupHeaderDiscipline});
             this.DetailReport.DataMember = "Assays";
@@ -641,6 +642,7 @@
             this.GroupHeaderDiscipline.HeightF = 33.00001F;
             this.GroupHeaderDiscipline.KeepTogether = true;
             this.GroupHeaderDiscipline.Name = "GroupHeaderDiscipline";
+            this.GroupHeaderDiscipline.PageBreak = DevExpress.XtraReports.UI.PageBreak.BeforeBandExceptFirstEntry;
             // 
             // xrLabel18
             // 
@@ -727,7 +729,7 @@
         private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeaderCin;
         private DevExpress.XtraReports.UI.XRLabel xrLabel15;
         private DevExpress.XtraReports.UI.XRLabel xrLabel16;
-        private DevExpress.XtraReports.UI.DetailBand Detail1;
+        private DevExpress.XtraReports.UI.DetailBand DetailResults;
         private DevExpress.XtraReports.UI.DetailReportBand DetailReport;
         private System.Windows.Forms.BindingSource bindingSource;
         private DevExpress.XtraReports.UI.XRLabel xrLabel17;
