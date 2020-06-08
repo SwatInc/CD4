@@ -41,12 +41,12 @@
             this.barButtonItemProfiles = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemOrderEntry = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemResultEntry = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemStatistics = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPageGeneral = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageConfiguration = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
-            this.barButtonItemStatistics = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             this.SuspendLayout();
             // 
@@ -152,7 +152,7 @@
             // 
             this.barButtonItemOrderEntry.Caption = "Order Entry";
             this.barButtonItemOrderEntry.Id = 11;
-            this.barButtonItemOrderEntry.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
+            this.barButtonItemOrderEntry.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemOrderEntry.ImageOptions.SvgImage")));
             this.barButtonItemOrderEntry.Name = "barButtonItemOrderEntry";
             this.barButtonItemOrderEntry.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
@@ -162,6 +162,14 @@
             this.barButtonItemResultEntry.Id = 12;
             this.barButtonItemResultEntry.ImageOptions.SvgImage = global::CD4.UI.Properties.Resources.marker;
             this.barButtonItemResultEntry.Name = "barButtonItemResultEntry";
+            // 
+            // barButtonItemStatistics
+            // 
+            this.barButtonItemStatistics.Caption = "Statistics";
+            this.barButtonItemStatistics.Id = 13;
+            this.barButtonItemStatistics.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemStatistics.ImageOptions.SvgImage")));
+            this.barButtonItemStatistics.Name = "barButtonItemStatistics";
+            this.barButtonItemStatistics.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
             // ribbonPageGeneral
             // 
@@ -206,18 +214,12 @@
             this.ribbonStatusBar.Ribbon = this.ribbon;
             this.ribbonStatusBar.Size = new System.Drawing.Size(1023, 31);
             // 
-            // barButtonItemStatistics
-            // 
-            this.barButtonItemStatistics.Caption = "Statistics";
-            this.barButtonItemStatistics.Id = 13;
-            this.barButtonItemStatistics.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem3.ImageOptions.SvgImage")));
-            this.barButtonItemStatistics.Name = "barButtonItemStatistics";
-            this.barButtonItemStatistics.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImageLayoutStore = System.Windows.Forms.ImageLayout.Tile;
+            this.BackgroundImageStore = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImageStore")));
             this.ClientSize = new System.Drawing.Size(1023, 541);
             this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbon);

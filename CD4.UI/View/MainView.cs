@@ -22,6 +22,9 @@ namespace CD4.UI.View
             _viewModel = viewModel;
             this.reportsDataAccess = reportsDataAccess;
 
+            //load auth UI
+            LoadAuthenticationUi();
+
             #region Event Subscriptions
 
             //Configuration Tab buttons
@@ -40,6 +43,11 @@ namespace CD4.UI.View
             barButtonItemResultEntry.ItemClick += OpenResultEntryView;
             #endregion
 
+        }
+
+        private void LoadAuthenticationUi()
+        {
+            this.OpenMdiForm<AuthenticationView>();
         }
 
         private void OpenResultEntryView(object sender, ItemClickEventArgs e)

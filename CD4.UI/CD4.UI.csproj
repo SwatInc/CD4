@@ -138,6 +138,12 @@
     <Compile Include="View\AtollIslandView.Designer.cs">
       <DependentUpon>AtollIslandView.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\AuthenticationView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AuthenticationView.Designer.cs">
+      <DependentUpon>AuthenticationView.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\ClinicaDetailsView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -233,6 +239,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\AtollIslandView.resx">
       <DependentUpon>AtollIslandView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\AuthenticationView.resx">
+      <DependentUpon>AuthenticationView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\ClinicaDetailsView.resx">
       <DependentUpon>ClinicaDetailsView.cs</DependentUpon>
