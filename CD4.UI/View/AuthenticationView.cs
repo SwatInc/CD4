@@ -9,17 +9,39 @@ namespace CD4.UI.View
     {
         //Holds the current UI state
         private UiState uiState;
+        private bool? capsLockStatus;
+
+        //events 
+        private event EventHandler<bool> CapsLockStatusChanged;
+
         public AuthenticationView()
         {
             InitializeComponent();
-            
-            //Set Ui State to normal
-            SetNormalUiState();
-
+           
             //subscribe for events
             simpleButtonCancel.Click += CloseSignInView;
             SimpleButtonSignIn.Click += SignInUser;
-            this.FormClosing += OnClosingSignIn;
+            CapsLockStatusChanged += AuthenticationView_CapsLockStatusChanged;
+            FormClosing += OnClosingSignIn;
+            KeyUp += AuthenticationView_KeyUp;
+
+            //Set Ui State to normal
+            SetNormalUiState();
+
+            //initialize caps locks status display on view
+            CheckCapsLockStatus();
+        }
+
+        //reflect the caps lock status on view
+        private void AuthenticationView_CapsLockStatusChanged(object sender, bool e)
+        {
+            this.labelControlCapsLockStatus.Visible = e;
+        }
+
+        private void AuthenticationView_KeyUp(object sender, KeyEventArgs e)
+        {
+            //check caps lock status
+            CheckCapsLockStatus();
         }
 
         /// <summary>
@@ -48,6 +70,21 @@ namespace CD4.UI.View
 
             //Exit application
             ExitApplication();
+        }
+
+        /// <summary>
+        /// When called, checks the current caps lock status with the previous and raises an event if status is changed.
+        /// </summary>
+        private void CheckCapsLockStatus()
+        {
+            //check current caps lock status
+            bool? currentCapsLockStatus = Control.IsKeyLocked(Keys.CapsLock);
+            //Compare caps lock status, return if current status is same as previous
+            if (currentCapsLockStatus == capsLockStatus) return;
+            //assign new caps lock status
+            capsLockStatus = currentCapsLockStatus;
+            //Raise event to indicate the change
+            CapsLockStatusChanged?.Invoke(this, (bool)capsLockStatus);
         }
 
         /// <summary>
