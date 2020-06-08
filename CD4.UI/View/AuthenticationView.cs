@@ -1,4 +1,5 @@
-﻿using DevExpress.XtraEditors;
+﻿using CD4.UI.Library.ViewModel;
+using DevExpress.XtraEditors;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -10,11 +11,12 @@ namespace CD4.UI.View
         //Holds the current UI state
         private UiState uiState;
         private bool? capsLockStatus;
+        private readonly IAuthenticationViewModel viewModel;
 
         //events 
         private event EventHandler<bool> CapsLockStatusChanged;
 
-        public AuthenticationView()
+        public AuthenticationView(IAuthenticationViewModel viewModel)
         {
             InitializeComponent();
            
@@ -30,6 +32,7 @@ namespace CD4.UI.View
 
             //initialize caps locks status display on view
             CheckCapsLockStatus();
+            this.viewModel = viewModel;
         }
 
         //reflect the caps lock status on view
@@ -145,7 +148,6 @@ namespace CD4.UI.View
             //set the UiState flag to "normal"
             uiState = UiState.Normal;
         }
-
         private void SetAuthenticatingUiState()
         {
             //if UI state is already normal, ignore and return

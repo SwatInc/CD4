@@ -88,10 +88,12 @@
     <Compile Include="Model\UiState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validations\OrderEntryValidator.cs" />
+    <Compile Include="ViewModel\AuthenticationViewModel.cs" />
     <Compile Include="ViewModel\ClinicalDetailsViewModel.cs" />
     <Compile Include="ViewModel\CodifiedValuesViewModel.cs" />
     <Compile Include="ViewModel\CountryViewModel.cs" />
     <Compile Include="ViewModel\GenderViewModel.cs" />
+    <Compile Include="ViewModel\IAuthenticationViewModel.cs" />
     <Compile Include="ViewModel\IClinicalDetailsViewModel.cs" />
     <Compile Include="ViewModel\ICodifiedValuesViewModel.cs" />
     <Compile Include="ViewModel\ICountryViewModel.cs" />

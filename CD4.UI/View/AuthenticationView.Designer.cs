@@ -36,17 +36,19 @@
             this.labelControlCapsLockStatus = new DevExpress.XtraEditors.LabelControl();
             this.pictureEditLaboratoryLogo = new DevExpress.XtraEditors.PictureEdit();
             this.groupControlAuthView = new DevExpress.XtraEditors.GroupControl();
+            this.separatorControl1 = new DevExpress.XtraEditors.SeparatorControl();
             this.simpleButtonCancel = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.textEditPassword.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditUsername.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEditLaboratoryLogo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlAuthView)).BeginInit();
             this.groupControlAuthView.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.separatorControl1)).BeginInit();
             this.SuspendLayout();
             // 
             // textEditPassword
             // 
-            this.textEditPassword.Location = new System.Drawing.Point(119, 129);
+            this.textEditPassword.Location = new System.Drawing.Point(119, 121);
             this.textEditPassword.Name = "textEditPassword";
             this.textEditPassword.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textEditPassword.Properties.Appearance.Options.UseFont = true;
@@ -77,7 +79,7 @@
             // 
             // textEditUsername
             // 
-            this.textEditUsername.Location = new System.Drawing.Point(119, 95);
+            this.textEditUsername.Location = new System.Drawing.Point(119, 87);
             this.textEditUsername.Name = "textEditUsername";
             this.textEditUsername.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textEditUsername.Properties.Appearance.Options.UseFont = true;
@@ -120,7 +122,7 @@
             this.ProgressPanelAuthentication.Caption = "Please Wait...";
             this.ProgressPanelAuthentication.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.ProgressPanelAuthentication.Description = "Authenticating";
-            this.ProgressPanelAuthentication.Location = new System.Drawing.Point(5, 236);
+            this.ProgressPanelAuthentication.Location = new System.Drawing.Point(5, 23);
             this.ProgressPanelAuthentication.Name = "ProgressPanelAuthentication";
             this.ProgressPanelAuthentication.Size = new System.Drawing.Size(35, 29);
             this.ProgressPanelAuthentication.TabIndex = 44;
@@ -130,7 +132,7 @@
             // 
             this.SimpleButtonSignIn.Appearance.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SimpleButtonSignIn.Appearance.Options.UseFont = true;
-            this.SimpleButtonSignIn.Location = new System.Drawing.Point(257, 214);
+            this.SimpleButtonSignIn.Location = new System.Drawing.Point(257, 211);
             this.SimpleButtonSignIn.Name = "SimpleButtonSignIn";
             this.SimpleButtonSignIn.Size = new System.Drawing.Size(102, 30);
             this.SimpleButtonSignIn.TabIndex = 46;
@@ -159,7 +161,7 @@
             this.labelControlCapsLockStatus.AppearancePressed.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.labelControlCapsLockStatus.AppearancePressed.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.labelControlCapsLockStatus.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.labelControlCapsLockStatus.Location = new System.Drawing.Point(136, 159);
+            this.labelControlCapsLockStatus.Location = new System.Drawing.Point(136, 151);
             this.labelControlCapsLockStatus.Name = "labelControlCapsLockStatus";
             this.labelControlCapsLockStatus.Size = new System.Drawing.Size(222, 27);
             this.labelControlCapsLockStatus.TabIndex = 47;
@@ -169,7 +171,7 @@
             // pictureEditLaboratoryLogo
             // 
             this.pictureEditLaboratoryLogo.EditValue = ((object)(resources.GetObject("pictureEditLaboratoryLogo.EditValue")));
-            this.pictureEditLaboratoryLogo.Location = new System.Drawing.Point(11, 34);
+            this.pictureEditLaboratoryLogo.Location = new System.Drawing.Point(11, 24);
             this.pictureEditLaboratoryLogo.Name = "pictureEditLaboratoryLogo";
             this.pictureEditLaboratoryLogo.Properties.AllowFocused = false;
             this.pictureEditLaboratoryLogo.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
@@ -184,6 +186,7 @@
             // 
             this.groupControlAuthView.Controls.Add(this.pictureEditLaboratoryLogo);
             this.groupControlAuthView.Controls.Add(this.ProgressPanelAuthentication);
+            this.groupControlAuthView.Controls.Add(this.separatorControl1);
             this.groupControlAuthView.Controls.Add(this.simpleButtonCancel);
             this.groupControlAuthView.Controls.Add(this.textEditUsername);
             this.groupControlAuthView.Controls.Add(this.textEditPassword);
@@ -191,8 +194,15 @@
             this.groupControlAuthView.Controls.Add(this.SimpleButtonSignIn);
             this.groupControlAuthView.Location = new System.Drawing.Point(1, 1);
             this.groupControlAuthView.Name = "groupControlAuthView";
-            this.groupControlAuthView.Size = new System.Drawing.Size(500, 270);
+            this.groupControlAuthView.Size = new System.Drawing.Size(500, 252);
             this.groupControlAuthView.TabIndex = 49;
+            // 
+            // separatorControl1
+            // 
+            this.separatorControl1.Location = new System.Drawing.Point(11, 188);
+            this.separatorControl1.Name = "separatorControl1";
+            this.separatorControl1.Size = new System.Drawing.Size(478, 23);
+            this.separatorControl1.TabIndex = 49;
             // 
             // simpleButtonCancel
             // 
@@ -206,7 +216,7 @@
             this.simpleButtonCancel.AppearanceHovered.Options.UseForeColor = true;
             this.simpleButtonCancel.AppearancePressed.ForeColor = System.Drawing.Color.Gray;
             this.simpleButtonCancel.AppearancePressed.Options.UseForeColor = true;
-            this.simpleButtonCancel.Location = new System.Drawing.Point(137, 214);
+            this.simpleButtonCancel.Location = new System.Drawing.Point(137, 211);
             this.simpleButtonCancel.Name = "simpleButtonCancel";
             this.simpleButtonCancel.Size = new System.Drawing.Size(102, 30);
             this.simpleButtonCancel.TabIndex = 48;
@@ -217,7 +227,7 @@
             this.Appearance.Options.UseFont = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(502, 272);
+            this.ClientSize = new System.Drawing.Size(502, 255);
             this.ControlBox = false;
             this.Controls.Add(this.groupControlAuthView);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -235,6 +245,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureEditLaboratoryLogo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlAuthView)).EndInit();
             this.groupControlAuthView.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.separatorControl1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -249,5 +260,6 @@
         private DevExpress.XtraEditors.PictureEdit pictureEditLaboratoryLogo;
         private DevExpress.XtraEditors.GroupControl groupControlAuthView;
         internal DevExpress.XtraEditors.SimpleButton simpleButtonCancel;
+        private DevExpress.XtraEditors.SeparatorControl separatorControl1;
     }
 }
