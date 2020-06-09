@@ -73,8 +73,13 @@
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageGeneral,
             this.ribbonPageConfiguration});
-            this.ribbon.Size = new System.Drawing.Size(1023, 143);
+            this.ribbon.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
+            this.ribbon.ShowDisplayOptionsMenuButton = DevExpress.Utils.DefaultBoolean.False;
+            this.ribbon.ShowMoreCommandsButton = DevExpress.Utils.DefaultBoolean.False;
+            this.ribbon.ShowToolbarCustomizeItem = false;
+            this.ribbon.Size = new System.Drawing.Size(715, 143);
             this.ribbon.StatusBar = this.ribbonStatusBar;
+            this.ribbon.Toolbar.ShowCustomizeItem = false;
             // 
             // barButtonItemCodifiedResults
             // 
@@ -212,7 +217,7 @@
             this.ribbonStatusBar.Location = new System.Drawing.Point(0, 510);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(1023, 31);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(715, 31);
             // 
             // MainView
             // 
@@ -220,9 +225,10 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayoutStore = System.Windows.Forms.ImageLayout.Tile;
             this.BackgroundImageStore = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImageStore")));
-            this.ClientSize = new System.Drawing.Size(1023, 541);
+            this.ClientSize = new System.Drawing.Size(715, 541);
             this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbon);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.IsMdiContainer = true;
             this.Name = "MainView";
             this.Ribbon = this.ribbon;
