@@ -74,6 +74,7 @@
             this.textEditPassword.Properties.NullValuePrompt = "password";
             this.textEditPassword.Properties.NullValuePromptShowForEmptyValue = true;
             this.textEditPassword.Properties.ShowNullValuePromptWhenFocused = true;
+            this.textEditPassword.Properties.UseSystemPasswordChar = true;
             this.textEditPassword.Size = new System.Drawing.Size(258, 28);
             this.textEditPassword.TabIndex = 5;
             // 
@@ -195,7 +196,7 @@
             this.groupControlAuthView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControlAuthView.Location = new System.Drawing.Point(0, 0);
             this.groupControlAuthView.Name = "groupControlAuthView";
-            this.groupControlAuthView.Size = new System.Drawing.Size(539, 254);
+            this.groupControlAuthView.Size = new System.Drawing.Size(545, 260);
             this.groupControlAuthView.TabIndex = 49;
             // 
             // separatorControl1
@@ -230,7 +231,7 @@
             this.Appearance.Options.UseFont = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(539, 254);
+            this.ClientSize = new System.Drawing.Size(545, 260);
             this.ControlBox = false;
             this.Controls.Add(this.groupControlAuthView);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

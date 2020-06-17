@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace CD4.UI.View
 {
-    public partial class AuthenticationView : DevExpress.XtraEditors.XtraForm
+    public partial class AuthenticationView : XtraForm
     {
         //Holds the current UI state
         private UiState uiState;
@@ -15,7 +15,7 @@ namespace CD4.UI.View
 
         //events 
         private event EventHandler<bool> CapsLockStatusChanged;
-
+        
         public AuthenticationView(IAuthenticationViewModel viewModel)
         {
             InitializeComponent();
@@ -33,6 +33,25 @@ namespace CD4.UI.View
             //initialize caps locks status display on view
             CheckCapsLockStatus();
             this.viewModel = viewModel;
+
+            //bind UI to view model
+            InitializeBinding();
+
+        }
+
+        private void InitializeBinding()
+        {
+            //bind username
+            textEditUsername.DataBindings.Add
+                (new Binding("EditValue", viewModel, nameof(viewModel.Username)));
+
+            //bind password
+            textEditPassword.DataBindings.Add
+                (new Binding("EditValue", viewModel, nameof(viewModel.Password)));
+
+            //bind login button disable / enable functionality
+            SimpleButtonSignIn.DataBindings.Add
+                (new Binding("Enabled", viewModel, nameof(viewModel.CanLogIn)));
         }
 
         //reflect the caps lock status on view
