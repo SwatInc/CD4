@@ -119,13 +119,13 @@
     <Build Include="dbo\StoredProcedures\usp_DeleteAnalysisRequestClinicalDetails.sql" />
     <Build Include="dbo\Views\RequestsWithTestsWithResults.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetAnalysisReportByCin.sql" />
-    <Build Include="auth\Tables\AspNetRoleClaims.sql" />
-    <Build Include="auth\Tables\AspNetRoles.sql" />
-    <Build Include="auth\Tables\AspNetUserClaims.sql" />
-    <Build Include="auth\Tables\AspNetUserLogins.sql" />
-    <Build Include="auth\Tables\AspNetUserRoles.sql" />
-    <Build Include="auth\Tables\AspNetUsers.sql" />
-    <Build Include="auth\Tables\AspNetUserTokens.sql" />
+    <Build Include="auth\Tables\RoleClaims.sql" />
+    <Build Include="auth\Tables\Roles.sql" />
+    <Build Include="auth\Tables\UserClaims.sql" />
+    <Build Include="auth\Tables\UserLogins.sql" />
+    <Build Include="auth\Tables\UserRoles.sql" />
+    <Build Include="auth\Tables\Users.sql" />
+    <Build Include="auth\Tables\UserTokens.sql" />
     <Build Include="auth\Tables\DeviceCodes.sql" />
     <Build Include="auth\Tables\PersistedGrants.sql" />
   </ItemGroup>
