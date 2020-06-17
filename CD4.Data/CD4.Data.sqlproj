@@ -62,6 +62,11 @@
     <Folder Include="dbo\Views" />
     <Folder Include="dbo\Scripts" />
     <Folder Include="dbo\Types" />
+    <Folder Include="auth" />
+    <Folder Include="auth\Tables" />
+    <Folder Include="auth\StoredProcedures" />
+    <Folder Include="auth\Views" />
+    <Folder Include="auth\Scripts" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Patient.sql" />
@@ -114,6 +119,15 @@
     <Build Include="dbo\StoredProcedures\usp_DeleteAnalysisRequestClinicalDetails.sql" />
     <Build Include="dbo\Views\RequestsWithTestsWithResults.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetAnalysisReportByCin.sql" />
+    <Build Include="auth\Tables\AspNetRoleClaims.sql" />
+    <Build Include="auth\Tables\AspNetRoles.sql" />
+    <Build Include="auth\Tables\AspNetUserClaims.sql" />
+    <Build Include="auth\Tables\AspNetUserLogins.sql" />
+    <Build Include="auth\Tables\AspNetUserRoles.sql" />
+    <Build Include="auth\Tables\AspNetUsers.sql" />
+    <Build Include="auth\Tables\AspNetUserTokens.sql" />
+    <Build Include="auth\Tables\DeviceCodes.sql" />
+    <Build Include="auth\Tables\PersistedGrants.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
