@@ -47,7 +47,7 @@ namespace CD4.UI.View
 
         private void LoadAuthenticationUi()
         {
-            this.OpenMdiForm<AuthenticationView>();
+           this.OpenMdiForm<AuthenticationView>();
         }
 
         private void OpenResultEntryView(object sender, ItemClickEventArgs e)

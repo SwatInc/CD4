@@ -65,6 +65,7 @@
     <Compile Include="Model\AtollIslandModel.cs" />
     <Compile Include="Model\AtollModel.cs" />
     <Compile Include="Model\AtollsIslandsRawModel.cs" />
+    <Compile Include="Model\Authority.cs" />
     <Compile Include="Model\PatientModel.cs" />
     <Compile Include="Model\ResultModel.cs" />
     <Compile Include="Model\RequestSampleModel.cs" />

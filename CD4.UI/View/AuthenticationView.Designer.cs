@@ -48,7 +48,7 @@
             // 
             // textEditPassword
             // 
-            this.textEditPassword.Location = new System.Drawing.Point(119, 121);
+            this.textEditPassword.Location = new System.Drawing.Point(129, 121);
             this.textEditPassword.Name = "textEditPassword";
             this.textEditPassword.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textEditPassword.Properties.Appearance.Options.UseFont = true;
@@ -79,7 +79,7 @@
             // 
             // textEditUsername
             // 
-            this.textEditUsername.Location = new System.Drawing.Point(119, 87);
+            this.textEditUsername.Location = new System.Drawing.Point(129, 87);
             this.textEditUsername.Name = "textEditUsername";
             this.textEditUsername.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textEditUsername.Properties.Appearance.Options.UseFont = true;
@@ -132,7 +132,7 @@
             // 
             this.SimpleButtonSignIn.Appearance.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SimpleButtonSignIn.Appearance.Options.UseFont = true;
-            this.SimpleButtonSignIn.Location = new System.Drawing.Point(257, 211);
+            this.SimpleButtonSignIn.Location = new System.Drawing.Point(267, 211);
             this.SimpleButtonSignIn.Name = "SimpleButtonSignIn";
             this.SimpleButtonSignIn.Size = new System.Drawing.Size(102, 30);
             this.SimpleButtonSignIn.TabIndex = 46;
@@ -161,7 +161,7 @@
             this.labelControlCapsLockStatus.AppearancePressed.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.labelControlCapsLockStatus.AppearancePressed.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.labelControlCapsLockStatus.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.labelControlCapsLockStatus.Location = new System.Drawing.Point(136, 151);
+            this.labelControlCapsLockStatus.Location = new System.Drawing.Point(146, 151);
             this.labelControlCapsLockStatus.Name = "labelControlCapsLockStatus";
             this.labelControlCapsLockStatus.Size = new System.Drawing.Size(222, 27);
             this.labelControlCapsLockStatus.TabIndex = 47;
@@ -171,7 +171,7 @@
             // pictureEditLaboratoryLogo
             // 
             this.pictureEditLaboratoryLogo.EditValue = ((object)(resources.GetObject("pictureEditLaboratoryLogo.EditValue")));
-            this.pictureEditLaboratoryLogo.Location = new System.Drawing.Point(11, 24);
+            this.pictureEditLaboratoryLogo.Location = new System.Drawing.Point(0, 29);
             this.pictureEditLaboratoryLogo.Name = "pictureEditLaboratoryLogo";
             this.pictureEditLaboratoryLogo.Properties.AllowFocused = false;
             this.pictureEditLaboratoryLogo.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
@@ -179,7 +179,7 @@
             this.pictureEditLaboratoryLogo.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
             this.pictureEditLaboratoryLogo.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
             this.pictureEditLaboratoryLogo.Properties.ZoomPercent = 75D;
-            this.pictureEditLaboratoryLogo.Size = new System.Drawing.Size(478, 46);
+            this.pictureEditLaboratoryLogo.Size = new System.Drawing.Size(539, 46);
             this.pictureEditLaboratoryLogo.TabIndex = 48;
             // 
             // groupControlAuthView
@@ -192,14 +192,15 @@
             this.groupControlAuthView.Controls.Add(this.textEditPassword);
             this.groupControlAuthView.Controls.Add(this.labelControlCapsLockStatus);
             this.groupControlAuthView.Controls.Add(this.SimpleButtonSignIn);
-            this.groupControlAuthView.Location = new System.Drawing.Point(1, 1);
+            this.groupControlAuthView.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControlAuthView.Location = new System.Drawing.Point(0, 0);
             this.groupControlAuthView.Name = "groupControlAuthView";
-            this.groupControlAuthView.Size = new System.Drawing.Size(500, 252);
+            this.groupControlAuthView.Size = new System.Drawing.Size(539, 254);
             this.groupControlAuthView.TabIndex = 49;
             // 
             // separatorControl1
             // 
-            this.separatorControl1.Location = new System.Drawing.Point(11, 188);
+            this.separatorControl1.Location = new System.Drawing.Point(21, 188);
             this.separatorControl1.Name = "separatorControl1";
             this.separatorControl1.Size = new System.Drawing.Size(478, 23);
             this.separatorControl1.TabIndex = 49;
@@ -216,7 +217,7 @@
             this.simpleButtonCancel.AppearanceHovered.Options.UseForeColor = true;
             this.simpleButtonCancel.AppearancePressed.ForeColor = System.Drawing.Color.Gray;
             this.simpleButtonCancel.AppearancePressed.Options.UseForeColor = true;
-            this.simpleButtonCancel.Location = new System.Drawing.Point(137, 211);
+            this.simpleButtonCancel.Location = new System.Drawing.Point(147, 211);
             this.simpleButtonCancel.Name = "simpleButtonCancel";
             this.simpleButtonCancel.Size = new System.Drawing.Size(102, 30);
             this.simpleButtonCancel.TabIndex = 48;
@@ -224,10 +225,12 @@
             // 
             // AuthenticationView
             // 
+            this.Appearance.BackColor = System.Drawing.SystemColors.Control;
+            this.Appearance.Options.UseBackColor = true;
             this.Appearance.Options.UseFont = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(502, 255);
+            this.ClientSize = new System.Drawing.Size(539, 254);
             this.ControlBox = false;
             this.Controls.Add(this.groupControlAuthView);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -238,6 +241,8 @@
             this.MinimizeBox = false;
             this.Name = "AuthenticationView";
             this.Opacity = 0D;
+            this.ShowIcon = false;
+            this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.TransparencyKey = System.Drawing.SystemColors.Control;
             ((System.ComponentModel.ISupportInitialize)(this.textEditPassword.Properties)).EndInit();
