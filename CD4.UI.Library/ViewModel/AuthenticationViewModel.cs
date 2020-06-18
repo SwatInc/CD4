@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CD4.DataLibrary.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
@@ -13,20 +14,25 @@ namespace CD4.UI.Library.ViewModel
     {
         private string username;
         private string password;
+        private readonly IAuthenticationDataAccess authDataAccess;
 
-        public AuthenticationViewModel()
+        //Raised when auth is successful. 
+        // TODO: Passes Authorized model to the subscriber
+        public event EventHandler AuthenticationSuccessful;
+        public AuthenticationViewModel(IAuthenticationDataAccess authDataAccess )
         {
             //login button is disabled on startup
             CanLogIn = false;
             //subscribe to property changed for processing on change events
-            PropertyChanged += AuthenticationViewModel_PropertyChanged
-                ;
+            PropertyChanged += AuthenticationViewModel_PropertyChanged;
+            this.authDataAccess = authDataAccess;
         }
         
         /// <summary>
         /// Do required operation depending on a property change on the UI
         /// </summary>
-        private void AuthenticationViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        private void AuthenticationViewModel_PropertyChanged 
+            (object sender, PropertyChangedEventArgs e)
         {
             //if username or password is changed...
             if (e.PropertyName == nameof(Username) || e.PropertyName == nameof(Password))
@@ -79,13 +85,14 @@ namespace CD4.UI.Library.ViewModel
 
         public bool CanLogIn { get; set; }
 
-        //Authenticate user using username and password
+        /// <summary>
+        /// Authenticate user using username and password
+        /// </summary>
+        /// <returns>Returns the authorized model</returns>
         public async Task AuthenticateUser()
         {
-
+            var authorizedData = await authDataAccess.Authenticate(Username, Password);
         }
-
-
 
         #region INotifyPropertyChanged Hookup
 
@@ -97,8 +104,6 @@ namespace CD4.UI.Library.ViewModel
         }
 
         #endregion
-
-
 
     }
 }
