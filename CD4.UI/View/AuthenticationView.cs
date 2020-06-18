@@ -39,15 +39,18 @@ namespace CD4.UI.View
 
         }
 
+        /// <summary>
+        /// databind the controls
+        /// </summary>
         private void InitializeBinding()
         {
             //bind username
             textEditUsername.DataBindings.Add
-                (new Binding("EditValue", viewModel, nameof(viewModel.Username)));
+                (new Binding("EditValue", viewModel, nameof(viewModel.Username), false, DataSourceUpdateMode.OnPropertyChanged));
 
             //bind password
             textEditPassword.DataBindings.Add
-                (new Binding("EditValue", viewModel, nameof(viewModel.Password)));
+                (new Binding("EditValue", viewModel, nameof(viewModel.Password),false,DataSourceUpdateMode.OnPropertyChanged));
 
             //bind login button disable / enable functionality
             SimpleButtonSignIn.DataBindings.Add
