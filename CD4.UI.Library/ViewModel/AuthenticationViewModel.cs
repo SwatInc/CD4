@@ -1,4 +1,6 @@
-﻿using CD4.DataLibrary.DataAccess;
+﻿using AutoMapper;
+using CD4.DataLibrary.DataAccess;
+using CD4.UI.Library.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,17 +17,19 @@ namespace CD4.UI.Library.ViewModel
         private string username;
         private string password;
         private readonly IAuthenticationDataAccess authDataAccess;
+        private readonly IMapper mapper;
 
-        //Raised when auth is successful. 
+        //Raised when auth is successful or unsuccessful 
         // TODO: Passes Authorized model to the subscriber
-        public event EventHandler AuthenticationSuccessful;
-        public AuthenticationViewModel(IAuthenticationDataAccess authDataAccess )
+        public event EventHandler<AuthorizeDetailEventArgs> AuthenticationStatusIndication;
+        public AuthenticationViewModel(IAuthenticationDataAccess authDataAccess, IMapper mapper)
         {
             //login button is disabled on startup
             CanLogIn = false;
             //subscribe to property changed for processing on change events
             PropertyChanged += AuthenticationViewModel_PropertyChanged;
             this.authDataAccess = authDataAccess;
+            this.mapper = mapper;
         }
         
         /// <summary>
@@ -87,11 +91,21 @@ namespace CD4.UI.Library.ViewModel
 
         /// <summary>
         /// Authenticate user using username and password
+        /// Raises an event (AuthenticationStatusIndication) indicating authentication status
         /// </summary>
-        /// <returns>Returns the authorized model</returns>
+        /// <returns>returns task</returns>
         public async Task AuthenticateUser()
         {
+            //call library to authenticate the username and password
             var authorizedData = await authDataAccess.Authenticate(Username, Password);
+            //check the retuned data for null...
+            if (authorizedData != null)
+            {
+                //map the AuthorozedDetailModel to event args model
+                var authArgs = mapper.Map<AuthorizeDetailEventArgs>(authorizedData);
+                //raise an event to indicate authentication current status
+                AuthenticationStatusIndication?.Invoke(this, authArgs);
+            }
         }
 
         #region INotifyPropertyChanged Hookup
