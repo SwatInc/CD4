@@ -39,6 +39,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -111,6 +112,7 @@
     <Compile Include="Models\SampleUpdateDatabaseModel.cs" />
     <Compile Include="Models\SitesModel.cs" />
     <Compile Include="Models\TestsModel.cs" />
+    <Compile Include="Models\UsernameAndHashModel.cs" />
     <Compile Include="Models\WorklistModel.cs" />
     <Compile Include="Models\WorklistPatientDataModel.cs" />
     <Compile Include="Models\WorkListResultsModel.cs" />

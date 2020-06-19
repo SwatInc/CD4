@@ -21,11 +21,7 @@ namespace CD4.UI.View
             InitializeComponent();
            
             //subscribe for events
-            simpleButtonCancel.Click += CloseSignInView;
-            SimpleButtonSignIn.Click += SignInUser;
-            CapsLockStatusChanged += AuthenticationView_CapsLockStatusChanged;
-            FormClosing += OnClosingSignIn;
-            KeyUp += AuthenticationView_KeyUp;
+
 
             //Set Ui State to normal
             SetNormalUiState();
@@ -37,6 +33,48 @@ namespace CD4.UI.View
             //bind UI to view model
             InitializeBinding();
 
+            //subscribe to events
+            simpleButtonCancel.Click += CloseSignInView;
+            CapsLockStatusChanged += AuthenticationView_CapsLockStatusChanged;
+            FormClosing += OnClosingSignIn;
+            KeyUp += AuthenticationView_KeyUp;
+            SimpleButtonSignIn.Click += SignInUser;
+            viewModel.AuthenticationStatusIndication += ViewModel_AuthenticationStatusIndication;
+        }
+
+        private void ViewModel_AuthenticationStatusIndication
+            (object sender, Library.Model.AuthorizeDetailEventArgs e)
+        {
+            if (e.IsAuthenticated)
+            {
+                this.Close();
+            }
+            else
+            {
+                //show a message that auth failed
+                XtraMessageBox.Show("Invalid username or password! Please try again.");
+                //hide authenticating animation
+                SetNormalUiState();
+                //Clear out the textedits and get focus to username
+                ClearOutUiAndFocusUsername();
+            }
+        }
+
+
+        /// <summary>
+        /// Clear username and password textedits and focus username textedit
+        /// </summary>
+        private void ClearOutUiAndFocusUsername()
+        {
+            textEditUsername.EditValue = "";
+            textEditPassword.EditValue = "";
+            textEditUsername.Focus();
+        }
+
+        private async void SignInUser(object sender, EventArgs e)
+        {
+            SetAuthenticatingUiState();
+            await viewModel.AuthenticateUser();
         }
 
         /// <summary>
@@ -67,17 +105,6 @@ namespace CD4.UI.View
         {
             //check caps lock status
             CheckCapsLockStatus();
-        }
-
-        /// <summary>
-        /// Handles user authenitcation button click
-        /// </summary>
-        private async void SignInUser(object sender, EventArgs e)
-        {
-            ToggleUiState();
-            //initialize auth async
-            await Task.Delay(3000);
-            ToggleUiState();
         }
 
         /// <summary>
