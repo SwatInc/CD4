@@ -1,4 +1,6 @@
 ﻿using CD4.DataLibrary.Models;
+using Newtonsoft.Json.Serialization;
+using SwatIncCrypto;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,11 +22,47 @@ namespace CD4.DataLibrary.DataAccess
                 (storedProcedure,parameter);
             //if username is not found, return isAuthentcated as false.
             if (result is null)
-            { return new AuthorizeDetailModel() { IsAuthenticated = false };}
-            //Hash the password and compare with returned hash
+            { 
+                return new AuthorizeDetailModel() 
+                {
+                    IsAuthenticated = false,
+                    Message = "Username or password is incorrect!"
+                };
+            }
             //if hash match returns true, fetch other details for return model.
-            //return
-            throw new NotImplementedException();
+            if (VerifyPassword(password, result.PasswordHash))
+            {
+                throw new NotImplementedException();
+            }
+            else
+            {
+                return new AuthorizeDetailModel()
+                {
+                    IsAuthenticated = false,
+                    Message = "Username or password is incorrect!"
+                };
+            }
+        }
+
+        /// <summary>
+        /// hashes the provided string password
+        /// </summary>
+        /// <param name="password">string password</param>
+        /// <returns>return SHA512 hash</returns>
+        private string HashPassword(string password)
+        {
+            return SwatIncCrypto.SwatIncCrypto.SwatIncSecurityCreateHashSHA512(password);
+        }
+
+        /// <summary>
+        /// Hashes the password and compares with the hash from database
+        /// </summary>
+        /// <param name="password">string password</param>
+        /// <param name="goodHash">Good hash from database</param>
+        /// <returns>boolean to indicate whether the password is a match</returns>
+        private bool VerifyPassword(string password, string goodHash)
+        {
+            return SwatIncCrypto.SwatIncCrypto.VerifyPassword(password, goodHash);
         }
     }
 }

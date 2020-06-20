@@ -10,9 +10,9 @@ namespace CD4.UI.Library.Model
     {
         public string UserRole { get; set; }
         public string Username { get; set; }
-        public string Firstname { get; set; }
-        public string Lastname { get; set; }
+        public string FullName { get; set; }
         public List<string> Claims { get; set; }
         public bool IsAuthenticated { get; set; }
+        public string Message { get; set; }
     }
 }
