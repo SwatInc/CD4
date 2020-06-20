@@ -1,5 +1,6 @@
 ﻿using CD4.UI.Library.ViewModel;
 using DevExpress.XtraEditors;
+using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -74,7 +75,15 @@ namespace CD4.UI.View
         private async void SignInUser(object sender, EventArgs e)
         {
             SetAuthenticatingUiState();
-            await viewModel.AuthenticateUser();
+            try
+            {
+                await viewModel.AuthenticateUser();
+            }
+            catch (Exception ex)
+            {
+                SetNormalUiState();
+                XtraMessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>
