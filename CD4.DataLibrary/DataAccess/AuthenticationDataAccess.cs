@@ -36,6 +36,7 @@ namespace CD4.DataLibrary.DataAccess
             }
             else
             {
+                //return IsAuthenticated as flase with message.
                 return new AuthorizeDetailModel()
                 {
                     IsAuthenticated = false,

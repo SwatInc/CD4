@@ -129,6 +129,7 @@
     <Build Include="auth\Tables\DeviceCodes.sql" />
     <Build Include="auth\Tables\PersistedGrants.sql" />
     <Build Include="auth\StoredProcedures\usp_GetHashForUsername.sql" />
+    <Build Include="auth\StoredProcedures\usp_GetUserRoleAndClaims.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
