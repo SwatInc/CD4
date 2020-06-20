@@ -21,6 +21,21 @@ namespace CD4.UI.View
             InitializeComponent();
             this.viewModel = viewModel;
             InitializeBinding();
+
+            //subscribe for events
+            simpleButtonChangePassword.Click += ChangePassword;
+        }
+
+        private async void ChangePassword(object sender, EventArgs e)
+        {
+            try
+            {
+                await viewModel.ChangePassword();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
         }
 
         private void InitializeBinding()
