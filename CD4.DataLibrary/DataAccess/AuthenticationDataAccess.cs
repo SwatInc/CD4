@@ -32,7 +32,10 @@ namespace CD4.DataLibrary.DataAccess
             //if hash match returns true, fetch other details for return model.
             if (VerifyPassword(password, result.PasswordHash))
             {
-                throw new NotImplementedException();
+                storedProcedure = "[dbo].[usp_GetUserRoleAndClaims]";
+                var queryResult = await SelectInsertOrUpdate<AuthorizeDetailModel, dynamic>(storedProcedure, parameter);
+                queryResult.IsAuthenticated = true;
+                return queryResult;
             }
             else
             {
