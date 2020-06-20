@@ -27,11 +27,8 @@ namespace CD4.UI.View
             //Set Ui State to normal
             SetNormalUiState();
 
-            //initialize caps locks status display on view
-            CheckCapsLockStatus();
-            this.viewModel = viewModel;
-
             //bind UI to view model
+            this.viewModel = viewModel;
             InitializeBinding();
 
             //subscribe to events
@@ -41,6 +38,9 @@ namespace CD4.UI.View
             KeyUp += AuthenticationView_KeyUp;
             SimpleButtonSignIn.Click += SignInUser;
             viewModel.AuthenticationStatusIndication += ViewModel_AuthenticationStatusIndication;
+
+            //initialize caps locks status display on view
+            CheckCapsLockStatus();
         }
 
         private void ViewModel_AuthenticationStatusIndication
