@@ -41,8 +41,16 @@ namespace CD4.UI.View
             //General Tab Buttons
             barButtonItemOrderEntry.ItemClick += OpenOrderEntryView;
             barButtonItemResultEntry.ItemClick += OpenResultEntryView;
+
+            //profile Tab Buttons
+            barButtonItemChangePassword.ItemClick += OpenChangePasswordView;
             #endregion
 
+        }
+
+        private void OpenChangePasswordView(object sender, ItemClickEventArgs e)
+        {
+            this.OpenMdiForm<ChangePasswordView>();
         }
 
         private void LoadAuthenticationUi()

@@ -42,10 +42,14 @@
             this.barButtonItemOrderEntry = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemResultEntry = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemStatistics = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemViewProfile = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemChangePassword = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPageGeneral = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageConfiguration = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             this.SuspendLayout();
@@ -66,13 +70,16 @@
             this.barButtonItemProfiles,
             this.barButtonItemOrderEntry,
             this.barButtonItemResultEntry,
-            this.barButtonItemStatistics});
+            this.barButtonItemStatistics,
+            this.barButtonItemViewProfile,
+            this.barButtonItemChangePassword});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 14;
+            this.ribbon.MaxItemId = 16;
             this.ribbon.Name = "ribbon";
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageGeneral,
-            this.ribbonPageConfiguration});
+            this.ribbonPageConfiguration,
+            this.ribbonPage1});
             this.ribbon.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbon.ShowDisplayOptionsMenuButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbon.ShowMoreCommandsButton = DevExpress.Utils.DefaultBoolean.False;
@@ -176,6 +183,20 @@
             this.barButtonItemStatistics.Name = "barButtonItemStatistics";
             this.barButtonItemStatistics.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
+            // barButtonItemViewProfile
+            // 
+            this.barButtonItemViewProfile.Caption = "View Profile";
+            this.barButtonItemViewProfile.Id = 14;
+            this.barButtonItemViewProfile.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
+            this.barButtonItemViewProfile.Name = "barButtonItemViewProfile";
+            // 
+            // barButtonItemChangePassword
+            // 
+            this.barButtonItemChangePassword.Caption = "Change Password";
+            this.barButtonItemChangePassword.Id = 15;
+            this.barButtonItemChangePassword.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem2.ImageOptions.SvgImage")));
+            this.barButtonItemChangePassword.Name = "barButtonItemChangePassword";
+            // 
             // ribbonPageGeneral
             // 
             this.ribbonPageGeneral.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -211,6 +232,20 @@
             this.ribbonPageGroup1.ItemLinks.Add(this.barButtonItemProfiles);
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Text = "Configuration";
+            // 
+            // ribbonPage1
+            // 
+            this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup3});
+            this.ribbonPage1.Name = "ribbonPage1";
+            this.ribbonPage1.Text = "Profile";
+            // 
+            // ribbonPageGroup3
+            // 
+            this.ribbonPageGroup3.ItemLinks.Add(this.barButtonItemViewProfile);
+            this.ribbonPageGroup3.ItemLinks.Add(this.barButtonItemChangePassword);
+            this.ribbonPageGroup3.Name = "ribbonPageGroup3";
+            this.ribbonPageGroup3.Text = "ribbonPageGroup3";
             // 
             // ribbonStatusBar
             // 
@@ -260,5 +295,9 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItemOrderEntry;
         private DevExpress.XtraBars.BarButtonItem barButtonItemResultEntry;
         private DevExpress.XtraBars.BarButtonItem barButtonItemStatistics;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemViewProfile;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemChangePassword;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup3;
     }
 }
