@@ -138,6 +138,14 @@ namespace CD4.UI.View
 
             }
 
+            //Check whether the form is authentication form
+            if (typeof(T) == typeof(AuthenticationView))
+            {
+                //cast T as authenticationView
+                var authView = (AuthenticationView)Convert.ChangeType(form, typeof(AuthenticationView));
+                //subscribe for the required event
+                authView.UserAuthorized += AuthView_UserAuthorized;
+            }
             //if parameter is not null, assign it to form tag
             form.Tag = parameter;
             form.MdiParent = this;
@@ -145,6 +153,12 @@ namespace CD4.UI.View
             
             form.FormClosed += Form_FormClosed;
 
+        }
+
+        private void AuthView_UserAuthorized(object sender, Library.Model.AuthorizeDetailEventArgs e)
+        {
+            //Todo: assign this via MainViewModel by databinding
+            barStaticItemUsernameAndRole.Caption = $"Welcome {e.FullName} ({e.UserRole})";
         }
 
         private void ResultView_OnGenerateReportByCin(object sender, string cin)

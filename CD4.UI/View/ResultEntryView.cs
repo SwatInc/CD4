@@ -36,7 +36,8 @@ namespace CD4.UI.View
             gridViewTests.FocusedRowChanged += SelectedTestChanged;
             dataRefreshTimer.Tick += RefreshViewData;
             simpleButtonReport.Click += SimpleButtonReport_Click;
-            
+
+            dateEdit1.EditValue = DateTime.Today;
         }
 
         private void SimpleButtonReport_Click(object sender, EventArgs e)

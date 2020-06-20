@@ -51,7 +51,10 @@
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
+            this.repositoryItemRatingControl1 = new DevExpress.XtraEditors.Repository.RepositoryItemRatingControl();
+            this.barStaticItemUsernameAndRole = new DevExpress.XtraBars.BarStaticItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRatingControl1)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbon
@@ -72,14 +75,17 @@
             this.barButtonItemResultEntry,
             this.barButtonItemStatistics,
             this.barButtonItemViewProfile,
-            this.barButtonItemChangePassword});
+            this.barButtonItemChangePassword,
+            this.barStaticItemUsernameAndRole});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 16;
+            this.ribbon.MaxItemId = 18;
             this.ribbon.Name = "ribbon";
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageGeneral,
             this.ribbonPageConfiguration,
             this.ribbonPage1});
+            this.ribbon.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
+            this.repositoryItemRatingControl1});
             this.ribbon.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbon.ShowDisplayOptionsMenuButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbon.ShowMoreCommandsButton = DevExpress.Utils.DefaultBoolean.False;
@@ -187,14 +193,14 @@
             // 
             this.barButtonItemViewProfile.Caption = "View Profile";
             this.barButtonItemViewProfile.Id = 14;
-            this.barButtonItemViewProfile.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
+            this.barButtonItemViewProfile.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemViewProfile.ImageOptions.SvgImage")));
             this.barButtonItemViewProfile.Name = "barButtonItemViewProfile";
             // 
             // barButtonItemChangePassword
             // 
             this.barButtonItemChangePassword.Caption = "Change Password";
             this.barButtonItemChangePassword.Id = 15;
-            this.barButtonItemChangePassword.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem2.ImageOptions.SvgImage")));
+            this.barButtonItemChangePassword.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemChangePassword.ImageOptions.SvgImage")));
             this.barButtonItemChangePassword.Name = "barButtonItemChangePassword";
             // 
             // ribbonPageGeneral
@@ -249,10 +255,22 @@
             // 
             // ribbonStatusBar
             // 
+            this.ribbonStatusBar.ItemLinks.Add(this.barStaticItemUsernameAndRole);
             this.ribbonStatusBar.Location = new System.Drawing.Point(0, 510);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
             this.ribbonStatusBar.Size = new System.Drawing.Size(1110, 31);
+            // 
+            // repositoryItemRatingControl1
+            // 
+            this.repositoryItemRatingControl1.AutoHeight = false;
+            this.repositoryItemRatingControl1.Name = "repositoryItemRatingControl1";
+            // 
+            // barStaticItemUsernameAndRole
+            // 
+            this.barStaticItemUsernameAndRole.Caption = "Welcome";
+            this.barStaticItemUsernameAndRole.Id = 17;
+            this.barStaticItemUsernameAndRole.Name = "barStaticItemUsernameAndRole";
             // 
             // MainView
             // 
@@ -270,6 +288,7 @@
             this.StatusBar = this.ribbonStatusBar;
             this.Text = "MainView";
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRatingControl1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -299,5 +318,7 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItemChangePassword;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup3;
+        private DevExpress.XtraBars.BarStaticItem barStaticItemUsernameAndRole;
+        private DevExpress.XtraEditors.Repository.RepositoryItemRatingControl repositoryItemRatingControl1;
     }
 }

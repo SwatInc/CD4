@@ -3,6 +3,7 @@ using DevExpress.XtraEditors;
 using Newtonsoft.Json;
 using System;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 using System.Windows.Forms;
 
 namespace CD4.UI.View
@@ -15,6 +16,7 @@ namespace CD4.UI.View
         private readonly IAuthenticationViewModel viewModel;
 
         //events 
+        public event EventHandler<Library.Model.AuthorizeDetailEventArgs> UserAuthorized;
         private event EventHandler<bool> CapsLockStatusChanged;
         
         public AuthenticationView(IAuthenticationViewModel viewModel)
@@ -48,6 +50,11 @@ namespace CD4.UI.View
         {
             if (e.IsAuthenticated)
             {
+                //unsubscribe from form closing event since there is not need to exit the application on form closing
+                FormClosing -= OnClosingSignIn;
+                //Raise an event indicating that the user is authorized.
+                UserAuthorized?.Invoke(this, e);
+                //close the authentication form
                 this.Close();
             }
             else

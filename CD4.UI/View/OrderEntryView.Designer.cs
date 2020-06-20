@@ -62,6 +62,7 @@
             this.lookUpEditTests = new DevExpress.XtraEditors.LookUpEdit();
             this.simpleButtonRemoveTest = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButtonSearchRequest = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlRequestData)).BeginInit();
             this.groupControlRequestData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditSampleReceived.Properties.CalendarTimeProperties)).BeginInit();
@@ -482,7 +483,7 @@
             // 
             // simpleButtonSearch
             // 
-            this.simpleButtonSearch.Location = new System.Drawing.Point(287, 345);
+            this.simpleButtonSearch.Location = new System.Drawing.Point(201, 345);
             this.simpleButtonSearch.Name = "simpleButtonSearch";
             this.simpleButtonSearch.Size = new System.Drawing.Size(98, 23);
             this.simpleButtonSearch.TabIndex = 1;
@@ -490,7 +491,7 @@
             // 
             // simpleButtonConfirm
             // 
-            this.simpleButtonConfirm.Location = new System.Drawing.Point(495, 345);
+            this.simpleButtonConfirm.Location = new System.Drawing.Point(409, 345);
             this.simpleButtonConfirm.Name = "simpleButtonConfirm";
             this.simpleButtonConfirm.Size = new System.Drawing.Size(98, 23);
             this.simpleButtonConfirm.TabIndex = 0;
@@ -551,7 +552,7 @@
             // 
             // simpleButtonRemoveTest
             // 
-            this.simpleButtonRemoveTest.Location = new System.Drawing.Point(183, 345);
+            this.simpleButtonRemoveTest.Location = new System.Drawing.Point(97, 345);
             this.simpleButtonRemoveTest.Name = "simpleButtonRemoveTest";
             this.simpleButtonRemoveTest.Size = new System.Drawing.Size(98, 23);
             this.simpleButtonRemoveTest.TabIndex = 6;
@@ -559,17 +560,26 @@
             // 
             // simpleButtonSearchRequest
             // 
-            this.simpleButtonSearchRequest.Location = new System.Drawing.Point(391, 345);
+            this.simpleButtonSearchRequest.Location = new System.Drawing.Point(305, 345);
             this.simpleButtonSearchRequest.Name = "simpleButtonSearchRequest";
             this.simpleButtonSearchRequest.Size = new System.Drawing.Size(98, 23);
             this.simpleButtonSearchRequest.TabIndex = 7;
             this.simpleButtonSearchRequest.Text = "Search Req. [ F7 ]";
+            // 
+            // simpleButton1
+            // 
+            this.simpleButton1.Location = new System.Drawing.Point(513, 345);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(122, 23);
+            this.simpleButton1.TabIndex = 8;
+            this.simpleButton1.Text = "Print Barcode [ F8 ]";
             // 
             // OrderEntryView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(765, 372);
+            this.Controls.Add(this.simpleButton1);
             this.Controls.Add(this.simpleButtonSearchRequest);
             this.Controls.Add(this.simpleButtonRemoveTest);
             this.Controls.Add(this.groupControlTestSelection);
@@ -658,5 +668,6 @@
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelRequest;
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelPatientData;
         private DevExpress.XtraEditors.SimpleButton simpleButtonSearchRequest;
+        private DevExpress.XtraEditors.SimpleButton simpleButton1;
     }
 }
