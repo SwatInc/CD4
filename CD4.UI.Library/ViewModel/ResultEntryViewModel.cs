@@ -28,7 +28,10 @@ namespace CD4.UI.Library.ViewModel
             CodifiedPhrasesForSelectedTest = new BindingList<CodifiedResultsModel>();
             AllCodifiedPhrases = new List<CodifiedResultsModel>();
             TempCodifiedPhrasesList = new List<CodifiedResultsModel>();
-            
+
+            //set the date to load worksheet from
+            LoadWorksheetFromDate = DateTime.Today;
+
             GenerateDemoData();
             this.workSheetDataAccess = workSheetDataAccess;
             this.mapper = mapper;
@@ -51,6 +54,16 @@ namespace CD4.UI.Library.ViewModel
         #endregion
 
         #region Public Properties
+        public DateTime LoadWorksheetFromDate
+        {
+            get => loadWorksheetFromDate; set
+            {
+                if(loadWorksheetFromDate == value) { return; }
+                loadWorksheetFromDate = value;
+                OnPropertyChanged();
+
+            }
+        }
         public List<RequestSampleModel> RequestData { get; set; }
         public BindingList<ResultModel> SelectedResultData { get; set; }
         private List<ResultModel> AllResultData { get; set; }
@@ -59,6 +72,7 @@ namespace CD4.UI.Library.ViewModel
         public BindingList<string> SelectedClinicalDetails { get; set; }
         public List<CodifiedResultsModel> AllCodifiedPhrases { get; set; }
         private List<CodifiedResultsModel> TempCodifiedPhrasesList;
+        private DateTime loadWorksheetFromDate;
         private readonly IWorkSheetDataAccess workSheetDataAccess;
         private readonly IMapper mapper;
         private readonly IResultDataAccess resultDataAccess;
@@ -153,7 +167,7 @@ namespace CD4.UI.Library.ViewModel
             foreach (var id in idsCodifiedPhrase)
             {
                 var isIsInt = int.TryParse(id, out int parsedId);
-                if (isIsInt) 
+                if (isIsInt)
                 {
                     var match = AllCodifiedPhrases.Find((c) => c.Id == parsedId);
                     if (match is null) continue;
@@ -270,20 +284,32 @@ namespace CD4.UI.Library.ViewModel
             #endregion
         }
 
-        private async Task GetWorkSheet()
+        public async Task GetWorkSheet()
         {
             var worksheet = await workSheetDataAccess.GetNotValidatedWorklistAsync
-                (new DateTime(2019, 05, 01));
+                (LoadWorksheetFromDate);
             await DisplayWorksheet(worksheet);
 
         }
 
         private async Task DisplayWorksheet(CD4.DataLibrary.Models.WorklistModel worklist)
         {
+            //return if PatientData is null
+            if (worklist.PatientData is null)
+            {
+                return;
+            }
+
             //map out request data
             foreach (var item in worklist.PatientData)
             {
                 RequestData.Add(mapper.Map<RequestSampleModel>(item));
+            }
+
+            //if TestResultData is null return
+            if (worklist.TestResultsData is null)
+            {
+                return;
             }
 
             //map out result data
@@ -293,6 +319,7 @@ namespace CD4.UI.Library.ViewModel
             }
 
         }
+
         #endregion
 
     }

@@ -56,11 +56,12 @@ namespace CD4.UI.View
             this.gridColumnResult = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemLookUpEditCodifiedPhrases = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.groupControlFunctions = new DevExpress.XtraEditors.GroupControl();
-            this.simpleButtonReport = new DevExpress.XtraEditors.SimpleButton();
-            this.dateEdit1 = new DevExpress.XtraEditors.DateEdit();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.simpleButtonLoadWorksheet = new DevExpress.XtraEditors.SimpleButton();
             this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.dateEditLoadWorksheetFrom = new DevExpress.XtraEditors.DateEdit();
+            this.simpleButtonReport = new DevExpress.XtraEditors.SimpleButton();
             this.labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).BeginInit();
             this.splitContainerControlPatient.SuspendLayout();
@@ -78,17 +79,9 @@ namespace CD4.UI.View
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditCodifiedPhrases)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlFunctions)).BeginInit();
             this.groupControlFunctions.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEditLoadWorksheetFrom.Properties.CalendarTimeProperties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEditLoadWorksheetFrom.Properties)).BeginInit();
             this.SuspendLayout();
-            // 
-            // labelControlNationalId
-            // 
-            this.labelControlNationalId.Location = new System.Drawing.Point(12, 50);
-            this.labelControlNationalId.Name = "labelControlNationalId";
-            this.labelControlNationalId.Size = new System.Drawing.Size(49, 13);
-            this.labelControlNationalId.TabIndex = 1;
-            this.labelControlNationalId.Text = "NationalId";
             // 
             // labelControlPatientName
             // 
@@ -105,6 +98,14 @@ namespace CD4.UI.View
             labelControlPatientName.Size = new System.Drawing.Size(118, 21);
             labelControlPatientName.TabIndex = 0;
             labelControlPatientName.Text = "PATIENT NAME";
+            // 
+            // labelControlNationalId
+            // 
+            this.labelControlNationalId.Location = new System.Drawing.Point(12, 50);
+            this.labelControlNationalId.Name = "labelControlNationalId";
+            this.labelControlNationalId.Size = new System.Drawing.Size(49, 13);
+            this.labelControlNationalId.TabIndex = 1;
+            this.labelControlNationalId.Text = "NationalId";
             // 
             // labelControlAgeSex
             // 
@@ -365,10 +366,11 @@ namespace CD4.UI.View
             // 
             // groupControlFunctions
             // 
+            this.groupControlFunctions.Controls.Add(this.simpleButtonLoadWorksheet);
             this.groupControlFunctions.Controls.Add(this.comboBox1);
             this.groupControlFunctions.Controls.Add(this.label2);
             this.groupControlFunctions.Controls.Add(this.label1);
-            this.groupControlFunctions.Controls.Add(this.dateEdit1);
+            this.groupControlFunctions.Controls.Add(this.dateEditLoadWorksheetFrom);
             this.groupControlFunctions.Controls.Add(this.simpleButtonReport);
             this.groupControlFunctions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControlFunctions.Location = new System.Drawing.Point(0, 0);
@@ -377,43 +379,13 @@ namespace CD4.UI.View
             this.groupControlFunctions.TabIndex = 1;
             this.groupControlFunctions.Text = "Functions";
             // 
-            // simpleButtonReport
+            // simpleButtonLoadWorksheet
             // 
-            this.simpleButtonReport.Location = new System.Drawing.Point(752, 33);
-            this.simpleButtonReport.Name = "simpleButtonReport";
-            this.simpleButtonReport.Size = new System.Drawing.Size(75, 23);
-            this.simpleButtonReport.TabIndex = 0;
-            this.simpleButtonReport.Text = "Report";
-            // 
-            // dateEdit1
-            // 
-            this.dateEdit1.EditValue = null;
-            this.dateEdit1.Location = new System.Drawing.Point(12, 45);
-            this.dateEdit1.Name = "dateEdit1";
-            this.dateEdit1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit1.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.dateEdit1.Size = new System.Drawing.Size(175, 20);
-            this.dateEdit1.TabIndex = 1;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 29);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Select Sample date";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(192, 29);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Select Sample Status";
+            this.simpleButtonLoadWorksheet.Location = new System.Drawing.Point(405, 43);
+            this.simpleButtonLoadWorksheet.Name = "simpleButtonLoadWorksheet";
+            this.simpleButtonLoadWorksheet.Size = new System.Drawing.Size(108, 23);
+            this.simpleButtonLoadWorksheet.TabIndex = 6;
+            this.simpleButtonLoadWorksheet.Text = "Load Worksheet";
             // 
             // comboBox1
             // 
@@ -428,6 +400,44 @@ namespace CD4.UI.View
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(190, 21);
             this.comboBox1.TabIndex = 5;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(192, 29);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(107, 13);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Select Sample Status";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 29);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(98, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Select Sample date";
+            // 
+            // dateEditLoadWorksheetFrom
+            // 
+            this.dateEditLoadWorksheetFrom.EditValue = null;
+            this.dateEditLoadWorksheetFrom.Location = new System.Drawing.Point(12, 45);
+            this.dateEditLoadWorksheetFrom.Name = "dateEditLoadWorksheetFrom";
+            this.dateEditLoadWorksheetFrom.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dateEditLoadWorksheetFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dateEditLoadWorksheetFrom.Size = new System.Drawing.Size(175, 20);
+            this.dateEditLoadWorksheetFrom.TabIndex = 1;
+            // 
+            // simpleButtonReport
+            // 
+            this.simpleButtonReport.Location = new System.Drawing.Point(752, 33);
+            this.simpleButtonReport.Name = "simpleButtonReport";
+            this.simpleButtonReport.Size = new System.Drawing.Size(75, 23);
+            this.simpleButtonReport.TabIndex = 0;
+            this.simpleButtonReport.Text = "Report";
             // 
             // ResultEntryView
             // 
@@ -455,8 +465,8 @@ namespace CD4.UI.View
             ((System.ComponentModel.ISupportInitialize)(this.groupControlFunctions)).EndInit();
             this.groupControlFunctions.ResumeLayout(false);
             this.groupControlFunctions.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties.CalendarTimeProperties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dateEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEditLoadWorksheetFrom.Properties.CalendarTimeProperties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dateEditLoadWorksheetFrom.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -493,7 +503,8 @@ namespace CD4.UI.View
         private SimpleButton simpleButtonReport;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
-        private DateEdit dateEdit1;
+        private DateEdit dateEditLoadWorksheetFrom;
         private System.Windows.Forms.ComboBox comboBox1;
+        private SimpleButton simpleButtonLoadWorksheet;
     }
 }

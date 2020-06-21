@@ -1,19 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using CD4.UI.Library.ViewModel;
 using DevExpress.XtraGrid.Views.Base;
 using CD4.UI.Library.Model;
-using DevExpress.XtraBars;
-using System.Timers;
-using System.Diagnostics;
 
 namespace CD4.UI.View
 {
@@ -36,8 +26,20 @@ namespace CD4.UI.View
             gridViewTests.FocusedRowChanged += SelectedTestChanged;
             dataRefreshTimer.Tick += RefreshViewData;
             simpleButtonReport.Click += SimpleButtonReport_Click;
+            simpleButtonLoadWorksheet.Click += LoadWorkSheet;
+        }
 
-            dateEdit1.EditValue = DateTime.Today;
+        private async void LoadWorkSheet(object sender, EventArgs e)
+        {
+            try
+            {
+                await _viewModel.GetWorkSheet();
+            }
+            catch (Exception ex)
+            {
+
+                XtraMessageBox.Show(ex.Message);
+            }
         }
 
         private void SimpleButtonReport_Click(object sender, EventArgs e)
@@ -62,7 +64,6 @@ namespace CD4.UI.View
             dataRefreshTimer.Enabled = false;
             gridControlSamples.RefreshDataSource();
         }
-
 
         private void CopyCinToClipBoard(object sender, EventArgs e)
         {
@@ -152,6 +153,10 @@ namespace CD4.UI.View
             repositoryItemLookUpEditCodifiedPhrases.DataSource = _viewModel.CodifiedPhrasesForSelectedTest;
             repositoryItemLookUpEditCodifiedPhrases.DisplayMember = nameof(CodifiedResultsModel.CodifiedValue);
             repositoryItemLookUpEditCodifiedPhrases.ValueMember = nameof(CodifiedResultsModel.CodifiedValue);
+            #endregion
+
+            #region FiltersAndFunctions
+            dateEditLoadWorksheetFrom.DataBindings.Add(new Binding("EditValue", _viewModel, nameof(_viewModel.LoadWorksheetFromDate)));
             #endregion
         }
 

@@ -1,4 +1,5 @@
 ﻿using CD4.UI.Library.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -12,8 +13,11 @@ namespace CD4.UI.Library.ViewModel
         RequestSampleModel SelectedRequestData { get; set; }
         Task SetSelectedSampleAsync(RequestSampleModel requestSampleData);
         Task SetTestCodifiedPhrasesAsync(ResultModel selectedTest);
+        Task GetWorkSheet();
+
         BindingList<CodifiedResultsModel> CodifiedPhrasesForSelectedTest { get; set; }
         BindingList<string> SelectedClinicalDetails { get; set; }
+        DateTime LoadWorksheetFromDate { get; set; }
 
         event PropertyChangedEventHandler PropertyChanged;
 
