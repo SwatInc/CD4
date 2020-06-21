@@ -27,6 +27,7 @@ namespace CD4.UI.View
             dataRefreshTimer.Tick += RefreshViewData;
             simpleButtonReport.Click += SimpleButtonReport_Click;
             simpleButtonLoadWorksheet.Click += LoadWorkSheet;
+            _viewModel.RequestDataRefreshed += RefreshViewData;
         }
 
         private async void LoadWorkSheet(object sender, EventArgs e)

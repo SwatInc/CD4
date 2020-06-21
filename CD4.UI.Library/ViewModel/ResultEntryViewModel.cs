@@ -15,6 +15,10 @@ namespace CD4.UI.Library.ViewModel
 {
     public class ResultEntryViewModel : INotifyPropertyChanged, IResultEntryViewModel
     {
+        #region Events
+        //event that notifies user interface that new data has been loaded and that datagrids needs to be refreshed.
+        public event EventHandler RequestDataRefreshed;
+        #endregion
 
         #region Default Constructor
         public ResultEntryViewModel
@@ -323,6 +327,8 @@ namespace CD4.UI.Library.ViewModel
                 AllResultData.Add(mapper.Map<ResultModel>(item));
             }
 
+            //notify UI that data has refreshed, so that UI knows to refresh datagrids
+            RequestDataRefreshed?.Invoke(this, EventArgs.Empty);
         }
 
         #endregion

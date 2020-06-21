@@ -20,6 +20,6 @@ namespace CD4.UI.Library.ViewModel
         DateTime LoadWorksheetFromDate { get; set; }
 
         event PropertyChangedEventHandler PropertyChanged;
-
+        event EventHandler RequestDataRefreshed;
     }
 }
