@@ -31,7 +31,7 @@ BEGIN
         SELECT [TC].[AnalysisRequestId],STRING_AGG(ISNULL([CD].[Detail],''),',') 
         FROM @TempCins [TC]
         LEFT JOIN [dbo].[AnalysisRequest_ClinicalDetail] [ACD] ON [TC].[AnalysisRequestId] = [ACD].[AnalysisRequestId]
-        LEFT JOIN [dbo].[ClinicalDetail] [CD] ON [ACD].[ClinicalDetailsId] = [CD].Id
+        LEFT JOIN [dbo].[ClinicalDetail] [CD] ON [ACD].[ClinicalDetailsId] = [CD].[Id]
         GROUP BY [TC].[AnalysisRequestId];
 
 		--fetch request data and join with clinical details :)
@@ -65,7 +65,6 @@ BEGIN
                [Mask] 
 	           FROM [dbo].[WorkSheetResultData]
 	           WHERE [Cin] IN (SELECT [Cin] FROM @TempCins);
-
 
 		BREAK;  
 	END
