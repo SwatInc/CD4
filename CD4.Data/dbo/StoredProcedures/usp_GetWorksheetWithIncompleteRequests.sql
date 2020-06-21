@@ -23,7 +23,7 @@ BEGIN
         INSERT INTO @TempCins
         SELECT DISTINCT([S].[Cin]),[S].[AnalysisRequestId] 
         FROM [dbo].[Sample] [S] 
-        INNER JOIN dbo.Result r ON r.Sample_Cin = S.cin
+        INNER JOIN dbo.Result r ON r.Sample_Cin = S.Cin
         WHERE s.ReceivedDate > @StartDateInUse AND (r.Result IS NULL OR r.Result = '');
 
         --Get Clinical details
