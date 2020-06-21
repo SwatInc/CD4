@@ -301,8 +301,11 @@ namespace CD4.UI.Library.ViewModel
             }
 
             //map out request data
+            //Clear current request data if any...
+            RequestData.Clear();
             foreach (var item in worklist.PatientData)
             {
+                //and map new data from database into the requestData list
                 RequestData.Add(mapper.Map<RequestSampleModel>(item));
             }
 
@@ -312,7 +315,9 @@ namespace CD4.UI.Library.ViewModel
                 return;
             }
 
-            //map out result data
+            //Clear Test result data if any...
+            AllResultData.Clear();
+            //map out new result data
             foreach (var item in worklist.TestResultsData)
             {
                 AllResultData.Add(mapper.Map<ResultModel>(item));
