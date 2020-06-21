@@ -485,7 +485,7 @@ namespace CD4.UI.Library.ViewModel
             await RepopulateIslandDatasource(SelectedAtoll);
             var island = await Task.Run(() =>
             {
-                var result = Islands.SingleOrDefault((i) => i.Island == results.Island);
+                var result = Islands.FirstOrDefault((i) => i.Island == results.Island);
                 return result is null ? string.Empty : result.Island;
             });
 
