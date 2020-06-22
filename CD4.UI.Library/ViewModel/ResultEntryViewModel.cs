@@ -298,15 +298,21 @@ namespace CD4.UI.Library.ViewModel
 
         private async Task DisplayWorksheet(CD4.DataLibrary.Models.WorklistModel worklist)
         {
+            //Clear current request data if any...
+            RequestData.Clear();
+            //Clear Test result data if any...
+            AllResultData.Clear();
+            //Clear Selected Result data if any..
+            SelectedResultData.Clear();
+
             //return if PatientData is null
             if (worklist.PatientData is null)
             {
+                RequestDataRefreshed?.Invoke(this, EventArgs.Empty);
                 return;
             }
 
             //map out request data
-            //Clear current request data if any...
-            RequestData.Clear();
             foreach (var item in worklist.PatientData)
             {
                 //and map new data from database into the requestData list
@@ -319,8 +325,6 @@ namespace CD4.UI.Library.ViewModel
                 return;
             }
 
-            //Clear Test result data if any...
-            AllResultData.Clear();
             //map out new result data
             foreach (var item in worklist.TestResultsData)
             {

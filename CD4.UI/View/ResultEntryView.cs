@@ -64,6 +64,7 @@ namespace CD4.UI.View
         {
             dataRefreshTimer.Enabled = false;
             gridControlSamples.RefreshDataSource();
+            gridControlTests.RefreshDataSource();
         }
 
         private void CopyCinToClipBoard(object sender, EventArgs e)

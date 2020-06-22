@@ -19,14 +19,15 @@ BEGIN
 
         DECLARE @TempCins TABLE ([Cin] VARCHAR(20) PRIMARY KEY, [AnalysisRequestId] INT NOT NULL);
 		DECLARE @TempClinicalDetails TABLE([AnalysisRequestId] INT PRIMARY KEY, [Detail] VARCHAR(100) NULL);
-        --get distinct Cins
+        
+        -- get distinct Cins
         INSERT INTO @TempCins
         SELECT DISTINCT([S].[Cin]),[S].[AnalysisRequestId] 
         FROM [dbo].[Sample] [S] 
         INNER JOIN dbo.Result r ON r.Sample_Cin = S.Cin
         WHERE s.ReceivedDate > @StartDateInUse AND (r.Result IS NULL OR r.Result = '');
 
-        --Get Clinical details
+        -- Get Clinical details
         INSERT INTO @TempClinicalDetails
         SELECT [TC].[AnalysisRequestId],STRING_AGG(ISNULL([CD].[Detail],''),',') 
         FROM @TempCins [TC]
@@ -34,7 +35,7 @@ BEGIN
         LEFT JOIN [dbo].[ClinicalDetail] [CD] ON [ACD].[ClinicalDetailsId] = [CD].[Id]
         GROUP BY [TC].[AnalysisRequestId];
 
-		--fetch request data and join with clinical details :)
+		-- fetch request data and join with clinical details :)
 		SELECT DISTINCT([RW].[AnalysisRequestId]) AS [Id],
                [RW].[AnalysisRequestId],
                [RW].[Cin],
@@ -54,8 +55,7 @@ BEGIN
         INNER JOIN @TempClinicalDetails [C] ON [RW].[AnalysisRequestId] = [C].[AnalysisRequestId]
 		WHERE [RW].[ReceivedDate] > @StartDateInUse;
 
-		--fetch results data which is not complete(has no results).
-
+		-- fetch results data which is not complete(has no results).
         SELECT [Id],
                [AnalysisRequestId],
                [Cin],
