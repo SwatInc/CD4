@@ -25,7 +25,7 @@ BEGIN
         SELECT DISTINCT([S].[Cin]),[S].[AnalysisRequestId] 
         FROM [dbo].[Sample] [S] 
         INNER JOIN dbo.Result r ON r.Sample_Cin = S.Cin
-        WHERE s.ReceivedDate > @StartDateInUse AND (r.Result IS NULL OR r.Result = '');
+        WHERE s.ReceivedDate >= @StartDateInUse AND (r.Result IS NULL OR r.Result = '');
 
         -- Get Clinical details
         INSERT INTO @TempClinicalDetails
@@ -53,7 +53,7 @@ BEGIN
                ,ISNULL([C].[Detail],'') AS [ClinicalDetails]
 		FROM [dbo].[RequestsWithTestsWithoutResults] [RW] WITH (NOEXPAND)
         INNER JOIN @TempClinicalDetails [C] ON [RW].[AnalysisRequestId] = [C].[AnalysisRequestId]
-		WHERE [RW].[ReceivedDate] > @StartDateInUse;
+		WHERE [RW].[ReceivedDate] >= @StartDateInUse;
 
 		-- fetch results data which is not complete(has no results).
         SELECT [Id],
