@@ -41,16 +41,17 @@ namespace CD4.DataLibrary.DataAccess
 
 
             #region Request Rejection Criteria - Primary
-
+            //Requests with no Cin are invalid
             if (string.IsNullOrEmpty(request.Cin))
             {
                 throw new ArgumentNullException("CIN", "COVID Identification number cannot be null! Analysis request not saved!");
             }
+            //Requests with not tests are not valid.
             if (request.Tests.Count == 0)
             {
                 throw new ArgumentException("A minimum of one test is mandatory to confirm the request!");
             }
-
+            //Checking whether the current request exists on the database. If it does, any edits for the request should not change the patient to a new patient.
             var PatientDataValidityForAnalysisRequest = await IsPatientDifferentForAnalysisRequest(request);
             //if the data update criteria for existing request fails, throw an exception saying so...
             if (PatientDataValidityForAnalysisRequest.IsAnalysisRequestsPatientChanged)
@@ -63,27 +64,37 @@ namespace CD4.DataLibrary.DataAccess
             #endregion
 
             #region Fetch Present data
-
+            //load the sample from database, if exists
             var requestAndSample = await GetSampleByIdAsync(request.Cin);
+            //fetch patient data specific to the now handlng request
             PatientModel patient = (await patientData.GetPatientByNidPp(request.NationalIdPassport)).FirstOrDefault();
 
+            //if the request and sample exist on the database...
             if (requestAndSample != null)
             {
+                //Get clinical details saved on the database for request
                 clinicalDetails = await clinicalDetailsData.GetClinicalDetailsByRequestId(requestAndSample.RequestId);
+                //Get requested tests saved on the database
                 databaseTestsForRequest = await GetRequestedTestsByRequestIdAsync(requestAndSample.RequestId);
             }
 
             #endregion
 
             #region Determine request, sample and , clinical details status | Determine Tests to insert / delete
-
+            //Checking whether the current handling request is new, clean, or dirty.
             requestSampleStatus = AssesRequestAndSampleStatus(requestAndSample, request);
+            //checking whether the patient for the current request is new, clean or dirty.
             patientStatus = AssesPatientStatus(patient, request);
 
+            //if the request and sample was previously saved on database....
             if (requestAndSample != null)
             {
+                //determine the status of clinical details... New, Clean or dirty.
                 clinicalDetailsStatus = AssesClinicalDetailStatus(request, clinicalDetails);
+                //Generate a list of tests to insert for the request
                 TestsToInsert = GetTestsToInsert(request.Tests, databaseTestsForRequest);
+                //Make a list of tests for the request that exists on the database but does not exist on the request.
+                //NOTE: If no results exists for these tests, they will be removed.
                 TestsToRemove = GetTestsToRemove(request.Tests, databaseTestsForRequest);
 
             }
@@ -301,6 +312,7 @@ namespace CD4.DataLibrary.DataAccess
             return patient.Id;
         }
 
+
         private RequestDataStatus AssesClinicalDetailStatus
             (AnalysisRequestDataModel request, List<ClinicalDetailsDatabaseModel> clinicalDetails)
         {
@@ -348,6 +360,7 @@ namespace CD4.DataLibrary.DataAccess
         private RequestDataStatus AssesRequestAndSampleStatus
             (RequestAndSampleDatabaseModel requestAndSample, AnalysisRequestDataModel request)
         {
+            //Setting an initial status of new
             var status = RequestDataStatus.New;
             if (requestAndSample != null)
             {
@@ -384,12 +397,22 @@ namespace CD4.DataLibrary.DataAccess
 
         }
 
+        /// <summary>
+        /// Tests to insert: Make a list of tests that does not exist on the database as requested, but exists on current request. 
+        /// </summary>
+        /// <param name="userInputList">The test list from current processing request provided by user. This might have been edited by user</param>
+        /// <param name="requestedTestsOnDatabase">The list of tests that exists on the database for the request</param>
+        /// <returns></returns>
         private List<TestsModel> GetTestsToInsert(List<TestsModel> userInputList, List<ResultsDatabaseModel> requestedTestsOnDatabase)
         {
+            //if current processing list does not have any tests, there is nothing to insert.
             if (userInputList is null) return new List<TestsModel>();
+            //if no tests exist on the database for the request, insert the whole test list from current processing request.
             if (requestedTestsOnDatabase is null) return userInputList;
 
+            //doing the almost the same as above.
             if (userInputList.Count == 0 || requestedTestsOnDatabase.Count == 0) return userInputList;
+
 
             var testInsertList = new List<TestsModel>();
             foreach (var test in userInputList)
