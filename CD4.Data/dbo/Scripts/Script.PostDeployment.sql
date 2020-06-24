@@ -278,11 +278,11 @@ DECLARE @NumericId int;
 SELECT @CodifiedId =  [Id] FROM [dbo].[ResultDataType] [r] WHERE [r].[Name] = 'CODIFIED'; 
 SELECT @NumericId =  [Id] FROM [dbo].[ResultDataType] [r] WHERE [r].[Name] = 'NUMERIC'; 
 
-INSERT INTO [dbo].[Test]([Description],[Mask],[Reportable],[ResultDataTypeId]) VALUES
-('E Gene','##.##',1,@NumericId),
-('EAV (Internal Control)','##.##',1,@NumericId),
-('RdRP Gene','##.##',1,@NumericId),
-('SARS-CoV-2 Result','1|2',1,@CodifiedId);
+INSERT INTO [dbo].[Test]([Discipline],[Description],[Mask],[Reportable],[ResultDataTypeId]) VALUES
+('MOLECULAR BIOLOGY','E Gene','##.##',1,@NumericId),
+('MOLECULAR BIOLOGY','EAV (Internal Control)','##.##',1,@NumericId),
+('MOLECULAR BIOLOGY','RdRP Gene','##.##',1,@NumericId),
+('MOLECULAR BIOLOGY','SARS-CoV-2 Result','1|2',1,@CodifiedId);
 
 INSERT INTO [dbo].[Profiles]([Description]) VALUES
 ('SARS CoV Profile');
