@@ -69,6 +69,7 @@
     <Compile Include="DataAccess\ResultDataAccess.cs" />
     <Compile Include="DataAccess\SampleDataAccess.cs" />
     <Compile Include="DataAccess\StaticDataDataAccess.cs" />
+    <Compile Include="DataAccess\StatusDataAccess.cs" />
     <Compile Include="DataAccess\WorkSheetDataAccess.cs" />
     <Compile Include="DiskIO\Read.cs" />
     <Compile Include="Helpers\DateHelper.cs" />

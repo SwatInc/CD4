@@ -43,7 +43,13 @@ namespace CD4.DataLibrary.DataAccess
         public async Task<bool> InsertUpdateResultByResultIdAsync(int resultId, string result)
         {
             var storedProcedure = "[dbo].[usp_UpdateResultByResultId]";
-            var parameter = new { Result = result, ResultId = resultId };
+            var parameter = new { Result = result, ResultId = resultId, StatusId = 4 }; //the statusId = 4 on database must be the Key for dbo.Status.Status = "ToValidate". FETCH THIS.
+
+            /*Todo
+             * Make a database query to get Id for Status equivalent to "ToValidate".
+             * Also get the sample status in the above query
+             * When updating the result, Set the sample status too, if required.
+             */
 
             var output = await SelectInsertOrUpdate<bool, dynamic>(storedProcedure, parameter);
             return output;
