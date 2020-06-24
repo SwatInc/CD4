@@ -345,6 +345,11 @@ VALUES
 ('1','OrderEntryView'),
 ('1','ResultEntryView');
 
+--insert status table data
+INSERT INTO [dbo].[Status] ([Status])
+VALUES
+('Registered'),('Collected'),('Received'),('ToValidate'),('Validated'),('Processing'),('Rejected');
+
 ----Get a patient Id
 --DECLARE @PatientId int;
 --DECLARE @ScientistId int;
