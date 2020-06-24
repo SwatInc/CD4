@@ -16,7 +16,7 @@ namespace CD4.DataLibrary.Models
     {
         #region Default Constructor
         public RequestSampleAndClinicalDetailsInsertDatabaseModel
-            (int patientId, AnalysisRequestDataModel request)
+            (int patientId, AnalysisRequestDataModel request, IStatusDataAccess statusData)
         {
             PatientId = patientId;
             EpisodeNumber = request.EpisodeNumber;
@@ -27,7 +27,7 @@ namespace CD4.DataLibrary.Models
             CollectionDate = DateHelper.GetCD4FormatDate(request.SampleCollectionDate);
             ReceivedDate = DateHelper.GetCD4FormatDate(request.SampleReceivedDate);
             CommaDelimitedClinicalDetailsIds = ClinicalDetailsDataAccess.GetCsvClinicalDetails(request.ClinicalDetails);
-            RequestedTestData = ResultDataAccess.GetTestsTable(request.Tests, request.Cin);
+            RequestedTestData =  ResultDataAccess.GetTestsTableAsync(request.Tests, request.Cin, statusData).GetAwaiter().GetResult();
         }
 
         #endregion

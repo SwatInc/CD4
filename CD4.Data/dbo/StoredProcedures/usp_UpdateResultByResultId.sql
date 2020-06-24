@@ -1,6 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[usp_UpdateResultByResultId]
 	@Result VARCHAR(50),
-	@ResultId int
+	@ResultId int,
+	@StatusId int
 AS
 BEGIN
 SET NOCOUNT ON;
@@ -11,7 +12,8 @@ DECLARE @ReturnValue bit = 0;
 
 			UPDATE [dbo].[Result]
 			SET [Result] = @Result,
-				[ResultDate] = GETDATE()
+				[ResultDate] = GETDATE(),
+				[StatusId] = @StatusId
 			WHERE [Id] = @ResultId;
 		
 		COMMIT TRANSACTION;

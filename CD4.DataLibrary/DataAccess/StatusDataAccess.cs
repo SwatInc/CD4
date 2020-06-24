@@ -13,7 +13,7 @@ namespace CD4.DataLibrary.DataAccess
         /// </summary>
         /// <param name="status">The status for which the Id is to be queried.</param>
         /// <returns>integer representing Status Id for the specified status</returns>
-        public async Task<int> GetStatusIdByStatus(string status)
+        private async Task<int> GetStatusIdByStatusAsync(string status)
         {
             //the stored procedure name to call
             var storedProcedure = "usp_GetStatusIdByStatus";
@@ -23,6 +23,28 @@ namespace CD4.DataLibrary.DataAccess
             //call the base class to execute the stored procedure.
             var output = await SelectInsertOrUpdate<int, dynamic>(storedProcedure, parameter);
             return output;
+        }
+
+        /// <summary>
+        /// Get status table PK corresponding to the status "Registered"
+        /// Throws an exception if the status is not found on the database
+        /// </summary>
+        /// <param name="statusData">Instance of static data class</param>
+        /// <returns>Integer indicating statusId for status "Registered"</returns>
+        public int GetRegisteredStatusId()
+        {
+            return 1;
+        }
+
+        /// <summary>
+        /// Get status table PK corresponding to the status "ToValidate"
+        /// Throws an exception if the status is not found on the database
+        /// </summary>
+        /// <param name="statusData">Instance of static data class</param>
+        /// <returns>Integer indicating statusId for status "ToValidate"</returns>
+        public int GetToValidateStatusId()
+        {
+            return 4;
         }
     }
 }

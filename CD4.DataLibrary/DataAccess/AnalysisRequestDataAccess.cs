@@ -14,16 +14,19 @@ namespace CD4.DataLibrary.DataAccess
         private readonly IClinicalDetailsDataAccess clinicalDetailsData;
         private readonly ISampleDataAccess sampleDataAccess;
         private readonly IResultDataAccess resultDataAccess;
+        private readonly IStatusDataAccess statusDataAccess;
 
         public AnalysisRequestDataAccess(IPatientDataAccess patientData,
             IClinicalDetailsDataAccess clinicalDetailsData,
             ISampleDataAccess sampleDataAccess,
-            IResultDataAccess resultDataAccess)
+            IResultDataAccess resultDataAccess,
+            IStatusDataAccess statusDataAccess)
         {
             this.patientData = patientData;
             this.clinicalDetailsData = clinicalDetailsData;
             this.sampleDataAccess = sampleDataAccess;
             this.resultDataAccess = resultDataAccess;
+            this.statusDataAccess = statusDataAccess;
         }
 
         public async Task<bool> ConfirmRequestAsync(AnalysisRequestDataModel request)
@@ -284,7 +287,7 @@ namespace CD4.DataLibrary.DataAccess
         private async Task<bool> InsertNewCompleteRequest
             (int patientId, AnalysisRequestDataModel request)
         {
-            var insertData = new RequestSampleAndClinicalDetailsInsertDatabaseModel(patientId, request);
+            var insertData = new RequestSampleAndClinicalDetailsInsertDatabaseModel(patientId, request, statusDataAccess);
 
             if (string.IsNullOrEmpty(insertData.CommaDelimitedClinicalDetailsIds))
             {

@@ -328,6 +328,23 @@ INSERT INTO [dbo].[Patient]
 ('Aminath Hussain','A987654','19800214',@MaleGenderId,@SHithadhooId,@MaldivesCountryId,'Some Some Address','973465347');
 
 
+--insert user: Bismillah.123!
+INSERT INTO [dbo].[Users]([Id],[UserName],[Fullname],[PasswordHash],[AccessFailedCount],[EmailConfirmed],[PhoneNumberConfirmed],[TwoFactorEnabled],[LockoutEnabled]) VALUES
+('1','swatincadmin','Ibrahim Hussain','SHA512:88:lhOgh7mA9H1w9L9wu6FoVPUiK+sYR4Tr5A==:8Y2OSxfDTkF9zcplYHlU5LZ/zM3cvpycvAWeEbUxQeR1I3/mCxb7tLt5bBLl2FWJmPEubhYyH0s9tFP60Wo3EQ==',0,0,0,0,0);
+
+--insert roles
+INSERT INTO [dbo].[Roles] ([Id],[Name]) VALUES('1','Swat, Inc Developer');
+
+--setup user roles
+INSERT INTO [dbo].[UserRoles] ([UserId],[RoleId]) VALUES ('1','1');
+
+--setup user claims
+INSERT INTO [dbo].[RoleClaims] ([RoleId],[ClaimValue])
+VALUES
+('1','ribbon'),
+('1','OrderEntryView'),
+('1','ResultEntryView');
+
 ----Get a patient Id
 --DECLARE @PatientId int;
 --DECLARE @ScientistId int;

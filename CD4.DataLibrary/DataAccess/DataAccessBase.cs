@@ -85,8 +85,16 @@ namespace CD4.DataLibrary.DataAccess
         {
             using (IDbConnection connection = new SqlConnection(helper.GetConnectionString()))
             {
-                return await connection.QueryFirstOrDefaultAsync<T>
-                    (storedProcedure,parameters,commandType: CommandType.StoredProcedure);
+                try
+                {
+                    return await connection.QueryFirstOrDefaultAsync<T>
+                        (storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+                }
+                catch (Exception ex)
+                {
+
+                    throw;
+                }
 
             }
 
