@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CD4.DataLibrary.DataAccess
 {
-    public class StatusDataAccess: DataAccessBase
+    public class StatusDataAccess : DataAccessBase, IStatusDataAccess
     {
         /// <summary>
         /// Fetches statusId for the specified status string from the database

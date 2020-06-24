@@ -51,6 +51,9 @@ namespace CD4.DataLibrary.DataAccess
              * When updating the result, Set the sample status too, if required.
              */
 
+            StatusDataAccess dataAccess = new StatusDataAccess();
+            var id  = await dataAccess.GetStatusIdByStatus("ToValidate");
+
             var output = await SelectInsertOrUpdate<bool, dynamic>(storedProcedure, parameter);
             return output;
         }

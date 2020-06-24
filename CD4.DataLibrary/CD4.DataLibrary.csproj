@@ -63,6 +63,7 @@
     <Compile Include="DataAccess\IResultDataAccess.cs" />
     <Compile Include="DataAccess\ISampleDataAccess.cs" />
     <Compile Include="DataAccess\IStaticDataDataAccess.cs" />
+    <Compile Include="DataAccess\IStatusDataAccess.cs" />
     <Compile Include="DataAccess\IWorkSheetDataAccess.cs" />
     <Compile Include="DataAccess\PatientDataAccess.cs" />
     <Compile Include="DataAccess\ReportsDataAccess.cs" />
