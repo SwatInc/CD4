@@ -8,6 +8,10 @@ namespace CD4.DataLibrary.Models
 {
     public class AnalysisRequestDataModel
     {
+        public AnalysisRequestDataModel()
+        {
+            StatusId = 1;
+        }
         #region Request Fields
         public string Cin { get; set; }
         public int SiteId { get; set; }
@@ -37,6 +41,7 @@ namespace CD4.DataLibrary.Models
         public List<ClinicalDetailsSelectionModel> ClinicalDetails { get; set; }
         public List<TestsModel> Tests { get; set; }
         public string EpisodeNumber { get; set; }
+        public int StatusId { get; set; }
 
         #endregion
     }

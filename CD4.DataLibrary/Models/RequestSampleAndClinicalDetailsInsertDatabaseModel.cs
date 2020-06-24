@@ -22,6 +22,7 @@ namespace CD4.DataLibrary.Models
             EpisodeNumber = request.EpisodeNumber;
             Age = request.Age;
             Cin = request.Cin;
+            SampleStatusId = request.StatusId;
             SiteId = request.SiteId;
             CollectionDate = DateHelper.GetCD4FormatDate(request.SampleCollectionDate);
             ReceivedDate = DateHelper.GetCD4FormatDate(request.SampleReceivedDate);
@@ -39,6 +40,7 @@ namespace CD4.DataLibrary.Models
                 EpisodeNumber,
                 Age,
                 Cin,
+                SampleStatusId,
                 SiteId,
                 CollectionDate,
                 ReceivedDate,
@@ -54,6 +56,7 @@ namespace CD4.DataLibrary.Models
         public string EpisodeNumber { get; private set; }
         public string Age { get; private set; }
         public string Cin { get; private set; }
+        public int SampleStatusId { get; set; }
         public int SiteId { get; private set; }
         public string CollectionDate { get; private set; }
         public string ReceivedDate { get; private set; }

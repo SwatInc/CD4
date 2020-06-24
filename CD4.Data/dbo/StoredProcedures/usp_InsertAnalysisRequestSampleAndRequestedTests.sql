@@ -4,6 +4,7 @@ CREATE PROCEDURE [dbo].[usp_InsertAnalysisRequestSampleAndRequestedTests]
 	@EpisodeNumber varchar(15),
 	@Age varchar(20),
 	@Cin varchar(50),
+	@SampleStatusId int,
 	@SiteId int,
 	@CollectionDate char(8),
 	@ReceivedDate char(8),
@@ -30,12 +31,12 @@ DECLARE @ReturnValue bit = 0;
 				SELECT @AnalysisRequestId =  [Id] FROM @InsertedId;
 
 				--insert into dbo.Sample
-				INSERT INTO [dbo].[Sample]([Cin], [AnalysisRequestId], [SiteId], [CollectionDate], [ReceivedDate])
-				VALUES (@Cin,@AnalysisRequestId , @SiteId, @CollectionDate, @ReceivedDate);
+				INSERT INTO [dbo].[Sample]([Cin], [AnalysisRequestId], [SiteId], [CollectionDate], [ReceivedDate], [StatusId])
+				VALUES (@Cin,@AnalysisRequestId , @SiteId, @CollectionDate, @ReceivedDate, @SampleStatusId);
 
 				--insert into dbo.Result
-				INSERT INTO [dbo].[Result] ([Sample_Cin], [TestId])
-				SELECT [TD].[Sample_Cin], [TD].[TestId]
+				INSERT INTO [dbo].[Result] ([Sample_Cin], [TestId], [StatusId])
+				SELECT [TD].[Sample_Cin], [TD].[TestId], [TD].[TestStatusId]
 				FROM @RequestedTestData [TD];
 
 				COMMIT TRANSACTION;

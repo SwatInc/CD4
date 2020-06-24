@@ -292,7 +292,7 @@ namespace CD4.DataLibrary.DataAccess
                 return await SelectInsertOrUpdate<bool, dynamic>
                     ("[dbo].[usp_InsertAnalysisRequestSampleAndRequestedTests]", insertData.GetWithoutClinicalDetails());
             }
-
+            //with clinical details
             return await SelectInsertOrUpdate<bool, RequestSampleAndClinicalDetailsInsertDatabaseModel>
                 ("[dbo].[usp_InsertAnalysisRequestClinicalDetailsSampleAndRequestedTests]", insertData);
         }

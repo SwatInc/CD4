@@ -27,13 +27,15 @@ namespace CD4.DataLibrary.DataAccess
 
         public static SqlMapper.ICustomQueryParameter GetTestsTable(List<TestsModel> tests, string cin)
         {
+            var statusId = 1;
             var returnTable = new DataTable();
             returnTable.Columns.Add("TestId");
             returnTable.Columns.Add("Sample_Cin");
+            returnTable.Columns.Add("StatusId");
 
             foreach (var item in tests)
             {
-                returnTable.Rows.Add(item.Id, cin);
+                returnTable.Rows.Add(item.Id,cin, statusId);
             }
             return returnTable.AsTableValuedParameter("ResultTableInsertDataUDT");
         }
