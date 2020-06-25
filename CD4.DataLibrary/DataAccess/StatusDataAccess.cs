@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CD4.DataLibrary.Models;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -120,6 +122,18 @@ namespace CD4.DataLibrary.DataAccess
 
             //if none of the above criteria matched, return the existing sample status.
             return sampleStatus;
+        }
+
+        /// <summary>
+        /// Queries database to get a list of all status with their Ids.
+        /// </summary>
+        /// <returns>List of StatusModel with Id and Status</returns>
+        public async Task<List<StatusModel>> GetAllStatus()
+        {
+            //the stored procedure name to call
+            var storedProcedure = "[dbo].[usp_GetAllStatus]";
+            var output =  await LoadDataAsync<StatusModel>(storedProcedure);
+            return output.ToList();
         }
 
         /// <summary>

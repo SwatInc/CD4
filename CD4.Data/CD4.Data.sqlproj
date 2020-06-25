@@ -134,6 +134,7 @@
     <Build Include="dbo\StoredProcedures\usp_GetStatusIdbyStatus.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetSampleAndAllTestStatusByResultId.sql" />
     <Build Include="dbo\StoredProcedures\usp_UpdateSampleStatusResultId.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetAllStatus.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />

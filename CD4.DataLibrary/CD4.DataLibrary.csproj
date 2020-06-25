@@ -116,6 +116,7 @@
     <Compile Include="Models\CinParameterModel.cs" />
     <Compile Include="Models\SampleUpdateDatabaseModel.cs" />
     <Compile Include="Models\SitesModel.cs" />
+    <Compile Include="Models\StatusModel.cs" />
     <Compile Include="Models\TestsModel.cs" />
     <Compile Include="Models\UsernameAndHashModel.cs" />
     <Compile Include="Models\WorklistModel.cs" />
