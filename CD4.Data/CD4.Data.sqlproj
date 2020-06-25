@@ -132,6 +132,8 @@
     <Build Include="auth\StoredProcedures\usp_GetUserRoleAndClaims.sql" />
     <Build Include="dbo\Tables\Status.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetStatusIdbyStatus.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetSampleAndAllTestStatusByResultId.sql" />
+    <Build Include="dbo\StoredProcedures\usp_UpdateSampleStatusResultId.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />

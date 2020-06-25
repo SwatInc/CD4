@@ -83,12 +83,19 @@ namespace CD4.DataLibrary.DataAccess
             var statusId =  statusData.GetToValidateStatusId();
             //prepare the parameter to pass to the query.
             var parameter = new { Result = result, ResultId = resultId, StatusId = statusId };
-
-            //Set the sample status
-
-
+            //insert result and result status
             var output = await SelectInsertOrUpdate<bool, dynamic>(storedProcedure, parameter);
+            //Set the sample status
+            var sampleStatus = await statusData.DetermineSampleStatus(resultId);
+            var IsSampleStatusSet = await UpdateSampleStatusByResultId(resultId, sampleStatus);
             return output;
+        }
+
+        public async Task<bool> UpdateSampleStatusByResultId(int resultId, int sampleStatus)
+        {
+            var storedProcedure = "[dbo].[usp_UpdateSampleStatusResultId]";
+            var parameter = new { ResultId = resultId, SampleStatus = sampleStatus };
+            return await SelectInsertOrUpdate<bool, dynamic>(storedProcedure, parameter);
         }
     }
 }
