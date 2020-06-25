@@ -4,13 +4,13 @@ returns two lists of data
 	Other with results data.
 
 CONDITION: 
-Data returned will be filtered form date. i.e. >= to the date specified.C:\Users\ibrah\source\repos\CD4\CD4.Data\dbo\StoredProcedures\GetWorksheetWithIncompleteRequests.sql
-If no date is specified, the procedure not return anything.
+Data returned will be filtered form date and Test Status
 */
-CREATE PROCEDURE [dbo].[usp_GetWorksheetWithIncompleteRequests]
-	@StartDate VARCHAR(8)
+CREATE PROCEDURE [dbo].[usp_GetWorksheetBySpecifiedDateAndStatusId]
+	@StartDate VARCHAR(8),
 	--pass in todays date if no date is specified.
 	-- Format: yyyyMMdd
+    @StatusId int -- Look for tests with this status Id
 AS
 BEGIN
 	WHILE (@StartDate IS NOT NULL) AND (@StartDate <> '')
@@ -24,8 +24,8 @@ BEGIN
         INSERT INTO @TempCins
         SELECT DISTINCT([S].[Cin]),[S].[AnalysisRequestId] 
         FROM [dbo].[Sample] [S] 
-        INNER JOIN dbo.Result r ON r.Sample_Cin = S.Cin
-        WHERE s.ReceivedDate >= @StartDateInUse AND (r.Result IS NULL OR r.Result = '');
+        INNER JOIN dbo.Result [r] ON [r].[Sample_Cin] = [S].[Cin]
+        WHERE [s].[ReceivedDate] >= @StartDateInUse AND [r].[StatusId] = @StatusId;
 
         -- Get Clinical details
         INSERT INTO @TempClinicalDetails
@@ -49,11 +49,12 @@ BEGIN
                [RW].[Address],
                [RW].[AtollIslandCountry],
                [RW].[EpisodeNumber],
-               [RW].[Site]
-               ,ISNULL([C].[Detail],'') AS [ClinicalDetails]
-		FROM [dbo].[RequestsWithTestsWithoutResults] [RW] WITH (NOEXPAND)
+               [RW].[Site],
+               [RW].[StatusId],
+               ISNULL([C].[Detail],'') AS [ClinicalDetails]
+		FROM [dbo].[RequestsWithTestsAndResults] [RW] WITH (NOEXPAND)
         INNER JOIN @TempClinicalDetails [C] ON [RW].[AnalysisRequestId] = [C].[AnalysisRequestId]
-		WHERE [RW].[ReceivedDate] >= @StartDateInUse;
+		WHERE [RW].[ReceivedDate] >= @StartDateInUse AND [RW].[StatusId] = @StatusId;
 
 		-- fetch results data which is not complete(has no results).
         SELECT [Id],

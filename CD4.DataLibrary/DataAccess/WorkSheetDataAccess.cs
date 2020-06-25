@@ -11,10 +11,10 @@ namespace CD4.DataLibrary.DataAccess
 {
     public class WorkSheetDataAccess : DataAccessBase, IWorkSheetDataAccess
     {
-        public async Task<WorklistModel> GetNotValidatedWorklistAsync(DateTime? startDate = null)
+        public async Task<WorklistModel> GetWorklistBySpecifiedDateAndStatusIdAsync(int selectedStatusId, DateTime? startDate = null)
         {
-            var storedProcedure = "[dbo].[usp_GetWorksheetWithIncompleteRequests]";
-            var parameter = new { StartDate = GetStartDate(startDate) };
+            var storedProcedure = "[dbo].[usp_GetWorksheetBySpecifiedDateAndStatusId]";
+            var parameter = new { StartDate = GetStartDate(startDate), StatusId = selectedStatusId };
 
             var results = await SelectWorksheetDatasets<dynamic>(storedProcedure, parameter);
             return results;

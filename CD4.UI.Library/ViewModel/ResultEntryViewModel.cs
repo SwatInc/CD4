@@ -320,10 +320,30 @@ namespace CD4.UI.Library.ViewModel
 
         public async Task GetWorkSheet()
         {
-            var worksheet = await workSheetDataAccess.GetNotValidatedWorklistAsync
-                (LoadWorksheetFromDate);
+            var worksheet = await workSheetDataAccess.GetWorklistBySpecifiedDateAndStatusIdAsync
+                (GetSelectedStatusIdOrDefault(),LoadWorksheetFromDate);
             await DisplayWorksheet(worksheet);
 
+        }
+
+       private int GetSelectedStatusIdOrDefault()
+        {
+            //declare a variable to hold the selected statusId
+            int selectedStatusId;
+
+            //Check whether the selected status is null...
+            if (SelectedStatus is null)
+            {
+                //assign the Id as 4, which corresponds to the ToValidate status.
+                selectedStatusId = 4;
+            }
+            else
+            {
+                //otherwise, return the actual selected status Id
+                selectedStatusId = SelectedStatus.Id;
+            }
+
+            return selectedStatusId;
         }
 
         private async Task DisplayWorksheet(CD4.DataLibrary.Models.WorklistModel worklist)

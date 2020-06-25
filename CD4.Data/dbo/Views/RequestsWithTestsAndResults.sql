@@ -1,6 +1,7 @@
-﻿CREATE VIEW [dbo].[RequestsWithTestsWithoutResults]
+﻿CREATE VIEW [dbo].[RequestsWithTestsAndResults]
 (
        [Id],
+       [StatusId],
        [AnalysisRequestId],
        [Cin],
        [CollectionDate],
@@ -19,6 +20,7 @@ WITH SCHEMABINDING
 AS
 ( 
 SELECT [R].[Id],
+       [R].[StatusId],
        [S].[AnalysisRequestId],
        [S].[Cin],
        [S].[CollectionDate],
@@ -40,12 +42,11 @@ INNER JOIN [dbo].[Gender] [G] ON [P].[GenderId] = [G].[Id]
 INNER JOIN [dbo].[Atoll] [A] ON [P].[AtollId] = [A].[Id]
 INNER JOIN [dbo].[Country] [C] ON [P].[CountryId]  = [C].[Id] 
 INNER JOIN [dbo].[Sites] [SI] ON [S].[SiteId] = [SI].[Id]
-WHERE [R].[Result] IS NULL OR [R].[Result] = ''
 )
 GO
 CREATE UNIQUE CLUSTERED INDEX IX_RequestDataForWorksheet_Id
-ON [dbo].[RequestsWithTestsWithoutResults]([Id]);
+ON [dbo].[RequestsWithTestsAndResults]([Id]);
 GO
 CREATE NONCLUSTERED INDEX IX_ReceivedDate
-ON [dbo].[RequestsWithTestsWithoutResults]([ReceivedDate]);
+ON [dbo].[RequestsWithTestsAndResults]([ReceivedDate]);
 GO
