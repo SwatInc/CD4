@@ -1,28 +1,35 @@
 ﻿using AutoMapper;
 using CD4.DataLibrary.DataAccess;
 using CD4.UI.Library.Model;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace CD4.UI.Library.ViewModel
 {
     public class ResultEntryViewModel : INotifyPropertyChanged, IResultEntryViewModel
     {
+        #region Private Properties
+        private List<CodifiedResultsModel> TempCodifiedPhrasesList;
+        private DateTime loadWorksheetFromDate;
+        private readonly IWorkSheetDataAccess workSheetDataAccess;
+        private readonly IMapper mapper;
+        private readonly IResultDataAccess resultDataAccess;
+        private readonly IStatusDataAccess statusDataAccess;
+        #endregion
+
         #region Events
         //event that notifies user interface that new data has been loaded and that datagrids needs to be refreshed.
         public event EventHandler RequestDataRefreshed;
+        public event EventHandler LoadAllStatusData;
         #endregion
 
         #region Default Constructor
         public ResultEntryViewModel
-            (IWorkSheetDataAccess workSheetDataAccess, IMapper mapper, IResultDataAccess resultDataAccess)
+            (IWorkSheetDataAccess workSheetDataAccess, IMapper mapper, IResultDataAccess resultDataAccess, IStatusDataAccess statusDataAccess)
         {
             RequestData = new List<RequestSampleModel>();
             SelectedResultData = new BindingList<ResultModel>();
@@ -32,6 +39,7 @@ namespace CD4.UI.Library.ViewModel
             CodifiedPhrasesForSelectedTest = new BindingList<CodifiedResultsModel>();
             AllCodifiedPhrases = new List<CodifiedResultsModel>();
             TempCodifiedPhrasesList = new List<CodifiedResultsModel>();
+            AllStatus = new List<StatusModel>();
 
             //set the date to load worksheet from
             LoadWorksheetFromDate = DateTime.Today;
@@ -40,8 +48,13 @@ namespace CD4.UI.Library.ViewModel
             this.workSheetDataAccess = workSheetDataAccess;
             this.mapper = mapper;
             this.resultDataAccess = resultDataAccess;
+            this.statusDataAccess = statusDataAccess;
             GetWorkSheet().ConfigureAwait(true);
             SelectedResultData.ListChanged += UpdateDatabaseResults;
+            LoadAllStatusData += GetAllStatusData;
+
+            //load all status Data
+            LoadAllStatusData?.Invoke(this, EventArgs.Empty);
         }
 
         #endregion
@@ -62,7 +75,7 @@ namespace CD4.UI.Library.ViewModel
         {
             get => loadWorksheetFromDate; set
             {
-                if(loadWorksheetFromDate == value) { return; }
+                if (loadWorksheetFromDate == value) { return; }
                 loadWorksheetFromDate = value;
                 OnPropertyChanged();
 
@@ -75,12 +88,7 @@ namespace CD4.UI.Library.ViewModel
         public BindingList<CodifiedResultsModel> CodifiedPhrasesForSelectedTest { get; set; }
         public BindingList<string> SelectedClinicalDetails { get; set; }
         public List<CodifiedResultsModel> AllCodifiedPhrases { get; set; }
-        private List<CodifiedResultsModel> TempCodifiedPhrasesList;
-        private DateTime loadWorksheetFromDate;
-        private readonly IWorkSheetDataAccess workSheetDataAccess;
-        private readonly IMapper mapper;
-        private readonly IResultDataAccess resultDataAccess;
-
+        public List<StatusModel> AllStatus { get; set; }
         #endregion
 
         #region Public Methods
@@ -136,6 +144,25 @@ namespace CD4.UI.Library.ViewModel
         #endregion
 
         #region Private Methods
+
+        /// <summary>
+        /// Fetches all status data from data layer. This data will be used as a datasource for the lookupedit status filter.
+        /// </summary>
+        private async void GetAllStatusData(object sender, EventArgs e)
+        {
+            //call the datalayer for the data.
+
+            var result = await statusDataAccess.GetAllStatus();
+            //automap the data onto a list of corresponding local model
+            var statusModel = mapper.Map<List<StatusModel>>(result);
+            //add the data to the datasource.
+            foreach (var item in statusModel)
+            {
+                AllStatus.Add(item);
+            }
+
+
+        }
 
         private async void UpdateDatabaseResults(object sender, ListChangedEventArgs e)
         {

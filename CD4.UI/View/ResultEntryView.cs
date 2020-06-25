@@ -158,7 +158,13 @@ namespace CD4.UI.View
             #endregion
 
             #region FiltersAndFunctions
+
             dateEditLoadWorksheetFrom.DataBindings.Add(new Binding("EditValue", _viewModel, nameof(_viewModel.LoadWorksheetFromDate)));
+
+            //Wire up the datasource for lookUpEditSampleStatusFilter
+            lookUpEditSampleStatusFilter.Properties.DataSource = _viewModel.AllStatus;
+            lookUpEditSampleStatusFilter.Properties.ValueMember = nameof(StatusModel.Id);
+            lookUpEditSampleStatusFilter.Properties.DisplayMember = nameof(StatusModel.Status);
             #endregion
         }
 

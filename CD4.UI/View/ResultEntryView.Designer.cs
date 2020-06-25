@@ -57,11 +57,10 @@ namespace CD4.UI.View
             this.repositoryItemLookUpEditCodifiedPhrases = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.groupControlFunctions = new DevExpress.XtraEditors.GroupControl();
             this.simpleButtonLoadWorksheet = new DevExpress.XtraEditors.SimpleButton();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
             this.dateEditLoadWorksheetFrom = new DevExpress.XtraEditors.DateEdit();
             this.simpleButtonReport = new DevExpress.XtraEditors.SimpleButton();
+            this.lookUpEditSampleStatusFilter = new DevExpress.XtraEditors.LookUpEdit();
+            this.label1 = new System.Windows.Forms.Label();
             this.labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).BeginInit();
             this.splitContainerControlPatient.SuspendLayout();
@@ -81,23 +80,8 @@ namespace CD4.UI.View
             this.groupControlFunctions.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditLoadWorksheetFrom.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditLoadWorksheetFrom.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditSampleStatusFilter.Properties)).BeginInit();
             this.SuspendLayout();
-            // 
-            // labelControlPatientName
-            // 
-            labelControlPatientName.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.Appearance.Options.UseFont = true;
-            labelControlPatientName.AppearanceDisabled.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.AppearanceDisabled.Options.UseFont = true;
-            labelControlPatientName.AppearanceHovered.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.AppearanceHovered.Options.UseFont = true;
-            labelControlPatientName.AppearancePressed.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.AppearancePressed.Options.UseFont = true;
-            labelControlPatientName.Location = new System.Drawing.Point(12, 23);
-            labelControlPatientName.Name = "labelControlPatientName";
-            labelControlPatientName.Size = new System.Drawing.Size(118, 21);
-            labelControlPatientName.TabIndex = 0;
-            labelControlPatientName.Text = "PATIENT NAME";
             // 
             // labelControlNationalId
             // 
@@ -223,6 +207,22 @@ namespace CD4.UI.View
             this.listBoxControlClinicalDetails.Name = "listBoxControlClinicalDetails";
             this.listBoxControlClinicalDetails.Size = new System.Drawing.Size(223, 66);
             this.listBoxControlClinicalDetails.TabIndex = 9;
+            // 
+            // labelControlPatientName
+            // 
+            labelControlPatientName.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.Appearance.Options.UseFont = true;
+            labelControlPatientName.AppearanceDisabled.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearanceDisabled.Options.UseFont = true;
+            labelControlPatientName.AppearanceHovered.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearanceHovered.Options.UseFont = true;
+            labelControlPatientName.AppearancePressed.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearancePressed.Options.UseFont = true;
+            labelControlPatientName.Location = new System.Drawing.Point(12, 23);
+            labelControlPatientName.Name = "labelControlPatientName";
+            labelControlPatientName.Size = new System.Drawing.Size(118, 21);
+            labelControlPatientName.TabIndex = 0;
+            labelControlPatientName.Text = "PATIENT NAME";
             // 
             // splitContainerControlFunctions
             // 
@@ -366,9 +366,8 @@ namespace CD4.UI.View
             // 
             // groupControlFunctions
             // 
+            this.groupControlFunctions.Controls.Add(this.lookUpEditSampleStatusFilter);
             this.groupControlFunctions.Controls.Add(this.simpleButtonLoadWorksheet);
-            this.groupControlFunctions.Controls.Add(this.comboBox1);
-            this.groupControlFunctions.Controls.Add(this.label2);
             this.groupControlFunctions.Controls.Add(this.label1);
             this.groupControlFunctions.Controls.Add(this.dateEditLoadWorksheetFrom);
             this.groupControlFunctions.Controls.Add(this.simpleButtonReport);
@@ -381,43 +380,11 @@ namespace CD4.UI.View
             // 
             // simpleButtonLoadWorksheet
             // 
-            this.simpleButtonLoadWorksheet.Location = new System.Drawing.Point(405, 43);
+            this.simpleButtonLoadWorksheet.Location = new System.Drawing.Point(389, 43);
             this.simpleButtonLoadWorksheet.Name = "simpleButtonLoadWorksheet";
             this.simpleButtonLoadWorksheet.Size = new System.Drawing.Size(108, 23);
             this.simpleButtonLoadWorksheet.TabIndex = 6;
             this.simpleButtonLoadWorksheet.Text = "Load Worksheet";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "Collected",
-            "Received",
-            "Analyser Query",
-            "With Result",
-            "Validated"});
-            this.comboBox1.Location = new System.Drawing.Point(193, 44);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(190, 21);
-            this.comboBox1.TabIndex = 5;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(192, 29);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 13);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Select Sample Status";
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 29);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Select Sample date";
             // 
             // dateEditLoadWorksheetFrom
             // 
@@ -428,16 +395,41 @@ namespace CD4.UI.View
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateEditLoadWorksheetFrom.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.dateEditLoadWorksheetFrom.Properties.NullText = "Please select the sample date...";
+            this.dateEditLoadWorksheetFrom.Properties.NullValuePrompt = "Please select the sample date...";
+            this.dateEditLoadWorksheetFrom.Properties.NullValuePromptShowForEmptyValue = true;
             this.dateEditLoadWorksheetFrom.Size = new System.Drawing.Size(175, 20);
             this.dateEditLoadWorksheetFrom.TabIndex = 1;
             // 
             // simpleButtonReport
             // 
-            this.simpleButtonReport.Location = new System.Drawing.Point(752, 33);
+            this.simpleButtonReport.Location = new System.Drawing.Point(504, 43);
             this.simpleButtonReport.Name = "simpleButtonReport";
             this.simpleButtonReport.Size = new System.Drawing.Size(75, 23);
             this.simpleButtonReport.TabIndex = 0;
             this.simpleButtonReport.Text = "Report";
+            // 
+            // lookUpEditSampleStatusFilter
+            // 
+            this.lookUpEditSampleStatusFilter.Location = new System.Drawing.Point(193, 45);
+            this.lookUpEditSampleStatusFilter.Name = "lookUpEditSampleStatusFilter";
+            this.lookUpEditSampleStatusFilter.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpEditSampleStatusFilter.Properties.NullText = "Please select sample status...";
+            this.lookUpEditSampleStatusFilter.Properties.NullValuePrompt = "Please select sample status...";
+            this.lookUpEditSampleStatusFilter.Properties.NullValuePromptShowForEmptyValue = true;
+            this.lookUpEditSampleStatusFilter.Properties.ShowNullValuePromptWhenFocused = true;
+            this.lookUpEditSampleStatusFilter.Size = new System.Drawing.Size(190, 20);
+            this.lookUpEditSampleStatusFilter.TabIndex = 7;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 29);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(98, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Select Sample date";
             // 
             // ResultEntryView
             // 
@@ -467,6 +459,7 @@ namespace CD4.UI.View
             this.groupControlFunctions.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditLoadWorksheetFrom.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditLoadWorksheetFrom.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditSampleStatusFilter.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -501,10 +494,9 @@ namespace CD4.UI.View
         private DevExpress.XtraEditors.LabelControl labelControlPatientName;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEditCodifiedPhrases;
         private SimpleButton simpleButtonReport;
-        private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label label1;
         private DateEdit dateEditLoadWorksheetFrom;
-        private System.Windows.Forms.ComboBox comboBox1;
         private SimpleButton simpleButtonLoadWorksheet;
+        private LookUpEdit lookUpEditSampleStatusFilter;
+        private System.Windows.Forms.Label label1;
     }
 }
