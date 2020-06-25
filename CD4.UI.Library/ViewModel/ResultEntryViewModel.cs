@@ -4,6 +4,7 @@ using CD4.UI.Library.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -89,6 +90,8 @@ namespace CD4.UI.Library.ViewModel
         public BindingList<string> SelectedClinicalDetails { get; set; }
         public List<CodifiedResultsModel> AllCodifiedPhrases { get; set; }
         public List<StatusModel> AllStatus { get; set; }
+        public StatusModel SelectedStatus { get; set; }
+
         #endregion
 
         #region Public Methods

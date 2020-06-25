@@ -19,6 +19,7 @@ namespace CD4.UI.Library.ViewModel
         BindingList<string> SelectedClinicalDetails { get; set; }
         DateTime LoadWorksheetFromDate { get; set; }
         List<StatusModel> AllStatus { get; set; }
+        StatusModel SelectedStatus { get; set; }
 
         event PropertyChangedEventHandler PropertyChanged;
         event EventHandler RequestDataRefreshed;

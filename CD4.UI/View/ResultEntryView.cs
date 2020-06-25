@@ -4,6 +4,7 @@ using DevExpress.XtraEditors;
 using CD4.UI.Library.ViewModel;
 using DevExpress.XtraGrid.Views.Base;
 using CD4.UI.Library.Model;
+using System.Diagnostics;
 
 namespace CD4.UI.View
 {
@@ -28,6 +29,16 @@ namespace CD4.UI.View
             simpleButtonReport.Click += SimpleButtonReport_Click;
             simpleButtonLoadWorksheet.Click += LoadWorkSheet;
             _viewModel.RequestDataRefreshed += RefreshViewData;
+            lookUpEditSampleStatusFilter.EditValueChanged += LookUpEditSampleStatusFilter_EditValueChanged;
+        }
+
+        /// <summary>
+        /// Sets the selected status to viewmodel variable
+        /// </summary>
+        private void LookUpEditSampleStatusFilter_EditValueChanged(object sender, EventArgs e)
+        {
+            //gets the selected datarow from lookupedit and set it to viewModel variable
+            _viewModel.SelectedStatus = (StatusModel)(lookUpEditSampleStatusFilter.GetSelectedDataRow());
         }
 
         private async void LoadWorkSheet(object sender, EventArgs e)
@@ -163,8 +174,8 @@ namespace CD4.UI.View
 
             //Wire up the datasource for lookUpEditSampleStatusFilter
             lookUpEditSampleStatusFilter.Properties.DataSource = _viewModel.AllStatus;
-            lookUpEditSampleStatusFilter.Properties.ValueMember = nameof(StatusModel.Id);
             lookUpEditSampleStatusFilter.Properties.DisplayMember = nameof(StatusModel.Status);
+            lookUpEditSampleStatusFilter.Properties.ValueMember = nameof(StatusModel.Id);
             #endregion
         }
 
