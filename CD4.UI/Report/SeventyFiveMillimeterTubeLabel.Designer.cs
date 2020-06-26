@@ -261,11 +261,11 @@
             this.xrLabel9.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "?Discipline")});
             this.xrLabel9.Font = new System.Drawing.Font("Segoe UI Semibold", 8F);
-            this.xrLabel9.LocationFloat = new DevExpress.Utils.PointFloat(12.34722F, 296.9438F);
+            this.xrLabel9.LocationFloat = new DevExpress.Utils.PointFloat(10.88887F, 296.9438F);
             this.xrLabel9.Multiline = true;
             this.xrLabel9.Name = "xrLabel9";
             this.xrLabel9.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
-            this.xrLabel9.SizeF = new System.Drawing.SizeF(473.8471F, 47.01447F);
+            this.xrLabel9.SizeF = new System.Drawing.SizeF(475.3055F, 47.01447F);
             this.xrLabel9.StylePriority.UseFont = false;
             this.xrLabel9.Text = "xrLabel9";
             // 
