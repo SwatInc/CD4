@@ -135,6 +135,12 @@
       <DependentUpon>AnalysisReport.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Report\SeventyFiveMillimeterTubeLabel.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\SeventyFiveMillimeterTubeLabel.Designer.cs">
+      <DependentUpon>SeventyFiveMillimeterTubeLabel.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\AtollIslandView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -245,6 +251,9 @@
     <EmbeddedResource Include="Report\AnalysisReport.resx">
       <DependentUpon>AnalysisReport.cs</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report\SeventyFiveMillimeterTubeLabel.resx">
+      <DependentUpon>SeventyFiveMillimeterTubeLabel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\AtollIslandView.resx">
       <DependentUpon>AtollIslandView.cs</DependentUpon>
