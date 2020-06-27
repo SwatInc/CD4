@@ -61,7 +61,7 @@ BEGIN
                [AnalysisRequestId],
                [Cin],
                [Description] AS [Test],
-               @StatusId AS [StatusIconId],
+               [StatusId] AS [StatusIconId],
                [Result],
                [DataType],
                [Mask] 
