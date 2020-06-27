@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Drawing;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
@@ -20,6 +20,7 @@ namespace CD4.UI.Library.Model
         private DateTime resultDate;
         private string dataType;
         private string mask;
+        private int statusIconName;
 
         #endregion
 
@@ -60,6 +61,46 @@ namespace CD4.UI.Library.Model
                 OnPropertyChanged();
             }
         }
+        public Image StatusIcon { get; private set; }
+        public int StatusIconId
+        {
+            get => statusIconName; set
+            {
+                statusIconName = value;
+                SetIcon(value);
+            }
+        }
+
+        private void SetIcon(int statusIconId)
+        {
+            switch (statusIconId)
+            {
+                case 1:
+                    StatusIcon = Properties.Resources.Requested;
+                    break;
+                case 2:
+                    StatusIcon = Properties.Resources.Sampled;
+                    break;
+                case 3:
+                    StatusIcon = Properties.Resources.Received;
+                    break;
+                case 4:
+                    StatusIcon = Properties.Resources.ToValidate;
+                    break;
+                case 5:
+                    StatusIcon = Properties.Resources.Validated;
+                    break;
+                case 6:
+                    StatusIcon = Properties.Resources.Processing;
+                    break;
+                case 7:
+                    StatusIcon = Properties.Resources.Rejected;
+                    break;
+                default:
+                    break;
+            }
+        }
+
         public string Result
         {
             get => result; set

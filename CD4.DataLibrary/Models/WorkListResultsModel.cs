@@ -6,6 +6,7 @@
         public int AnalysisRequestId { get; set; }
         public string Cin { get; set; }
         public string Test { get; set; }
+        public int StatusIconId { get; set; }
         public string Result { get; set; }
         public string DataType { get; set; }
         public string Mask { get; set; }

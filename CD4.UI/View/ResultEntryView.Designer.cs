@@ -56,11 +56,12 @@ namespace CD4.UI.View
             this.gridColumnResult = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemLookUpEditCodifiedPhrases = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.groupControlFunctions = new DevExpress.XtraEditors.GroupControl();
+            this.lookUpEditSampleStatusFilter = new DevExpress.XtraEditors.LookUpEdit();
             this.simpleButtonLoadWorksheet = new DevExpress.XtraEditors.SimpleButton();
+            this.label1 = new System.Windows.Forms.Label();
             this.dateEditLoadWorksheetFrom = new DevExpress.XtraEditors.DateEdit();
             this.simpleButtonReport = new DevExpress.XtraEditors.SimpleButton();
-            this.lookUpEditSampleStatusFilter = new DevExpress.XtraEditors.LookUpEdit();
-            this.label1 = new System.Windows.Forms.Label();
+            this.gridColumnStatusIcon = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).BeginInit();
             this.splitContainerControlPatient.SuspendLayout();
@@ -78,9 +79,9 @@ namespace CD4.UI.View
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditCodifiedPhrases)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlFunctions)).BeginInit();
             this.groupControlFunctions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditSampleStatusFilter.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditLoadWorksheetFrom.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditLoadWorksheetFrom.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditSampleStatusFilter.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // labelControlNationalId
@@ -326,7 +327,8 @@ namespace CD4.UI.View
             // 
             this.gridViewTests.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumnTestName,
-            this.gridColumnResult});
+            this.gridColumnResult,
+            this.gridColumnStatusIcon});
             this.gridViewTests.GridControl = this.gridControlTests;
             this.gridViewTests.Name = "gridViewTests";
             this.gridViewTests.OptionsView.ShowGroupPanel = false;
@@ -339,7 +341,7 @@ namespace CD4.UI.View
             this.gridColumnTestName.OptionsColumn.AllowEdit = false;
             this.gridColumnTestName.Visible = true;
             this.gridColumnTestName.VisibleIndex = 0;
-            this.gridColumnTestName.Width = 98;
+            this.gridColumnTestName.Width = 64;
             // 
             // gridColumnResult
             // 
@@ -348,8 +350,8 @@ namespace CD4.UI.View
             this.gridColumnResult.FieldName = "Result";
             this.gridColumnResult.Name = "gridColumnResult";
             this.gridColumnResult.Visible = true;
-            this.gridColumnResult.VisibleIndex = 1;
-            this.gridColumnResult.Width = 460;
+            this.gridColumnResult.VisibleIndex = 2;
+            this.gridColumnResult.Width = 310;
             // 
             // repositoryItemLookUpEditCodifiedPhrases
             // 
@@ -378,6 +380,19 @@ namespace CD4.UI.View
             this.groupControlFunctions.TabIndex = 1;
             this.groupControlFunctions.Text = "Functions";
             // 
+            // lookUpEditSampleStatusFilter
+            // 
+            this.lookUpEditSampleStatusFilter.Location = new System.Drawing.Point(193, 45);
+            this.lookUpEditSampleStatusFilter.Name = "lookUpEditSampleStatusFilter";
+            this.lookUpEditSampleStatusFilter.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpEditSampleStatusFilter.Properties.NullText = "Please select sample status...";
+            this.lookUpEditSampleStatusFilter.Properties.NullValuePrompt = "Please select sample status...";
+            this.lookUpEditSampleStatusFilter.Properties.NullValuePromptShowForEmptyValue = true;
+            this.lookUpEditSampleStatusFilter.Properties.ShowNullValuePromptWhenFocused = true;
+            this.lookUpEditSampleStatusFilter.Size = new System.Drawing.Size(190, 20);
+            this.lookUpEditSampleStatusFilter.TabIndex = 7;
+            // 
             // simpleButtonLoadWorksheet
             // 
             this.simpleButtonLoadWorksheet.Location = new System.Drawing.Point(389, 43);
@@ -385,6 +400,15 @@ namespace CD4.UI.View
             this.simpleButtonLoadWorksheet.Size = new System.Drawing.Size(108, 23);
             this.simpleButtonLoadWorksheet.TabIndex = 6;
             this.simpleButtonLoadWorksheet.Text = "Load Worksheet";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(12, 29);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(98, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Select Sample date";
             // 
             // dateEditLoadWorksheetFrom
             // 
@@ -409,27 +433,14 @@ namespace CD4.UI.View
             this.simpleButtonReport.TabIndex = 0;
             this.simpleButtonReport.Text = "Report";
             // 
-            // lookUpEditSampleStatusFilter
+            // gridColumnStatusIcon
             // 
-            this.lookUpEditSampleStatusFilter.Location = new System.Drawing.Point(193, 45);
-            this.lookUpEditSampleStatusFilter.Name = "lookUpEditSampleStatusFilter";
-            this.lookUpEditSampleStatusFilter.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpEditSampleStatusFilter.Properties.NullText = "Please select sample status...";
-            this.lookUpEditSampleStatusFilter.Properties.NullValuePrompt = "Please select sample status...";
-            this.lookUpEditSampleStatusFilter.Properties.NullValuePromptShowForEmptyValue = true;
-            this.lookUpEditSampleStatusFilter.Properties.ShowNullValuePromptWhenFocused = true;
-            this.lookUpEditSampleStatusFilter.Size = new System.Drawing.Size(190, 20);
-            this.lookUpEditSampleStatusFilter.TabIndex = 7;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 29);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Select Sample date";
+            this.gridColumnStatusIcon.Caption = " ";
+            this.gridColumnStatusIcon.FieldName = "StatusIcon";
+            this.gridColumnStatusIcon.Name = "gridColumnStatusIcon";
+            this.gridColumnStatusIcon.Visible = true;
+            this.gridColumnStatusIcon.VisibleIndex = 1;
+            this.gridColumnStatusIcon.Width = 42;
             // 
             // ResultEntryView
             // 
@@ -457,9 +468,9 @@ namespace CD4.UI.View
             ((System.ComponentModel.ISupportInitialize)(this.groupControlFunctions)).EndInit();
             this.groupControlFunctions.ResumeLayout(false);
             this.groupControlFunctions.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditSampleStatusFilter.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditLoadWorksheetFrom.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditLoadWorksheetFrom.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditSampleStatusFilter.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -498,5 +509,6 @@ namespace CD4.UI.View
         private SimpleButton simpleButtonLoadWorksheet;
         private LookUpEdit lookUpEditSampleStatusFilter;
         private System.Windows.Forms.Label label1;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnStatusIcon;
     }
 }
