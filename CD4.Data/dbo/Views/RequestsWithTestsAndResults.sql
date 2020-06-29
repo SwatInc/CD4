@@ -1,7 +1,8 @@
 ﻿CREATE VIEW [dbo].[RequestsWithTestsAndResults]
 (
        [Id],
-       [StatusId],
+       [TestStatusId],
+       [SampleStatusId],
        [AnalysisRequestId],
        [Cin],
        [CollectionDate],
@@ -20,7 +21,8 @@ WITH SCHEMABINDING
 AS
 ( 
 SELECT [R].[Id],
-       [R].[StatusId],
+       [R].[StatusId] AS [TestStatusId],
+       [S].[StatusId] AS [SampleStatusId],
        [S].[AnalysisRequestId],
        [S].[Cin],
        [S].[CollectionDate],
