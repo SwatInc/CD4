@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Drawing;
 using System.Runtime.CompilerServices;
 
 namespace CD4.UI.Library.Model
@@ -22,6 +23,7 @@ namespace CD4.UI.Library.Model
         private string episodeNumber;
         private string site;
         private string clinicalDetails;
+        private int statusIconId;
 
         #endregion
 
@@ -155,6 +157,8 @@ namespace CD4.UI.Library.Model
                 OnPropertyChanged();
             }
         }
+        public Image StatusIcon { get; private set; }
+
 
         //ClinicalDetails
         public string ClinicalDetails
@@ -167,6 +171,53 @@ namespace CD4.UI.Library.Model
             }
         }
 
+        public int StatusIconId
+        {
+            get => statusIconId; set
+            {
+                if (statusIconId==value)
+                {
+                    return;
+                }
+                statusIconId = value;
+                OnPropertyChanged();
+                SetIcon(value);
+            }
+        }
+
+
+        #endregion
+
+        #region Private Methods
+        private void SetIcon(int statusIconId)
+        {
+            switch (statusIconId)
+            {
+                case 1:
+                    StatusIcon = Properties.Resources.Requested;
+                    break;
+                case 2:
+                    StatusIcon = Properties.Resources.Sampled;
+                    break;
+                case 3:
+                    StatusIcon = Properties.Resources.Received;
+                    break;
+                case 4:
+                    StatusIcon = Properties.Resources.ToValidate;
+                    break;
+                case 5:
+                    StatusIcon = Properties.Resources.Validated;
+                    break;
+                case 6:
+                    StatusIcon = Properties.Resources.Processing;
+                    break;
+                case 7:
+                    StatusIcon = Properties.Resources.Rejected;
+                    break;
+                default:
+                    break;
+            }
+        }
         #endregion
 
         #region INotifyPropertyChanged Hookup

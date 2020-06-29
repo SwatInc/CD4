@@ -154,7 +154,6 @@ namespace CD4.UI.Library.ViewModel
         private async void GetAllStatusData(object sender, EventArgs e)
         {
             //call the datalayer for the data.
-
             var result = await statusDataAccess.GetAllStatus();
             //automap the data onto a list of corresponding local model
             var statusModel = mapper.Map<List<StatusModel>>(result);
