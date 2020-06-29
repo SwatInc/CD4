@@ -16,5 +16,7 @@ namespace CD4.DataLibrary.Models.ReportModels
         public DateTime CollectedDate { get; set; }
         public DateTime ReceivedDate { get; set; }
         public string Cin { get; set; }
+        public int StatusIconId { get; set; }
+
     }
 }
