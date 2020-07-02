@@ -1,11 +1,13 @@
 ﻿using CD4.UI.Library.Model;
 using CD4.UI.Library.ViewModel;
+using DevExpress.Office.Drawing;
 using DevExpress.Utils.Menu;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace CD4.UI.View
@@ -93,16 +95,56 @@ namespace CD4.UI.View
         {
             var menuItems = new List<DXMenuItem>();
             menuItems.Add(new DXMenuItem("Validate Sample [ F7 ]", new EventHandler(OnValidateSampleClick)) { Tag = new RowInfo(view, rowHandle) });
-            menuItems.Add(new DXMenuItem("Reject Sample [ Shift + F11 ]", new EventHandler(OnRejectSampleClick)) { Tag = new RowInfo(view, rowHandle) });
+            menuItems.Add(new DXMenuItem("Reject Sample [ Shift+F11 ]", new EventHandler(OnRejectSampleClick)) { Tag = new RowInfo(view, rowHandle) });
             return menuItems;
         }
 
+        /// <summary>
+        /// Generates menu items for the selected test of the sample.
+        /// </summary>
+        /// <param name="view">Test grid view for selected tests</param>
+        /// <param name="rowHandle">Clicked row handle</param>
+        /// <returns>List of menu items for tests grid view</returns>
+        List<DXMenuItem> CreateTestMenuItemsCollection(GridView view, int rowHandle)
+        {
+            var menuItems = new List<DXMenuItem>();
+            menuItems.Add(new DXMenuItem("Validate Test [ F7 ]", new EventHandler(OnValidateSampleClick)) { Tag = new RowInfo(view, rowHandle) });
+            menuItems.Add(new DXMenuItem("Reject Test [ Shift+F11 ]", new EventHandler(OnRejectSampleClick)) { Tag = new RowInfo(view, rowHandle) });
+            return menuItems;
+        }
+
+        /// <summary>
+        /// Call the view model to validate the sample
+        /// </summary>
         void OnValidateSampleClick(object sender, EventArgs e)
         {
-
+            var sampleToValidate = GetSampleForMenu(sender, e);
+            Debug.WriteLine("validating sample: " + sampleToValidate.Cin);
         }
+
+        /// <summary>
+        /// Call the view model to reject the sample
+        /// </summary>
         void OnRejectSampleClick(object sender, EventArgs e)
         {
+            var sampleToReject = GetSampleForMenu(sender, e);
+            Debug.WriteLine("Rejecting sample: " + sampleToReject.Cin);
+        }
+
+        /// <summary>
+        /// Gets the sample for the passed in grid and row handle
+        /// </summary>
+        /// <param name="sender">Object with gridView and row handle assigned to Tag property</param>
+        /// <param name="e">empty</param>
+        /// <returns>RequestSampleModel for the row handle for the grid</returns>
+        RequestSampleModel GetSampleForMenu(object sender, EventArgs e)
+        {
+            //Get the menu item 
+            var menu = (DXMenuItem)sender;
+            //get the row info
+            var rowInfo = (RowInfo)menu.Tag;
+            //Get the request sample model and return
+            return (RequestSampleModel)rowInfo.View.GetRow(rowInfo.RowHandle);
 
         }
 
