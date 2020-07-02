@@ -1,17 +1,19 @@
-﻿using System;
-using System.Windows.Forms;
-using DevExpress.XtraEditors;
+﻿using CD4.UI.Library.Model;
 using CD4.UI.Library.ViewModel;
+using DevExpress.Utils.Menu;
+using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Base;
-using CD4.UI.Library.Model;
-using System.Diagnostics;
+using DevExpress.XtraGrid.Views.Grid;
+using System;
+using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace CD4.UI.View
 {
     public partial class ResultEntryView : XtraForm
     {
         private readonly IResultEntryViewModel _viewModel;
-        System.Windows.Forms.Timer dataRefreshTimer = new System.Windows.Forms.Timer() { Enabled = true, Interval = 1000};
+        System.Windows.Forms.Timer dataRefreshTimer = new System.Windows.Forms.Timer() { Enabled = true, Interval = 1000 };
 
         public event EventHandler<string> GenerateReportByCin;
 
@@ -29,7 +31,79 @@ namespace CD4.UI.View
             simpleButtonReport.Click += SimpleButtonReport_Click;
             simpleButtonLoadWorksheet.Click += LoadWorkSheet;
             _viewModel.RequestDataRefreshed += RefreshViewData;
+            gridViewSamples.PopupMenuShowing += ShowSamplePopupMenu;
+            gridViewTests.PopupMenuShowing += ShowTestPopupMenu;
             lookUpEditSampleStatusFilter.EditValueChanged += LookUpEditSampleStatusFilter_EditValueChanged;
+        }
+
+        /// <summary>
+        /// Show a popup menu when gridview Samples is clicked.
+        /// </summary>
+        private void ShowSamplePopupMenu(object sender, PopupMenuShowingEventArgs e)
+        {
+            if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
+            {
+                //row handle
+                var rowHandle = e.HitInfo.RowHandle;
+                //grid which raised the event
+                var sampleGrid = (GridView)sender;
+                //sample menu items
+                var sampleMenuItems = CreateSampleMenuItemsCollection(sampleGrid, rowHandle);
+                // Delete existing menu items, if any.
+                e.Menu.Items.Clear();
+
+                //add all menu items for sample grid view context menu
+                foreach (var item in sampleMenuItems)
+                {
+                    e.Menu.Items.Add(item);
+                }
+            }
+        }
+        /// <summary>
+        /// Show a popup menu when gridview test is clicked.
+        /// </summary>
+        private void ShowTestPopupMenu(object sender, PopupMenuShowingEventArgs e)
+        {
+            if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
+            {
+
+            }
+        }
+
+        /// <summary>
+        /// Return a menu item for validating sample
+        /// </summary>
+        /// <returns>menu item</returns>
+        DXMenuItem CreateMenuItemValidateSample(GridView view, int rowHandle)
+        {
+            //create validate menu item add a handler
+            DXMenuItem menuItem = new DXMenuItem("Validate Sample [ F7 ]", new EventHandler(OnValidateSampleClick));
+            //Tag the row handle and view onto the menu item
+            menuItem.Tag = new RowInfo(view, rowHandle);
+            return menuItem;
+        }
+
+        /// <summary>
+        /// Generates menu items for the whole sample menu.
+        /// </summary>
+        /// <param name="view">Sample grid view</param>
+        /// <param name="rowHandle">Clicked row handle</param>
+        /// <returns>List of menu items for sample grid view</returns>
+        List<DXMenuItem> CreateSampleMenuItemsCollection(GridView view, int rowHandle)
+        {
+            var menuItems = new List<DXMenuItem>();
+            menuItems.Add(new DXMenuItem("Validate Sample [ F7 ]", new EventHandler(OnValidateSampleClick)) { Tag = new RowInfo(view, rowHandle) });
+            menuItems.Add(new DXMenuItem("Reject Sample [ Shift + F11 ]", new EventHandler(OnRejectSampleClick)) { Tag = new RowInfo(view, rowHandle) });
+            return menuItems;
+        }
+
+        void OnValidateSampleClick(object sender, EventArgs e)
+        {
+
+        }
+        void OnRejectSampleClick(object sender, EventArgs e)
+        {
+
         }
 
         /// <summary>
@@ -104,7 +178,7 @@ namespace CD4.UI.View
             //Get row handles of selected rows
             var selectedRowHandles = gridViewSamples.GetSelectedRows();
             //return null if no rows selected
-            if (selectedRowHandles.Length==0)
+            if (selectedRowHandles.Length == 0)
             {
                 return null;
             }
@@ -128,7 +202,7 @@ namespace CD4.UI.View
 
             labelControlPatientName.DataBindings.Add
                 (new Binding("Text", _viewModel.SelectedRequestData, nameof(RequestSampleModel.PatientName),
-                true,DataSourceUpdateMode.OnPropertyChanged));
+                true, DataSourceUpdateMode.OnPropertyChanged));
 
             labelControlNationalId.DataBindings.Add
                 (new Binding("Text", _viewModel.SelectedRequestData, nameof(RequestSampleModel.NationalId)));
@@ -189,5 +263,16 @@ namespace CD4.UI.View
             splitContainerControlFunctions.SplitterPosition = (int)((decimal)height - 90m);
         }
 
+    }
+
+    class RowInfo
+    {
+        public RowInfo(GridView view, int rowHandle)
+        {
+            this.RowHandle = rowHandle;
+            this.View = view;
+        }
+        public GridView View;
+        public int RowHandle;
     }
 }
