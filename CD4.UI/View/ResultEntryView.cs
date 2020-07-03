@@ -68,7 +68,20 @@ namespace CD4.UI.View
         {
             if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
             {
+                //row handle
+                var rowHandle = e.HitInfo.RowHandle;
+                //grid which raised the event
+                var sampleGrid = (GridView)sender;
+                //sample menu items
+                var sampleMenuItems = CreateTestMenuItemsCollection(sampleGrid, rowHandle);
+                // Delete existing menu items, if any.
+                e.Menu.Items.Clear();
 
+                //add all menu items for sample grid view context menu
+                foreach (var item in sampleMenuItems)
+                {
+                    e.Menu.Items.Add(item);
+                }
             }
         }
 
@@ -108,9 +121,45 @@ namespace CD4.UI.View
         List<DXMenuItem> CreateTestMenuItemsCollection(GridView view, int rowHandle)
         {
             var menuItems = new List<DXMenuItem>();
-            menuItems.Add(new DXMenuItem("Validate Test [ F7 ]", new EventHandler(OnValidateSampleClick)) { Tag = new RowInfo(view, rowHandle) });
-            menuItems.Add(new DXMenuItem("Reject Test [ Shift+F11 ]", new EventHandler(OnRejectSampleClick)) { Tag = new RowInfo(view, rowHandle) });
+            menuItems.Add(new DXMenuItem("Validate Test [ F7 ]", new EventHandler(OnValidateTestClick)) { Tag = new RowInfo(view, rowHandle) });
+            menuItems.Add(new DXMenuItem("Reject Test [ Shift+F11 ]", new EventHandler(OnRejectTestClick)) { Tag = new RowInfo(view, rowHandle) });
+            menuItems.Add(new DXMenuItem("Show test history [  ]", new EventHandler(OnShowTestHistoryClick)) { Tag = new RowInfo(view, rowHandle) });
+            menuItems.Add(new DXMenuItem("Show reruns [ F6 ]", new EventHandler(OnShowRerunsClick)) { Tag = new RowInfo(view, rowHandle) });
             return menuItems;
+        }
+
+        /// <summary>
+        /// call view model to show test reruns
+        /// </summary>
+        private void OnShowRerunsClick(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// call view model to show test history
+        /// </summary>
+        private void OnShowTestHistoryClick(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        /// <summary>
+        /// call the view model to reject the test
+        /// </summary>
+        private void OnRejectTestClick(object sender, EventArgs e)
+        {
+            var testToReject = GetTestForMenu(sender, e);
+            Debug.WriteLine($"Rejecting Test: {testToReject.Cin}, Test: {testToReject.Test}, Result: {testToReject.Result}");
+        }
+
+        /// <summary>
+        /// Call the view model to validate the test
+        /// </summary>
+        private void OnValidateTestClick(object sender, EventArgs e)
+        {
+            var testToValidate = GetTestForMenu(sender, e);
+            Debug.WriteLine($"validating Test: {testToValidate.Cin}, Test: {testToValidate.Test}, Result: {testToValidate.Result}");
         }
 
         /// <summary>
@@ -146,6 +195,22 @@ namespace CD4.UI.View
             //Get the request sample model and return
             return (RequestSampleModel)rowInfo.View.GetRow(rowInfo.RowHandle);
 
+        }
+
+        /// <summary>
+        /// Returns the test that curresponds to the the row handle passed in.
+        /// </summary>
+        /// <param name="sender">Object with gridView and row handle assigned to Tag property</param>
+        /// <param name="e">empty</param>
+        /// <returns>ResultModel for the row handle for the grid</returns>
+        ResultModel GetTestForMenu(object sender, EventArgs e)
+        {
+            //Get the menu item 
+            var menu = (DXMenuItem)sender;
+            //get the row info
+            var rowInfo = (RowInfo)menu.Tag;
+            //Get the request sample model and return
+            return (ResultModel)rowInfo.View.GetRow(rowInfo.RowHandle);
         }
 
         /// <summary>

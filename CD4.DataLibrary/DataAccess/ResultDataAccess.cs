@@ -46,7 +46,8 @@ namespace CD4.DataLibrary.DataAccess
         /// <param name="tests">Tests requested</param>
         /// <param name="cin">Sample cin</param>
         /// <returns>an instance of TableValueParameter of ResultTableInsertDataUDT as ICustomQueryParameter</returns>
-        public static async Task<SqlMapper.ICustomQueryParameter> GetTestsTableAsync(List<TestsModel> tests, string cin, IStatusDataAccess statusData)
+        public static async Task<SqlMapper.ICustomQueryParameter> GetTestsTableAsync
+            (List<TestsModel> tests, string cin, IStatusDataAccess statusData)
         {
             //Declare datatable instance and add the columns required for UDT
             var returnTable = new DataTable();
