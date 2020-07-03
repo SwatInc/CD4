@@ -18,7 +18,7 @@ namespace CD4.DataLibrary.DataAccess
             var storedProcedure = "[dbo].[usp_GetHashForUsername]";
             var parameter = new { username = username };
 
-            var result = await SelectInsertOrUpdate<UsernameAndHashModel, dynamic>
+            var result = await SelectInsertOrUpdateAsync<UsernameAndHashModel, dynamic>
                 (storedProcedure,parameter);
             //if username is not found, return isAuthentcated as false.
             if (result is null)
@@ -33,7 +33,7 @@ namespace CD4.DataLibrary.DataAccess
             if (VerifyPassword(password, result.PasswordHash))
             {
                 storedProcedure = "[dbo].[usp_GetUserRoleAndClaims]";
-                var queryResult = await SelectInsertOrUpdate<AuthorizeDetailModel, dynamic>(storedProcedure, parameter);
+                var queryResult = await SelectInsertOrUpdateAsync<AuthorizeDetailModel, dynamic>(storedProcedure, parameter);
                 queryResult.IsAuthenticated = true;
                 return queryResult;
             }

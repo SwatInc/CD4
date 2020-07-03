@@ -41,7 +41,7 @@ namespace CD4.DataLibrary.DataAccess
 
             }
 
-            return await SelectInsertOrUpdate<bool, dynamic>(storedProcedureInUse, data);
+            return await SelectInsertOrUpdateAsync<bool, dynamic>(storedProcedureInUse, data);
         }
 
         /// <summary>

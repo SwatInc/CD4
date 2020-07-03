@@ -66,7 +66,7 @@ namespace CD4.DataLibrary.DataAccess
         public async Task<int> InsertPatient(PatientInsertDatabaseModel patient)
         {
             var storedProcedure = "[dbo].[usp_InsertPatient]";
-            return await SelectInsertOrUpdate<int, PatientInsertDatabaseModel>
+            return await SelectInsertOrUpdateAsync<int, PatientInsertDatabaseModel>
                 (storedProcedure, patient);
         }
 
@@ -75,7 +75,7 @@ namespace CD4.DataLibrary.DataAccess
             try
             {
                 var storedProcedure = "[dbo].[usp_UpdatePatientWithId]";
-                _ = await SelectInsertOrUpdate<bool, PatientUpdateDatabaseModel>
+                _ = await SelectInsertOrUpdateAsync<bool, PatientUpdateDatabaseModel>
                     (storedProcedure, patient);
                 return true;
             }

@@ -292,11 +292,11 @@ namespace CD4.DataLibrary.DataAccess
             if (string.IsNullOrEmpty(insertData.CommaDelimitedClinicalDetailsIds))
             {
                 // when clinical details are not available.
-                return await SelectInsertOrUpdate<bool, dynamic>
+                return await SelectInsertOrUpdateAsync<bool, dynamic>
                     ("[dbo].[usp_InsertAnalysisRequestSampleAndRequestedTests]", insertData.GetWithoutClinicalDetails());
             }
             //with clinical details
-            return await SelectInsertOrUpdate<bool, RequestSampleAndClinicalDetailsInsertDatabaseModel>
+            return await SelectInsertOrUpdateAsync<bool, RequestSampleAndClinicalDetailsInsertDatabaseModel>
                 ("[dbo].[usp_InsertAnalysisRequestClinicalDetailsSampleAndRequestedTests]", insertData);
         }
 
@@ -467,7 +467,7 @@ namespace CD4.DataLibrary.DataAccess
         public async Task<int> InsertRequestAsync(AnalysisRequestInsertDatabaseModel request)
         {
             var storedProcedure = "[dbo].[usp_InsertAnalysisRequest]";
-            return await SelectInsertOrUpdate<int, AnalysisRequestInsertDatabaseModel>
+            return await SelectInsertOrUpdateAsync<int, AnalysisRequestInsertDatabaseModel>
                 (storedProcedure, request);
         }
 
@@ -476,7 +476,7 @@ namespace CD4.DataLibrary.DataAccess
             try
             {
                 var storedProcedure = "[dbo].[usp_UpdateAnalysisRequest]";
-                _ = await SelectInsertOrUpdate<bool, AnalysisRequestUpdateDatabaseModel>
+                _ = await SelectInsertOrUpdateAsync<bool, AnalysisRequestUpdateDatabaseModel>
                     (storedProcedure, request);
                 return true;
             }

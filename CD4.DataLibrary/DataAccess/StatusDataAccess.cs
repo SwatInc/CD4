@@ -22,7 +22,7 @@ namespace CD4.DataLibrary.DataAccess
             var parameter = new { Status = status };
 
             //call the base class to execute the stored procedure.
-            var output = await SelectInsertOrUpdate<int, dynamic>(storedProcedure, parameter);
+            var output = await SelectInsertOrUpdateAsync<int, dynamic>(storedProcedure, parameter);
             return output;
         }
 
@@ -58,7 +58,7 @@ namespace CD4.DataLibrary.DataAccess
             //Get all tests statuses of the sample. Comma delimited int's
             var storedProcedure = "usp_GetSampleAndAllTestStatusByResultId";
             var parameters = new { ResultId = resultId };
-            var testsStatusesCsv = await SelectInsertOrUpdate<string, dynamic>(storedProcedure, parameters);
+            var testsStatusesCsv = await SelectInsertOrUpdateAsync<string, dynamic>(storedProcedure, parameters);
             //make sure that the returned value is valid. sanity check
             if (testsStatusesCsv.Length == 0)
             {
@@ -143,8 +143,9 @@ namespace CD4.DataLibrary.DataAccess
         /// <param name="cin">The CIN for the test</param>
         /// <param name="testDescription">The test description</param>
         /// <param name="testStatus">The current status for the test on the test</param>
+        /// <param name="isResulted">True if the sample has a result</param>
         /// <returns>returns a bool to indicate the task completed successfully</returns>
-        public async Task<bool> ValidateTest(string cin, string testDescription, int testStatus)
+        public async Task<bool> ValidateTest(string cin, string testDescription, int testStatus,bool isResulted)
         {
             //Verify that the test can be validated based on the current test status
             switch (testStatus)
@@ -170,10 +171,31 @@ namespace CD4.DataLibrary.DataAccess
                 default:
                     break;
             }
+            //throw if the sample does not have results
+            if (!isResulted)
+            {
+                throw new Exception("The test needs to have a result to validate.");
+            }
+            //set the stored procedure name
+            var storedProcedure = "usp_ValidateTest";
+            //set the parameters for the stored procedure
+            var parameters = new { Cin = cin, TestDescription = testDescription, TestStatus = (int)Status.Validated };
 
+            try
+            {
+                //execute the stored procedure
+                var output = await SelectInsertOrUpdateAsync<bool, dynamic>(storedProcedure, parameters);
+                //update sample status if required.
 
+                //return true after updating test status and sample status.
+                return true;
+            }
+            catch (Exception)
+            {
+                //throw the exception, it will be handled in the UI layer
+                throw;
+            }
 
-            throw new NotImplementedException();
         }
 
         /// <summary>

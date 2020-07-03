@@ -81,7 +81,7 @@ namespace CD4.DataLibrary.DataAccess
             return returnData;
         }
 
-        internal async Task<T> SelectInsertOrUpdate<T,U>(string storedProcedure, U parameters)
+        internal async Task<T> SelectInsertOrUpdateAsync<T,U>(string storedProcedure, U parameters)
         {
             using (IDbConnection connection = new SqlConnection(helper.GetConnectionString()))
             {
