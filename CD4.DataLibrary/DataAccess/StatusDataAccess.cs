@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace CD4.DataLibrary.DataAccess
 {
@@ -134,6 +135,43 @@ namespace CD4.DataLibrary.DataAccess
             var storedProcedure = "[dbo].[usp_GetAllStatus]";
             var output =  await LoadDataAsync<StatusModel>(storedProcedure);
             return output.ToList();
+        }
+
+        /// <summary>
+        /// Mark the specified test as validated. 
+        /// </summary>
+        /// <param name="cin">The CIN for the test</param>
+        /// <param name="testDescription">The test description</param>
+        /// <param name="testStatus">The current status for the test on the test</param>
+        /// <returns>returns a bool to indicate the task completed successfully</returns>
+        public async Task<bool> ValidateTest(string cin, string testDescription, int testStatus)
+        {
+            //Verify that the test can be validated
+            switch (testStatus)
+            {
+                case (int)Status.Registered:
+                    throw new Exception("Cannot validate a test with registered status.");
+                case (int)Status.Collected:
+                    //Ignore.
+                    break;
+                case (int)Status.Received:
+                    //Ignore.
+                    break;
+                case (int)Status.ToValidate:
+                    //Ignore.
+                    break;
+                case (int)Status.Validated:
+                    throw new Exception("Test already validated.");
+                case (int)Status.Processing:
+                    //Ignore.
+                    break;
+                case (int)Status.Rejected:
+                    throw new Exception("Cannot validate a rejected test.");
+                default:
+                    break;
+            }
+
+            throw new NotImplementedException();
         }
 
         /// <summary>
