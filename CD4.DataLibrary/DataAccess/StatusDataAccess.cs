@@ -146,30 +146,32 @@ namespace CD4.DataLibrary.DataAccess
         /// <returns>returns a bool to indicate the task completed successfully</returns>
         public async Task<bool> ValidateTest(string cin, string testDescription, int testStatus)
         {
-            //Verify that the test can be validated
+            //Verify that the test can be validated based on the current test status
             switch (testStatus)
             {
                 case (int)Status.Registered:
                     throw new Exception("Cannot validate a test with registered status.");
                 case (int)Status.Collected:
-                    //Ignore.
+                    //Ignore, can validate test with this status
                     break;
                 case (int)Status.Received:
-                    //Ignore.
+                    //Ignore, can validate test with this status
                     break;
                 case (int)Status.ToValidate:
-                    //Ignore.
+                    //Ignore, can validate test with this status
                     break;
                 case (int)Status.Validated:
                     throw new Exception("Test already validated.");
                 case (int)Status.Processing:
-                    //Ignore.
+                    //Ignore, can validate test with this status
                     break;
                 case (int)Status.Rejected:
                     throw new Exception("Cannot validate a rejected test.");
                 default:
                     break;
             }
+
+
 
             throw new NotImplementedException();
         }
