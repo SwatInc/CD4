@@ -27,6 +27,10 @@ namespace CD4.UI.Library.ViewModel
         //event that notifies user interface that new data has been loaded and that datagrids needs to be refreshed.
         public event EventHandler RequestDataRefreshed;
         public event EventHandler LoadAllStatusData;
+        //Push logs to the UI layer
+        public event EventHandler<string> PushingLogs;
+        //Push messages that does not require user input tracking
+        public event EventHandler<string> PushingMessages;
         #endregion
 
         #region Default Constructor
@@ -155,7 +159,7 @@ namespace CD4.UI.Library.ViewModel
             catch (Exception ex)
             {
 
-                MessageBox.Show(ex.Message);
+                PushingMessages?.Invoke(this, ex.Message);
             }
         }
 

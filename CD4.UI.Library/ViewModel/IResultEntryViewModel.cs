@@ -24,5 +24,7 @@ namespace CD4.UI.Library.ViewModel
 
         event PropertyChangedEventHandler PropertyChanged;
         event EventHandler RequestDataRefreshed;
+        event EventHandler<string> PushingMessages;
+        event EventHandler<string> PushingLogs;
     }
 }

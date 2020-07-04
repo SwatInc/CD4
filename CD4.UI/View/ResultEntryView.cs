@@ -32,9 +32,15 @@ namespace CD4.UI.View
             simpleButtonReport.Click += SimpleButtonReport_Click;
             simpleButtonLoadWorksheet.Click += LoadWorkSheet;
             _viewModel.RequestDataRefreshed += RefreshViewData;
+            _viewModel.PushingMessages += _viewModel_PushingMessages;
             gridViewSamples.PopupMenuShowing += ShowSamplePopupMenu;
             gridViewTests.PopupMenuShowing += ShowTestPopupMenu;
             lookUpEditSampleStatusFilter.EditValueChanged += LookUpEditSampleStatusFilter_EditValueChanged;
+        }
+
+        private void _viewModel_PushingMessages(object sender, string e)
+        {
+            XtraMessageBox.Show(e);
         }
 
         /// <summary>
