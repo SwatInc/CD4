@@ -3,7 +3,7 @@ CREATE PROCEDURE [dbo].[usp_ValidateTest]
 	@Cin varchar(50),
 	@TestDescription varchar(50),
 	@TestStatus int
-AS
+AS	
 BEGIN
 SET NOCOUNT ON;
 --variable for storing test Id
