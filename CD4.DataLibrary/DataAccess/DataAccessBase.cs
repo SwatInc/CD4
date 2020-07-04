@@ -87,8 +87,9 @@ namespace CD4.DataLibrary.DataAccess
             {
                 try
                 {
-                    return await connection.QueryFirstOrDefaultAsync<T>
+                    var s =  await connection.QueryFirstOrDefaultAsync<T>
                         (storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+                    return s;
                 }
                 catch (Exception ex)
                 {

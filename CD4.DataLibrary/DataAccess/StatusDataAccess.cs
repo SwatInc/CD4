@@ -148,28 +148,10 @@ namespace CD4.DataLibrary.DataAccess
         public async Task<bool> ValidateTest(string cin, string testDescription, int testStatus,string result)
         {
             //Verify that the test can be validated based on the current test status
-            switch (testStatus)
+            var isOkToValidateMessage = IsTestStatusAcceptableToValidate(testStatus);
+            if (!string.IsNullOrEmpty(isOkToValidateMessage))
             {
-                case (int)Status.Registered:
-                    throw new Exception("Cannot validate a test with registered status.");
-                case (int)Status.Collected:
-                    //Ignore, can validate test with this status
-                    break;
-                case (int)Status.Received:
-                    //Ignore, can validate test with this status
-                    break;
-                case (int)Status.ToValidate:
-                    //Ignore, can validate test with this status
-                    break;
-                case (int)Status.Validated:
-                    throw new Exception("Test already validated.");
-                case (int)Status.Processing:
-                    //Ignore, can validate test with this status
-                    break;
-                case (int)Status.Rejected:
-                    throw new Exception("Cannot validate a rejected test.");
-                default:
-                    break;
+                throw new Exception(isOkToValidateMessage);
             }
             //throw if the sample does not have results
             if (!IsResulted(result))
@@ -184,8 +166,15 @@ namespace CD4.DataLibrary.DataAccess
             try
             {
                 //execute the stored procedure
-                var output = await SelectInsertOrUpdateAsync<bool, dynamic>(storedProcedure, parameters);
-                //update sample status if required.
+                var output = await LoadDataWithParameterAsync<StatusIdModel, dynamic>(storedProcedure, parameters);
+                //if output has only one item... update sample status if required.
+                if (output.Count == 1)
+                {   //check whether the status is validated.
+                    if (output.First<StatusIdModel>().StatusId == (int)Status.Validated)
+                    {//Mark sample sample status as validated
+                        await ValidateOnlySample(cin);
+                    }
+                }
 
                 //return true after updating test status and sample status.
                 return true;
@@ -196,6 +185,54 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
 
+        }
+       
+        /// <summary>
+        /// Change only sample status to validated. Does not mess with test status.
+        /// Do not use this method if test status needs to be marked as validated on validating sample.
+        /// </summary>
+        /// <param name="cin">Sample CIN</param>
+        private async Task ValidateOnlySample(string cin)
+        {
+            var storedProcedure = "usp_ValidateOnlysample";
+            var parameter = new { Cin = cin };
+            try
+            {
+                _ = await SelectInsertOrUpdateAsync<dynamic, dynamic>(storedProcedure, parameter);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Check whether the tests status is acceptable to validate test
+        /// </summary>
+        /// <param name="testStatus">The current test status</param>
+        /// <returns>return null if acceptable, else returns the appropriate error message.</returns>
+        private string IsTestStatusAcceptableToValidate(int testStatus)
+        {
+            switch (testStatus)
+            {
+                case (int)Status.Registered:
+                    return "Cannot validate a test with registered status.";
+                case (int)Status.Collected:
+                    return null;
+                case (int)Status.Received:
+                    return null;
+                case (int)Status.ToValidate:
+                    return null;
+                case (int)Status.Validated:
+                    return "Test already validated.";
+                case (int)Status.Processing:
+                    return null;
+                case (int)Status.Rejected:
+                    return "Cannot validate a rejected test.";
+                default:
+                    return null;
+            }
         }
 
         /// <summary>

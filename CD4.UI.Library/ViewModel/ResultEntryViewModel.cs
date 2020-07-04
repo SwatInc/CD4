@@ -149,7 +149,8 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-                await statusDataAccess.ValidateTest(resultModel.Cin, resultModel.Test, resultModel.StatusIconId, resultModel.Result);
+                var output = await statusDataAccess.ValidateTest(resultModel.Cin, resultModel.Test, resultModel.StatusIconId, resultModel.Result);
+                UpdateUiAfterOnTestValidation(output, resultModel);
             }
             catch (Exception ex)
             {
@@ -178,6 +179,56 @@ namespace CD4.UI.Library.ViewModel
             }
 
 
+        }
+
+        /// <summary>
+        /// Changes the test status icon on grid UI. Changes the sample status icon as validated if all the tests are validated.
+        /// </summary>
+        private void UpdateUiAfterOnTestValidation(bool output, ResultModel resultModel)
+        {
+            bool OkToMarkSampleValidated = true;
+            bool IsRefreshUiGrids = false;
+            //if output is true
+            if (output)
+            {//change the status icon to validated.
+                foreach (var item in SelectedResultData)
+                {
+                    //if the validated test equals the current test being iterated...
+                    if (item.Test == resultModel.Test)
+                    {
+                        //Set the StatusIconId to 5, which will internally change the icon to validated.
+                        item.StatusIconId = 5;
+                        //The UI needs to be refreshed.
+                        IsRefreshUiGrids = true;
+                    }
+                    //Set the flag to set the sample status icon as validated.
+                    if (item.StatusIconId != 5)
+                    {
+                        OkToMarkSampleValidated = false;
+                    }
+                }
+            }
+            //decide to mark set the sample icon as validated.
+            if (OkToMarkSampleValidated)
+            {
+                //change the sample icon to validated.
+                foreach (var item in RequestData)
+                {
+                    if (item.Cin == resultModel.Cin)
+                    {
+                        item.StatusIconId = 5;
+                        //needs to refresh the UI
+                        OkToMarkSampleValidated = true;
+                    }
+                }
+            }
+
+            //refresh the UI grids if required.
+            if (IsRefreshUiGrids)
+            {
+                //Raise the event to notify the UI to refresh the grid datasource.
+                RequestDataRefreshed?.Invoke(this, EventArgs.Empty);
+            }
         }
 
         private async void UpdateDatabaseResults(object sender, ListChangedEventArgs e)

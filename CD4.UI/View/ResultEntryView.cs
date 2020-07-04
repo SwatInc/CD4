@@ -161,8 +161,6 @@ namespace CD4.UI.View
             Debug.WriteLine($"validating Test: {testToValidate.Cin}, Test: {testToValidate.Test}, Result: {testToValidate.Result}");
 
             await _viewModel.ValidateTest(testToValidate);
-
-
         }
 
         /// <summary>
