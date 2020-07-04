@@ -1,6 +1,5 @@
 ﻿using CD4.UI.Library.Model;
 using CD4.UI.Library.ViewModel;
-using DevExpress.Office.Drawing;
 using DevExpress.Utils.Menu;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Views.Base;
@@ -156,10 +155,14 @@ namespace CD4.UI.View
         /// <summary>
         /// Call the view model to validate the test
         /// </summary>
-        private void OnValidateTestClick(object sender, EventArgs e)
+        private async void OnValidateTestClick(object sender, EventArgs e)
         {
             var testToValidate = GetTestForMenu(sender, e);
             Debug.WriteLine($"validating Test: {testToValidate.Cin}, Test: {testToValidate.Test}, Result: {testToValidate.Result}");
+
+            await _viewModel.ValidateTest(testToValidate);
+
+
         }
 
         /// <summary>

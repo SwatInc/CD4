@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace CD4.UI.Library.ViewModel
 {
@@ -141,6 +142,19 @@ namespace CD4.UI.Library.ViewModel
                 {
                     CodifiedPhrasesForSelectedTest.Add(phrase);
                 }
+            }
+        }
+
+        public async Task ValidateTest(ResultModel resultModel)
+        {
+            try
+            {
+                await statusDataAccess.ValidateTest(resultModel.Cin, resultModel.Test, resultModel.StatusIconId, resultModel.Result);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
             }
         }
 
