@@ -4,11 +4,9 @@ using CD4.UI.Library.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace CD4.UI.Library.ViewModel
 {
@@ -101,6 +99,14 @@ namespace CD4.UI.Library.ViewModel
 
         #region Public Methods
 
+        public async Task GetWorkSheet()
+        {
+            var worksheet = await workSheetDataAccess.GetWorklistBySpecifiedDateAndStatusIdAsync
+                (GetSelectedStatusIdOrDefault(), LoadWorksheetFromDate);
+            await DisplayWorksheet(worksheet);
+
+        }
+
         public async Task SetSelectedSampleAsync(RequestSampleModel requestSampleData)
         {
             if (requestSampleData is null) return;
@@ -191,7 +197,6 @@ namespace CD4.UI.Library.ViewModel
 
 
         }
-
         /// <summary>
         /// Changes the test status icon on grid UI. Changes the sample status icon as validated if all the tests are validated.
         /// </summary>
@@ -242,7 +247,6 @@ namespace CD4.UI.Library.ViewModel
                 RequestDataRefreshed?.Invoke(this, EventArgs.Empty);
             }
         }
-
         private async void UpdateDatabaseResults(object sender, ListChangedEventArgs e)
         {
             //detect when a result is modified.
@@ -252,12 +256,10 @@ namespace CD4.UI.Library.ViewModel
                 await InsertUpdateResultByIdAsync(testData.Result, testData.Id);
             }
         }
-
         private async Task InsertUpdateResultByIdAsync(string result, int resultId)
         {
             var response = await resultDataAccess.InsertUpdateResultByResultIdAsync(resultId, result);
         }
-
         private void SetClinicalDetailsForSelectedSample(string delimitedDetails)
         {
             SelectedClinicalDetails.Clear();
@@ -393,16 +395,7 @@ namespace CD4.UI.Library.ViewModel
 
             #endregion
         }
-
-        public async Task GetWorkSheet()
-        {
-            var worksheet = await workSheetDataAccess.GetWorklistBySpecifiedDateAndStatusIdAsync
-                (GetSelectedStatusIdOrDefault(),LoadWorksheetFromDate);
-            await DisplayWorksheet(worksheet);
-
-        }
-
-       private int GetSelectedStatusIdOrDefault()
+        private int GetSelectedStatusIdOrDefault()
         {
             //declare a variable to hold the selected statusId
             int selectedStatusId;
@@ -421,7 +414,6 @@ namespace CD4.UI.Library.ViewModel
 
             return selectedStatusId;
         }
-
         private async Task DisplayWorksheet(CD4.DataLibrary.Models.WorklistModel worklist)
         {
             //Clear current request data if any...
