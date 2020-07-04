@@ -50,6 +50,7 @@ namespace CD4.UI.View
             this.gridColumnReceivedDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnCollectedDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnSequence = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnSampleStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridControlTests = new DevExpress.XtraGrid.GridControl();
             this.gridViewTests = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumnTestName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -62,7 +63,6 @@ namespace CD4.UI.View
             this.label1 = new System.Windows.Forms.Label();
             this.dateEditLoadWorksheetFrom = new DevExpress.XtraEditors.DateEdit();
             this.simpleButtonReport = new DevExpress.XtraEditors.SimpleButton();
-            this.gridColumnSampleStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).BeginInit();
             this.splitContainerControlPatient.SuspendLayout();
@@ -312,6 +312,15 @@ namespace CD4.UI.View
             this.gridColumnSequence.VisibleIndex = 0;
             this.gridColumnSequence.Width = 40;
             // 
+            // gridColumnSampleStatus
+            // 
+            this.gridColumnSampleStatus.Caption = " ";
+            this.gridColumnSampleStatus.FieldName = "StatusIcon";
+            this.gridColumnSampleStatus.Name = "gridColumnSampleStatus";
+            this.gridColumnSampleStatus.Visible = true;
+            this.gridColumnSampleStatus.VisibleIndex = 1;
+            this.gridColumnSampleStatus.Width = 32;
+            // 
             // gridControlTests
             // 
             this.gridControlTests.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -444,21 +453,13 @@ namespace CD4.UI.View
             this.simpleButtonReport.TabIndex = 0;
             this.simpleButtonReport.Text = "Report";
             // 
-            // gridColumnSampleStatus
-            // 
-            this.gridColumnSampleStatus.Caption = " ";
-            this.gridColumnSampleStatus.FieldName = "StatusIcon";
-            this.gridColumnSampleStatus.Name = "gridColumnSampleStatus";
-            this.gridColumnSampleStatus.Visible = true;
-            this.gridColumnSampleStatus.VisibleIndex = 1;
-            this.gridColumnSampleStatus.Width = 32;
-            // 
             // ResultEntryView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(839, 401);
             this.Controls.Add(this.splitContainerControlPatient);
+            this.KeyPreview = true;
             this.Name = "ResultEntryView";
             this.Text = "ResultEntryView";
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).EndInit();

@@ -35,7 +35,96 @@ namespace CD4.UI.View
             _viewModel.PushingMessages += _viewModel_PushingMessages;
             gridViewSamples.PopupMenuShowing += ShowSamplePopupMenu;
             gridViewTests.PopupMenuShowing += ShowTestPopupMenu;
+            this.KeyUp += ResultEntryView_KeyUp;
             lookUpEditSampleStatusFilter.EditValueChanged += LookUpEditSampleStatusFilter_EditValueChanged;
+        }
+
+        private async void ResultEntryView_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Enter:
+                    break;
+                case Keys.ShiftKey:
+                    break;
+                case Keys.ControlKey:
+                    break;
+                case Keys.F1:
+                    break;
+                case Keys.F2:
+                    break;
+                case Keys.F3:
+                    break;
+                case Keys.F4:
+                    break;
+                case Keys.F5:
+                    break;
+                case Keys.F6:
+                    break;
+                case Keys.F7:
+                    break;
+                case Keys.F8:
+                    break;
+                case Keys.F9:
+                    break;
+                case Keys.F11: //Validate selected test
+                    //get the selected row handle
+                    var selectedRowHandle = gridViewTests.FocusedRowHandle;
+                    //Ignore if no row is selected.
+                    if (selectedRowHandle >= 0)
+                    {
+                        //Get selected result model
+                        var resultModel = (ResultModel)gridViewTests.GetRow(selectedRowHandle);
+                        await _viewModel.ValidateTest(resultModel);
+                    }
+                    break;
+                case Keys.F12:
+                    break;
+                case Keys.F13:
+                    break;
+                case Keys.F14:
+                    break;
+                case Keys.F15:
+                    break;
+                case Keys.F16:
+                    break;
+                case Keys.F17:
+                    break;
+                case Keys.F18:
+                    break;
+                case Keys.F19:
+                    break;
+                case Keys.F20:
+                    break;
+                case Keys.F21:
+                    break;
+                case Keys.F22:
+                    break;
+                case Keys.F23:
+                    break;
+                case Keys.F24:
+                    break;
+                case Keys.NumLock:
+                    break;
+                case Keys.Scroll:
+                    break;
+                case Keys.LShiftKey:
+                    break;
+                case Keys.RShiftKey:
+                    break;
+                case Keys.LControlKey:
+                    break;
+                case Keys.RControlKey:
+                    break;
+                case Keys.Shift:
+                    break;
+                case Keys.Control:
+                    break;
+                case Keys.Alt:
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void _viewModel_PushingMessages(object sender, string e)
