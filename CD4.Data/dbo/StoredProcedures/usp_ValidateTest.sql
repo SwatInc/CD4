@@ -13,7 +13,7 @@ SET NOCOUNT ON;
 --the query to update the specified test status to validated status.
 	UPDATE [dbo].[Result]
 	SET [StatusId] = @TestStatus
-	WHERE [Sample_Cin] = @Cin AND @TestId = @TestId;
+	WHERE [Sample_Cin] = @Cin AND [TestId] = @TestId;
 --select the distinct status for all the tests in the sample.
 	SELECT DISTINCT([StatusId]) FROM [dbo].[Result] WHERE [Sample_Cin] = @Cin;
 END
