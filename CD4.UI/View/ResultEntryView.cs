@@ -215,7 +215,7 @@ namespace CD4.UI.View
         List<DXMenuItem> CreateTestMenuItemsCollection(GridView view, int rowHandle)
         {
             var menuItems = new List<DXMenuItem>();
-            menuItems.Add(new DXMenuItem("Validate Test [ F7 ]", new EventHandler(OnValidateTestClick)) { Tag = new RowInfo(view, rowHandle) });
+            menuItems.Add(new DXMenuItem("Validate Test [ F11 ]", new EventHandler(OnValidateTestClick)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Reject Test [ Shift+F11 ]", new EventHandler(OnRejectTestClick)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Show test history [  ]", new EventHandler(OnShowTestHistoryClick)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Show reruns [ F6 ]", new EventHandler(OnShowRerunsClick)) { Tag = new RowInfo(view, rowHandle) });
