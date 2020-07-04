@@ -15,6 +15,7 @@ namespace CD4.UI.Library.ViewModel
         Task SetTestCodifiedPhrasesAsync(ResultModel selectedTest);
         Task GetWorkSheet();
         Task ValidateTest(ResultModel resultModel);
+        Task ValidateSample(RequestSampleModel requestSampleModel);
 
         BindingList<CodifiedResultsModel> CodifiedPhrasesForSelectedTest { get; set; }
         BindingList<string> SelectedClinicalDetails { get; set; }

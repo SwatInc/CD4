@@ -67,7 +67,7 @@ namespace CD4.UI.View
                     break;
                 case Keys.F9:
                     break;
-                case Keys.F11: //Validate selected test
+                case Keys.F11: //Validate selected test on pressing F11
                     //get the selected row handle
                     var selectedRowHandle = gridViewTests.FocusedRowHandle;
                     //Ignore if no row is selected.
@@ -261,10 +261,12 @@ namespace CD4.UI.View
         /// <summary>
         /// Call the view model to validate the sample
         /// </summary>
-        void OnValidateSampleClick(object sender, EventArgs e)
+        async void OnValidateSampleClick(object sender, EventArgs e)
         {
             var sampleToValidate = GetSampleForMenu(sender, e);
             Debug.WriteLine("validating sample: " + sampleToValidate.Cin);
+            //Call the view model to mark the sample and applicable associated tests as validated.
+            await _viewModel.ValidateSample(sampleToValidate);
         }
 
         /// <summary>

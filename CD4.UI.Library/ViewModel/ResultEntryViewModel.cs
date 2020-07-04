@@ -176,6 +176,14 @@ namespace CD4.UI.Library.ViewModel
             }
         }
 
+        /// <summary>
+        /// Marks the sample and all the applicable for the sample as validated.
+        /// </summary>
+        public async Task ValidateSample(RequestSampleModel requestSampleModel)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
 
         #region Private Methods
