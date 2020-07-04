@@ -145,7 +145,7 @@ namespace CD4.DataLibrary.DataAccess
         /// <param name="testStatus">The current status for the test on the test</param>
         /// <param name="isResulted">True if the sample has a result</param>
         /// <returns>returns a bool to indicate the task completed successfully</returns>
-        public async Task<bool> ValidateTest(string cin, string testDescription, int testStatus,bool isResulted)
+        public async Task<bool> ValidateTest(string cin, string testDescription, int testStatus,string result)
         {
             //Verify that the test can be validated based on the current test status
             switch (testStatus)
@@ -172,7 +172,7 @@ namespace CD4.DataLibrary.DataAccess
                     break;
             }
             //throw if the sample does not have results
-            if (!isResulted)
+            if (!IsResulted(result))
             {
                 throw new Exception("The test needs to have a result to validate.");
             }
@@ -196,6 +196,20 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
 
+        }
+
+        /// <summary>
+        /// Checks whether the result contains anything.
+        /// </summary>
+        /// <param name="result">The string result</param>
+        /// <returns>True if result is not null or empty</returns>
+        private bool IsResulted(string result)
+        {
+            if (string.IsNullOrEmpty(result))
+            {
+                return false;
+            }
+            return true;
         }
 
         /// <summary>
