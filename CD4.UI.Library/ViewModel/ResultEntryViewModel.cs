@@ -227,6 +227,7 @@ namespace CD4.UI.Library.ViewModel
                 {
                     if (item.Cin == resultModel.Cin)
                     {
+                        //The icon id 5 corresponds to validated icon. Show on the UI, sample as validated.
                         item.StatusIconId = 5;
                         //needs to refresh the UI
                         OkToMarkSampleValidated = true;
