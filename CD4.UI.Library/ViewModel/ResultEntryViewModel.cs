@@ -149,16 +149,23 @@ namespace CD4.UI.Library.ViewModel
             }
         }
 
+        /// <summary>
+        /// Mark the test as validated.
+        /// </summary>
+        /// <param name="resultModel">Result model with the test information of test to be validated</param>
+        /// <returns>a Task</returns>
         public async Task ValidateTest(ResultModel resultModel)
         {
             try
             {
+                //mark the test as validated.
                 var output = await statusDataAccess.ValidateTest(resultModel.Cin, resultModel.Test, resultModel.StatusIconId, resultModel.Result);
+                //Update the UI to show that the test as validated...ie., if it has been validated.
                 UpdateUiAfterOnTestValidation(output, resultModel);
             }
             catch (Exception ex)
             {
-
+                //Push the error message to UI
                 PushingMessages?.Invoke(this, ex.Message);
             }
         }
