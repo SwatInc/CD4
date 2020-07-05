@@ -131,10 +131,17 @@ namespace CD4.DataLibrary.DataAccess
         /// <returns>List of StatusModel with Id and Status</returns>
         public async Task<List<StatusModel>> GetAllStatus()
         {
-            //the stored procedure name to call
-            var storedProcedure = "[dbo].[usp_GetAllStatus]";
-            var output =  await LoadDataAsync<StatusModel>(storedProcedure);
-            return output.ToList();
+            try
+            {
+                //the stored procedure name to call
+                var storedProcedure = "[dbo].[usp_GetAllStatus]";
+                var output = await LoadDataAsync<StatusModel>(storedProcedure);
+                return output.ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>
@@ -185,6 +192,11 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
 
+        }
+
+        public async Task<bool> ValidateSample()
+        {
+            throw new NotImplementedException();
         }
        
         /// <summary>

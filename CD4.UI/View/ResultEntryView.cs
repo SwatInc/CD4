@@ -455,6 +455,9 @@ namespace CD4.UI.View
             lookUpEditSampleStatusFilter.Properties.DataSource = _viewModel.AllStatus;
             lookUpEditSampleStatusFilter.Properties.DisplayMember = nameof(StatusModel.Status);
             lookUpEditSampleStatusFilter.Properties.ValueMember = nameof(StatusModel.Id);
+
+            //bind the enable/disable functionality of "Load Worksheet" button
+            simpleButtonLoadWorksheet.DataBindings.Add(new Binding("Enabled", _viewModel, nameof(_viewModel.IsloadWorkSheetButtonEnabled)));
             #endregion
         }
 

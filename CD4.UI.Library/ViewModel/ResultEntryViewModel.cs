@@ -15,6 +15,7 @@ namespace CD4.UI.Library.ViewModel
         #region Private Properties
         private List<CodifiedResultsModel> TempCodifiedPhrasesList;
         private DateTime loadWorksheetFromDate;
+        private bool isloadWorkSheetButtonEnabled;
         private readonly IWorkSheetDataAccess workSheetDataAccess;
         private readonly IMapper mapper;
         private readonly IResultDataAccess resultDataAccess;
@@ -25,6 +26,7 @@ namespace CD4.UI.Library.ViewModel
         //event that notifies user interface that new data has been loaded and that datagrids needs to be refreshed.
         public event EventHandler RequestDataRefreshed;
         public event EventHandler LoadAllStatusData;
+        public event EventHandler LoadInitialWorklist;
         //Push logs to the UI layer
         public event EventHandler<string> PushingLogs;
         //Push messages that does not require user input tracking
@@ -53,12 +55,27 @@ namespace CD4.UI.Library.ViewModel
             this.mapper = mapper;
             this.resultDataAccess = resultDataAccess;
             this.statusDataAccess = statusDataAccess;
-            GetWorkSheet().ConfigureAwait(true);
             SelectedResultData.ListChanged += UpdateDatabaseResults;
             LoadAllStatusData += GetAllStatusData;
+            LoadInitialWorklist += ResultEntryViewModel_LoadInitialWorklist;
 
             //load all status Data
             LoadAllStatusData?.Invoke(this, EventArgs.Empty);
+            //Load initial Worklist
+            LoadInitialWorklist?.Invoke(this, EventArgs.Empty);
+        }
+
+        private async void ResultEntryViewModel_LoadInitialWorklist(object sender, EventArgs e)
+        {
+            try
+            {
+                await GetWorkSheet();
+            }
+            catch (Exception ex)
+            {
+                PushingMessages?.Invoke(this, ex.Message);
+            }
+
         }
 
         #endregion
@@ -95,16 +112,44 @@ namespace CD4.UI.Library.ViewModel
         public List<StatusModel> AllStatus { get; set; }
         public StatusModel SelectedStatus { get; set; }
 
+        //enable/disable status of loadWorksheet button
+        public bool IsloadWorkSheetButtonEnabled
+        {
+            get => isloadWorkSheetButtonEnabled;
+            set
+            {
+                //if the value is already set....
+                if (isloadWorkSheetButtonEnabled == value)
+                {
+                    //return without setting it again
+                    return;
+                }
+                //set the new value
+                isloadWorkSheetButtonEnabled = value;
+                //Raise property changed
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region Public Methods
 
         public async Task GetWorkSheet()
         {
-            var worksheet = await workSheetDataAccess.GetWorklistBySpecifiedDateAndStatusIdAsync
-                (GetSelectedStatusIdOrDefault(), LoadWorksheetFromDate);
-            await DisplayWorksheet(worksheet);
-
+            try
+            {
+                //Disable the load worksheet button to avoid multiple clicks
+                IsloadWorkSheetButtonEnabled = false;
+                var worksheet = await workSheetDataAccess.GetWorklistBySpecifiedDateAndStatusIdAsync
+                    (GetSelectedStatusIdOrDefault(), LoadWorksheetFromDate);
+                await DisplayWorksheet(worksheet);
+            }
+            finally
+            {
+                //enable the load worksheet button again even if the call fails
+                IsloadWorkSheetButtonEnabled = true;
+            }
         }
 
         public async Task SetSelectedSampleAsync(RequestSampleModel requestSampleData)
@@ -193,17 +238,22 @@ namespace CD4.UI.Library.ViewModel
         /// </summary>
         private async void GetAllStatusData(object sender, EventArgs e)
         {
-            //call the datalayer for the data.
-            var result = await statusDataAccess.GetAllStatus();
-            //automap the data onto a list of corresponding local model
-            var statusModel = mapper.Map<List<StatusModel>>(result);
-            //add the data to the datasource.
-            foreach (var item in statusModel)
+            try
             {
-                AllStatus.Add(item);
+                //call the datalayer for the data.
+                var result = await statusDataAccess.GetAllStatus();
+                //automap the data onto a list of corresponding local model
+                var statusModel = mapper.Map<List<StatusModel>>(result);
+                //add the data to the datasource.
+                foreach (var item in statusModel)
+                {
+                    AllStatus.Add(item);
+                }
             }
-
-
+            catch (Exception ex)
+            {
+                PushingMessages?.Invoke(this, ex.Message);
+            }
         }
         /// <summary>
         /// Changes the test status icon on grid UI. Changes the sample status icon as validated if all the tests are validated.

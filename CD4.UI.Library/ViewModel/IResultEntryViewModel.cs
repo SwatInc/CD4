@@ -22,6 +22,7 @@ namespace CD4.UI.Library.ViewModel
         DateTime LoadWorksheetFromDate { get; set; }
         List<StatusModel> AllStatus { get; set; }
         StatusModel SelectedStatus { get; set; }
+        bool IsloadWorkSheetButtonEnabled { get; set; }
 
         event PropertyChangedEventHandler PropertyChanged;
         event EventHandler RequestDataRefreshed;
