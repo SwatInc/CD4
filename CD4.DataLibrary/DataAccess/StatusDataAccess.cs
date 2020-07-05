@@ -204,11 +204,8 @@ namespace CD4.DataLibrary.DataAccess
 
             try
             {
-                //call the stored procedure. not required catch the return
-                var output = await SelectInsertOrUpdateAsync<StatusUpdatedSampleAndTestStatusModel, dynamic>(storedProcedure, parameters);
-                //Get the sample and test statuses
-
-                throw new NotImplementedException();
+                //call the stored procedure. Returns the status of the sample status with all associated test status regardless of the change
+               return await ValidateSampleAndGetUpdatedSampleAndTestStatus<dynamic>(storedProcedure, parameters);
             }
             catch (Exception)
             {

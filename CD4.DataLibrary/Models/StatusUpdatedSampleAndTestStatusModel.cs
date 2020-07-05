@@ -8,7 +8,7 @@ namespace CD4.DataLibrary.Models
 {
     public class StatusUpdatedSampleAndTestStatusModel
     {
-        public StatusUpdatedSampleModel Sample { get; set; }
-        public List<StatusUpdatedTestModel> Tests { get; set; }
+        public StatusUpdatedSampleModel SampleStatus { get; set; }
+        public List<StatusUpdatedTestModel> TestStatusList { get; set; }
     }
 }

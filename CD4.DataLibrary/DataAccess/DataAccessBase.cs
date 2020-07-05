@@ -169,6 +169,38 @@ namespace CD4.DataLibrary.DataAccess
             };
         }
 
+
+        internal async Task<StatusUpdatedSampleAndTestStatusModel> ValidateSampleAndGetUpdatedSampleAndTestStatus<T>(string storedProcedure, T parameters)
+        {
+            var SampleStatus = new StatusUpdatedSampleModel();
+            var TestStatus = new List<StatusUpdatedTestModel>();
+            try
+            {
+                using (IDbConnection connection = new SqlConnection(helper.GetConnectionString()))
+                {
+                    using (var reader = await connection.QueryMultipleAsync
+                        (storedProcedure, parameters, commandType: CommandType.StoredProcedure))
+                    {
+                        SampleStatus = reader.Read<StatusUpdatedSampleModel>().FirstOrDefault();
+                        TestStatus = reader.Read<StatusUpdatedTestModel>().ToList();
+                    }
+
+                }
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+            //no need to check for nulls from the returned list. It will always be populated.
+            return new StatusUpdatedSampleAndTestStatusModel()
+            {
+                SampleStatus = SampleStatus,
+                TestStatusList = TestStatus
+            };
+        }
+
         /// <summary>
         /// Gets data needed to generate an analysis report by using the provided Cin(Parameter) and stored procedure
         /// </summary>
