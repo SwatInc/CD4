@@ -2,9 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace CD4.DataLibrary.DataAccess
 {
@@ -195,6 +193,12 @@ namespace CD4.DataLibrary.DataAccess
 
         }
 
+        /// <summary>
+        /// Mark a specified sample as valdated after validating associated tests. 
+        /// This will not validate the specified sample if one or more associated tests cannot be validated/ is not rejected.
+        /// </summary>
+        /// <param name="cin">The CIN for the sample to validate</param>
+        /// <returns>A model containing sample status and associated tests status after update operation which can be used to chnage displayed UI status</returns>
         public async Task<StatusUpdatedSampleAndTestStatusModel> ValidateSample(string cin)
         {
             //set the stored procedure name
@@ -209,7 +213,7 @@ namespace CD4.DataLibrary.DataAccess
             }
             catch (Exception)
             {
-
+                //Not handling errors in this layer.
                 throw;
             }
         }
