@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -194,9 +195,26 @@ namespace CD4.DataLibrary.DataAccess
 
         }
 
-        public async Task<bool> ValidateSample()
+        public async Task<StatusUpdatedSampleAndTestStatusModel> ValidateSample(string cin)
         {
-            throw new NotImplementedException();
+            //set the stored procedure name
+            var storedProcedure = "[dbo].[usp_ValidateSampleAndApplicableAssociatedTests]";
+            //set the parameters for the stored procedure
+            var parameters = new { Cin = cin };
+
+            try
+            {
+                //call the stored procedure. not required catch the return
+                var output = await SelectInsertOrUpdateAsync<StatusUpdatedSampleAndTestStatusModel, dynamic>(storedProcedure, parameters);
+                //Get the sample and test statuses
+
+                throw new NotImplementedException();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
        
         /// <summary>

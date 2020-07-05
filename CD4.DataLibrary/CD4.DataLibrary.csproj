@@ -118,6 +118,9 @@
     <Compile Include="Models\SitesModel.cs" />
     <Compile Include="Models\StatusIdModel.cs" />
     <Compile Include="Models\StatusModel.cs" />
+    <Compile Include="Models\StatusUpdatedSampleAndTestStatusModel.cs" />
+    <Compile Include="Models\StatusUpdatedSampleModel.cs" />
+    <Compile Include="Models\StatusUpdatedTestModel.cs" />
     <Compile Include="Models\TestsModel.cs" />
     <Compile Include="Models\UsernameAndHashModel.cs" />
     <Compile Include="Models\WorklistModel.cs" />

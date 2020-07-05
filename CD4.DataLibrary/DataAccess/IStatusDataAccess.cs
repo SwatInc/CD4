@@ -10,6 +10,7 @@ namespace CD4.DataLibrary.DataAccess
         Task<List<StatusModel>> GetAllStatus();
         int GetRegisteredStatusId();
         int GetToValidateStatusId();
+        Task<StatusUpdatedSampleAndTestStatusModel> ValidateSample(string cin);
         Task<bool> ValidateTest(string cin, string testDescription, int testStatus, string result);
     }
 }

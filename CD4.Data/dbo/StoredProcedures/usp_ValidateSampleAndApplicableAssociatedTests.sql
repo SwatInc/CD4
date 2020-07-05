@@ -13,11 +13,15 @@ SET NOCOUNT ON;
 	--do a count of not validated AND not rejected for the sample
     SELECT @NotValidatedNotRejectedCount =  COUNT([StatusId]) 
 	FROM [dbo].[Result] [R]
-    WHERE ([R].[StatusId] <> 5 OR [R].[StatusId] <> 7);
+    WHERE ([R].[StatusId] <> 5 AND [R].[StatusId] <> 7) AND [Sample_Cin] = @Cin;
 	--If @NotValidatedNotRejectedCount = 0 then exec usp to validate the sample.
 	IF @NotValidatedNotRejectedCount = 0
 		BEGIN
 			EXECUTE [dbo].[usp_ValidateOnlySample]
 			@Cin = @Cin;
 		END
+
+	--select validated sample status and test status for all tests in sample.
+	SELECT [Cin],[StatusId] FROM [dbo].[Sample] WHERE [Cin] = @Cin;
+	SELECT [Id] AS [TestId], [StatusId] FROM [dbo].[Result] WHERE [Sample_Cin] = @Cin;
 END

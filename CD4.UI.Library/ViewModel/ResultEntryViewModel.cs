@@ -226,7 +226,15 @@ namespace CD4.UI.Library.ViewModel
         /// </summary>
         public async Task ValidateSample(RequestSampleModel requestSampleModel)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await statusDataAccess.ValidateSample(requestSampleModel.Cin);
+            }
+            catch (Exception ex)
+            {
+
+                PushingMessages?.Invoke(this, ex.Message);
+            }
         }
 
         #endregion
