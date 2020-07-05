@@ -76,8 +76,14 @@ namespace CD4.DataLibrary.DataAccess
 
         }
 
-        public async Task<bool> InsertUpdateResultByResultIdAsync(int resultId, string result)
+        public async Task<bool> InsertUpdateResultByResultIdAsync(int resultId, string result, int testStatus)
         {
+            //check whether the test status is acceptable for result entry
+            var InvalidTestStatusMessage = IsTestStatusValidForResultEntry(testStatus);
+            if (!string.IsNullOrEmpty(InvalidTestStatusMessage))
+            {
+                throw new Exception(InvalidTestStatusMessage);
+            }
             //Set the stored procedure to call
             var storedProcedure = "[dbo].[usp_UpdateResultByResultId]";
             //Make a database query to get Id for Status equivalent to "ToValidate".
@@ -90,6 +96,34 @@ namespace CD4.DataLibrary.DataAccess
             var sampleStatus = await statusData.DetermineSampleStatus(resultId);
             var IsSampleStatusSet = await UpdateSampleStatusByResultId(resultId, sampleStatus);
             return output;
+        }
+
+        /// <summary>
+        /// Can be used to determine whether the test status is acceptable for result entry.
+        /// </summary>
+        /// <param name="testStatus">The current status of the test for which result being attempted to save.</param>
+        /// <returns>A null if ok to proceed. If not ok to proceed, a string message is returned explainig the reason that result should not be saved for the test.</returns>
+        private string IsTestStatusValidForResultEntry(int testStatus)
+        {
+            switch (testStatus)
+            {
+                case (int)Status.Registered:
+                    return "Cannot enter a result to a sample/test which is not collected or accepted to the laboratory.";
+                case (int)Status.Collected:
+                    return null; //OK to proceed with saving the result
+                case (int)Status.Received:
+                    return null; //OK to proceed with saving the result
+                case (int)Status.ToValidate:
+                    return null; //OK to proceed with saving the result
+                case (int)Status.Validated:
+                    return "Test already validated. Please cancel test validation to enter a new result.";
+                case (int)Status.Processing:
+                    return null; //OK to proceed with saving the result
+                case (int)Status.Rejected:
+                    return "Cannot enter a result to a rejected test.";
+                default:
+                    throw new ArgumentException("Test status not recognised. Cannot enter a result. Please contact LIS vendor.");
+            }
         }
 
         public async Task<bool> UpdateSampleStatusByResultId(int resultId, int sampleStatus)

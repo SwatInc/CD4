@@ -24,6 +24,7 @@ namespace CD4.UI.Library.Model
         private string site;
         private string clinicalDetails;
         private int statusIconId;
+        private string birthDateString;
 
         #endregion
 
@@ -103,12 +104,21 @@ namespace CD4.UI.Library.Model
                 OnPropertyChanged();
             }
         }
+        public string BirthDateString
+        {
+            get => birthDateString; private set
+            {
+                birthDateString = value;
+                OnPropertyChanged();
+            }
+        }
         public DateTime Birthdate
         {
             get => birthdate; set
             {
                 if (birthdate == value) return;
                 birthdate = value;
+                BirthDateString = value.ToString("dd-MMM-yyyy");
                 OnPropertyChanged();
             }
         }
@@ -175,7 +185,7 @@ namespace CD4.UI.Library.Model
         {
             get => statusIconId; set
             {
-                if (statusIconId==value)
+                if (statusIconId == value)
                 {
                     return;
                 }

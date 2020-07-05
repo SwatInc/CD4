@@ -154,10 +154,10 @@ namespace CD4.DataLibrary.DataAccess
         public async Task<bool> ValidateTest(string cin, string testDescription, int testStatus,string result)
         {
             //Verify that the test can be validated based on the current test status
-            var isOkToValidateMessage = IsTestStatusAcceptableToValidate(testStatus);
+            var isOkToValidateMessage = IsTestStatusOrSampleStatusAcceptableToValidate(testStatus);
             if (!string.IsNullOrEmpty(isOkToValidateMessage))
             {
-                throw new Exception(isOkToValidateMessage);
+                throw new Exception(isOkToValidateMessage.Replace("[]","Test"));
             }
             //throw if the sample does not have results
             if (!IsResulted(result))
@@ -199,8 +199,14 @@ namespace CD4.DataLibrary.DataAccess
         /// </summary>
         /// <param name="cin">The CIN for the sample to validate</param>
         /// <returns>A model containing sample status and associated tests status after update operation which can be used to chnage displayed UI status</returns>
-        public async Task<StatusUpdatedSampleAndTestStatusModel> ValidateSample(string cin)
+        public async Task<StatusUpdatedSampleAndTestStatusModel> ValidateSample(string cin, int currentSampleStatus)
         {
+            //Can the sample be validated.
+            var isOkToValidateMessage = IsTestStatusOrSampleStatusAcceptableToValidate(currentSampleStatus);
+            if (!string.IsNullOrEmpty(isOkToValidateMessage))
+            {
+                throw new Exception(isOkToValidateMessage.Replace("[]", "Sample"));
+            }            
             //set the stored procedure name
             var storedProcedure = "[dbo].[usp_ValidateSampleAndApplicableAssociatedTests]";
             //set the parameters for the stored procedure
@@ -243,12 +249,12 @@ namespace CD4.DataLibrary.DataAccess
         /// </summary>
         /// <param name="testStatus">The current test status</param>
         /// <returns>return null if acceptable, else returns the appropriate error message.</returns>
-        private string IsTestStatusAcceptableToValidate(int testStatus)
+        private string IsTestStatusOrSampleStatusAcceptableToValidate(int testStatus)
         {
             switch (testStatus)
             {
                 case (int)Status.Registered:
-                    return "Cannot validate a test with registered status.";
+                    return "Cannot validate a [] with registered status.";
                 case (int)Status.Collected:
                     return null;
                 case (int)Status.Received:
@@ -256,11 +262,11 @@ namespace CD4.DataLibrary.DataAccess
                 case (int)Status.ToValidate:
                     return null;
                 case (int)Status.Validated:
-                    return "Test already validated.";
+                    return "[] already validated.";
                 case (int)Status.Processing:
                     return null;
                 case (int)Status.Rejected:
-                    return "Cannot validate a rejected test.";
+                    return "Cannot validate a rejected [].";
                 default:
                     return null;
             }
@@ -283,15 +289,5 @@ namespace CD4.DataLibrary.DataAccess
         /// <summary>
         /// Database Status table PKs must be equivalent to the Status enums' indexes
         /// </summary>
-        private enum Status
-        {
-            Registered = 1,
-            Collected,
-            Received,
-            ToValidate,
-            Validated,
-            Processing,
-            Rejected
-        }
     }
 }

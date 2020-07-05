@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CD4.DataLibrary.DataAccess;
 using CD4.UI.Library.Model;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -228,7 +229,7 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-                await statusDataAccess.ValidateSample(requestSampleModel.Cin);
+                await statusDataAccess.ValidateSample(requestSampleModel.Cin, requestSampleModel.StatusIconId);
             }
             catch (Exception ex)
             {
@@ -319,12 +320,31 @@ namespace CD4.UI.Library.ViewModel
             if (e.ListChangedType == ListChangedType.ItemChanged)
             {
                 var testData = SelectedResultData.ElementAt(e.NewIndex);
-                await InsertUpdateResultByIdAsync(testData.Result, testData.Id);
+                await InsertUpdateResultByIdAsync(testData.Result, testData.Id, testData.StatusIconId);
             }
         }
-        private async Task InsertUpdateResultByIdAsync(string result, int resultId)
+        private async Task InsertUpdateResultByIdAsync(string result, int resultId, int testStatus)
         {
-            var response = await resultDataAccess.InsertUpdateResultByResultIdAsync(resultId, result);
+            try
+            {
+                var response = await resultDataAccess.InsertUpdateResultByResultIdAsync(resultId, result, testStatus);
+            }
+            catch (Exception ex)
+            {
+                //remove the result from UI since it was not saved.
+                foreach (var item in SelectedResultData)
+                {
+                    if (item.Id==resultId)
+                    {
+                        //Unsubscribe from event to avoid a listchange fire for this change
+                        SelectedResultData.ListChanged -= UpdateDatabaseResults;
+                        item.Result = null;
+                        //subscribe again
+                        SelectedResultData.ListChanged += UpdateDatabaseResults;
+                    }
+                }
+                PushingMessages?.Invoke(this, ex.Message);
+            }
         }
         private void SetClinicalDetailsForSelectedSample(string delimitedDetails)
         {

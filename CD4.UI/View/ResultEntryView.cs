@@ -416,7 +416,7 @@ namespace CD4.UI.View
                 (new Binding("Text", _viewModel.SelectedRequestData, nameof(RequestSampleModel.AgeSex)));
 
             labelControlBirthdate.DataBindings.Add
-                (new Binding("Text", _viewModel.SelectedRequestData, nameof(RequestSampleModel.Birthdate)));
+                (new Binding("Text", _viewModel.SelectedRequestData, nameof(RequestSampleModel.BirthDateString)));
 
             labelControlPhoneNumber.DataBindings.Add
                 (new Binding("Text", _viewModel.SelectedRequestData, nameof(RequestSampleModel.PhoneNumber)));
