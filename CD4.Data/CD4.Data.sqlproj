@@ -142,6 +142,7 @@
     <Build Include="dbo\StoredProcedures\usp_ValidateTest.sql" />
     <Build Include="dbo\StoredProcedures\usp_ValidateOnlySample.sql" />
     <Build Include="dbo\StoredProcedures\usp_ValidateSampleAndApplicableAssociatedTests.sql" />
+    <Build Include="dbo\StoredProcedures\usp_MarkSampleCollected.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
