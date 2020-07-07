@@ -225,6 +225,30 @@ namespace CD4.DataLibrary.DataAccess
         }
        
         /// <summary>
+        /// marks the sample as Collected if the sample and associated tests have registered status
+        /// </summary>
+        /// <param name="cin">Cin to mark as collected</param>
+        /// <returns>true if the procedure completes without error</returns>
+        public async Task<bool> MarkSampleCollected(string cin)
+        {
+            //set the stored procedure name
+            var storedProcedure = "[dbo].[usp_MarkSampleCollected]";
+            //set the parameters for the stored procedure
+            var parameters = new { Cin = cin };
+            try
+            {
+                _ = await SelectInsertOrUpdateAsync<dynamic, dynamic>(storedProcedure, parameters);
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        /// <summary>
         /// Change only sample status to validated. Does not mess with test status.
         /// Do not use this method if test status needs to be marked as validated on validating sample.
         /// </summary>
