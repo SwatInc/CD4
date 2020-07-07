@@ -2,7 +2,9 @@
 using CD4.DataLibrary.DataAccess;
 using CD4.UI.Library.Model;
 using CD4.UI.Library.ViewModel;
+using CD4.UI.Report;
 using DevExpress.XtraEditors;
+using DevExpress.XtraReports.UI;
 using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
@@ -34,6 +36,17 @@ namespace CD4.UI.View
             _viewModel.PropertyChanged += OnPropertyChanged;
             simpleButtonConfirm.Click += OnConfirmAnalysisRequest;
             simpleButtonSearchRequest.Click+= OnSearchRequest;
+            simpleButtonPrintBarcode.Click += SimpleButtonPrintBarcode_Click;
+        }
+
+        private async void SimpleButtonPrintBarcode_Click(object sender, EventArgs e)
+        {
+            PrintBarcode();
+            var response = XtraMessageBox.Show("Do you want to mark the sample as collected?", "Order entry", MessageBoxButtons.YesNo);
+            if (response == DialogResult.Yes)
+            {
+                await _viewModel.MarkSampleCollected();
+            }
         }
 
         private async void OnSearchRequest(object sender, EventArgs e)
@@ -361,6 +374,34 @@ namespace CD4.UI.View
         private void SearchViewModel_PatientSelected(object sender, PatientModel e)
         {
             _viewModel.OnReceiveSearchResults(e);
+        }
+
+        private bool PrintBarcode()
+        {
+            var barcode = new SeventyFiveMillimeterTubeLabel();
+            barcode.Parameters["Fullname"].Value = _viewModel.Fullname;
+            barcode.Parameters["NidPp"].Value = _viewModel.NidPp;
+            barcode.Parameters["Birthdate"].Value = _viewModel.Birthdate;
+            barcode.Parameters["Age"].Value = _viewModel.Age;
+            barcode.Parameters["AccessionNumber"].Value = _viewModel.Cin;
+            barcode.Parameters["SampleCollectedDate"].Value = _viewModel.SampleCollectionDate;
+            barcode.Parameters["Seq"].Value = 0;
+            barcode.Parameters["Discipline"].Value = "MOLECULAR BIOLOGY";
+
+            barcode.PrinterName = _viewModel.BarcodePrinterName;
+            barcode.RequestParameters = false;
+            var autoprint = new ReportPrintTool(barcode);
+            try
+            {
+                barcode.ShowPrintMarginsWarning = false;
+                autoprint.Print(barcode.PrinterName);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+                return false;
+            }
         }
     }
 }

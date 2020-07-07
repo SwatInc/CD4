@@ -62,7 +62,7 @@
             this.lookUpEditTests = new DevExpress.XtraEditors.LookUpEdit();
             this.simpleButtonRemoveTest = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButtonSearchRequest = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButtonPrintBarcode = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlRequestData)).BeginInit();
             this.groupControlRequestData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditSampleReceived.Properties.CalendarTimeProperties)).BeginInit();
@@ -566,20 +566,20 @@
             this.simpleButtonSearchRequest.TabIndex = 7;
             this.simpleButtonSearchRequest.Text = "Search Req. [ F7 ]";
             // 
-            // simpleButton1
+            // simpleButtonPrintBarcode
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(513, 345);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(122, 23);
-            this.simpleButton1.TabIndex = 8;
-            this.simpleButton1.Text = "Print Barcode [ F8 ]";
+            this.simpleButtonPrintBarcode.Location = new System.Drawing.Point(513, 345);
+            this.simpleButtonPrintBarcode.Name = "simpleButtonPrintBarcode";
+            this.simpleButtonPrintBarcode.Size = new System.Drawing.Size(122, 23);
+            this.simpleButtonPrintBarcode.TabIndex = 8;
+            this.simpleButtonPrintBarcode.Text = "Print Barcode [ F8 ]";
             // 
             // OrderEntryView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(765, 372);
-            this.Controls.Add(this.simpleButton1);
+            this.Controls.Add(this.simpleButtonPrintBarcode);
             this.Controls.Add(this.simpleButtonSearchRequest);
             this.Controls.Add(this.simpleButtonRemoveTest);
             this.Controls.Add(this.groupControlTestSelection);
@@ -668,6 +668,6 @@
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelRequest;
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelPatientData;
         private DevExpress.XtraEditors.SimpleButton simpleButtonSearchRequest;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.SimpleButton simpleButtonPrintBarcode;
     }
 }
