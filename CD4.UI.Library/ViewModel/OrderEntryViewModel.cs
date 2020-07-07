@@ -41,6 +41,7 @@ namespace CD4.UI.Library.ViewModel
         private readonly IMapper mapper;
         private readonly IStaticDataDataAccess staticData;
         private readonly IAnalysisRequestDataAccess request;
+        private readonly IStatusDataAccess statusDataAccess;
         private bool loadingStaticData;
         #endregion
 
@@ -50,7 +51,7 @@ namespace CD4.UI.Library.ViewModel
 
         #region Default Constructor
         public OrderEntryViewModel(IMapper mapper,
-            IStaticDataDataAccess staticData, IAnalysisRequestDataAccess request)
+            IStaticDataDataAccess staticData, IAnalysisRequestDataAccess request, IStatusDataAccess statusDataAccess)
         {
             Sites = new List<SitesModel>();
             Gender = new List<GenderModel>();
@@ -66,9 +67,11 @@ namespace CD4.UI.Library.ViewModel
             this.mapper = mapper;
             this.staticData = staticData;
             this.request = request;
+            this.statusDataAccess = statusDataAccess;
             PropertyChanged += OrderEntryViewModel_PropertyChanged;
             InitializeStaticData += OnInitializeStaticDataAsync;
             InitializeStaticData(this, EventArgs.Empty);
+            InitializePrintingRequirementsDemo();
         }
 
         #endregion
@@ -94,6 +97,7 @@ namespace CD4.UI.Library.ViewModel
             }
         }
         private List<AtollIslandModel> AllAtollsWithCorrespondingIsland { get; set; }
+        public string BarcodePrinterName { get; set; }
 
         #region Request
         public string Cin
@@ -321,6 +325,7 @@ namespace CD4.UI.Library.ViewModel
 
         #endregion
 
+
         #endregion
 
         #region Public Methods
@@ -448,6 +453,19 @@ namespace CD4.UI.Library.ViewModel
             await SetSelectedItemsForLookups(results);
         }
 
+        public async Task MarkSampleCollected()
+        {
+            try
+            {
+                _ = await statusDataAccess.MarkSampleCollected(this.Cin);
+            }
+            catch (Exception ex)
+            {
+                PushingMessages?.Invoke(this, ex.Message);
+            }
+
+        }
+
         private async Task SetSelectedItemsForLookups(PatientModel results)
         {
             if (results is null) return;
@@ -492,9 +510,14 @@ namespace CD4.UI.Library.ViewModel
             if (!string.IsNullOrEmpty(island)) { SelectedIsland = island; }
         }
 
+
         #endregion
 
         #region Private Methods
+        private void InitializePrintingRequirementsDemo()
+        {
+            BarcodePrinterName = "Microsoft XPS Document Writer";
+        }
         private void ManageValidation()
         {
             var results = ValidateOrderEntry();

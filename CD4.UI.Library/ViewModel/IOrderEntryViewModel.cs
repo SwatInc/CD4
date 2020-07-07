@@ -41,10 +41,13 @@ namespace CD4.UI.Library.ViewModel
         Task SearchDataExperimentation();
 
         string TestToAdd { get; set; }
+        string BarcodePrinterName { get; set; }
+
         Task ManageAddTestToRequestAsync();
         void RemoveTestModelFromAddedTests(TestModel testModel);
         Task OnReceiveSearchResults(PatientModel results);
         Task SearchRequestByCinAsync();
+        Task MarkSampleCollected();
 
         event PropertyChangedEventHandler PropertyChanged;
         event EventHandler<string> PushingLogs;
