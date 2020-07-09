@@ -57,15 +57,16 @@ namespace CD4.DataLibrary.DataAccess
             //Get all tests statuses of the sample. Comma delimited int's
             var storedProcedure = "usp_GetSampleAndAllTestStatusByResultId";
             var parameters = new { ResultId = resultId };
-            var testsStatusesCsv = await SelectInsertOrUpdateAsync<string, dynamic>(storedProcedure, parameters);
+            //the status output format: sampleStatus,Test1 status, test2 Status, T3 status....
+            var sampleAndTestsStatusesCsv = await SelectInsertOrUpdateAsync<string, dynamic>(storedProcedure, parameters);
             //make sure that the returned value is valid. sanity check
-            if (testsStatusesCsv.Length == 0)
+            if (sampleAndTestsStatusesCsv.Length == 0)
             {
                 throw new Exception($"Cannot fetch tests statuses for sample: {resultId} required to change the sample status.");
             }
 
             //Determine new status of the sample, and return
-            return DetermineNewStatusForSample(testsStatusesCsv);
+            return DetermineNewStatusForSample(sampleAndTestsStatusesCsv);
         }
 
         /// <summary>
@@ -96,7 +97,7 @@ namespace CD4.DataLibrary.DataAccess
             //variable to track to mark sample as validated.
             bool CanSampleBeMarkedvalidated = true;
             //determine new sample status based on test status.
-            for (int i = 1; i < SampleAndTestStatus.Length - 1; i++)
+            for (int i = 1; i < SampleAndTestStatus.Length; i++)
             {
                 //if even one tests has the ToValidate status...
                 if (SampleAndTestStatus[i] == (int)Status.ToValidate)
