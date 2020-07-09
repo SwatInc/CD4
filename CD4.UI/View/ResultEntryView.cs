@@ -459,6 +459,11 @@ namespace CD4.UI.View
             //bind the enable/disable functionality of "Load Worksheet" button
             simpleButtonLoadWorksheet.DataBindings.Add(new Binding("Enabled", _viewModel, nameof(_viewModel.IsloadWorkSheetButtonEnabled)));
             #endregion
+
+            #region Loading Animations
+            progressPanelSamples.DataBindings.Add(new Binding("Visible", _viewModel, nameof(_viewModel.IsLoadingAnimationEnabled)));
+            progressPanelTests.DataBindings.Add(new Binding("Visible", _viewModel, nameof(_viewModel.IsLoadingAnimationEnabled)));
+            #endregion
         }
 
         private void OnSizeChangedAdjustSplitContainers(object sender, EventArgs e)

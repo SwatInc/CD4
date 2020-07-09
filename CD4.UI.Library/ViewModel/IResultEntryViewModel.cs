@@ -23,6 +23,7 @@ namespace CD4.UI.Library.ViewModel
         List<StatusModel> AllStatus { get; set; }
         StatusModel SelectedStatus { get; set; }
         bool IsloadWorkSheetButtonEnabled { get; set; }
+        bool IsLoadingAnimationEnabled { get; set; }
 
         event PropertyChangedEventHandler PropertyChanged;
         event EventHandler RequestDataRefreshed;

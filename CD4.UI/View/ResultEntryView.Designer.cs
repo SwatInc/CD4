@@ -44,6 +44,7 @@ namespace CD4.UI.View
             this.listBoxControlClinicalDetails = new DevExpress.XtraEditors.ListBoxControl();
             this.splitContainerControlFunctions = new DevExpress.XtraEditors.SplitContainerControl();
             this.splitContainerControlSamplesAndTest = new DevExpress.XtraEditors.SplitContainerControl();
+            this.progressPanelSamples = new DevExpress.XtraWaitForm.ProgressPanel();
             this.gridControlSamples = new DevExpress.XtraGrid.GridControl();
             this.gridViewSamples = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumnCin = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -51,6 +52,7 @@ namespace CD4.UI.View
             this.gridColumnCollectedDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnSequence = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnSampleStatus = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.progressPanelTests = new DevExpress.XtraWaitForm.ProgressPanel();
             this.gridControlTests = new DevExpress.XtraGrid.GridControl();
             this.gridViewTests = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumnTestName = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -245,13 +247,29 @@ namespace CD4.UI.View
             this.splitContainerControlSamplesAndTest.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainerControlSamplesAndTest.Location = new System.Drawing.Point(0, 0);
             this.splitContainerControlSamplesAndTest.Name = "splitContainerControlSamplesAndTest";
+            this.splitContainerControlSamplesAndTest.Panel1.Controls.Add(this.progressPanelSamples);
             this.splitContainerControlSamplesAndTest.Panel1.Controls.Add(this.gridControlSamples);
             this.splitContainerControlSamplesAndTest.Panel1.Text = "Panel1";
+            this.splitContainerControlSamplesAndTest.Panel2.Controls.Add(this.progressPanelTests);
             this.splitContainerControlSamplesAndTest.Panel2.Controls.Add(this.gridControlTests);
             this.splitContainerControlSamplesAndTest.Panel2.Text = "Panel2";
             this.splitContainerControlSamplesAndTest.Size = new System.Drawing.Size(839, 224);
             this.splitContainerControlSamplesAndTest.SplitterPosition = 400;
             this.splitContainerControlSamplesAndTest.TabIndex = 0;
+            // 
+            // progressPanelSamples
+            // 
+            this.progressPanelSamples.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.progressPanelSamples.Appearance.Options.UseBackColor = true;
+            this.progressPanelSamples.BarAnimationElementThickness = 2;
+            this.progressPanelSamples.Caption = "Please Wait";
+            this.progressPanelSamples.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.progressPanelSamples.Description = "Loading samples ...";
+            this.progressPanelSamples.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressPanelSamples.Location = new System.Drawing.Point(0, 0);
+            this.progressPanelSamples.Name = "progressPanelSamples";
+            this.progressPanelSamples.Size = new System.Drawing.Size(400, 224);
+            this.progressPanelSamples.TabIndex = 2;
             // 
             // gridControlSamples
             // 
@@ -320,6 +338,20 @@ namespace CD4.UI.View
             this.gridColumnSampleStatus.Visible = true;
             this.gridColumnSampleStatus.VisibleIndex = 1;
             this.gridColumnSampleStatus.Width = 32;
+            // 
+            // progressPanelTests
+            // 
+            this.progressPanelTests.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.progressPanelTests.Appearance.Options.UseBackColor = true;
+            this.progressPanelTests.BarAnimationElementThickness = 2;
+            this.progressPanelTests.Caption = "Please Wait";
+            this.progressPanelTests.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.progressPanelTests.Description = "Loading tests ...";
+            this.progressPanelTests.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressPanelTests.Location = new System.Drawing.Point(0, 0);
+            this.progressPanelTests.Name = "progressPanelTests";
+            this.progressPanelTests.Size = new System.Drawing.Size(434, 224);
+            this.progressPanelTests.TabIndex = 3;
             // 
             // gridControlTests
             // 
@@ -523,5 +555,7 @@ namespace CD4.UI.View
         private System.Windows.Forms.Label label1;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnStatusIcon;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnSampleStatus;
+        private DevExpress.XtraWaitForm.ProgressPanel progressPanelSamples;
+        private DevExpress.XtraWaitForm.ProgressPanel progressPanelTests;
     }
 }

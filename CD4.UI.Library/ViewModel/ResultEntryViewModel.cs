@@ -17,6 +17,7 @@ namespace CD4.UI.Library.ViewModel
         private List<CodifiedResultsModel> TempCodifiedPhrasesList;
         private DateTime loadWorksheetFromDate;
         private bool isloadWorkSheetButtonEnabled;
+        private bool isLoadingAnimationEnabled;
         private readonly IWorkSheetDataAccess workSheetDataAccess;
         private readonly IMapper mapper;
         private readonly IResultDataAccess resultDataAccess;
@@ -127,7 +128,17 @@ namespace CD4.UI.Library.ViewModel
                 }
                 //set the new value
                 isloadWorkSheetButtonEnabled = value;
+                //set the loading animation, loading animation will be enabled when button is disabled
+                IsLoadingAnimationEnabled = !value;
                 //Raise property changed
+                OnPropertyChanged();
+            }
+        }
+        public bool IsLoadingAnimationEnabled
+        {
+            get => isLoadingAnimationEnabled; set
+            {
+                isLoadingAnimationEnabled = value;
                 OnPropertyChanged();
             }
         }
@@ -334,7 +345,7 @@ namespace CD4.UI.Library.ViewModel
                 //remove the result from UI since it was not saved.
                 foreach (var item in SelectedResultData)
                 {
-                    if (item.Id==resultId)
+                    if (item.Id == resultId)
                     {
                         //Unsubscribe from event to avoid a listchange fire for this change
                         SelectedResultData.ListChanged -= UpdateDatabaseResults;
