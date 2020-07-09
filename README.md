@@ -1,4 +1,4 @@
-<img src="https://github.com/SwatInc/CD4/blob/master/CD4.UI/lymphocyte.ico" alt="Xamarin.Forms banner" height="145" >
+<img src="cd4_banner.png" alt="CD4+ banner" height="145" >
 
 # CD4
 
