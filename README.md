@@ -1,4 +1,4 @@
-<img src="cd4_banner.png" alt="CD4+ banner" height="331" >
+<img src="cd4_banner.png" alt="CD4+ banner" >
 
 # CD4
 
