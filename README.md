@@ -1,3 +1,5 @@
+<img src="cd4_banner.png" alt="CD4+ banner" >
+
 # CD4
 
 **What does CD4 mean?**
