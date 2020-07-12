@@ -201,6 +201,12 @@
     <Compile Include="View\PatientSearchResultsView.Designer.cs">
       <DependentUpon>PatientSearchResultsView.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\PrinterSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\PrinterSettings.Designer.cs">
+      <DependentUpon>PrinterSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\ProfilesView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -284,6 +290,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\PatientSearchResultsView.resx">
       <DependentUpon>PatientSearchResultsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\PrinterSettings.resx">
+      <DependentUpon>PrinterSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\ProfilesView.resx">
       <DependentUpon>ProfilesView.cs</DependentUpon>

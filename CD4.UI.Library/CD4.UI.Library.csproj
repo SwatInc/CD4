@@ -120,6 +120,7 @@
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\OrderEntryViewModel.cs" />
     <Compile Include="ViewModel\PatientSearchResultsViewModel.cs" />
+    <Compile Include="ViewModel\PrinterSettingsViewModel.cs" />
     <Compile Include="ViewModel\ProfilesViewModel.cs" />
     <Compile Include="ViewModel\ResultEntryViewModel.cs" />
     <Compile Include="ViewModel\ScientistViewModel.cs" />

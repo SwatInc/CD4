@@ -273,38 +273,59 @@ INSERT INTO [dbo].[ResultDataType]([Name]) VALUES
 ('CODIFIED'),
 ('TEXTUAL');
 
+--insert sample types
+INSERT INTO [dbo].[SampleType] ([Description],[Colour]) VALUES
+('SERUM','Red'),
+('WHOLE BLOOD','Lavender');
+
 DECLARE @CodifiedId int;
 DECLARE @NumericId int;
+DECLARE @NumericIdSerum int;
+DECLARE @SampleTypeIdSerum int;
+DECLARE @SampleTypeIdWb int;
+SELECT @SampleTypeIdSerum = [Id] FROM [dbo].[SampleType] WHERE [Description] = 'SERUM'; 
+SELECT @SampleTypeIdWb = [Id] FROM [dbo].[SampleType] WHERE [Description] = 'WHOLE BLOOD'; 
 SELECT @CodifiedId =  [Id] FROM [dbo].[ResultDataType] [r] WHERE [r].[Name] = 'CODIFIED'; 
 SELECT @NumericId =  [Id] FROM [dbo].[ResultDataType] [r] WHERE [r].[Name] = 'NUMERIC'; 
 
-INSERT INTO [dbo].[Test]([Discipline],[Description],[Mask],[Reportable],[ResultDataTypeId]) VALUES
-('MOLECULAR BIOLOGY','E Gene','##.##',1,@NumericId),
-('MOLECULAR BIOLOGY','EAV (Internal Control)','##.##',1,@NumericId),
-('MOLECULAR BIOLOGY','RdRP Gene','##.##',1,@NumericId),
-('MOLECULAR BIOLOGY','SARS-CoV-2 Result','1|2',1,@CodifiedId);
+INSERT INTO [dbo].[Test]([Discipline],[SampleTypeId],[Description],[Mask],[Reportable],[ResultDataTypeId]) VALUES
+('MOLECULAR BIOLOGY',@SampleTypeIdSerum,'E Gene','##.##',1,@NumericId),
+('MOLECULAR BIOLOGY',@SampleTypeIdSerum,'EAV (Internal Control)','##.##',1,@NumericId),
+('MOLECULAR BIOLOGY',@SampleTypeIdSerum,'RdRP Gene','##.##',1,@NumericId),
+('MOLECULAR BIOLOGY',@SampleTypeIdSerum,'SARS-CoV-2 Result','1|2',1,@CodifiedId),
+('DIAGNOSTIC HAEMATOLOGY',@SampleTypeIdWb,'Haemoglobin','##.##',1,@NumericId),
+('DIAGNOSTIC HAEMATOLOGY',@SampleTypeIdWb,'Haematocrit','##.##',1,@NumericId);
 
 INSERT INTO [dbo].[Profiles]([Description]) VALUES
-('SARS CoV Profile');
+('SARS CoV Profile'),
+('Hb/PCV');
 
 DECLARE @CovProfileId int;
+DECLARE @CovProfileIdHbPcv int;
 SELECT @CovProfileId =  [Id] FROM [dbo].[Profiles] [p] WHERE [p].[Description] = 'SARS CoV Profile'; 
+SELECT @CovProfileIdHbPcv =  [Id] FROM [dbo].[Profiles] [p] WHERE [p].[Description] = 'Hb/PCV'; 
 
 DECLARE @egene int;
 DECLARE @eav int;
 DECLARE @rdrp int;
 DECLARE @result int;
+DECLARE @resultHb int;
+DECLARE @resultPCV int;
 
 SELECT @egene =  [Id] FROM [dbo].[Test] [t] WHERE [t].[Description] = 'E Gene'; 
 SELECT @eav =  [Id] FROM [dbo].[Test] [t] WHERE [t].[Description] = 'EAV (Internal Control)'; 
 SELECT @rdrp =  [Id] FROM [dbo].[Test] [t] WHERE [t].[Description] = 'RdRP Gene'; 
 SELECT @result =  [Id] FROM [dbo].[Test] [t] WHERE [t].[Description] = 'SARS-CoV-2 Result'; 
+SELECT @resultHb =  [Id] FROM [dbo].[Test] [t] WHERE [t].[Description] = 'Haemoglobin'; 
+SELECT @resultPCV =  [Id] FROM [dbo].[Test] [t] WHERE [t].[Description] = 'Haematocrit'; 
 
 INSERT INTO [dbo].[Profile_Tests]([ProfileId],[TestId]) VALUES
 (@CovProfileId,@egene),
 (@CovProfileId,@eav),
 (@CovProfileId,@rdrp),
-(@CovProfileId,@result);
+(@CovProfileId,@result),
+(@CovProfileIdHbPcv,@resultHb),
+(@CovProfileIdHbPcv,@resultPCV);
 
 --Preparing to insert patient
 DECLARE @MaleGenderId int;

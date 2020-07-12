@@ -1,6 +1,6 @@
 ﻿CREATE TABLE [dbo].[WorkStationPrinters]
 (
-	[Id] INT NOT NULL,
+	[Id] INT NOT NULL IDENTITY,
 	[WorkStationId] int NOT NULL,
 	[PrinterId] int NOT NULL, 
 	[PrinterType] int NOT NULL, 
