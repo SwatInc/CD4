@@ -288,13 +288,13 @@ SELECT @SampleTypeIdWb = [Id] FROM [dbo].[SampleType] WHERE [Description] = 'WHO
 SELECT @CodifiedId =  [Id] FROM [dbo].[ResultDataType] [r] WHERE [r].[Name] = 'CODIFIED'; 
 SELECT @NumericId =  [Id] FROM [dbo].[ResultDataType] [r] WHERE [r].[Name] = 'NUMERIC'; 
 
-INSERT INTO [dbo].[Test]([Discipline],[SampleTypeId],[Description],[Mask],[Reportable],[ResultDataTypeId]) VALUES
-('MOLECULAR BIOLOGY',@SampleTypeIdSerum,'E Gene','##.##',1,@NumericId),
-('MOLECULAR BIOLOGY',@SampleTypeIdSerum,'EAV (Internal Control)','##.##',1,@NumericId),
-('MOLECULAR BIOLOGY',@SampleTypeIdSerum,'RdRP Gene','##.##',1,@NumericId),
-('MOLECULAR BIOLOGY',@SampleTypeIdSerum,'SARS-CoV-2 Result','1|2',1,@CodifiedId),
-('DIAGNOSTIC HAEMATOLOGY',@SampleTypeIdWb,'Haemoglobin','##.##',1,@NumericId),
-('DIAGNOSTIC HAEMATOLOGY',@SampleTypeIdWb,'Haematocrit','##.##',1,@NumericId);
+INSERT INTO [dbo].[Test]([Discipline],[SampleTypeId],[Description],[Mask],[Reportable],[ResultDataTypeId],[Unit]) VALUES
+('MOLECULAR BIOLOGY',@SampleTypeIdSerum,'E Gene','##.##',1,@NumericId,null),
+('MOLECULAR BIOLOGY',@SampleTypeIdSerum,'EAV (Internal Control)','##.##',1,@NumericId,null),
+('MOLECULAR BIOLOGY',@SampleTypeIdSerum,'RdRP Gene','##.##',1,@NumericId,null),
+('MOLECULAR BIOLOGY',@SampleTypeIdSerum,'SARS-CoV-2 Result','1|2',1,@CodifiedId,null),
+('DIAGNOSTIC HAEMATOLOGY',@SampleTypeIdWb,'Haemoglobin','##.##',1,@NumericId,'mg/dL'),
+('DIAGNOSTIC HAEMATOLOGY',@SampleTypeIdWb,'Haematocrit','##.##',1,@NumericId,'%');
 
 INSERT INTO [dbo].[Profiles]([Description]) VALUES
 ('SARS CoV Profile'),
@@ -377,7 +377,7 @@ INSERT INTO [dbo].[Printers]([Description]) VALUES ('Microsoft XPS Document Writ
 INSERT INTO [dbo].[Printers]([Description]) VALUES ('OneNote for Windows 10');
 INSERT INTO [dbo].[PrinterTypes]([Description])VALUES ('Barcode Printer');
 INSERT INTO [dbo].[PrinterTypes]([Description])VALUES ('Document Printer');
-INSERT INTO [dbo].[WorkStations]([Description])VALUES('IBRAHIMHUYCN');
+INSERT INTO [dbo].[WorkStations]([Description])VALUES('IBRAHIMHUCYN');
 INSERT INTO [dbo].[WorkStationPrinters]([WorkStationId],[PrinterId],[PrinterType]) VALUES (1,1,1);
 INSERT INTO [dbo].[WorkStationPrinters]([WorkStationId],[PrinterId],[PrinterType]) VALUES (1,2,2);
 

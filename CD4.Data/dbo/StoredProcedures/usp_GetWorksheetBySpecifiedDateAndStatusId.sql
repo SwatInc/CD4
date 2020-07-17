@@ -64,7 +64,8 @@ BEGIN
                [StatusId] AS [StatusIconId],
                [Result],
                [DataType],
-               [Mask] 
+               [Mask],
+               [Unit]
 	           FROM [dbo].[WorkSheetResultData]
 	           WHERE [Cin] IN (SELECT [Cin] FROM @TempCins);
 
