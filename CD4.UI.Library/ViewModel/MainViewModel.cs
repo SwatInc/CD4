@@ -18,7 +18,7 @@ namespace CD4.UI.Library.ViewModel
             this.mapper = mapper;
         }
 
-        public async Task<List<WorkStationPrintersInfo>> GetApplicationWideStaticData()
+        public async Task<List<WorkStationPrintersInfoModel>> GetApplicationWideStaticData()
         {
             //Get the workstation name
             var workstation = GetWorkStationName();
@@ -27,8 +27,7 @@ namespace CD4.UI.Library.ViewModel
                 //request for data
                 var output = await staticDataDataAccess.GetWorkStationPrintersAsync(workstation);
                 //map the output to local model and return
-                var map =  mapper.Map<List<WorkStationPrintersInfo>>(output);
-                return map;
+                return mapper.Map<List<WorkStationPrintersInfoModel>>(output);
             }
             catch (Exception)
             {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CD4.DataLibrary.Models
 {
-    public class WorkstationPrintersInfo
+    public class WorkstationPrintersInfoModel
     {
         public string Printer { get; set; }
         public string PrinterType { get; set; }

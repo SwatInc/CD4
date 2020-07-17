@@ -160,7 +160,7 @@ namespace CD4.DataLibrary.DataAccess
         /// </summary>
         /// <param name="workstationName">The workstation system name</param>
         /// <returns>List of CurrentWorkStationPrinter</returns>
-        public async Task<List<WorkstationPrintersInfo>> GetWorkStationPrintersAsync(string workstationName)
+        public async Task<List<WorkstationPrintersInfoModel>> GetWorkStationPrintersAsync(string workstationName)
         {
             //the stored procedure name to call
             var storedProcedure = "[dbo].[usp_GetPrintersByWorkStation]";
@@ -170,7 +170,7 @@ namespace CD4.DataLibrary.DataAccess
             try
             {
                 //call the base method for a dapper database call
-                var data = await LoadDataWithParameterAsync<WorkstationPrintersInfo, dynamic>(storedProcedure, parameters);
+                var data = await LoadDataWithParameterAsync<WorkstationPrintersInfoModel, dynamic>(storedProcedure, parameters);
                 return data;
             }
             catch (Exception)

@@ -6,6 +6,6 @@ namespace CD4.UI.Library.ViewModel
 {
     public interface IMainViewModel
     {
-        Task<List<WorkStationPrintersInfo>> GetApplicationWideStaticData();
+        Task<List<WorkStationPrintersInfoModel>> GetApplicationWideStaticData();
     }
 }
