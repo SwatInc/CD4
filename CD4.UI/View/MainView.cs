@@ -4,6 +4,7 @@ using DevExpress.Skins;
 using DevExpress.XtraBars;
 using DevExpress.XtraEditors;
 using System;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CD4.UI.View
@@ -46,6 +47,22 @@ namespace CD4.UI.View
             barButtonItemChangePassword.ItemClick += OpenChangePasswordView;
             #endregion
 
+            //load app wide static data from database
+            LoadAppWideStaticData().GetAwaiter().GetResult();
+        }
+
+        private async Task LoadAppWideStaticData()
+        {
+            //Load workstation printer information
+            try
+            {
+                var printerData = await _viewModel.GetApplicationWideStaticData();
+
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
         }
 
         private void OpenChangePasswordView(object sender, ItemClickEventArgs e)

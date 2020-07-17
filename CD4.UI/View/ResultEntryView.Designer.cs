@@ -65,6 +65,7 @@ namespace CD4.UI.View
             this.label1 = new System.Windows.Forms.Label();
             this.dateEditLoadWorksheetFrom = new DevExpress.XtraEditors.DateEdit();
             this.simpleButtonReport = new DevExpress.XtraEditors.SimpleButton();
+            this.gridColumnUnit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).BeginInit();
             this.splitContainerControlPatient.SuspendLayout();
@@ -371,7 +372,8 @@ namespace CD4.UI.View
             this.gridViewTests.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumnTestName,
             this.gridColumnResult,
-            this.gridColumnStatusIcon});
+            this.gridColumnStatusIcon,
+            this.gridColumnUnit});
             this.gridViewTests.GridControl = this.gridControlTests;
             this.gridViewTests.Name = "gridViewTests";
             this.gridViewTests.OptionsView.ShowGroupPanel = false;
@@ -384,7 +386,7 @@ namespace CD4.UI.View
             this.gridColumnTestName.OptionsColumn.AllowEdit = false;
             this.gridColumnTestName.Visible = true;
             this.gridColumnTestName.VisibleIndex = 0;
-            this.gridColumnTestName.Width = 64;
+            this.gridColumnTestName.Width = 109;
             // 
             // gridColumnResult
             // 
@@ -394,7 +396,7 @@ namespace CD4.UI.View
             this.gridColumnResult.Name = "gridColumnResult";
             this.gridColumnResult.Visible = true;
             this.gridColumnResult.VisibleIndex = 2;
-            this.gridColumnResult.Width = 319;
+            this.gridColumnResult.Width = 101;
             // 
             // repositoryItemLookUpEditCodifiedPhrases
             // 
@@ -416,7 +418,7 @@ namespace CD4.UI.View
             this.gridColumnStatusIcon.Name = "gridColumnStatusIcon";
             this.gridColumnStatusIcon.Visible = true;
             this.gridColumnStatusIcon.VisibleIndex = 1;
-            this.gridColumnStatusIcon.Width = 33;
+            this.gridColumnStatusIcon.Width = 36;
             // 
             // groupControlFunctions
             // 
@@ -484,6 +486,15 @@ namespace CD4.UI.View
             this.simpleButtonReport.Size = new System.Drawing.Size(75, 23);
             this.simpleButtonReport.TabIndex = 0;
             this.simpleButtonReport.Text = "Report";
+            // 
+            // gridColumnUnit
+            // 
+            this.gridColumnUnit.Caption = "Unit";
+            this.gridColumnUnit.FieldName = "Unit";
+            this.gridColumnUnit.Name = "gridColumnUnit";
+            this.gridColumnUnit.Visible = true;
+            this.gridColumnUnit.VisibleIndex = 3;
+            this.gridColumnUnit.Width = 170;
             // 
             // ResultEntryView
             // 
@@ -557,5 +568,6 @@ namespace CD4.UI.View
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnSampleStatus;
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelSamples;
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelTests;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnUnit;
     }
 }

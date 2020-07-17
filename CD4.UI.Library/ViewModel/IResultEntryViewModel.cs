@@ -20,8 +20,8 @@ namespace CD4.UI.Library.ViewModel
         BindingList<CodifiedResultsModel> CodifiedPhrasesForSelectedTest { get; set; }
         BindingList<string> SelectedClinicalDetails { get; set; }
         DateTime LoadWorksheetFromDate { get; set; }
-        List<StatusModel> AllStatus { get; set; }
-        StatusModel SelectedStatus { get; set; }
+        List<WorkstationPrintersInfo> AllStatus { get; set; }
+        WorkstationPrintersInfo SelectedStatus { get; set; }
         bool IsloadWorkSheetButtonEnabled { get; set; }
         bool IsLoadingAnimationEnabled { get; set; }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CD4.UI.Library.Model
 {
-    public class StatusModel
+    public class WorkstationPrintersInfo
     {
         public int Id { get; set; }
         public string Status { get; set; }

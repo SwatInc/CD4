@@ -21,6 +21,7 @@ namespace CD4.UI.Library.Model
         private string dataType;
         private string mask;
         private int statusIconName;
+        private string unit;
 
         #endregion
 
@@ -134,6 +135,19 @@ namespace CD4.UI.Library.Model
             {
                 if (mask == value) return;
                 mask = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Unit
+        {
+            get => unit; set
+            {
+                if (unit==value)
+                {
+                    return;
+                }
+                unit = value;
                 OnPropertyChanged();
             }
         }
