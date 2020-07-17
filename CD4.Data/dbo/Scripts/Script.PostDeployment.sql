@@ -371,6 +371,16 @@ INSERT INTO [dbo].[Status] ([Status])
 VALUES
 ('Registered'),('Collected'),('Received'),('ToValidate'),('Validated'),('Processing'),('Rejected');
 
+
+-- insert system printer
+INSERT INTO [dbo].[Printers]([Description]) VALUES ('Microsoft XPS Document Writer');
+INSERT INTO [dbo].[Printers]([Description]) VALUES ('OneNote for Windows 10');
+INSERT INTO [dbo].[PrinterTypes]([Description])VALUES ('Barcode Printer');
+INSERT INTO [dbo].[PrinterTypes]([Description])VALUES ('Document Printer');
+INSERT INTO [dbo].[WorkStations]([Description])VALUES('IBRAHIMHUYCN');
+INSERT INTO [dbo].[WorkStationPrinters]([WorkStationId],[PrinterId],[PrinterType]) VALUES (1,1,1);
+INSERT INTO [dbo].[WorkStationPrinters]([WorkStationId],[PrinterId],[PrinterType]) VALUES (1,2,2);
+
 ----Get a patient Id
 --DECLARE @PatientId int;
 --DECLARE @ScientistId int;
