@@ -89,6 +89,7 @@
     <Compile Include="Models\ClinicalDetailsModel.cs" />
     <Compile Include="Models\ClinicalDetailsSelectionModel.cs" />
     <Compile Include="Models\CompleteRequestSearchResultsModel.cs" />
+    <Compile Include="Models\StationPrintersInfo.cs" />
     <Compile Include="Models\ExistingRequestsPatientComparisionArgs.cs" />
     <Compile Include="Models\PatientNidPpAndNameModel.cs" />
     <Compile Include="Models\ReportModels\AnalysisReportDatabaseModel.cs" />

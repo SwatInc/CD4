@@ -39,14 +39,22 @@ namespace CD4.DataLibrary.DataAccess
             (string storedProcedure, U parameter)
         {
 
-            IEnumerable<T> results = new List<T>();
-            using (IDbConnection connection = new SqlConnection(helper.GetConnectionString()))
+            try
             {
-                results = await connection.QueryAsync<T>
-                    (storedProcedure, parameter, commandType: CommandType.StoredProcedure);
+                IEnumerable<T> results = new List<T>();
+                using (IDbConnection connection = new SqlConnection(helper.GetConnectionString()))
+                {
+                    return connection.QueryAsync<T>
+                        (storedProcedure, parameter, commandType: CommandType.StoredProcedure).Result.ToList();
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
 
-            return results.ToList();
+
         }
 
         /// <summary>

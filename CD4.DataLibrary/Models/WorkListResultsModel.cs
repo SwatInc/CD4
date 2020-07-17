@@ -10,7 +10,7 @@
         public string Result { get; set; }
         public string DataType { get; set; }
         public string Mask { get; set; }
-
+        public string Unit { get; set; }
 
     }
 }
