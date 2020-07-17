@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CD4.UI.Library.ViewModel
 {
-    public class PrinterSettingsViewModel : INotifyPropertyChanged
+    public class PrinterSettingsViewModel : INotifyPropertyChanged, IPrinterSettingsViewModel
     {
         public PrinterSettingsViewModel()
         {
