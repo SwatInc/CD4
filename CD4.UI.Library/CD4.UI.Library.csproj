@@ -71,7 +71,7 @@
     <Compile Include="Model\PatientModel.cs" />
     <Compile Include="Model\ResultModel.cs" />
     <Compile Include="Model\RequestSampleModel.cs" />
-    <Compile Include="Model\WorkstationPrintersInfo1.cs" />
+    <Compile Include="Model\StatusModel.cs" />
     <Compile Include="Model\ValidationDataModel.cs" />
     <Compile Include="Model\ClinicalDetailsModel.cs" />
     <Compile Include="Model\ClinicalDetailsOrderEntryModel.cs" />

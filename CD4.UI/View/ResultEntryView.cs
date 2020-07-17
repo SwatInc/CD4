@@ -320,7 +320,7 @@ namespace CD4.UI.View
         private void LookUpEditSampleStatusFilter_EditValueChanged(object sender, EventArgs e)
         {
             //gets the selected datarow from lookupedit and set it to viewModel variable
-            _viewModel.SelectedStatus = (WorkstationPrintersInfo)(lookUpEditSampleStatusFilter.GetSelectedDataRow());
+            _viewModel.SelectedStatus = (StatusModel)(lookUpEditSampleStatusFilter.GetSelectedDataRow());
         }
 
         private async void LoadWorkSheet(object sender, EventArgs e)
@@ -456,8 +456,8 @@ namespace CD4.UI.View
 
             //Wire up the datasource for lookUpEditSampleStatusFilter
             lookUpEditSampleStatusFilter.Properties.DataSource = _viewModel.AllStatus;
-            lookUpEditSampleStatusFilter.Properties.DisplayMember = nameof(WorkstationPrintersInfo.Status);
-            lookUpEditSampleStatusFilter.Properties.ValueMember = nameof(WorkstationPrintersInfo.Id);
+            lookUpEditSampleStatusFilter.Properties.DisplayMember = nameof(StatusModel.Status);
+            lookUpEditSampleStatusFilter.Properties.ValueMember = nameof(StatusModel.Id);
 
             //bind the enable/disable functionality of "Load Worksheet" button
             simpleButtonLoadWorksheet.DataBindings.Add(new Binding("Enabled", _viewModel, nameof(_viewModel.IsloadWorkSheetButtonEnabled)));

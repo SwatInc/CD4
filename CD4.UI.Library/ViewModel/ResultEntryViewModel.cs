@@ -47,7 +47,7 @@ namespace CD4.UI.Library.ViewModel
             CodifiedPhrasesForSelectedTest = new BindingList<CodifiedResultsModel>();
             AllCodifiedPhrases = new List<CodifiedResultsModel>();
             TempCodifiedPhrasesList = new List<CodifiedResultsModel>();
-            AllStatus = new List<WorkstationPrintersInfo>();
+            AllStatus = new List<StatusModel>();
 
             //set the date to load worksheet from
             LoadWorksheetFromDate = DateTime.Today;
@@ -111,8 +111,8 @@ namespace CD4.UI.Library.ViewModel
         public BindingList<CodifiedResultsModel> CodifiedPhrasesForSelectedTest { get; set; }
         public BindingList<string> SelectedClinicalDetails { get; set; }
         public List<CodifiedResultsModel> AllCodifiedPhrases { get; set; }
-        public List<WorkstationPrintersInfo> AllStatus { get; set; }
-        public WorkstationPrintersInfo SelectedStatus { get; set; }
+        public List<StatusModel> AllStatus { get; set; }
+        public StatusModel SelectedStatus { get; set; }
 
         //enable/disable status of loadWorksheet button
         public bool IsloadWorkSheetButtonEnabled
@@ -263,7 +263,7 @@ namespace CD4.UI.Library.ViewModel
                 //call the datalayer for the data.
                 var result = await statusDataAccess.GetAllStatus();
                 //automap the data onto a list of corresponding local model
-                var statusModel = mapper.Map<List<WorkstationPrintersInfo>>(result);
+                var statusModel = mapper.Map<List<StatusModel>>(result);
                 //add the data to the datasource.
                 foreach (var item in statusModel)
                 {
