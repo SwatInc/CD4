@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CD4.DataLibrary.DataAccess;
+using CD4.DataLibrary.Models;
 using CD4.UI.Library.Model;
 using Newtonsoft.Json;
 using System;
@@ -47,7 +48,7 @@ namespace CD4.UI.Library.ViewModel
             CodifiedPhrasesForSelectedTest = new BindingList<CodifiedResultsModel>();
             AllCodifiedPhrases = new List<CodifiedResultsModel>();
             TempCodifiedPhrasesList = new List<CodifiedResultsModel>();
-            AllStatus = new List<StatusModel>();
+            AllStatus = new List<Model.StatusModel>();
 
             //set the date to load worksheet from
             LoadWorksheetFromDate = DateTime.Today;
@@ -111,8 +112,8 @@ namespace CD4.UI.Library.ViewModel
         public BindingList<CodifiedResultsModel> CodifiedPhrasesForSelectedTest { get; set; }
         public BindingList<string> SelectedClinicalDetails { get; set; }
         public List<CodifiedResultsModel> AllCodifiedPhrases { get; set; }
-        public List<StatusModel> AllStatus { get; set; }
-        public StatusModel SelectedStatus { get; set; }
+        public List<Model.StatusModel> AllStatus { get; set; }
+        public Model.StatusModel SelectedStatus { get; set; }
 
         //enable/disable status of loadWorksheet button
         public bool IsloadWorkSheetButtonEnabled
@@ -240,13 +241,46 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-                await statusDataAccess.ValidateSample(requestSampleModel.Cin, requestSampleModel.StatusIconId);
+                var output = await statusDataAccess.ValidateSample(requestSampleModel.Cin, requestSampleModel.StatusIconId);
+                UpdateUiAOnSampleValidation(output, requestSampleModel);
             }
             catch (Exception ex)
             {
 
                 PushingMessages?.Invoke(this, ex.Message);
             }
+        }
+
+        /// <summary>
+        /// updates the status icon on UI to match with the database status returned after sample validation
+        /// </summary>
+        /// <param name="output"></param>
+        /// <param name="requestSampleModel"></param>
+        private void UpdateUiAOnSampleValidation
+            (StatusUpdatedSampleAndTestStatusModel output, RequestSampleModel requestSampleModel)
+        {
+            //1. update any changes in status for analyses for the sample.
+            
+            //if the now selected sample is the sample that was validated...
+            if (SelectedRequestData.Cin == requestSampleModel.Cin)
+            {
+
+                //iterate the selected sample... to update tests status in sample.
+                foreach (var item in SelectedResultData)
+                {
+                    //get the test status for current item...
+                    var testStatus = output.TestStatusList.Find((x) => x.TestId == item.Id);
+                    //update UI status
+                    item.StatusIconId = testStatus.StatusId;
+                }
+
+            }
+
+            //Update UI sample status
+            this.RequestData.First(r => r.Cin == output.SampleStatus.Cin).StatusIconId = output.SampleStatus.StatusId;
+
+            //Raise the event to notify the UI to refresh the grid datasource.
+            RequestDataRefreshed?.Invoke(this, EventArgs.Empty);
         }
 
         #endregion
@@ -263,7 +297,7 @@ namespace CD4.UI.Library.ViewModel
                 //call the datalayer for the data.
                 var result = await statusDataAccess.GetAllStatus();
                 //automap the data onto a list of corresponding local model
-                var statusModel = mapper.Map<List<StatusModel>>(result);
+                var statusModel = mapper.Map<List<Model.StatusModel>>(result);
                 //add the data to the datasource.
                 foreach (var item in statusModel)
                 {
