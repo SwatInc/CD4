@@ -64,7 +64,17 @@ namespace CD4.UI.View
                     break;
                 case Keys.F6:
                     break;
-                case Keys.F7:
+                case Keys.F7://validate selected sample on pressing F7
+                    //get the selected row handle
+                    var selectedRowhandle = gridViewSamples.FocusedRowHandle;
+                    //Ignore if no row is selected
+                    if (selectedRowhandle >=0)
+                    {
+                        //Get the selected sample.
+                        var sampleToValidate = (RequestSampleModel)gridViewSamples.GetRow(selectedRowhandle);
+                        await _viewModel.ValidateSample(sampleToValidate);
+
+                    }
                     break;
                 case Keys.F8:
                     break;
@@ -77,8 +87,8 @@ namespace CD4.UI.View
                     if (selectedRowHandle >= 0)
                     {
                         //Get selected result model
-                        var resultModel = (ResultModel)gridViewTests.GetRow(selectedRowHandle);
-                        await _viewModel.ValidateTest(resultModel);
+                        var resultToValidate = (ResultModel)gridViewTests.GetRow(selectedRowHandle);
+                        await _viewModel.ValidateTest(resultToValidate);
                     }
                     break;
                 case Keys.F12:
