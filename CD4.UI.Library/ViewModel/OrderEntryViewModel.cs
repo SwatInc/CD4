@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -211,7 +212,7 @@ namespace CD4.UI.Library.ViewModel
             {
                 if (birthdate == value) return;
                 birthdate = value;
-                SetAge((DateTime)value);
+                SetAge(value);
                 OnPropertyChanged();
             }
         }
@@ -333,7 +334,12 @@ namespace CD4.UI.Library.ViewModel
         public async Task SearchRequestByCinAsync()
         {
             var result = await request.SearchRequestByCinAsync(Cin);
-
+            //handle no search results
+            if (result.RequestPatientSampleData is null)
+            {
+                ClearAllDisplayedData();
+                throw new Exception("No results returned for search request!");
+            }
             this.Cin = result.RequestPatientSampleData.Cin;
             this.EpisodeNumber = result.RequestPatientSampleData.EpisodeNumber;
             this.SelectedSiteId = result.RequestPatientSampleData.SiteId;
@@ -377,6 +383,44 @@ namespace CD4.UI.Library.ViewModel
                 });
             }
 
+
+        }
+
+        /// <summary>
+        /// CLears out all the displayed data for request, patient, clinical details and requested tests.
+        /// </summary>
+        private void ClearAllDisplayedData()
+        {
+            //clear request data
+            Cin = string.Empty;
+            SelectedSiteId = 0;
+            SampleCollectionDate = null;
+            SampleReceivedDate = null;
+            CinErrorText = null;
+
+            //Clear patient data
+            NidPp = null;
+            Fullname = null;
+            SelectedGenderId = 0;
+            Age = null;
+            PhoneNumber = null;
+            Birthdate = null;
+            Address = null;
+            SelectedAtoll = null;
+            SelectedIsland = null;
+            SelectedCountryId = 0;
+
+            //Clear all clinical details
+            foreach (var item in ClinicalDetails)
+            {
+                if (item.IsSelected==true)
+                {
+                    item.IsSelected = false;
+                }
+            }
+
+            //clear requested tests
+            AddedTests.Clear();
 
         }
 
@@ -829,9 +873,14 @@ namespace CD4.UI.Library.ViewModel
 
         }
 
-        private void SetAge(DateTime birthdate)
+        private void SetAge(DateTime? birthdate)
         {
-            Age = DateTimeExtensions.ToAgeString(birthdate);
+            if (birthdate is null)
+            {
+                Age = null;
+                return;
+            }
+            Age = DateTimeExtensions.ToAgeString((DateTime)birthdate);
         }
 
         /// <summary>

@@ -175,8 +175,18 @@ namespace CD4.UI.View
                 case Keys.F7:
                     //change focus to search request button to which validates any control that has focus and thereby updating view model
                     simpleButtonSearchRequest.Focus();
-                    //execute search
-                    await this.InitializeRequestSearchByCinAsync();
+
+                    try
+                    {
+                        //execute search
+                        await this.InitializeRequestSearchByCinAsync();
+                    }
+                    catch (Exception ex)
+                    {
+
+                        XtraMessageBox.Show(ex.Message);
+                    }
+
                     break;
                 default:
                     break;
