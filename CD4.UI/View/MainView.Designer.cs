@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.barButtonItemCodifiedResults = new DevExpress.XtraBars.BarButtonItem();
@@ -44,17 +45,22 @@
             this.barButtonItemStatistics = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemViewProfile = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemChangePassword = new DevExpress.XtraBars.BarButtonItem();
+            this.barStaticItemUsernameAndRole = new DevExpress.XtraBars.BarStaticItem();
             this.ribbonPageGeneral = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageConfiguration = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             this.repositoryItemRatingControl1 = new DevExpress.XtraEditors.Repository.RepositoryItemRatingControl();
-            this.barStaticItemUsernameAndRole = new DevExpress.XtraBars.BarStaticItem();
+            this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.popupMenu = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRatingControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenu)).BeginInit();
             this.SuspendLayout();
             // 
             // ribbon
@@ -76,9 +82,12 @@
             this.barButtonItemStatistics,
             this.barButtonItemViewProfile,
             this.barButtonItemChangePassword,
-            this.barStaticItemUsernameAndRole});
+            this.barStaticItemUsernameAndRole,
+            this.barButtonItem1,
+            this.barButtonItem2,
+            this.barButtonItem3});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 18;
+            this.ribbon.MaxItemId = 21;
             this.ribbon.Name = "ribbon";
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageGeneral,
@@ -203,6 +212,12 @@
             this.barButtonItemChangePassword.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemChangePassword.ImageOptions.SvgImage")));
             this.barButtonItemChangePassword.Name = "barButtonItemChangePassword";
             // 
+            // barStaticItemUsernameAndRole
+            // 
+            this.barStaticItemUsernameAndRole.Caption = "Welcome";
+            this.barStaticItemUsernameAndRole.Id = 17;
+            this.barStaticItemUsernameAndRole.Name = "barStaticItemUsernameAndRole";
+            // 
             // ribbonPageGeneral
             // 
             this.ribbonPageGeneral.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -215,8 +230,9 @@
             this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemOrderEntry);
             this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemResultEntry);
             this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemStatistics);
+            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItem1);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
-            this.ribbonPageGroup2.Text = "ribbonPageGroup2";
+            this.ribbonPageGroup2.Text = "General Lab Tasks";
             // 
             // ribbonPageConfiguration
             // 
@@ -253,6 +269,11 @@
             this.ribbonPageGroup3.Name = "ribbonPageGroup3";
             this.ribbonPageGroup3.Text = "ribbonPageGroup3";
             // 
+            // repositoryItemRatingControl1
+            // 
+            this.repositoryItemRatingControl1.AutoHeight = false;
+            this.repositoryItemRatingControl1.Name = "repositoryItemRatingControl1";
+            // 
             // ribbonStatusBar
             // 
             this.ribbonStatusBar.ItemLinks.Add(this.barStaticItemUsernameAndRole);
@@ -261,16 +282,39 @@
             this.ribbonStatusBar.Ribbon = this.ribbon;
             this.ribbonStatusBar.Size = new System.Drawing.Size(1110, 31);
             // 
-            // repositoryItemRatingControl1
+            // barButtonItem1
             // 
-            this.repositoryItemRatingControl1.AutoHeight = false;
-            this.repositoryItemRatingControl1.Name = "repositoryItemRatingControl1";
+            this.barButtonItem1.ActAsDropDown = true;
+            this.barButtonItem1.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.DropDown;
+            this.barButtonItem1.Caption = "Discipline";
+            this.barButtonItem1.DropDownControl = this.popupMenu;
+            this.barButtonItem1.Id = 18;
+            this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
-            // barStaticItemUsernameAndRole
+            // popupMenu
             // 
-            this.barStaticItemUsernameAndRole.Caption = "Welcome";
-            this.barStaticItemUsernameAndRole.Id = 17;
-            this.barStaticItemUsernameAndRole.Name = "barStaticItemUsernameAndRole";
+            this.popupMenu.ItemLinks.Add(this.barButtonItem2);
+            this.popupMenu.ItemLinks.Add(this.barButtonItem3);
+            this.popupMenu.MenuDrawMode = DevExpress.XtraBars.MenuDrawMode.LargeImagesText;
+            this.popupMenu.Name = "popupMenu";
+            this.popupMenu.Ribbon = this.ribbon;
+            // 
+            // barButtonItem2
+            // 
+            this.barButtonItem2.Caption = "barButtonItemTest1";
+            this.barButtonItem2.Id = 19;
+            this.barButtonItem2.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem2.ImageOptions.SvgImage")));
+            this.barButtonItem2.Name = "barButtonItem2";
+            this.barButtonItem2.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            // 
+            // barButtonItem3
+            // 
+            this.barButtonItem3.Caption = "barButtonItemTest2";
+            this.barButtonItem3.Id = 20;
+            this.barButtonItem3.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem3.ImageOptions.SvgImage")));
+            this.barButtonItem3.Name = "barButtonItem3";
+            this.barButtonItem3.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
             // MainView
             // 
@@ -289,6 +333,7 @@
             this.Text = "MainView";
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRatingControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenu)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -320,5 +365,9 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup3;
         private DevExpress.XtraBars.BarStaticItem barStaticItemUsernameAndRole;
         private DevExpress.XtraEditors.Repository.RepositoryItemRatingControl repositoryItemRatingControl1;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.PopupMenu popupMenu;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
     }
 }

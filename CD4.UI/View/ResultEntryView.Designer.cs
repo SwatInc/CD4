@@ -59,13 +59,13 @@ namespace CD4.UI.View
             this.gridColumnResult = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemLookUpEditCodifiedPhrases = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.gridColumnStatusIcon = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnUnit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControlFunctions = new DevExpress.XtraEditors.GroupControl();
             this.lookUpEditSampleStatusFilter = new DevExpress.XtraEditors.LookUpEdit();
             this.simpleButtonLoadWorksheet = new DevExpress.XtraEditors.SimpleButton();
             this.label1 = new System.Windows.Forms.Label();
             this.dateEditLoadWorksheetFrom = new DevExpress.XtraEditors.DateEdit();
             this.simpleButtonReport = new DevExpress.XtraEditors.SimpleButton();
-            this.gridColumnUnit = new DevExpress.XtraGrid.Columns.GridColumn();
             this.labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).BeginInit();
             this.splitContainerControlPatient.SuspendLayout();
@@ -420,6 +420,15 @@ namespace CD4.UI.View
             this.gridColumnStatusIcon.VisibleIndex = 1;
             this.gridColumnStatusIcon.Width = 36;
             // 
+            // gridColumnUnit
+            // 
+            this.gridColumnUnit.Caption = "Unit";
+            this.gridColumnUnit.FieldName = "Unit";
+            this.gridColumnUnit.Name = "gridColumnUnit";
+            this.gridColumnUnit.Visible = true;
+            this.gridColumnUnit.VisibleIndex = 3;
+            this.gridColumnUnit.Width = 170;
+            // 
             // groupControlFunctions
             // 
             this.groupControlFunctions.Controls.Add(this.lookUpEditSampleStatusFilter);
@@ -449,7 +458,7 @@ namespace CD4.UI.View
             // 
             // simpleButtonLoadWorksheet
             // 
-            this.simpleButtonLoadWorksheet.Location = new System.Drawing.Point(389, 43);
+            this.simpleButtonLoadWorksheet.Location = new System.Drawing.Point(635, 43);
             this.simpleButtonLoadWorksheet.Name = "simpleButtonLoadWorksheet";
             this.simpleButtonLoadWorksheet.Size = new System.Drawing.Size(108, 23);
             this.simpleButtonLoadWorksheet.TabIndex = 6;
@@ -481,20 +490,11 @@ namespace CD4.UI.View
             // 
             // simpleButtonReport
             // 
-            this.simpleButtonReport.Location = new System.Drawing.Point(504, 43);
+            this.simpleButtonReport.Location = new System.Drawing.Point(750, 43);
             this.simpleButtonReport.Name = "simpleButtonReport";
             this.simpleButtonReport.Size = new System.Drawing.Size(75, 23);
             this.simpleButtonReport.TabIndex = 0;
             this.simpleButtonReport.Text = "Report";
-            // 
-            // gridColumnUnit
-            // 
-            this.gridColumnUnit.Caption = "Unit";
-            this.gridColumnUnit.FieldName = "Unit";
-            this.gridColumnUnit.Name = "gridColumnUnit";
-            this.gridColumnUnit.Visible = true;
-            this.gridColumnUnit.VisibleIndex = 3;
-            this.gridColumnUnit.Width = 170;
             // 
             // ResultEntryView
             // 

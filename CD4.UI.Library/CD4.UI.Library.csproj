@@ -201,5 +201,20 @@
   <ItemGroup>
     <None Include="Resources\ToValidate.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ClinicalPath32x32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Haematology.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\MicroIcon32x32.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Oncology.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\All Labs1.PNG" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
