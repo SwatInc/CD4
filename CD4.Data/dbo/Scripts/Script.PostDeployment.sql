@@ -278,23 +278,44 @@ INSERT INTO [dbo].[SampleType] ([Description],[Colour]) VALUES
 ('SERUM','Red'),
 ('WHOLE BLOOD','Lavender');
 
+--insert disciplines
+INSERT INTO [dbo].[Discipline]([Description]) VALUES
+('DIAGNOSTIC HAEMATOLOGY'),
+('MOLECULAR BIOLOGY');
+--insert units
+INSERT INTO [dbo].[Unit] ([Unit]) VALUES
+(' '),
+('mg/dL'),
+('%');
+
 DECLARE @CodifiedId int;
 DECLARE @NumericId int;
 DECLARE @NumericIdSerum int;
 DECLARE @SampleTypeIdSerum int;
 DECLARE @SampleTypeIdWb int;
+DECLARE @DisciplineMolecular int;
+DECLARE @DisciplineHaematology int;
+DECLARE @UnitmgdL int;
+DECLARE @UnitPercent int;
+DECLARE @UnitNA int;
 SELECT @SampleTypeIdSerum = [Id] FROM [dbo].[SampleType] WHERE [Description] = 'SERUM'; 
 SELECT @SampleTypeIdWb = [Id] FROM [dbo].[SampleType] WHERE [Description] = 'WHOLE BLOOD'; 
 SELECT @CodifiedId =  [Id] FROM [dbo].[ResultDataType] [r] WHERE [r].[Name] = 'CODIFIED'; 
 SELECT @NumericId =  [Id] FROM [dbo].[ResultDataType] [r] WHERE [r].[Name] = 'NUMERIC'; 
+SELECT @DisciplineMolecular =  [Id] FROM [dbo].[Discipline] [d] WHERE [d].[Description] = 'MOLECULAR BIOLOGY'; 
+SELECT @DisciplineHaematology =  [Id] FROM [dbo].[Discipline] [d] WHERE [d].[Description] = 'DIAGNOSTIC HAEMATOLOGY'; 
+SELECT @UnitmgdL =  [Id] FROM [dbo].[unit] [u] WHERE [u].[Unit] = 'mg/dL'; 
+SELECT @UnitPercent =  [Id] FROM [dbo].[unit] [u] WHERE [u].[Unit] =  '%'; 
+SELECT @UnitNA =  [Id] FROM [dbo].[unit] [u] WHERE [u].[Unit] =  ' '; 
 
-INSERT INTO [dbo].[Test]([Discipline],[SampleTypeId],[Description],[Mask],[Reportable],[ResultDataTypeId],[Unit]) VALUES
-('MOLECULAR BIOLOGY',@SampleTypeIdSerum,'E Gene','##.##',1,@NumericId,null),
-('MOLECULAR BIOLOGY',@SampleTypeIdSerum,'EAV (Internal Control)','##.##',1,@NumericId,null),
-('MOLECULAR BIOLOGY',@SampleTypeIdSerum,'RdRP Gene','##.##',1,@NumericId,null),
-('MOLECULAR BIOLOGY',@SampleTypeIdSerum,'SARS-CoV-2 Result','1|2',1,@CodifiedId,null),
-('DIAGNOSTIC HAEMATOLOGY',@SampleTypeIdWb,'Haemoglobin','##.##',1,@NumericId,'mg/dL'),
-('DIAGNOSTIC HAEMATOLOGY',@SampleTypeIdWb,'Haematocrit','##.##',1,@NumericId,'%');
+
+INSERT INTO [dbo].[Test]([DisciplineId],[SampleTypeId],[Description],[Mask],[Reportable],[ResultDataTypeId],[UnitId]) VALUES
+(@DisciplineMolecular ,@SampleTypeIdSerum,'E Gene','##.##',1,@NumericId,@UnitNA),
+(@DisciplineMolecular ,@SampleTypeIdSerum,'EAV (Internal Control)','##.##',1,@NumericId,@UnitNA),
+(@DisciplineMolecular ,@SampleTypeIdSerum,'RdRP Gene','##.##',1,@NumericId,@UnitNA),
+(@DisciplineMolecular ,@SampleTypeIdSerum,'SARS-CoV-2 Result','1|2',1,@CodifiedId,@UnitNA),
+(@DisciplineHaematology ,@SampleTypeIdWb,'Haemoglobin','##.##',1,@NumericId,@UnitmgdL),
+(@DisciplineHaematology ,@SampleTypeIdWb,'Haematocrit','##.##',1,@NumericId,@UnitPercent);
 
 INSERT INTO [dbo].[Profiles]([Description]) VALUES
 ('SARS CoV Profile'),
