@@ -20,12 +20,12 @@ BEGIN
         DECLARE @TempCins TABLE ([Cin] VARCHAR(20) PRIMARY KEY, [AnalysisRequestId] INT NOT NULL);
 		DECLARE @TempClinicalDetails TABLE([AnalysisRequestId] INT PRIMARY KEY, [Detail] VARCHAR(100) NULL);
         
-        -- get distinct Cins
+        -- get distinct Cins which is more than specified date and matches the status
         INSERT INTO @TempCins
         SELECT DISTINCT([S].[Cin]),[S].[AnalysisRequestId] 
         FROM [dbo].[Sample] [S] 
-        INNER JOIN dbo.Result [r] ON [r].[Sample_Cin] = [S].[Cin]
-        WHERE [s].[ReceivedDate] >= @StartDateInUse AND [r].[StatusId] = @StatusId;
+        INNER JOIN [dbo].[AuditTrail] [AT] ON [S].[Cin] = [AT].[Cin]
+        WHERE [AT].[CreatedAt] >= @StartDateInUse AND [AT].[StatusId] = @StatusId;
 
         -- Get Clinical details
         INSERT INTO @TempClinicalDetails

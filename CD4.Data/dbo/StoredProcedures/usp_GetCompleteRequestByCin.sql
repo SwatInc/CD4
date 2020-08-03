@@ -34,7 +34,8 @@ SET NOCOUNT ON;
 	WHERE [AC].[AnalysisRequestId] = @RequestId;
 
 	--Get the test data
-	SELECT [R].[Id], [R].[Sample_Cin], [R].[TestId], [R].[Result], [R].[ResultDate] 
-	FROM [dbo].[Result] [R] 
+	SELECT [R].[Id], [R].[Sample_Cin], [R].[TestId], [R].[Result], [RT].[CreatedAt] AS [ResultDate] 
+	FROM [dbo].[Result] [R]
+	INNER JOIN [dbo].[ResultTracking] [RT] ON [R].[Id] = [RT].[ResultId]
 	WHERE [R].[Sample_Cin] = @Cin;
 END;

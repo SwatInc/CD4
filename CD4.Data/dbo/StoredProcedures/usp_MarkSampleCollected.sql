@@ -5,12 +5,13 @@ AS
 BEGIN
 SET NOCOUNT ON;
 	--Set sample status as collected  and set collected date.
-	UPDATE [dbo].[Sample]
+	UPDATE [dbo].[SampleTracking]
 	SET [StatusId] = 2,
-		[CollectionDate] = GETDATE()
-	WHERE [Cin] = @Cin AND [StatusId] = 1;
+		[CreatedAt] = GETDATE()
+	WHERE [SampleCin] = @Cin AND [StatusId] = 1;
 	--Set associated test statuses as collected
-	UPDATE [dbo].[Result]
+	UPDATE [dbo].[ResultTracking]
 	SET [StatusId] = 2
-	WHERE [Sample_Cin] = @Cin AND [StatusId] =1;
+	WHERE  [StatusId] =1 AND [ResultId] IN
+			(SELECT [Id] FROM [dbo].[Result] WHERE [Sample_Cin] = @Cin);
 END

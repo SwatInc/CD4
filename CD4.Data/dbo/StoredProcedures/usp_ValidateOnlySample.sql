@@ -3,7 +3,19 @@
 AS
 BEGIN
 	SET NOCOUNT ON;
-	UPDATE [dbo].[Sample]
+	DECLARE @AuditTypeId int;
+	DECLARE @StatusDescription varchar(50);
+
+	UPDATE [dbo].[SampleTracking]
 	SET [StatusId] = 5
-	WHERE [Cin] = @Cin;
+	WHERE [SampleCin] = @Cin;
+
+	--AUDIT TRAIL
+	--prep for insert
+	SELECT @AuditTypeId  = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Sample';
+	SELECT @StatusDescription = [Status] FROM [dbo].[Status] WHERE [Id] = 5;
+	--insert audit trail
+	INSERT INTO [dbo].[AuditTrail] ([AuditTypeId],[Cin],[StatusId],[Details]) 
+	VALUES (@AuditTypeId,@Cin,5,'Sample ' +@cin+ ', status changed to '+ @StatusDescription)
+
 END

@@ -12,9 +12,9 @@ DECLARE @ReturnValue bit = 0;
 		BEGIN TRY
 
 				UPDATE [dbo].[Sample]
-				SET [SiteId] = @SiteId,
-					[CollectionDate] = @CollectionDate,
-					[ReceivedDate] = @ReceivedDate
+				SET [SiteId] = @SiteId
+					--[CollectionDate] = @CollectionDate,
+					--[ReceivedDate] = @ReceivedDate
 				WHERE [Cin] = @Cin;
 
 				COMMIT TRANSACTION;
