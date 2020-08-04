@@ -53,7 +53,6 @@ namespace CD4.DataLibrary.DataAccess
             var returnTable = new DataTable();
             returnTable.Columns.Add("TestId");
             returnTable.Columns.Add("Sample_Cin");
-            returnTable.Columns.Add("StatusId");
 
             try
             {
@@ -63,7 +62,7 @@ namespace CD4.DataLibrary.DataAccess
                 //Add rows to the Datatable declared, and return
                 foreach (var item in tests)
                 {
-                    returnTable.Rows.Add(item.Id, cin, statusId);
+                    returnTable.Rows.Add(item.Id, cin);
                 }
                 return returnTable.AsTableValuedParameter("ResultTableInsertDataUDT");
             }

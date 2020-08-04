@@ -52,7 +52,7 @@ BEGIN
                [RW].[Site],
                [RW].[SampleStatusId] AS [StatusIconId],
                ISNULL([C].[Detail],'') AS [ClinicalDetails]
-		FROM [dbo].[RequestsWithTestsAndResults] [RW] WITH (NOEXPAND)
+		FROM [dbo].[RequestsWithTestsAndResults] [RW] 
         INNER JOIN @TempClinicalDetails [C] ON [RW].[AnalysisRequestId] = [C].[AnalysisRequestId]
 		WHERE [RW].[ReceivedDate] >= @StartDateInUse AND [RW].[TestStatusId] = @StatusId;
 

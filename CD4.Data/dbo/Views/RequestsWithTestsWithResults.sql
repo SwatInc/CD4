@@ -15,7 +15,6 @@
 	   [EpisodeNumber],
 	   [Site]
 )
-WITH SCHEMABINDING
 AS
 ( 
 SELECT [R].[Id],
@@ -44,14 +43,4 @@ LEFT JOIN [dbo].[SampleCollectionTimings] [SCT] ON [S].[Cin] = [SCT].[Cin]
 LEFT JOIN [dbo].[SampleReceivedTimings] [SRC] ON [S].[Cin] = [SRC].[Cin]
 WHERE [R].[Result] IS NOT NULL OR [R].[Result] <> ''
 )
-GO
-CREATE UNIQUE CLUSTERED INDEX IX_RequestDataForReport_Id
-ON [dbo].[RequestsWithTestsWithResults]([Id]);
-GO
-GO
-CREATE NONCLUSTERED INDEX [IX_RequestDataForReport_Cin]
-ON [dbo].[RequestsWithTestsWithResults] ([Cin])
-GO
-CREATE NONCLUSTERED INDEX IX_RequestDataForReport_ReceivedDate
-ON [dbo].[RequestsWithTestsWithResults]([ReceivedDate]);
 GO
