@@ -9,6 +9,9 @@ SET NOCOUNT ON;
 -- variable for storing test Id and ResultId
 	DECLARE @TestId int;
 	DECLARE @ResultId int;
+	DECLARE @AuditTypeIdTest int;
+	DECLARE @StatusText varchar(50);
+	DECLARE @TestResult_Audit varchar(50);
 
 -- fetch the test Id from description
 	SELECT @TestId = [Id] FROM [dbo].[Test] WHERE [Description] = @TestDescription;
@@ -30,4 +33,14 @@ SET NOCOUNT ON;
 	WHERE [RT].[ResultId] IN --sub query gets all ResultIds corresponding to the Cin
 		(SELECT [Id] FROM [dbo].[Result] WHERE [Sample_Cin] = @Cin);
 
+-- audit trail
+	--select audit type and status text(eg: validated instead of Id) 
+	SELECT @AuditTypeIdTest = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Test';
+	SELECT @StatusText = [Status] FROM [dbo].[Status] WHERE [Id] = @TestStatus;
+	--select test result
+	SELECT @TestResult_Audit = [Result] FROM [dbo].[Result] WHERE [Id]  = @ResultId;
+	--insert audit trail
+	INSERT INTO [dbo].[AuditTrail] ([AuditTypeId],[Cin],[StatusId],[Details])
+	VALUES (@AuditTypeIdTest,@Cin,@TestStatus,
+	'Test status of '+@TestDescription+ ' changed to '+ @StatusText +' with result ' + @TestResult_Audit);
 END
