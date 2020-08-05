@@ -4,5 +4,5 @@
     [ResultId] INT NOT NULL, 
     [StatusId] INT NOT NULL, 
     [UsersId] INT NOT NULL, 
-    [CreatedAt] DATETIME2 NOT NULL
+    [CreatedAt] DATETIME2 NOT NULL DEFAULT GETDATE()
 )

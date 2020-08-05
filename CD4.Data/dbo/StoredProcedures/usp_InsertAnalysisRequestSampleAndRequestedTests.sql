@@ -58,11 +58,11 @@ DECLARE @ReturnValue bit = 0;
 				--request record audit
 				SELECT @AuditTypeId = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'AnalysisRequest';
 				INSERT INTO [dbo].[AuditTrail] ([AuditTypeId],[StatusId],[Details]) VALUES
-				(@AuditTypeId,1,'Request registered for sample number: '+ @Cin+ ' by ' +@UserName+ ' at '+ GETDATE())
+				(@AuditTypeId,1,'Request registered for sample number: '+ @Cin+ ' by ' +@UserName+ ' at '+ CONVERT(varchar(10),GETDATE(),103))
 				--insert sample audit Trail
 				SELECT @AuditTypeId = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Sample';
 				INSERT INTO [dbo].[AuditTrail] ([AuditTypeId],[Cin],[StatusId],[Details]) VALUES
-				(@AuditTypeId,@Cin,1,'Sample: '+ @Cin +' created by user: '+ @UserName +' at '+GETDATE());
+				(@AuditTypeId,@Cin,1,'Sample: '+ @Cin +' created by user: '+ @UserName +' at '+ CONVERT(varchar(10),GETDATE(),103));
 				--get tests registered for Cin
 				SELECT @TestsRegistered = STRING_AGG([T].[Description],',') 
 				FROM [dbo].[Result] [R]
@@ -71,7 +71,7 @@ DECLARE @ReturnValue bit = 0;
 				--insert tests audit trail
 				SELECT @AuditTypeId = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Test';
 				INSERT INTO [dbo].[AuditTrail] ([AuditTypeId],[StatusId],[Details]) VALUES
-				(@AuditTypeId,1,'Tests registered for sample number '+ @Cin+ ':'+@TestsRegistered+ ' by '+@UserName+ ' at '+ GETDATE())
+				(@AuditTypeId,1,'Tests registered for sample number '+ @Cin+ ':'+@TestsRegistered+ ' by '+@UserName+ ' at '+ CONVERT(varchar(10),GETDATE(),103))
 
 				COMMIT TRANSACTION;
 				SET @ReturnValue = 1;

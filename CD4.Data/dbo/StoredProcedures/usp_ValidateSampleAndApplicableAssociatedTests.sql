@@ -1,5 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[usp_ValidateSampleAndApplicableAssociatedTests]
-	@Cin varchar(50)
+	@Cin varchar(50),
+	@UserId int
 AS
 BEGIN
 SET NOCOUNT ON;
@@ -33,7 +34,8 @@ SET NOCOUNT ON;
 	IF @NotValidatedNotRejectedCount = 0
 		BEGIN
 			EXECUTE [dbo].[usp_ValidateOnlySample]
-			@Cin = @Cin;
+			@Cin = @Cin,
+			@UserId = @UserId;
 			-- Audit for sample trail done in the [dbo].[usp_ValidateOnlySample]
 		END
 

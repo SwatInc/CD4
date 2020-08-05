@@ -13,19 +13,14 @@ DECLARE @ReturnValue bit = 0;
 
 				UPDATE [dbo].[Sample]
 				SET [SiteId] = @SiteId
-					--[CollectionDate] = @CollectionDate,
-					--[ReceivedDate] = @ReceivedDate
 				WHERE [Cin] = @Cin;
 
 				COMMIT TRANSACTION;
 				SET @ReturnValue = 1;
 		END TRY
 		BEGIN CATCH
-				IF (XACT_STATE()) = -1  
-				BEGIN  
-					ROLLBACK TRANSACTION; 
-				END;
-				THROW;
+			ROLLBACK TRANSACTION;
+			THROW;
 		END CATCH;
 SELECT @ReturnValue;
 END;

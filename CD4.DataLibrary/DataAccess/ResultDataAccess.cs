@@ -34,7 +34,8 @@ namespace CD4.DataLibrary.DataAccess
             var syncData = new
             {
                 TestsToInsert = testToInsertTable,
-                TestsToRemove = testToRemoveTable
+                TestsToRemove = testToRemoveTable,
+                UserId =1
             };
 
             return await SelectInsertOrUpdateAsync<bool, dynamic>(storedProcedure, syncData);
@@ -88,7 +89,7 @@ namespace CD4.DataLibrary.DataAccess
             //Make a database query to get Id for Status equivalent to "ToValidate".
             var statusId =  statusData.GetToValidateStatusId();
             //prepare the parameter to pass to the query.
-            var parameter = new { Result = result, ResultId = resultId, StatusId = statusId };
+            var parameter = new { Result = result, ResultId = resultId, StatusId = statusId, UserId = 1 };
             //insert result and result status
             var output = await SelectInsertOrUpdateAsync<bool, dynamic>(storedProcedure, parameter);
             //Set the sample status
@@ -128,7 +129,7 @@ namespace CD4.DataLibrary.DataAccess
         public async Task<bool> UpdateSampleStatusByResultId(int resultId, int sampleStatus)
         {
             var storedProcedure = "[dbo].[usp_UpdateSampleStatusResultId]";
-            var parameter = new { ResultId = resultId, SampleStatus = sampleStatus };
+            var parameter = new { ResultId = resultId, SampleStatus = sampleStatus, UserId = 1 };
             return await SelectInsertOrUpdateAsync<bool, dynamic>(storedProcedure, parameter);
         }
     }
