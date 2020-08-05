@@ -3,7 +3,7 @@
 AS
 BEGIN
 SET NOCOUNT ON;
-SELECT * 
-FROM [dbo].[AnalysisRequest_ClinicalDetail] [C]
-WHERE [C].[AnalysisRequestId] = @AnalysisRequestId;
+	SELECT [C].[Id],[C].[AnalysisRequestId],[C].[ClinicalDetailsId]
+	FROM [dbo].[AnalysisRequest_ClinicalDetail] [C]
+	WHERE [C].[AnalysisRequestId] = @AnalysisRequestId;
 END
