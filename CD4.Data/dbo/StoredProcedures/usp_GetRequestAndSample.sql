@@ -12,7 +12,7 @@ BEGIN
 	, [SRT].[ReceivedAt] AS [ReceivedDate]
 	FROM [dbo].[Sample] [S]
 	INNER JOIN [dbo].[AnalysisRequest] [AR] ON [S].[AnalysisRequestId] = [AR].[Id]
-	INNER JOIN [dbo].[SampleCollectionTimings] [SCT] ON [S].[Cin] = [SCT].[Cin]
-	INNER JOIN [dbo].[SampleReceivedTimings] [SRT] ON [S].[Cin] = [SRT].[Cin]
+	LEFT JOIN [dbo].[SampleCollectionTimings] [SCT] ON [S].[Cin] = [SCT].[Cin]
+	LEFT JOIN [dbo].[SampleReceivedTimings] [SRT] ON [S].[Cin] = [SRT].[Cin]
 	WHERE [S].[Cin] = @Cin;
 END
