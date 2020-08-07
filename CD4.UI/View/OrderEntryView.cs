@@ -345,15 +345,20 @@ namespace CD4.UI.View
                 SearchTerm = searchTerm,
                 SearchType = GetSearchType()
             };
+            //IMPORTANT: Needs to subscribe for this event from viewModel before initializing the view to avoid catching events from 
+            //view model after the view gets disposed.
+            searchViewModel.PatientSelected += SearchViewModel_PatientSelected;
 
             var searchView = new PatientSearchResultsView(searchViewModel)
             {
                 MdiParent = this.MdiParent,
                 StartPosition = FormStartPosition.CenterParent
             };
-            searchViewModel.PatientSelected += SearchViewModel_PatientSelected;
-            searchView.Show();
             searchView.FormClosed += SearchView_FormClosed;
+            if (!searchView.IsDisposed)
+            {
+                searchView.Show();
+            }
 
         }
 

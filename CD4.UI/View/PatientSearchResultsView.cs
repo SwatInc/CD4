@@ -22,10 +22,13 @@ namespace CD4.UI.View
             InitializeComponent();
             this._viewModel = viewModel;
             InitializeDataBinding();
-            InitializeSearchAsync().ConfigureAwait(true);
 
             _viewModel.PatientSelected += OnPatientSelected;
             gridViewPatientSearchResults.DoubleClick += gridViewPatientSearchResults_DoubleClick;
+
+
+            InitializeSearchAsync().ConfigureAwait(true);
+
         }
 
         private void OnPatientSelected(object sender, PatientModel e)
