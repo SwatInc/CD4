@@ -406,21 +406,11 @@ INSERT INTO [dbo].[WorkStationPrinters]([WorkStationId],[PrinterId],[PrinterType
 
 
 -- Insert rows into table 'dbo.AuditTypes' in schema '[dbo]'
-INSERT INTO [dbo].[AuditTypes]
-    ( -- Columns to insert data into
-    [Description]
-    )
+INSERT INTO [dbo].[AuditTypes]([Description])
 VALUES
-    ( -- First row: values for the columns in the list above
-        'AnalysisRequest'
-),
-    (
-        'Sample'
-),
-    (
-        'Test'
-)
-GO
+    ('AnalysisRequest'),
+    ( 'Sample'),
+    ('Test');
 
 ----Get a patient Id
 --DECLARE @PatientId int;

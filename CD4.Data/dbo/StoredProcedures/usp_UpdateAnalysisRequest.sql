@@ -37,7 +37,7 @@ SET NOCOUNT ON;
 	SELECT @Username = [UserName] FROM [dbo].[Users] WHERE [Id] = 1 -- Get the Id passed in.
 	SELECT @CurrentStatusId = [Id] FROM [dbo].[RequestTracking] WHERE [AnalysisRequestId] = @Id;
 
-	INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[StatusId],[Details],[CreatedAt])
+	INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[StatusId],[Details])
 		 VALUES
 			   (@AuditTypeIdRequest,
 			   1,

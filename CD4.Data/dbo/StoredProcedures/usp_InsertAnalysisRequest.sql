@@ -30,7 +30,7 @@ SET NOCOUNT ON;
 	SELECT @AuditPatientInfo = CONCAT([Fullname], ' (',[Id],' | ',[NidPp],')') FROM [dbo].[Patient] WHERE [Id] = @PatientId;
 	SELECT @AuditTypeIdRequest = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'AnalysisRequest';
 
-	INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[StatusId],[Details],[CreatedAt])
+	INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[StatusId],[Details])
 		 VALUES
 			   (@AuditTypeIdRequest,
 			   1,

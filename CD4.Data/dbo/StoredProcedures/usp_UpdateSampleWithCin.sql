@@ -10,10 +10,27 @@ SET XACT_ABORT ON;
 DECLARE @ReturnValue bit = 0;
     BEGIN TRANSACTION;
 		BEGIN TRY
+				
+				DECLARE @AuditTypeIdSample int;
+				DECLARE @CurrentStatus int;
 
+				--get current
+				SELECT @CurrentStatus = [StatusId] FROM [dbo].[SampleTracking] WHERE [SampleCin] = @Cin;
+
+				-- update sample site
 				UPDATE [dbo].[Sample]
 				SET [SiteId] = @SiteId
 				WHERE [Cin] = @Cin;
+
+				-- insert / update sample collected date
+				-- insert / update sample received date
+
+				-- TRACKING
+
+				-- AUDIT
+				SELECT @AuditTypeIdSample = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Sample';
+				INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[Cin],[StatusId],[Details])
+				VALUES(@AuditTypeIdSample, @Cin,@CurrentStatus, 'Sample Update.... site, collected and received dates.');
 
 				COMMIT TRANSACTION;
 				SET @ReturnValue = 1;
