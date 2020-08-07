@@ -404,6 +404,24 @@ INSERT INTO [dbo].[WorkStations]([Description])VALUES('IBRAHIMHUCYN');
 INSERT INTO [dbo].[WorkStationPrinters]([WorkStationId],[PrinterId],[PrinterType]) VALUES (1,1,1);
 INSERT INTO [dbo].[WorkStationPrinters]([WorkStationId],[PrinterId],[PrinterType]) VALUES (1,2,2);
 
+
+-- Insert rows into table 'dbo.AuditTypes' in schema '[dbo]'
+INSERT INTO [dbo].[AuditTypes]
+    ( -- Columns to insert data into
+    [Description]
+    )
+VALUES
+    ( -- First row: values for the columns in the list above
+        'AnalysisRequest'
+),
+    (
+        'Sample'
+),
+    (
+        'Test'
+)
+GO
+
 ----Get a patient Id
 --DECLARE @PatientId int;
 --DECLARE @ScientistId int;
