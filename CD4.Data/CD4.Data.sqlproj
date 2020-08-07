@@ -166,7 +166,4 @@
   <ItemGroup>
     <PostDeploy Include="dbo\Scripts\Script.PostDeployment.sql" />
   </ItemGroup>
-  <ItemGroup>
-    <PreDeploy Include="dbo\Scripts\Script.PreDeployment.sql" />
-  </ItemGroup>
 </Project>

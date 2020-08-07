@@ -11,6 +11,22 @@ DECLARE @ReturnValue bit = 0;
 		BEGIN TRY
 				DECLARE @AuditTypeIdTest int;
 				DECLARE @Username varchar(50);
+                DECLARE @TrackingData TABLE ([ResultId] int)
+                DECLARE @Cin VARCHAR(50);
+                -- TRACKING: Tests to remove
+                SELECT TOP 1 @Cin =  [Sample_Cin] FROM @TestsToRemove;
+                DELETE FROM [dbo].[ResultTracking]
+                WHERE [ResultId] IN 
+                (
+                    SELECT [Id] 
+                    FROM [dbo].[Result] 
+                    WHERE [Sample_Cin] = @Cin AND [TestId] IN 
+                    (
+                        SELECT [TestId] FROM @TestsToRemove
+                    )
+                );
+
+                --SYNC
 				--remove tests requested for removal
 				DELETE FROM [dbo].[Result] 
 				WHERE 
@@ -19,10 +35,15 @@ DECLARE @ReturnValue bit = 0;
 
 				--add tests requested for insertion
 				INSERT INTO [dbo].[Result] ([Sample_Cin], [TestId])
+                OUTPUT inserted.[Id] INTO @TrackingData
 				SELECT [I].[Sample_Cin], [I].[TestId] FROM @TestsToInsert [I];
 
-				COMMIT TRANSACTION;
+                -- TRACKING: Added tests
+                INSERT INTO [dbo].[ResultTracking] ([ResultId],[StatusId],[UsersId])
+				SELECT [ResultId],1,@UserId FROM @TrackingData;
+                -- removed tests
 
+                -- AUDIT
 				--audit trail, tests added
 				SELECT @AuditTypeIdtest = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Test';
 				
@@ -41,6 +62,7 @@ DECLARE @ReturnValue bit = 0;
 					, (SELECT 'User: '+@Username+' rejected test for Cin: '+[Sample_Cin] +' '+ [Description] FROM [dbo].[Test] WHERE [Id] = [I].[TestId]) 
 				FROM @TestsToRemove [I];
 
+				COMMIT TRANSACTION;
 				SET @ReturnValue = 1;
 		END TRY
 		BEGIN CATCH

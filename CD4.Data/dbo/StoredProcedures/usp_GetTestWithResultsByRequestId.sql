@@ -8,5 +8,5 @@ FROM [dbo].[Result] [R]
 INNER JOIN [dbo].[Sample] [S] ON [S].[Cin] = [R].[Sample_Cin]
 INNER JOIN [dbo].[AnalysisRequest] [AR] ON [AR].[Id] = [S].[AnalysisRequestId]
 LEFT JOIN [dbo].[ResultTracking] [RT] ON [R].[Id] = [RT].[ResultId]
-WHERE [S].[AnalysisRequestId] = @AnalysisRequestId AND [RT].[StatusId] = 4; -- ToValidate (4)
+WHERE [S].[AnalysisRequestId] = @AnalysisRequestId;
 END
