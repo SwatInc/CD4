@@ -18,27 +18,81 @@ namespace CD4.DataLibrary.DataAccess
         }
 
         /// <summary>
-        /// Inserts the specified tests list into database and removes a specified test list from the database for a particualar CIN
+        /// Manages inserts the specified test lists into database and removes a specified test list from the database for a particualar CIN by calling appropriate methods
         /// </summary>
         /// <param name="testsToInsert">List of tests to insert</param>
         /// <param name="testsToRemove">List of tests to remove</param>
         /// <param name="cin">The CIN for which tests are to be inserted or deleted or both</param>
         /// <returns>Returns true or false indicating the successfull/unsuccessfull completion of the insert/delete operation</returns>
-        public async Task<bool> SyncRequestedTestDataAsync
+        public async Task<bool> ManageRequestedTestsDataAsync
             (List<TestsModel> testsToInsert, List<TestsModel> testsToRemove, string cin)
         {
             var testToInsertTable = await GetTestsTableAsync(testsToInsert, cin, statusData);
             var testToRemoveTable =await  GetTestsTableAsync(testsToRemove, cin, statusData);
-            var storedProcedure = "[dbo].[usp_SyncResultsTableData]";
 
-            var syncData = new
+            //determine whether to create, delete or sync result table data
+            if (testsToInsert.Count > 0 && testsToRemove.Count > 0)
             {
-                TestsToInsert = testToInsertTable,
-                TestsToRemove = testToRemoveTable,
-                UserId =1
-            };
+                //sync data
+                var syncData = new
+                {
+                    TestsToInsert = testToInsertTable,
+                    TestsToRemove = testToRemoveTable,
+                    UserId = 1
+                };
 
+                return await SyncResultTableDataAsync(syncData);
+            }
+            else if (testsToInsert.Count > 0)
+            {
+                var insertData = new
+                {
+                    TestsToInsert = testToInsertTable,
+                    UserId = 1
+                };
+                return await InsertResultTableDataAsync(insertData);
+            }
+            else if (testsToRemove.Count > 0)
+            {
+                var removeData = new
+                {
+                    TestsToRemove = testToRemoveTable,
+                    UserId = 1
+                };
+                return await RemoveResultTableDataAsync(removeData);
+
+            }
+            else
+            {
+                throw new Exception("No tests inserted or removed!");
+            }
+
+
+        }
+
+        /// <summary>
+        /// Adds and removes the specified test records to the Results table
+        /// </summary>
+        /// <param name="syncData"></param>
+        /// <returns>Task of bool indicating success/failure</returns>
+        private async Task<bool> SyncResultTableDataAsync(dynamic syncData)
+        {
+            var storedProcedure = "[dbo].[usp_SyncResultsTableData]";
             return await SelectInsertOrUpdateAsync<bool, dynamic>(storedProcedure, syncData);
+        }
+
+        private async Task<bool> InsertResultTableDataAsync(dynamic insertData)
+        {
+            var storedProcedure = "[dbo].[usp_InsertResultsTableData]";
+            return await SelectInsertOrUpdateAsync<bool, dynamic>(storedProcedure, insertData);
+
+        }
+
+        private async Task<bool> RemoveResultTableDataAsync(dynamic removeData)
+        {
+            var storedProcedure = "[dbo].[usp_RemoveResultsTableData]";
+            return await SelectInsertOrUpdateAsync<bool, dynamic>(storedProcedure, removeData);
+
         }
 
         /// <summary>

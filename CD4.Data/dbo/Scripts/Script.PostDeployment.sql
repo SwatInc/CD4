@@ -392,7 +392,7 @@ VALUES
 --insert status table data
 INSERT INTO [dbo].[Status] ([Status])
 VALUES
-('Registered'),('Collected'),('Received'),('ToValidate'),('Validated'),('Processing'),('Rejected');
+('Registered'),('Collected'),('Received'),('ToValidate'),('Validated'),('Processing'),('Rejected'),('Removed');
 
 
 -- insert system printer

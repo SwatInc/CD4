@@ -99,7 +99,7 @@ namespace CD4.DataLibrary.DataAccess
                         (storedProcedure, parameters, commandType: CommandType.StoredProcedure);
                     return s;
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
 
                     throw;

@@ -1,4 +1,8 @@
-﻿CREATE PROCEDURE [dbo].[usp_SyncResultsTableData]
+﻿-- This procedure should be called only when there are tests to be inserted and tests to be removed
+-- Otherwise use either of the following procedures
+	-- [dbo].[usp_InsertResultsTableData]
+	-- [dbo].[usp_RemoveResultsTableData]
+CREATE PROCEDURE [dbo].[usp_SyncResultsTableData]
 	@TestsToInsert [dbo].[ResultTableInsertDataUDT] READONLY,
 	@TestsToRemove [dbo].[ResultTableInsertDataUDT] READONLY,
 	@UserId int
@@ -13,6 +17,7 @@ DECLARE @ReturnValue bit = 0;
 				DECLARE @Username varchar(50);
                 DECLARE @TrackingData TABLE ([ResultId] int)
                 DECLARE @Cin VARCHAR(50);
+
                 -- TRACKING: Tests to remove
                 SELECT TOP 1 @Cin =  [Sample_Cin] FROM @TestsToRemove;
                 DELETE FROM [dbo].[ResultTracking]
@@ -46,20 +51,21 @@ DECLARE @ReturnValue bit = 0;
                 -- AUDIT
 				--audit trail, tests added
 				SELECT @AuditTypeIdtest = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Test';
+				SELECT @Username = [UserName] FROM [dbo].[Users] WHERE [Id] = @UserId;
 				
 				INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[Cin],[StatusId],[Details])
 				SELECT @AuditTypeIdtest
 					, [I].[Sample_Cin]
 					, 1 -- registered status
-					, (SELECT 'User: '+@Username+' registered for Cin: '+[Sample_Cin] +' '+ [Description] FROM [dbo].[Test] WHERE [Id] = [I].[TestId]) 
+					, (SELECT CONCAT('User: ',@Username,' registered for Cin: ',[Sample_Cin],' ',[Description]) FROM [dbo].[Test] WHERE [Id] = [I].[TestId]) 
 				FROM @TestsToInsert [I];
 
 				--audit trail, tests removed
 				INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[Cin],[StatusId],[Details])
 				SELECT @AuditTypeIdtest
 					, [I].[Sample_Cin]
-					, 7 -- rejected status
-					, (SELECT 'User: '+@Username+' rejected test for Cin: '+[Sample_Cin] +' '+ [Description] FROM [dbo].[Test] WHERE [Id] = [I].[TestId]) 
+					, 8 -- removed status
+					, (SELECT CONCAT('User: ',@Username,' removed test for Cin: ',[Sample_Cin],' ',[Description]) FROM [dbo].[Test] WHERE [Id] = [I].[TestId]) 
 				FROM @TestsToRemove [I];
 
 				COMMIT TRANSACTION;
