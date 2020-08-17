@@ -156,6 +156,7 @@
     <Build Include="dbo\Views\SampleReceivedTimings.sql" />
     <Build Include="dbo\StoredProcedures\usp_InsertResultsTableData.sql" />
     <Build Include="dbo\StoredProcedures\usp_RemoveResultsTableData.sql" />
+    <Build Include="dbo\Tables\TrackingHistory.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
