@@ -21,6 +21,12 @@ DECLARE @ReturnValue bit = 0;
 				DECLARE @DemoUserId int = 1;
 				DECLARE @Username varchar(50);
 				DECLARE @TestsRegistered varchar(500);
+				DECLARE @TempTrackingHistory AS TABLE(
+									[TrackingType] INT,
+									[AnalysisRequestId] INT,
+									[SampleCin] varchar(50),
+									[ResultId] int,
+									[TimeStamp] DATETIMEOFFSET);
 
 				--used to catch all inserted ids
 				DECLARE @InsertedId TABLE ([Id] int);
@@ -49,14 +55,25 @@ DECLARE @ReturnValue bit = 0;
 
 				--TRACKING (StatusId for registered (1).)
 				--request tracking
-				INSERT INTO [dbo].[RequestTracking]([AnalysisRequestId],[StatusId],[UsersId]) 
-				VALUES (@AnalysisRequestId,1,@DemoUserId) 
+				INSERT INTO [dbo].[RequestTracking]([AnalysisRequestId],[StatusId],[UsersId])
+				OUTPUT 1, INSERTED.[AnalysisRequestId], INSERTED.[CreatedAt]
+						INTO @TempTrackingHistory([TrackingType],[AnalysisRequestId],[TimeStamp])
+				VALUES (@AnalysisRequestId,1,@DemoUserId);
 				--sample tracking
 				INSERT INTO [dbo].[SampleTracking] ([SampleCin],[StatusId],[UsersId])
+				OUTPUT 2,INSERTED.[SampleCin],INSERTED.[CreatedAt]
+					INTO @TempTrackingHistory([TrackingType],[SampleCin],[TimeStamp])
 				VALUES (@Cin,1,@DemoUserId);
 				--tests tracking
 				INSERT INTO [dbo].[ResultTracking] ([ResultId],[StatusId],[UsersId])
+				OUTPUT 3, INSERTED.[ResultId],INSERTED.[CreatedAt]
+						INTO @TempTrackingHistory([TrackingType],[ResultId],[TimeStamp])
 				SELECT [Id], 1,@UserId FROM [dbo].[Result] WHERE [Sample_Cin] = @Cin;
+
+				--TRACKING HISTORY
+				INSERT INTO [dbo].[TrackingHistory]([TrackingType],[AnalysisRequestId],[SampleCin],[ResultId],[StatusId],[UsersId],[TimeStamp])
+				SELECT [TrackingType],[AnalysisRequestId],[SampleCin],[ResultId],1,@UserId,[TimeStamp]
+				FROM @TempTrackingHistory;
 				
 				--AUDIT TRAIL
 				--select username for audit
