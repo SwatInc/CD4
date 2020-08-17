@@ -16,6 +16,6 @@ namespace CD4.DataLibrary.Models
         public string Sample_Cin { get; set; }
         public int TestId { get; set; }
         public string Result { get; set; }
-        public DateTime ResultDate { get; set; }
+        public DateTimeOffset? ResultDate { get; set; }
     }
 }
