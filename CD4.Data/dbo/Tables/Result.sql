@@ -6,10 +6,10 @@
     [Result] VARCHAR(50) NULL,
     CONSTRAINT [FK_Result_Test] FOREIGN KEY ([TestId]) REFERENCES [dbo].[Test]([Id]), 
     CONSTRAINT [FK_Result_Sample] FOREIGN KEY ([Sample_Cin]) REFERENCES [dbo].[Sample]([Cin]), 
-    CONSTRAINT [PK_Id_Cin] PRIMARY KEY ([Id],[Sample_Cin]), 
-    CONSTRAINT [AK_Result_CinAndTestId] UNIQUE ([Sample_Cin],[TestId]))
+    CONSTRAINT [AK_Result_CinAndTestId] UNIQUE ([Sample_Cin],[TestId]), 
+    CONSTRAINT [PK_Result_Id] PRIMARY KEY ([Id]))
 GO
-CREATE INDEX [IX_Result_Result] ON [dbo].[Result] ([Result]);
+CREATE INDEX [IX_Result_Result] ON [dbo].[Result] ([Result]) INCLUDE ([Sample_Cin]);
 GO
 CREATE NONCLUSTERED INDEX [IX_Result_Result_TestId]
 ON [dbo].[Result] ([Result])
