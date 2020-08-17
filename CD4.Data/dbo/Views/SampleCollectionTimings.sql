@@ -7,11 +7,11 @@
 WITH SCHEMABINDING
 AS
 (
-	SELECT [a].[Id]
-		 , [a].[Cin]
-		 , [a].[CreatedAt] AS [CollectedAt]
-	FROM [dbo].[AuditTrail] [a]
-	WHERE [a].[StatusId] = 2 AND [a].[Cin] <> 'NA' --StatusId 2 on dbo.Status must be Collected
+	SELECT [th].[Id]
+		 , [th].[SampleCin] AS [Cin]
+		 , [th].[TimeStamp] AS [CollectedAt]
+	FROM [dbo].[TrackingHistory] [th]
+	WHERE [th].[StatusId] = 2 AND [th].[SampleCin] IS NOT NULL --StatusId 2 on dbo.Status must be Collected
 )
 GO
 CREATE UNIQUE CLUSTERED INDEX IX_SampleCollectionTimings_Id
