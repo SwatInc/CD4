@@ -4,5 +4,8 @@
     [ResultId] INT NOT NULL, 
     [StatusId] INT NOT NULL, 
     [UsersId] INT NOT NULL, 
-    [CreatedAt] DATETIME2 NOT NULL DEFAULT GETDATE()
+    [CreatedAt] DATETIME2 NOT NULL DEFAULT GETDATE(), 
+    CONSTRAINT [FK_ResultTracking_Result] FOREIGN KEY ([ResultId]) REFERENCES [dbo].[Result]([Id]),
+    CONSTRAINT [FK_ResultTracking_Status] FOREIGN KEY ([StatusId]) REFERENCES [dbo].[Status]([Id]),
+    CONSTRAINT [FK_ResultTracking_Users] FOREIGN KEY ([UsersId]) REFERENCES [dbo].[Users]([Id])
 )

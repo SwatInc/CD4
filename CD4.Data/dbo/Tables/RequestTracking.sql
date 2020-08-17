@@ -4,5 +4,8 @@
     [AnalysisRequestId] INT NOT NULL, 
     [StatusId] INT NOT NULL, 
     [UsersId] INT NOT NULL, 
-    [CreatedAt] DATETIME2 NOT NULL DEFAULT GETDATE()
+    [CreatedAt] DATETIME2 NOT NULL DEFAULT GETDATE(), 
+    CONSTRAINT [FK_RequestTracking_AnalysisRequest] FOREIGN KEY ([AnalysisRequestId]) REFERENCES [dbo].[AnalysisRequest]([Id]), 
+    CONSTRAINT [FK_RequestTracking_Status] FOREIGN KEY ([StatusId]) REFERENCES [dbo].[Status]([Id]), 
+    CONSTRAINT [FK_RequestTracking_Users] FOREIGN KEY ([UsersId]) REFERENCES [dbo].[Users]([Id])
 )

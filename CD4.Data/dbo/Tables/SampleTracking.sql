@@ -4,5 +4,8 @@
     [SampleCin] VARCHAR(50) NOT NULL, 
     [StatusId] INT NOT NULL, 
     [UsersId] INT NOT NULL, 
-    [CreatedAt] DATETIME2 NOT NULL DEFAULT GETDATE()
+    [CreatedAt] DATETIME2 NOT NULL DEFAULT GETDATE(), 
+    CONSTRAINT [FK_SampleTracking_Sample] FOREIGN KEY ([SampleCin]) REFERENCES [dbo].[Sample]([Cin]),
+    CONSTRAINT [FK_SampleTracking_Status] FOREIGN KEY ([StatusId]) REFERENCES [dbo].[Status]([Id]), 
+    CONSTRAINT [FK_SampleTracking_Users] FOREIGN KEY ([UsersId]) REFERENCES [dbo].[Users]([Id])
 )
