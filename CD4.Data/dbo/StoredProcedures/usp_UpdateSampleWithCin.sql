@@ -1,8 +1,8 @@
 ﻿CREATE PROCEDURE [dbo].[usp_UpdateSampleWithCin]
 	@Cin varchar(50),
 	@SiteId int,
-	@CollectionDate date,
-	@ReceivedDate date
+	@CollectionDate datetimeoffset,
+	@ReceivedDate datetimeoffset
 AS
 BEGIN
 SET NOCOUNT ON;
@@ -23,9 +23,13 @@ DECLARE @ReturnValue bit = 0;
 				WHERE [Cin] = @Cin;
 
 				-- insert / update sample collected date
+				UPDATE [dbo].[TrackingHistory]
+				SET [TimeStamp] = @CollectionDate
+				WHERE [SampleCin] = @Cin AND [StatusId] = 2
 				-- insert / update sample received date
-
-				-- TRACKING
+				UPDATE [dbo].[TrackingHistory]
+				SET [TimeStamp] = @CollectionDate
+				WHERE [SampleCin] = @Cin AND [StatusId] = 3
 
 				-- AUDIT
 				SELECT @AuditTypeIdSample = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Sample';

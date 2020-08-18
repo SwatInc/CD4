@@ -12,6 +12,12 @@ DECLARE @ReturnValue bit = 0;
 			DECLARE @TrackingData TABLE ([ResultId] int)
 			DECLARE @AuditTypeIdTest int;
 			DECLARE @Username varchar(50);
+			DECLARE @TempTrackingHistory AS TABLE(
+								[TrackingType] INT,
+								[AnalysisRequestId] INT,
+								[SampleCin] varchar(50),
+								[ResultId] int,
+								[TimeStamp] DATETIMEOFFSET);
 
 			--add tests requested for insertion
 			INSERT INTO [dbo].[Result] ([Sample_Cin], [TestId])
@@ -20,7 +26,14 @@ DECLARE @ReturnValue bit = 0;
 
             -- TRACKING: Added tests
             INSERT INTO [dbo].[ResultTracking] ([ResultId],[StatusId],[UsersId])
+			OUTPUT 3, INSERTED.[ResultId],INSERTED.[CreatedAt]
+					INTO @TempTrackingHistory([TrackingType],[ResultId],[TimeStamp])
 			SELECT [ResultId],1,@UserId FROM @TrackingData;
+
+			--TRACKING HISTORY
+			INSERT INTO [dbo].[TrackingHistory]([TrackingType],[AnalysisRequestId],[SampleCin],[ResultId],[StatusId],[UsersId],[TimeStamp])
+			SELECT [TrackingType],[AnalysisRequestId],[SampleCin],[ResultId],1,@UserId,[TimeStamp]
+			FROM @TempTrackingHistory;
 
             -- AUDIT
 			--audit trail, tests added

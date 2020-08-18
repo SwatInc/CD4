@@ -10,6 +10,12 @@ SET NOCOUNT ON;
 	DECLARE @AuditTypeIdTest int;
 	DECLARE @TestDescription varchar(50);
 	DECLARE @Username varchar(50);
+	DECLARE @TempTrackingHistory AS TABLE(
+						[TrackingType] INT,
+						[AnalysisRequestId] INT,
+						[SampleCin] varchar(50),
+						[ResultId] int,
+						[TimeStamp] DATETIMEOFFSET);
 
 	INSERT INTO [dbo].[Result] ([Sample_Cin], [TestId])
 	OUTPUT INSERTED.Id
@@ -18,6 +24,8 @@ SET NOCOUNT ON;
 	-- TRACKING 
 	SELECT @InsertedResultRecordId = SCOPE_IDENTITY();
 	INSERT INTO [dbo].[ResultTracking]([ResultId],[StatusId],[UsersId])
+	OUTPUT 3, INSERTED.[ResultId],INSERTED.[CreatedAt]
+			INTO @TempTrackingHistory([TrackingType],[ResultId],[TimeStamp])
 		 VALUES
 		 (@InsertedResultRecordId, 1,1);
 

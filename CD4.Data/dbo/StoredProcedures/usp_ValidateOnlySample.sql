@@ -12,6 +12,10 @@ BEGIN
 	SET [StatusId] = 5
 	WHERE [SampleCin] = @Cin;
 
+	-- TRACKING HISTORY
+	INSERT INTO [dbo].[TrackingHistory] ([TrackingType],[SampleCin],[StatusId],[UsersId]) VALUES
+	(2,@Cin,5,@UserId);
+
 	--AUDIT TRAIL
 	--prep for insert
 	SELECT @Username = [UserName] FROM [dbo].[Users] WHERE [Id] = @UserId;

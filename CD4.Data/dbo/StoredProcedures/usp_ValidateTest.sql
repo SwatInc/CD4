@@ -1,4 +1,4 @@
-﻿-- validates the specified sample and return distinct testStatus of all the tests in the sample.
+﻿-- validates the specified tests and return distinct testStatus of all the tests in the sample.
 CREATE PROCEDURE [dbo].[usp_ValidateTest]
 	@Cin varchar(50),
 	@TestDescription varchar(50),
@@ -32,6 +32,10 @@ SET NOCOUNT ON;
 	FROM [dbo].[ResultTracking] [RT]
 	WHERE [RT].[ResultId] IN --sub query gets all ResultIds corresponding to the Cin
 		(SELECT [Id] FROM [dbo].[Result] WHERE [Sample_Cin] = @Cin);
+
+-- tracking history
+	INSERT INTO [dbo].[TrackingHistory] ([TrackingType],[ResultId],[StatusId],[UsersId]) VALUES
+	(3,@ResultId,@TestStatus,1);
 
 -- audit trail
 	--select audit type and status text(eg: validated instead of Id) 

@@ -19,6 +19,12 @@ SET NOCOUNT ON;
 	INNER JOIN [dbo].[Test] [T] ON [R].[TestId] = [T].[Id]
 	WHERE [Sample_Cin] = @Cin  AND ([Result] <> NULL OR [Result] <> '');
 
+	-- TEST TRACKING HISTORY
+	INSERT INTO [dbo].[TrackingHistory] ([TrackingType],[ResultId],[StatusId],[UsersId])
+	SELECT 3,[ResultId],5,@UserId 
+	FROM [ResultTracking] 
+	WHERE [StatusId] = 4 AND [ResultId] IN (SELECT [ResultId] FROM @ResultDataToValidate);
+
 	--mark tests as validated
 	UPDATE [dbo].[ResultTracking]
 		SET [StatusId] = 5
@@ -48,18 +54,7 @@ SET NOCOUNT ON;
 	WHERE [Sample_Cin] = @Cin;
 
 	--AUDIT TRAIL... (NOTE: Audit for sample trail done in the [dbo].[usp_ValidateOnlySample])
-	/*
--- audit trail
-	--select audit type and status text(eg: validated instead of Id) 
-	SELECT @AuditTypeIdTest = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Test';
-	SELECT @StatusText = [Status] FROM [dbo].[Status] WHERE [Id] = @TestStatus;
 
-	--insert audit trail
-	INSERT INTO [dbo].[AuditTrail] ([AuditTypeId],[Cin],[StatusId],[Details])
-	VALUES (@AuditTypeIdTest,@Cin,@TestStatus,
-			'Test status of '+@TestDescription+ ' changed to '+ @StatusText);
-
-	*/
 	SELECT @AuditTypeIdTest = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Test';
 	SELECT @StatusText = [Status] FROM [dbo].[Status] WHERE [Id] = 5;
 

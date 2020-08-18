@@ -17,10 +17,12 @@ DECLARE @ReturnValue bit = 0;
 				DECLARE @Username varchar(50);
                 DECLARE @TrackingData TABLE ([ResultId] int)
                 DECLARE @Cin VARCHAR(50);
+				DECLARE @TempTrackingHistory TABLE ([ResultId] INT NOT NULL, [StatusId] INT NOT NULL);
 
                 -- TRACKING: Tests to remove
                 SELECT TOP 1 @Cin =  [Sample_Cin] FROM @TestsToRemove;
                 DELETE FROM [dbo].[ResultTracking]
+				OUTPUT DELETED.[ResultId], 8 INTO @TempTrackingHistory
                 WHERE [ResultId] IN 
                 (
                     SELECT [Id] 
@@ -45,8 +47,13 @@ DECLARE @ReturnValue bit = 0;
 
                 -- TRACKING: Added tests
                 INSERT INTO [dbo].[ResultTracking] ([ResultId],[StatusId],[UsersId])
+				OUTPUT INSERTED.[ResultId], 1 INTO @TempTrackingHistory
 				SELECT [ResultId],1,@UserId FROM @TrackingData;
                 -- removed tests
+
+				-- TRACKING HISTORY
+				INSERT INTO [dbo].[TrackingHistory] ([TrackingType],[ResultId],[UsersId])
+				SELECT 3,[ResultId],@UserId FROM @TrackingData;
 
                 -- AUDIT
 				--audit trail, tests added

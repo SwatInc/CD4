@@ -12,24 +12,32 @@ DECLARE @ReturnValue bit = 0;
             DECLARE @AuditTypeIdTest int;
             DECLARE @Cin VARCHAR(50);
 			DECLARE @Username varchar(50);
+			DECLARE @ResultIdsToRemove TABLE ([Id] INT NOT NULL UNIQUE);
             
+			INSERT INTO @ResultIdsToRemove([Id])
+            SELECT [Id] 
+            FROM [dbo].[Result] 
+            WHERE [Sample_Cin] = @Cin AND [TestId] IN 
+            (
+                SELECT [TestId] FROM @TestsToRemove
+            )
+
             -- TRACKING: Tests to remove
             SELECT TOP 1 @Cin =  [Sample_Cin] FROM @TestsToRemove;
             DELETE FROM [dbo].[ResultTracking]
             WHERE [ResultId] IN 
             (
-                SELECT [Id] 
-                FROM [dbo].[Result] 
-                WHERE [Sample_Cin] = @Cin AND [TestId] IN 
-                (
-                    SELECT [TestId] FROM @TestsToRemove
-                )
+                SELECT [Id] FROM @ResultIdsToRemove
             );
 			--remove tests requested for removal
 			DELETE FROM [dbo].[Result] 
 			WHERE 
 			([TestId] IN (SELECT [R].[TestId]  FROM @TestsToRemove [R])) AND
 			[Sample_Cin] = (SELECT TOP(1)[R].[Sample_Cin] FROM @TestsToRemove [R]);
+
+			-- TRACKING HISTORY
+			INSERT INTO [dbo].[TrackingHistory]([TrackingType],[ResultId],[StatusId])
+			SELECT 3,[Id],8 FROM @ResultIdsToRemove;
 
             -- AUDIT
 			SELECT @AuditTypeIdtest = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Test';

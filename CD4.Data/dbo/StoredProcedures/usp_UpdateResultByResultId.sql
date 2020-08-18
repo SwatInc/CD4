@@ -32,8 +32,6 @@ DECLARE @ReturnValue bit = 0;
 		--update result
 			UPDATE [dbo].[Result]
 			SET [Result] = @Result
-				--[ResultDate] = GETDATE(),
-				--[StatusId] = @StatusId
 			WHERE [Id] = @ResultId;
 		
 		-- update result status
@@ -43,8 +41,14 @@ DECLARE @ReturnValue bit = 0;
 		WHERE ResultId = @ResultId
 
 		-- TRACKING
-		INSERT INTO [dbo].[ResultTracking]([ResultId],[StatusId],[UsersId])
-		VALUES (@ResultId,@StatusId,@UsersId);
+		UPDATE [dbo].[ResultTracking]
+		SET [StatusId] = @StatusId,
+			[UsersId] = @UsersId
+		WHERE [ResultId] = @ResultId;
+
+		-- TRACKING HISTORY
+		INSERT INTO [dbo].[TrackingHistory] ([TrackingType],[ResultId],[StatusId],[UsersId]) VALUES
+		(3,@ResultId,@StatusId);
 
 		
 		-- AUDIT PROCESS
@@ -59,7 +63,7 @@ DECLARE @ReturnValue bit = 0;
 		SELECT @AuditTypeIdTest = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Test';
 
 		INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[Cin],[StatusId],[Details])
-		VALUES(@AuditTypeIdTest,@Cin, @StatusId,'PREVIOUS: '+@PreviousData+'. ' +@CurrentData)
+		VALUES(@AuditTypeIdTest,@Cin, @StatusId,'PREVIOUS: '+@PreviousData+'!. ' +@CurrentData)
 
 		COMMIT TRANSACTION;
 			SET @ReturnValue = 1;
