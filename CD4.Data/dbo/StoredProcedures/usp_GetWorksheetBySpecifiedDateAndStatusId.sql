@@ -54,7 +54,7 @@ BEGIN
                ISNULL([C].[Detail],'') AS [ClinicalDetails]
 		FROM [dbo].[RequestsWithTestsAndResults] [RW] 
         INNER JOIN @TempClinicalDetails [C] ON [RW].[AnalysisRequestId] = [C].[AnalysisRequestId]
-		WHERE [RW].[ReceivedDate] >= @StartDateInUse AND [RW].[TestStatusId] = @StatusId;
+		WHERE [RW].[CollectionDate] >= @StartDateInUse AND [RW].[TestStatusId] = @StatusId;
 
 		-- fetch results data which is not complete(has no results).
         SELECT [Id],
