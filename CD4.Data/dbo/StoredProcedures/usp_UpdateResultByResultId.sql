@@ -48,7 +48,7 @@ DECLARE @ReturnValue bit = 0;
 
 		-- TRACKING HISTORY
 		INSERT INTO [dbo].[TrackingHistory] ([TrackingType],[ResultId],[StatusId],[UsersId]) VALUES
-		(3,@ResultId,@StatusId);
+		(3,@ResultId,@StatusId,@UsersId);
 
 		
 		-- AUDIT PROCESS
