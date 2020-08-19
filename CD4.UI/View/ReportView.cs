@@ -202,8 +202,8 @@ namespace CD4.UI.View
     public class AnalysisRequestReport
     {
         public string SampleSite { get; set; }
-        public DateTime CollectedDate { get; set; }
-        public DateTime ReceivedDate { get; set; }
+        public DateTimeOffset? CollectedDate { get; set; }
+        public DateTimeOffset? ReceivedDate { get; set; }
         public Patient Patient { get; set; }
         public BindingList<Assays> Assays { get; set; }
 

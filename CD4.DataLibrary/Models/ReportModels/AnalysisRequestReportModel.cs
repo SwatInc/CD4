@@ -10,8 +10,8 @@ namespace CD4.DataLibrary.Models.ReportModels
             Assays = new List<AssaysModel>();
         }
         public string SampleSite { get; set; }
-        public DateTime CollectedDate { get; set; }
-        public DateTime ReceivedDate { get; set; }
+        public DateTimeOffset? CollectedDate { get; set; }
+        public DateTimeOffset? ReceivedDate { get; set; }
         public PatientModel Patient { get; set; }
         public List<AssaysModel> Assays { get; set; }
 

@@ -143,7 +143,7 @@ namespace CD4.DataLibrary.DataAccess
             //Make a database query to get Id for Status equivalent to "ToValidate".
             var statusId =  statusData.GetToValidateStatusId();
             //prepare the parameter to pass to the query.
-            var parameter = new { Result = result, ResultId = resultId, StatusId = statusId, UserId = 1 };
+            var parameter = new { Result = result, ResultId = resultId, StatusId = statusId, UsersId = 1 };
             //insert result and result status
             var output = await SelectInsertOrUpdateAsync<bool, dynamic>(storedProcedure, parameter);
             //Set the sample status

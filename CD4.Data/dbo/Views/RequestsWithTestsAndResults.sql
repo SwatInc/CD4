@@ -5,6 +5,7 @@
        [SampleStatusId],
        [AnalysisRequestId],
        [Cin],
+       [RequestedDate],
        [CollectionDate],
        [ReceivedDate],
        [FullName],
@@ -24,6 +25,7 @@ SELECT [R].[Id],
        [ST].[StatusId] AS [SampleStatusId],
        [S].[AnalysisRequestId],
        [S].[Cin],
+       [REQT].[RequestedAt] AS [RequestedDate],
        [SCT].[CollectedAt] AS [CollectionDate],
        [SRT].[ReceivedAt] AS [ReceivedDate],
        [P].[FullName],
@@ -47,6 +49,6 @@ LEFT JOIN [dbo].[SampleTracking] [ST] ON  [s].[Cin] = [ST].[SampleCin]     -- fo
 LEFT JOIN [dbo].[ResultTracking] [RT] ON [RT].[ResultId] = [R].[Id]        -- for current result status tracking
 LEFT JOIN [dbo].[SampleCollectionTimings] [SCT] ON [S].[Cin] = [SCT].[Cin]
 LEFT JOIN [dbo].[SampleReceivedTimings] [SRT] ON [S].[Cin] = [SRT].[Cin]
-
+LEFT JOIN [dbo].[SampleRequestedTimings] [REQT] ON [S].[AnalysisRequestId] = [REQT].[AnalysisRequestId]
 )
 GO
