@@ -58,10 +58,10 @@ SET NOCOUNT ON;
 	SELECT @AuditTypeIdTest = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Test';
 	SELECT @StatusText = [Status] FROM [dbo].[Status] WHERE [Id] = 5;
 
-	SELECT @ValidatedTestsWithResults = STRING_AGG([TestDesc]+': '+[Result],'|') FROM @ResultDataToValidate
+	SELECT @ValidatedTestsWithResults = STRING_AGG([TestDesc]+': '+[Result],' | ') FROM @ResultDataToValidate
 
 	--insert audit trail
 	INSERT INTO [dbo].[AuditTrail] ([AuditTypeId],[Cin],[StatusId],[Details])
-	VALUES (@AuditTypeIdTest,@Cin,5,'Validated: ' + @ValidatedTestsWithResults);
+	VALUES (@AuditTypeIdTest,@Cin,5,CONCAT('Validated: ', @ValidatedTestsWithResults));
 
 END
