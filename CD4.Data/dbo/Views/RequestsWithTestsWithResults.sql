@@ -15,14 +15,13 @@
 	   [EpisodeNumber],
 	   [Site]
 )
-WITH SCHEMABINDING
 AS
 ( 
 SELECT [R].[Id],
        [S].[AnalysisRequestId],
        [S].[Cin],
-       [S].[CollectionDate],
-       [S].[ReceivedDate],
+       [SCT].[CollectedAt] AS [CollectionDate],
+       [SRC].[ReceivedAt] AS [ReceivedDate],
        [P].[FullName],
        [P].[NidPp],
 	   ISNULL(CONCAT([AR].[Age],' / ',[G].[Gender]) ,'')AS [AgeSex],
@@ -40,16 +39,8 @@ INNER JOIN [dbo].[Gender] [G] ON [P].[GenderId] = [G].[Id]
 INNER JOIN [dbo].[Atoll] [A] ON [P].[AtollId] = [A].[Id]
 INNER JOIN [dbo].[Country] [C] ON [P].[CountryId]  = [C].[Id] 
 INNER JOIN [dbo].[Sites] [SI] ON [S].[SiteId] = [SI].[Id]
+LEFT JOIN [dbo].[SampleCollectionTimings] [SCT] ON [S].[Cin] = [SCT].[Cin]
+LEFT JOIN [dbo].[SampleReceivedTimings] [SRC] ON [S].[Cin] = [SRC].[Cin]
 WHERE [R].[Result] IS NOT NULL OR [R].[Result] <> ''
 )
-GO
-CREATE UNIQUE CLUSTERED INDEX IX_RequestDataForReport_Id
-ON [dbo].[RequestsWithTestsWithResults]([Id]);
-GO
-GO
-CREATE NONCLUSTERED INDEX [IX_RequestDataForReport_Cin]
-ON [dbo].[RequestsWithTestsWithResults] ([Cin])
-GO
-CREATE NONCLUSTERED INDEX IX_RequestDataForReport_ReceivedDate
-ON [dbo].[RequestsWithTestsWithResults]([ReceivedDate]);
 GO

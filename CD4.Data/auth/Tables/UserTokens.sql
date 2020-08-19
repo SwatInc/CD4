@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[UserTokens](
-	[UserId] [NVARCHAR](450) NOT NULL,
+	[UserId] INT NOT NULL,
 	[LoginProvider] [NVARCHAR](128) NOT NULL,
 	[Name] [NVARCHAR](128) NOT NULL,
 	[Value] [NVARCHAR](MAX) NULL,

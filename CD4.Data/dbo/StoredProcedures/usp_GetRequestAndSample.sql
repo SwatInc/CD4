@@ -3,8 +3,16 @@
 AS
 SET NOCOUNT ON;
 BEGIN
-	SELECT [AR].[Id] AS [RequestId],[AR].[EpisodeNumber], [AR].[Age], [S].[Cin], [S].[SiteId], [S].[CollectionDate], [S].[ReceivedDate]
+	SELECT [AR].[Id] AS [RequestId]
+	, [AR].[EpisodeNumber]
+	, [AR].[Age]
+	, [S].[Cin]
+	, [S].[SiteId]
+	, [SCT].[CollectedAt] AS [CollectionDate]
+	, [SRT].[ReceivedAt] AS [ReceivedDate]
 	FROM [dbo].[Sample] [S]
 	INNER JOIN [dbo].[AnalysisRequest] [AR] ON [S].[AnalysisRequestId] = [AR].[Id]
+	LEFT JOIN [dbo].[SampleCollectionTimings] [SCT] ON [S].[Cin] = [SCT].[Cin]
+	LEFT JOIN [dbo].[SampleReceivedTimings] [SRT] ON [S].[Cin] = [SRT].[Cin]
 	WHERE [S].[Cin] = @Cin;
 END

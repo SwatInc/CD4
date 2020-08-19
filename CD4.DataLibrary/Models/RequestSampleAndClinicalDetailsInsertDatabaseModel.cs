@@ -18,14 +18,15 @@ namespace CD4.DataLibrary.Models
         public RequestSampleAndClinicalDetailsInsertDatabaseModel
             (int patientId, AnalysisRequestDataModel request, IStatusDataAccess statusData)
         {
+            //set demo authId
+            this.UserId = 1;
+
             PatientId = patientId;
             EpisodeNumber = request.EpisodeNumber;
             Age = request.Age;
             Cin = request.Cin;
             SampleStatusId = request.StatusId;
             SiteId = request.SiteId;
-            CollectionDate = DateHelper.GetCD4FormatDate(request.SampleCollectionDate);
-            ReceivedDate = DateHelper.GetCD4FormatDate(request.SampleReceivedDate);
             CommaDelimitedClinicalDetailsIds = ClinicalDetailsDataAccess.GetCsvClinicalDetails(request.ClinicalDetails);
             RequestedTestData =  ResultDataAccess.GetTestsTableAsync(request.Tests, request.Cin, statusData).GetAwaiter().GetResult();
         }
@@ -42,8 +43,7 @@ namespace CD4.DataLibrary.Models
                 Cin,
                 SampleStatusId,
                 SiteId,
-                CollectionDate,
-                ReceivedDate,
+                UserId,
                 RequestedTestData
             };
 
@@ -58,9 +58,8 @@ namespace CD4.DataLibrary.Models
         public string Cin { get; private set; }
         public int SampleStatusId { get; set; }
         public int SiteId { get; private set; }
-        public string CollectionDate { get; private set; }
-        public string ReceivedDate { get; private set; }
         public string CommaDelimitedClinicalDetailsIds { get; private set; }
+        public int UserId { get; set; }
         public SqlMapper.ICustomQueryParameter RequestedTestData { get; set; }
 
         #endregion

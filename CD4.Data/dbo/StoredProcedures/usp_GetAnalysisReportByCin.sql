@@ -34,6 +34,6 @@ AS
 		,[R].[CollectionDate] AS [CollectedDate]
 		,[R].[ReceivedDate]
 		,[R].[Cin]
-		FROM [dbo].[RequestsWithTestsWithResults] [R] WITH (NOEXPAND)
+		FROM [dbo].[RequestsWithTestsWithResults] [R]
 		WHERE [R].[Cin] = @Cin;
 END

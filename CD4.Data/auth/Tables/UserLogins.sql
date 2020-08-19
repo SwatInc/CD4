@@ -2,7 +2,7 @@
 	[LoginProvider] [nvarchar](128) NOT NULL,
 	[ProviderKey] [nvarchar](128) NOT NULL,
 	[ProviderDisplayName] [nvarchar](max) NULL,
-	[UserId] [nvarchar](450) NOT NULL,
+	[UserId] INT NOT NULL,
  CONSTRAINT [PK_UserLogins] PRIMARY KEY CLUSTERED 
 (
 	[LoginProvider] ASC,

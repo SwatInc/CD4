@@ -371,8 +371,10 @@ INSERT INTO [dbo].[Patient]
 
 
 --insert user: Bismillah.123!
+SET IDENTITY_INSERT [Users] ON
 INSERT INTO [dbo].[Users]([Id],[UserName],[Fullname],[PasswordHash],[AccessFailedCount],[EmailConfirmed],[PhoneNumberConfirmed],[TwoFactorEnabled],[LockoutEnabled]) VALUES
 ('1','swatincadmin','Ibrahim Hussain','SHA512:88:lhOgh7mA9H1w9L9wu6FoVPUiK+sYR4Tr5A==:8Y2OSxfDTkF9zcplYHlU5LZ/zM3cvpycvAWeEbUxQeR1I3/mCxb7tLt5bBLl2FWJmPEubhYyH0s9tFP60Wo3EQ==',0,0,0,0,0);
+SET IDENTITY_INSERT [Users] OFF
 
 --insert roles
 INSERT INTO [dbo].[Roles] ([Id],[Name]) VALUES('1','Swat, Inc Developer');
@@ -390,7 +392,7 @@ VALUES
 --insert status table data
 INSERT INTO [dbo].[Status] ([Status])
 VALUES
-('Registered'),('Collected'),('Received'),('ToValidate'),('Validated'),('Processing'),('Rejected');
+('Registered'),('Collected'),('Received'),('ToValidate'),('Validated'),('Processing'),('Rejected'),('Removed');
 
 
 -- insert system printer
@@ -401,6 +403,14 @@ INSERT INTO [dbo].[PrinterTypes]([Description])VALUES ('Document Printer');
 INSERT INTO [dbo].[WorkStations]([Description])VALUES('IBRAHIMHUCYN');
 INSERT INTO [dbo].[WorkStationPrinters]([WorkStationId],[PrinterId],[PrinterType]) VALUES (1,1,1);
 INSERT INTO [dbo].[WorkStationPrinters]([WorkStationId],[PrinterId],[PrinterType]) VALUES (1,2,2);
+
+
+-- Insert rows into table 'dbo.AuditTypes' in schema '[dbo]'
+INSERT INTO [dbo].[AuditTypes]([Description])
+VALUES
+    ('AnalysisRequest'),
+    ( 'Sample'),
+    ('Test');
 
 ----Get a patient Id
 --DECLARE @PatientId int;

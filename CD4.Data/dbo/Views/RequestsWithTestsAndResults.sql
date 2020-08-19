@@ -5,6 +5,7 @@
        [SampleStatusId],
        [AnalysisRequestId],
        [Cin],
+       [RequestedDate],
        [CollectionDate],
        [ReceivedDate],
        [FullName],
@@ -17,16 +18,16 @@
 	   [EpisodeNumber],
 	   [Site]
 )
-WITH SCHEMABINDING
 AS
 ( 
 SELECT [R].[Id],
-       [R].[StatusId] AS [TestStatusId],
-       [S].[StatusId] AS [SampleStatusId],
+       [RT].[StatusId] AS [TestStatusId],
+       [ST].[StatusId] AS [SampleStatusId],
        [S].[AnalysisRequestId],
        [S].[Cin],
-       [S].[CollectionDate],
-       [S].[ReceivedDate],
+       [REQT].[RequestedAt] AS [RequestedDate],
+       [SCT].[CollectedAt] AS [CollectionDate],
+       [SRT].[ReceivedAt] AS [ReceivedDate],
        [P].[FullName],
        [P].[NidPp],
 	   ISNULL(CONCAT([AR].[Age],' / ',[G].[Gender]) ,'')AS [AgeSex],
@@ -44,11 +45,10 @@ INNER JOIN [dbo].[Gender] [G] ON [P].[GenderId] = [G].[Id]
 INNER JOIN [dbo].[Atoll] [A] ON [P].[AtollId] = [A].[Id]
 INNER JOIN [dbo].[Country] [C] ON [P].[CountryId]  = [C].[Id] 
 INNER JOIN [dbo].[Sites] [SI] ON [S].[SiteId] = [SI].[Id]
+LEFT JOIN [dbo].[SampleTracking] [ST] ON  [s].[Cin] = [ST].[SampleCin]     -- for current sample status tracking
+LEFT JOIN [dbo].[ResultTracking] [RT] ON [RT].[ResultId] = [R].[Id]        -- for current result status tracking
+LEFT JOIN [dbo].[SampleCollectionTimings] [SCT] ON [S].[Cin] = [SCT].[Cin]
+LEFT JOIN [dbo].[SampleReceivedTimings] [SRT] ON [S].[Cin] = [SRT].[Cin]
+LEFT JOIN [dbo].[SampleRequestedTimings] [REQT] ON [S].[AnalysisRequestId] = [REQT].[AnalysisRequestId]
 )
-GO
-CREATE UNIQUE CLUSTERED INDEX IX_RequestDataForWorksheet_Id
-ON [dbo].[RequestsWithTestsAndResults]([Id]);
-GO
-CREATE NONCLUSTERED INDEX IX_ReceivedDate
-ON [dbo].[RequestsWithTestsAndResults]([ReceivedDate]);
 GO

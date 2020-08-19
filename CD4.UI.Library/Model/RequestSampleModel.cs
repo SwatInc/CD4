@@ -11,8 +11,8 @@ namespace CD4.UI.Library.Model
         private int id;
         private int analysisRequestId;
         private string cin;
-        private DateTime collectionDate;
-        private DateTime receivedDate;
+        private DateTimeOffset? collectionDate;
+        private DateTimeOffset? receivedDate;
         private string patientName;
         private string nationalId;
         private string ageSex;
@@ -57,7 +57,7 @@ namespace CD4.UI.Library.Model
                 OnPropertyChanged();
             }
         }
-        public DateTime CollectionDate
+        public DateTimeOffset? CollectionDate
         {
             get => collectionDate; set
             {
@@ -66,7 +66,7 @@ namespace CD4.UI.Library.Model
                 OnPropertyChanged();
             }
         }
-        public DateTime ReceivedDate
+        public DateTimeOffset? ReceivedDate
         {
             get => receivedDate; set
             {

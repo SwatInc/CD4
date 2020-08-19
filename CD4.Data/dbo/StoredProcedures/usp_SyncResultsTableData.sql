@@ -1,6 +1,11 @@
-﻿CREATE PROCEDURE [dbo].[usp_SyncResultsTableData]
+﻿-- This procedure should be called only when there are tests to be inserted and tests to be removed
+-- Otherwise use either of the following procedures
+	-- [dbo].[usp_InsertResultsTableData]
+	-- [dbo].[usp_RemoveResultsTableData]
+CREATE PROCEDURE [dbo].[usp_SyncResultsTableData]
 	@TestsToInsert [dbo].[ResultTableInsertDataUDT] READONLY,
-	@TestsToRemove [dbo].[ResultTableInsertDataUDT] READONLY
+	@TestsToRemove [dbo].[ResultTableInsertDataUDT] READONLY,
+	@UserId int
 AS
 BEGIN
 SET NOCOUNT ON;
@@ -8,7 +13,27 @@ SET XACT_ABORT ON;
 DECLARE @ReturnValue bit = 0;
     BEGIN TRANSACTION;
 		BEGIN TRY
-				
+				DECLARE @AuditTypeIdTest int;
+				DECLARE @Username varchar(50);
+                DECLARE @TrackingData TABLE ([ResultId] int)
+                DECLARE @Cin VARCHAR(50);
+				DECLARE @TempTrackingHistory TABLE ([ResultId] INT NOT NULL, [StatusId] INT NOT NULL);
+
+                -- TRACKING: Tests to remove
+                SELECT TOP 1 @Cin =  [Sample_Cin] FROM @TestsToRemove;
+                DELETE FROM [dbo].[ResultTracking]
+				OUTPUT DELETED.[ResultId], 8 INTO @TempTrackingHistory
+                WHERE [ResultId] IN 
+                (
+                    SELECT [Id] 
+                    FROM [dbo].[Result] 
+                    WHERE [Sample_Cin] = @Cin AND [TestId] IN 
+                    (
+                        SELECT [TestId] FROM @TestsToRemove
+                    )
+                );
+
+                --SYNC
 				--remove tests requested for removal
 				DELETE FROM [dbo].[Result] 
 				WHERE 
@@ -17,17 +42,45 @@ DECLARE @ReturnValue bit = 0;
 
 				--add tests requested for insertion
 				INSERT INTO [dbo].[Result] ([Sample_Cin], [TestId])
+                OUTPUT inserted.[Id] INTO @TrackingData
 				SELECT [I].[Sample_Cin], [I].[TestId] FROM @TestsToInsert [I];
+
+                -- TRACKING: Added tests
+                INSERT INTO [dbo].[ResultTracking] ([ResultId],[StatusId],[UsersId])
+				OUTPUT INSERTED.[ResultId], 1 INTO @TempTrackingHistory
+				SELECT [ResultId],1,@UserId FROM @TrackingData;
+                -- removed tests
+
+				-- TRACKING HISTORY
+				INSERT INTO [dbo].[TrackingHistory] ([TrackingType],[ResultId],[UsersId])
+				SELECT 3,[ResultId],@UserId FROM @TrackingData;
+
+                -- AUDIT
+				--audit trail, tests added
+				SELECT @AuditTypeIdtest = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Test';
+				SELECT @Username = [UserName] FROM [dbo].[Users] WHERE [Id] = @UserId;
+				
+				INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[Cin],[StatusId],[Details])
+				SELECT @AuditTypeIdtest
+					, [I].[Sample_Cin]
+					, 1 -- registered status
+					, (SELECT CONCAT('User: ',@Username,' registered for Cin: ',[Sample_Cin],' ',[Description]) FROM [dbo].[Test] WHERE [Id] = [I].[TestId]) 
+				FROM @TestsToInsert [I];
+
+				--audit trail, tests removed
+				INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[Cin],[StatusId],[Details])
+				SELECT @AuditTypeIdtest
+					, [I].[Sample_Cin]
+					, 8 -- removed status
+					, (SELECT CONCAT('User: ',@Username,' removed test for Cin: ',[Sample_Cin],' ',[Description]) FROM [dbo].[Test] WHERE [Id] = [I].[TestId]) 
+				FROM @TestsToRemove [I];
 
 				COMMIT TRANSACTION;
 				SET @ReturnValue = 1;
 		END TRY
 		BEGIN CATCH
-				IF (XACT_STATE()) = -1  
-				BEGIN  
-					ROLLBACK TRANSACTION; 
-				END;
-				THROW;
+			ROLLBACK TRANSACTION;
+			THROW;
 		END CATCH;
 SELECT @ReturnValue;
 END;

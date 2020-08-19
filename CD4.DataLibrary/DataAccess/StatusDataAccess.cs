@@ -211,7 +211,7 @@ namespace CD4.DataLibrary.DataAccess
             //set the stored procedure name
             var storedProcedure = "[dbo].[usp_ValidateSampleAndApplicableAssociatedTests]";
             //set the parameters for the stored procedure
-            var parameters = new { Cin = cin };
+            var parameters = new { Cin = cin, UserId =1 };
 
             try
             {
@@ -235,7 +235,7 @@ namespace CD4.DataLibrary.DataAccess
             //set the stored procedure name
             var storedProcedure = "[dbo].[usp_MarkSampleCollected]";
             //set the parameters for the stored procedure
-            var parameters = new { Cin = cin };
+            var parameters = new { Cin = cin, UserId =1 };
             try
             {
                 _ = await SelectInsertOrUpdateAsync<dynamic, dynamic>(storedProcedure, parameters);
@@ -257,7 +257,7 @@ namespace CD4.DataLibrary.DataAccess
         private async Task ValidateOnlySample(string cin)
         {
             var storedProcedure = "usp_ValidateOnlysample";
-            var parameter = new { Cin = cin };
+            var parameter = new { Cin = cin, UserId = 1 };
             try
             {
                 _ = await SelectInsertOrUpdateAsync<dynamic, dynamic>(storedProcedure, parameter);

@@ -42,6 +42,8 @@ namespace CD4.UI
                 while (inner != null)
                 {
                     _log.Fatal($"Inner Stack Trace\n{inner.Message}\n{inner.StackTrace}");
+                    //get the next inner exception for next iteration
+                    inner = inner.InnerException;
                 }
             }
 

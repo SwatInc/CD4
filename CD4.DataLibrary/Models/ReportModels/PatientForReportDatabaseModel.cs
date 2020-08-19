@@ -13,8 +13,8 @@ namespace CD4.DataLibrary.Models.ReportModels
         public DateTime Birthdate { get; set; }
         public string Address { get; set; }
         public string SampleSite { get; set; }
-        public DateTime CollectedDate { get; set; }
-        public DateTime ReceivedDate { get; set; }
+        public DateTimeOffset? CollectedDate { get; set; }
+        public DateTimeOffset? ReceivedDate { get; set; }
         public string Cin { get; set; }
         public int StatusIconId { get; set; }
 

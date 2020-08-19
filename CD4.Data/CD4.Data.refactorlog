@@ -56,4 +56,18 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="UnitId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="06b33556-c267-4eb0-b709-214880f95c04" ChangeDateTime="08/01/2020 10:44:37">
+    <Property Name="ElementName" Value="[dbo].[SampleTracking].[AccessionNo]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[SampleTracking]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="SampleCin" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="c98120b2-e226-4f78-8a6d-03216f3e05b4" ChangeDateTime="08/01/2020 10:48:51">
+    <Property Name="ElementName" Value="[dbo].[ResultTracking].[Usersid]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ResultTracking]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="UsersId" />
+  </Operation>
 </Operations>

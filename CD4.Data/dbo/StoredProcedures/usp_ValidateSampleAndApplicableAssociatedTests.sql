@@ -1,27 +1,67 @@
 ﻿CREATE PROCEDURE [dbo].[usp_ValidateSampleAndApplicableAssociatedTests]
-	@Cin varchar(50)
+	@Cin varchar(50),
+	@UserId int
 AS
 BEGIN
 SET NOCOUNT ON;
 	DECLARE @NotValidatedNotRejectedCount int = 0;
-	--validate the relavent tests that can be validated.
+	DECLARE @ValidatedTestsWithResults varchar(500);
+	DECLARE @ResultDataToValidate TABLE([ResultId] int not null PRIMARY KEY, [TestDesc] varchar(50),[Result] varchar(50));
+	DECLARE @AuditTypeIdTest int;
+	DECLARE @StatusText varchar(50);
+
+	--APPLICABLE TEST RESULTS VALIDATION
 	--Note: StatusId 5 => Validated, StatusId 4 => ToValidate, StatusId 7 => Rejected
-	UPDATE [dbo].[Result]
-	SET [StatusId] = 5
-	WHERE [Sample_Cin] = @Cin AND [StatusId] = 4 AND ([Result] <> NULL OR [Result] <> '');
-	
-	--do a count of not validated AND not rejected for the sample
-    SELECT @NotValidatedNotRejectedCount =  COUNT([StatusId]) 
+	--get tests that can be validated into a table variable
+	INSERT INTO @ResultDataToValidate([ResultId],[TestDesc],[Result])
+	SELECT [R].[Id],[T].[Description],[R].[Result] 
 	FROM [dbo].[Result] [R]
-    WHERE ([R].[StatusId] <> 5 AND [R].[StatusId] <> 7) AND [Sample_Cin] = @Cin;
+	INNER JOIN [dbo].[Test] [T] ON [R].[TestId] = [T].[Id]
+	WHERE [Sample_Cin] = @Cin  AND ([Result] <> NULL OR [Result] <> '');
+
+	-- TEST TRACKING HISTORY
+	INSERT INTO [dbo].[TrackingHistory] ([TrackingType],[ResultId],[StatusId],[UsersId])
+	SELECT 3,[ResultId],5,@UserId 
+	FROM [ResultTracking] 
+	WHERE [StatusId] = 4 AND [ResultId] IN (SELECT [ResultId] FROM @ResultDataToValidate);
+
+	--mark tests as validated
+	UPDATE [dbo].[ResultTracking]
+		SET [StatusId] = 5
+	WHERE [StatusId] = 4 AND [ResultId] IN (SELECT [ResultId] FROM @ResultDataToValidate);
+
+	--SAMPLE VALIDATION IF REQUIRED
+	--do a count of not validated AND not rejected for the sample
+	SELECT @NotValidatedNotRejectedCount =  COUNT([RT].[StatusId]) 
+	FROM [dbo].[ResultTracking] [RT]
+    WHERE ([RT].[StatusId] <> 5 AND [RT].[StatusId] <> 7) AND [ResultId] IN
+		(SELECT [Id] FROM [dbo].[Result] WHERE [Sample_Cin] = @Cin);
 	--If @NotValidatedNotRejectedCount = 0 then exec usp to validate the sample.
 	IF @NotValidatedNotRejectedCount = 0
 		BEGIN
 			EXECUTE [dbo].[usp_ValidateOnlySample]
-			@Cin = @Cin;
+			@Cin = @Cin,
+			@UserId = @UserId;
+			-- Audit for sample trail done in the [dbo].[usp_ValidateOnlySample]
 		END
 
-	--select validated sample status and test status for all tests in sample.
-	SELECT [Cin],[StatusId] FROM [dbo].[Sample] WHERE [Cin] = @Cin;
-	SELECT [Id] AS [TestId], [StatusId] FROM [dbo].[Result] WHERE [Sample_Cin] = @Cin;
+	--SELECTING RETURN DATA
+	-- 1. select validated sample status and 2. test status for all tests in sample.
+	SELECT [SampleCin] AS [Cin],[StatusId] FROM [dbo].[SampleTracking] WHERE [SampleCin] = @Cin;
+	SELECT [R].[Id] AS [TestId], [RT].[StatusId] 
+	FROM [dbo].[Result] [R]
+	INNER JOIN [dbo].[ResultTracking] [RT] ON [R].[Id] = [RT].[ResultId]
+	WHERE [Sample_Cin] = @Cin;
+
+	--AUDIT TRAIL... (NOTE: Audit for sample trail done in the [dbo].[usp_ValidateOnlySample])
+
+	SELECT @AuditTypeIdTest = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Test';
+	SELECT @StatusText = [Status] FROM [dbo].[Status] WHERE [Id] = 5;
+
+	SELECT @ValidatedTestsWithResults = STRING_AGG([TestDesc]+': '+[Result],'|') FROM @ResultDataToValidate
+
+	--insert audit trail
+	INSERT INTO [dbo].[AuditTrail] ([AuditTypeId],[Cin],[StatusId],[Details])
+	VALUES (@AuditTypeIdTest,@Cin,5,'Validated: ' + @ValidatedTestsWithResults);
+
 END

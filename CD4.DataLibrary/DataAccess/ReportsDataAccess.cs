@@ -15,7 +15,7 @@ namespace CD4.DataLibrary.DataAccess
             var parameters = new { Cin = cin };
 
             //Execute the stored procedure by calling LoadAnalysisReportByCinAsync method
-            var output = await this.LoadAnalysisReportByCinAsync<dynamic>(storedProcedure, parameters);
+            var output = await LoadAnalysisReportByCinAsync<dynamic>(storedProcedure, parameters);
 
             //If query yeilded no results, return new list
             if (output.Results.Count == 0)
