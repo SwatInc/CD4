@@ -7,8 +7,8 @@ namespace CD4.DataLibrary.Models
         public int Id { get; set; } //This is the analysis request Id renamed as Id to satisfy UI seq No
         public int AnalysisRequestId { get; set; }
         public string Cin { get; set; }
-        public DateTime? CollectionDate { get; set; }
-        public DateTime? ReceivedDate { get; set; }
+        public DateTimeOffset? CollectionDate { get; set; }
+        public DateTimeOffset? ReceivedDate { get; set; }
         public string PatientName { get; set; }
         public string NationalId { get; set; }
         public string AgeSex { get; set; }
