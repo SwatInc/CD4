@@ -21,7 +21,7 @@ DECLARE @ReturnValue bit = 0;
 		SELECT @Cin = [Sample_Cin] FROM [dbo].[Result] WHERE [Id] = @ResultId;
 
 		-- get initial auditing data
-		SELECT @PreviousData = CONCAT(' Test: ['+[R].[Sample_Cin]+' | ',[T].[Description],'] with result: '+ [R].[Result])
+		SELECT @PreviousData = CONCAT(' Test: [',[R].[Sample_Cin],' | ',[T].[Description],'] with result: ', [R].[Result])
 		FROM [dbo].[Status] [S]
 		INNER JOIN [dbo].[ResultTracking] [RT] ON [S].[Id] = [RT].[StatusId]
 		INNER JOIN [dbo].[Result] [R] ON [RT].[ResultId] = [R].[Id]
@@ -63,7 +63,7 @@ DECLARE @ReturnValue bit = 0;
 		SELECT @AuditTypeIdTest = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Test';
 
 		INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[Cin],[StatusId],[Details])
-		VALUES(@AuditTypeIdTest,@Cin, @StatusId,CONCAT('PREVIOUS: ',@PreviousData,' |. CURRENT: ', @CurrentData));
+		VALUES(@AuditTypeIdTest,@Cin, @StatusId,CONCAT('PREVIOUS: ',@PreviousData,' | CURRENT: ', @CurrentData));
 
 		COMMIT TRANSACTION;
 			SET @ReturnValue = 1;
