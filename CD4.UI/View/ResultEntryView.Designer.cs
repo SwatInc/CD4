@@ -60,13 +60,15 @@ namespace CD4.UI.View
             this.repositoryItemLookUpEditCodifiedPhrases = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.gridColumnStatusIcon = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnUnit = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnIsNormal = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnIsDeltaOk = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControlFunctions = new DevExpress.XtraEditors.GroupControl();
             this.lookUpEditSampleStatusFilter = new DevExpress.XtraEditors.LookUpEdit();
             this.simpleButtonLoadWorksheet = new DevExpress.XtraEditors.SimpleButton();
             this.label1 = new System.Windows.Forms.Label();
             this.dateEditLoadWorksheetFrom = new DevExpress.XtraEditors.DateEdit();
             this.simpleButtonReport = new DevExpress.XtraEditors.SimpleButton();
-            this.labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
+            labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).BeginInit();
             this.splitContainerControlPatient.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlSelectedPatientRequestClinicalDetailsArea)).BeginInit();
@@ -348,10 +350,9 @@ namespace CD4.UI.View
             this.progressPanelTests.Caption = "Please Wait";
             this.progressPanelTests.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.progressPanelTests.Description = "Loading tests ...";
-            this.progressPanelTests.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.progressPanelTests.Location = new System.Drawing.Point(0, 0);
+            this.progressPanelTests.Location = new System.Drawing.Point(230, 134);
             this.progressPanelTests.Name = "progressPanelTests";
-            this.progressPanelTests.Size = new System.Drawing.Size(434, 224);
+            this.progressPanelTests.Size = new System.Drawing.Size(204, 90);
             this.progressPanelTests.TabIndex = 3;
             // 
             // gridControlTests
@@ -373,7 +374,9 @@ namespace CD4.UI.View
             this.gridColumnTestName,
             this.gridColumnResult,
             this.gridColumnStatusIcon,
-            this.gridColumnUnit});
+            this.gridColumnUnit,
+            this.gridColumnIsNormal,
+            this.gridColumnIsDeltaOk});
             this.gridViewTests.GridControl = this.gridControlTests;
             this.gridViewTests.Name = "gridViewTests";
             this.gridViewTests.OptionsView.ShowGroupPanel = false;
@@ -428,6 +431,20 @@ namespace CD4.UI.View
             this.gridColumnUnit.Visible = true;
             this.gridColumnUnit.VisibleIndex = 3;
             this.gridColumnUnit.Width = 170;
+            // 
+            // gridColumnIsNormal
+            // 
+            this.gridColumnIsNormal.Caption = "Is Normal";
+            this.gridColumnIsNormal.FieldName = "IsNormal";
+            this.gridColumnIsNormal.Name = "gridColumnIsNormal";
+            this.gridColumnIsNormal.Visible = true;
+            this.gridColumnIsNormal.VisibleIndex = 4;
+            // 
+            // gridColumnIsDeltaOk
+            // 
+            this.gridColumnIsDeltaOk.Caption = "Is Delta OK";
+            this.gridColumnIsDeltaOk.FieldName = "IsDeltaOk";
+            this.gridColumnIsDeltaOk.Name = "gridColumnIsDeltaOk";
             // 
             // groupControlFunctions
             // 
@@ -569,5 +586,7 @@ namespace CD4.UI.View
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelSamples;
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelTests;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnUnit;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnIsNormal;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnIsDeltaOk;
     }
 }
