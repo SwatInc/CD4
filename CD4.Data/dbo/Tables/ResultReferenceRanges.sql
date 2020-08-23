@@ -1,7 +1,6 @@
 ﻿CREATE TABLE [dbo].[ResultReferenceRanges]
 (
-	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
-    [TestId] INT NOT NULL,
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
     [ResultId] INT NOT NULL, 
     [NormalHighLimit] DECIMAL(10, 8) NOT NULL DEFAULT -1, 
     [NormalLowLimit] DECIMAL(10, 8) NOT NULL DEFAULT -1,
