@@ -56,7 +56,7 @@ BEGIN
         INNER JOIN @TempClinicalDetails [C] ON [RW].[AnalysisRequestId] = [C].[AnalysisRequestId]
 		WHERE [RW].[RequestedDate] >= @StartDateInUse AND [RW].[TestStatusId] = @StatusId;
 
-		-- fetch results data which is not complete(has no results).
+		-- fetch results data
         SELECT [Id],
                [AnalysisRequestId],
                [Cin],
@@ -69,6 +69,18 @@ BEGIN
 	           FROM [dbo].[WorkSheetResultData]
 	           WHERE [Cin] IN (SELECT [Cin] FROM @TempCins);
 
+        --get reference ranges
+        SELECT [ResultId],
+               [NormalLowLimit],
+               [NormalHighLimit],
+               [AttentionLowLimit],
+               [AttentionHighLimit],
+               [PathologyLowLimit],
+               [PathologyHighLimit]
+        FROM [dbo].[ResultReferenceRanges]
+        WHERE [ResultId] IN ( SELECT [Id] FROM [dbo].[Result] WHERE [Sample_Cin] IN (
+                                        SELECT [Cin] FROM @TempCins ));
+               
 		BREAK;  
 	END
 END
