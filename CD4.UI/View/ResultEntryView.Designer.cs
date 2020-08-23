@@ -30,6 +30,7 @@ namespace CD4.UI.View
         /// </summary>
         private void InitializeComponent()
         {
+
             this.labelControlNationalId = new DevExpress.XtraEditors.LabelControl();
             this.labelControlAgeSex = new DevExpress.XtraEditors.LabelControl();
             this.labelControlBirthdate = new DevExpress.XtraEditors.LabelControl();
@@ -60,7 +61,7 @@ namespace CD4.UI.View
             this.repositoryItemLookUpEditCodifiedPhrases = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.gridColumnStatusIcon = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnUnit = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnIsNormal = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnReferenceCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnIsDeltaOk = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControlFunctions = new DevExpress.XtraEditors.GroupControl();
             this.lookUpEditSampleStatusFilter = new DevExpress.XtraEditors.LookUpEdit();
@@ -375,7 +376,7 @@ namespace CD4.UI.View
             this.gridColumnResult,
             this.gridColumnStatusIcon,
             this.gridColumnUnit,
-            this.gridColumnIsNormal,
+            this.gridColumnReferenceCode,
             this.gridColumnIsDeltaOk});
             this.gridViewTests.GridControl = this.gridControlTests;
             this.gridViewTests.Name = "gridViewTests";
@@ -432,13 +433,13 @@ namespace CD4.UI.View
             this.gridColumnUnit.VisibleIndex = 3;
             this.gridColumnUnit.Width = 170;
             // 
-            // gridColumnIsNormal
+            // gridColumnReferenceCode
             // 
-            this.gridColumnIsNormal.Caption = "Is Normal";
-            this.gridColumnIsNormal.FieldName = "IsNormal";
-            this.gridColumnIsNormal.Name = "gridColumnIsNormal";
-            this.gridColumnIsNormal.Visible = true;
-            this.gridColumnIsNormal.VisibleIndex = 4;
+            this.gridColumnReferenceCode.Caption = "Ref. Code";
+            this.gridColumnReferenceCode.FieldName = "ReferenceCode";
+            this.gridColumnReferenceCode.Name = "gridColumnReferenceCode";
+            this.gridColumnReferenceCode.Visible = true;
+            this.gridColumnReferenceCode.VisibleIndex = 4;
             // 
             // gridColumnIsDeltaOk
             // 
@@ -586,7 +587,7 @@ namespace CD4.UI.View
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelSamples;
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelTests;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnUnit;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnIsNormal;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnReferenceCode;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnIsDeltaOk;
     }
 }

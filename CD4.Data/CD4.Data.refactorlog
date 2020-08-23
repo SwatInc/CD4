@@ -84,4 +84,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="DeltaValidityDays" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="cf409122-84ab-4fd4-b1a1-db67676fb292" ChangeDateTime="08/23/2020 20:46:04">
+    <Property Name="ElementName" Value="[dbo].[Result].[IsNormal]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Result]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ReferenceCode" />
+  </Operation>
 </Operations>

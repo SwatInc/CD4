@@ -22,7 +22,7 @@ namespace CD4.UI.Library.Model
         private string mask;
         private int statusIconName;
         private string unit;
-        private bool _isNormal;
+        private string _referenceCode;
         private bool _isDeltaOk;
 
         #endregion
@@ -154,12 +154,12 @@ namespace CD4.UI.Library.Model
             }
         }
 
-        public bool IsNormal
+        public string ReferenceCode
         {
-            get => _isNormal; set
+            get => _referenceCode; set
             {
-                if (_isNormal == value) return;
-                _isNormal = value;
+                if (_referenceCode == value) return;
+                _referenceCode = value;
                 OnPropertyChanged();
             }
         }

@@ -48,17 +48,36 @@ namespace CD4.UI.View
         {
             GridView view = (GridView)sender;
             //get the reference column value.
-            var normal = (bool)(view.GetRowCellValue(e.RowHandle, "IsNormal"));
+            var refCode = (string)(view.GetRowCellValue(e.RowHandle, "ReferenceCode"));
 
             if (e.Column.FieldName == "Result")
             {
-                if (normal)
+
+                if (refCode == "NM")
+                {
+                    e.Appearance.ForeColor = Color.Black;
+                    e.Appearance.FontStyleDelta = FontStyle.Regular;
+                }
+
+                if (refCode == "AT")
+                {
+                    e.Appearance.ForeColor = Color.FromArgb(196, 196, 0); // kinda yellow / not too bright
+                    e.Appearance.FontStyleDelta = FontStyle.Bold;
+                }
+
+                if (refCode == "PA")
+                {
+                    e.Appearance.ForeColor = Color.Brown;
+                    e.Appearance.FontStyleDelta = FontStyle.Bold;
+                }
+
+                if (refCode == "HP")
                 {
                     e.Appearance.ForeColor = Color.Red;
                     e.Appearance.FontStyleDelta = FontStyle.Bold;
                 }
 
-                if (!normal)
+                if (refCode == "NA")
                 {
                     e.Appearance.ForeColor = Color.Blue;
                     e.Appearance.FontStyleDelta = FontStyle.Bold;

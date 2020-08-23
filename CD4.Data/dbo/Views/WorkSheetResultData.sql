@@ -13,7 +13,7 @@ SELECT [R].[Id],
 	   [DT].[Name] AS [DataType],
 	   [T].[Mask],
 	   [RT].[StatusId],
-	   [R].[IsNormal],
+	   [R].[ReferenceCode],
 	   [R].[IsDeltaOk]
 FROM [dbo].[Result] [R]
 INNER JOIN [dbo].[Sample] [S] ON [R].[Sample_Cin] = [S].[Cin]
