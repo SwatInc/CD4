@@ -21,8 +21,7 @@
     [OutOfNormalityRelativeHigh_DeltaLow] DECIMAL(10, 8) NOT NULL DEFAULT -1,
     [OutOfNormalityRelativeHigh_DeltaHigh] DECIMAL(10, 8) NOT NULL DEFAULT -1, 
     [DeltaValidityDays] INT NOT NULL DEFAULT 0, 
-    [BiasFactor] INT NOT NULL DEFAULT 0, 
+    [BiasFactor] INT NOT NULL DEFAULT 0,
     CONSTRAINT [FK_ResultReferenceRanges_ResultId] FOREIGN KEY ([ResultId]) REFERENCES [dbo].[Result]([Id]), 
-    CONSTRAINT [FK_ResultReferenceRanges_Test] FOREIGN KEY ([TestId]) REFERENCES [dbo].[Test]([Id]),
 
     )
