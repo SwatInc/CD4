@@ -161,6 +161,7 @@
     <Build Include="dbo\Tables\ReferenceRange.sql" />
     <Build Include="dbo\Tables\ReferenceData.sql" />
     <Build Include="dbo\Tables\ReferenceType.sql" />
+    <Build Include="dbo\Tables\ResultReferenceRanges.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
