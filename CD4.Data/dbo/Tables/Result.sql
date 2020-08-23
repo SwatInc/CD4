@@ -5,7 +5,7 @@
     [TestId] INT NOT NULL, 
     [Result] VARCHAR(50) NULL, 
     [IsNormal] BIT NOT NULL DEFAULT 1, -- default set as normal(1) because inital result on table will be null.
-    [IsDeltaFailed] BIT NOT NULL DEFAULT 0, -- default is NotFailed(0) because initial result is null delta failure cannot be determined unless a result is entered.
+    [IsDeltaOk] BIT NOT NULL DEFAULT 1, -- default is NotFailed(1) because initial result is null delta failure cannot be determined unless a result is entered.
     CONSTRAINT [FK_Result_Test] FOREIGN KEY ([TestId]) REFERENCES [dbo].[Test]([Id]), 
     CONSTRAINT [FK_Result_Sample] FOREIGN KEY ([Sample_Cin]) REFERENCES [dbo].[Sample]([Cin]), 
     CONSTRAINT [AK_Result_CinAndTestId] UNIQUE ([Sample_Cin],[TestId]), 

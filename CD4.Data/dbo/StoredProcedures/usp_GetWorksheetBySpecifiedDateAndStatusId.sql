@@ -65,7 +65,9 @@ BEGIN
                [Result],
                [DataType],
                [Mask],
-               [Unit]
+               [Unit],
+               [IsNormal],
+               [IsDeltaOk]
 	           FROM [dbo].[WorkSheetResultData]
 	           WHERE [Cin] IN (SELECT [Cin] FROM @TempCins);
 
