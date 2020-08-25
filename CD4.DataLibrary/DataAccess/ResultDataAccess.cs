@@ -148,11 +148,7 @@ namespace CD4.DataLibrary.DataAccess
             //prepare the parameter to pass to the query.
             var parameter = new { Result = result, ResultId = resultId, StatusId = statusId,ReferenceCode = referenceCode, UsersId = 1 };
             //insert result and result status
-            var output = await SelectInsertOrUpdateAsync<UpdatedResultAndStatusModel, dynamic>(storedProcedure, parameter);
-            //Set the sample status
-            //var sampleStatus = await statusData.DetermineSampleStatus(resultId);
-            //var IsSampleStatusSet = await UpdateSampleStatusByResultId(resultId, sampleStatus);
-            return output;
+            return await SelectInsertOrUpdateAsync<UpdatedResultAndStatusModel, dynamic>(storedProcedure, parameter);
         }
 
         /// <summary>
