@@ -6,7 +6,7 @@ namespace CD4.DataLibrary.DataAccess
 {
     public interface IResultDataAccess
     {
-        Task<bool> InsertUpdateResultByResultIdAsync(int resultId, string result, int testStatus);
+        Task<UpdatedResultAndStatusModel> InsertUpdateResultByResultIdAsync(int resultId, string result, int testStatus);
         Task<bool> ManageRequestedTestsDataAsync(List<TestsModel> testsToInsert, List<TestsModel> testsToRemove, string cin);
     }
 }

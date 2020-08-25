@@ -2,7 +2,6 @@
 using CD4.DataLibrary.DataAccess;
 using CD4.DataLibrary.Models;
 using CD4.UI.Library.Model;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -260,7 +259,7 @@ namespace CD4.UI.Library.ViewModel
             (StatusUpdatedSampleAndTestStatusModel output, RequestSampleModel requestSampleModel)
         {
             //1. update any changes in status for analyses for the sample.
-            
+
             //if the now selected sample is the sample that was validated...
             if (SelectedRequestData.Cin == requestSampleModel.Cin)
             {
@@ -383,7 +382,8 @@ namespace CD4.UI.Library.ViewModel
                     {
                         //Unsubscribe from event to avoid a listchange fire for this change
                         SelectedResultData.ListChanged -= UpdateDatabaseResults;
-                        item.Result = null;
+                        //if the result is not validated... set current result to null
+                        if (item.StatusIconId != 5) item.Result = null;
                         //subscribe again
                         SelectedResultData.ListChanged += UpdateDatabaseResults;
                     }

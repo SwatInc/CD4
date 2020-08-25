@@ -1,7 +1,6 @@
 ﻿using CD4.DataLibrary.Models;
 using Dapper;
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
@@ -11,10 +10,12 @@ namespace CD4.DataLibrary.DataAccess
     public class ResultDataAccess : DataAccessBase, IResultDataAccess
     {
         private readonly IStatusDataAccess statusData;
+        private readonly IReferenceRangeDataAccess _referenceRangeDataAccess;
 
-        public ResultDataAccess(IStatusDataAccess statusData)
+        public ResultDataAccess(IStatusDataAccess statusData, IReferenceRangeDataAccess referenceRangeDataAccess)
         {
             this.statusData = statusData;
+            _referenceRangeDataAccess = referenceRangeDataAccess;
         }
 
         /// <summary>
@@ -130,8 +131,10 @@ namespace CD4.DataLibrary.DataAccess
 
         }
 
-        public async Task<bool> InsertUpdateResultByResultIdAsync(int resultId, string result, int testStatus)
+        public async Task<UpdatedResultAndStatusModel> InsertUpdateResultByResultIdAsync(int resultId, string result, int testStatus)
         {
+            var demoReferenceData = await _referenceRangeDataAccess.GetDemoReferenceRangeByResultIdAsync(resultId);
+            var referenceCode = demoReferenceData.GetResultReferenceCode(result,resultId);
             //check whether the test status is acceptable for result entry
             var InvalidTestStatusMessage = IsTestStatusValidForResultEntry(testStatus);
             if (!string.IsNullOrEmpty(InvalidTestStatusMessage))
@@ -143,12 +146,12 @@ namespace CD4.DataLibrary.DataAccess
             //Make a database query to get Id for Status equivalent to "ToValidate".
             var statusId =  statusData.GetToValidateStatusId();
             //prepare the parameter to pass to the query.
-            var parameter = new { Result = result, ResultId = resultId, StatusId = statusId, UsersId = 1 };
+            var parameter = new { Result = result, ResultId = resultId, StatusId = statusId,ReferenceCode = referenceCode, UsersId = 1 };
             //insert result and result status
-            var output = await SelectInsertOrUpdateAsync<bool, dynamic>(storedProcedure, parameter);
+            var output = await SelectInsertOrUpdateAsync<UpdatedResultAndStatusModel, dynamic>(storedProcedure, parameter);
             //Set the sample status
-            var sampleStatus = await statusData.DetermineSampleStatus(resultId);
-            var IsSampleStatusSet = await UpdateSampleStatusByResultId(resultId, sampleStatus);
+            //var sampleStatus = await statusData.DetermineSampleStatus(resultId);
+            //var IsSampleStatusSet = await UpdateSampleStatusByResultId(resultId, sampleStatus);
             return output;
         }
 

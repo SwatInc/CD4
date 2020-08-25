@@ -30,7 +30,6 @@ namespace CD4.UI.View
         /// </summary>
         private void InitializeComponent()
         {
-
             this.labelControlNationalId = new DevExpress.XtraEditors.LabelControl();
             this.labelControlAgeSex = new DevExpress.XtraEditors.LabelControl();
             this.labelControlBirthdate = new DevExpress.XtraEditors.LabelControl();
@@ -438,8 +437,6 @@ namespace CD4.UI.View
             this.gridColumnReferenceCode.Caption = "Ref. Code";
             this.gridColumnReferenceCode.FieldName = "ReferenceCode";
             this.gridColumnReferenceCode.Name = "gridColumnReferenceCode";
-            this.gridColumnReferenceCode.Visible = true;
-            this.gridColumnReferenceCode.VisibleIndex = 4;
             // 
             // gridColumnIsDeltaOk
             // 

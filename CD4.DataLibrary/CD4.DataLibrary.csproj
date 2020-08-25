@@ -62,6 +62,7 @@
     <Compile Include="DataAccess\IAuthenticationDataAccess.cs" />
     <Compile Include="DataAccess\IClinicalDetailsDataAccess.cs" />
     <Compile Include="DataAccess\IPatientDataAccess.cs" />
+    <Compile Include="DataAccess\IReferenceRangeDataAccess.cs" />
     <Compile Include="DataAccess\IReportsDataAccess.cs" />
     <Compile Include="DataAccess\IResultDataAccess.cs" />
     <Compile Include="DataAccess\ISampleDataAccess.cs" />
@@ -69,6 +70,7 @@
     <Compile Include="DataAccess\IStatusDataAccess.cs" />
     <Compile Include="DataAccess\IWorkSheetDataAccess.cs" />
     <Compile Include="DataAccess\PatientDataAccess.cs" />
+    <Compile Include="DataAccess\ReferenceRangeDataAccess.cs" />
     <Compile Include="DataAccess\ReportsDataAccess.cs" />
     <Compile Include="DataAccess\ResultDataAccess.cs" />
     <Compile Include="DataAccess\SampleDataAccess.cs" />
@@ -89,6 +91,8 @@
     <Compile Include="Models\ClinicalDetailsModel.cs" />
     <Compile Include="Models\ClinicalDetailsSelectionModel.cs" />
     <Compile Include="Models\CompleteRequestSearchResultsModel.cs" />
+    <Compile Include="Models\ResultReferenceRangeModel.cs" />
+    <Compile Include="Models\UpdatedResultAndStatusModel.cs" />
     <Compile Include="Models\WorkstationPrintersInfoModel.cs" />
     <Compile Include="Models\ExistingRequestsPatientComparisionArgs.cs" />
     <Compile Include="Models\PatientNidPpAndNameModel.cs" />
