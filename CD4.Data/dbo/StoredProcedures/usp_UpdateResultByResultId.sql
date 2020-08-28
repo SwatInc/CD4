@@ -75,7 +75,8 @@ SET XACT_ABORT ON;
 			   [R].[ReferenceCode],
 			   [RT].[StatusId]
 		FROM [dbo].[Result] [R]
-		INNER JOIN [dbo].[ResultTracking] [RT] ON [R].[Id] = [RT].[ResultId];
+		INNER JOIN [dbo].[ResultTracking] [RT] ON [R].[Id] = [RT].[ResultId]
+		WHERE [R].[Id] = @ResultId;
 
 		COMMIT TRANSACTION;
 		END TRY

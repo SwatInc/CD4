@@ -358,6 +358,30 @@ namespace CD4.UI.Library.ViewModel
                 RequestDataRefreshed?.Invoke(this, EventArgs.Empty);
             }
         }
+
+        /// <summary>
+        /// update UI (Grid displaying tests) after result is pushed to the database. 
+        /// </summary>
+        /// <param name="response">The model containing updated data</param>
+        private void UpdateUiOnResultEntry(UpdatedResultAndStatusModel response)
+        {
+            //get the item to update from Selected Result Data
+            var ItemToUpdate = SelectedResultData.Where(x => x.Id == response.ResultId).FirstOrDefault();
+            //if not present in select samples' result
+            if (ItemToUpdate is null)
+            {
+                //another sample might be selected. Look in all loaded results
+                ItemToUpdate = AllResultData.Where(x => x.Id == response.ResultId).FirstOrDefault();
+                // Return if not present
+                if (ItemToUpdate is null) return;
+            }
+
+            //update UI
+            ItemToUpdate.Result = response.Result;
+            ItemToUpdate.ReferenceCode = response.ReferenceCode;
+            ItemToUpdate.StatusIconId = response.StatusId;
+        }
+
         private async void UpdateDatabaseResults(object sender, ListChangedEventArgs e)
         {
             //detect when a result is modified.
@@ -372,6 +396,7 @@ namespace CD4.UI.Library.ViewModel
             try
             {
                 var response = await resultDataAccess.InsertUpdateResultByResultIdAsync(resultId, result, testStatus);
+                UpdateUiOnResultEntry(response);
             }
             catch (Exception ex)
             {
@@ -391,6 +416,7 @@ namespace CD4.UI.Library.ViewModel
                 PushingMessages?.Invoke(this, ex.Message);
             }
         }
+
         private void SetClinicalDetailsForSelectedSample(string delimitedDetails)
         {
             SelectedClinicalDetails.Clear();
