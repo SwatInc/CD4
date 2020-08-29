@@ -10,12 +10,11 @@ AS
 BEGIN
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
-DECLARE @ReturnValue bit = 0;
     BEGIN TRANSACTION;
 		BEGIN TRY
 				DECLARE @AuditTypeIdTest int;
 				DECLARE @Username varchar(50);
-                DECLARE @TrackingData TABLE ([ResultId] int)
+                DECLARE @TrackingData TABLE ([Id] INT PRIMARY KEY IDENTITY, [ResultId] int)
                 DECLARE @Cin VARCHAR(50);
 				DECLARE @TempTrackingHistory TABLE ([ResultId] INT NOT NULL, [StatusId] INT NOT NULL);
 
@@ -32,6 +31,9 @@ DECLARE @ReturnValue bit = 0;
                         SELECT [TestId] FROM @TestsToRemove
                     )
                 );
+				--REFERENCE RANGE: remove reference ranges for tests to be removed.
+				DELETE FROM [dbo].[ResultReferenceRanges]
+				WHERE [ResultId] IN (SELECT [ResultId] FROM @TempTrackingHistory);
 
                 --SYNC
 				--remove tests requested for removal
@@ -44,6 +46,19 @@ DECLARE @ReturnValue bit = 0;
 				INSERT INTO [dbo].[Result] ([Sample_Cin], [TestId])
                 OUTPUT inserted.[Id] INTO @TrackingData
 				SELECT [I].[Sample_Cin], [I].[TestId] FROM @TestsToInsert [I];
+
+				-- REFERENCE RANGE: insert reference ranges for inserted tests
+				DECLARE @Counter INT;
+				DECLARE @MaxValue INT;
+				DECLARE @InsertedResultId int;
+				SELECT @MaxValue = COUNT([ResultId]) FROM @TrackingData;
+				SET @Counter=1
+				WHILE ( @Counter <= @MaxValue)
+				BEGIN
+					SELECT @InsertedResultId = [ResultId] FROM @TrackingData WHERE [Id] = @Counter;
+					EXEC [dbo].[usp_InsertResultReferenceRange] @ResultId = @InsertedResultId;
+					SET @Counter  = @Counter  + 1;
+				END
 
                 -- TRACKING: Added tests
                 INSERT INTO [dbo].[ResultTracking] ([ResultId],[StatusId],[UsersId])
@@ -76,11 +91,9 @@ DECLARE @ReturnValue bit = 0;
 				FROM @TestsToRemove [I];
 
 				COMMIT TRANSACTION;
-				SET @ReturnValue = 1;
 		END TRY
 		BEGIN CATCH
 			ROLLBACK TRANSACTION;
 			THROW;
 		END CATCH;
-SELECT @ReturnValue;
 END;

@@ -162,6 +162,9 @@
     <Build Include="dbo\Tables\ReferenceData.sql" />
     <Build Include="dbo\Tables\ReferenceType.sql" />
     <Build Include="dbo\Tables\ResultReferenceRanges.sql" />
+    <Build Include="dbo\StoredProcedures\usp_InsertResultReferenceRange.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetSpecifiedHighReferenceLimitValue.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetSpecifiedLowReferenceLimitValue.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
