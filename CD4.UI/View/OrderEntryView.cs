@@ -207,7 +207,7 @@ namespace CD4.UI.View
             }
         }
 
-        private async void LookUpEditTests_Validated(object sender, System.EventArgs e)
+        private async void LookUpEditTests_Validated(object sender, EventArgs e)
         {
             await _viewModel.ManageAddTestToRequestAsync();
         }

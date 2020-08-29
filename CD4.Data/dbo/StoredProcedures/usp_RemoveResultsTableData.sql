@@ -13,22 +13,26 @@ DECLARE @ReturnValue bit = 0;
             DECLARE @Cin VARCHAR(50);
 			DECLARE @Username varchar(50);
 			DECLARE @ResultIdsToRemove TABLE ([Id] INT NOT NULL UNIQUE);
-            
+
+            -- TRACKING: Tests to remove
+
+			-- get the Cin from tests to remove
+            SELECT TOP 1 @Cin =  [Sample_Cin] FROM @TestsToRemove;
+            --get resultIds to remove 
 			INSERT INTO @ResultIdsToRemove([Id])
             SELECT [Id] 
             FROM [dbo].[Result] 
             WHERE [Sample_Cin] = @Cin AND [TestId] IN 
             (
                 SELECT [TestId] FROM @TestsToRemove
-            )
-
-            -- TRACKING: Tests to remove
-            SELECT TOP 1 @Cin =  [Sample_Cin] FROM @TestsToRemove;
-            DELETE FROM [dbo].[ResultTracking]
+            );
+			--remove the realtime-time results tracking data of tests...
+			DELETE FROM [dbo].[ResultTracking]
             WHERE [ResultId] IN 
             (
                 SELECT [Id] FROM @ResultIdsToRemove
             );
+
 			--remove tests requested for removal
 			DELETE FROM [dbo].[Result] 
 			WHERE 
