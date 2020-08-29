@@ -32,6 +32,12 @@ DECLARE @ReturnValue bit = 0;
             (
                 SELECT [Id] FROM @ResultIdsToRemove
             );
+			--remove from tracking history
+			DELETE FROM [dbo].[TrackingHistory]
+			WHERE [ResultId]  IN 
+            (
+                SELECT [Id] FROM @ResultIdsToRemove
+            );
 
 			--remove tests requested for removal
 			DELETE FROM [dbo].[Result] 
