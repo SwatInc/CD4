@@ -1,0 +1,31 @@
+﻿CREATE PROCEDURE [dbo].[usp_GetResultReferenceRangeByResultId]
+	@ResultId int
+AS
+BEGIN
+    SELECT [Id]
+          ,[ResultId]
+          ,[NormalHighLimit]
+          ,[NormalLowLimit]
+          ,[AttentionHighLimit]
+          ,[AttentionLowLimit]
+          ,[PathologyHighLimit]
+          ,[PathologyLowLimit]
+          ,[HighPathologyHighLimit]
+          ,[HighPathologyLowLimit]
+          ,[AbsoluteDeltaLowLimit]
+          ,[AbsoluteDeltaHighLimit]
+          ,[RelativeDeltaLowLimit]
+          ,[RelativeDeltaHighLimit]
+          ,[OutOfNormalityAbsoluteLow_DeltaLowLimit]
+          ,[OutOfNormalityAbsoluteLow_DeltaHighLimit]
+          ,[OutOfNormalityAbsoluteHigh_DeltaLowLimt]
+          ,[OutOfNormalityAbsoluteHigh_DeltaHighLimit]
+          ,[OutOfNormalityRelativeLow_DeltaLowLimit]
+          ,[OutOfNormalityRelativeLow_DeltaHighLimit]
+          ,[OutOfNormalityRelativeHigh_DeltaLowlimit]
+          ,[OutOfNormalityRelativeHigh_DeltaHighLimit]
+          ,[DeltaValidityDays]
+          ,[BiasFactor]
+      FROM [dbo].[ResultReferenceRanges]
+      WHERE [ResultId] = @ResultId;
+END

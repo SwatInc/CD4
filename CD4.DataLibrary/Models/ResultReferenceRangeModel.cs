@@ -1,7 +1,12 @@
-﻿namespace CD4.DataLibrary.Models
+﻿using System;
+using System.Security.Cryptography;
+
+namespace CD4.DataLibrary.Models
 {
     public class ResultReferenceRangeModel
     {
+        private bool[] _referenceInterpretationCode = new bool[5];
+
         public int Id { get; set; }
         public int ResultId { get; set; }
         public float NormalHighLimit { get; set; } = -1;
@@ -45,22 +50,68 @@
             //if fails... return normal code for now... needs improvement for codified results
             if (!IsNumeric) return ReferenceCode.NM.ToString();
             
-            //if specific reference range is not set return appropriate code... for now check normal limits...
-            //return normal code if normal limits are not specified.
-            if(this.NormalLowLimit ==-1 && this.NormalHighLimit ==-1) return ReferenceCode.NM.ToString();
+            //condition for normal result
+            _referenceInterpretationCode[0] = (IsExceedsNormal(numericResult));
+            _referenceInterpretationCode[1] = (IsExceedsAttention(numericResult));
+            _referenceInterpretationCode[2] = (IsExceedsPathology(numericResult));
+            _referenceInterpretationCode[3] = (IsExceedsPanic(numericResult));
+            _referenceInterpretationCode[4] = (IsExceedsAcceptability(numericResult));
 
-            //do a crude comparision to get normal or attention code
-            if (numericResult > this.NormalHighLimit || numericResult < this.NormalLowLimit)
-            {
-                return ReferenceCode.AT.ToString();
-            }
-            else
-            {
-                return ReferenceCode.NM.ToString();
-            }
-
+            return DetermineReferenceCode(_referenceInterpretationCode);
         }
 
+        private string DetermineReferenceCode(bool[] referenceInterpretationCode)
+        {
+            if (referenceInterpretationCode[4]) return ReferenceCode.NA.ToString();
+            if (referenceInterpretationCode[3]) return ReferenceCode.HP.ToString();
+            if (referenceInterpretationCode[2]) return ReferenceCode.PA.ToString();
+            if (referenceInterpretationCode[1]) return ReferenceCode.AT.ToString();
+            if (referenceInterpretationCode[0]) return ReferenceCode.AT.ToString(); //outside normal but not attention, as AT for now
+
+            return ReferenceCode.NM.ToString();
+        }
+
+        private bool IsExceedsAcceptability(float numericResult)
+        {
+            return false;
+        }
+
+        private bool IsExceedsPanic(float numericResult)
+        {
+            return HighPathologyHighLimit != -1
+                   && numericResult > HighPathologyHighLimit
+                   || HighPathologyLowLimit != -1
+                   && numericResult < HighPathologyLowLimit;
+        }
+
+        private bool IsExceedsPathology(float numericResult)
+        {
+            return PathologyHighLimit != -1
+                   && numericResult > PathologyHighLimit
+                   || PathologyLowLimit != -1
+                   && numericResult < PathologyLowLimit;
+        }
+
+        private bool IsExceedsAttention(float numericResult)
+        {
+            return AttentionHighLimit != -1
+                   && numericResult > AttentionHighLimit
+                   || AttentionLowLimit != -1
+                   && numericResult < AttentionLowLimit;
+        }
+
+        /// <summary>
+        /// checks whether result exceeds a specified normal limit. If no limit is specified it is assumed
+        /// that the result exceeding normal is not applicable.
+        /// </summary>
+        /// <returns>True is result exceeds specified limits. If not specified, then false</returns>
+        private bool IsExceedsNormal(float numericResult)
+        {
+            return NormalHighLimit != -1
+                && numericResult > NormalHighLimit
+                || NormalLowLimit != -1
+                && numericResult < NormalLowLimit;
+        }
 
         private enum ReferenceCode
         {

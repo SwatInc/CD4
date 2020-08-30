@@ -146,8 +146,8 @@ namespace CD4.DataLibrary.DataAccess
 
         public async Task<UpdatedResultAndStatusModel> InsertUpdateResultByResultIdAsync(int resultId, string result, int testStatus)
         {
-            var demoReferenceData = await _referenceRangeDataAccess.GetDemoReferenceRangeByResultIdAsync(resultId);
-            var referenceCode = demoReferenceData.GetResultReferenceCode(result, resultId);
+            var referenceData = await _referenceRangeDataAccess.GetReferenceRangeByResultIdAsync(resultId);
+            var referenceCode = referenceData.GetResultReferenceCode(result, resultId);
             //check whether the test status is acceptable for result entry
             var InvalidTestStatusMessage = IsTestStatusValidForResultEntry(testStatus);
             if (!string.IsNullOrEmpty(InvalidTestStatusMessage))
