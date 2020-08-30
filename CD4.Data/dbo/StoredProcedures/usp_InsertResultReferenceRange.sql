@@ -86,12 +86,12 @@ BEGIN
                ,[HighPathologyLowLimit])
          VALUES
                (@ResultId
-               ,@NormalHighLimit
-               ,@NormalLowLimit
-               ,@AttentionHighLimit
-               ,@AttentionLowLimit
-               ,@PathologyHighLimit
-               ,@PathologyLowLimit
-               ,@HighPathologyHighLimit
-               ,@HighPathologyLowLimit);
+               ,COALESCE(@NormalHighLimit,-1)
+               ,COALESCE(@NormalLowLimit,-1)
+               ,COALESCE(@AttentionHighLimit,-1)
+               ,COALESCE(@AttentionLowLimit,-1)
+               ,COALESCE(@PathologyHighLimit,-1)
+               ,COALESCE(@PathologyLowLimit,-1)
+               ,COALESCE(@HighPathologyHighLimit,-1)
+               ,COALESCE(@HighPathologyLowLimit,-1));
 END

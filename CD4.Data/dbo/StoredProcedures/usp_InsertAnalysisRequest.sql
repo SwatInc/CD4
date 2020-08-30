@@ -36,7 +36,7 @@ SET XACT_ABORT ON;
 			VALUES (@AuditTypeIdRequest,@InsertedRequestId,1,1)
 
 			--AUDIT
-			SELECT @AuditPatientInfo = CONCAT([Fullname], ' (',[Id],' | ',[NidPp],')') FROM [dbo].[Patient] WHERE [Id] = @PatientId;
+			SELECT @AuditPatientInfo = CONCAT([FullName], ' (',[Id],' | ',[NidPp],')') FROM [dbo].[Patient] WHERE [Id] = @PatientId;
 
 			INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[StatusId],[Details])
 				 VALUES

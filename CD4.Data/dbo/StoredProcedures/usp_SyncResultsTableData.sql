@@ -14,12 +14,13 @@ SET XACT_ABORT ON;
 		BEGIN TRY
 				DECLARE @AuditTypeIdTest int;
 				DECLARE @Username varchar(50);
-                DECLARE @TrackingData TABLE ([Id] INT PRIMARY KEY IDENTITY, [ResultId] int)
+                DECLARE @TrackingData TABLE ([Id] INT PRIMARY KEY IDENTITY(1,1), [ResultId] int)
                 DECLARE @Cin VARCHAR(50);
 				DECLARE @TempTrackingHistory TABLE ([ResultId] INT NOT NULL, [StatusId] INT NOT NULL);
 
                 -- TRACKING: Tests to remove
                 SELECT TOP 1 @Cin =  [Sample_Cin] FROM @TestsToRemove;
+
                 DELETE FROM [dbo].[ResultTracking]
 				OUTPUT DELETED.[ResultId], 8 INTO @TempTrackingHistory
                 WHERE [ResultId] IN 
@@ -31,6 +32,14 @@ SET XACT_ABORT ON;
                         SELECT [TestId] FROM @TestsToRemove
                     )
                 );
+
+				--remove from tracking history
+				DELETE FROM [dbo].[TrackingHistory]
+				WHERE [ResultId]  IN 
+				(
+					SELECT [ResultId] FROM @TempTrackingHistory
+				);
+
 				--REFERENCE RANGE: remove reference ranges for tests to be removed.
 				DELETE FROM [dbo].[ResultReferenceRanges]
 				WHERE [ResultId] IN (SELECT [ResultId] FROM @TempTrackingHistory);
@@ -62,13 +71,13 @@ SET XACT_ABORT ON;
 
                 -- TRACKING: Added tests
                 INSERT INTO [dbo].[ResultTracking] ([ResultId],[StatusId],[UsersId])
-				OUTPUT INSERTED.[ResultId], 1 INTO @TempTrackingHistory
+				OUTPUT INSERTED.[ResultId], 1 INTO @TempTrackingHistory  -- temp tracking with status 1, 
 				SELECT [ResultId],1,@UserId FROM @TrackingData;
                 -- removed tests
 
 				-- TRACKING HISTORY
-				INSERT INTO [dbo].[TrackingHistory] ([TrackingType],[ResultId],[UsersId])
-				SELECT 3,[ResultId],@UserId FROM @TrackingData;
+				INSERT INTO [dbo].[TrackingHistory] ([TrackingType],[ResultId],[StatusId],[UsersId])
+				SELECT 3,[ResultId],1,@UserId FROM @TrackingData;
 
                 -- AUDIT
 				--audit trail, tests added

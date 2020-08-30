@@ -9,7 +9,7 @@
 ) ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[UserRoles]  WITH CHECK ADD  CONSTRAINT [FK_UserRoles_Roles_RoleId] FOREIGN KEY([RoleId])
+ALTER TABLE [dbo].[UserRoles] ADD  CONSTRAINT [FK_UserRoles_Roles_RoleId] FOREIGN KEY([RoleId])
 REFERENCES [dbo].[Roles] ([Id])
 ON DELETE CASCADE
 GO
@@ -17,7 +17,7 @@ GO
 ALTER TABLE [dbo].[UserRoles] CHECK CONSTRAINT [FK_UserRoles_Roles_RoleId]
 GO
 
-ALTER TABLE [dbo].[UserRoles]  WITH CHECK ADD  CONSTRAINT [FK_UserRoles_Users_UserId] FOREIGN KEY([UserId])
+ALTER TABLE [dbo].[UserRoles]  ADD  CONSTRAINT [FK_UserRoles_Users_UserId] FOREIGN KEY([UserId])
 REFERENCES [dbo].[Users] ([Id])
 ON DELETE CASCADE
 GO
