@@ -451,7 +451,7 @@ DECLARE @ReferenceRangePCVId int;
 SELECT @ReferenceRangeHgbId  =  [Id] FROM [ReferenceRange] WHERE [TestId] = @resultHb;
 SELECT @ReferenceRangePCVId  =  [Id] FROM [ReferenceRange] WHERE [TestId] = @resultPCV;
 
--- insert referec data for Hb and PCV
+-- insert referece data for Hb and PCV
 INSERT INTO [dbo].[ReferenceData] ([ReferenceRangeId],[ReferenceTypeId],[LowLimitValue],[HighLimitValue])
 VALUES
     (@ReferenceRangeHgbId,@NormalId,11.0,18.2), -- HGB

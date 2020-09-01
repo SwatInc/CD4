@@ -18,9 +18,14 @@ AS
 			,[W].[Discipline]
 			,[W].[Description] AS [Assay]
 			,[W].[Result] 
-			,[W].[Unit] 
+			,[W].[Unit]
+			,[RR].[DisplayNormalRange]
 			FROM [dbo].[WorkSheetResultData] [W]
-			WHERE [W].[Cin] = @Cin AND ([W].[Result] IS NOT NULL OR [W].[Result] <> '');
+			INNER JOIN [dbo].[ResultTracking] [RT] ON [W].[Id] = [RT].[ResultId]
+			INNER JOIN [dbo].[ResultReferenceRanges] [RR] ON [W].[Id] = [RR].[ResultId]
+			WHERE [W].[Cin] = @Cin AND 
+				 ([W].[Result] IS NOT NULL OR [W].[Result] <> '') AND
+				  [RT].[StatusId] = 5;
 
 		SELECT [Cin],[Discipline],[Assay],[Result],[Unit] FROM @ReportResult;
 	

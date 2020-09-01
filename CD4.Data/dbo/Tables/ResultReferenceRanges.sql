@@ -24,6 +24,7 @@
     [OutOfNormalityRelativeHigh_DeltaHighLimit] DECIMAL(10, 8) NOT NULL DEFAULT -1, 
     [DeltaValidityDays] INT NOT NULL DEFAULT 0, 
     [BiasFactor] INT NOT NULL DEFAULT 0,
+    [DisplayNormalRange] varchar(100) DEFAULT NULL
     CONSTRAINT [FK_ResultReferenceRanges_ResultId] FOREIGN KEY ([ResultId]) REFERENCES [dbo].[Result]([Id]), 
 
     )
