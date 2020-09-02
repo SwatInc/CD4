@@ -34,7 +34,8 @@ BEGIN
     DECLARE @OutOfNormalityRelativeLow_DeltaHighLimit DECIMAL(10, 8);
     DECLARE @OutOfNormalityRelativeHigh_DeltaLowlimit DECIMAL(10, 8);
     DECLARE @OutOfNormalityRelativeHigh_DeltaHighLimit DECIMAL(10, 8); 
-    
+    DECLARE @DisplayNormalRange VARCHAR(100);
+
     --get patient specific data
     INSERT INTO @PatientAndTestData ([AgeInDays],[GenderId],[TestId])
     SELECT DATEDIFF(d,[P].[Birthdate],GETDATE()) AS [AgeInDays], [P].[GenderId],[R].[TestId]
@@ -73,6 +74,12 @@ BEGIN
     EXEC [dbo].[usp_GetSpecifiedHighReferenceLimitValue] @HighPathologyHighLimit OUTPUT,@TestId = @TestId, @GenderId  = @GenderId, @AgeInDays = @AgeInDays, @ReferenceTypeId = @PanicId;
     --high pathology low limit
     EXEC [dbo].[usp_GetSpecifiedLowReferenceLimitValue] @HighPathologyLowLimit OUTPUT,@TestId = @TestId, @GenderId  = @GenderId, @AgeInDays = @AgeInDays, @ReferenceTypeId = @PanicId;
+    -- select display reference range
+    SELECT @DisplayNormalRange = [DisplayNormalRange]
+    FROM [dbo].[ReferenceRange]
+    WHERE [TestId] = @TestId AND 
+          [GenderId] = @GenderId AND
+          ([FromAgeDays] >= @AgeInDays AND [ToAgeDays] <= @AgeInDays);
 
     INSERT INTO [dbo].[ResultReferenceRanges]
                ([ResultId]
@@ -83,7 +90,8 @@ BEGIN
                ,[PathologyHighLimit]
                ,[PathologyLowLimit]
                ,[HighPathologyHighLimit]
-               ,[HighPathologyLowLimit])
+               ,[HighPathologyLowLimit]
+               ,[DisplayNormalRange])
          VALUES
                (@ResultId
                ,COALESCE(@NormalHighLimit,-1)
@@ -93,5 +101,6 @@ BEGIN
                ,COALESCE(@PathologyHighLimit,-1)
                ,COALESCE(@PathologyLowLimit,-1)
                ,COALESCE(@HighPathologyHighLimit,-1)
-               ,COALESCE(@HighPathologyLowLimit,-1));
+               ,COALESCE(@HighPathologyLowLimit,-1)
+               ,@DisplayNormalRange);
 END

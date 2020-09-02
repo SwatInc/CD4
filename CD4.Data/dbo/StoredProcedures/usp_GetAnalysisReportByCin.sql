@@ -9,7 +9,8 @@ AS
 			[Discipline] VARCHAR(50) NOT NULL,
 			[Assay] VARCHAR(50) NOT NULL,
 			[Result] VARCHAR(50)NULL,
-			[Unit] varchar(10) null
+			[Unit] varchar(10) null,
+			[DisplayNormalRange] varchar(100)
 		);
 
 		INSERT INTO @ReportResult

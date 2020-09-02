@@ -9,7 +9,7 @@ DECLARE @ReturnValue bit = 0;
     BEGIN TRANSACTION;
 		BEGIN TRY
             
-			DECLARE @TrackingData TABLE ([ResultId] int)
+			DECLARE @TrackingData TABLE ([Id] INT PRIMARY KEY IDENTITY(1,1), [ResultId] int);
 			DECLARE @AuditTypeIdTest int;
 			DECLARE @Username varchar(50);
 			DECLARE @TempTrackingHistory AS TABLE(
@@ -23,6 +23,19 @@ DECLARE @ReturnValue bit = 0;
 			INSERT INTO [dbo].[Result] ([Sample_Cin], [TestId])
             OUTPUT inserted.[Id] INTO @TrackingData
 			SELECT [I].[Sample_Cin], [I].[TestId] FROM @TestsToInsert [I];
+
+			-- REFERENCE RANGE: insert reference ranges for inserted tests
+			DECLARE @Counter INT;
+			DECLARE @MaxValue INT;
+			DECLARE @InsertedResultId int;
+			SELECT @MaxValue = COUNT([ResultId]) FROM @TrackingData;
+			SET @Counter=1
+			WHILE ( @Counter <= @MaxValue)
+			BEGIN
+				SELECT @InsertedResultId = [ResultId] FROM @TrackingData WHERE [Id] = @Counter;
+				EXEC [dbo].[usp_InsertResultReferenceRange] @ResultId = @InsertedResultId;
+				SET @Counter  = @Counter  + 1;
+			END
 
             -- TRACKING: Added tests
             INSERT INTO [dbo].[ResultTracking] ([ResultId],[StatusId],[UsersId])
