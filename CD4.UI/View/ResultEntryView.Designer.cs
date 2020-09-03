@@ -350,9 +350,10 @@ namespace CD4.UI.View
             this.progressPanelTests.Caption = "Please Wait";
             this.progressPanelTests.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.progressPanelTests.Description = "Loading tests ...";
-            this.progressPanelTests.Location = new System.Drawing.Point(230, 134);
+            this.progressPanelTests.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressPanelTests.Location = new System.Drawing.Point(0, 0);
             this.progressPanelTests.Name = "progressPanelTests";
-            this.progressPanelTests.Size = new System.Drawing.Size(204, 90);
+            this.progressPanelTests.Size = new System.Drawing.Size(434, 224);
             this.progressPanelTests.TabIndex = 3;
             // 
             // gridControlTests
@@ -428,6 +429,7 @@ namespace CD4.UI.View
             this.gridColumnUnit.Caption = "Unit";
             this.gridColumnUnit.FieldName = "Unit";
             this.gridColumnUnit.Name = "gridColumnUnit";
+            this.gridColumnUnit.OptionsColumn.AllowEdit = false;
             this.gridColumnUnit.Visible = true;
             this.gridColumnUnit.VisibleIndex = 3;
             this.gridColumnUnit.Width = 170;

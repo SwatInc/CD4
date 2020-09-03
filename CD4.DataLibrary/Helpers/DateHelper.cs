@@ -8,13 +8,13 @@ namespace CD4.DataLibrary.Helpers
 {
     public class DateHelper
     {
-        public static string GetCD4FormatDate(DateTime? nullabledate)
+        public static string GetCD4FormatDate(DateTimeOffset? nullabledate)
         {
             if (nullabledate is null)
             {
                 return null;
             }
-            return ((DateTime)nullabledate).ToString("yyyyMMdd");
+            return nullabledate.Value.ToLocalTime().ToString("yyyyMMdd");
         }
     }
 }

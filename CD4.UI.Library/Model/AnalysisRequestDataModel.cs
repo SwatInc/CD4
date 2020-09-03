@@ -11,8 +11,8 @@ namespace CD4.UI.Library.Model
         #region Request Fields
         public string Cin { get; set; }
         public int SelectedSiteId { get; set; }
-        public DateTime SampleCollectionDate { get; set; }
-        public DateTime SampleReceivedDate { get; set; }
+        public DateTimeOffset SampleCollectionDate { get; set; }
+        public DateTimeOffset SampleReceivedDate { get; set; }
 
         #endregion
 

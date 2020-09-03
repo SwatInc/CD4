@@ -10,7 +10,7 @@ namespace CD4.DataLibrary.Models
     {
         public string Cin { get; set; }
         public int SiteId { get; set; }
-        public DateTime? CollectionDate { get; set; }
-        public DateTime? ReceivedDate { get; set; }
+        public DateTimeOffset? CollectionDate { get; set; }
+        public DateTimeOffset? ReceivedDate { get; set; }
     }
 }
