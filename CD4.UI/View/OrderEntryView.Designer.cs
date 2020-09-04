@@ -117,10 +117,9 @@
             this.progressPanelRequest.Appearance.Options.UseBackColor = true;
             this.progressPanelRequest.BarAnimationElementThickness = 2;
             this.progressPanelRequest.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.progressPanelRequest.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.progressPanelRequest.Location = new System.Drawing.Point(2, 20);
+            this.progressPanelRequest.Location = new System.Drawing.Point(174, 125);
             this.progressPanelRequest.Name = "progressPanelRequest";
-            this.progressPanelRequest.Size = new System.Drawing.Size(192, 119);
+            this.progressPanelRequest.Size = new System.Drawing.Size(20, 14);
             this.progressPanelRequest.TabIndex = 0;
             this.progressPanelRequest.TabStop = false;
             this.progressPanelRequest.Text = "Request data";
@@ -136,6 +135,8 @@
             this.dateEditSampleReceived.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateEditSampleReceived.Properties.CalendarTimeProperties.Mask.EditMask = "d";
+            this.dateEditSampleReceived.Properties.Mask.EditMask = "";
+            this.dateEditSampleReceived.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.None;
             this.dateEditSampleReceived.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.dateEditSampleReceived.Properties.NullText = "Sample received date";
             this.dateEditSampleReceived.Properties.NullValuePrompt = "Sample received date";
@@ -154,6 +155,8 @@
             this.dateEditCollectedDate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateEditCollectedDate.Properties.CalendarTimeProperties.Mask.EditMask = "d";
+            this.dateEditCollectedDate.Properties.Mask.EditMask = "";
+            this.dateEditCollectedDate.Properties.Mask.MaskType = DevExpress.XtraEditors.Mask.MaskType.None;
             this.dateEditCollectedDate.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.dateEditCollectedDate.Properties.NullText = "Sample Collection date";
             this.dateEditCollectedDate.Properties.NullValuePrompt = "Sample Collection date";

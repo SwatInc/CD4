@@ -26,8 +26,8 @@ namespace CD4.UI.Library.ViewModel
         BindingList<IslandModel> Islands { get; set; }
         string NidPp { get; set; }
         string PhoneNumber { get; set; }
-        DateTime? SampleCollectionDate { get; set; }
-        DateTime? SampleReceivedDate { get; set; }
+        DateTimeOffset? SampleCollectionDate { get; set; }
+        DateTimeOffset? SampleReceivedDate { get; set; }
         string SelectedAtoll { get; set; }
         int SelectedCountryId { get; set; }
         int SelectedGenderId { get; set; }

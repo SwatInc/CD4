@@ -60,13 +60,15 @@ namespace CD4.UI.View
             this.repositoryItemLookUpEditCodifiedPhrases = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.gridColumnStatusIcon = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnUnit = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnReferenceCode = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnIsDeltaOk = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControlFunctions = new DevExpress.XtraEditors.GroupControl();
             this.lookUpEditSampleStatusFilter = new DevExpress.XtraEditors.LookUpEdit();
             this.simpleButtonLoadWorksheet = new DevExpress.XtraEditors.SimpleButton();
             this.label1 = new System.Windows.Forms.Label();
             this.dateEditLoadWorksheetFrom = new DevExpress.XtraEditors.DateEdit();
             this.simpleButtonReport = new DevExpress.XtraEditors.SimpleButton();
-            this.labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
+            labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).BeginInit();
             this.splitContainerControlPatient.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlSelectedPatientRequestClinicalDetailsArea)).BeginInit();
@@ -373,7 +375,9 @@ namespace CD4.UI.View
             this.gridColumnTestName,
             this.gridColumnResult,
             this.gridColumnStatusIcon,
-            this.gridColumnUnit});
+            this.gridColumnUnit,
+            this.gridColumnReferenceCode,
+            this.gridColumnIsDeltaOk});
             this.gridViewTests.GridControl = this.gridControlTests;
             this.gridViewTests.Name = "gridViewTests";
             this.gridViewTests.OptionsView.ShowGroupPanel = false;
@@ -425,9 +429,22 @@ namespace CD4.UI.View
             this.gridColumnUnit.Caption = "Unit";
             this.gridColumnUnit.FieldName = "Unit";
             this.gridColumnUnit.Name = "gridColumnUnit";
+            this.gridColumnUnit.OptionsColumn.AllowEdit = false;
             this.gridColumnUnit.Visible = true;
             this.gridColumnUnit.VisibleIndex = 3;
             this.gridColumnUnit.Width = 170;
+            // 
+            // gridColumnReferenceCode
+            // 
+            this.gridColumnReferenceCode.Caption = "Ref. Code";
+            this.gridColumnReferenceCode.FieldName = "ReferenceCode";
+            this.gridColumnReferenceCode.Name = "gridColumnReferenceCode";
+            // 
+            // gridColumnIsDeltaOk
+            // 
+            this.gridColumnIsDeltaOk.Caption = "Is Delta OK";
+            this.gridColumnIsDeltaOk.FieldName = "IsDeltaOk";
+            this.gridColumnIsDeltaOk.Name = "gridColumnIsDeltaOk";
             // 
             // groupControlFunctions
             // 
@@ -569,5 +586,7 @@ namespace CD4.UI.View
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelSamples;
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelTests;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnUnit;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnReferenceCode;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnIsDeltaOk;
     }
 }

@@ -70,4 +70,25 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="UsersId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="6ac8ac57-cbfa-448e-aecc-45fd5a1a0fc6" ChangeDateTime="08/23/2020 10:43:11">
+    <Property Name="ElementName" Value="[dbo].[ResultReferenceRanges].[Validity]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ResultReferenceRanges]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DeltaValidity" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="977c0a4f-8769-417f-82bc-f270ed29619f" ChangeDateTime="08/23/2020 10:43:15">
+    <Property Name="ElementName" Value="[dbo].[ResultReferenceRanges].[DeltaValidity]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[ResultReferenceRanges]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DeltaValidityDays" />
+  </Operation>
+  <Operation Name="Rename Refactor" Key="cf409122-84ab-4fd4-b1a1-db67676fb292" ChangeDateTime="08/23/2020 20:46:04">
+    <Property Name="ElementName" Value="[dbo].[Result].[IsNormal]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Result]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="ReferenceCode" />
+  </Operation>
 </Operations>

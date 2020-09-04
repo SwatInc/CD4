@@ -10,7 +10,7 @@
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[RoleClaims]  WITH CHECK ADD  CONSTRAINT [FK_RoleClaims_Roles_RoleId] FOREIGN KEY([RoleId])
+ALTER TABLE [dbo].[RoleClaims] ADD  CONSTRAINT [FK_RoleClaims_Roles_RoleId] FOREIGN KEY([RoleId])
 REFERENCES [dbo].[Roles] ([Id])
 ON DELETE CASCADE
 GO

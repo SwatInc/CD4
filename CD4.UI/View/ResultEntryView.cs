@@ -7,6 +7,7 @@ using DevExpress.XtraGrid.Views.Grid;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace CD4.UI.View
@@ -28,6 +29,7 @@ namespace CD4.UI.View
             labelControlCin.DoubleClick += CopyCinToClipBoard;
             gridViewSamples.FocusedRowChanged += SelectedSampleChanged;
             gridViewTests.FocusedRowChanged += SelectedTestChanged;
+            gridViewTests.RowCellStyle += GridViewTests_RowCellStyle;
             dataRefreshTimer.Tick += RefreshViewData;
             simpleButtonReport.Click += SimpleButtonReport_Click;
             simpleButtonLoadWorksheet.Click += LoadWorkSheet;
@@ -37,6 +39,51 @@ namespace CD4.UI.View
             gridViewTests.PopupMenuShowing += ShowTestPopupMenu;
             this.KeyUp += ResultEntryView_KeyUp;
             lookUpEditSampleStatusFilter.EditValueChanged += LookUpEditSampleStatusFilter_EditValueChanged;
+        }
+
+        /// <summary>
+        /// Handles style changes to cells depending on factors like reference range, delta checks QCs
+        /// </summary>
+        private void GridViewTests_RowCellStyle(object sender, RowCellStyleEventArgs e)
+        {
+            GridView view = (GridView)sender;
+            //get the reference column value.
+            var refCode = (string)(view.GetRowCellValue(e.RowHandle, "ReferenceCode"));
+
+            if (e.Column.FieldName == "Result")
+            {
+
+                if (refCode == "NM")
+                {
+                    e.Appearance.ForeColor = Color.Black;
+                    e.Appearance.FontStyleDelta = FontStyle.Regular;
+                }
+
+                if (refCode == "AT")
+                {
+                    e.Appearance.ForeColor = Color.FromArgb(196, 196, 0); // kinda yellow / not too bright
+                    e.Appearance.FontStyleDelta = FontStyle.Bold;
+                }
+
+                if (refCode == "PA")
+                {
+                    e.Appearance.ForeColor = Color.Brown;
+                    e.Appearance.FontStyleDelta = FontStyle.Bold;
+                }
+
+                if (refCode == "HP")
+                {
+                    e.Appearance.ForeColor = Color.Red;
+                    e.Appearance.FontStyleDelta = FontStyle.Bold;
+                }
+
+                if (refCode == "NA")
+                {
+                    e.Appearance.ForeColor = Color.Blue;
+                    e.Appearance.FontStyleDelta = FontStyle.Bold;
+                }
+            }
+
         }
 
         /// <summary>

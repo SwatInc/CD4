@@ -1,7 +1,6 @@
 ﻿using CD4.DataLibrary.Models;
 using Dapper;
 using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Data;
 using System.Threading.Tasks;
@@ -11,10 +10,12 @@ namespace CD4.DataLibrary.DataAccess
     public class ResultDataAccess : DataAccessBase, IResultDataAccess
     {
         private readonly IStatusDataAccess statusData;
+        private readonly IReferenceRangeDataAccess _referenceRangeDataAccess;
 
-        public ResultDataAccess(IStatusDataAccess statusData)
+        public ResultDataAccess(IStatusDataAccess statusData, IReferenceRangeDataAccess referenceRangeDataAccess)
         {
             this.statusData = statusData;
+            _referenceRangeDataAccess = referenceRangeDataAccess;
         }
 
         /// <summary>
@@ -28,7 +29,7 @@ namespace CD4.DataLibrary.DataAccess
             (List<TestsModel> testsToInsert, List<TestsModel> testsToRemove, string cin)
         {
             var testToInsertTable = await GetTestsTableAsync(testsToInsert, cin, statusData);
-            var testToRemoveTable =await  GetTestsTableAsync(testsToRemove, cin, statusData);
+            var testToRemoveTable = await GetTestsTableAsync(testsToRemove, cin, statusData);
 
             //determine whether to create, delete or sync result table data
             if (testsToInsert.Count > 0 && testsToRemove.Count > 0)
@@ -41,7 +42,8 @@ namespace CD4.DataLibrary.DataAccess
                     UserId = 1
                 };
 
-                return await SyncResultTableDataAsync(syncData);
+                await SyncResultTableDataAsync(syncData);
+                return true;
             }
             else if (testsToInsert.Count > 0)
             {
@@ -78,7 +80,17 @@ namespace CD4.DataLibrary.DataAccess
         private async Task<bool> SyncResultTableDataAsync(dynamic syncData)
         {
             var storedProcedure = "[dbo].[usp_SyncResultsTableData]";
-            return await SelectInsertOrUpdateAsync<bool, dynamic>(storedProcedure, syncData);
+            try
+            {
+                await SelectInsertOrUpdateAsync<bool, dynamic>(storedProcedure, syncData);
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
 
         private async Task<bool> InsertResultTableDataAsync(dynamic insertData)
@@ -101,7 +113,9 @@ namespace CD4.DataLibrary.DataAccess
         /// <param name="tests">Tests requested</param>
         /// <param name="cin">Sample cin</param>
         /// <returns>an instance of TableValueParameter of ResultTableInsertDataUDT as ICustomQueryParameter</returns>
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public static async Task<SqlMapper.ICustomQueryParameter> GetTestsTableAsync
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
             (List<TestsModel> tests, string cin, IStatusDataAccess statusData)
         {
             //Declare datatable instance and add the columns required for UDT
@@ -112,7 +126,7 @@ namespace CD4.DataLibrary.DataAccess
             try
             {
                 //Fetch Status Id for "Registered Status"
-                var statusId =  statusData.GetRegisteredStatusId();
+                var statusId = statusData.GetRegisteredStatusId();
 
                 //Add rows to the Datatable declared, and return
                 foreach (var item in tests)
@@ -130,8 +144,10 @@ namespace CD4.DataLibrary.DataAccess
 
         }
 
-        public async Task<bool> InsertUpdateResultByResultIdAsync(int resultId, string result, int testStatus)
+        public async Task<UpdatedResultAndStatusModel> InsertUpdateResultByResultIdAsync(int resultId, string result, int testStatus)
         {
+            var referenceData = await _referenceRangeDataAccess.GetReferenceRangeByResultIdAsync(resultId);
+            var referenceCode = referenceData.GetResultReferenceCode(result, resultId);
             //check whether the test status is acceptable for result entry
             var InvalidTestStatusMessage = IsTestStatusValidForResultEntry(testStatus);
             if (!string.IsNullOrEmpty(InvalidTestStatusMessage))
@@ -141,15 +157,11 @@ namespace CD4.DataLibrary.DataAccess
             //Set the stored procedure to call
             var storedProcedure = "[dbo].[usp_UpdateResultByResultId]";
             //Make a database query to get Id for Status equivalent to "ToValidate".
-            var statusId =  statusData.GetToValidateStatusId();
+            var statusId = statusData.GetToValidateStatusId();
             //prepare the parameter to pass to the query.
-            var parameter = new { Result = result, ResultId = resultId, StatusId = statusId, UsersId = 1 };
+            var parameter = new { Result = result, ResultId = resultId, StatusId = statusId, ReferenceCode = referenceCode, UsersId = 1 };
             //insert result and result status
-            var output = await SelectInsertOrUpdateAsync<bool, dynamic>(storedProcedure, parameter);
-            //Set the sample status
-            var sampleStatus = await statusData.DetermineSampleStatus(resultId);
-            var IsSampleStatusSet = await UpdateSampleStatusByResultId(resultId, sampleStatus);
-            return output;
+            return await SelectInsertOrUpdateAsync<UpdatedResultAndStatusModel, dynamic>(storedProcedure, parameter);
         }
 
         /// <summary>

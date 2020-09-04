@@ -11,6 +11,7 @@
         public string DataType { get; set; }
         public string Mask { get; set; }
         public string Unit { get; set; }
-
+        public string ReferenceCode { get; set; }
+        public bool IsDeltaOk { get; set; }
     }
 }

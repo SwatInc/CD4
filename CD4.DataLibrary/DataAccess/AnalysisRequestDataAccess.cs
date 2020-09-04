@@ -35,7 +35,6 @@ namespace CD4.DataLibrary.DataAccess
             RequestDataStatus patientStatus = RequestDataStatus.New;
             RequestDataStatus clinicalDetailsStatus = RequestDataStatus.New;
             int InsertedPatientId = 0;
-            int InsertedRequestId = 0;
 
             List<TestsModel> TestsToInsert = new List<TestsModel>();
             List<TestsModel> TestsToRemove = new List<TestsModel>();

@@ -35,7 +35,9 @@ namespace CD4.DataLibrary.DataAccess
             return results.ToList();
         }
 
+#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         internal async Task<List<T>> LoadDataWithParameterAsync<T,U>
+#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
             (string storedProcedure, U parameter)
         {
 
@@ -176,7 +178,6 @@ namespace CD4.DataLibrary.DataAccess
                  TestResultsData = resultData
             };
         }
-
 
         internal async Task<StatusUpdatedSampleAndTestStatusModel> ValidateSampleAndGetUpdatedSampleAndTestStatus<T>(string storedProcedure, T parameters)
         {

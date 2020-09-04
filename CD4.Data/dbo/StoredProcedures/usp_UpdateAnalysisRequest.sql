@@ -14,7 +14,7 @@ SET NOCOUNT ON;
 	DECLARE @Username varchar(50);
 
 	-- collect data before update.
-	SELECT @RequestTraceBeforeUpdate  = CONCAT([P].[Fullname], ' [',[P].[Id],' | ',[P].[NidPp],']. Episode Number: ', [AR].[EpisodeNumber],' and age: ',[AR].[Age]) 
+	SELECT @RequestTraceBeforeUpdate  = CONCAT([P].[FullName], ' [',[P].[Id],' | ',[P].[NidPp],']. Episode Number: ', [AR].[EpisodeNumber],' and age: ',[AR].[Age]) 
 	FROM [dbo].[AnalysisRequest] [AR]
 	INNER JOIN [dbo].[Patient] [P] ON [AR].[PatientId] = [P].[Id]
 	WHERE [AR].[Id] = @Id
@@ -28,7 +28,7 @@ SET NOCOUNT ON;
 	-- Todo: TRACKING
 	-- AUDIT: Analysis Request details updated for sample
 	--collect data after update
-	SELECT @RequestTraceAfterUpdate  = CONCAT([P].[Fullname], ' [',[P].[Id],' | ',[P].[NidPp],']. Episode Number: ', [AR].[EpisodeNumber],' and age: ',[AR].[Age])  
+	SELECT @RequestTraceAfterUpdate  = CONCAT([P].[FullName], ' [',[P].[Id],' | ',[P].[NidPp],']. Episode Number: ', [AR].[EpisodeNumber],' and age: ',[AR].[Age])  
 	FROM [dbo].[AnalysisRequest] [AR]
 	INNER JOIN [dbo].[Patient] [P] ON [AR].[PatientId] = [P].[Id]
 	WHERE [AR].[Id] = @Id;

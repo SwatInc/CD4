@@ -10,7 +10,7 @@
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
 
-ALTER TABLE [dbo].[UserClaims]  WITH CHECK ADD  CONSTRAINT [FK_UserClaims_Users_UserId] FOREIGN KEY([UserId])
+ALTER TABLE [dbo].[UserClaims]  ADD  CONSTRAINT [FK_UserClaims_Users_UserId] FOREIGN KEY([UserId])
 REFERENCES [dbo].[Users] ([Id])
 ON DELETE CASCADE
 GO

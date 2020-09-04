@@ -2,7 +2,6 @@
 using CD4.DataLibrary.DataAccess;
 using CD4.DataLibrary.Models;
 using CD4.UI.Library.Model;
-using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -260,7 +259,7 @@ namespace CD4.UI.Library.ViewModel
             (StatusUpdatedSampleAndTestStatusModel output, RequestSampleModel requestSampleModel)
         {
             //1. update any changes in status for analyses for the sample.
-            
+
             //if the now selected sample is the sample that was validated...
             if (SelectedRequestData.Cin == requestSampleModel.Cin)
             {
@@ -359,6 +358,30 @@ namespace CD4.UI.Library.ViewModel
                 RequestDataRefreshed?.Invoke(this, EventArgs.Empty);
             }
         }
+
+        /// <summary>
+        /// update UI (Grid displaying tests) after result is pushed to the database. 
+        /// </summary>
+        /// <param name="response">The model containing updated data</param>
+        private void UpdateUiOnResultEntry(UpdatedResultAndStatusModel response)
+        {
+            //get the item to update from Selected Result Data
+            var ItemToUpdate = SelectedResultData.Where(x => x.Id == response.ResultId).FirstOrDefault();
+            //if not present in select samples' result
+            if (ItemToUpdate is null)
+            {
+                //another sample might be selected. Look in all loaded results
+                ItemToUpdate = AllResultData.Where(x => x.Id == response.ResultId).FirstOrDefault();
+                // Return if not present
+                if (ItemToUpdate is null) return;
+            }
+
+            //update UI
+            ItemToUpdate.Result = response.Result;
+            ItemToUpdate.ReferenceCode = response.ReferenceCode;
+            ItemToUpdate.StatusIconId = response.StatusId;
+        }
+
         private async void UpdateDatabaseResults(object sender, ListChangedEventArgs e)
         {
             //detect when a result is modified.
@@ -373,6 +396,7 @@ namespace CD4.UI.Library.ViewModel
             try
             {
                 var response = await resultDataAccess.InsertUpdateResultByResultIdAsync(resultId, result, testStatus);
+                UpdateUiOnResultEntry(response);
             }
             catch (Exception ex)
             {
@@ -383,7 +407,8 @@ namespace CD4.UI.Library.ViewModel
                     {
                         //Unsubscribe from event to avoid a listchange fire for this change
                         SelectedResultData.ListChanged -= UpdateDatabaseResults;
-                        item.Result = null;
+                        //if the result is not validated... set current result to null
+                        if (item.StatusIconId != 5) item.Result = null;
                         //subscribe again
                         SelectedResultData.ListChanged += UpdateDatabaseResults;
                     }
@@ -391,6 +416,7 @@ namespace CD4.UI.Library.ViewModel
                 PushingMessages?.Invoke(this, ex.Message);
             }
         }
+
         private void SetClinicalDetailsForSelectedSample(string delimitedDetails)
         {
             SelectedClinicalDetails.Clear();

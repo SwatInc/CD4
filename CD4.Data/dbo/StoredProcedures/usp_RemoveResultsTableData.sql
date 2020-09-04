@@ -12,23 +12,39 @@ DECLARE @ReturnValue bit = 0;
             DECLARE @AuditTypeIdTest int;
             DECLARE @Cin VARCHAR(50);
 			DECLARE @Username varchar(50);
-			DECLARE @ResultIdsToRemove TABLE ([Id] INT NOT NULL UNIQUE);
-            
-			INSERT INTO @ResultIdsToRemove([Id])
-            SELECT [Id] 
-            FROM [dbo].[Result] 
-            WHERE [Sample_Cin] = @Cin AND [TestId] IN 
-            (
-                SELECT [TestId] FROM @TestsToRemove
-            )
+			--DECLARE @ResultIdsToRemove TABLE ([Id] INT NOT NULL UNIQUE);
+			DECLARE @TempTrackingHistory TABLE ([ResultId] INT NOT NULL, [StatusId] INT NOT NULL);
+
 
             -- TRACKING: Tests to remove
+
+			-- get the Cin from tests to remove
             SELECT TOP 1 @Cin =  [Sample_Cin] FROM @TestsToRemove;
+            --remove relavent tracking data and return removed result Ids
+
             DELETE FROM [dbo].[ResultTracking]
+			OUTPUT DELETED.[ResultId], 8 INTO @TempTrackingHistory
             WHERE [ResultId] IN 
             (
-                SELECT [Id] FROM @ResultIdsToRemove
+                SELECT [Id] 
+                FROM [dbo].[Result] 
+                WHERE [Sample_Cin] = @Cin AND [TestId] IN 
+                (
+                    SELECT [TestId] FROM @TestsToRemove
+                )
             );
+
+			--remove from tracking history
+			DELETE FROM [dbo].[TrackingHistory]
+			WHERE [ResultId]  IN 
+            (
+                SELECT [ResultId] FROM @TempTrackingHistory
+            );
+
+			--REFERENCE RANGE: remove reference ranges for tests to be removed.
+			DELETE FROM [dbo].[ResultReferenceRanges]
+			WHERE [ResultId] IN (SELECT [ResultId] FROM @TempTrackingHistory);
+
 			--remove tests requested for removal
 			DELETE FROM [dbo].[Result] 
 			WHERE 
@@ -36,8 +52,8 @@ DECLARE @ReturnValue bit = 0;
 			[Sample_Cin] = (SELECT TOP(1)[R].[Sample_Cin] FROM @TestsToRemove [R]);
 
 			-- TRACKING HISTORY
-			INSERT INTO [dbo].[TrackingHistory]([TrackingType],[ResultId],[StatusId])
-			SELECT 3,[Id],8 FROM @ResultIdsToRemove;
+			--INSERT INTO [dbo].[TrackingHistory]([TrackingType],[ResultId],[StatusId])
+			--SELECT 3,[Id],8 FROM @ResultIdsToRemove;
 
             -- AUDIT
 			SELECT @AuditTypeIdtest = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Test';

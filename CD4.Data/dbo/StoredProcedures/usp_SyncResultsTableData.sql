@@ -10,17 +10,17 @@ AS
 BEGIN
 SET NOCOUNT ON;
 SET XACT_ABORT ON;
-DECLARE @ReturnValue bit = 0;
     BEGIN TRANSACTION;
 		BEGIN TRY
 				DECLARE @AuditTypeIdTest int;
 				DECLARE @Username varchar(50);
-                DECLARE @TrackingData TABLE ([ResultId] int)
+                DECLARE @TrackingData TABLE ([Id] INT PRIMARY KEY IDENTITY(1,1), [ResultId] int)
                 DECLARE @Cin VARCHAR(50);
 				DECLARE @TempTrackingHistory TABLE ([ResultId] INT NOT NULL, [StatusId] INT NOT NULL);
 
                 -- TRACKING: Tests to remove
                 SELECT TOP 1 @Cin =  [Sample_Cin] FROM @TestsToRemove;
+
                 DELETE FROM [dbo].[ResultTracking]
 				OUTPUT DELETED.[ResultId], 8 INTO @TempTrackingHistory
                 WHERE [ResultId] IN 
@@ -32,6 +32,17 @@ DECLARE @ReturnValue bit = 0;
                         SELECT [TestId] FROM @TestsToRemove
                     )
                 );
+
+				--remove from tracking history
+				DELETE FROM [dbo].[TrackingHistory]
+				WHERE [ResultId]  IN 
+				(
+					SELECT [ResultId] FROM @TempTrackingHistory
+				);
+
+				--REFERENCE RANGE: remove reference ranges for tests to be removed.
+				DELETE FROM [dbo].[ResultReferenceRanges]
+				WHERE [ResultId] IN (SELECT [ResultId] FROM @TempTrackingHistory);
 
                 --SYNC
 				--remove tests requested for removal
@@ -45,15 +56,28 @@ DECLARE @ReturnValue bit = 0;
                 OUTPUT inserted.[Id] INTO @TrackingData
 				SELECT [I].[Sample_Cin], [I].[TestId] FROM @TestsToInsert [I];
 
+				-- REFERENCE RANGE: insert reference ranges for inserted tests
+				DECLARE @Counter INT;
+				DECLARE @MaxValue INT;
+				DECLARE @InsertedResultId int;
+				SELECT @MaxValue = COUNT([ResultId]) FROM @TrackingData;
+				SET @Counter=1
+				WHILE ( @Counter <= @MaxValue)
+				BEGIN
+					SELECT @InsertedResultId = [ResultId] FROM @TrackingData WHERE [Id] = @Counter;
+					EXEC [dbo].[usp_InsertResultReferenceRange] @ResultId = @InsertedResultId;
+					SET @Counter  = @Counter  + 1;
+				END
+
                 -- TRACKING: Added tests
                 INSERT INTO [dbo].[ResultTracking] ([ResultId],[StatusId],[UsersId])
-				OUTPUT INSERTED.[ResultId], 1 INTO @TempTrackingHistory
+				OUTPUT INSERTED.[ResultId], 1 INTO @TempTrackingHistory  -- temp tracking with status 1, 
 				SELECT [ResultId],1,@UserId FROM @TrackingData;
                 -- removed tests
 
 				-- TRACKING HISTORY
-				INSERT INTO [dbo].[TrackingHistory] ([TrackingType],[ResultId],[UsersId])
-				SELECT 3,[ResultId],@UserId FROM @TrackingData;
+				INSERT INTO [dbo].[TrackingHistory] ([TrackingType],[ResultId],[StatusId],[UsersId])
+				SELECT 3,[ResultId],1,@UserId FROM @TrackingData;
 
                 -- AUDIT
 				--audit trail, tests added
@@ -76,11 +100,9 @@ DECLARE @ReturnValue bit = 0;
 				FROM @TestsToRemove [I];
 
 				COMMIT TRANSACTION;
-				SET @ReturnValue = 1;
 		END TRY
 		BEGIN CATCH
 			ROLLBACK TRANSACTION;
 			THROW;
 		END CATCH;
-SELECT @ReturnValue;
 END;

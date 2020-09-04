@@ -350,6 +350,7 @@ INSERT INTO [dbo].[Profile_Tests]([ProfileId],[TestId]) VALUES
 
 --Preparing to insert patient
 DECLARE @MaleGenderId int;
+DECLARE @FeMaleGenderId int;
 DECLARE @SHithadhooId int;
 DECLARE @MaldivesCountryId int;
 
@@ -361,13 +362,13 @@ INSERT INTO [dbo].[Patient]
 ([FullName],[NidPp],[Birthdate],[GenderId],[AtollId],[CountryId],[Address],[PhoneNumber]) VALUES
 ('Ahmed Hussain','A1234567','19910214',@MaleGenderId,@SHithadhooId,@MaldivesCountryId,'Some Address','772342300');
 
-SELECT @MaleGenderId = [Id] FROM [dbo].[Gender] WHERE [Gender] = 'FEMALE';
+SELECT @FeMaleGenderId = [Id] FROM [dbo].[Gender] WHERE [Gender] = 'FEMALE';
 SELECT @SHithadhooId = [Id] FROM [dbo].[Atoll] WHERE [Atoll] = 'K' AND [Island] = 'MALE';
 SELECT @MaldivesCountryId = [Id] FROM [dbo].[Country] WHERE [Country] = 'BANGLADESHI';
 
 INSERT INTO [dbo].[Patient] 
 ([FullName],[NidPp],[Birthdate],[GenderId],[AtollId],[CountryId],[Address],[PhoneNumber]) VALUES
-('Aminath Hussain','A987654','19800214',@MaleGenderId,@SHithadhooId,@MaldivesCountryId,'Some Some Address','973465347');
+('Aminath Hussain','A987654','19800214',@FeMaleGenderId,@SHithadhooId,@MaldivesCountryId,'Some Some Address','973465347');
 
 
 --insert user: Bismillah.123!
@@ -411,6 +412,59 @@ VALUES
     ('AnalysisRequest'),
     ( 'Sample'),
     ('Test');
+
+-- REFEENCE RANGES SET UP
+-- reference type
+INSERT INTO [dbo].[ReferenceType] ([Description])
+VALUES
+    ('Normal'),
+    ('Attention'),
+    ('Pathology'),
+    ('Panic / High Pathology'),
+    ('Not Acceptable');
+
+DECLARE @NormalId int;
+DECLARE @AttentionId int;
+DECLARE @PathologyId int;
+DECLARE @PanicId int;
+DECLARE @NotAcceptableId int;
+
+-- get the reference type Ids
+SELECT @NormalId = [Id] FROM [dbo].[ReferenceType] WHERE [Description] = 'Normal';
+SELECT @AttentionId = [Id] FROM [dbo].[ReferenceType] WHERE [Description] = 'Attention';
+SELECT @PathologyId = [Id] FROM [dbo].[ReferenceType] WHERE [Description] = 'Pathology';
+SELECT @PanicId = [Id] FROM [dbo].[ReferenceType] WHERE [Description] = 'Panic / High Pathology';
+SELECT @NotAcceptableId = [Id] FROM [dbo].[ReferenceType] WHERE [Description] = 'Not Acceptable';
+
+-- insert reference range
+--haemoglobin, normal , female, age 0 to 73000 days
+--PCV, normal , female, age 0 to 73000 days
+INSERT INTO [dbo].[ReferenceRange]([TestId],[GenderId],[FromAgeDays],[ToAgeDays],[DeltaValidityIntervalDays],[BiasFactor],[DisplayNormalRange])
+VALUES
+    (@resultHb,@FeMaleGenderId,0,73000,0,0, '11 - 18.2 g/dL'),
+    (@resultPCV, @FeMaleGenderId,0,73000,0,0,'33.0 - 54.6 %');
+
+-- get reference range ids
+DECLARE @ReferenceRangeHgbId int;
+DECLARE @ReferenceRangePCVId int;
+
+SELECT @ReferenceRangeHgbId  =  [Id] FROM [ReferenceRange] WHERE [TestId] = @resultHb;
+SELECT @ReferenceRangePCVId  =  [Id] FROM [ReferenceRange] WHERE [TestId] = @resultPCV;
+
+-- insert referece data for Hb and PCV
+INSERT INTO [dbo].[ReferenceData] ([ReferenceRangeId],[ReferenceTypeId],[LowLimitValue],[HighLimitValue])
+VALUES
+    (@ReferenceRangeHgbId,@NormalId,11.0,18.2), -- HGB
+    (@ReferenceRangeHgbId,@AttentionId,9.0,20.2),
+    (@ReferenceRangeHgbId,@PathologyId,7.0,20.9),
+    (@ReferenceRangeHgbId,@PanicId,6.0,21.9),
+    (@ReferenceRangeHgbId,@NotAcceptableId,2.0,25.9),
+    (@ReferenceRangePCVId,@NormalId,33.0,54.6), -- PCV
+    (@ReferenceRangePCVId,@AttentionId,27.0,60.2),
+    (@ReferenceRangePCVId,@PathologyId,21.0,60.9),
+    (@ReferenceRangePCVId,@PanicId,18.0,65.7),
+    (@ReferenceRangePCVId,@NotAcceptableId,6.0,77.9);
+
 
 ----Get a patient Id
 --DECLARE @PatientId int;

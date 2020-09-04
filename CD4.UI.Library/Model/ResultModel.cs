@@ -22,6 +22,8 @@ namespace CD4.UI.Library.Model
         private string mask;
         private int statusIconName;
         private string unit;
+        private string _referenceCode;
+        private bool _isDeltaOk;
 
         #endregion
 
@@ -143,11 +145,31 @@ namespace CD4.UI.Library.Model
         {
             get => unit; set
             {
-                if (unit==value)
+                if (unit == value)
                 {
                     return;
                 }
                 unit = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string ReferenceCode
+        {
+            get => _referenceCode; set
+            {
+                if (_referenceCode == value) return;
+                _referenceCode = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool IsDeltaOk
+        {
+            get => _isDeltaOk; set
+            {
+                if (_isDeltaOk == value) return;
+                _isDeltaOk = value;
                 OnPropertyChanged();
             }
         }

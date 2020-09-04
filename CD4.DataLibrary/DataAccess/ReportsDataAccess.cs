@@ -64,7 +64,8 @@ namespace CD4.DataLibrary.DataAccess
                      Discipline = assay.Discipline,
                      Cin  = assay.Cin,
                      Result = assay.Result,
-                     Unit = assay.Unit
+                     Unit = assay.Unit,
+                     DisplayNormalRange = assay.DisplayNormalRange
                 });
             }
 

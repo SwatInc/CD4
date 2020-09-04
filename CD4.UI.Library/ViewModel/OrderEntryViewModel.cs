@@ -22,8 +22,8 @@ namespace CD4.UI.Library.ViewModel
         #region Private Properties
         private CultureInfo cultureInfo = new CultureInfo("en-US");
         private string cin;
-        private DateTime? sampleCollectionDate;
-        private DateTime? sampleReceivedDate;
+        private DateTimeOffset? sampleCollectionDate;
+        private DateTimeOffset? sampleReceivedDate;
         private string nidPp;
         private string fullname;
         private string age;
@@ -133,7 +133,7 @@ namespace CD4.UI.Library.ViewModel
                 //OnPropertyChanged(); called elsewhere
             }
         }
-        public DateTime? SampleCollectionDate
+        public DateTimeOffset? SampleCollectionDate
         {
             get => sampleCollectionDate; set
             {
@@ -142,7 +142,7 @@ namespace CD4.UI.Library.ViewModel
                 OnPropertyChanged();
             }
         }
-        public DateTime? SampleReceivedDate
+        public DateTimeOffset? SampleReceivedDate
         {
             get => sampleReceivedDate; set
             {
