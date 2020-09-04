@@ -103,7 +103,8 @@ namespace CD4.UI.View
                     Discipline = assay.Discipline,
                     Assay = assay.Assay,
                     Result = assay.Result,
-                    Unit = assay.Unit
+                    Unit = assay.Unit,
+                    DisplayNormalRange = assay.DisplayNormalRange
                 });
             }
 
@@ -216,6 +217,7 @@ namespace CD4.UI.View
         public string Assay { get; set; }
         public string Result { get; set; }
         public string Unit { get; set; }
+        public string DisplayNormalRange { get; set; }
     }
 
     public class Patient
