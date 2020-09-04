@@ -439,10 +439,10 @@ SELECT @NotAcceptableId = [Id] FROM [dbo].[ReferenceType] WHERE [Description] = 
 -- insert reference range
 --haemoglobin, normal , female, age 0 to 73000 days
 --PCV, normal , female, age 0 to 73000 days
-INSERT INTO [dbo].[ReferenceRange]([TestId],[GenderId],[FromAgeDays],[ToAgeDays],[DeltaValidityIntervalDays],[BiasFactor])
+INSERT INTO [dbo].[ReferenceRange]([TestId],[GenderId],[FromAgeDays],[ToAgeDays],[DeltaValidityIntervalDays],[BiasFactor],[DisplayNormalRange])
 VALUES
-    (@resultHb,@FeMaleGenderId,0,73000,0,0),
-    (@resultPCV, @FeMaleGenderId,0,73000,0,0);
+    (@resultHb,@FeMaleGenderId,0,73000,0,0, '11 - 18.2 g/dL'),
+    (@resultPCV, @FeMaleGenderId,0,73000,0,0,'33.0 - 54.6 %');
 
 -- get reference range ids
 DECLARE @ReferenceRangeHgbId int;
