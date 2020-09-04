@@ -79,7 +79,7 @@ BEGIN
     FROM [dbo].[ReferenceRange]
     WHERE [TestId] = @TestId AND 
           [GenderId] = @GenderId AND
-          ([FromAgeDays] >= @AgeInDays AND [ToAgeDays] <= @AgeInDays);
+          (@AgeInDays >= [FromAgeDays] AND [ToAgeDays] >= @AgeInDays);
 
     INSERT INTO [dbo].[ResultReferenceRanges]
                ([ResultId]
