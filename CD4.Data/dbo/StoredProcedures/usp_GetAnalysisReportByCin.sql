@@ -28,7 +28,7 @@ AS
 				 ([W].[Result] IS NOT NULL OR [W].[Result] <> '') AND
 				  [RT].[StatusId] = 5;
 
-		SELECT [Cin],[Discipline],[Assay],[Result],[Unit] FROM @ReportResult;
+		SELECT [Cin],[Discipline],[Assay],[Result],[Unit],[DisplayNormalRange] FROM @ReportResult;
 	
 		SELECT 
 		DISTINCT([R].[NidPp])
