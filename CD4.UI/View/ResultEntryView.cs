@@ -35,10 +35,43 @@ namespace CD4.UI.View
             simpleButtonLoadWorksheet.Click += LoadWorkSheet;
             _viewModel.RequestDataRefreshed += RefreshViewData;
             _viewModel.PushingMessages += _viewModel_PushingMessages;
+            _viewModel.PropertyChanged += _viewModel_PropertyChanged;
             gridViewSamples.PopupMenuShowing += ShowSamplePopupMenu;
             gridViewTests.PopupMenuShowing += ShowTestPopupMenu;
             this.KeyUp += ResultEntryView_KeyUp;
             lookUpEditSampleStatusFilter.EditValueChanged += LookUpEditSampleStatusFilter_EditValueChanged;
+        }
+
+        /// <summary>
+        /// manual UI reaction to view model changes.
+        /// </summary>
+        private void _viewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            //handle GridControlTest datasource changes
+            if (e.PropertyName == nameof(_viewModel.GridTestActiveDatasource))
+            {
+                ChangeGridControlTestDatasource(_viewModel.GridTestActiveDatasource);
+            }
+        }
+        /// <summary>
+        /// Changes the datasource of gridControlTest
+        /// </summary>
+        /// <param name="gridTestActiveDatasource">Active data source name</param>
+        private void ChangeGridControlTestDatasource(ResultEntryViewModel.GridControlTestActiveDatasource gridTestActiveDatasource)
+        {
+            switch (gridTestActiveDatasource)
+            {
+                case ResultEntryViewModel.GridControlTestActiveDatasource.Tests:
+                    gridViewTests.Columns.Clear();
+                    gridControlTests.DataSource = _viewModel.SelectedResultData;
+                    break;
+                case ResultEntryViewModel.GridControlTestActiveDatasource.AuditTrail:
+                    gridViewTests.Columns.Clear();
+                    gridControlTests.DataSource = _viewModel.SampleAuditTrail;
+                    break;
+                default:
+                    break;
+            }
         }
 
         /// <summary>
@@ -263,7 +296,29 @@ namespace CD4.UI.View
             var menuItems = new List<DXMenuItem>();
             menuItems.Add(new DXMenuItem("Validate Sample [ F7 ]", new EventHandler(OnValidateSampleClick)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Reject Sample [ Shift+F11 ]", new EventHandler(OnRejectSampleClick)) { Tag = new RowInfo(view, rowHandle) });
+            menuItems.Add(new DXMenuItem("Sample Audit Trail [ F12 ]", new EventHandler(OnSampleAuditTrailClick)) { Tag = new RowInfo(view, rowHandle) });
             return menuItems;
+        }
+
+        /// <summary>
+        /// Fetches and displays sample audit trail on GridControlTests
+        /// </summary>
+        private async void OnSampleAuditTrailClick(object sender, EventArgs e)
+        {
+            //get selected item on grid
+            var sample = GetSampleForMenu(sender, e);
+            try
+            {
+                //pass to view model to fetch auditTrail
+                await _viewModel.GetSampleAuditTrailByCinAsync(sample.Cin);
+                //set the audit trail as the datasource on the grid: GridControlTest 
+                _viewModel.GridTestActiveDatasource = ResultEntryViewModel.GridControlTestActiveDatasource.AuditTrail;
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+
         }
 
         /// <summary>

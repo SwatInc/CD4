@@ -268,10 +268,9 @@ namespace CD4.UI.View
             this.progressPanelSamples.Caption = "Please Wait";
             this.progressPanelSamples.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.progressPanelSamples.Description = "Loading samples ...";
-            this.progressPanelSamples.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.progressPanelSamples.Location = new System.Drawing.Point(0, 0);
+            this.progressPanelSamples.Location = new System.Drawing.Point(222, 161);
             this.progressPanelSamples.Name = "progressPanelSamples";
-            this.progressPanelSamples.Size = new System.Drawing.Size(400, 224);
+            this.progressPanelSamples.Size = new System.Drawing.Size(178, 63);
             this.progressPanelSamples.TabIndex = 2;
             // 
             // gridControlSamples
@@ -350,10 +349,9 @@ namespace CD4.UI.View
             this.progressPanelTests.Caption = "Please Wait";
             this.progressPanelTests.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.progressPanelTests.Description = "Loading tests ...";
-            this.progressPanelTests.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.progressPanelTests.Location = new System.Drawing.Point(0, 0);
+            this.progressPanelTests.Location = new System.Drawing.Point(230, 161);
             this.progressPanelTests.Name = "progressPanelTests";
-            this.progressPanelTests.Size = new System.Drawing.Size(434, 224);
+            this.progressPanelTests.Size = new System.Drawing.Size(204, 63);
             this.progressPanelTests.TabIndex = 3;
             // 
             // gridControlTests

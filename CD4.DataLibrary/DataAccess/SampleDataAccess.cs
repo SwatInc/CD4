@@ -15,7 +15,7 @@ namespace CD4.DataLibrary.DataAccess
             return await SelectInsertOrUpdateAsync<bool, SampleUpdateDatabaseModel>(storedProcedure, sample);
         }
 
-        public async Task<List<AuditTrailModel>> GetAuditTrailByCin(string cin)
+        public async Task<List<AuditTrailModel>> GetAuditTrailByCinAsync(string cin)
         {
             var storedProcedure = "[dbo].[usp_GetAuditTrailByCin]";
             var parameter = new { Cin = cin };
