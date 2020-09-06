@@ -14,5 +14,12 @@ namespace CD4.DataLibrary.DataAccess
             var storedProcedure = "[dbo].[usp_UpdateSampleWithCin]";
             return await SelectInsertOrUpdateAsync<bool, SampleUpdateDatabaseModel>(storedProcedure, sample);
         }
+
+        public async Task<List<AuditTrailModel>> GetAuditTrailByCinAsync(string cin)
+        {
+            var storedProcedure = "[dbo].[usp_GetAuditTrailByCin]";
+            var parameter = new { Cin = cin };
+            return  await LoadDataWithParameterAsync<AuditTrailModel, dynamic>(storedProcedure, parameter);
+        }
     }
 }

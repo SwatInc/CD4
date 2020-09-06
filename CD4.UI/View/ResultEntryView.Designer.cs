@@ -47,27 +47,17 @@ namespace CD4.UI.View
             this.progressPanelSamples = new DevExpress.XtraWaitForm.ProgressPanel();
             this.gridControlSamples = new DevExpress.XtraGrid.GridControl();
             this.gridViewSamples = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumnCin = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReceivedDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnCollectedDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnSequence = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnSampleStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             this.progressPanelTests = new DevExpress.XtraWaitForm.ProgressPanel();
             this.gridControlTests = new DevExpress.XtraGrid.GridControl();
             this.gridViewTests = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumnTestName = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnResult = new DevExpress.XtraGrid.Columns.GridColumn();
             this.repositoryItemLookUpEditCodifiedPhrases = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
-            this.gridColumnStatusIcon = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnUnit = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReferenceCode = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnIsDeltaOk = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControlFunctions = new DevExpress.XtraEditors.GroupControl();
             this.lookUpEditSampleStatusFilter = new DevExpress.XtraEditors.LookUpEdit();
             this.simpleButtonLoadWorksheet = new DevExpress.XtraEditors.SimpleButton();
             this.label1 = new System.Windows.Forms.Label();
             this.dateEditLoadWorksheetFrom = new DevExpress.XtraEditors.DateEdit();
             this.simpleButtonReport = new DevExpress.XtraEditors.SimpleButton();
+            this.gridColumnSampleStatus = new DevExpress.XtraGrid.Columns.GridColumn();
             labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).BeginInit();
             this.splitContainerControlPatient.SuspendLayout();
@@ -268,10 +258,9 @@ namespace CD4.UI.View
             this.progressPanelSamples.Caption = "Please Wait";
             this.progressPanelSamples.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.progressPanelSamples.Description = "Loading samples ...";
-            this.progressPanelSamples.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.progressPanelSamples.Location = new System.Drawing.Point(0, 0);
+            this.progressPanelSamples.Location = new System.Drawing.Point(111, 90);
             this.progressPanelSamples.Name = "progressPanelSamples";
-            this.progressPanelSamples.Size = new System.Drawing.Size(400, 224);
+            this.progressPanelSamples.Size = new System.Drawing.Size(178, 63);
             this.progressPanelSamples.TabIndex = 2;
             // 
             // gridControlSamples
@@ -287,60 +276,9 @@ namespace CD4.UI.View
             // 
             // gridViewSamples
             // 
-            this.gridViewSamples.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumnCin,
-            this.gridColumnReceivedDate,
-            this.gridColumnCollectedDate,
-            this.gridColumnSequence,
-            this.gridColumnSampleStatus});
             this.gridViewSamples.GridControl = this.gridControlSamples;
             this.gridViewSamples.Name = "gridViewSamples";
             this.gridViewSamples.OptionsBehavior.Editable = false;
-            // 
-            // gridColumnCin
-            // 
-            this.gridColumnCin.Caption = "CIN";
-            this.gridColumnCin.FieldName = "Cin";
-            this.gridColumnCin.Name = "gridColumnCin";
-            this.gridColumnCin.Visible = true;
-            this.gridColumnCin.VisibleIndex = 2;
-            this.gridColumnCin.Width = 100;
-            // 
-            // gridColumnReceivedDate
-            // 
-            this.gridColumnReceivedDate.Caption = "Rec. Date";
-            this.gridColumnReceivedDate.FieldName = "ReceivedDate";
-            this.gridColumnReceivedDate.Name = "gridColumnReceivedDate";
-            this.gridColumnReceivedDate.Visible = true;
-            this.gridColumnReceivedDate.VisibleIndex = 3;
-            this.gridColumnReceivedDate.Width = 100;
-            // 
-            // gridColumnCollectedDate
-            // 
-            this.gridColumnCollectedDate.Caption = "Col. Date";
-            this.gridColumnCollectedDate.FieldName = "CollectionDate";
-            this.gridColumnCollectedDate.Name = "gridColumnCollectedDate";
-            this.gridColumnCollectedDate.Visible = true;
-            this.gridColumnCollectedDate.VisibleIndex = 4;
-            this.gridColumnCollectedDate.Width = 110;
-            // 
-            // gridColumnSequence
-            // 
-            this.gridColumnSequence.Caption = "Seq.";
-            this.gridColumnSequence.FieldName = "Id";
-            this.gridColumnSequence.Name = "gridColumnSequence";
-            this.gridColumnSequence.Visible = true;
-            this.gridColumnSequence.VisibleIndex = 0;
-            this.gridColumnSequence.Width = 40;
-            // 
-            // gridColumnSampleStatus
-            // 
-            this.gridColumnSampleStatus.Caption = " ";
-            this.gridColumnSampleStatus.FieldName = "StatusIcon";
-            this.gridColumnSampleStatus.Name = "gridColumnSampleStatus";
-            this.gridColumnSampleStatus.Visible = true;
-            this.gridColumnSampleStatus.VisibleIndex = 1;
-            this.gridColumnSampleStatus.Width = 32;
             // 
             // progressPanelTests
             // 
@@ -350,10 +288,9 @@ namespace CD4.UI.View
             this.progressPanelTests.Caption = "Please Wait";
             this.progressPanelTests.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.progressPanelTests.Description = "Loading tests ...";
-            this.progressPanelTests.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.progressPanelTests.Location = new System.Drawing.Point(0, 0);
+            this.progressPanelTests.Location = new System.Drawing.Point(134, 90);
             this.progressPanelTests.Name = "progressPanelTests";
-            this.progressPanelTests.Size = new System.Drawing.Size(434, 224);
+            this.progressPanelTests.Size = new System.Drawing.Size(204, 63);
             this.progressPanelTests.TabIndex = 3;
             // 
             // gridControlTests
@@ -371,36 +308,9 @@ namespace CD4.UI.View
             // 
             // gridViewTests
             // 
-            this.gridViewTests.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
-            this.gridColumnTestName,
-            this.gridColumnResult,
-            this.gridColumnStatusIcon,
-            this.gridColumnUnit,
-            this.gridColumnReferenceCode,
-            this.gridColumnIsDeltaOk});
             this.gridViewTests.GridControl = this.gridControlTests;
             this.gridViewTests.Name = "gridViewTests";
             this.gridViewTests.OptionsView.ShowGroupPanel = false;
-            // 
-            // gridColumnTestName
-            // 
-            this.gridColumnTestName.Caption = "Test";
-            this.gridColumnTestName.FieldName = "Test";
-            this.gridColumnTestName.Name = "gridColumnTestName";
-            this.gridColumnTestName.OptionsColumn.AllowEdit = false;
-            this.gridColumnTestName.Visible = true;
-            this.gridColumnTestName.VisibleIndex = 0;
-            this.gridColumnTestName.Width = 109;
-            // 
-            // gridColumnResult
-            // 
-            this.gridColumnResult.Caption = "Result";
-            this.gridColumnResult.ColumnEdit = this.repositoryItemLookUpEditCodifiedPhrases;
-            this.gridColumnResult.FieldName = "Result";
-            this.gridColumnResult.Name = "gridColumnResult";
-            this.gridColumnResult.Visible = true;
-            this.gridColumnResult.VisibleIndex = 2;
-            this.gridColumnResult.Width = 101;
             // 
             // repositoryItemLookUpEditCodifiedPhrases
             // 
@@ -414,37 +324,6 @@ namespace CD4.UI.View
             this.repositoryItemLookUpEditCodifiedPhrases.NullText = "";
             this.repositoryItemLookUpEditCodifiedPhrases.ShowHeader = false;
             this.repositoryItemLookUpEditCodifiedPhrases.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
-            // 
-            // gridColumnStatusIcon
-            // 
-            this.gridColumnStatusIcon.Caption = " ";
-            this.gridColumnStatusIcon.FieldName = "StatusIcon";
-            this.gridColumnStatusIcon.Name = "gridColumnStatusIcon";
-            this.gridColumnStatusIcon.Visible = true;
-            this.gridColumnStatusIcon.VisibleIndex = 1;
-            this.gridColumnStatusIcon.Width = 36;
-            // 
-            // gridColumnUnit
-            // 
-            this.gridColumnUnit.Caption = "Unit";
-            this.gridColumnUnit.FieldName = "Unit";
-            this.gridColumnUnit.Name = "gridColumnUnit";
-            this.gridColumnUnit.OptionsColumn.AllowEdit = false;
-            this.gridColumnUnit.Visible = true;
-            this.gridColumnUnit.VisibleIndex = 3;
-            this.gridColumnUnit.Width = 170;
-            // 
-            // gridColumnReferenceCode
-            // 
-            this.gridColumnReferenceCode.Caption = "Ref. Code";
-            this.gridColumnReferenceCode.FieldName = "ReferenceCode";
-            this.gridColumnReferenceCode.Name = "gridColumnReferenceCode";
-            // 
-            // gridColumnIsDeltaOk
-            // 
-            this.gridColumnIsDeltaOk.Caption = "Is Delta OK";
-            this.gridColumnIsDeltaOk.FieldName = "IsDeltaOk";
-            this.gridColumnIsDeltaOk.Name = "gridColumnIsDeltaOk";
             // 
             // groupControlFunctions
             // 
@@ -513,6 +392,10 @@ namespace CD4.UI.View
             this.simpleButtonReport.TabIndex = 0;
             this.simpleButtonReport.Text = "Report";
             // 
+            // gridColumnSampleStatus
+            // 
+            this.gridColumnSampleStatus.Name = "gridColumnSampleStatus";
+            // 
             // ResultEntryView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -559,12 +442,6 @@ namespace CD4.UI.View
         private DevExpress.XtraEditors.GroupControl groupControlSelectedPatientRequestClinicalDetailsArea;
         private DevExpress.XtraEditors.GroupControl groupControlFunctions;
         private DevExpress.XtraEditors.ListBoxControl listBoxControlClinicalDetails;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnCin;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnReceivedDate;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnCollectedDate;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnTestName;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnResult;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnSequence;
         private DevExpress.XtraEditors.LabelControl labelControlNationalId;
         private DevExpress.XtraEditors.LabelControl labelControlAgeSex;
         private DevExpress.XtraEditors.LabelControl labelControlBirthdate;
@@ -581,12 +458,8 @@ namespace CD4.UI.View
         private SimpleButton simpleButtonLoadWorksheet;
         private LookUpEdit lookUpEditSampleStatusFilter;
         private System.Windows.Forms.Label label1;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnStatusIcon;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnSampleStatus;
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelSamples;
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelTests;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnUnit;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnReferenceCode;
-        private DevExpress.XtraGrid.Columns.GridColumn gridColumnIsDeltaOk;
     }
 }

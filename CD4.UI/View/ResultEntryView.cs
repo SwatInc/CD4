@@ -1,9 +1,12 @@
 ﻿using CD4.UI.Library.Model;
 using CD4.UI.Library.ViewModel;
+using CD4.UI.UiSpecificModels;
 using DevExpress.Utils.Menu;
 using DevExpress.XtraEditors;
+using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -22,6 +25,10 @@ namespace CD4.UI.View
         public ResultEntryView(IResultEntryViewModel viewModel)
         {
             InitializeComponent();
+            //Initialize grid columns
+            SetTestGrid_Columns(ResultEntryViewModel.GridControlTestActiveDatasource.Tests);
+            SetSampleGrid_SampleColumns();
+
             _viewModel = viewModel;
             InitializeBinding();
 
@@ -35,10 +42,115 @@ namespace CD4.UI.View
             simpleButtonLoadWorksheet.Click += LoadWorkSheet;
             _viewModel.RequestDataRefreshed += RefreshViewData;
             _viewModel.PushingMessages += _viewModel_PushingMessages;
+            _viewModel.PropertyChanged += _viewModel_PropertyChanged;
             gridViewSamples.PopupMenuShowing += ShowSamplePopupMenu;
             gridViewTests.PopupMenuShowing += ShowTestPopupMenu;
             this.KeyUp += ResultEntryView_KeyUp;
             lookUpEditSampleStatusFilter.EditValueChanged += LookUpEditSampleStatusFilter_EditValueChanged;
+        }
+
+        /// <summary>
+        /// manual UI reaction to view model changes.
+        /// </summary>
+        private void _viewModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            //handle GridControlTest datasource changes
+            if (e.PropertyName == nameof(_viewModel.GridTestActiveDatasource))
+            {
+                ChangeGridControlTestDatasource(_viewModel.GridTestActiveDatasource);
+            }
+        }
+        /// <summary>
+        /// Changes the datasource of gridControlTest
+        /// </summary>
+        /// <param name="gridTestActiveDatasource">Active data source name</param>
+        private void ChangeGridControlTestDatasource(ResultEntryViewModel.GridControlTestActiveDatasource gridTestActiveDatasource)
+        {
+            switch (gridTestActiveDatasource)
+            {
+                case ResultEntryViewModel.GridControlTestActiveDatasource.Tests:
+                    SetTestGrid_Columns(ResultEntryViewModel.GridControlTestActiveDatasource.Tests);
+                    gridControlTests.DataSource = _viewModel.SelectedResultData;
+                    break;
+                case ResultEntryViewModel.GridControlTestActiveDatasource.AuditTrail:
+                    SetTestGrid_Columns(ResultEntryViewModel.GridControlTestActiveDatasource.AuditTrail);
+                    gridControlTests.DataSource = _viewModel.SampleAuditTrail;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void SetSampleGrid_SampleColumns()
+        {
+            //clear any existing columns
+            gridViewSamples.Columns.Clear();
+            var gridColumns = JsonConvert.DeserializeObject<List<GridColumnModel>>(Properties.Resources.SampleColumns);
+
+            foreach (var column in gridColumns)
+            {
+                var sampleColumn = new GridColumn
+                {
+                    Caption = column.Caption,
+                    FieldName = column.FieldName,
+                    Visible = column.Visible
+                };
+                sampleColumn.OptionsColumn.AllowEdit = column.AllowEdit;
+
+                if (sampleColumn.Visible)
+                {
+                    sampleColumn.VisibleIndex = column.VisibleIndex;
+                    sampleColumn.Width = column.Width;
+                }
+
+                gridViewSamples.Columns.Add(sampleColumn);
+            }
+        }
+
+        /// <summary>
+        /// Clears the gridViewTests, loads column definition for gridViewTests from config and add the columns to grid
+        /// </summary>
+        private void SetTestGrid_Columns(ResultEntryViewModel.GridControlTestActiveDatasource columnType)
+        {
+            //clear any existing columns
+            gridViewTests.Columns.Clear();
+            //get result columns data from settings
+            List<GridColumnModel> gridColumns = new List<GridColumnModel>();
+            switch (columnType)
+            {
+                case ResultEntryViewModel.GridControlTestActiveDatasource.Tests:
+                    gridColumns = JsonConvert.DeserializeObject<List<GridColumnModel>>(Properties.Resources.TestColumns);
+                    break;
+                case ResultEntryViewModel.GridControlTestActiveDatasource.AuditTrail:
+                    gridColumns = JsonConvert.DeserializeObject<List<GridColumnModel>>(Properties.Resources.AuditColumns);
+                    break;
+                default:
+                    break;
+            }
+            foreach (var column in gridColumns)
+            {
+                var sampleColumn = new GridColumn
+                {
+                    Caption = column.Caption,
+                    FieldName = column.FieldName,
+                    Visible = column.Visible,
+                    Name = column.Name
+                };
+                sampleColumn.OptionsColumn.AllowEdit = column.AllowEdit;
+
+                if (sampleColumn.Visible)
+                {
+                    sampleColumn.VisibleIndex = column.VisibleIndex;
+                    sampleColumn.Width = column.Width;
+                }
+
+                if (sampleColumn.Name == "gridColumnResult")
+                {
+                    sampleColumn.ColumnEdit = this.repositoryItemLookUpEditCodifiedPhrases;
+                }
+
+                gridViewTests.Columns.Add(sampleColumn);
+            }
         }
 
         /// <summary>
@@ -117,10 +229,12 @@ namespace CD4.UI.View
                     //Ignore if no row is selected
                     if (selectedRowhandle >=0)
                     {
+                        //if test not displayed.., return
+                        if (_viewModel.GridTestActiveDatasource != ResultEntryViewModel.GridControlTestActiveDatasource.Tests) return;
+
                         //Get the selected sample.
                         var sampleToValidate = (RequestSampleModel)gridViewSamples.GetRow(selectedRowhandle);
                         await _viewModel.ValidateSample(sampleToValidate);
-
                     }
                     break;
                 case Keys.F8:
@@ -133,12 +247,24 @@ namespace CD4.UI.View
                     //Ignore if no row is selected.
                     if (selectedRowHandle >= 0)
                     {
+                        //if test not displayed.., return
+                        if (_viewModel.GridTestActiveDatasource != ResultEntryViewModel.GridControlTestActiveDatasource.Tests) return;
                         //Get selected result model
                         var resultToValidate = (ResultModel)gridViewTests.GetRow(selectedRowHandle);
                         await _viewModel.ValidateTest(resultToValidate);
                     }
                     break;
                 case Keys.F12:
+                    //if tests for selected sample are not displayed...
+                    if (_viewModel.GridTestActiveDatasource != ResultEntryViewModel.GridControlTestActiveDatasource.Tests)
+                    {
+                        //Toggle view to display tests and return
+                        _viewModel.GridTestActiveDatasource = ResultEntryViewModel.GridControlTestActiveDatasource.Tests;
+                        return;
+                    }
+                    //display audit trail for selected sample
+                    var senderItem = new DXMenuItem() { Tag = new RowInfo(gridViewSamples, gridViewSamples.FocusedRowHandle) };
+                    OnSampleAuditTrailClick(senderItem, EventArgs.Empty);
                     break;
                 case Keys.F13:
                     break;
@@ -263,7 +389,29 @@ namespace CD4.UI.View
             var menuItems = new List<DXMenuItem>();
             menuItems.Add(new DXMenuItem("Validate Sample [ F7 ]", new EventHandler(OnValidateSampleClick)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Reject Sample [ Shift+F11 ]", new EventHandler(OnRejectSampleClick)) { Tag = new RowInfo(view, rowHandle) });
+            menuItems.Add(new DXMenuItem("Sample Audit Trail [ F12 ]", new EventHandler(OnSampleAuditTrailClick)) { Tag = new RowInfo(view, rowHandle) });
             return menuItems;
+        }
+
+        /// <summary>
+        /// Fetches and displays sample audit trail on GridControlTests
+        /// </summary>
+        private async void OnSampleAuditTrailClick(object sender, EventArgs e)
+        {
+            //get selected item on grid
+            var sample = GetSampleForMenu(sender, e);
+            try
+            {
+                //pass to view model to fetch auditTrail
+                await _viewModel.GetSampleAuditTrailByCinAsync(sample.Cin);
+                //set the audit trail as the datasource on the grid: GridControlTest 
+                _viewModel.GridTestActiveDatasource = ResultEntryViewModel.GridControlTestActiveDatasource.AuditTrail;
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+
         }
 
         /// <summary>
@@ -424,12 +572,21 @@ namespace CD4.UI.View
 
         private async void SelectedTestChanged(object sender, FocusedRowChangedEventArgs e)
         {
+            //if dsplayed data on grid is not tests... return
+            if (_viewModel.GridTestActiveDatasource != ResultEntryViewModel.GridControlTestActiveDatasource.Tests) return;
             var selectedTest = (ResultModel)gridViewTests.GetRow(e.FocusedRowHandle);
             await _viewModel.SetTestCodifiedPhrasesAsync(selectedTest);
         }
 
         private async void SelectedSampleChanged(object sender, FocusedRowChangedEventArgs e)
         {
+            //if tests data is not displayed on tests grid...
+            if (_viewModel.GridTestActiveDatasource != ResultEntryViewModel.GridControlTestActiveDatasource.Tests)
+            {
+                //display tests data on the grid
+                _viewModel.GridTestActiveDatasource = ResultEntryViewModel.GridControlTestActiveDatasource.Tests;
+            }
+
             var selectedSample = (RequestSampleModel)gridViewSamples.GetRow(e.FocusedRowHandle);
             await _viewModel.SetSelectedSampleAsync(selectedSample);
         }

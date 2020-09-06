@@ -166,6 +166,7 @@
     <Build Include="dbo\StoredProcedures\usp_GetSpecifiedHighReferenceLimitValue.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetSpecifiedLowReferenceLimitValue.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetResultReferenceRangeByResultId.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetAuditTrailByCin.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />

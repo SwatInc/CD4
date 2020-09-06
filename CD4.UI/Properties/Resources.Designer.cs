@@ -61,12 +61,39 @@ namespace CD4.UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to [{&quot;Caption&quot;:&quot;Event Time&quot;,&quot;FieldName&quot;:&quot;CreatedAt&quot;,&quot;AllowEdit&quot;:false,&quot;Name&quot;:&quot;gridColumnCreatedAt&quot;,&quot;Visible&quot;:true,&quot;VisibleIndex&quot;:0,&quot;Width&quot;:110},{&quot;Caption&quot;:&quot;Event Details&quot;,&quot;FieldName&quot;:&quot;Details&quot;,&quot;AllowEdit&quot;:false,&quot;Name&quot;:&quot;gridColumnDetails&quot;,&quot;Visible&quot;:true,&quot;VisibleIndex&quot;:1,&quot;Width&quot;:300},{&quot;Caption&quot;:&quot;CIN&quot;,&quot;FieldName&quot;:&quot;Cin&quot;,&quot;AllowEdit&quot;:false,&quot;Name&quot;:&quot;gridColumnCinAudit&quot;,&quot;Visible&quot;:true,&quot;VisibleIndex&quot;:2,&quot;Width&quot;:50}].
+        /// </summary>
+        internal static string AuditColumns {
+            get {
+                return ResourceManager.GetString("AuditColumns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
         /// </summary>
         internal static DevExpress.Utils.Svg.SvgImage marker {
             get {
                 object obj = ResourceManager.GetObject("marker", resourceCulture);
                 return ((DevExpress.Utils.Svg.SvgImage)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [{&quot;Caption&quot;:&quot;Seq.&quot;,&quot;FieldName&quot;:&quot;Id&quot;,&quot;AllowEdit&quot;:false,&quot;Name&quot;:&quot;gridColumnSequence&quot;,&quot;Visible&quot;:true,&quot;VisibleIndex&quot;:0,&quot;Width&quot;:40},{&quot;Caption&quot;:&quot; &quot;,&quot;FieldName&quot;:&quot;StatusIcon&quot;,&quot;AllowEdit&quot;:false,&quot;Name&quot;:&quot;gridColumnSampleStatus&quot;,&quot;Visible&quot;:true,&quot;VisibleIndex&quot;:1,&quot;Width&quot;:32},{&quot;Caption&quot;:&quot;CIN&quot;,&quot;FieldName&quot;:&quot;Cin&quot;,&quot;AllowEdit&quot;:false,&quot;Name&quot;:&quot;gridColumnCin&quot;,&quot;Visible&quot;:true,&quot;VisibleIndex&quot;:2,&quot;Width&quot;:100},{&quot;Caption&quot;:&quot;Rec. Date&quot;,&quot;FieldName&quot;:&quot;ReceivedDate&quot;,&quot;AllowEdit&quot;:false,&quot;Name&quot;:&quot;gridColumnReceivedDate&quot;,&quot;Visible&quot;:true,&quot;VisibleIndex&quot;:3 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string SampleColumns {
+            get {
+                return ResourceManager.GetString("SampleColumns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [{&quot;Caption&quot;:&quot;Test&quot;,&quot;FieldName&quot;:&quot;Test&quot;,&quot;AllowEdit&quot;:false,&quot;Name&quot;:&quot;gridColumnTestName&quot;,&quot;Visible&quot;:true,&quot;VisibleIndex&quot;:0,&quot;Width&quot;:109},{&quot;Caption&quot;:&quot; &quot;,&quot;FieldName&quot;:&quot;StatusIcon&quot;,&quot;AllowEdit&quot;:false,&quot;Name&quot;:&quot;gridColumnStatusIcon&quot;,&quot;Visible&quot;:true,&quot;VisibleIndex&quot;:1,&quot;Width&quot;:36},{&quot;Caption&quot;:&quot;Result&quot;,&quot;FieldName&quot;:&quot;Result&quot;,&quot;AllowEdit&quot;:true,&quot;Name&quot;:&quot;gridColumnResult&quot;,&quot;Visible&quot;:true,&quot;VisibleIndex&quot;:2,&quot;Width&quot;:109},{&quot;Caption&quot;:&quot;Unit&quot;,&quot;FieldName&quot;:&quot;Unit&quot;,&quot;AllowEdit&quot;:false,&quot;Name&quot;:&quot;gridColumnUnit&quot;,&quot;Visible&quot;:true,&quot;VisibleIndex&quot;:3,&quot;Width&quot;:170 [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string TestColumns {
+            get {
+                return ResourceManager.GetString("TestColumns", resourceCulture);
             }
         }
     }

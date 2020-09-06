@@ -24,10 +24,14 @@ namespace CD4.UI.Library.ViewModel
         StatusModel SelectedStatus { get; set; }
         bool IsloadWorkSheetButtonEnabled { get; set; }
         bool IsLoadingAnimationEnabled { get; set; }
+        ResultEntryViewModel.GridControlTestActiveDatasource GridTestActiveDatasource { get; set; }
+        List<AuditTrailModel> SampleAuditTrail { get; set; }
 
         event PropertyChangedEventHandler PropertyChanged;
         event EventHandler RequestDataRefreshed;
         event EventHandler<string> PushingMessages;
         event EventHandler<string> PushingLogs;
+
+        Task GetSampleAuditTrailByCinAsync(string cin);
     }
 }

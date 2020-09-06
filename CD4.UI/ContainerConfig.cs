@@ -20,24 +20,26 @@ namespace CD4.UI
 
             #region Automapper
 
-            builder.Register(context => new MapperConfiguration(cfg =>
+            builder.Register(context => new MapperConfiguration(config =>
             {
-                cfg.CreateMap<DataLibrary.Models.CountryModel, Library.Model.CountryModel>();
-                cfg.CreateMap<DataLibrary.Models.SitesModel, Library.Model.SitesModel>();
-                cfg.CreateMap<DataLibrary.Models.GenderModel, Library.Model.GenderModel>();
-                cfg.CreateMap<DataLibrary.Models.AtollIslandModel, Library.Model.AtollIslandModel>();
-                cfg.CreateMap<DataLibrary.Models.ClinicalDetailsModel, Library.Model.ClinicalDetailsOrderEntryModel>();
-                cfg.CreateMap<DataLibrary.Models.TestsModel, Library.Model.TestModel>().ReverseMap();
-                cfg.CreateMap<DataLibrary.Models.ProfilesAndTestModelOeModel, Library.Model.ProfilesAndTestsDatasourceOeModel>();
-                cfg.CreateMap<DataLibrary.Models.PatientModel, Library.Model.PatientModel>();
-                cfg.CreateMap<DataLibrary.Models.ClinicalDetailsSelectionModel, Library.Model.ClinicalDetailsOrderEntryModel>().ReverseMap();
-                cfg.CreateMap<DataLibrary.Models.WorklistPatientDataModel, Library.Model.RequestSampleModel>().ReverseMap();
-                cfg.CreateMap<DataLibrary.Models.WorkListResultsModel, Library.Model.ResultModel>().ReverseMap();
-                cfg.CreateMap<DataLibrary.Models.AuthorizeDetailModel, Library.Model.AuthorizeDetailEventArgs>();
-                cfg.CreateMap<DataLibrary.Models.StatusModel, Library.Model.StatusModel>();
-                cfg.CreateMap<DataLibrary.Models.WorkstationPrintersInfoModel, Library.Model.WorkStationPrintersInfoModel>().ReverseMap();
+                config.CreateMap<DataLibrary.Models.CountryModel, Library.Model.CountryModel>();
+                config.CreateMap<DataLibrary.Models.SitesModel, Library.Model.SitesModel>();
+                config.CreateMap<DataLibrary.Models.GenderModel, Library.Model.GenderModel>();
+                config.CreateMap<DataLibrary.Models.AtollIslandModel, Library.Model.AtollIslandModel>();
+                config.CreateMap<DataLibrary.Models.ClinicalDetailsModel, Library.Model.ClinicalDetailsOrderEntryModel>();
+                config.CreateMap<DataLibrary.Models.TestsModel, Library.Model.TestModel>().ReverseMap();
+                config.CreateMap<DataLibrary.Models.ProfilesAndTestModelOeModel, Library.Model.ProfilesAndTestsDatasourceOeModel>();
+                config.CreateMap<DataLibrary.Models.PatientModel, Library.Model.PatientModel>();
+                config.CreateMap<DataLibrary.Models.ClinicalDetailsSelectionModel, Library.Model.ClinicalDetailsOrderEntryModel>().ReverseMap();
+                config.CreateMap<DataLibrary.Models.WorklistPatientDataModel, Library.Model.RequestSampleModel>().ReverseMap();
+                config.CreateMap<DataLibrary.Models.WorkListResultsModel, Library.Model.ResultModel>().ReverseMap();
+                config.CreateMap<DataLibrary.Models.AuthorizeDetailModel, Library.Model.AuthorizeDetailEventArgs>();
+                config.CreateMap<DataLibrary.Models.StatusModel, Library.Model.StatusModel>();
+                config.CreateMap<DataLibrary.Models.WorkstationPrintersInfoModel, Library.Model.WorkStationPrintersInfoModel>().ReverseMap();
+                config.CreateMap<DataLibrary.Models.AuditTrailModel, Library.Model.AuditTrailModel>().ReverseMap();
+                config.CreateMap<DataLibrary.Models.AuditTrailModel, Library.Model.AuditTrailModel>();
 
-                cfg.CreateMap<DataLibrary.Models.AnalysisRequestDataModel, Library.ViewModel.OrderEntryViewModel>()
+                config.CreateMap<DataLibrary.Models.AnalysisRequestDataModel, Library.ViewModel.OrderEntryViewModel>()
                 .ForMember(dest => dest.SelectedSiteId, opt => opt.MapFrom(src => src.SiteId))
                 .ForMember(dest => dest.NidPp, opt => opt.MapFrom(src => src.NationalIdPassport))
                 .ForMember(dest => dest.SelectedGenderId, opt => opt.MapFrom(src => src.GenderId))

@@ -15,13 +15,15 @@ namespace CD4.UI.Library.ViewModel
     {
         #region Private Properties
         private List<CodifiedResultsModel> TempCodifiedPhrasesList;
-        private DateTime loadWorksheetFromDate;
-        private bool isloadWorkSheetButtonEnabled;
-        private bool isLoadingAnimationEnabled;
-        private readonly IWorkSheetDataAccess workSheetDataAccess;
-        private readonly IMapper mapper;
-        private readonly IResultDataAccess resultDataAccess;
-        private readonly IStatusDataAccess statusDataAccess;
+        private DateTime _loadWorksheetFromDate;
+        private bool _isloadWorkSheetButtonEnabled;
+        private bool _isLoadingAnimationEnabled;
+        private GridControlTestActiveDatasource _gridTestActiveDatasource;
+        private readonly IWorkSheetDataAccess _workSheetDataAccess;
+        private readonly IMapper _mapper;
+        private readonly IResultDataAccess _resultDataAccess;
+        private readonly IStatusDataAccess _statusDataAccess;
+        private readonly ISampleDataAccess _sampleDataAccess;
         #endregion
 
         #region Events
@@ -37,8 +39,9 @@ namespace CD4.UI.Library.ViewModel
 
         #region Default Constructor
         public ResultEntryViewModel
-            (IWorkSheetDataAccess workSheetDataAccess, IMapper mapper, IResultDataAccess resultDataAccess, IStatusDataAccess statusDataAccess)
+            (IWorkSheetDataAccess workSheetDataAccess, IMapper mapper, IResultDataAccess resultDataAccess, IStatusDataAccess statusDataAccess, ISampleDataAccess sampleDataAccess)
         {
+            GridTestActiveDatasource = GridControlTestActiveDatasource.Tests;
             RequestData = new List<RequestSampleModel>();
             SelectedResultData = new BindingList<ResultModel>();
             SelectedClinicalDetails = new BindingList<string>();
@@ -48,15 +51,17 @@ namespace CD4.UI.Library.ViewModel
             AllCodifiedPhrases = new List<CodifiedResultsModel>();
             TempCodifiedPhrasesList = new List<CodifiedResultsModel>();
             AllStatus = new List<Model.StatusModel>();
+            SampleAuditTrail = new List<Model.AuditTrailModel>();
 
             //set the date to load worksheet from
             LoadWorksheetFromDate = DateTime.Today;
 
             GenerateDemoData();
-            this.workSheetDataAccess = workSheetDataAccess;
-            this.mapper = mapper;
-            this.resultDataAccess = resultDataAccess;
-            this.statusDataAccess = statusDataAccess;
+            this._workSheetDataAccess = workSheetDataAccess;
+            this._mapper = mapper;
+            this._resultDataAccess = resultDataAccess;
+            this._statusDataAccess = statusDataAccess;
+            _sampleDataAccess = sampleDataAccess;
             SelectedResultData.ListChanged += UpdateDatabaseResults;
             LoadAllStatusData += GetAllStatusData;
             LoadInitialWorklist += ResultEntryViewModel_LoadInitialWorklist;
@@ -96,16 +101,17 @@ namespace CD4.UI.Library.ViewModel
         #region Public Properties
         public DateTime LoadWorksheetFromDate
         {
-            get => loadWorksheetFromDate; set
+            get => _loadWorksheetFromDate; set
             {
-                if (loadWorksheetFromDate == value) { return; }
-                loadWorksheetFromDate = value;
+                if (_loadWorksheetFromDate == value) { return; }
+                _loadWorksheetFromDate = value;
                 OnPropertyChanged();
 
             }
         }
         public List<RequestSampleModel> RequestData { get; set; }
         public BindingList<ResultModel> SelectedResultData { get; set; }
+        public List<Model.AuditTrailModel> SampleAuditTrail { get; set; }
         private List<ResultModel> AllResultData { get; set; }
         public RequestSampleModel SelectedRequestData { get; set; }
         public BindingList<CodifiedResultsModel> CodifiedPhrasesForSelectedTest { get; set; }
@@ -117,17 +123,17 @@ namespace CD4.UI.Library.ViewModel
         //enable/disable status of loadWorksheet button
         public bool IsloadWorkSheetButtonEnabled
         {
-            get => isloadWorkSheetButtonEnabled;
+            get => _isloadWorkSheetButtonEnabled;
             set
             {
                 //if the value is already set....
-                if (isloadWorkSheetButtonEnabled == value)
+                if (_isloadWorkSheetButtonEnabled == value)
                 {
                     //return without setting it again
                     return;
                 }
                 //set the new value
-                isloadWorkSheetButtonEnabled = value;
+                _isloadWorkSheetButtonEnabled = value;
                 //set the loading animation, loading animation will be enabled when button is disabled
                 IsLoadingAnimationEnabled = !value;
                 //Raise property changed
@@ -136,9 +142,19 @@ namespace CD4.UI.Library.ViewModel
         }
         public bool IsLoadingAnimationEnabled
         {
-            get => isLoadingAnimationEnabled; set
+            get => _isLoadingAnimationEnabled; set
             {
-                isLoadingAnimationEnabled = value;
+                _isLoadingAnimationEnabled = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public GridControlTestActiveDatasource GridTestActiveDatasource
+        {
+            get => _gridTestActiveDatasource; set
+            {
+                if (_gridTestActiveDatasource == value) return;
+                _gridTestActiveDatasource = value;
                 OnPropertyChanged();
             }
         }
@@ -147,13 +163,38 @@ namespace CD4.UI.Library.ViewModel
 
         #region Public Methods
 
+        public enum GridControlTestActiveDatasource
+        {
+            Tests,
+            AuditTrail
+        }
+
+        /// <summary>
+        /// Fetches sample audit trail from datalayer and maps the results to SampleAuditTrail list
+        /// </summary>
+        /// <param name="cin">The cin for the sample to fetch the audit trail data</param>
+        public async Task GetSampleAuditTrailByCinAsync(string cin)
+        {
+            try
+            {
+                //get the audit trail from datasource
+                var trail = await _sampleDataAccess.GetAuditTrailByCinAsync(cin);
+                //map the trail to this libraries trail model
+                SampleAuditTrail = _mapper.Map<List<Model.AuditTrailModel>>(trail);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public async Task GetWorkSheet()
         {
             try
             {
                 //Disable the load worksheet button to avoid multiple clicks
                 IsloadWorkSheetButtonEnabled = false;
-                var worksheet = await workSheetDataAccess.GetWorklistBySpecifiedDateAndStatusIdAsync
+                var worksheet = await _workSheetDataAccess.GetWorklistBySpecifiedDateAndStatusIdAsync
                     (GetSelectedStatusIdOrDefault(), LoadWorksheetFromDate);
                 await DisplayWorksheet(worksheet);
             }
@@ -222,7 +263,7 @@ namespace CD4.UI.Library.ViewModel
             try
             {
                 //mark the test as validated.
-                var output = await statusDataAccess.ValidateTest(resultModel.Cin, resultModel.Test, resultModel.StatusIconId, resultModel.Result);
+                var output = await _statusDataAccess.ValidateTest(resultModel.Cin, resultModel.Test, resultModel.StatusIconId, resultModel.Result);
                 //Update the UI to show that the test as validated...ie., if it has been validated.
                 UpdateUiAfterOnTestValidation(output, resultModel);
             }
@@ -240,7 +281,7 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-                var output = await statusDataAccess.ValidateSample(requestSampleModel.Cin, requestSampleModel.StatusIconId);
+                var output = await _statusDataAccess.ValidateSample(requestSampleModel.Cin, requestSampleModel.StatusIconId);
                 UpdateUiAOnSampleValidation(output, requestSampleModel);
             }
             catch (Exception ex)
@@ -294,9 +335,9 @@ namespace CD4.UI.Library.ViewModel
             try
             {
                 //call the datalayer for the data.
-                var result = await statusDataAccess.GetAllStatus();
+                var result = await _statusDataAccess.GetAllStatus();
                 //automap the data onto a list of corresponding local model
-                var statusModel = mapper.Map<List<Model.StatusModel>>(result);
+                var statusModel = _mapper.Map<List<Model.StatusModel>>(result);
                 //add the data to the datasource.
                 foreach (var item in statusModel)
                 {
@@ -395,7 +436,7 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-                var response = await resultDataAccess.InsertUpdateResultByResultIdAsync(resultId, result, testStatus);
+                var response = await _resultDataAccess.InsertUpdateResultByResultIdAsync(resultId, result, testStatus);
                 UpdateUiOnResultEntry(response);
             }
             catch (Exception ex)
@@ -591,7 +632,7 @@ namespace CD4.UI.Library.ViewModel
             foreach (var item in worklist.PatientData)
             {
                 //and map new data from database into the requestData list
-                RequestData.Add(mapper.Map<RequestSampleModel>(item));
+                RequestData.Add(_mapper.Map<RequestSampleModel>(item));
             }
 
             //if TestResultData is null return
@@ -603,7 +644,7 @@ namespace CD4.UI.Library.ViewModel
             //map out new result data
             foreach (var item in worklist.TestResultsData)
             {
-                AllResultData.Add(mapper.Map<ResultModel>(item));
+                AllResultData.Add(_mapper.Map<ResultModel>(item));
             }
 
             //notify UI that data has refreshed, so that UI knows to refresh datagrids
