@@ -133,7 +133,8 @@ namespace CD4.UI.View
                 {
                     Caption = column.Caption,
                     FieldName = column.FieldName,
-                    Visible = column.Visible
+                    Visible = column.Visible,
+                    Name = column.Name
                 };
                 sampleColumn.OptionsColumn.AllowEdit = column.AllowEdit;
 
@@ -141,6 +142,11 @@ namespace CD4.UI.View
                 {
                     sampleColumn.VisibleIndex = column.VisibleIndex;
                     sampleColumn.Width = column.Width;
+                }
+
+                if (sampleColumn.Name == "gridColumnResult")
+                {
+                    sampleColumn.ColumnEdit = this.repositoryItemLookUpEditCodifiedPhrases;
                 }
 
                 gridViewTests.Columns.Add(sampleColumn);
