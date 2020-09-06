@@ -141,6 +141,7 @@
     <Compile Include="Report\SeventyFiveMillimeterTubeLabel.Designer.cs">
       <DependentUpon>SeventyFiveMillimeterTubeLabel.cs</DependentUpon>
     </Compile>
+    <Compile Include="UiSpecificModels\GridColumnModel.cs" />
     <Compile Include="View\AtollIslandView.cs">
       <SubType>Form</SubType>
     </Compile>
