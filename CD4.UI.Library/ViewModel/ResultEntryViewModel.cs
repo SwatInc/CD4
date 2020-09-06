@@ -421,6 +421,9 @@ namespace CD4.UI.Library.ViewModel
             ItemToUpdate.Result = response.Result;
             ItemToUpdate.ReferenceCode = response.ReferenceCode;
             ItemToUpdate.StatusIconId = response.StatusId;
+
+            //refresh UI
+            RequestDataRefreshed?.Invoke(this, EventArgs.Empty);
         }
 
         private async void UpdateDatabaseResults(object sender, ListChangedEventArgs e)
