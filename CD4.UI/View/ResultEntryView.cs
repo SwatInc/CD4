@@ -308,9 +308,17 @@ namespace CD4.UI.View
                     break;
                 case Keys.Alt:
                     break;
+                case Keys.P: //handle Ctrl+P (Print report)
+                    if (e.Modifiers==Keys.Control)
+                    {
+                        SimpleButtonReport_Click(this, EventArgs.Empty);
+                    }
+                    break;
                 default:
                     break;
             }
+
+
         }
 
         private void _viewModel_PushingMessages(object sender, string e)

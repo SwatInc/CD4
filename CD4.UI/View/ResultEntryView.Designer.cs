@@ -354,7 +354,7 @@ namespace CD4.UI.View
             // 
             // simpleButtonLoadWorksheet
             // 
-            this.simpleButtonLoadWorksheet.Location = new System.Drawing.Point(635, 43);
+            this.simpleButtonLoadWorksheet.Location = new System.Drawing.Point(613, 43);
             this.simpleButtonLoadWorksheet.Name = "simpleButtonLoadWorksheet";
             this.simpleButtonLoadWorksheet.Size = new System.Drawing.Size(108, 23);
             this.simpleButtonLoadWorksheet.TabIndex = 6;
@@ -386,11 +386,11 @@ namespace CD4.UI.View
             // 
             // simpleButtonReport
             // 
-            this.simpleButtonReport.Location = new System.Drawing.Point(750, 43);
+            this.simpleButtonReport.Location = new System.Drawing.Point(727, 43);
             this.simpleButtonReport.Name = "simpleButtonReport";
-            this.simpleButtonReport.Size = new System.Drawing.Size(75, 23);
+            this.simpleButtonReport.Size = new System.Drawing.Size(98, 23);
             this.simpleButtonReport.TabIndex = 0;
-            this.simpleButtonReport.Text = "Report";
+            this.simpleButtonReport.Text = "Report [ Ctrl+P ]";
             // 
             // gridColumnSampleStatus
             // 

@@ -31,7 +31,7 @@ namespace CD4.UI.View
             lookUpEditTests.Validated += LookUpEditTests_Validated;
             simpleButtonRemoveTest.Click += RemoveTestFromAR;
             simpleButtonSearch.Click += OnPatientSearch;
-            KeyUp += ManageKeyUpEvents; ;
+            KeyUp += ManageKeyUpEvents;
             _viewModel.PushingMessages += OnPushMessage;
             _viewModel.PropertyChanged += OnPropertyChanged;
             simpleButtonConfirm.Click += OnConfirmAnalysisRequest;
