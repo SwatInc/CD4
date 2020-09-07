@@ -14,7 +14,7 @@ namespace CD4.UI.Library.ViewModel
     public class ResultEntryViewModel : INotifyPropertyChanged, IResultEntryViewModel
     {
         #region Private Properties
-        private List<CodifiedResultsModel> TempCodifiedPhrasesList;
+        private List<Model.CodifiedResultsModel> TempCodifiedPhrasesList;
         private DateTime _loadWorksheetFromDate;
         private bool _isloadWorkSheetButtonEnabled;
         private bool _isLoadingAnimationEnabled;
@@ -24,12 +24,13 @@ namespace CD4.UI.Library.ViewModel
         private readonly IResultDataAccess _resultDataAccess;
         private readonly IStatusDataAccess _statusDataAccess;
         private readonly ISampleDataAccess _sampleDataAccess;
+        private readonly IStaticDataDataAccess _staticDataDataAccess;
         #endregion
 
         #region Events
         //event that notifies user interface that new data has been loaded and that datagrids needs to be refreshed.
         public event EventHandler RequestDataRefreshed;
-        public event EventHandler LoadAllStatusData;
+        public event EventHandler LoadAllStatusDataAndCodifiedValues;
         public event EventHandler LoadInitialWorklist;
         //Push logs to the UI layer
         public event EventHandler<string> PushingLogs;
@@ -39,7 +40,8 @@ namespace CD4.UI.Library.ViewModel
 
         #region Default Constructor
         public ResultEntryViewModel
-            (IWorkSheetDataAccess workSheetDataAccess, IMapper mapper, IResultDataAccess resultDataAccess, IStatusDataAccess statusDataAccess, ISampleDataAccess sampleDataAccess)
+            (IWorkSheetDataAccess workSheetDataAccess, IMapper mapper, IResultDataAccess resultDataAccess, IStatusDataAccess statusDataAccess, 
+            ISampleDataAccess sampleDataAccess, IStaticDataDataAccess staticDataDataAccess)
         {
             GridTestActiveDatasource = GridControlTestActiveDatasource.Tests;
             RequestData = new List<RequestSampleModel>();
@@ -47,27 +49,29 @@ namespace CD4.UI.Library.ViewModel
             SelectedClinicalDetails = new BindingList<string>();
             SelectedRequestData = new RequestSampleModel();
             AllResultData = new List<ResultModel>();
-            CodifiedPhrasesForSelectedTest = new BindingList<CodifiedResultsModel>();
-            AllCodifiedPhrases = new List<CodifiedResultsModel>();
-            TempCodifiedPhrasesList = new List<CodifiedResultsModel>();
+            CodifiedPhrasesForSelectedTest = new BindingList<Model.CodifiedResultsModel>();
+            AllCodifiedPhrases = new List<Model.CodifiedResultsModel>();
+            TempCodifiedPhrasesList = new List<Model.CodifiedResultsModel>();
             AllStatus = new List<Model.StatusModel>();
             SampleAuditTrail = new List<Model.AuditTrailModel>();
 
             //set the date to load worksheet from
             LoadWorksheetFromDate = DateTime.Today;
 
-            GenerateDemoData();
+            //GenerateDemoData();
             this._workSheetDataAccess = workSheetDataAccess;
             this._mapper = mapper;
             this._resultDataAccess = resultDataAccess;
             this._statusDataAccess = statusDataAccess;
             _sampleDataAccess = sampleDataAccess;
+            _staticDataDataAccess = staticDataDataAccess;
             SelectedResultData.ListChanged += UpdateDatabaseResults;
-            LoadAllStatusData += GetAllStatusData;
+            LoadAllStatusDataAndCodifiedValues += GetAllStatusData;
+            LoadAllStatusDataAndCodifiedValues += FetchAllCodifiedData;
             LoadInitialWorklist += ResultEntryViewModel_LoadInitialWorklist;
 
             //load all status Data
-            LoadAllStatusData?.Invoke(this, EventArgs.Empty);
+            LoadAllStatusDataAndCodifiedValues?.Invoke(this, EventArgs.Empty);
             //Load initial Worklist
             LoadInitialWorklist?.Invoke(this, EventArgs.Empty);
         }
@@ -114,9 +118,9 @@ namespace CD4.UI.Library.ViewModel
         public List<Model.AuditTrailModel> SampleAuditTrail { get; set; }
         private List<ResultModel> AllResultData { get; set; }
         public RequestSampleModel SelectedRequestData { get; set; }
-        public BindingList<CodifiedResultsModel> CodifiedPhrasesForSelectedTest { get; set; }
+        public BindingList<Model.CodifiedResultsModel> CodifiedPhrasesForSelectedTest { get; set; }
         public BindingList<string> SelectedClinicalDetails { get; set; }
-        public List<CodifiedResultsModel> AllCodifiedPhrases { get; set; }
+        public List<Model.CodifiedResultsModel> AllCodifiedPhrases { get; set; }
         public List<Model.StatusModel> AllStatus { get; set; }
         public Model.StatusModel SelectedStatus { get; set; }
 
@@ -474,9 +478,9 @@ namespace CD4.UI.Library.ViewModel
             }
 
         }
-        private List<CodifiedResultsModel> GetCodifiedPhrasesForIds(string[] idsCodifiedPhrase)
+        private List<Model.CodifiedResultsModel> GetCodifiedPhrasesForIds(string[] idsCodifiedPhrase)
         {
-            var returnList = new List<CodifiedResultsModel>();
+            var returnList = new List<Model.CodifiedResultsModel>();
             foreach (var id in idsCodifiedPhrase)
             {
                 var isIsInt = int.TryParse(id, out int parsedId);
@@ -589,12 +593,25 @@ namespace CD4.UI.Library.ViewModel
 
             #region All Codified Phrases
 
-            AllCodifiedPhrases.Add(new CodifiedResultsModel() { Id = 1, CodifiedValue = "POSITIVE" });
-            AllCodifiedPhrases.Add(new CodifiedResultsModel() { Id = 2, CodifiedValue = "NEGATIVE" });
-            AllCodifiedPhrases.Add(new CodifiedResultsModel() { Id = 3, CodifiedValue = "NOT DETECTED" });
-            AllCodifiedPhrases.Add(new CodifiedResultsModel() { Id = 4, CodifiedValue = "DETECTED" });
+            //AllCodifiedPhrases.Add(new CodifiedResultsModel() { Id = 1, CodifiedValue = "POSITIVE" });
+            //AllCodifiedPhrases.Add(new CodifiedResultsModel() { Id = 2, CodifiedValue = "NEGATIVE" });
+            //AllCodifiedPhrases.Add(new CodifiedResultsModel() { Id = 3, CodifiedValue = "NOT DETECTED" });
+            //AllCodifiedPhrases.Add(new CodifiedResultsModel() { Id = 4, CodifiedValue = "DETECTED" });
 
             #endregion
+        }
+
+        private async void FetchAllCodifiedData(object sender, EventArgs e)
+        {
+            try
+            {
+                var codifiedPhrases = await _staticDataDataAccess.GetAllCodifiedValuesAsync();
+                AllCodifiedPhrases = _mapper.Map<List<Model.CodifiedResultsModel>>(codifiedPhrases);
+            }
+            catch (Exception ex)
+            {
+                PushingMessages?.Invoke(this, ex.Message);
+            }
         }
         private int GetSelectedStatusIdOrDefault()
         {

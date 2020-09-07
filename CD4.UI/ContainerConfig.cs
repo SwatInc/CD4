@@ -37,7 +37,8 @@ namespace CD4.UI
                 config.CreateMap<DataLibrary.Models.StatusModel, Library.Model.StatusModel>();
                 config.CreateMap<DataLibrary.Models.WorkstationPrintersInfoModel, Library.Model.WorkStationPrintersInfoModel>().ReverseMap();
                 config.CreateMap<DataLibrary.Models.AuditTrailModel, Library.Model.AuditTrailModel>().ReverseMap();
-                config.CreateMap<DataLibrary.Models.AuditTrailModel, Library.Model.AuditTrailModel>();
+                config.CreateMap<DataLibrary.Models.CodifiedResultsModel, Library.Model.CodifiedResultsModel>().ReverseMap();
+                config.CreateMap<DataLibrary.Models.CodifiedResultsModel, Library.Model.CodifiedResultsModel>();
 
                 config.CreateMap<DataLibrary.Models.AnalysisRequestDataModel, Library.ViewModel.OrderEntryViewModel>()
                 .ForMember(dest => dest.SelectedSiteId, opt => opt.MapFrom(src => src.SiteId))

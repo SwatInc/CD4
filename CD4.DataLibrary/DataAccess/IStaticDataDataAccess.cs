@@ -8,6 +8,7 @@ namespace CD4.DataLibrary.DataAccess
     {
         Task<List<AtollIslandModel>> GetAllAtollsAndIslandsAsync();
         Task<List<ClinicalDetailsModel>> GetAllClinicalDetailsAsync();
+        Task<List<CodifiedResultsModel>> GetAllCodifiedValuesAsync();
         Task<List<CountryModel>> GetAllCountriesAsync();
         Task<List<GenderModel>> GetAllGenderAsync();
         Task<List<ProfilesAndTestModelOeModel>> GetAllProfileTestsAsync();

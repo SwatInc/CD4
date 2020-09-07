@@ -179,5 +179,19 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
+
+        public async Task<List<CodifiedResultsModel>> GetAllCodifiedValuesAsync()
+        {
+            var storedProcedure = "[dbo].[usp_GetAllCodifiedValues]";
+            try
+            {
+                return await LoadDataAsync<CodifiedResultsModel>(storedProcedure);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

@@ -273,6 +273,12 @@ INSERT INTO [dbo].[ResultDataType]([Name]) VALUES
 ('CODIFIED'),
 ('TEXTUAL');
 
+INSERT INTO [dbo].[CodifiedResult]([Code],[ReferenceCode]) VALUES
+('POSITIVE','PA'),
+('NEGATIVE','NM'),
+('REACTIVE','PA'),
+('NON-REACTIVE','NM');  
+
 --insert sample types
 INSERT INTO [dbo].[SampleType] ([Description],[Colour]) VALUES
 ('SERUM','Red'),
