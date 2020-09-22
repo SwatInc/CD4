@@ -8,6 +8,7 @@
     [Mask] VARCHAR(50) NOT NULL,
     [UnitId] INT NOT NULL,
     [Reportable] BIT NOT NULL, 
+    [DeafultCommented] BIT NOT NULL,
     CONSTRAINT [FK_Test_ResultDataType] FOREIGN KEY ([ResultDataTypeId]) REFERENCES [dbo].[ResultDataType]([Id]), 
     CONSTRAINT [AK_Test_Description] UNIQUE ([Description]), 
     CONSTRAINT [FK_Test_SampleType] FOREIGN KEY ([SampleTypeId]) REFERENCES [SampleType]([Id]), 
