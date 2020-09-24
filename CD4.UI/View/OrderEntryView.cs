@@ -42,10 +42,14 @@ namespace CD4.UI.View
         private async void SimpleButtonPrintBarcode_Click(object sender, EventArgs e)
         {
             PrintBarcode();
-            var response = XtraMessageBox.Show("Do you want to mark the sample as collected?", "Order entry", MessageBoxButtons.YesNo);
-            if (response == DialogResult.Yes)
+            try
             {
                 await _viewModel.MarkSampleCollected();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show($"An error occured while marking the sample as collected\n\n{ex.Message}",
+                    "Mark Sample as collected", MessageBoxButtons.OK);
             }
         }
 

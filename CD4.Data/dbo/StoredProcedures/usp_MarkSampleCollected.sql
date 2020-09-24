@@ -20,7 +20,7 @@ SET NOCOUNT ON;
 
 	UPDATE [dbo].[ResultTracking]
 	SET [StatusId] = 2
-	WHERE  [StatusId] =1 AND [ResultId] IN
+	WHERE  [StatusId] = 1 AND [ResultId] IN
 			(SELECT [Id] FROM @EffectedResultIds);
 
 	-- TRACKING HISTORY
