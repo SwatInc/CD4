@@ -93,6 +93,7 @@
     <Compile Include="Models\ClinicalDetailsSelectionModel.cs" />
     <Compile Include="Models\CodifiedResultsModel.cs" />
     <Compile Include="Models\CompleteRequestSearchResultsModel.cs" />
+    <Compile Include="Models\GenericModelAndListModel.cs" />
     <Compile Include="Models\ResultReferenceRangeModel.cs" />
     <Compile Include="Models\SampleAndResultStatusAndResultModel.cs" />
     <Compile Include="Models\UpdatedResultAndStatusModel.cs" />

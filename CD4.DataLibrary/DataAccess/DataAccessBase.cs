@@ -91,6 +91,38 @@ namespace CD4.DataLibrary.DataAccess
             return returnData;
         }
 
+        /// <summary>
+        /// Executes query and get multiple objects with model, list , stored procedure and paramters
+        /// </summary>
+        /// <typeparam name="T">The type of model instance to be returned</typeparam>
+        /// <typeparam name="U">The type of list instance to be returned</typeparam>
+        /// <typeparam name="V">parameter type</typeparam>
+        /// <param name="storedProcedure">The stored procedure name</param>
+        /// <param name="parameters">instance of parameters</param>
+        /// <returns></returns>
+        internal async Task<GenericModelAndListModel> QueryMultiple_GetModelAndListWithParameterAsync<T, U, V>
+            (string storedProcedure, V parameters) where T: new()
+        {
+            var genericModelAndListList = new GenericModelAndListModel();
+            var returnData = genericModelAndListList.GetNewModel<T, U>();
+
+            T InstanceT = default(T);
+            List<U> ListU = null;
+
+            using (IDbConnection connection = new SqlConnection(helper.GetConnectionString()))
+            {
+                using (var lists = await connection.QueryMultipleAsync(storedProcedure,parameters,commandType: CommandType.StoredProcedure))
+                {
+                    InstanceT = lists.Read<T>().FirstOrDefault();
+                    ListU = lists.Read<U>().ToList();
+                }
+            }
+
+            returnData.T1 = InstanceT;
+            returnData.U1 = ListU;
+            return returnData;
+        }
+
         internal async Task<T> SelectInsertOrUpdateAsync<T,U>(string storedProcedure, U parameters)
         {
             using (IDbConnection connection = new SqlConnection(helper.GetConnectionString()))

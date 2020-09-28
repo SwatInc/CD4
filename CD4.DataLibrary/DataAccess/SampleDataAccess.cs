@@ -28,13 +28,19 @@ namespace CD4.DataLibrary.DataAccess
             var parameter = new { Cin = cin, CommentListId = commentListId, UserId = userId};
             try
             {
-                _ = await SelectInsertOrUpdateAsync<dynamic, dynamic>(storedProcedure, parameter);
+                var output = await QueryMultiple_GetModelAndListWithParameterAsync<StatusUpdatedSampleModel, UpdatedResultAndStatusModel,dynamic>
+                    (storedProcedure, parameter);
+
+                return new SampleAndResultStatusAndResultModel()
+                {
+                    SampleData = output.T1,
+                    ResultStatus = output.U1
+                };
             }
             catch (Exception)
             {
                 throw;
             }
-            throw new NotImplementedException();
 
         }
     }
