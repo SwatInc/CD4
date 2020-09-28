@@ -173,6 +173,20 @@ namespace CD4.UI.Library.ViewModel
             AuditTrail
         }
 
+        public async Task RejectSampleAsync(string cin)
+        {
+            try
+            {
+                var output = await _sampleDataAccess.RejectSampleAsync(cin, 1, 1);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
         /// <summary>
         /// Fetches sample audit trail from datalayer and maps the results to SampleAuditTrail list
         /// </summary>

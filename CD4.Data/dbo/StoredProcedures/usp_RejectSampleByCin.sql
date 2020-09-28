@@ -53,12 +53,12 @@ BEGIN
             @NumTestsNotRejected = 0;
 
     -- insert sample comment
-    INSERT INTO [dbo].[Comment]([CommentListId],[CommentTypeId],[Identifier],[UserId])
+    INSERT INTO [dbo].[Comment]([CommentListId],[CommentTypeId],[Identifier],[UserId],[CreatedAt],[UpdatedAt])
     VALUES
-        (@CommentListId,2,@Cin,1);
+        (@CommentListId,2,@Cin,1,GETDATE(),GETDATE());
     -- insert test comments for rejected sample
-    INSERT INTO [dbo].[Comment]([CommentListId],[CommentTypeId],[Identifier],[UserId])
-    SELECT @CommentListId,3,[Id] AS [Identifier] ,@UserId
+    INSERT INTO [dbo].[Comment]([CommentListId],[CommentTypeId],[Identifier],[UserId],[CreatedAt],[UpdatedAt])
+    SELECT @CommentListId,3,[Id] AS [Identifier] ,@UserId,GETDATE(),GETDATE()
     FROM @ResultIds;
 
     -- Insert sample tracking history: WARNING!!! this should execute only if sample was rejected.

@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CD4.UI.View
@@ -396,7 +397,7 @@ namespace CD4.UI.View
         {
             var menuItems = new List<DXMenuItem>();
             menuItems.Add(new DXMenuItem("Validate Sample [ F7 ]", new EventHandler(OnValidateSampleClick)) { Tag = new RowInfo(view, rowHandle) });
-            menuItems.Add(new DXMenuItem("Reject Sample [ Shift+F11 ]", new EventHandler(OnRejectSampleClick)) { Tag = new RowInfo(view, rowHandle) });
+            menuItems.Add(new DXMenuItem("Reject Sample [ Shift+F11 ]", new EventHandler(OnRejectSampleClickAsync)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Sample Audit Trail [ F12 ]", new EventHandler(OnSampleAuditTrailClick)) { Tag = new RowInfo(view, rowHandle) });
             return menuItems;
         }
@@ -488,10 +489,18 @@ namespace CD4.UI.View
         /// <summary>
         /// Call the view model to reject the sample
         /// </summary>
-        void OnRejectSampleClick(object sender, EventArgs e)
+         async void OnRejectSampleClickAsync(object sender, EventArgs e)
         {
             var sampleToReject = GetSampleForMenu(sender, e);
             Debug.WriteLine("Rejecting sample: " + sampleToReject.Cin);
+            try
+            {
+                 await _viewModel.RejectSampleAsync(sampleToReject.Cin);
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>
