@@ -21,5 +21,20 @@ namespace CD4.DataLibrary.DataAccess
             var parameter = new { Cin = cin };
             return  await LoadDataWithParameterAsync<AuditTrailModel, dynamic>(storedProcedure, parameter);
         }
+
+        public async Task RejectSampleAsync(string cin, int commentListId, int userId)
+        {
+            var storedProcedure = "[dbo].[usp_RejectSampleByCin]";
+            var parameter = new { Cin = cin, CommentListId = commentListId, UserId = userId};
+
+            try
+            {
+                _ = await SelectInsertOrUpdateAsync<dynamic, dynamic>(storedProcedure, parameter);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

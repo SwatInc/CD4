@@ -583,7 +583,7 @@ GO
 SET IDENTITY_INSERT [dbo].[CommentList_CommentType] ON
 GO
 INSERT [dbo].[CommentList_CommentType] ([Id], [CommentListId], [CommentTypeId], [IsActive])
-  VALUES (2, 1, 2, 1), (3, 1, 3, 1)
+  VALUES (2, 1, 4, 1), (3, 1, 5, 1)
 GO
 SET IDENTITY_INSERT [dbo].[CommentList_CommentType] OFF
 GO
