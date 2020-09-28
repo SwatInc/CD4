@@ -48,6 +48,7 @@
             // 
             // textEditPassword
             // 
+            this.textEditPassword.EnterMoveNextControl = true;
             this.textEditPassword.Location = new System.Drawing.Point(129, 121);
             this.textEditPassword.Name = "textEditPassword";
             this.textEditPassword.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -76,10 +77,11 @@
             this.textEditPassword.Properties.ShowNullValuePromptWhenFocused = true;
             this.textEditPassword.Properties.UseSystemPasswordChar = true;
             this.textEditPassword.Size = new System.Drawing.Size(258, 28);
-            this.textEditPassword.TabIndex = 5;
+            this.textEditPassword.TabIndex = 2;
             // 
             // textEditUsername
             // 
+            this.textEditUsername.EnterMoveNextControl = true;
             this.textEditUsername.Location = new System.Drawing.Point(129, 87);
             this.textEditUsername.Name = "textEditUsername";
             this.textEditUsername.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -107,7 +109,7 @@
             this.textEditUsername.Properties.NullValuePromptShowForEmptyValue = true;
             this.textEditUsername.Properties.ShowNullValuePromptWhenFocused = true;
             this.textEditUsername.Size = new System.Drawing.Size(258, 28);
-            this.textEditUsername.TabIndex = 4;
+            this.textEditUsername.TabIndex = 1;
             // 
             // ProgressPanelAuthentication
             // 
@@ -136,7 +138,7 @@
             this.SimpleButtonSignIn.Location = new System.Drawing.Point(267, 211);
             this.SimpleButtonSignIn.Name = "SimpleButtonSignIn";
             this.SimpleButtonSignIn.Size = new System.Drawing.Size(102, 30);
-            this.SimpleButtonSignIn.TabIndex = 46;
+            this.SimpleButtonSignIn.TabIndex = 3;
             this.SimpleButtonSignIn.Text = "Sign In";
             // 
             // labelControlCapsLockStatus
@@ -196,7 +198,7 @@
             this.groupControlAuthView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControlAuthView.Location = new System.Drawing.Point(0, 0);
             this.groupControlAuthView.Name = "groupControlAuthView";
-            this.groupControlAuthView.Size = new System.Drawing.Size(545, 260);
+            this.groupControlAuthView.Size = new System.Drawing.Size(551, 266);
             this.groupControlAuthView.TabIndex = 49;
             // 
             // separatorControl1
@@ -221,7 +223,7 @@
             this.simpleButtonCancel.Location = new System.Drawing.Point(147, 211);
             this.simpleButtonCancel.Name = "simpleButtonCancel";
             this.simpleButtonCancel.Size = new System.Drawing.Size(102, 30);
-            this.simpleButtonCancel.TabIndex = 48;
+            this.simpleButtonCancel.TabIndex = 4;
             this.simpleButtonCancel.Text = "Cancel";
             // 
             // AuthenticationView
@@ -231,7 +233,7 @@
             this.Appearance.Options.UseFont = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(545, 260);
+            this.ClientSize = new System.Drawing.Size(551, 266);
             this.ControlBox = false;
             this.Controls.Add(this.groupControlAuthView);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
