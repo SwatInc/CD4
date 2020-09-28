@@ -94,6 +94,7 @@
     <Compile Include="Models\CodifiedResultsModel.cs" />
     <Compile Include="Models\CompleteRequestSearchResultsModel.cs" />
     <Compile Include="Models\ResultReferenceRangeModel.cs" />
+    <Compile Include="Models\SampleAndResultStatusAndResultModel.cs" />
     <Compile Include="Models\UpdatedResultAndStatusModel.cs" />
     <Compile Include="Models\WorkstationPrintersInfoModel.cs" />
     <Compile Include="Models\ExistingRequestsPatientComparisionArgs.cs" />

@@ -25,7 +25,7 @@ BEGIN
       -- validated or registered tests
       UPDATE [dbo].[ResultTracking]
       SET [StatusId] = 7	-- 7 is rejected
-      OUTPUT INSERTED.[Id] INTO @ResultIds
+      OUTPUT INSERTED.[ResultId] INTO @ResultIds
       WHERE [StatusId] <> 5 OR [StatusId] <> 1
       AND [ResultId] IN (SELECT
         [Id] AS [ResultId]
@@ -83,10 +83,30 @@ BEGIN
     (
         SELECT STRING_AGG(CONVERT(VARCHAR(1000),[Description]), ' | ') AS [TestNamesRejected]
         FROM [dbo].[Test]
-        WHERE [Id] IN (SELECT [Id] FROM @ResultIds)
+        WHERE [Id] IN 
+                    (
+                        SELECT [TestId] AS [Id] 
+                        FROM [dbo].[Result] 
+                        WHERE [Id] IN (SELECT [Id] FROM @ResultIds)
+                    )
     ) AS T;
 
     COMMIT TRANSACTION;
+    -- return datac - sample status
+    SELECT [SampleCin] AS [Cin]
+          ,[StatusId] 
+    FROM [dbo].[SampleTracking] 
+    WHERE [SampleCin] = @Cin;
+    -- return datac - result status, result and reference code
+    SELECT [RT].[ResultId]
+          ,[R].[Sample_Cin] AS [Cin]
+          ,[R].[Result]
+          ,[R].[ReferenceCode]
+          ,[RT].[StatusId]
+    FROM [dbo].[ResultTracking] [RT]
+    INNER JOIN [dbo].[Result] [R] ON [RT].[ResultId] = [R].[Id]
+    WHERE [RT].[ResultId] IN  (SELECT [Id] AS [ResultId] FROM @ResultIds);
+
   END TRY
   BEGIN CATCH
     ROLLBACK TRANSACTION;
