@@ -576,7 +576,7 @@ GO
 SET IDENTITY_INSERT [dbo].[CommentType] ON
 GO
 INSERT [dbo].[CommentType] ([Id], [Description])
-  VALUES (1, N'Patient'), (2, N'Sample'), (3, N'Test')
+  VALUES (1, N'Patient'), (2, N'Sample'), (3, N'Test'),(4, N'SampleRejection'),(5, N'TestRejection')
 GO
 SET IDENTITY_INSERT [dbo].[CommentType] OFF
 GO

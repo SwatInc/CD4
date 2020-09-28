@@ -12,6 +12,7 @@ BEGIN
       DECLARE @Comment VARCHAR(2000);
       DECLARE @NumTestsNotRejected int;
       DECLARE @SampleTrackingTypeId int;
+      DECLARE @TestTrackingTypeId int;
       DECLARE @ResultIds TABLE (
         Id int
       );
@@ -61,13 +62,29 @@ BEGIN
     FROM @ResultIds;
 
     -- Insert sample tracking history: WARNING!!! this should execute only if sample was rejected.
-    SELECT @SampleTrackingTypeId = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Sample'
+    SELECT @SampleTrackingTypeId = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Sample';
+    SELECT @TestTrackingTypeId = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Test';
+
     INSERT INTO [dbo].[TrackingHistory] ([TrackingType],[SampleCin],[StatusId],[UsersId])
     VALUES
         (@SampleTrackingTypeId,@Cin,7,@UserId);
     -- insert test tracking history
-
-    -- Write audit logs
+    INSERT INTO [dbo].[TrackingHistory] ([TrackingType],[ResultId],[StatusId],[UsersId])
+    SELECT @TestTrackingTypeId,[Id],7,@UserId
+    FROM @ResultIds;
+    -- Write audit logs - sample
+    INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[Cin],[StatusId],[Details])
+    VALUES
+        (@SampleTrackingTypeId,@Cin,7,CONCAT('Sample Rejected: ',@Cin));
+    -- Write audit logs - Tests
+    INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[Cin],[StatusId],[Details])
+    SELECT @TestTrackingTypeId,@Cin,7,CONCAT('Sample ',@Cin,', rejection caused test rejections: ',[T].[TestNamesRejected])
+    FROM
+    (
+        SELECT STRING_AGG(CONVERT(VARCHAR(1000),[Description]), ' | ') AS [TestNamesRejected]
+        FROM [dbo].[Test]
+        WHERE [Id] IN (SELECT [Id] FROM @ResultIds)
+    ) AS T;
 
     COMMIT TRANSACTION;
   END TRY
