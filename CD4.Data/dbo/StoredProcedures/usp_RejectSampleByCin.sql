@@ -75,7 +75,7 @@ BEGIN
     -- Write audit logs - sample
     INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[Cin],[StatusId],[Details])
     VALUES
-        (@SampleTrackingTypeId,@Cin,7,CONCAT('Sample Rejected: ',@Cin));
+        (@SampleTrackingTypeId,@Cin,7,CONCAT('Sample Rejected: ',@Cin,'. Reason: ',@Comment));
     -- Write audit logs - Tests
     INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[Cin],[StatusId],[Details])
     SELECT @TestTrackingTypeId,@Cin,7,CONCAT('Sample ',@Cin,', rejection caused test rejections: ',[T].[TestNamesRejected])
