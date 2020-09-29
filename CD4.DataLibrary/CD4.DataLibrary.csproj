@@ -62,6 +62,7 @@
     <Compile Include="DataAccess\IAnalysisRequestDataAccess.cs" />
     <Compile Include="DataAccess\IAuthenticationDataAccess.cs" />
     <Compile Include="DataAccess\IClinicalDetailsDataAccess.cs" />
+    <Compile Include="DataAccess\ICommentsDataAccess.cs" />
     <Compile Include="DataAccess\IPatientDataAccess.cs" />
     <Compile Include="DataAccess\IReferenceRangeDataAccess.cs" />
     <Compile Include="DataAccess\IReportsDataAccess.cs" />

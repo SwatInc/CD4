@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CD4.DataLibrary.DataAccess
 {
-    public class CommentsDataAccess: DataAccessBase
+    public class CommentsDataAccess : DataAccessBase, ICommentsDataAccess
     {
         public async Task<List<CommentsSelectionModel>> GetAllCommentsByTypeId(int commentTypeId)
         {
