@@ -40,9 +40,10 @@ BEGIN
       FROM @ResultIds);
 
       -- Get the number of tests not rejected for the sample
-      SELECT @NumTestsNotRejected = COUNT([Id]) 
-      FROM [dbo].[ResultTracking] 
-      WHERE [StatusId] <> 7;
+      SELECT @NumTestsNotRejected = COUNT([RT].[Id]) 
+      FROM [dbo].[ResultTracking] [RT]
+      INNER JOIN [dbo].[Result] [R] ON [R].[Id] = [RT].[ResultId]
+      WHERE [RT].[StatusId] <> 7 AND [R].[Sample_Cin] = @Cin;
       -- if all tests for the sample is rejected and sample status is not validated or registered,
       -- mark the sample as rejected.
       UPDATE [dbo].[SampleTracking]

@@ -400,8 +400,14 @@ namespace CD4.UI.View
             var menuItems = new List<DXMenuItem>();
             menuItems.Add(new DXMenuItem("Validate Sample [ F7 ]", new EventHandler(OnValidateSampleClick)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Reject Sample [ Shift+F11 ]", new EventHandler(OnRejectSampleClickAsync)) { Tag = new RowInfo(view, rowHandle) });
+            menuItems.Add(new DXMenuItem("Cancel Sample Rejection [ Ctlr+Shift+F11 ]", new EventHandler(OnCancelRejectSampleClickAsync)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Sample Audit Trail [ F12 ]", new EventHandler(OnSampleAuditTrailClick)) { Tag = new RowInfo(view, rowHandle) });
             return menuItems;
+        }
+
+        private void OnCancelRejectSampleClickAsync(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
         }
 
         /// <summary>
