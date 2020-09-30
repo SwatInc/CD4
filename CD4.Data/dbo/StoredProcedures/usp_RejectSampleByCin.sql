@@ -8,7 +8,8 @@ BEGIN
   SET XACT_ABORT ON;
   BEGIN TRANSACTION;
     BEGIN TRY
-
+        
+      DECLARE @LoggedInUser varchar(256);
       DECLARE @Comment VARCHAR(2000);
       DECLARE @NumTestsNotRejected int;
       DECLARE @SampleTrackingTypeId int;
@@ -28,9 +29,9 @@ BEGIN
       OUTPUT INSERTED.[ResultId] INTO @ResultIds
       WHERE [StatusId] <> 5 AND [StatusId] <> 1 
       AND [ResultId] IN (SELECT
-        [Id] AS [ResultId]
-      FROM [dbo].[Result]
-      WHERE [Sample_Cin] = @Cin);
+                        [Id] AS [ResultId]
+                      FROM [dbo].[Result]
+                      WHERE [Sample_Cin] = @Cin);
 
       -- remove the results of rejected tests
       UPDATE [dbo].[Result]
@@ -56,15 +57,17 @@ BEGIN
     -- insert sample comment
     INSERT INTO [dbo].[Comment]([CommentListId],[CommentTypeId],[Identifier],[UserId],[CreatedAt],[UpdatedAt])
     VALUES
-        (@CommentListId,2,@Cin,1,GETDATE(),GETDATE());
+        (@CommentListId,4,@Cin,1,GETDATE(),GETDATE()); -- 4 comment type: sample rejection
     -- insert test comments for rejected sample
     INSERT INTO [dbo].[Comment]([CommentListId],[CommentTypeId],[Identifier],[UserId],[CreatedAt],[UpdatedAt])
-    SELECT @CommentListId,3,[Id] AS [Identifier] ,@UserId,GETDATE(),GETDATE()
-    FROM @ResultIds;
+    SELECT @CommentListId,5,[Id] AS [Identifier] ,@UserId,GETDATE(),GETDATE()
+    FROM @ResultIds; -- 5 comment type: Test Rejection
 
     -- Insert sample tracking history: WARNING!!! this should execute only if sample was rejected.
     SELECT @SampleTrackingTypeId = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Sample';
     SELECT @TestTrackingTypeId = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Test';
+    -- get username
+    SELECT @LoggedInUser =  [UserName] FROM [dbo].[Users];
 
     INSERT INTO [dbo].[TrackingHistory] ([TrackingType],[SampleCin],[StatusId],[UsersId])
     VALUES
@@ -76,10 +79,10 @@ BEGIN
     -- Write audit logs - sample
     INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[Cin],[StatusId],[Details])
     VALUES
-        (@SampleTrackingTypeId,@Cin,7,CONCAT('Sample Rejected: ',@Cin,'. Reason: ',@Comment));
+        (@SampleTrackingTypeId,@Cin,7,CONCAT('Sample Rejected: ',@Cin,' by user ',@LoggedInUser,'. Reason: ',@Comment));
     -- Write audit logs - Tests
     INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[Cin],[StatusId],[Details])
-    SELECT @TestTrackingTypeId,@Cin,7,CONCAT('Sample ',@Cin,', rejection caused test rejections: ',[T].[TestNamesRejected])
+    SELECT @TestTrackingTypeId,@Cin,7,CONCAT('Sample ',@Cin,', rejection caused automatic test rejections: ',[T].[TestNamesRejected])
     FROM
     (
         SELECT STRING_AGG(CONVERT(VARCHAR(1000),[Description]), ' | ') AS [TestNamesRejected]

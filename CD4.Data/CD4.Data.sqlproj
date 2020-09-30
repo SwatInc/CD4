@@ -176,6 +176,7 @@
     <Build Include="dbo\Tables\CommentList_CommentType.sql" />
     <Build Include="dbo\StoredProcedures\usp_DecideToAndExecuteMarkSampleCollected.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetAllRejectionComments.sql" />
+    <Build Include="dbo\StoredProcedures\usp_CancelSampleRejectionByCin.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
