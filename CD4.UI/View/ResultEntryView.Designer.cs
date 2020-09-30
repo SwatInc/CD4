@@ -30,6 +30,7 @@ namespace CD4.UI.View
         /// </summary>
         private void InitializeComponent()
         {
+            this.labelControlPatientName = new LabelControl();
             this.labelControlNationalId = new DevExpress.XtraEditors.LabelControl();
             this.labelControlAgeSex = new DevExpress.XtraEditors.LabelControl();
             this.labelControlBirthdate = new DevExpress.XtraEditors.LabelControl();

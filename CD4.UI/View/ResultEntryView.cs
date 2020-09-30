@@ -19,11 +19,12 @@ namespace CD4.UI.View
     public partial class ResultEntryView : XtraForm
     {
         private readonly IResultEntryViewModel _viewModel;
+        private readonly IRejectionCommentViewModel _rejectionCommentViewModel;
         System.Windows.Forms.Timer dataRefreshTimer = new System.Windows.Forms.Timer() { Enabled = true, Interval = 1000 };
 
         public event EventHandler<string> GenerateReportByCin;
 
-        public ResultEntryView(IResultEntryViewModel viewModel)
+        public ResultEntryView(IResultEntryViewModel viewModel, IRejectionCommentViewModel rejectionCommentViewModel)
         {
             InitializeComponent();
             //Initialize grid columns
@@ -31,6 +32,7 @@ namespace CD4.UI.View
             SetSampleGrid_SampleColumns();
 
             _viewModel = viewModel;
+            _rejectionCommentViewModel = rejectionCommentViewModel;
             InitializeBinding();
 
             SizeChanged += OnSizeChangedAdjustSplitContainers;
@@ -493,9 +495,25 @@ namespace CD4.UI.View
         {
             var sampleToReject = GetSampleForMenu(sender, e);
             Debug.WriteLine("Rejecting sample: " + sampleToReject.Cin);
+            //Check whether the sample can be rejected
+            var canReject = _viewModel.CanRejectSample(sampleToReject);
+            if (!canReject)
+            {
+                XtraMessageBox.Show($"Sample, {sampleToReject.Cin}, cannot be rejected because it is either registered or validated or rejected.");
+                return;
+            }
             try
             {
-                 await _viewModel.RejectSampleAsync(sampleToReject.Cin);
+                var dialog = new RejectionCommentView(_rejectionCommentViewModel);
+                dialog.ShowDialog();
+                if (dialog.DialogResult != null)
+                {
+                    if (dialog.DialogResult > 0)
+                    {
+                        await _viewModel.RejectSampleAsync(sampleToReject.Cin, (int)dialog.DialogResult);
+                    }
+                }
+                dialog.Close();
             }
             catch (Exception ex)
             {

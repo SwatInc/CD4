@@ -2,7 +2,7 @@
  @CommentTypeId int
 AS
 BEGIN
-	SELECT [CL].[Id], [CL].[Description]
+	SELECT [CL].[Id], [CL].[Description] AS [Comment]
 	FROM [dbo].[CommentList] [CL]
 	INNER JOIN [dbo].[CommentList_CommentType] [CCT] ON [CL].[Id] = [CCT].[CommentListId]
 	INNER JOIN [dbo].[CommentType] [CT] ON [CCT].[CommentTypeId] = [CT].[Id]

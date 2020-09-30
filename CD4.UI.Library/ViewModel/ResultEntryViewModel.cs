@@ -172,12 +172,22 @@ namespace CD4.UI.Library.ViewModel
             Tests,
             AuditTrail
         }
-
-        public async Task RejectSampleAsync(string cin)
+        public bool CanRejectSample(RequestSampleModel sampleToReject)
+        {
+            if (sampleToReject.StatusIconId == 1 || sampleToReject.StatusIconId ==5 || sampleToReject.StatusIconId == 7)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        public async Task RejectSampleAsync(string cin, int commentListId)
         {
             try
             {
-                var output = await _sampleDataAccess.RejectSampleAsync(cin, 1, 1);
+                var output = await _sampleDataAccess.RejectSampleAsync(cin, commentListId, 1);
             }
             catch (Exception)
             {

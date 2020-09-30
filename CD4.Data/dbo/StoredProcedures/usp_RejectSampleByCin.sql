@@ -26,7 +26,7 @@ BEGIN
       UPDATE [dbo].[ResultTracking]
       SET [StatusId] = 7	-- 7 is rejected
       OUTPUT INSERTED.[ResultId] INTO @ResultIds
-      WHERE [StatusId] <> 5 OR [StatusId] <> 1
+      WHERE [StatusId] <> 5 AND [StatusId] <> 1 
       AND [ResultId] IN (SELECT
         [Id] AS [ResultId]
       FROM [dbo].[Result]

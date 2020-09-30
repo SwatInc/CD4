@@ -33,6 +33,7 @@ namespace CD4.UI.Library.ViewModel
         event EventHandler<string> PushingLogs;
 
         Task GetSampleAuditTrailByCinAsync(string cin);
-        Task RejectSampleAsync(string cin);
+        Task RejectSampleAsync(string cin, int commentListId);
+        bool CanRejectSample(RequestSampleModel sampleToReject);
     }
 }
