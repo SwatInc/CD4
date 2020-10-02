@@ -38,7 +38,7 @@ BEGIN
 				-- remove sample rejection comments
 				DELETE FROM [dbo].[Comment]
 				WHERE [CommentTypeId] = 4 AND
-				CAST([Identifier] AS INT) IN (SELECT [Id] FROM @ResultIds);
+				CAST([Identifier] AS VARCHAR(50)) = @Cin;
 
 				-- Insert sample tracking history: WARNING!!! this should execute only if sample was rejected.
 				SELECT @SampleTrackingTypeId = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Sample';

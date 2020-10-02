@@ -405,9 +405,18 @@ namespace CD4.UI.View
             return menuItems;
         }
 
-        private void OnCancelRejectSampleClickAsync(object sender, EventArgs e)
+        private async void OnCancelRejectSampleClickAsync(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var sample = GetSampleForMenu(sender, e);
+            Debug.WriteLine("Cancelling sample rejection: " + sample.Cin);
+            try
+            {
+                await _viewModel.CancelSampleRejection(sample.Cin);
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>
