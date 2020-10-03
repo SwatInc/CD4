@@ -173,15 +173,23 @@ namespace CD4.UI.Library.ViewModel
             AuditTrail
         }
 
+        /// <summary>
+        /// Cancels the rejection of a rejected sample and associated tests.
+        /// </summary>
+        /// <param name="cin">The CIN for sample to reject</param>
         public async Task CancelSampleRejection(string cin)
         {
             try
             {
+                //call datalayer to cancel sample rejection
                 var output = await _sampleDataAccess.CancelSampleRejectionByCinAsync(cin, 1);
+                //map-out the result returned.
+                var mappedData = _mapper.Map<SampleAndResultStatusAndResultModel>(output);
+                //updateUI
+                UpdateUiOnSampleRejectionOrRejectionCancellation(mappedData);
             }
             catch (Exception)
             {
-
                 throw;
             }
         }
@@ -196,11 +204,22 @@ namespace CD4.UI.Library.ViewModel
                 return true;
             }
         }
+
+        /// <summary>
+        /// Rejects a sample with CIN and user provided reason for rejection.
+        /// </summary>
+        /// <param name="cin">The CIN of the sample to reject</param>
+        /// <param name="commentListId">The DB Id of the user selected comment.</param>
         public async Task RejectSampleAsync(string cin, int commentListId)
         {
             try
             {
+                //call datalayer to reject the sample.
                 var output = await _sampleDataAccess.RejectSampleAsync(cin, commentListId, 1);
+                //map-out the result returned.
+                var mappedData = _mapper.Map<SampleAndResultStatusAndResultModel>(output);
+                //updateUI
+                UpdateUiOnSampleRejectionOrRejectionCancellation(mappedData);
             }
             catch (Exception)
             {
@@ -462,11 +481,45 @@ namespace CD4.UI.Library.ViewModel
             ItemToUpdate.Result = response.Result;
             ItemToUpdate.ReferenceCode = response.ReferenceCode;
             ItemToUpdate.StatusIconId = response.StatusId;
-
+            //update sample icon to processing
+            var sample = RequestData.Find(x => x.Cin == response.Cin);
+            sample.StatusIconId = 6; // 6 is processing
             //refresh UI
             RequestDataRefreshed?.Invoke(this, EventArgs.Empty);
         }
 
+        /// <summary>
+        /// updates UI after sample is rejected.
+        /// </summary>
+        /// <param name="statusUpdateData">model returned by datalayer on rejecting sample.</param>
+        private void UpdateUiOnSampleRejectionOrRejectionCancellation(SampleAndResultStatusAndResultModel statusUpdateData)
+        {
+            //find the sample rejected.
+            var sample = RequestData.Find(x => x.Cin == statusUpdateData.SampleData.Cin);
+            switch (sample)
+            {
+                case null:
+                    return;
+                default:
+                    //update status Id and Icon of sample.
+                    sample.StatusIconId = statusUpdateData.SampleData.StatusId;
+                    //Find the sample results
+                    var resultData = AllResultData.Where(x => x.Cin == statusUpdateData.SampleData.Cin);
+                    //update them
+                    foreach (var resultRecord in resultData)
+                    {
+                        var newData = statusUpdateData.ResultStatus.Find(x => x.ResultId == resultRecord.Id);
+                        if (newData is null) return;
+                        resultRecord.Result = newData.Result;
+                        resultRecord.StatusIconId = newData.StatusId;
+                        resultRecord.ReferenceCode = newData.ReferenceCode;
+                    }
+                    //refresh UI
+                    RequestDataRefreshed?.Invoke(this, EventArgs.Empty);
+                    break;
+            }
+
+        }
         private async void UpdateDatabaseResults(object sender, ListChangedEventArgs e)
         {
             //detect when a result is modified.
@@ -501,7 +554,6 @@ namespace CD4.UI.Library.ViewModel
                 PushingMessages?.Invoke(this, ex.Message);
             }
         }
-
         private void SetClinicalDetailsForSelectedSample(string delimitedDetails)
         {
             SelectedClinicalDetails.Clear();

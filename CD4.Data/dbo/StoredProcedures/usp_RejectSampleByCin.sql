@@ -29,9 +29,9 @@ BEGIN
       OUTPUT INSERTED.[ResultId] INTO @ResultIds
       WHERE [StatusId] <> 5 AND [StatusId] <> 1 
       AND [ResultId] IN (SELECT
-                        [Id] AS [ResultId]
-                      FROM [dbo].[Result]
-                      WHERE [Sample_Cin] = @Cin);
+                         [Id] AS [ResultId]
+                         FROM [dbo].[Result]
+                         WHERE [Sample_Cin] = @Cin);
 
       -- remove the results of rejected tests
       UPDATE [dbo].[Result]

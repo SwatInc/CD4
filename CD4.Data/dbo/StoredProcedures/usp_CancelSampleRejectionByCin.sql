@@ -22,8 +22,8 @@ BEGIN
 				OUTPUT INSERTED.[ResultId] INTO @ResultIds -- this line required?
 				WHERE [StatusId] = 7 -- 7 is rejected
 					  AND [ResultId] IN (SELECT [Id] AS [ResultId]
-								   FROM [dbo].[Result]
-								   WHERE [Sample_Cin] = @Cin);
+					  FROM [dbo].[Result]
+					  WHERE [Sample_Cin] = @Cin);
 
 				-- mark the sample as collected if rejected.
 				UPDATE [dbo].[SampleTracking]
