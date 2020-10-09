@@ -44,14 +44,16 @@ BEGIN
 				-- AUDIT
 				SELECT @SampleTrackingTypeId = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Sample';
 				SELECT @TestTrackingTypeId = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Test';
+				
+				-- get username
+				SELECT @LoggedInUser =  [UserName] FROM [dbo].[Users];
 
 				-- Write audit logs - sample. if sample rejection got cancelled.
 				--Todo
 
 				-- Write audit logs - Tests
 				INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[Cin],[StatusId],[Details])
-				SELECT @TestTrackingTypeId,@Cin,2,CONCAT('Sample ',@Cin,
-						', rejection cancellation caused test rejection cancellations for: ',[T].[TestNamesRejected])
+				SELECT @TestTrackingTypeId,@Cin,2,CONCAT('Rejection cancelled for test: ',[T].[TestNamesRejected], ' by user ', @LoggedInUser)
 				FROM
 				(
 					SELECT STRING_AGG(CONVERT(VARCHAR(1000),[Description]), ' | ') AS [TestNamesRejected]
