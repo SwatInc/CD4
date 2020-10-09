@@ -179,6 +179,7 @@
     <Build Include="dbo\StoredProcedures\usp_CancelSampleRejectionByCin.sql" />
     <Build Include="dbo\StoredProcedures\usp_RejectTest.sql" />
     <Build Include="dbo\StoredProcedures\usp_InsertSampleAuditTrail.sql" />
+    <Build Include="dbo\StoredProcedures\usp_CancelTestRejectionByResultId.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />

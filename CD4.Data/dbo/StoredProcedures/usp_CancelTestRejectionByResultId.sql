@@ -1,5 +1,5 @@
-﻿CREATE PROCEDURE [dbo].[usp_CancelSampleRejectionByCin]
-	@Cin varchar(50),
+﻿CREATE PROCEDURE [dbo].[usp_CancelTestRejectionByResultId]
+	@ResultId int,
 	@UserId int
 AS
 BEGIN
@@ -7,23 +7,24 @@ BEGIN
 	SET XACT_ABORT ON;
 		BEGIN TRANSACTION;
 			BEGIN TRY
-				
+
 				DECLARE @LoggedInUser varchar(256);
 				DECLARE @SampleTrackingTypeId int;
-				DECLARE @TestTrackingTypeId int;				
+				DECLARE @TestTrackingTypeId int;	
+				DEClARE @Cin varchar(50);
 				DECLARE @ResultIds TABLE (
 					Id int
 				);
 
-				-- change all the rejected tests for the sample to collected
-				-- and mark them collected.
+				--Get the corresponding cin for the test
+				SELECT @Cin = [Sample_Cin] FROM [dbo].[Result] WHERE [Id] = @ResultId;
+
+				-- mark the specified rejected test as collected
 				UPDATE [dbo].[ResultTracking]
 				SET [StatusId] = 2	-- 2 is collected
-				OUTPUT INSERTED.[ResultId] INTO @ResultIds
+				OUTPUT INSERTED.[ResultId] INTO @ResultIds -- this line required?
 				WHERE [StatusId] = 7 -- 7 is rejected
-					  AND [ResultId] IN (SELECT [Id] AS [ResultId]
-					  FROM [dbo].[Result]
-					  WHERE [Sample_Cin] = @Cin);
+					  AND [ResultId] = @ResultId;
 
 				-- mark the sample as collected if rejected.
 				UPDATE [dbo].[SampleTracking]
@@ -35,22 +36,17 @@ BEGIN
 				WHERE [CommentTypeId] = 5 AND
 				CAST([Identifier] AS INT) IN (SELECT [Id] FROM @ResultIds);
 
-				-- remove sample rejection comments
+				-- remove any sample rejection comments
 				DELETE FROM [dbo].[Comment]
 				WHERE [CommentTypeId] = 4 AND
 				CAST([Identifier] AS VARCHAR(50)) = @Cin;
 
-				-- Insert sample tracking history: WARNING!!! this should execute only if sample was rejected.
+				-- AUDIT
 				SELECT @SampleTrackingTypeId = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Sample';
 				SELECT @TestTrackingTypeId = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Test';
 
-				-- get username
-				SELECT @LoggedInUser =  [UserName] FROM [dbo].[Users];
-
-				-- Write audit logs - sample
-				INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[Cin],[StatusId],[Details])
-				VALUES
-					(@SampleTrackingTypeId,@Cin,2,CONCAT('Sample ',@Cin,' Rejection cancelled by user ',@LoggedInUser));
+				-- Write audit logs - sample. if sample rejection got cancelled.
+				--Todo
 
 				-- Write audit logs - Tests
 				INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[Cin],[StatusId],[Details])
@@ -89,4 +85,3 @@ BEGIN
 				THROW;
 			END CATCH;
 END
-
