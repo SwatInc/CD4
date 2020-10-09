@@ -569,21 +569,22 @@ GO
 SET IDENTITY_INSERT [dbo].[CommentList] ON
 GO
 INSERT [dbo].[CommentList] ([Id], [Description], [IsActive], [UpdatedDate], [CreatedDate])
-  VALUES (1, N'Sample haemolysed.', 1, GETDATE(), GETDATE())
+  VALUES (1, N'Sample haemolysed.', 1, GETDATE(), GETDATE()),
+         (2, N'Sample insufficient.', 1, GETDATE(), GETDATE());
 GO
 SET IDENTITY_INSERT [dbo].[CommentList] OFF
 GO
 SET IDENTITY_INSERT [dbo].[CommentType] ON
 GO
 INSERT [dbo].[CommentType] ([Id], [Description])
-  VALUES (1, N'Patient'), (2, N'Sample'), (3, N'Test'),(4, N'SampleRejection'),(5, N'TestRejection')
+  VALUES (1, N'Patient'), (2, N'Sample'), (3, N'Test'),(4, N'SampleRejection'),(5, N'TestRejection');
 GO
 SET IDENTITY_INSERT [dbo].[CommentType] OFF
 GO
 SET IDENTITY_INSERT [dbo].[CommentList_CommentType] ON
 GO
 INSERT [dbo].[CommentList_CommentType] ([Id], [CommentListId], [CommentTypeId], [IsActive])
-  VALUES (2, 1, 4, 1), (3, 1, 5, 1)
+  VALUES (2, 1, 4, 1), (3, 1, 5, 1),(4,2, 4, 1), (5, 1, 5, 1);
 GO
 SET IDENTITY_INSERT [dbo].[CommentList_CommentType] OFF
 GO
