@@ -1,4 +1,4 @@
-﻿using CD4.DataLibrary.Models;
+﻿using CD4.UI.Library.Model;
 using System.ComponentModel;
 
 namespace CD4.UI.Library.ViewModel
@@ -11,6 +11,7 @@ namespace CD4.UI.Library.ViewModel
         bool IsOkEnabled { get; set; }
         int ReasonsCountDisplayed { get; set; }
         bool IsReasonsListEnabled { get; set; }
+        RejectionReasonType ReasonType { get; set; }
 
         event PropertyChangedEventHandler PropertyChanged;
     }

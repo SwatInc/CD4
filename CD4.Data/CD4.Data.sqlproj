@@ -177,6 +177,8 @@
     <Build Include="dbo\StoredProcedures\usp_DecideToAndExecuteMarkSampleCollected.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetAllRejectionComments.sql" />
     <Build Include="dbo\StoredProcedures\usp_CancelSampleRejectionByCin.sql" />
+    <Build Include="dbo\StoredProcedures\usp_RejectTest.sql" />
+    <Build Include="dbo\StoredProcedures\usp_InsertSampleAuditTrail.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />

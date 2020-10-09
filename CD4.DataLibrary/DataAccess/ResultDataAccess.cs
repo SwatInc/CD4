@@ -198,5 +198,42 @@ namespace CD4.DataLibrary.DataAccess
             var parameter = new { ResultId = resultId, SampleStatus = sampleStatus, UserId = 1 };
             return await SelectInsertOrUpdateAsync<bool, dynamic>(storedProcedure, parameter);
         }
+
+        /// <summary>
+        /// Reject test by result Id
+        /// </summary>
+        /// <param name="resultId">The result Id for the test</param>
+        /// <param name="cin">The CIN of the sample for which the test belongs to</param>
+        /// <param name="commentListId">The comment to be inserted to the test</param>
+        /// <param name="userId">The user Id of the logged in user</param>
+        /// <returns>An instance of SampleAndResultStatusAndResultModel</returns>
+        public async Task<SampleAndResultStatusAndResultModel> RejectTestByResultId(int resultId, string cin, int commentListId, int userId)
+        {
+            var storedProcedure = "[dbo].[usp_RejectTest]";
+            var parameters = new
+            {
+                ResultId = resultId,
+                Cin = cin,
+                CommentListId  = commentListId,
+                UserId = userId
+            };
+
+            try
+            {
+                var output = await QueryMultiple_GetModelAndListWithParameterAsync<StatusUpdatedSampleModel, UpdatedResultAndStatusModel, dynamic>
+                    (storedProcedure, parameters);
+
+                return new SampleAndResultStatusAndResultModel()
+                {
+                    SampleData = output.T1,
+                    ResultStatus = output.U1
+                };
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

@@ -205,6 +205,18 @@ namespace CD4.UI.Library.ViewModel
             }
         }
 
+        public bool CanRejectTest(ResultModel sampleToReject)
+        {
+            if (sampleToReject.StatusIconId == 1 || sampleToReject.StatusIconId == 5 || sampleToReject.StatusIconId == 7)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
         /// <summary>
         /// Rejects a sample with CIN and user provided reason for rejection.
         /// </summary>
@@ -509,10 +521,12 @@ namespace CD4.UI.Library.ViewModel
                     foreach (var resultRecord in resultData)
                     {
                         var newData = statusUpdateData.ResultStatus.Find(x => x.ResultId == resultRecord.Id);
-                        if (newData is null) return;
-                        resultRecord.Result = newData.Result;
-                        resultRecord.StatusIconId = newData.StatusId;
-                        resultRecord.ReferenceCode = newData.ReferenceCode;
+                        if (newData != null) 
+                        {
+                            resultRecord.Result = newData.Result;
+                            resultRecord.StatusIconId = newData.StatusId;
+                            resultRecord.ReferenceCode = newData.ReferenceCode;
+                        };
                     }
                     //refresh UI
                     RequestDataRefreshed?.Invoke(this, EventArgs.Empty);
@@ -758,6 +772,25 @@ namespace CD4.UI.Library.ViewModel
 
             //notify UI that data has refreshed, so that UI knows to refresh datagrids
             RequestDataRefreshed?.Invoke(this, EventArgs.Empty);
+        }
+
+        public async Task RejectTestAsync(ResultModel testToReject, int commentListId)
+        {
+            try
+            {
+                // get the actual commentId and user Id to pass in
+                var output = await _resultDataAccess.RejectTestByResultId
+                    (testToReject.Id, testToReject.Cin, commentListId, 1);
+
+                var mappedData = _mapper.Map<SampleAndResultStatusAndResultModel>(output);
+                //updateUI
+                UpdateUiOnSampleRejectionOrRejectionCancellation(mappedData);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         #endregion

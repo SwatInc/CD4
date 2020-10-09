@@ -12,8 +12,8 @@ SET XACT_ABORT ON;
 		BEGIN TRY
 
 		DECLARE @ResultDate DATETIME2;
-		DECLARE @PreviousData varchar(50);
-		DECLARE @CurrentData varchar(50);
+		DECLARE @PreviousData varchar(100);
+		DECLARE @CurrentData varchar(100);
 		DECLARE @Cin varchar(50);
 		DECLARE @AuditTypeIdTest int;
 

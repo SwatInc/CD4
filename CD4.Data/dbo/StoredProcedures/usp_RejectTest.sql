@@ -103,7 +103,6 @@ BEGIN
             , @Cin
             , 7
             ,CONCAT(@RejectedTestName,' on ',@Cin, ' rejected by user ',@LoggedInUser)
-
         );
 
         -- Generate auto sample rejection comment
@@ -112,10 +111,11 @@ BEGIN
         -- insert sample audit trail as sample rejected, if all tests of the sample is rejected
         IF @NumTestsNotRejected = 0
         BEGIN
-            EXEC @InsertedSampleAuditTrailId =  [dbo].[usp_InsertSampleAuditTrail]
+            EXEC  [dbo].[usp_InsertSampleAuditTrail]
               @Cin = @Cin
             , @StatusId = 7
             , @Details = @AutoSampleRejectionReason
+            ,@InsertedId = @InsertedSampleAuditTrailId output;
         END;
         COMMIT TRANSACTION;
 

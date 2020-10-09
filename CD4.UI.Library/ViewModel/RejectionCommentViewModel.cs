@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CD4.DataLibrary.DataAccess;
-using CD4.DataLibrary.Models;
+using CD4.UI.Library.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,11 +13,12 @@ namespace CD4.UI.Library.ViewModel
 {
     public class RejectionCommentViewModel : INotifyPropertyChanged, IRejectionCommentViewModel
     {
-        private CommentsSelectionModel _selectedReason;
+        private Model.CommentsSelectionModel _selectedReason;
         private bool _isLoading;
         private bool _isOkEnabled;
         private int _reasonsCountDisplayed;
         private bool _isReasonsListEnabled;
+        private RejectionReasonType _reasonType;
         private readonly ICommentsDataAccess _commentsDataAccess;
         private readonly IMapper _mapper;
 
@@ -26,7 +27,9 @@ namespace CD4.UI.Library.ViewModel
         {
             _commentsDataAccess = commentsDataAccess;
             _mapper = mapper;
-            RejectionReasons = new BindingList<CommentsSelectionModel>();
+            RejectionReasons = new BindingList<Model.CommentsSelectionModel>();
+            SampleRejectionCommentsList = new List<CommentsSelectionModel>();
+            TestRejectionCommentsList = new List<CommentsSelectionModel>();
             IsLoading = true;
             IsOkEnabled = false;
             FetchReasons += OnFetchReasons;
@@ -39,19 +42,48 @@ namespace CD4.UI.Library.ViewModel
             FetchReasons?.Invoke(this, EventArgs.Empty);
         }
 
-        private async void OnFetchReasons(object sender, EventArgs e)
+        public async void OnFetchReasons(object sender, EventArgs e)
         {
             //sample rejection CommentTypeId is 4
             var reasons = await _commentsDataAccess.GetAllCommentsByTypeId(4);
-            var mappedResons = _mapper.Map<List<CommentsSelectionModel>>(reasons);
+            SampleRejectionCommentsList = _mapper.Map<List<Model.CommentsSelectionModel>>(reasons);
 
-            RejectionReasons.Clear();
-            foreach (var reason in mappedResons)
-            {
-                RejectionReasons.Add(reason);
-            }
+            //test rejection CommentTypeId is 5
+            reasons = await _commentsDataAccess.GetAllCommentsByTypeId(4);
+            TestRejectionCommentsList = _mapper.Map<List<Model.CommentsSelectionModel>>(reasons);
 
             IsLoading = false;
+        }
+
+        /// <summary>
+        /// Assign display comments
+        /// </summary>
+        /// <param name="rejectionCommentType"></param>
+        private void AssignComments(RejectionReasonType rejectionCommentType)
+        {
+            RejectionReasons.Clear();
+
+            switch (rejectionCommentType)
+            {
+                case RejectionReasonType.Sample:
+
+                    foreach (var reason in SampleRejectionCommentsList)
+                    {
+                        RejectionReasons.Add(reason);
+                    }
+
+                    break;
+                case RejectionReasonType.Test:
+
+                    foreach (var reason in TestRejectionCommentsList)
+                    {
+                        RejectionReasons.Add(reason);
+                    }
+                    break;
+
+                default:
+                    break;
+            }
         }
 
         #region INotifyPropertyChanged Hookup
@@ -65,8 +97,11 @@ namespace CD4.UI.Library.ViewModel
 
         #endregion
 
-        public BindingList<CommentsSelectionModel> RejectionReasons { get; set; }
-        public CommentsSelectionModel SelectedReason
+        public BindingList<Model.CommentsSelectionModel> RejectionReasons { get; set; }
+        public List<Model.CommentsSelectionModel> SampleRejectionCommentsList { get; set; }
+        public List<Model.CommentsSelectionModel> TestRejectionCommentsList { get; set; }
+
+        public Model.CommentsSelectionModel SelectedReason
         {
             get => _selectedReason; set
             {
@@ -124,6 +159,15 @@ namespace CD4.UI.Library.ViewModel
             }
         }
 
-
+        public RejectionReasonType ReasonType
+        {
+            get => _reasonType; set
+            {
+                if (_reasonType == value) return;
+                _reasonType = value;
+                //when reason type changes assign appropriate comments
+                AssignComments(_reasonType);
+            }
+        }
     }
 }

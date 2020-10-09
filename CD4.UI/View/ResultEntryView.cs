@@ -475,10 +475,37 @@ namespace CD4.UI.View
         /// <summary>
         /// call the view model to reject the test
         /// </summary>
-        private void OnRejectTestClick(object sender, EventArgs e)
+        private async void OnRejectTestClick(object sender, EventArgs e)
         {
             var testToReject = GetTestForMenu(sender, e);
             Debug.WriteLine($"Rejecting Test: {testToReject.Cin}, Test: {testToReject.Test}, Result: {testToReject.Result}");
+
+            //Check whether the test can be rejected
+            var canReject = _viewModel.CanRejectTest(testToReject);
+            if (!canReject)
+            {
+                XtraMessageBox.Show($"Test, {testToReject.Test}, cannot be rejected because it is either registered or validated or rejected.");
+                return;
+            }
+            try
+            {
+                _rejectionCommentViewModel.ReasonType = RejectionReasonType.Test; //assign test rejection reasons from list
+                var dialog = new RejectionCommentView(_rejectionCommentViewModel);
+                dialog.ShowDialog();
+                if (dialog.DialogResult != null)
+                {
+                    if (dialog.DialogResult > 0)
+                    {
+                        await _viewModel.RejectTestAsync(testToReject, (int)dialog.DialogResult);
+                    }
+                }
+                dialog.Close();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+
         }
 
         /// <summary>
@@ -519,6 +546,7 @@ namespace CD4.UI.View
             }
             try
             {
+                _rejectionCommentViewModel.ReasonType = RejectionReasonType.Sample;
                 var dialog = new RejectionCommentView(_rejectionCommentViewModel);
                 dialog.ShowDialog();
                 if (dialog.DialogResult != null)

@@ -9,8 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using CD4.UI.Library.ViewModel;
-using CD4.DataLibrary.Models;
 using DevExpress.Utils.DirectXPaint;
+using CD4.UI.Library.Model;
 
 namespace CD4.UI.View
 {
