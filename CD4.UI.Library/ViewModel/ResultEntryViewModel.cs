@@ -793,6 +793,22 @@ namespace CD4.UI.Library.ViewModel
             }
         }
 
+        public async Task CancelTestRejection(ResultModel testData)
+        {
+            try
+            {
+                var output = await _resultDataAccess.CancelTestRejectionByResultId(testData.Id, 1);
+                var mappedData = _mapper.Map<SampleAndResultStatusAndResultModel>(output);
+                //updateUI
+                UpdateUiOnSampleRejectionOrRejectionCancellation(mappedData);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         #endregion
 
     }

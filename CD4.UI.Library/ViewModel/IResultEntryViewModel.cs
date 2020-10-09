@@ -38,5 +38,6 @@ namespace CD4.UI.Library.ViewModel
         Task CancelSampleRejection(string cin);
         Task RejectTestAsync(ResultModel testToReject, int commentListId);
         bool CanRejectTest(ResultModel sampleToReject);
+        Task CancelTestRejection(ResultModel testData);
     }
 }

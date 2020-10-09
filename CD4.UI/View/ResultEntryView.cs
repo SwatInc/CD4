@@ -451,9 +451,23 @@ namespace CD4.UI.View
             var menuItems = new List<DXMenuItem>();
             menuItems.Add(new DXMenuItem("Validate Test [ F11 ]", new EventHandler(OnValidateTestClick)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Reject Test [ Shift+F11 ]", new EventHandler(OnRejectTestClick)) { Tag = new RowInfo(view, rowHandle) });
+            menuItems.Add(new DXMenuItem("Cancel Test Rejection [ Shift+F11 ]", new EventHandler(OnTestRejectionCancellationClickAsync)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Show test history [  ]", new EventHandler(OnShowTestHistoryClick)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Show reruns [ F6 ]", new EventHandler(OnShowRerunsClick)) { Tag = new RowInfo(view, rowHandle) });
             return menuItems;
+        }
+
+        private async void OnTestRejectionCancellationClickAsync(object sender, EventArgs e)
+        {
+            var TestData = GetTestForMenu(sender, e);
+            try
+            {
+                await _viewModel.CancelTestRejection(TestData);
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show($"Error cancelling test rejection\n{ex.Message}");
+            }
         }
 
         /// <summary>
