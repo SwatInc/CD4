@@ -57,10 +57,12 @@
     <Compile Include="DataAccess\AnalysisRequestDataAccess.cs" />
     <Compile Include="DataAccess\AuthenticationDataAccess.cs" />
     <Compile Include="DataAccess\ClinicalDetailsDataAccess.cs" />
+    <Compile Include="DataAccess\CommentsDataAccess.cs" />
     <Compile Include="DataAccess\DataAccessBase.cs" />
     <Compile Include="DataAccess\IAnalysisRequestDataAccess.cs" />
     <Compile Include="DataAccess\IAuthenticationDataAccess.cs" />
     <Compile Include="DataAccess\IClinicalDetailsDataAccess.cs" />
+    <Compile Include="DataAccess\ICommentsDataAccess.cs" />
     <Compile Include="DataAccess\IPatientDataAccess.cs" />
     <Compile Include="DataAccess\IReferenceRangeDataAccess.cs" />
     <Compile Include="DataAccess\IReportsDataAccess.cs" />
@@ -92,8 +94,11 @@
     <Compile Include="Models\ClinicalDetailsModel.cs" />
     <Compile Include="Models\ClinicalDetailsSelectionModel.cs" />
     <Compile Include="Models\CodifiedResultsModel.cs" />
+    <Compile Include="Models\CommentsSelectionModel.cs" />
     <Compile Include="Models\CompleteRequestSearchResultsModel.cs" />
+    <Compile Include="Models\GenericModelAndListModel.cs" />
     <Compile Include="Models\ResultReferenceRangeModel.cs" />
+    <Compile Include="Models\SampleAndResultStatusAndResultModel.cs" />
     <Compile Include="Models\UpdatedResultAndStatusModel.cs" />
     <Compile Include="Models\WorkstationPrintersInfoModel.cs" />
     <Compile Include="Models\ExistingRequestsPatientComparisionArgs.cs" />

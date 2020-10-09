@@ -1,8 +1,6 @@
 ﻿using CD4.DataLibrary.Models;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CD4.DataLibrary.DataAccess
@@ -19,7 +17,50 @@ namespace CD4.DataLibrary.DataAccess
         {
             var storedProcedure = "[dbo].[usp_GetAuditTrailByCin]";
             var parameter = new { Cin = cin };
-            return  await LoadDataWithParameterAsync<AuditTrailModel, dynamic>(storedProcedure, parameter);
+            return await LoadDataWithParameterAsync<AuditTrailModel, dynamic>(storedProcedure, parameter);
+        }
+
+        public async Task<SampleAndResultStatusAndResultModel> RejectSampleAsync(string cin, int commentListId, int userId)
+        {
+            var storedProcedure = "[dbo].[usp_RejectSampleByCin]";
+            var parameter = new { Cin = cin, CommentListId = commentListId, UserId = userId };
+            try
+            {
+                var output = await QueryMultiple_GetModelAndListWithParameterAsync<StatusUpdatedSampleModel, UpdatedResultAndStatusModel, dynamic>
+                    (storedProcedure, parameter);
+
+                return new SampleAndResultStatusAndResultModel()
+                {
+                    SampleData = output.T1,
+                    ResultStatus = output.U1
+                };
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<SampleAndResultStatusAndResultModel> CancelSampleRejectionByCinAsync(string cin, int userId)
+        {
+            var storedProcedure = "[dbo].[usp_CancelSampleRejectionByCin]";
+            var parameter = new { Cin = cin, UserId = userId };
+            try
+            {
+                var output = await QueryMultiple_GetModelAndListWithParameterAsync<StatusUpdatedSampleModel, UpdatedResultAndStatusModel, dynamic>
+                    (storedProcedure, parameter);
+
+                return new SampleAndResultStatusAndResultModel()
+                {
+                    SampleData = output.T1,
+                    ResultStatus = output.U1
+                };
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
     }
 }

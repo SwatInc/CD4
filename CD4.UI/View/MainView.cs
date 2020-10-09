@@ -73,6 +73,7 @@ namespace CD4.UI.View
         private void LoadAuthenticationUi()
         {
            this.OpenMdiForm<AuthenticationView>();
+            this.ribbon.Visible = false;
         }
 
         private void OpenResultEntryView(object sender, ItemClickEventArgs e)
@@ -176,6 +177,7 @@ namespace CD4.UI.View
         {
             //Todo: assign this via MainViewModel by databinding
             barStaticItemUsernameAndRole.Caption = $"Welcome {e.FullName} ({e.UserRole})";
+            ribbon.Visible = true;
         }
 
         private void ResultView_OnGenerateReportByCin(object sender, string cin)

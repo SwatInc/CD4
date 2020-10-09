@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CD4.UI.View
@@ -18,11 +19,12 @@ namespace CD4.UI.View
     public partial class ResultEntryView : XtraForm
     {
         private readonly IResultEntryViewModel _viewModel;
+        private readonly IRejectionCommentViewModel _rejectionCommentViewModel;
         System.Windows.Forms.Timer dataRefreshTimer = new System.Windows.Forms.Timer() { Enabled = true, Interval = 1000 };
 
         public event EventHandler<string> GenerateReportByCin;
 
-        public ResultEntryView(IResultEntryViewModel viewModel)
+        public ResultEntryView(IResultEntryViewModel viewModel, IRejectionCommentViewModel rejectionCommentViewModel)
         {
             InitializeComponent();
             //Initialize grid columns
@@ -30,6 +32,7 @@ namespace CD4.UI.View
             SetSampleGrid_SampleColumns();
 
             _viewModel = viewModel;
+            _rejectionCommentViewModel = rejectionCommentViewModel;
             InitializeBinding();
 
             SizeChanged += OnSizeChangedAdjustSplitContainers;
@@ -396,9 +399,33 @@ namespace CD4.UI.View
         {
             var menuItems = new List<DXMenuItem>();
             menuItems.Add(new DXMenuItem("Validate Sample [ F7 ]", new EventHandler(OnValidateSampleClick)) { Tag = new RowInfo(view, rowHandle) });
-            menuItems.Add(new DXMenuItem("Reject Sample [ Shift+F11 ]", new EventHandler(OnRejectSampleClick)) { Tag = new RowInfo(view, rowHandle) });
+            menuItems.Add(new DXMenuItem("Reject Sample [ Shift+F11 ]", new EventHandler(OnRejectSampleClickAsync)) { Tag = new RowInfo(view, rowHandle) });
+            menuItems.Add(new DXMenuItem("Cancel Sample Rejection [ Ctlr+Shift+F11 ]", new EventHandler(OnCancelRejectSampleClickAsync)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Sample Audit Trail [ F12 ]", new EventHandler(OnSampleAuditTrailClick)) { Tag = new RowInfo(view, rowHandle) });
             return menuItems;
+        }
+
+        private async void OnCancelRejectSampleClickAsync(object sender, EventArgs e)
+        {
+            var sample = GetSampleForMenu(sender, e);
+            Debug.WriteLine("Cancelling sample rejection: " + sample.Cin);
+
+            if (_viewModel.CanCancelSampleRejection(sample))
+            {
+                try
+                {
+                    await _viewModel.CancelSampleRejection(sample.Cin);
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.Message);
+                }
+            }
+            else
+            {
+                XtraMessageBox.Show("Cannot cancel sample rejection since the sample is not rejected or does not have any rejected tests");
+            }
+
         }
 
         /// <summary>
@@ -433,9 +460,31 @@ namespace CD4.UI.View
             var menuItems = new List<DXMenuItem>();
             menuItems.Add(new DXMenuItem("Validate Test [ F11 ]", new EventHandler(OnValidateTestClick)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Reject Test [ Shift+F11 ]", new EventHandler(OnRejectTestClick)) { Tag = new RowInfo(view, rowHandle) });
+            menuItems.Add(new DXMenuItem("Cancel Test Rejection [ Shift+F11 ]", new EventHandler(OnTestRejectionCancellationClickAsync)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Show test history [  ]", new EventHandler(OnShowTestHistoryClick)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Show reruns [ F6 ]", new EventHandler(OnShowRerunsClick)) { Tag = new RowInfo(view, rowHandle) });
             return menuItems;
+        }
+
+        private async void OnTestRejectionCancellationClickAsync(object sender, EventArgs e)
+        {
+            var TestData = GetTestForMenu(sender, e);
+            if (_viewModel.CanCancelTestRejection(TestData))
+            {
+                try
+                {
+                    await _viewModel.CancelTestRejection(TestData);
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show($"Error cancelling test rejection\n{ex.Message}");
+                }
+            }
+            else
+            {
+                XtraMessageBox.Show("Cannot cancel test rejection, the test is not rejected!");
+            }
+
         }
 
         /// <summary>
@@ -457,10 +506,37 @@ namespace CD4.UI.View
         /// <summary>
         /// call the view model to reject the test
         /// </summary>
-        private void OnRejectTestClick(object sender, EventArgs e)
+        private async void OnRejectTestClick(object sender, EventArgs e)
         {
             var testToReject = GetTestForMenu(sender, e);
             Debug.WriteLine($"Rejecting Test: {testToReject.Cin}, Test: {testToReject.Test}, Result: {testToReject.Result}");
+
+            //Check whether the test can be rejected
+            var canReject = _viewModel.CanRejectTest(testToReject);
+            if (!canReject)
+            {
+                XtraMessageBox.Show($"Test, {testToReject.Test}, cannot be rejected because it is either registered or validated or rejected.");
+                return;
+            }
+            try
+            {
+                _rejectionCommentViewModel.ReasonType = RejectionReasonType.Test; //assign test rejection reasons from list
+                var dialog = new RejectionCommentView(_rejectionCommentViewModel);
+                dialog.ShowDialog();
+                if (dialog.DialogResult != null)
+                {
+                    if (dialog.DialogResult > 0)
+                    {
+                        await _viewModel.RejectTestAsync(testToReject, (int)dialog.DialogResult);
+                    }
+                }
+                dialog.Close();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+
         }
 
         /// <summary>
@@ -488,10 +564,35 @@ namespace CD4.UI.View
         /// <summary>
         /// Call the view model to reject the sample
         /// </summary>
-        void OnRejectSampleClick(object sender, EventArgs e)
+         async void OnRejectSampleClickAsync(object sender, EventArgs e)
         {
             var sampleToReject = GetSampleForMenu(sender, e);
             Debug.WriteLine("Rejecting sample: " + sampleToReject.Cin);
+            //Check whether the sample can be rejected
+            var canReject = _viewModel.CanRejectSample(sampleToReject);
+            if (!canReject)
+            {
+                XtraMessageBox.Show($"Sample, {sampleToReject.Cin}, cannot be rejected because it is either registered or validated or rejected.");
+                return;
+            }
+            try
+            {
+                _rejectionCommentViewModel.ReasonType = RejectionReasonType.Sample;
+                var dialog = new RejectionCommentView(_rejectionCommentViewModel);
+                dialog.ShowDialog();
+                if (dialog.DialogResult != null)
+                {
+                    if (dialog.DialogResult > 0)
+                    {
+                        await _viewModel.RejectSampleAsync(sampleToReject.Cin, (int)dialog.DialogResult);
+                    }
+                }
+                dialog.Close();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
         }
 
         /// <summary>

@@ -69,7 +69,9 @@
     <Compile Include="Model\AuditTrailModel.cs" />
     <Compile Include="Model\Authority.cs" />
     <Compile Include="Model\AuthorizeDetailEventArgs.cs" />
+    <Compile Include="Model\CommentsSelectionModel.cs" />
     <Compile Include="Model\PatientModel.cs" />
+    <Compile Include="Model\RejectionReasonType.cs" />
     <Compile Include="Model\ResultModel.cs" />
     <Compile Include="Model\RequestSampleModel.cs" />
     <Compile Include="Model\StatusModel.cs" />
@@ -116,6 +118,7 @@
     <Compile Include="ViewModel\IPatientSearchResultsViewModel.cs" />
     <Compile Include="ViewModel\IPrinterSettingsViewModel.cs" />
     <Compile Include="ViewModel\IProfilesViewModel.cs" />
+    <Compile Include="ViewModel\IRejectionCommentViewModel.cs" />
     <Compile Include="ViewModel\IResultEntryViewModel.cs" />
     <Compile Include="ViewModel\IScientistViewModel.cs" />
     <Compile Include="ViewModel\ISitesViewModel.cs" />
@@ -125,6 +128,7 @@
     <Compile Include="ViewModel\PatientSearchResultsViewModel.cs" />
     <Compile Include="ViewModel\PrinterSettingsViewModel.cs" />
     <Compile Include="ViewModel\ProfilesViewModel.cs" />
+    <Compile Include="ViewModel\RejectionCommentViewModel.cs" />
     <Compile Include="ViewModel\ResultEntryViewModel.cs" />
     <Compile Include="ViewModel\ScientistViewModel.cs" />
     <Compile Include="ViewModel\SitesViewModel.cs" />

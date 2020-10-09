@@ -198,5 +198,75 @@ namespace CD4.DataLibrary.DataAccess
             var parameter = new { ResultId = resultId, SampleStatus = sampleStatus, UserId = 1 };
             return await SelectInsertOrUpdateAsync<bool, dynamic>(storedProcedure, parameter);
         }
+
+        /// <summary>
+        /// Reject test by result Id
+        /// </summary>
+        /// <param name="resultId">The result Id for the test</param>
+        /// <param name="cin">The CIN of the sample for which the test belongs to</param>
+        /// <param name="commentListId">The comment to be inserted to the test</param>
+        /// <param name="userId">The user Id of the logged in user</param>
+        /// <returns>An instance of SampleAndResultStatusAndResultModel</returns>
+        public async Task<SampleAndResultStatusAndResultModel> RejectTestByResultId(int resultId, string cin, int commentListId, int userId)
+        {
+            var storedProcedure = "[dbo].[usp_RejectTest]";
+            var parameters = new
+            {
+                ResultId = resultId,
+                Cin = cin,
+                CommentListId  = commentListId,
+                UserId = userId
+            };
+
+            try
+            {
+                var output = await QueryMultiple_GetModelAndListWithParameterAsync<StatusUpdatedSampleModel, UpdatedResultAndStatusModel, dynamic>
+                    (storedProcedure, parameters);
+
+                return new SampleAndResultStatusAndResultModel()
+                {
+                    SampleData = output.T1,
+                    ResultStatus = output.U1
+                };
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// Cancel test rejection by result Id
+        /// </summary>
+        /// <param name="resultId">The result Id of the test to cancel rejection</param>
+        /// <param name="userId">The Id of the user doing the rejection</param>
+        /// <returns>An instance of sample and test data in SampleAndResultStatusAndResultModel</returns>
+        public async Task<SampleAndResultStatusAndResultModel> CancelTestRejectionByResultId(int resultId, int userId)
+        {
+            var storedProcedure = "[dbo].[usp_CancelTestRejectionByResultId]";
+            var parameters = new
+            {
+                ResultId = resultId,
+                UserId = userId
+            };
+
+            try
+            {
+                var output = await QueryMultiple_GetModelAndListWithParameterAsync<StatusUpdatedSampleModel, UpdatedResultAndStatusModel, dynamic>
+                    (storedProcedure, parameters);
+
+                return new SampleAndResultStatusAndResultModel()
+                {
+                    SampleData = output.T1,
+                    ResultStatus = output.U1
+                };
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

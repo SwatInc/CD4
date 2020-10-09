@@ -233,7 +233,7 @@ namespace CD4.DataLibrary.DataAccess
         public async Task<bool> MarkSampleCollected(string cin)
         {
             //set the stored procedure name
-            var storedProcedure = "[dbo].[usp_MarkSampleCollected]";
+            var storedProcedure = "[dbo].[usp_DecideToAndExecuteMarkSampleCollected]";
             //set the parameters for the stored procedure
             var parameters = new { Cin = cin, UserId =1 };
             try
