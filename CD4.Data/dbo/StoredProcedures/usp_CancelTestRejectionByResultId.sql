@@ -10,6 +10,7 @@ BEGIN
 
 				DECLARE @LoggedInUser varchar(256);
 				DECLARE @SampleTrackingTypeId int;
+				DECLARE @NumberNonValdatedNonRejectedResults int;
 				DECLARE @TestTrackingTypeId int;	
 				DEClARE @Cin varchar(50);
 				DECLARE @ResultIds TABLE (
@@ -26,10 +27,16 @@ BEGIN
 				WHERE [StatusId] = 7 -- 7 is rejected
 					  AND [ResultId] = @ResultId;
 
+				-- check whether a sample marked as validated can be marked as collected.
+				SELECT @NumberNonValdatedNonRejectedResults = COUNT([R].[Id]) 
+				FROM [dbo].[Result] [R]
+				INNER JOIN [dbo].[ResultTracking] [RT] ON [R].[Id] = [RT].[ResultId]
+				WHERE  [RT].[StatusId] <> 7 AND  [RT].[StatusId] <> 5 AND [R].[Sample_Cin] = @Cin;
+				
 				-- mark the sample as collected if rejected.
 				UPDATE [dbo].[SampleTracking]
 				SET [StatusId] = 2 -- 2 is collected
-				WHERE [SampleCin] = @Cin AND [StatusId] = 7;
+				WHERE [SampleCin] = @Cin AND ([StatusId] = 7 OR [StatusId] = 5) AND @NumberNonValdatedNonRejectedResults > 0;
 
 				-- remove the test rejection comments
 				DELETE FROM [dbo].[Comment]
