@@ -409,14 +409,23 @@ namespace CD4.UI.View
         {
             var sample = GetSampleForMenu(sender, e);
             Debug.WriteLine("Cancelling sample rejection: " + sample.Cin);
-            try
+
+            if (_viewModel.CanCancelSampleRejection(sample))
             {
-                await _viewModel.CancelSampleRejection(sample.Cin);
+                try
+                {
+                    await _viewModel.CancelSampleRejection(sample.Cin);
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.Message);
+                }
             }
-            catch (Exception ex)
+            else
             {
-                XtraMessageBox.Show(ex.Message);
+                XtraMessageBox.Show("Cannot cancel sample rejection since the sample is not rejected or does not have any rejected tests");
             }
+
         }
 
         /// <summary>
@@ -460,14 +469,22 @@ namespace CD4.UI.View
         private async void OnTestRejectionCancellationClickAsync(object sender, EventArgs e)
         {
             var TestData = GetTestForMenu(sender, e);
-            try
+            if (_viewModel.CanCancelTestRejection(TestData))
             {
-                await _viewModel.CancelTestRejection(TestData);
+                try
+                {
+                    await _viewModel.CancelTestRejection(TestData);
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show($"Error cancelling test rejection\n{ex.Message}");
+                }
             }
-            catch (Exception ex)
+            else
             {
-                XtraMessageBox.Show($"Error cancelling test rejection\n{ex.Message}");
+                XtraMessageBox.Show("Cannot cancel test rejection, the test is not rejected!");
             }
+
         }
 
         /// <summary>

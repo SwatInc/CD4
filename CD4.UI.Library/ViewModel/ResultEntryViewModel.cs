@@ -809,6 +809,45 @@ namespace CD4.UI.Library.ViewModel
             }
         }
 
+        /// <summary>
+        /// checks whether it is okay to cancel sample rejection.
+        /// </summary>
+        /// <param name="sample"> The request sample model of the sample to reject</param>
+        /// <returns>True if it is okay to cancel sample rejection</returns>
+        public bool CanCancelSampleRejection(RequestSampleModel sample)
+        {
+            //if sample is marked as rejected, it is okay to cancel sample rejection
+            if (sample.StatusIconId == 7) return true;
+
+            //get all the tests for sample
+            var results = AllResultData.Where(x => x.Cin == sample.Cin);
+            //if no tests exist, cannot cancel rejection.
+            if (results is null) return false;
+
+            //check whether any test is rejected.
+            foreach (var item in results)
+            {
+                if (item.StatusIconId == 7)
+                {
+                    //if rejected test exist, can cancel rejection
+                    return true;
+                }
+            }
+
+            //if no tests rejected, cannot cancel rejection
+            return false;
+        }
+
+        /// <summary>
+        /// evaluate whether the specific test be rejected
+        /// </summary>
+        /// <param name="resultToEvaluateForRejection"></param>
+        /// <returns></returns>
+        public bool CanCancelTestRejection(ResultModel resultToEvaluateForRejection)
+        {
+            return resultToEvaluateForRejection.StatusIconId == 7;
+        }
+
         #endregion
 
     }
