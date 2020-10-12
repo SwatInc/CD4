@@ -1,6 +1,7 @@
 ﻿using CD4.UI.Library.Model;
 using CD4.UI.Library.ViewModel;
 using CD4.UI.UiSpecificModels;
+using DevExpress.Utils.DirectXPaint;
 using DevExpress.Utils.Menu;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Columns;
@@ -357,6 +358,9 @@ namespace CD4.UI.View
         /// </summary>
         private void ShowTestPopupMenu(object sender, PopupMenuShowingEventArgs e)
         {
+            //show the menu only if the data displayed is that of results
+            if (((GridView)sender).DataSource.GetType() != _viewModel.SelectedResultData.GetType()) return;
+
             if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
             {
                 //row handle
