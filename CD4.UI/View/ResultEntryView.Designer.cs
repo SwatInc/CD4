@@ -30,7 +30,6 @@ namespace CD4.UI.View
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelControlPatientName = new LabelControl();
             this.labelControlNationalId = new DevExpress.XtraEditors.LabelControl();
             this.labelControlAgeSex = new DevExpress.XtraEditors.LabelControl();
             this.labelControlBirthdate = new DevExpress.XtraEditors.LabelControl();
@@ -59,6 +58,8 @@ namespace CD4.UI.View
             this.dateEditLoadWorksheetFrom = new DevExpress.XtraEditors.DateEdit();
             this.simpleButtonReport = new DevExpress.XtraEditors.SimpleButton();
             this.gridColumnSampleStatus = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.graphsUserControl = new CD4.UI.UserControls.GraphsUserControl();
+            this.labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).BeginInit();
             this.splitContainerControlPatient.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlSelectedPatientRequestClinicalDetailsArea)).BeginInit();
@@ -79,6 +80,22 @@ namespace CD4.UI.View
             ((System.ComponentModel.ISupportInitialize)(this.dateEditLoadWorksheetFrom.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditLoadWorksheetFrom.Properties)).BeginInit();
             this.SuspendLayout();
+            // 
+            // labelControlPatientName
+            // 
+            labelControlPatientName.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.Appearance.Options.UseFont = true;
+            labelControlPatientName.AppearanceDisabled.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearanceDisabled.Options.UseFont = true;
+            labelControlPatientName.AppearanceHovered.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearanceHovered.Options.UseFont = true;
+            labelControlPatientName.AppearancePressed.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearancePressed.Options.UseFont = true;
+            labelControlPatientName.Location = new System.Drawing.Point(12, 23);
+            labelControlPatientName.Name = "labelControlPatientName";
+            labelControlPatientName.Size = new System.Drawing.Size(118, 21);
+            labelControlPatientName.TabIndex = 0;
+            labelControlPatientName.Text = "PATIENT NAME";
             // 
             // labelControlNationalId
             // 
@@ -205,22 +222,6 @@ namespace CD4.UI.View
             this.listBoxControlClinicalDetails.Size = new System.Drawing.Size(223, 66);
             this.listBoxControlClinicalDetails.TabIndex = 9;
             // 
-            // labelControlPatientName
-            // 
-            labelControlPatientName.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.Appearance.Options.UseFont = true;
-            labelControlPatientName.AppearanceDisabled.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.AppearanceDisabled.Options.UseFont = true;
-            labelControlPatientName.AppearanceHovered.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.AppearanceHovered.Options.UseFont = true;
-            labelControlPatientName.AppearancePressed.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.AppearancePressed.Options.UseFont = true;
-            labelControlPatientName.Location = new System.Drawing.Point(12, 23);
-            labelControlPatientName.Name = "labelControlPatientName";
-            labelControlPatientName.Size = new System.Drawing.Size(118, 21);
-            labelControlPatientName.TabIndex = 0;
-            labelControlPatientName.Text = "PATIENT NAME";
-            // 
             // splitContainerControlFunctions
             // 
             this.splitContainerControlFunctions.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -245,6 +246,7 @@ namespace CD4.UI.View
             this.splitContainerControlSamplesAndTest.Panel1.Text = "Panel1";
             this.splitContainerControlSamplesAndTest.Panel2.Controls.Add(this.progressPanelTests);
             this.splitContainerControlSamplesAndTest.Panel2.Controls.Add(this.gridControlTests);
+            this.splitContainerControlSamplesAndTest.Panel2.Controls.Add(this.graphsUserControl);
             this.splitContainerControlSamplesAndTest.Panel2.Text = "Panel2";
             this.splitContainerControlSamplesAndTest.Size = new System.Drawing.Size(839, 224);
             this.splitContainerControlSamplesAndTest.SplitterPosition = 400;
@@ -396,6 +398,14 @@ namespace CD4.UI.View
             // 
             this.gridColumnSampleStatus.Name = "gridColumnSampleStatus";
             // 
+            // graphsUserControl1
+            // 
+            this.graphsUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.graphsUserControl.Location = new System.Drawing.Point(0, 0);
+            this.graphsUserControl.Name = "graphsUserControl";
+            this.graphsUserControl.Size = new System.Drawing.Size(434, 224);
+            this.graphsUserControl.TabIndex = 4;
+            // 
             // ResultEntryView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -461,5 +471,6 @@ namespace CD4.UI.View
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnSampleStatus;
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelSamples;
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelTests;
+        private UserControls.GraphsUserControl graphsUserControl;
     }
 }

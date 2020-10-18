@@ -15,9 +15,13 @@ namespace CD4.UI.UserControls
 {
     public partial class GraphsUserControl : XtraUserControl
     {
+        #region Private Fields
         private List<TestHistoryModel> _testHistories;
         private ResultType _resultType;
 
+        #endregion
+
+        #region Default Constructor
         public GraphsUserControl()
         {
             InitializeComponent();
@@ -28,6 +32,9 @@ namespace CD4.UI.UserControls
             rangeTrackBarControl.EditValueChanged += RangeTrackBarControl_EditValueChanged;
         }
 
+        #endregion
+
+        #region Event Handlers
         private void RangeTrackBarControl_EditValueChanged(object sender, EventArgs e)
         {
             dynamic editValue = rangeTrackBarControl.EditValue;
@@ -50,6 +57,89 @@ namespace CD4.UI.UserControls
                 FormatGraphLabels(GraphLabelFormatting.Results);
 
             }
+        }
+
+
+        #endregion
+
+        #region Private Methods
+        private int GetPointsForSlider()
+        {
+            return _testHistories.Count;
+        }
+
+        private void PlotData()
+        {
+            //prepare data
+            var seriesName = GetSeriesName();
+            //select view type
+            var viewType = GetSeriesViewType();
+            if (viewType.GetType() != typeof(ViewType))
+            {
+                XtraMessageBox.Show((string)viewType);
+                return;
+            };
+
+            //prep the series
+            Series series = new Series(seriesName, viewType)
+            {
+                DataSource = _testHistories,
+                ArgumentDataMember = nameof(TestHistoryModel.Number), //X-axis values member name
+            };
+
+            //set Y-axis values member name
+            series.ValueDataMembers.AddRange(new string[] { nameof(TestHistoryModel.Result) });
+            //set value scale type for Y-axis as Qualitative if values are codified, if numeric set scale type as numeric
+            if (viewType == ViewType.Line)
+            {
+                series.ValueScaleType = ScaleType.Numerical;
+                //make marker visible and make it a cross
+                ((LineSeriesView)series.View).MarkerVisibility = DevExpress.Utils.DefaultBoolean.True;
+                ((LineSeriesView)series.View).LineMarkerOptions.Kind = MarkerKind.Cross;
+            }
+            else
+            {
+                series.ValueScaleType = ScaleType.Qualitative;
+            }
+
+            //X-axis value acle type is always qualitative
+            series.ArgumentScaleType = ScaleType.Qualitative;
+
+            series.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True; //use this as a setting to toggle lables on graphs
+            series.Label.ResolveOverlappingMode = ResolveOverlappingMode.HideOverlapped;
+            //set Crosshair Label pattern for displaying when mouse hovers on a pointer to display result date and result
+            series.CrosshairLabelPattern = "{ResultDate}\r\n{Result}";
+            //set label pattern
+            series.Label.TextPattern = "{ResultDate}\r\n{Result}";
+            //add the series to the chart
+            testHistoryChartControl.Series.Add(series);
+
+            //enable scrolling on X-axis
+            XYDiagram diagram = (XYDiagram)testHistoryChartControl.Diagram;
+            diagram.AxisX.VisualRange.SetMinMaxValues("1", "10");
+            diagram.EnableAxisXScrolling = true;
+            diagram.ScrollingOptions.UseKeyboard = true;
+
+        }
+
+        private dynamic GetSeriesViewType()
+        {
+            switch (_resultType)
+            {
+                case ResultType.Numeric:
+                    return ViewType.Line;
+                case ResultType.Textual:
+                    return "Cannot plot historical graphs for textual data.";
+                case ResultType.Codified:
+                    return ViewType.Point;
+                default:
+                    return "The data type must be Numeric or Codified to plot a chart!";
+            }
+        }
+
+        private string GetSeriesName()
+        {
+            return _testHistories.FirstOrDefault().TestName;
         }
 
         private void FormatGraphLabels(GraphLabelFormatting labelFormat)
@@ -96,6 +186,9 @@ namespace CD4.UI.UserControls
             testHistoryChartControl.Series[0].LabelsVisibility = DevExpress.Utils.DefaultBoolean.True;
         }
 
+        #endregion
+
+        #region Public Methods
         public void InitializeChart(List<TestHistoryModel> testHistories, ResultType resultType)
         {
             _testHistories = testHistories;
@@ -118,86 +211,9 @@ namespace CD4.UI.UserControls
             rangeTrackBarControl.Value = new DevExpress.XtraEditors.Repository.TrackBarRange() { Maximum = maxNumberOfPoints, Minimum = maxNumberOfPoints - 10 };
         }
 
+        #endregion
 
-        private int GetPointsForSlider()
-        {
-            return _testHistories.Count;
-        }
-
-        private void PlotData()
-        {
-            //prepare data
-            var seriesName = GetSeriesName();
-            //select view type
-            var viewType = GetSeriesViewType();
-            if (viewType.GetType() != typeof(ViewType)) 
-            {
-                XtraMessageBox.Show((string)viewType);
-                return;
-            };
-
-            //prep the series
-            Series series = new Series(seriesName, viewType)
-            {
-                DataSource = _testHistories,
-                ArgumentDataMember = nameof(TestHistoryModel.Number), //X-axis values member name
-            };
-
-            //set Y-axis values member name
-            series.ValueDataMembers.AddRange(new string[] { nameof(TestHistoryModel.Result) });
-            //set value scale type for Y-axis as Qualitative if values are codified, if numeric set scale type as numeric
-            if (viewType == ViewType.Line)
-            {
-                series.ValueScaleType = ScaleType.Numerical;
-                //make marker visible and make it a cross
-                ((LineSeriesView)series.View).MarkerVisibility = DevExpress.Utils.DefaultBoolean.True;
-                ((LineSeriesView)series.View).LineMarkerOptions.Kind = MarkerKind.Cross;
-            }
-            else
-            {
-                series.ValueScaleType = ScaleType.Qualitative;
-            }
-
-            //X-axis value acle type is always qualitative
-            series.ArgumentScaleType = ScaleType.Qualitative;
-
-            series.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True; //use this as a setting to toggle lables on graphs
-            series.Label.ResolveOverlappingMode = ResolveOverlappingMode.HideOverlapped;
-            //set Crosshair Label pattern for displaying when mouse hovers on a pointer to display result date and result
-            series.CrosshairLabelPattern = "{ResultDate}\r\n{Result}";
-            //set label pattern
-            series.Label.TextPattern = "{ResultDate}\r\n{Result}";
-            //add the series to the chart
-            testHistoryChartControl.Series.Add(series);
-            
-            //enable scrolling on X-axis
-            XYDiagram diagram = (XYDiagram)testHistoryChartControl.Diagram;
-            diagram.AxisX.VisualRange.SetMinMaxValues("1", "10");
-            diagram.EnableAxisXScrolling = true;
-            diagram.ScrollingOptions.UseKeyboard = true;
-
-        }
-
-        private dynamic GetSeriesViewType()
-        {
-            switch (_resultType)
-            {
-                case ResultType.Numeric:
-                    return ViewType.Line;
-                case ResultType.Textual:
-                    return "Cannot plot historical graphs for textual data.";
-                case ResultType.Codified:
-                    return ViewType.Point;
-                default:
-                    return "The data type must be Numeric or Codified to plot a chart!";
-            }
-        }
-
-        private string GetSeriesName()
-        {
-            return _testHistories.FirstOrDefault().TestName;
-        }
-
+        #region Enums
         public enum ResultType
         {
             Numeric,
@@ -209,5 +225,8 @@ namespace CD4.UI.UserControls
             Results,
             ResultsWithResultDate
         }
+
+        #endregion
+
     }
 }
