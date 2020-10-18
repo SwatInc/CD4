@@ -504,7 +504,7 @@ namespace CD4.UI.View
         /// </summary>
         private void OnShowTestHistoryClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+
         }
 
         /// <summary>
