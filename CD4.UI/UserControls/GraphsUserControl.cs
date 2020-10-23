@@ -30,6 +30,18 @@ namespace CD4.UI.UserControls
             checkEditEnableGraphLabels.CheckedChanged += CheckEditEnableGraphLabels_CheckedChanged;
             toggleSwitchResultsAndResultsWithDates.Toggled += ToggleSwitchResultsAndResultsWithDates_Toggled;
             rangeTrackBarControl.EditValueChanged += RangeTrackBarControl_EditValueChanged;
+            this.VisibleChanged += ClearExistingPlotsOnHiding;
+        }
+
+        /// <summary>
+        /// Clears all existing plots when the user control is hidden.
+        /// </summary>
+        private void ClearExistingPlotsOnHiding(object sender, EventArgs e)
+        {
+            if (!Visible)
+            {
+                ClearAllCurrentPlots();
+            }
         }
 
         #endregion
@@ -66,6 +78,14 @@ namespace CD4.UI.UserControls
         private int GetPointsForSlider()
         {
             return _testHistories.Count;
+        }
+
+        /// <summary>
+        /// Clears all existing series plots in chartControl
+        /// </summary>
+        public void ClearAllCurrentPlots()
+        {
+            this.testHistoryChartControl.Series.Clear();
         }
 
         private void PlotData(string unit)
