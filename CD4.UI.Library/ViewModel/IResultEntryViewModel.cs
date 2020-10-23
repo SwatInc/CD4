@@ -41,5 +41,6 @@ namespace CD4.UI.Library.ViewModel
         Task CancelTestRejection(ResultModel testData);
         bool CanCancelSampleRejection(RequestSampleModel sample);
         bool CanCancelTestRejection(ResultModel resultToEvaluateForRejection);
+        Task<dynamic> GetResultHistoryAsync(ResultModel testRecord);
     }
 }

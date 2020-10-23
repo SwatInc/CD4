@@ -77,12 +77,12 @@
             this.xrLabel15 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel16 = new DevExpress.XtraReports.UI.XRLabel();
             this.DetailResults = new DevExpress.XtraReports.UI.DetailBand();
+            this.xrLabel19 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel17 = new DevExpress.XtraReports.UI.XRLabel();
             this.DetailReport = new DevExpress.XtraReports.UI.DetailReportBand();
             this.GroupHeaderDiscipline = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.xrLabel18 = new DevExpress.XtraReports.UI.XRLabel();
             this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.xrLabel19 = new DevExpress.XtraReports.UI.XRLabel();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
@@ -100,6 +100,7 @@
             this.xrPictureBoxLaboratorylogo.LocationFloat = new DevExpress.Utils.PointFloat(454.9849F, 30.12501F);
             this.xrPictureBoxLaboratorylogo.Name = "xrPictureBoxLaboratorylogo";
             this.xrPictureBoxLaboratorylogo.SizeF = new System.Drawing.SizeF(174.0151F, 34.87499F);
+            this.xrPictureBoxLaboratorylogo.Visible = false;
             // 
             // xrLabelAnalysisReport
             // 
@@ -613,6 +614,17 @@
             this.DetailResults.KeepTogether = true;
             this.DetailResults.Name = "DetailResults";
             // 
+            // xrLabel19
+            // 
+            this.xrLabel19.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DisplayNormalRange]")});
+            this.xrLabel19.LocationFloat = new DevExpress.Utils.PointFloat(505.8752F, 0F);
+            this.xrLabel19.Multiline = true;
+            this.xrLabel19.Name = "xrLabel19";
+            this.xrLabel19.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel19.SizeF = new System.Drawing.SizeF(115.6249F, 23F);
+            this.xrLabel19.Text = "xrLabel19";
+            // 
             // xrLabel17
             // 
             this.xrLabel17.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
@@ -664,17 +676,6 @@
             // bindingSource
             // 
             this.bindingSource.DataSource = typeof(CD4.UI.View.AnalysisRequestReport);
-            // 
-            // xrLabel19
-            // 
-            this.xrLabel19.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[DisplayNormalRange]")});
-            this.xrLabel19.LocationFloat = new DevExpress.Utils.PointFloat(505.8752F, 0F);
-            this.xrLabel19.Multiline = true;
-            this.xrLabel19.Name = "xrLabel19";
-            this.xrLabel19.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
-            this.xrLabel19.SizeF = new System.Drawing.SizeF(115.6249F, 23F);
-            this.xrLabel19.Text = "xrLabel19";
             // 
             // AnalysisReport
             // 

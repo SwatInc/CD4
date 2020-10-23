@@ -848,6 +848,19 @@ namespace CD4.UI.Library.ViewModel
             return resultToEvaluateForRejection.StatusIconId == 7;
         }
 
+        public async Task<dynamic> GetResultHistoryAsync(ResultModel testRecord)
+        {
+            try
+            {
+               return await _resultDataAccess.GetResultHistoryAync(testRecord.Id, testRecord.AnalysisRequestId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         #endregion
 
     }
