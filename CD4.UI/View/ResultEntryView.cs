@@ -82,6 +82,7 @@ namespace CD4.UI.View
         /// <param name="gridTestActiveDatasource">Active data source name</param>
         private void ChangeGridControlTestDatasource(ResultEntryViewModel.GridControlTestActiveDatasource gridTestActiveDatasource)
         {
+            //exit test history mode if in test history mode.
             switch (gridTestActiveDatasource)
             {
                 case ResultEntryViewModel.GridControlTestActiveDatasource.Tests:
@@ -101,6 +102,25 @@ namespace CD4.UI.View
             }
         }
 
+        /// <summary>
+        /// toggles controls visibility to show graphUserControl and hide grid control test or vice-versa depending on the IsTestHistoryMode
+        /// </summary>
+        /// <param name="IsTestHistoryMode">Pass true if state is in test history mode else pass false.</param>
+        private void ToggleUiVisibilityToTestHistoryMode(bool IsTestHistoryMode)
+        {
+            if (IsTestHistoryMode)
+            {
+                this.gridControlTests.Visible = false;
+                this.graphsUserControl.Visible = true;
+            }
+
+            if (!IsTestHistoryMode)
+            {
+                this.gridControlTests.Visible = true;
+                this.graphsUserControl.Visible = false;
+            }
+        }
+
         private void ChangeGridControlSampleDatasource(ResultEntryViewModel.GridControlSampleActiveDatasource gridControlSampleActiveDatasource)
         {
             switch (gridControlSampleActiveDatasource)
@@ -108,10 +128,14 @@ namespace CD4.UI.View
                 case ResultEntryViewModel.GridControlSampleActiveDatasource.Sample:
                     SetSampleGrid_Columns(gridControlSampleActiveDatasource);
                     gridControlSamples.DataSource = _viewModel.RequestData;
+                    ToggleUiVisibilityToTestHistoryMode(false);
+
                     break;
                 case ResultEntryViewModel.GridControlSampleActiveDatasource.TestHistory:
                     SetSampleGrid_Columns(gridControlSampleActiveDatasource);
                     gridControlSamples.DataSource = _viewModel.TestHistoryData;
+                    ToggleUiVisibilityToTestHistoryMode(true);
+
                     break;
                 default:
                     break;
@@ -361,8 +385,13 @@ namespace CD4.UI.View
                 case Keys.Shift:
                     break;
                 case Keys.Escape:
-                    this.graphsUserControl.Hide();
-                    this.gridControlTests.Visible = true;
+                    //if in test history mode, exit test history mode.
+                    if(_viewModel.GridSampleActiveDatasource == ResultEntryViewModel.GridControlSampleActiveDatasource.TestHistory)
+                    {
+                        _viewModel.GridSampleActiveDatasource = ResultEntryViewModel.GridControlSampleActiveDatasource.Sample;
+                        _viewModel.GridTestActiveDatasource = ResultEntryViewModel.GridControlTestActiveDatasource.Tests;
+                    }
+
                     break;
                 case Keys.Control:
                     break;
@@ -579,16 +608,13 @@ namespace CD4.UI.View
                     {
                         Number = item.Id,
                         Result = double.Parse(item.Result),
-                        ResultDate = ((DateTimeOffset)item.ResultDate).DateTime,
+                        ResultDate = item.ResultDate,
                         TestName = testRecord.Test 
                     });
                 }
                 this.graphsUserControl.InitializeChart(_viewModel.TestHistoryData,
                     UserControls.GraphsUserControl.ResultType.Numeric,
                     testRecord.Unit);
-
-                this.gridControlTests.Visible = false;
-                this.graphsUserControl.Show();
 
                 //change sample and test grid datasources
                 _viewModel.GridSampleActiveDatasource = ResultEntryViewModel.GridControlSampleActiveDatasource.TestHistory;
@@ -794,7 +820,7 @@ namespace CD4.UI.View
         private async void SelectedSampleChanged(object sender, FocusedRowChangedEventArgs e)
         {
             //Do not do anything if is test history view mode
-            if (_viewModel.GridSampleActiveDatasource == ResultEntryViewModel.GridControlSampleActiveDatasource.TestHistory) return;
+            if (gridControlSamples.DataSource != _viewModel.RequestData) return;
             //if tests data is not displayed on tests grid...
             if (_viewModel.GridTestActiveDatasource != ResultEntryViewModel.GridControlTestActiveDatasource.Tests)
             {
