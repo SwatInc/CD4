@@ -97,6 +97,7 @@
     <Compile Include="Models\CommentsSelectionModel.cs" />
     <Compile Include="Models\CompleteRequestSearchResultsModel.cs" />
     <Compile Include="Models\GenericModelAndListModel.cs" />
+    <Compile Include="Models\ResultHistoryModel.cs" />
     <Compile Include="Models\ResultReferenceRangeModel.cs" />
     <Compile Include="Models\SampleAndResultStatusAndResultModel.cs" />
     <Compile Include="Models\UpdatedResultAndStatusModel.cs" />

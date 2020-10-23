@@ -68,7 +68,7 @@ namespace CD4.UI.UserControls
             return _testHistories.Count;
         }
 
-        private void PlotData()
+        private void PlotData(string unit)
         {
             //prepare data
             var seriesName = GetSeriesName();
@@ -108,7 +108,7 @@ namespace CD4.UI.UserControls
             series.LabelsVisibility = DevExpress.Utils.DefaultBoolean.True; //use this as a setting to toggle lables on graphs
             series.Label.ResolveOverlappingMode = ResolveOverlappingMode.HideOverlapped;
             //set Crosshair Label pattern for displaying when mouse hovers on a pointer to display result date and result
-            series.CrosshairLabelPattern = "{ResultDate}\r\n{Result}";
+            series.CrosshairLabelPattern = "{ResultDate}\r\n{Result} " + unit;
             //set label pattern
             series.Label.TextPattern = "{ResultDate}\r\n{Result}";
             //add the series to the chart
@@ -189,7 +189,7 @@ namespace CD4.UI.UserControls
         #endregion
 
         #region Public Methods
-        public void InitializeChart(List<TestHistoryModel> testHistories, ResultType resultType)
+        public void InitializeChart(List<TestHistoryModel> testHistories, ResultType resultType, string unit)
         {
             _testHistories = testHistories;
             _resultType = resultType;
@@ -201,7 +201,7 @@ namespace CD4.UI.UserControls
             rangeTrackBarControl.Properties.Maximum = maxNumberOfPoints;
             rangeTrackBarControl.RefreshLabels();
             rangeTrackBarControl.Properties.ShowLabels = true;
-            PlotData();
+            PlotData(unit);
             SetGraphDisplayRange();
         }
 
