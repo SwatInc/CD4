@@ -308,6 +308,10 @@ namespace CD4.UI.View
                     break;
                 case Keys.Shift:
                     break;
+                case Keys.Escape:
+                    this.graphsUserControl.Hide();
+                    this.gridControlTests.Visible = true;
+                    break;
                 case Keys.Control:
                     break;
                 case Keys.Alt:
@@ -465,7 +469,7 @@ namespace CD4.UI.View
             menuItems.Add(new DXMenuItem("Validate Test [ F11 ]", new EventHandler(OnValidateTestClick)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Reject Test [ Shift+F11 ]", new EventHandler(OnRejectTestClick)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Cancel Test Rejection [ Shift+F11 ]", new EventHandler(OnTestRejectionCancellationClickAsync)) { Tag = new RowInfo(view, rowHandle) });
-            menuItems.Add(new DXMenuItem("Show test history [  ]", new EventHandler(OnShowTestHistoryClick)) { Tag = new RowInfo(view, rowHandle) });
+            menuItems.Add(new DXMenuItem("Show test history [  ]", new EventHandler(OnShowTestHistoryClickAsync)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Show reruns [ F6 ]", new EventHandler(OnShowRerunsClick)) { Tag = new RowInfo(view, rowHandle) });
             return menuItems;
         }
@@ -502,9 +506,46 @@ namespace CD4.UI.View
         /// <summary>
         /// call view model to show test history
         /// </summary>
-        private void OnShowTestHistoryClick(object sender, EventArgs e)
+        private async void OnShowTestHistoryClickAsync(object sender, EventArgs e)
         {
+            //shows the loading animation before initiating data access calls. This might take some time.
+            _viewModel.IsLoadingAnimationEnabled = true;
+            //Get the selected test record.
             var testRecord = GetTestForMenu(sender, e);
+            try
+            {
+                //call view model to request for test history data.
+                var data = await _viewModel.GetResultHistoryAsync(testRecord);
+                //initialize add data to a new TestHistoryModel required to pass data to graphUserControl
+                var testHistory = new List<TestHistoryModel>();
+                foreach (var item in data)
+                {
+                    testHistory.Add(new TestHistoryModel() 
+                    {
+                        Number = item.Id,
+                        Result = double.Parse(item.Result),
+                        ResultDate = ((DateTimeOffset)item.ResultDate).DateTime,
+                        TestName = testRecord.Test 
+                    });
+                }
+                this.graphsUserControl.InitializeChart(testHistory,
+                    UserControls.GraphsUserControl.ResultType.Numeric,
+                    testRecord.Unit);
+
+                this.gridControlTests.Visible = false;
+                this.graphsUserControl.Show();
+            }
+            catch (Exception ex)
+            {
+
+                XtraMessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                _viewModel.IsLoadingAnimationEnabled = false;
+            }
+
+
         }
 
         /// <summary>

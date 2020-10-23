@@ -51,6 +51,7 @@ namespace CD4.UI.View
             this.gridControlTests = new DevExpress.XtraGrid.GridControl();
             this.gridViewTests = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.repositoryItemLookUpEditCodifiedPhrases = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.graphsUserControl = new CD4.UI.UserControls.GraphsUserControl();
             this.groupControlFunctions = new DevExpress.XtraEditors.GroupControl();
             this.lookUpEditSampleStatusFilter = new DevExpress.XtraEditors.LookUpEdit();
             this.simpleButtonLoadWorksheet = new DevExpress.XtraEditors.SimpleButton();
@@ -58,8 +59,7 @@ namespace CD4.UI.View
             this.dateEditLoadWorksheetFrom = new DevExpress.XtraEditors.DateEdit();
             this.simpleButtonReport = new DevExpress.XtraEditors.SimpleButton();
             this.gridColumnSampleStatus = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.graphsUserControl = new CD4.UI.UserControls.GraphsUserControl();
-            this.labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
+            labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).BeginInit();
             this.splitContainerControlPatient.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlSelectedPatientRequestClinicalDetailsArea)).BeginInit();
@@ -80,22 +80,6 @@ namespace CD4.UI.View
             ((System.ComponentModel.ISupportInitialize)(this.dateEditLoadWorksheetFrom.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditLoadWorksheetFrom.Properties)).BeginInit();
             this.SuspendLayout();
-            // 
-            // labelControlPatientName
-            // 
-            labelControlPatientName.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.Appearance.Options.UseFont = true;
-            labelControlPatientName.AppearanceDisabled.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.AppearanceDisabled.Options.UseFont = true;
-            labelControlPatientName.AppearanceHovered.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.AppearanceHovered.Options.UseFont = true;
-            labelControlPatientName.AppearancePressed.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.AppearancePressed.Options.UseFont = true;
-            labelControlPatientName.Location = new System.Drawing.Point(12, 23);
-            labelControlPatientName.Name = "labelControlPatientName";
-            labelControlPatientName.Size = new System.Drawing.Size(118, 21);
-            labelControlPatientName.TabIndex = 0;
-            labelControlPatientName.Text = "PATIENT NAME";
             // 
             // labelControlNationalId
             // 
@@ -222,6 +206,22 @@ namespace CD4.UI.View
             this.listBoxControlClinicalDetails.Size = new System.Drawing.Size(223, 66);
             this.listBoxControlClinicalDetails.TabIndex = 9;
             // 
+            // labelControlPatientName
+            // 
+            labelControlPatientName.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.Appearance.Options.UseFont = true;
+            labelControlPatientName.AppearanceDisabled.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearanceDisabled.Options.UseFont = true;
+            labelControlPatientName.AppearanceHovered.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearanceHovered.Options.UseFont = true;
+            labelControlPatientName.AppearancePressed.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearancePressed.Options.UseFont = true;
+            labelControlPatientName.Location = new System.Drawing.Point(12, 23);
+            labelControlPatientName.Name = "labelControlPatientName";
+            labelControlPatientName.Size = new System.Drawing.Size(118, 21);
+            labelControlPatientName.TabIndex = 0;
+            labelControlPatientName.Text = "PATIENT NAME";
+            // 
             // splitContainerControlFunctions
             // 
             this.splitContainerControlFunctions.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -260,9 +260,10 @@ namespace CD4.UI.View
             this.progressPanelSamples.Caption = "Please Wait";
             this.progressPanelSamples.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.progressPanelSamples.Description = "Loading samples ...";
-            this.progressPanelSamples.Location = new System.Drawing.Point(111, 90);
+            this.progressPanelSamples.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressPanelSamples.Location = new System.Drawing.Point(0, 0);
             this.progressPanelSamples.Name = "progressPanelSamples";
-            this.progressPanelSamples.Size = new System.Drawing.Size(178, 63);
+            this.progressPanelSamples.Size = new System.Drawing.Size(400, 224);
             this.progressPanelSamples.TabIndex = 2;
             // 
             // gridControlSamples
@@ -290,9 +291,10 @@ namespace CD4.UI.View
             this.progressPanelTests.Caption = "Please Wait";
             this.progressPanelTests.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.progressPanelTests.Description = "Loading tests ...";
-            this.progressPanelTests.Location = new System.Drawing.Point(134, 90);
+            this.progressPanelTests.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressPanelTests.Location = new System.Drawing.Point(0, 0);
             this.progressPanelTests.Name = "progressPanelTests";
-            this.progressPanelTests.Size = new System.Drawing.Size(204, 63);
+            this.progressPanelTests.Size = new System.Drawing.Size(434, 224);
             this.progressPanelTests.TabIndex = 3;
             // 
             // gridControlTests
@@ -326,6 +328,14 @@ namespace CD4.UI.View
             this.repositoryItemLookUpEditCodifiedPhrases.NullText = "";
             this.repositoryItemLookUpEditCodifiedPhrases.ShowHeader = false;
             this.repositoryItemLookUpEditCodifiedPhrases.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            // 
+            // graphsUserControl
+            // 
+            this.graphsUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.graphsUserControl.Location = new System.Drawing.Point(0, 0);
+            this.graphsUserControl.Name = "graphsUserControl";
+            this.graphsUserControl.Size = new System.Drawing.Size(434, 224);
+            this.graphsUserControl.TabIndex = 4;
             // 
             // groupControlFunctions
             // 
@@ -397,14 +407,6 @@ namespace CD4.UI.View
             // gridColumnSampleStatus
             // 
             this.gridColumnSampleStatus.Name = "gridColumnSampleStatus";
-            // 
-            // graphsUserControl1
-            // 
-            this.graphsUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.graphsUserControl.Location = new System.Drawing.Point(0, 0);
-            this.graphsUserControl.Name = "graphsUserControl";
-            this.graphsUserControl.Size = new System.Drawing.Size(434, 224);
-            this.graphsUserControl.TabIndex = 4;
             // 
             // ResultEntryView
             // 
