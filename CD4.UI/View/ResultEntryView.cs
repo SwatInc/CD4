@@ -35,6 +35,7 @@ namespace CD4.UI.View
 
 
             _viewModel = viewModel;
+            _viewModel.TestHistoryData = new List<TestHistoryModel>();
             _rejectionCommentViewModel = rejectionCommentViewModel;
             InitializeBinding();
 
@@ -110,7 +111,7 @@ namespace CD4.UI.View
                     break;
                 case ResultEntryViewModel.GridControlSampleActiveDatasource.TestHistory:
                     SetSampleGrid_Columns(gridControlSampleActiveDatasource);
-                    gridControlSamples.DataSource = null;
+                    gridControlSamples.DataSource = _viewModel.TestHistoryData;
                     break;
                 default:
                     break;
@@ -390,6 +391,9 @@ namespace CD4.UI.View
         /// </summary>
         private void ShowSamplePopupMenu(object sender, PopupMenuShowingEventArgs e)
         {
+            //this popup menu dhoulf appear only if the sample list is displayed
+            if (_viewModel.GridSampleActiveDatasource != ResultEntryViewModel.GridControlSampleActiveDatasource.Sample) return;
+
             if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
             {
                 //row handle
@@ -568,10 +572,10 @@ namespace CD4.UI.View
                 //call view model to request for test history data.
                 var data = await _viewModel.GetResultHistoryAsync(testRecord);
                 //initialize add data to a new TestHistoryModel required to pass data to graphUserControl
-                var testHistory = new List<TestHistoryModel>();
+                _viewModel.TestHistoryData.Clear();
                 foreach (var item in data)
                 {
-                    testHistory.Add(new TestHistoryModel() 
+                    _viewModel.TestHistoryData.Add(new TestHistoryModel() 
                     {
                         Number = item.Id,
                         Result = double.Parse(item.Result),
@@ -579,7 +583,7 @@ namespace CD4.UI.View
                         TestName = testRecord.Test 
                     });
                 }
-                this.graphsUserControl.InitializeChart(testHistory,
+                this.graphsUserControl.InitializeChart(_viewModel.TestHistoryData,
                     UserControls.GraphsUserControl.ResultType.Numeric,
                     testRecord.Unit);
 

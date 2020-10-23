@@ -116,6 +116,7 @@ namespace CD4.UI.Library.ViewModel
             }
         }
         public List<RequestSampleModel> RequestData { get; set; }
+        public dynamic TestHistoryData { get; set; }
         public BindingList<ResultModel> SelectedResultData { get; set; }
         public List<Model.AuditTrailModel> SampleAuditTrail { get; set; }
         private List<ResultModel> AllResultData { get; set; }

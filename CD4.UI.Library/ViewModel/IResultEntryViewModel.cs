@@ -27,6 +27,7 @@ namespace CD4.UI.Library.ViewModel
         ResultEntryViewModel.GridControlTestActiveDatasource GridTestActiveDatasource { get; set; }
         List<AuditTrailModel> SampleAuditTrail { get; set; }
         ResultEntryViewModel.GridControlSampleActiveDatasource GridSampleActiveDatasource { get; set; }
+        dynamic TestHistoryData { get; set; }
 
         event PropertyChangedEventHandler PropertyChanged;
         event EventHandler RequestDataRefreshed;
