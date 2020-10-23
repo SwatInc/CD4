@@ -31,7 +31,7 @@ BEGIN
 			[P].[Id] IN 
 				(SELECT [PatientId] AS [Id] FROM [dbo].[AnalysisRequest] WHERE [Id] = @AnalysisRequestId)
 		)
-	ORDER BY [ResultDate] DESC;
+	ORDER BY [ResultDate];
 
 	SELECT [Id], [Result],[ResultDate] FROM @TestHistoryData;
 END
