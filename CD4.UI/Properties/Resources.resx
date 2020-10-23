@@ -130,4 +130,7 @@
   <data name="TestColumns" xml:space="preserve">
     <value>[{"Caption":"Test","FieldName":"Test","AllowEdit":false,"Name":"gridColumnTestName","Visible":true,"VisibleIndex":0,"Width":109},{"Caption":" ","FieldName":"StatusIcon","AllowEdit":false,"Name":"gridColumnStatusIcon","Visible":true,"VisibleIndex":1,"Width":36},{"Caption":"Result","FieldName":"Result","AllowEdit":true,"Name":"gridColumnResult","Visible":true,"VisibleIndex":2,"Width":109},{"Caption":"Unit","FieldName":"Unit","AllowEdit":false,"Name":"gridColumnUnit","Visible":true,"VisibleIndex":3,"Width":170},{"Caption":"Ref. Code","FieldName":"ReferenceCode","AllowEdit":false,"Name":"gridColumnReferenceCode","Visible":false,"VisibleIndex":4,"Width":1},{"Caption":"Is Delta OK","FieldName":"IsDeltaOk","AllowEdit":false,"Name":"gridColumnIsDeltaOk","Visible":false,"VisibleIndex":5,"Width":1}]</value>
   </data>
+  <data name="TestHistoryColumns" xml:space="preserve">
+    <value>[{"Caption":"Seq.","FieldName":"Number","AllowEdit":false,"Name":"gridColumnNumber","Visible":true,"VisibleIndex":0,"Width":40},{"Caption":"Assay","FieldName":"TestName","AllowEdit":false,"Name":"gridColumnTestName","Visible":true,"VisibleIndex":1,"Width":100},{"Caption":"Result","FieldName":"Result","AllowEdit":false,"Name":"gridColumnResult","Visible":true,"VisibleIndex":2,"Width":100},{"Caption":"Result Date","FieldName":"ResultDate","AllowEdit":false,"Name":"gridColumnResultDate","Visible":true,"VisibleIndex":3,"Width":150}]</value>
+  </data>
 </root>

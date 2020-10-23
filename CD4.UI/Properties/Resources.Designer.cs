@@ -96,5 +96,14 @@ namespace CD4.UI.Properties {
                 return ResourceManager.GetString("TestColumns", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [{&quot;Caption&quot;:&quot;Seq.&quot;,&quot;FieldName&quot;:&quot;Number&quot;,&quot;AllowEdit&quot;:false,&quot;Name&quot;:&quot;gridColumnNumber&quot;,&quot;Visible&quot;:true,&quot;VisibleIndex&quot;:0,&quot;Width&quot;:40},{&quot;Caption&quot;:&quot;Assay&quot;,&quot;FieldName&quot;:&quot;TestName&quot;,&quot;AllowEdit&quot;:false,&quot;Name&quot;:&quot;gridColumnTestName&quot;,&quot;Visible&quot;:true,&quot;VisibleIndex&quot;:1,&quot;Width&quot;:100},{&quot;Caption&quot;:&quot;Result&quot;,&quot;FieldName&quot;:&quot;Result&quot;,&quot;AllowEdit&quot;:false,&quot;Name&quot;:&quot;gridColumnResult&quot;,&quot;Visible&quot;:true,&quot;VisibleIndex&quot;:2,&quot;Width&quot;:100},{&quot;Caption&quot;:&quot;Result Date&quot;,&quot;FieldName&quot;:&quot;ResultDate&quot;,&quot;AllowEdit&quot;:false,&quot;Name&quot;:&quot;gridColumnResultDate&quot;,&quot;Visible&quot;:true,&quot;Visible [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string TestHistoryColumns {
+            get {
+                return ResourceManager.GetString("TestHistoryColumns", resourceCulture);
+            }
+        }
     }
 }

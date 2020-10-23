@@ -49,7 +49,7 @@ namespace CD4.UI.View
             _viewModel.PropertyChanged += _viewModel_PropertyChanged;
             gridViewSamples.PopupMenuShowing += ShowSamplePopupMenu;
             gridViewTests.PopupMenuShowing += ShowTestPopupMenu;
-            this.KeyUp += ResultEntryView_KeyUp;
+            KeyUp += ResultEntryView_KeyUp;
             lookUpEditSampleStatusFilter.EditValueChanged += LookUpEditSampleStatusFilter_EditValueChanged;
         }
 
