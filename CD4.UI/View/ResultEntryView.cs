@@ -838,6 +838,7 @@ namespace CD4.UI.View
         /// <returns>Returns selected Cin or null</returns>
         private string GetSelectedCin()
         {
+            if (gridControlSamples.DataSource != _viewModel.RequestData) return null;
             //Get row handles of selected rows
             var selectedRowHandles = gridViewSamples.GetSelectedRows();
             //return null if no rows selected
