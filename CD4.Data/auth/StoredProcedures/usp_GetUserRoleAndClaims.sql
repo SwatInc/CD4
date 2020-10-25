@@ -3,7 +3,7 @@
 AS
 BEGIN
 
-	DECLARE @Claims varchar(max);
+	DECLARE @Claims varchar(1000);
 
 		--claims for all roles
 	SELECT @Claims  = STRING_AGG([RC].[ClaimValue],',')
