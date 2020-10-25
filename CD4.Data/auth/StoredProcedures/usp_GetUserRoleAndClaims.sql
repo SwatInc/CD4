@@ -13,7 +13,7 @@ BEGIN
 	WHERE [U].[UserName] = @Username;
 
 	--role, username, fullname, 
-	SELECT [R].[Name] AS [UserRole], [U].[UserName], [U].[Fullname], @Claims AS [Claims]
+	SELECT [R].[Name] AS [UserRole], [U].[UserName], [U].[Fullname], @Claims AS [ClaimsCsv]
 	FROM [dbo].[Users] [U]
 	INNER JOIN [dbo].[UserRoles] [UR] ON [U].[Id] = [UR].[UserId]
 	INNER JOIN [dbo].[Roles] [R] ON [R].[Id] = [UR].[RoleId]
