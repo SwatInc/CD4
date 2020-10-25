@@ -19,6 +19,7 @@ namespace CD4.UI.Library.ViewModel
         private bool _isloadWorkSheetButtonEnabled;
         private bool _isLoadingAnimationEnabled;
         private GridControlTestActiveDatasource _gridTestActiveDatasource;
+        private GridControlSampleActiveDatasource _gridSampleActiveDatasource;
         private readonly IWorkSheetDataAccess _workSheetDataAccess;
         private readonly IMapper _mapper;
         private readonly IResultDataAccess _resultDataAccess;
@@ -40,10 +41,11 @@ namespace CD4.UI.Library.ViewModel
 
         #region Default Constructor
         public ResultEntryViewModel
-            (IWorkSheetDataAccess workSheetDataAccess, IMapper mapper, IResultDataAccess resultDataAccess, IStatusDataAccess statusDataAccess, 
+            (IWorkSheetDataAccess workSheetDataAccess, IMapper mapper, IResultDataAccess resultDataAccess, IStatusDataAccess statusDataAccess,
             ISampleDataAccess sampleDataAccess, IStaticDataDataAccess staticDataDataAccess)
         {
             GridTestActiveDatasource = GridControlTestActiveDatasource.Tests;
+            GridSampleActiveDatasource = GridControlSampleActiveDatasource.Sample;
             RequestData = new List<RequestSampleModel>();
             SelectedResultData = new BindingList<ResultModel>();
             SelectedClinicalDetails = new BindingList<string>();
@@ -114,6 +116,7 @@ namespace CD4.UI.Library.ViewModel
             }
         }
         public List<RequestSampleModel> RequestData { get; set; }
+        public dynamic TestHistoryData { get; set; }
         public BindingList<ResultModel> SelectedResultData { get; set; }
         public List<Model.AuditTrailModel> SampleAuditTrail { get; set; }
         private List<ResultModel> AllResultData { get; set; }
@@ -163,6 +166,16 @@ namespace CD4.UI.Library.ViewModel
             }
         }
 
+        public GridControlSampleActiveDatasource GridSampleActiveDatasource
+        {
+            get => _gridSampleActiveDatasource; set
+            {
+                if (_gridSampleActiveDatasource == value) return;
+                _gridSampleActiveDatasource = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region Public Methods
@@ -170,7 +183,14 @@ namespace CD4.UI.Library.ViewModel
         public enum GridControlTestActiveDatasource
         {
             Tests,
-            AuditTrail
+            AuditTrail,
+            None
+        }
+
+        public enum GridControlSampleActiveDatasource
+        {
+            Sample,
+            TestHistory
         }
 
         /// <summary>
@@ -195,7 +215,7 @@ namespace CD4.UI.Library.ViewModel
         }
         public bool CanRejectSample(RequestSampleModel sampleToReject)
         {
-            if (sampleToReject.StatusIconId == 1 || sampleToReject.StatusIconId ==5 || sampleToReject.StatusIconId == 7)
+            if (sampleToReject.StatusIconId == 1 || sampleToReject.StatusIconId == 5 || sampleToReject.StatusIconId == 7)
             {
                 return false;
             }
@@ -521,7 +541,7 @@ namespace CD4.UI.Library.ViewModel
                     foreach (var resultRecord in resultData)
                     {
                         var newData = statusUpdateData.ResultStatus.Find(x => x.ResultId == resultRecord.Id);
-                        if (newData != null) 
+                        if (newData != null)
                         {
                             resultRecord.Result = newData.Result;
                             resultRecord.StatusIconId = newData.StatusId;
@@ -846,6 +866,19 @@ namespace CD4.UI.Library.ViewModel
         public bool CanCancelTestRejection(ResultModel resultToEvaluateForRejection)
         {
             return resultToEvaluateForRejection.StatusIconId == 7;
+        }
+
+        public async Task<dynamic> GetResultHistoryAsync(ResultModel testRecord)
+        {
+            try
+            {
+                return await _resultDataAccess.GetResultHistoryAync(testRecord.Id, testRecord.AnalysisRequestId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         #endregion

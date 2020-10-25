@@ -30,7 +30,6 @@ namespace CD4.UI.View
         /// </summary>
         private void InitializeComponent()
         {
-            this.labelControlPatientName = new LabelControl();
             this.labelControlNationalId = new DevExpress.XtraEditors.LabelControl();
             this.labelControlAgeSex = new DevExpress.XtraEditors.LabelControl();
             this.labelControlBirthdate = new DevExpress.XtraEditors.LabelControl();
@@ -52,6 +51,7 @@ namespace CD4.UI.View
             this.gridControlTests = new DevExpress.XtraGrid.GridControl();
             this.gridViewTests = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.repositoryItemLookUpEditCodifiedPhrases = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
+            this.graphsUserControl = new CD4.UI.UserControls.GraphsUserControl();
             this.groupControlFunctions = new DevExpress.XtraEditors.GroupControl();
             this.lookUpEditSampleStatusFilter = new DevExpress.XtraEditors.LookUpEdit();
             this.simpleButtonLoadWorksheet = new DevExpress.XtraEditors.SimpleButton();
@@ -59,6 +59,7 @@ namespace CD4.UI.View
             this.dateEditLoadWorksheetFrom = new DevExpress.XtraEditors.DateEdit();
             this.simpleButtonReport = new DevExpress.XtraEditors.SimpleButton();
             this.gridColumnSampleStatus = new DevExpress.XtraGrid.Columns.GridColumn();
+            labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).BeginInit();
             this.splitContainerControlPatient.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlSelectedPatientRequestClinicalDetailsArea)).BeginInit();
@@ -245,6 +246,7 @@ namespace CD4.UI.View
             this.splitContainerControlSamplesAndTest.Panel1.Text = "Panel1";
             this.splitContainerControlSamplesAndTest.Panel2.Controls.Add(this.progressPanelTests);
             this.splitContainerControlSamplesAndTest.Panel2.Controls.Add(this.gridControlTests);
+            this.splitContainerControlSamplesAndTest.Panel2.Controls.Add(this.graphsUserControl);
             this.splitContainerControlSamplesAndTest.Panel2.Text = "Panel2";
             this.splitContainerControlSamplesAndTest.Size = new System.Drawing.Size(839, 224);
             this.splitContainerControlSamplesAndTest.SplitterPosition = 400;
@@ -258,9 +260,10 @@ namespace CD4.UI.View
             this.progressPanelSamples.Caption = "Please Wait";
             this.progressPanelSamples.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.progressPanelSamples.Description = "Loading samples ...";
-            this.progressPanelSamples.Location = new System.Drawing.Point(111, 90);
+            this.progressPanelSamples.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressPanelSamples.Location = new System.Drawing.Point(0, 0);
             this.progressPanelSamples.Name = "progressPanelSamples";
-            this.progressPanelSamples.Size = new System.Drawing.Size(178, 63);
+            this.progressPanelSamples.Size = new System.Drawing.Size(400, 224);
             this.progressPanelSamples.TabIndex = 2;
             // 
             // gridControlSamples
@@ -288,9 +291,10 @@ namespace CD4.UI.View
             this.progressPanelTests.Caption = "Please Wait";
             this.progressPanelTests.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.progressPanelTests.Description = "Loading tests ...";
-            this.progressPanelTests.Location = new System.Drawing.Point(134, 90);
+            this.progressPanelTests.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressPanelTests.Location = new System.Drawing.Point(0, 0);
             this.progressPanelTests.Name = "progressPanelTests";
-            this.progressPanelTests.Size = new System.Drawing.Size(204, 63);
+            this.progressPanelTests.Size = new System.Drawing.Size(434, 224);
             this.progressPanelTests.TabIndex = 3;
             // 
             // gridControlTests
@@ -324,6 +328,14 @@ namespace CD4.UI.View
             this.repositoryItemLookUpEditCodifiedPhrases.NullText = "";
             this.repositoryItemLookUpEditCodifiedPhrases.ShowHeader = false;
             this.repositoryItemLookUpEditCodifiedPhrases.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
+            // 
+            // graphsUserControl
+            // 
+            this.graphsUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.graphsUserControl.Location = new System.Drawing.Point(0, 0);
+            this.graphsUserControl.Name = "graphsUserControl";
+            this.graphsUserControl.Size = new System.Drawing.Size(434, 224);
+            this.graphsUserControl.TabIndex = 4;
             // 
             // groupControlFunctions
             // 
@@ -461,5 +473,6 @@ namespace CD4.UI.View
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnSampleStatus;
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelSamples;
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelTests;
+        private UserControls.GraphsUserControl graphsUserControl;
     }
 }

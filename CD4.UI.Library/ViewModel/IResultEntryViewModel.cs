@@ -26,6 +26,8 @@ namespace CD4.UI.Library.ViewModel
         bool IsLoadingAnimationEnabled { get; set; }
         ResultEntryViewModel.GridControlTestActiveDatasource GridTestActiveDatasource { get; set; }
         List<AuditTrailModel> SampleAuditTrail { get; set; }
+        ResultEntryViewModel.GridControlSampleActiveDatasource GridSampleActiveDatasource { get; set; }
+        dynamic TestHistoryData { get; set; }
 
         event PropertyChangedEventHandler PropertyChanged;
         event EventHandler RequestDataRefreshed;
@@ -41,5 +43,6 @@ namespace CD4.UI.Library.ViewModel
         Task CancelTestRejection(ResultModel testData);
         bool CanCancelSampleRejection(RequestSampleModel sample);
         bool CanCancelTestRejection(ResultModel resultToEvaluateForRejection);
+        Task<dynamic> GetResultHistoryAsync(ResultModel testRecord);
     }
 }

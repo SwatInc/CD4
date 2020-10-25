@@ -268,5 +268,23 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
+
+        public async Task<List<ResultHistoryModel>> GetResultHistoryAync
+            (int resultId, int analysisRequestId)
+        {
+            var parameters = new { ResultId = resultId, AnalysisRequestId = analysisRequestId };
+            var storedProcedure = "[dbo].[usp_GetTestHistoryByResultId]";
+
+            try
+            {
+                return await LoadDataWithParameterAsync<ResultHistoryModel, dynamic>
+                    (storedProcedure, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+    
     }
 }

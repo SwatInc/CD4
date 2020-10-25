@@ -7,6 +7,7 @@ using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraReports.UI;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -30,11 +31,14 @@ namespace CD4.UI.View
             InitializeComponent();
             //Initialize grid columns
             SetTestGrid_Columns(ResultEntryViewModel.GridControlTestActiveDatasource.Tests);
-            SetSampleGrid_SampleColumns();
+            SetSampleGrid_Columns(ResultEntryViewModel.GridControlSampleActiveDatasource.Sample);
+
 
             _viewModel = viewModel;
+            _viewModel.TestHistoryData = new List<TestHistoryModel>();
             _rejectionCommentViewModel = rejectionCommentViewModel;
             InitializeBinding();
+
 
             SizeChanged += OnSizeChangedAdjustSplitContainers;
             labelControlCin.DoubleClick += CopyCinToClipBoard;
@@ -49,8 +53,9 @@ namespace CD4.UI.View
             _viewModel.PropertyChanged += _viewModel_PropertyChanged;
             gridViewSamples.PopupMenuShowing += ShowSamplePopupMenu;
             gridViewTests.PopupMenuShowing += ShowTestPopupMenu;
-            this.KeyUp += ResultEntryView_KeyUp;
+            KeyUp += ResultEntryView_KeyUp;
             lookUpEditSampleStatusFilter.EditValueChanged += LookUpEditSampleStatusFilter_EditValueChanged;
+
         }
 
         /// <summary>
@@ -63,33 +68,98 @@ namespace CD4.UI.View
             {
                 ChangeGridControlTestDatasource(_viewModel.GridTestActiveDatasource);
             }
+
+            //handle GridControlSample datasource changes
+            if (e.PropertyName == nameof(_viewModel.GridTestActiveDatasource))
+            {
+                ChangeGridControlSampleDatasource(_viewModel.GridSampleActiveDatasource);
+            }
         }
+
         /// <summary>
         /// Changes the datasource of gridControlTest
         /// </summary>
         /// <param name="gridTestActiveDatasource">Active data source name</param>
         private void ChangeGridControlTestDatasource(ResultEntryViewModel.GridControlTestActiveDatasource gridTestActiveDatasource)
         {
+            //exit test history mode if in test history mode.
             switch (gridTestActiveDatasource)
             {
                 case ResultEntryViewModel.GridControlTestActiveDatasource.Tests:
-                    SetTestGrid_Columns(ResultEntryViewModel.GridControlTestActiveDatasource.Tests);
+                    SetTestGrid_Columns(gridTestActiveDatasource);
                     gridControlTests.DataSource = _viewModel.SelectedResultData;
                     break;
                 case ResultEntryViewModel.GridControlTestActiveDatasource.AuditTrail:
-                    SetTestGrid_Columns(ResultEntryViewModel.GridControlTestActiveDatasource.AuditTrail);
+                    SetTestGrid_Columns(gridTestActiveDatasource);
                     gridControlTests.DataSource = _viewModel.SampleAuditTrail;
+                    break;
+                case ResultEntryViewModel.GridControlTestActiveDatasource.None:
+                    SetTestGrid_Columns(gridTestActiveDatasource);
+                    gridControlTests.DataSource = null;
                     break;
                 default:
                     break;
             }
         }
 
-        private void SetSampleGrid_SampleColumns()
+        /// <summary>
+        /// toggles controls visibility to show graphUserControl and hide grid control test or vice-versa depending on the IsTestHistoryMode
+        /// </summary>
+        /// <param name="IsTestHistoryMode">Pass true if state is in test history mode else pass false.</param>
+        private void ToggleUiVisibilityToTestHistoryMode(bool IsTestHistoryMode)
+        {
+            if (IsTestHistoryMode)
+            {
+                this.gridControlTests.Visible = false;
+                this.graphsUserControl.Visible = true;
+            }
+
+            if (!IsTestHistoryMode)
+            {
+                this.gridControlTests.Visible = true;
+                this.graphsUserControl.Visible = false;
+            }
+        }
+
+        private void ChangeGridControlSampleDatasource(ResultEntryViewModel.GridControlSampleActiveDatasource gridControlSampleActiveDatasource)
+        {
+            switch (gridControlSampleActiveDatasource)
+            {
+                case ResultEntryViewModel.GridControlSampleActiveDatasource.Sample:
+                    SetSampleGrid_Columns(gridControlSampleActiveDatasource);
+                    gridControlSamples.DataSource = _viewModel.RequestData;
+                    ToggleUiVisibilityToTestHistoryMode(false);
+
+                    break;
+                case ResultEntryViewModel.GridControlSampleActiveDatasource.TestHistory:
+                    SetSampleGrid_Columns(gridControlSampleActiveDatasource);
+                    gridControlSamples.DataSource = _viewModel.TestHistoryData;
+                    ToggleUiVisibilityToTestHistoryMode(true);
+
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        private void SetSampleGrid_Columns(ResultEntryViewModel.GridControlSampleActiveDatasource columnType)
         {
             //clear any existing columns
             gridViewSamples.Columns.Clear();
-            var gridColumns = JsonConvert.DeserializeObject<List<GridColumnModel>>(Properties.Resources.SampleColumns);
+            var gridColumns = new List<GridColumnModel>();
+
+            //select the columns depending on active datasource
+            switch (columnType)
+            {
+                case ResultEntryViewModel.GridControlSampleActiveDatasource.Sample:
+                    gridColumns = JsonConvert.DeserializeObject<List<GridColumnModel>>(Properties.Resources.SampleColumns);
+                    break;
+                case ResultEntryViewModel.GridControlSampleActiveDatasource.TestHistory:
+                    gridColumns = JsonConvert.DeserializeObject<List<GridColumnModel>>(Properties.Resources.TestHistoryColumns);
+                    break;
+                default:
+                    break;
+            }
 
             foreach (var column in gridColumns)
             {
@@ -118,6 +188,9 @@ namespace CD4.UI.View
         {
             //clear any existing columns
             gridViewTests.Columns.Clear();
+            //dont set new columns if the active data source is set to none
+            if (columnType == ResultEntryViewModel.GridControlTestActiveDatasource.None) return;
+
             //get result columns data from settings
             List<GridColumnModel> gridColumns = new List<GridColumnModel>();
             switch (columnType)
@@ -262,6 +335,9 @@ namespace CD4.UI.View
                     //if tests for selected sample are not displayed...
                     if (_viewModel.GridTestActiveDatasource != ResultEntryViewModel.GridControlTestActiveDatasource.Tests)
                     {
+                        //if datasource is null(testHistory mode), do not try to toggle the datasource
+                        if (_viewModel.GridTestActiveDatasource == ResultEntryViewModel.GridControlTestActiveDatasource.None) return;
+
                         //Toggle view to display tests and return
                         _viewModel.GridTestActiveDatasource = ResultEntryViewModel.GridControlTestActiveDatasource.Tests;
                         return;
@@ -308,6 +384,15 @@ namespace CD4.UI.View
                     break;
                 case Keys.Shift:
                     break;
+                case Keys.Escape:
+                    //if in test history mode, exit test history mode.
+                    if(_viewModel.GridSampleActiveDatasource == ResultEntryViewModel.GridControlSampleActiveDatasource.TestHistory)
+                    {
+                        _viewModel.GridSampleActiveDatasource = ResultEntryViewModel.GridControlSampleActiveDatasource.Sample;
+                        _viewModel.GridTestActiveDatasource = ResultEntryViewModel.GridControlTestActiveDatasource.Tests;
+                    }
+
+                    break;
                 case Keys.Control:
                     break;
                 case Keys.Alt:
@@ -335,6 +420,9 @@ namespace CD4.UI.View
         /// </summary>
         private void ShowSamplePopupMenu(object sender, PopupMenuShowingEventArgs e)
         {
+            //this popup menu dhoulf appear only if the sample list is displayed
+            if (_viewModel.GridSampleActiveDatasource != ResultEntryViewModel.GridControlSampleActiveDatasource.Sample) return;
+
             if (e.MenuType == DevExpress.XtraGrid.Views.Grid.GridMenuType.Row)
             {
                 //row handle
@@ -465,7 +553,7 @@ namespace CD4.UI.View
             menuItems.Add(new DXMenuItem("Validate Test [ F11 ]", new EventHandler(OnValidateTestClick)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Reject Test [ Shift+F11 ]", new EventHandler(OnRejectTestClick)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Cancel Test Rejection [ Shift+F11 ]", new EventHandler(OnTestRejectionCancellationClickAsync)) { Tag = new RowInfo(view, rowHandle) });
-            menuItems.Add(new DXMenuItem("Show test history [  ]", new EventHandler(OnShowTestHistoryClick)) { Tag = new RowInfo(view, rowHandle) });
+            menuItems.Add(new DXMenuItem("Show test history [  ]", new EventHandler(OnShowTestHistoryClickAsync)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Show reruns [ F6 ]", new EventHandler(OnShowRerunsClick)) { Tag = new RowInfo(view, rowHandle) });
             return menuItems;
         }
@@ -502,9 +590,47 @@ namespace CD4.UI.View
         /// <summary>
         /// call view model to show test history
         /// </summary>
-        private void OnShowTestHistoryClick(object sender, EventArgs e)
+        private async void OnShowTestHistoryClickAsync(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            //shows the loading animation before initiating data access calls. This might take some time.
+            _viewModel.IsLoadingAnimationEnabled = true;
+            //Get the selected test record.
+            var testRecord = GetTestForMenu(sender, e);
+            try
+            {
+                //call view model to request for test history data.
+                var data = await _viewModel.GetResultHistoryAsync(testRecord);
+                //initialize add data to a new TestHistoryModel required to pass data to graphUserControl
+                _viewModel.TestHistoryData.Clear();
+                foreach (var item in data)
+                {
+                    _viewModel.TestHistoryData.Add(new TestHistoryModel() 
+                    {
+                        Number = item.Id,
+                        Result = double.Parse(item.Result),
+                        ResultDate = item.ResultDate,
+                        TestName = testRecord.Test 
+                    });
+                }
+                this.graphsUserControl.InitializeChart(_viewModel.TestHistoryData,
+                    UserControls.GraphsUserControl.ResultType.Numeric,
+                    testRecord.Unit);
+
+                //change sample and test grid datasources
+                _viewModel.GridSampleActiveDatasource = ResultEntryViewModel.GridControlSampleActiveDatasource.TestHistory;
+                _viewModel.GridTestActiveDatasource = ResultEntryViewModel.GridControlTestActiveDatasource.None;
+            }
+            catch (Exception ex)
+            {
+
+                XtraMessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                _viewModel.IsLoadingAnimationEnabled = false;
+            }
+
+
         }
 
         /// <summary>
@@ -693,6 +819,8 @@ namespace CD4.UI.View
 
         private async void SelectedSampleChanged(object sender, FocusedRowChangedEventArgs e)
         {
+            //Do not do anything if is test history view mode
+            if (gridControlSamples.DataSource != _viewModel.RequestData) return;
             //if tests data is not displayed on tests grid...
             if (_viewModel.GridTestActiveDatasource != ResultEntryViewModel.GridControlTestActiveDatasource.Tests)
             {
@@ -710,6 +838,7 @@ namespace CD4.UI.View
         /// <returns>Returns selected Cin or null</returns>
         private string GetSelectedCin()
         {
+            if (gridControlSamples.DataSource != _viewModel.RequestData) return null;
             //Get row handles of selected rows
             var selectedRowHandles = gridViewSamples.GetSelectedRows();
             //return null if no rows selected
