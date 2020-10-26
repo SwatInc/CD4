@@ -8,11 +8,22 @@ namespace CD4.UI.Library.Model
 {
     public class AuthorizeDetailEventArgs : EventArgs
     {
+        public void SetData(AuthorizeDetailEventArgs authorizeDetailEvent)
+        {
+            this.UserRole = authorizeDetailEvent.UserRole;
+            this.Username = authorizeDetailEvent.Username;
+            this.FullName = authorizeDetailEvent.FullName;
+            this.ClaimsCsv = authorizeDetailEvent.ClaimsCsv;
+            this.IsAuthenticated = authorizeDetailEvent.IsAuthenticated;
+        }
+
         public string UserRole { get; set; }
         public string Username { get; set; }
         public string FullName { get; set; }
         public string ClaimsCsv { get; set; }
         public bool IsAuthenticated { get; set; }
         public string Message { get; set; }
+
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using AutoMapper;
+using CD4.UI.Library.Model;
 using CD4.UI.Library.ViewModel;
 using CD4.UI.View;
 using log4net;
@@ -9,6 +10,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 
 namespace CD4.UI
 {
@@ -84,6 +86,10 @@ namespace CD4.UI
                 .Where(t => t.Namespace.Contains("DataAccess"))
                 .Where(t => t.FullName.Contains("Base") != true )
                 .As(t => t.GetInterfaces().FirstOrDefault(i => i.Name == $"I{t.Name}"));
+
+            builder.RegisterType<AuthorizeDetailEventArgs>()
+                .AsSelf()
+                .SingleInstance();
 
             return builder.Build();
         }

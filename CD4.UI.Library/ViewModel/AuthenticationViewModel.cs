@@ -17,18 +17,20 @@ namespace CD4.UI.Library.ViewModel
         private string username;
         private string password;
         private readonly IAuthenticationDataAccess authDataAccess;
+        private AuthorizeDetailEventArgs _authArgs;
         private readonly IMapper mapper;
 
         //Raised when auth is successful or unsuccessful 
         // TODO: Passes Authorized model to the subscriber
         public event EventHandler<AuthorizeDetailEventArgs> AuthenticationStatusIndication;
-        public AuthenticationViewModel(IAuthenticationDataAccess authDataAccess, IMapper mapper)
+        public AuthenticationViewModel(IAuthenticationDataAccess authDataAccess, AuthorizeDetailEventArgs authArgs, IMapper mapper)
         {
             //login button is disabled on startup
             CanLogIn = false;
             //subscribe to property changed for processing on change events
             PropertyChanged += AuthenticationViewModel_PropertyChanged;
             this.authDataAccess = authDataAccess;
+            _authArgs = authArgs;
             this.mapper = mapper;
         }
         
@@ -102,9 +104,10 @@ namespace CD4.UI.Library.ViewModel
             if (authorizedData != null)
             {
                 //map the AuthorozedDetailModel to event args model
-                var authArgs = mapper.Map<AuthorizeDetailEventArgs>(authorizedData);
+               var authdata = mapper.Map<AuthorizeDetailEventArgs>(authorizedData);
+                _authArgs.SetData(authdata);
                 //raise an event to indicate authentication current status
-                AuthenticationStatusIndication?.Invoke(this, authArgs);
+                AuthenticationStatusIndication?.Invoke(this, _authArgs);
             }
         }
 

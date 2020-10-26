@@ -18,11 +18,14 @@ namespace CD4.UI.View
         private readonly IOrderEntryViewModel _viewModel;
         private readonly IMapper mapper;
         private readonly IPatientDataAccess dataAccess;
+        private readonly AuthorizeDetailEventArgs _authArgs;
 
         public OrderEntryView(IOrderEntryViewModel viewModel,
-            IMapper mapper, IPatientDataAccess dataAccess)
+            IMapper mapper, IPatientDataAccess dataAccess, AuthorizeDetailEventArgs authArgs)
         {
             InitializeComponent();
+            _authArgs = authArgs;
+            //Evaluate user authorisation
             this._viewModel = viewModel;
             this.mapper = mapper;
             this.dataAccess = dataAccess;
