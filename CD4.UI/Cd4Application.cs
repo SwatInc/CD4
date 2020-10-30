@@ -17,11 +17,13 @@ namespace CD4.UI
     {
         private static readonly log4net.ILog _log = LogHelper.GetLogger();
         private readonly IReportsDataAccess reportsDataAccess;
+        private readonly IUserAuthEvaluator _userAuthEvaluator;
 
-        public Cd4Application(IMainViewModel mainViewModel, IReportsDataAccess reportsDataAccess)
+        public Cd4Application(IMainViewModel mainViewModel, IReportsDataAccess reportsDataAccess, IUserAuthEvaluator userAuthEvaluator)
         {
             _mainViewModel = mainViewModel;
             this.reportsDataAccess = reportsDataAccess;
+            _userAuthEvaluator = userAuthEvaluator;
         }
 
         private IMainViewModel _mainViewModel { get; }
@@ -33,7 +35,7 @@ namespace CD4.UI
             Application.SetCompatibleTextRenderingDefault(false);
 
             BonusSkins.Register();
-            Application.Run(new MainView(_mainViewModel, reportsDataAccess));
+            Application.Run(new MainView(_mainViewModel, reportsDataAccess, _userAuthEvaluator));
 
         }
     }

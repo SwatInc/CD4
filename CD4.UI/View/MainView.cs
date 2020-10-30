@@ -12,16 +12,18 @@ namespace CD4.UI.View
     public partial class MainView : DevExpress.XtraBars.Ribbon.RibbonForm
     {
         private readonly IReportsDataAccess reportsDataAccess;
+        private readonly IUserAuthEvaluator _authEvaluator;
 
         private IMainViewModel _viewModel { get; }
 
-        public MainView(IMainViewModel viewModel, IReportsDataAccess reportsDataAccess)
+        public MainView(IMainViewModel viewModel, IReportsDataAccess reportsDataAccess, IUserAuthEvaluator authEvaluator)
         {
             InitializeComponent();
             SkinManager.EnableFormSkins();
             SkinManager.EnableMdiFormSkins();
             _viewModel = viewModel;
             this.reportsDataAccess = reportsDataAccess;
+            _authEvaluator = authEvaluator;
 
             //load auth UI
             LoadAuthenticationUi();
@@ -165,10 +167,15 @@ namespace CD4.UI.View
                 authView.UserAuthorized += AuthView_UserAuthorized;
             }
             //if parameter is not null, assign it to form tag
-            form.Tag = parameter;
+            if (!string.IsNullOrEmpty(parameter)) { form.Tag = parameter; }
             form.MdiParent = this;
+            //check for authorization
+            if (!_authEvaluator.EvaluateAuthForItem<Form>(form))
+            {
+                XtraMessageBox.Show($"You are not authorised to for {form.Tag}. Please contact your administrator if you require authorisation.");
+                return;
+            }
             form.Show();
-            
             form.FormClosed += Form_FormClosed;
 
         }

@@ -18,17 +18,17 @@ namespace CD4.UI.View
         private readonly IOrderEntryViewModel _viewModel;
         private readonly IMapper mapper;
         private readonly IPatientDataAccess dataAccess;
-        private readonly AuthorizeDetailEventArgs _authArgs;
+        private readonly IUserAuthEvaluator _authEvaluator;
 
         public OrderEntryView(IOrderEntryViewModel viewModel,
-            IMapper mapper, IPatientDataAccess dataAccess, AuthorizeDetailEventArgs authArgs)
+            IMapper mapper, IPatientDataAccess dataAccess, IUserAuthEvaluator authEvaluator)
         {
             InitializeComponent();
-            _authArgs = authArgs;
             //Evaluate user authorisation
             this._viewModel = viewModel;
             this.mapper = mapper;
             this.dataAccess = dataAccess;
+            _authEvaluator = authEvaluator;
             InitializeDataBinding();
 
             lookUpEditTests.Validated += LookUpEditTests_Validated;
@@ -162,24 +162,34 @@ namespace CD4.UI.View
             switch (e.KeyCode)
             {
                 case Keys.Delete:
+
+                    if (!_authEvaluator.IsFunctionAuthorized(simpleButtonRemoveTest.Tag.ToString())) return;
                     //change focus to make sure that everything is validated.
                     simpleButtonRemoveTest.Focus();
                     //execute remove test.
                     RemoveTestFromAR(this, EventArgs.Empty);
                     break;
                 case Keys.F6:
+
+                    if (!_authEvaluator.IsFunctionAuthorized(simpleButtonConfirm.Tag.ToString())) return;
                     //change focus to confim to which validates any control that has focus and thereby updating view model
                     simpleButtonConfirm.Focus();
                     //execute confim analysis request.
                     OnConfirmAnalysisRequest(this, EventArgs.Empty);
                     break;
                 case Keys.F2:
+
+                    if (!_authEvaluator.IsFunctionAuthorized(simpleButtonSearch.Tag.ToString())) return;
+
                     //change focus to search button to which validates any control that has focus and thereby updating view model
                     simpleButtonSearch.Focus();
                     //execute search
                     OnPatientSearch(this, EventArgs.Empty);
                     break;
                 case Keys.F7:
+
+                    if (!_authEvaluator.IsFunctionAuthorized(simpleButtonSearchRequest.Tag.ToString())) return;
+
                     //change focus to search request button to which validates any control that has focus and thereby updating view model
                     simpleButtonSearchRequest.Focus();
 

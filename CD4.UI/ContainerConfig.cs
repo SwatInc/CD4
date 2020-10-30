@@ -87,9 +87,12 @@ namespace CD4.UI
                 .Where(t => t.FullName.Contains("Base") != true )
                 .As(t => t.GetInterfaces().FirstOrDefault(i => i.Name == $"I{t.Name}"));
 
+            //register auth event args
             builder.RegisterType<AuthorizeDetailEventArgs>()
                 .AsSelf()
                 .SingleInstance();
+
+            builder.RegisterType<UserAuthEvaluator>().As<IUserAuthEvaluator>();
 
             return builder.Build();
         }
