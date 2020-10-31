@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.barButtonItemCodifiedResults = new DevExpress.XtraBars.BarButtonItem();
@@ -47,7 +46,7 @@
             this.barButtonItemChangePassword = new DevExpress.XtraBars.BarButtonItem();
             this.barStaticItemUsernameAndRole = new DevExpress.XtraBars.BarStaticItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-            this.popupMenu = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.popupMenu = new DevExpress.XtraBars.PopupMenu();
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPageGeneral = new DevExpress.XtraBars.Ribbon.RibbonPage();
@@ -101,6 +100,7 @@
             this.ribbon.ShowToolbarCustomizeItem = false;
             this.ribbon.Size = new System.Drawing.Size(1110, 143);
             this.ribbon.StatusBar = this.ribbonStatusBar;
+            this.ribbon.Tag = "ribbon";
             this.ribbon.Toolbar.ShowCustomizeItem = false;
             // 
             // barButtonItemCodifiedResults
@@ -182,6 +182,7 @@
             this.barButtonItemOrderEntry.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemOrderEntry.ImageOptions.SvgImage")));
             this.barButtonItemOrderEntry.Name = "barButtonItemOrderEntry";
             this.barButtonItemOrderEntry.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.barButtonItemOrderEntry.Tag = "Ribbon.GeneralPage.OrderEntry";
             // 
             // barButtonItemResultEntry
             // 
@@ -257,7 +258,8 @@
             this.ribbonPageGeneral.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroup2});
             this.ribbonPageGeneral.Name = "ribbonPageGeneral";
-            this.ribbonPageGeneral.Text = "General";
+            this.ribbonPageGeneral.Tag = "Ribbon.GeneralPage";
+            this.ribbonPageGeneral.Text = "GeneralPage";
             // 
             // ribbonPageGroup2
             // 
@@ -273,6 +275,7 @@
             this.ribbonPageConfiguration.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroup1});
             this.ribbonPageConfiguration.Name = "ribbonPageConfiguration";
+            this.ribbonPageConfiguration.Tag = "Ribbon.ConfigurationPage";
             this.ribbonPageConfiguration.Text = "Configuration";
             // 
             // ribbonPageGroup1
@@ -294,6 +297,7 @@
             this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroup3});
             this.ribbonPage1.Name = "ribbonPage1";
+            this.ribbonPage1.Tag = "Ribbon.Profile";
             this.ribbonPage1.Text = "Profile";
             // 
             // ribbonPageGroup3

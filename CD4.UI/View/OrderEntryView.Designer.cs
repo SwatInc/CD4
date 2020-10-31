@@ -490,6 +490,7 @@
             this.simpleButtonSearch.Name = "simpleButtonSearch";
             this.simpleButtonSearch.Size = new System.Drawing.Size(98, 23);
             this.simpleButtonSearch.TabIndex = 1;
+            this.simpleButtonSearch.Tag = "OrderEntry.Search";
             this.simpleButtonSearch.Text = "Search [ F2 ]";
             // 
             // simpleButtonConfirm
@@ -498,6 +499,7 @@
             this.simpleButtonConfirm.Name = "simpleButtonConfirm";
             this.simpleButtonConfirm.Size = new System.Drawing.Size(98, 23);
             this.simpleButtonConfirm.TabIndex = 0;
+            this.simpleButtonConfirm.Tag = "OrderEntry.Confirm";
             this.simpleButtonConfirm.Text = "Confirm [ F6 ]";
             // 
             // groupControlTestSelection
@@ -559,6 +561,7 @@
             this.simpleButtonRemoveTest.Name = "simpleButtonRemoveTest";
             this.simpleButtonRemoveTest.Size = new System.Drawing.Size(98, 23);
             this.simpleButtonRemoveTest.TabIndex = 6;
+            this.simpleButtonRemoveTest.Tag = "OrderEntry.Remove";
             this.simpleButtonRemoveTest.Text = "Remove [ Del ]";
             // 
             // simpleButtonSearchRequest
@@ -567,6 +570,7 @@
             this.simpleButtonSearchRequest.Name = "simpleButtonSearchRequest";
             this.simpleButtonSearchRequest.Size = new System.Drawing.Size(98, 23);
             this.simpleButtonSearchRequest.TabIndex = 7;
+            this.simpleButtonSearchRequest.Tag = "OrderEntry.SearchReq";
             this.simpleButtonSearchRequest.Text = "Search Req. [ F7 ]";
             // 
             // simpleButtonPrintBarcode
@@ -575,6 +579,7 @@
             this.simpleButtonPrintBarcode.Name = "simpleButtonPrintBarcode";
             this.simpleButtonPrintBarcode.Size = new System.Drawing.Size(122, 23);
             this.simpleButtonPrintBarcode.TabIndex = 8;
+            this.simpleButtonPrintBarcode.Tag = "OrderEntry.PrintBarcode";
             this.simpleButtonPrintBarcode.Text = "Print Barcode [ F8 ]";
             // 
             // OrderEntryView
@@ -597,6 +602,7 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "OrderEntryView";
+            this.Tag = "OrderEntryView";
             this.Text = "Order Entry";
             ((System.ComponentModel.ISupportInitialize)(this.groupControlRequestData)).EndInit();
             this.groupControlRequestData.ResumeLayout(false);

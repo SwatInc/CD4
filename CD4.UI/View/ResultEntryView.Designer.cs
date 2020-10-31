@@ -370,6 +370,7 @@ namespace CD4.UI.View
             this.simpleButtonLoadWorksheet.Name = "simpleButtonLoadWorksheet";
             this.simpleButtonLoadWorksheet.Size = new System.Drawing.Size(108, 23);
             this.simpleButtonLoadWorksheet.TabIndex = 6;
+            this.simpleButtonLoadWorksheet.Tag = "ResultEntryView.LoadWorksheet";
             this.simpleButtonLoadWorksheet.Text = "Load Worksheet";
             // 
             // label1
@@ -402,6 +403,7 @@ namespace CD4.UI.View
             this.simpleButtonReport.Name = "simpleButtonReport";
             this.simpleButtonReport.Size = new System.Drawing.Size(98, 23);
             this.simpleButtonReport.TabIndex = 0;
+            this.simpleButtonReport.Tag = "ResultEntryView.Report";
             this.simpleButtonReport.Text = "Report [ Ctrl+P ]";
             // 
             // gridColumnSampleStatus
@@ -416,6 +418,7 @@ namespace CD4.UI.View
             this.Controls.Add(this.splitContainerControlPatient);
             this.KeyPreview = true;
             this.Name = "ResultEntryView";
+            this.Tag = "ResultEntryView";
             this.Text = "ResultEntryView";
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).EndInit();
             this.splitContainerControlPatient.ResumeLayout(false);

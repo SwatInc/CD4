@@ -22,11 +22,12 @@ namespace CD4.UI.View
     {
         private readonly IResultEntryViewModel _viewModel;
         private readonly IRejectionCommentViewModel _rejectionCommentViewModel;
+        private readonly IUserAuthEvaluator _authEvaluator;
         System.Windows.Forms.Timer dataRefreshTimer = new System.Windows.Forms.Timer() { Enabled = true, Interval = 1000 };
 
         public event EventHandler<string> GenerateReportByCin;
 
-        public ResultEntryView(IResultEntryViewModel viewModel, IRejectionCommentViewModel rejectionCommentViewModel)
+        public ResultEntryView(IResultEntryViewModel viewModel, IRejectionCommentViewModel rejectionCommentViewModel, IUserAuthEvaluator authEvaluator)
         {
             InitializeComponent();
             //Initialize grid columns
@@ -37,6 +38,7 @@ namespace CD4.UI.View
             _viewModel = viewModel;
             _viewModel.TestHistoryData = new List<TestHistoryModel>();
             _rejectionCommentViewModel = rejectionCommentViewModel;
+            _authEvaluator = authEvaluator;
             InitializeBinding();
 
 
@@ -301,6 +303,7 @@ namespace CD4.UI.View
                 case Keys.F6:
                     break;
                 case Keys.F7://validate selected sample on pressing F7
+
                     //get the selected row handle
                     var selectedRowhandle = gridViewSamples.FocusedRowHandle;
                     //Ignore if no row is selected
@@ -308,6 +311,9 @@ namespace CD4.UI.View
                     {
                         //if test not displayed.., return
                         if (_viewModel.GridTestActiveDatasource != ResultEntryViewModel.GridControlTestActiveDatasource.Tests) return;
+
+                        //check if the user is authorised
+                        if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.ValidateSampleOrTest")) return;
 
                         //Get the selected sample.
                         var sampleToValidate = (RequestSampleModel)gridViewSamples.GetRow(selectedRowhandle);
@@ -326,6 +332,10 @@ namespace CD4.UI.View
                     {
                         //if test not displayed.., return
                         if (_viewModel.GridTestActiveDatasource != ResultEntryViewModel.GridControlTestActiveDatasource.Tests) return;
+
+                        //check if the user is authorised
+                        if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.ValidateSampleOrTest")) return;
+
                         //Get selected result model
                         var resultToValidate = (ResultModel)gridViewTests.GetRow(selectedRowHandle);
                         await _viewModel.ValidateTest(resultToValidate);
@@ -342,6 +352,10 @@ namespace CD4.UI.View
                         _viewModel.GridTestActiveDatasource = ResultEntryViewModel.GridControlTestActiveDatasource.Tests;
                         return;
                     }
+
+                    //check if the user is authorised
+                    if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.ViewAuditTrail")) return;
+
                     //display audit trail for selected sample
                     var senderItem = new DXMenuItem() { Tag = new RowInfo(gridViewSamples, gridViewSamples.FocusedRowHandle) };
                     OnSampleAuditTrailClick(senderItem, EventArgs.Empty);
@@ -398,8 +412,12 @@ namespace CD4.UI.View
                 case Keys.Alt:
                     break;
                 case Keys.P: //handle Ctrl+P (Print report)
+
                     if (e.Modifiers==Keys.Control)
                     {
+                        //check if the user is authorised
+                        if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.PrintReport")) return;
+
                         SimpleButtonReport_Click(this, EventArgs.Empty);
                     }
                     break;
@@ -499,6 +517,9 @@ namespace CD4.UI.View
 
         private async void OnCancelRejectSampleClickAsync(object sender, EventArgs e)
         {
+            //check if the user is authorised
+            if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.CancelSampleOrTestRejection")) return;
+
             var sample = GetSampleForMenu(sender, e);
             Debug.WriteLine("Cancelling sample rejection: " + sample.Cin);
 
@@ -525,6 +546,9 @@ namespace CD4.UI.View
         /// </summary>
         private async void OnSampleAuditTrailClick(object sender, EventArgs e)
         {
+            //check if the user is authorised
+            if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.ViewAuditTrail")) return;
+
             //get selected item on grid
             var sample = GetSampleForMenu(sender, e);
             try
@@ -560,6 +584,9 @@ namespace CD4.UI.View
 
         private async void OnTestRejectionCancellationClickAsync(object sender, EventArgs e)
         {
+            //check if the user is authorised
+            if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.CancelSampleOrTestRejection")) return;
+
             var TestData = GetTestForMenu(sender, e);
             if (_viewModel.CanCancelTestRejection(TestData))
             {
@@ -592,6 +619,9 @@ namespace CD4.UI.View
         /// </summary>
         private async void OnShowTestHistoryClickAsync(object sender, EventArgs e)
         {
+            //check if the user is authorised
+            if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.ShowTestHistory")) return;
+
             //shows the loading animation before initiating data access calls. This might take some time.
             _viewModel.IsLoadingAnimationEnabled = true;
             //Get the selected test record.
@@ -638,6 +668,9 @@ namespace CD4.UI.View
         /// </summary>
         private async void OnRejectTestClick(object sender, EventArgs e)
         {
+            //check if the user is authorised
+            if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.RejectSampleOrTest")) return;
+
             var testToReject = GetTestForMenu(sender, e);
             Debug.WriteLine($"Rejecting Test: {testToReject.Cin}, Test: {testToReject.Test}, Result: {testToReject.Result}");
 
@@ -674,6 +707,9 @@ namespace CD4.UI.View
         /// </summary>
         private async void OnValidateTestClick(object sender, EventArgs e)
         {
+            //check if the user is authorised
+            if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.ValidateSampleOrTest")) return;
+
             var testToValidate = GetTestForMenu(sender, e);
             Debug.WriteLine($"validating Test: {testToValidate.Cin}, Test: {testToValidate.Test}, Result: {testToValidate.Result}");
 
@@ -685,6 +721,9 @@ namespace CD4.UI.View
         /// </summary>
         async void OnValidateSampleClick(object sender, EventArgs e)
         {
+            //check if the user is authorised
+            if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.ValidateSampleOrTest")) return;
+            
             var sampleToValidate = GetSampleForMenu(sender, e);
             Debug.WriteLine("validating sample: " + sampleToValidate.Cin);
             //Call the view model to mark the sample and applicable associated tests as validated.
@@ -696,6 +735,9 @@ namespace CD4.UI.View
         /// </summary>
          async void OnRejectSampleClickAsync(object sender, EventArgs e)
         {
+            //check if the user is authorised
+            if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.RejectSampleOrTest")) return;
+
             var sampleToReject = GetSampleForMenu(sender, e);
             Debug.WriteLine("Rejecting sample: " + sampleToReject.Cin);
             //Check whether the sample can be rejected
@@ -789,6 +831,9 @@ namespace CD4.UI.View
             {
                 XtraMessageBox.Show("Please select a sample to view the report!");
             }
+
+            //check if the user is authorised
+            if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.PrintReport")) return;
 
             //Raise an event indicating that a sample report is requested.
             GenerateReportByCin?.Invoke(this, cin);

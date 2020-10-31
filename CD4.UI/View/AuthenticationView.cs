@@ -22,9 +22,6 @@ namespace CD4.UI.View
         public AuthenticationView(IAuthenticationViewModel viewModel)
         {
             InitializeComponent();
-           
-            //subscribe for events
-
 
             //Set Ui State to normal
             SetNormalUiState();
