@@ -35,7 +35,7 @@ namespace CD4.UI
             Application.SetCompatibleTextRenderingDefault(false);
 
             BonusSkins.Register();
-            Application.Run(new MainView(_mainViewModel, reportsDataAccess, _userAuthEvaluator));
+            Application.Run(new MainView(_mainViewModel, reportsDataAccess, _userAuthEvaluator) {Tag = "MainView" });
 
         }
     }

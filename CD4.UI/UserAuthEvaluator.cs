@@ -1,11 +1,9 @@
 ﻿using CD4.UI.Extensions;
 using CD4.UI.Library.Model;
+using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
-using System;
-using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CD4.UI
@@ -46,11 +44,15 @@ namespace CD4.UI
             return true;
         }
 
-        public bool IsFunctionAuthorized(string requiredClaim)
+        public bool IsFunctionAuthorized(string requiredClaim, bool showMessage = true)
         {
             if (!_authArgs.IsFunctionAuthorized(requiredClaim, out var claim))
             {
-                _ = XtraMessageBox.Show($"Function, [ {requiredClaim} ] is not authorized for user {_authArgs.Username}.");
+                if (showMessage)
+                {
+                    _ = XtraMessageBox.Show($"Function, [ {requiredClaim} ] is not authorized for user {_authArgs.Username}.");
+                }
+
                 return false;
             }
             return true;
@@ -58,7 +60,7 @@ namespace CD4.UI
 
         private bool DoesUserClaimAccess(string claim)
         {
-            var IsClaimed =  !string.IsNullOrEmpty(_authArgs.Claims.Find((x) => x == claim));
+            var IsClaimed = !string.IsNullOrEmpty(_authArgs.Claims.Find((x) => x == claim));
             return IsClaimed;
         }
 

@@ -1,5 +1,7 @@
-﻿using System;
+﻿
+using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,6 +19,7 @@ namespace CD4.UI.Extensions
                 T childOfT = child as T;
                 if (childOfT != null)
                 {
+                    Debug.WriteLine(childOfT.ToString());
                     yield return (T)childOfT;
                 }
 
@@ -24,10 +27,12 @@ namespace CD4.UI.Extensions
                 {
                     foreach (T descendant in Descendants<T>(child))
                     {
+                        Debug.WriteLine(descendant.ToString());
                         yield return descendant;
                     }
                 }
             }
         }
+
     }
 }

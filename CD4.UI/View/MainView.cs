@@ -1,9 +1,14 @@
 ﻿using CD4.DataLibrary.DataAccess;
+using CD4.UI.Extensions;
 using CD4.UI.Library.ViewModel;
 using DevExpress.Skins;
 using DevExpress.XtraBars;
+using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
 using System;
+using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -184,7 +189,28 @@ namespace CD4.UI.View
         {
             //Todo: assign this via MainViewModel by databinding
             barStaticItemUsernameAndRole.Caption = $"Welcome {e.FullName} ({e.UserRole})";
-            ribbon.Visible = true;
+            EvaluateMainViewAuth();
+        }
+
+        private void EvaluateMainViewAuth()
+        {
+
+            //handle ribbon pages auth
+            foreach (var page in ribbon.Pages)
+            {
+                var pageTag = ((RibbonPage)page).Tag.ToString();
+                if (!string.IsNullOrEmpty(pageTag))
+                {
+                    if (!_authEvaluator.IsFunctionAuthorized(pageTag, false)) ((RibbonPage)page).Visible = false;
+                }
+            }
+
+            //handle ribbon auth
+            var ribbonTag = ribbon.Tag.ToString();
+            if (!string.IsNullOrEmpty(ribbonTag))
+            {
+                ribbon.Visible = _authEvaluator.IsFunctionAuthorized(ribbonTag);
+            }
         }
 
         private void ResultView_OnGenerateReportByCin(object sender, string cin)
