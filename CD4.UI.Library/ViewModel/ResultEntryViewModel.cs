@@ -881,6 +881,32 @@ namespace CD4.UI.Library.ViewModel
             }
         }
 
+        /// <summary>
+        /// returns true if the test status is 5 (Validated)
+        /// </summary>
+        /// <param name="testData">Result Model of selected test data</param>
+        /// <returns>return true if the sample is validated, otherwise returns false</returns>
+        public bool CanCancelTestValidation(ResultModel testData)
+        {
+            return testData.StatusIconId == 5;
+        }
+
+        public async Task CancelTestValidation(ResultModel testData)
+        {
+            try
+            {
+                var result  = await _resultDataAccess.CancelResultValidation(testData.Id, testData.Cin, 1);
+                var mappedData = _mapper.Map<SampleAndResultStatusAndResultModel>(result);
+                //updateUI, the following method can be used to Update UI after cancelling test rejection. Refactoring required
+                UpdateUiOnSampleRejectionOrRejectionCancellation(mappedData);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         #endregion
 
     }

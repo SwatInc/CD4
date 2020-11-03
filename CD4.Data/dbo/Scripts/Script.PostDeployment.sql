@@ -463,8 +463,25 @@ INSERT INTO [dbo].[UserRoles] ([UserId], [RoleId])
 --setup user claims
 INSERT INTO [dbo].[RoleClaims] ([RoleId], [ClaimValue])
   VALUES ('1', 'ribbon'),
-  ('1', 'OrderEntryView'),
-  ('1', 'ResultEntryView');
+    ('1', 'OrderEntryView'),
+    ('1', 'ResultEntryView'),
+    ('1', 'OrderEntry.Search'),
+    ('1', 'OrderEntry.SearchReq'),
+    ('1', 'OrderEntry.Remove'),
+    ('1', 'OrderEntry.Confirm'),
+    ('1', 'OrderEntry.PrintBarcode'),
+    ('1', 'ResultEntryView.LoadWorksheet'),
+    ('1', 'ResultEntryView.Report'),
+    ('1', 'ResultEntry.ValidateSampleOrTest'),
+    ('1', 'ResultEntry.ViewAuditTrail'),
+    ('1', 'ResultEntry.PrintReport'),
+    ('1', 'ResultEntry.RejectSampleOrTest'),
+    ('1', 'ResultEntry.CancelSampleOrTestRejection'),
+    ('1', 'ResultEntry.ShowTestHistory'),
+    ('1', 'MainView'),
+    ('1', 'Ribbon.Profile'),
+    ('1', 'Ribbon.ConfigurationPage'),
+    ('1', 'Ribbon.GeneralPage');
 
 --insert status table data
 INSERT INTO [dbo].[Status] ([Status])

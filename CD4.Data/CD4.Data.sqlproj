@@ -181,6 +181,7 @@
     <Build Include="dbo\StoredProcedures\usp_InsertSampleAuditTrail.sql" />
     <Build Include="dbo\StoredProcedures\usp_CancelTestRejectionByResultId.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetTestHistoryByResultId.sql" />
+    <Build Include="dbo\StoredProcedures\usp_CancelTestValidation.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
