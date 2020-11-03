@@ -10,7 +10,7 @@ SET NOCOUNT ON;
 		BEGIN TRANSACTION;
 			
 			--variables
-			DECLARE @CollectedStatus int = 2;
+			DECLARE @ToValidateStatus int = 4;
 			DECLARE @TestStatusBeforeUpdate int;
 			DECLARE @SampleStatusBeforeUpdate int;
 			DECLARE @ValidatedStatus int = 5;
@@ -19,6 +19,7 @@ SET NOCOUNT ON;
 			DEClARE @AuditText varchar(200);
 			DECLARE @TestName varchar(50);
 			DEClARE @Username varchar(50);
+			DECLARE @AuditTypeIdTest int;
 
 			--Get current test status
 			SELECT @TestStatusBeforeUpdate = [StatusId] 
@@ -31,7 +32,7 @@ SET NOCOUNT ON;
 
 			--set specified result status to collected
 			UPDATE [dbo].[ResultTracking]
-			SET [StatusId] = @CollectedStatus
+			SET [StatusId] = @ToValidateStatus
 			WHERE [ResultId] = @ResultId AND [StatusId] = @ValidatedStatus;
 
 			-- count not validated and not rejected tests in sample.
@@ -44,32 +45,43 @@ SET NOCOUNT ON;
 
 			--set sample status as collected if sample has not-validated and not-rejected tests
 			UPDATE [dbo].[SampleTracking]
-			SET [StatusId] = @CollectedStatus
-			WHERE @TestCountNotValidatedNotRejected > 0 and [StatusId] = @ValidatedStatus;
+			SET [StatusId] = @ToValidateStatus
+			WHERE @TestCountNotValidatedNotRejected > 0 AND
+			[StatusId] = @ValidatedStatus AND
+			[SampleCin] = @Cin;
 
 			-- insert test tracking history
 			INSERT INTO [dbo].[TrackingHistory]([TrackingType],[ResultId],[StatusId],[UsersId])
 			SELECT 3,@ResultId,[RT].[StatusId],@UsersId
 			FROM [dbo].[ResultTracking] [RT]
-			WHERE [RT].[StatusId] = @CollectedStatus AND 
-			[RT].[StatusId] <> @TestStatusBeforeUpdate;
+			WHERE [RT].[StatusId] = @ToValidateStatus AND 
+			[RT].[StatusId] <> @TestStatusBeforeUpdate AND
+			[RT].[ResultId] = @ResultId;
 
-			-- insert sample tracking
+			-- insert sample tracking History
 			INSERT INTO [dbo].[TrackingHistory]([TrackingType],[SampleCin],[StatusId],[UsersId])
 			SELECT 2,@Cin,[ST].[StatusId],@UsersId
 			FROM [dbo].[SampleTracking] [ST]
-			WHERE [ST].[StatusId] = @CollectedStatus AND 
-			[ST].[StatusId] <> @SampleStatusBeforeUpdate;
+			WHERE [ST].[StatusId] = @ToValidateStatus AND 
+			[ST].[StatusId] <> @SampleStatusBeforeUpdate AND
+			[ST].[SampleCin] = @Cin;
 
 			-- insert audit trail
 			--get test name
 			SELECT @TestName = [T].[Description]
-			FROM [dbo].[Test] T
+			FROM [dbo].[Test] [T]
 			INNER JOIN [dbo].[Result] [R] ON [T].[Id] = [R].[TestId]
 			WHERE [R].[Id] = @ResultId;
 			--get username
 			SELECT @Username  = [UserName] FROM [dbo].[Users] WHERE [Id] = @UsersId;
 			SELECT @AuditText = CONCAT('Cancelled validation for test [ ',@TestName,' ] by user ',@Username);
+
+			SELECT @AuditTypeIdTest = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Test';
+
+			INSERT INTO [dbo].[AuditTrail] ([AuditTypeId],[Cin],[StatusId],[Details])
+			SELECT @AuditTypeIdTest,@Cin,[StatusId],@AuditText
+			FROM [dbo].[ResultTracking] [RT]
+			WHERE [RT].[ResultId] = @ResultId;
 
 		COMMIT TRANSACTION;
 
