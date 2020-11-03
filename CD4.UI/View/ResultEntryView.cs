@@ -575,11 +575,36 @@ namespace CD4.UI.View
         {
             var menuItems = new List<DXMenuItem>();
             menuItems.Add(new DXMenuItem("Validate Test [ F11 ]", new EventHandler(OnValidateTestClick)) { Tag = new RowInfo(view, rowHandle) });
+            menuItems.Add(new DXMenuItem("Cancel Test Validation []", new EventHandler(OnCancelTestValidationClick)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Reject Test [ Shift+F11 ]", new EventHandler(OnRejectTestClick)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Cancel Test Rejection [ Shift+F11 ]", new EventHandler(OnTestRejectionCancellationClickAsync)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Show test history [  ]", new EventHandler(OnShowTestHistoryClickAsync)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Show reruns [ F6 ]", new EventHandler(OnShowRerunsClick)) { Tag = new RowInfo(view, rowHandle) });
             return menuItems;
+        }
+
+        private async void OnCancelTestValidationClick(object sender, EventArgs e)
+        {
+            //check if the user is authorised
+            if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.CancelTestValidation")) return;
+
+            var TestData = GetTestForMenu(sender, e);
+            if (_viewModel.CanCancelTestValidation(TestData))
+            {
+                try
+                {
+                    await _viewModel.CancelTestValidation(TestData);
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show($"Error cancelling test validation\n{ex.Message}");
+                }
+            }
+            else
+            {
+                XtraMessageBox.Show("Cannot cancel test validation!");
+            }
+
         }
 
         private async void OnTestRejectionCancellationClickAsync(object sender, EventArgs e)
@@ -611,7 +636,7 @@ namespace CD4.UI.View
         /// </summary>
         private void OnShowRerunsClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            XtraMessageBox.Show("This feature has not been implemented yet.\nFeature: Show test Reruns");
         }
 
         /// <summary>

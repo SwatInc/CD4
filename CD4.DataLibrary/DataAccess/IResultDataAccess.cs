@@ -6,6 +6,7 @@ namespace CD4.DataLibrary.DataAccess
 {
     public interface IResultDataAccess
     {
+        Task<SampleAndResultStatusAndResultModel> CancelResultValidation(int resultId, string cin, int userId);
         Task<SampleAndResultStatusAndResultModel> CancelTestRejectionByResultId(int resultId, int userId);
         Task<List<ResultHistoryModel>> GetResultHistoryAync(int resultId, int analysisRequestId);
         Task<UpdatedResultAndStatusModel> InsertUpdateResultByResultIdAsync(int resultId, string result, int testStatus);
