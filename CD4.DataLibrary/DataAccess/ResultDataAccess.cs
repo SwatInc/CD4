@@ -214,7 +214,7 @@ namespace CD4.DataLibrary.DataAccess
             {
                 ResultId = resultId,
                 Cin = cin,
-                CommentListId  = commentListId,
+                CommentListId = commentListId,
                 UserId = userId
             };
 
@@ -285,6 +285,28 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
-    
+
+        public async Task<SampleAndResultStatusAndResultModel> CancelResultValidation(int resultId, string cin, int userId)
+        {
+            var storedProcedure = "[dbo].[usp_CancelTestValidation]";
+            var parameters = new { ResultId = resultId, Cin = cin, UsersId = userId };
+
+            try
+            {
+                var output = await QueryMultiple_GetModelAndListWithParameterAsync<StatusUpdatedSampleModel, UpdatedResultAndStatusModel, dynamic>
+                    (storedProcedure, parameters);
+
+                return new SampleAndResultStatusAndResultModel()
+                {
+                    SampleData = output.T1,
+                    ResultStatus = output.U1
+                };
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
