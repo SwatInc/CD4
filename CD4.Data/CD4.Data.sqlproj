@@ -182,6 +182,7 @@
     <Build Include="dbo\StoredProcedures\usp_CancelTestRejectionByResultId.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetTestHistoryByResultId.sql" />
     <Build Include="dbo\StoredProcedures\usp_CancelTestValidation.sql" />
+    <Build Include="auth\StoredProcedures\usp_ChangeUserHash.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
