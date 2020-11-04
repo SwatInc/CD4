@@ -15,11 +15,7 @@ namespace CD4.DataLibrary.DataAccess
             (string username, string password)
         {
             //get username and password hash from database.
-            var storedProcedure = "[dbo].[usp_GetHashForUsername]";
-            var parameter = new { username = username };
-
-            var result = await SelectInsertOrUpdateAsync<UsernameAndHashModel, dynamic>
-                (storedProcedure,parameter);
+            var result = await GetHashForUser(username);
             //if username is not found, return isAuthentcated as false.
             if (result is null)
             { 
@@ -32,7 +28,8 @@ namespace CD4.DataLibrary.DataAccess
             //if hash match returns true, fetch other details for return model.
             if (VerifyPassword(password, result.PasswordHash))
             {
-                storedProcedure = "[dbo].[usp_GetUserRoleAndClaims]";
+                var storedProcedure = "[dbo].[usp_GetUserRoleAndClaims]";
+                var parameter = new { username = username };
                 var queryResult = await SelectInsertOrUpdateAsync<AuthorizeDetailModel, dynamic>(storedProcedure, parameter);
                 queryResult.IsAuthenticated = true;
                 return queryResult;
@@ -68,5 +65,78 @@ namespace CD4.DataLibrary.DataAccess
         {
             return SwatIncCrypto.SwatIncCrypto.VerifyPassword(password, goodHash);
         }
+
+        public async Task ChangePassword(string currentPassword, string username, string newPassword)
+        {
+            try
+            {
+                //get user hash
+                var usernameAndHash = await GetHashForUser(username);
+                if (usernameAndHash is null)
+                {
+                    throw new Exception($"An error occured while changing the password.\nCannot find user: {username}");
+                }
+                //verify that the current password match
+                if (VerifyPassword(currentPassword,usernameAndHash.PasswordHash))
+                {
+                    //change the password
+                    await ChangeUserHash(newPassword, username);
+                }
+                else
+                {
+                    throw new Exception("The current password provided is invalid!");
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// Fetches the user hash from database with the specified username
+        /// </summary>
+        /// <param name="username">The username and password</param>
+        /// <returns>An instance of UsernameAndHashModel or null </returns>
+        private async Task<UsernameAndHashModel> GetHashForUser(string username)
+        {
+            //get username and password hash from database.
+            var storedProcedure = "[dbo].[usp_GetHashForUsername]";
+            var parameter = new { username = username };
+
+            try
+            {
+                return await SelectInsertOrUpdateAsync<UsernameAndHashModel, dynamic>
+                    (storedProcedure, parameter);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// updates the database with new password hash
+        /// </summary>
+        /// <param name="password">The new password</param>
+        private async Task ChangeUserHash(string password, string username)
+        {
+            var storedProcedure = "[dbo].[usp_ChangeUserHash]";
+            var parameter = new { PasswordHash = SwatIncCrypto.SwatIncCrypto.SwatIncSecurityCreateHashSHA512(password), UserName = username };
+            try
+            {
+                _ = await SelectInsertOrUpdateAsync<dynamic, dynamic>(storedProcedure, parameter);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }
