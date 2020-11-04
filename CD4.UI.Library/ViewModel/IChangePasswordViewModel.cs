@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.Threading.Tasks;
 
 namespace CD4.UI.Library.ViewModel
@@ -10,8 +11,10 @@ namespace CD4.UI.Library.ViewModel
         string NewPassword { get; set; }
         string RepeatNewPassword { get; set; }
         bool ShowMismatchMessage { get; set; }
+        string LoggedInUserName { get; set; }
 
         event PropertyChangedEventHandler PropertyChanged;
+        event EventHandler<string> PrompToView;
 
         Task ChangePassword();
     }

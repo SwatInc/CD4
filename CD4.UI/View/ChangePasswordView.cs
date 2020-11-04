@@ -2,21 +2,33 @@
 using System.Windows.Forms;
 using DevExpress.XtraEditors;
 using CD4.UI.Library.ViewModel;
+using CD4.UI.Library.Model;
 
 namespace CD4.UI.View
 {
     public partial class ChangePasswordView : XtraForm
     {
         private readonly IChangePasswordViewModel viewModel;
+        private readonly AuthorizeDetailEventArgs _authorizeDetail;
 
-        public ChangePasswordView(IChangePasswordViewModel viewModel)
+        public ChangePasswordView(IChangePasswordViewModel viewModel, AuthorizeDetailEventArgs authorizeDetail)
         {
             InitializeComponent();
             this.viewModel = viewModel;
+            _authorizeDetail = authorizeDetail;
             InitializeBinding();
+
+            //set viewMOdel username
+            viewModel.LoggedInUserName = _authorizeDetail.Username;
 
             //subscribe for events
             simpleButtonChangePassword.Click += ChangePassword;
+            viewModel.PrompToView += ViewModel_PrompToView;
+        }
+
+        private void ViewModel_PrompToView(object sender, string e)
+        {
+            XtraMessageBox.Show(e);
         }
 
         private async void ChangePassword(object sender, EventArgs e)

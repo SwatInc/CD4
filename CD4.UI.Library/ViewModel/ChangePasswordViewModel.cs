@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CD4.DataLibrary.DataAccess;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -14,12 +15,15 @@ namespace CD4.UI.Library.ViewModel
         private string repeatNewPassword;
         private string newPassword;
         private string currentPassword;
+        private readonly IAuthenticationDataAccess _authenticationDataAccess;
 
-        public ChangePasswordViewModel()
+        public event EventHandler<string> PrompToView;
+        public ChangePasswordViewModel(IAuthenticationDataAccess authenticationDataAccess)
         {
 
             //subscribe for events
             PropertyChanged += ActOnLocalPropertyChanged;
+            _authenticationDataAccess = authenticationDataAccess;
         }
 
         private void ActOnLocalPropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -113,9 +117,18 @@ namespace CD4.UI.Library.ViewModel
         }
         public bool CanChangePassword { get; set; }
         public bool ShowMismatchMessage { get; set; }
+        public string LoggedInUserName { get; set; }
         public async Task ChangePassword()
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _authenticationDataAccess.ChangePassword(CurrentPassword, LoggedInUserName, NewPassword);
+                PrompToView?.Invoke(this, "Password changed successfully!");
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         #region INotifyPropertyChanged Hookup
