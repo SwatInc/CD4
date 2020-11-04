@@ -23,12 +23,6 @@ namespace CD4.UI.View
 
             //subscribe for events
             simpleButtonChangePassword.Click += ChangePassword;
-            viewModel.PrompToView += ViewModel_PrompToView;
-        }
-
-        private void ViewModel_PrompToView(object sender, string e)
-        {
-            XtraMessageBox.Show(e);
         }
 
         private async void ChangePassword(object sender, EventArgs e)
@@ -36,6 +30,8 @@ namespace CD4.UI.View
             try
             {
                 await viewModel.ChangePassword();
+                XtraMessageBox.Show("Password changed successfully!");
+                Close();
             }
             catch (Exception ex)
             {

@@ -14,8 +14,6 @@ namespace CD4.UI.Library.ViewModel
         string LoggedInUserName { get; set; }
 
         event PropertyChangedEventHandler PropertyChanged;
-        event EventHandler<string> PrompToView;
-
         Task ChangePassword();
     }
 }

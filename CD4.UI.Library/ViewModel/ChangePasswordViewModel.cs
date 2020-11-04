@@ -17,7 +17,6 @@ namespace CD4.UI.Library.ViewModel
         private string currentPassword;
         private readonly IAuthenticationDataAccess _authenticationDataAccess;
 
-        public event EventHandler<string> PrompToView;
         public ChangePasswordViewModel(IAuthenticationDataAccess authenticationDataAccess)
         {
 
@@ -123,7 +122,6 @@ namespace CD4.UI.Library.ViewModel
             try
             {
                 await _authenticationDataAccess.ChangePassword(CurrentPassword, LoggedInUserName, NewPassword);
-                PrompToView?.Invoke(this, "Password changed successfully!");
             }
             catch (Exception)
             {
