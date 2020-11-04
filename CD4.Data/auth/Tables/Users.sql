@@ -14,7 +14,8 @@
 	[TwoFactorEnabled] [bit] NOT NULL,
 	[LockoutEnd] [datetimeoffset](7) NULL,
 	[LockoutEnabled] [bit] NOT NULL,
-	[AccessFailedCount] [int] NOT NULL
+	[AccessFailedCount] [int] NOT NULL, 
+    CONSTRAINT [AK_Users_Username] UNIQUE ([UserName])
 );
 
 
