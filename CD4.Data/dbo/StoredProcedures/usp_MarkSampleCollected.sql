@@ -12,7 +12,7 @@ SET NOCOUNT ON;
 	--Set sample status as collected  and set collected date.
 	UPDATE [dbo].[SampleTracking]
 	SET [StatusId] = 2,
-		[CreatedAt] = GETDATE()
+		[CreatedAt] = SYSDATETIMEOFFSET()
 	WHERE [SampleCin] = @Cin AND [StatusId] = 1;
 	--Set associated test statuses as collected
 	INSERT INTO @EffectedResultIds ([Id])
