@@ -36,9 +36,9 @@
             this.labelControlCapsLockStatus = new DevExpress.XtraEditors.LabelControl();
             this.pictureEditLaboratoryLogo = new DevExpress.XtraEditors.PictureEdit();
             this.groupControlAuthView = new DevExpress.XtraEditors.GroupControl();
+            this.labelControlWelcomeMessage = new DevExpress.XtraEditors.LabelControl();
             this.separatorControl1 = new DevExpress.XtraEditors.SeparatorControl();
             this.simpleButtonCancel = new DevExpress.XtraEditors.SimpleButton();
-            this.labelControlWelcomeMessage = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.textEditPassword.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditUsername.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEditLaboratoryLogo.Properties)).BeginInit();
@@ -136,7 +136,7 @@
             // 
             this.SimpleButtonSignIn.Appearance.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SimpleButtonSignIn.Appearance.Options.UseFont = true;
-            this.SimpleButtonSignIn.Location = new System.Drawing.Point(422, 218);
+            this.SimpleButtonSignIn.Location = new System.Drawing.Point(422, 228);
             this.SimpleButtonSignIn.Name = "SimpleButtonSignIn";
             this.SimpleButtonSignIn.Size = new System.Drawing.Size(102, 30);
             this.SimpleButtonSignIn.TabIndex = 3;
@@ -184,7 +184,7 @@
             this.pictureEditLaboratoryLogo.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
             this.pictureEditLaboratoryLogo.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
             this.pictureEditLaboratoryLogo.Properties.ZoomPercent = 75D;
-            this.pictureEditLaboratoryLogo.Size = new System.Drawing.Size(261, 256);
+            this.pictureEditLaboratoryLogo.Size = new System.Drawing.Size(276, 269);
             this.pictureEditLaboratoryLogo.TabIndex = 48;
             // 
             // groupControlAuthView
@@ -201,33 +201,8 @@
             this.groupControlAuthView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControlAuthView.Location = new System.Drawing.Point(0, 0);
             this.groupControlAuthView.Name = "groupControlAuthView";
-            this.groupControlAuthView.Size = new System.Drawing.Size(575, 290);
+            this.groupControlAuthView.Size = new System.Drawing.Size(581, 296);
             this.groupControlAuthView.TabIndex = 49;
-            // 
-            // separatorControl1
-            // 
-            this.separatorControl1.Location = new System.Drawing.Point(288, 187);
-            this.separatorControl1.Name = "separatorControl1";
-            this.separatorControl1.Size = new System.Drawing.Size(258, 23);
-            this.separatorControl1.TabIndex = 49;
-            // 
-            // simpleButtonCancel
-            // 
-            this.simpleButtonCancel.Appearance.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.simpleButtonCancel.Appearance.ForeColor = System.Drawing.Color.Gray;
-            this.simpleButtonCancel.Appearance.Options.UseFont = true;
-            this.simpleButtonCancel.Appearance.Options.UseForeColor = true;
-            this.simpleButtonCancel.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
-            this.simpleButtonCancel.AppearanceDisabled.Options.UseForeColor = true;
-            this.simpleButtonCancel.AppearanceHovered.ForeColor = System.Drawing.Color.Gray;
-            this.simpleButtonCancel.AppearanceHovered.Options.UseForeColor = true;
-            this.simpleButtonCancel.AppearancePressed.ForeColor = System.Drawing.Color.Gray;
-            this.simpleButtonCancel.AppearancePressed.Options.UseForeColor = true;
-            this.simpleButtonCancel.Location = new System.Drawing.Point(302, 218);
-            this.simpleButtonCancel.Name = "simpleButtonCancel";
-            this.simpleButtonCancel.Size = new System.Drawing.Size(102, 30);
-            this.simpleButtonCancel.TabIndex = 4;
-            this.simpleButtonCancel.Text = "Cancel";
             // 
             // labelControlWelcomeMessage
             // 
@@ -259,6 +234,31 @@
             this.labelControlWelcomeMessage.Tag = "";
             this.labelControlWelcomeMessage.Text = "Welcome to CD4";
             // 
+            // separatorControl1
+            // 
+            this.separatorControl1.Location = new System.Drawing.Point(288, 187);
+            this.separatorControl1.Name = "separatorControl1";
+            this.separatorControl1.Size = new System.Drawing.Size(258, 23);
+            this.separatorControl1.TabIndex = 49;
+            // 
+            // simpleButtonCancel
+            // 
+            this.simpleButtonCancel.Appearance.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.simpleButtonCancel.Appearance.ForeColor = System.Drawing.Color.Gray;
+            this.simpleButtonCancel.Appearance.Options.UseFont = true;
+            this.simpleButtonCancel.Appearance.Options.UseForeColor = true;
+            this.simpleButtonCancel.AppearanceDisabled.ForeColor = System.Drawing.Color.Gray;
+            this.simpleButtonCancel.AppearanceDisabled.Options.UseForeColor = true;
+            this.simpleButtonCancel.AppearanceHovered.ForeColor = System.Drawing.Color.Gray;
+            this.simpleButtonCancel.AppearanceHovered.Options.UseForeColor = true;
+            this.simpleButtonCancel.AppearancePressed.ForeColor = System.Drawing.Color.Gray;
+            this.simpleButtonCancel.AppearancePressed.Options.UseForeColor = true;
+            this.simpleButtonCancel.Location = new System.Drawing.Point(302, 228);
+            this.simpleButtonCancel.Name = "simpleButtonCancel";
+            this.simpleButtonCancel.Size = new System.Drawing.Size(102, 30);
+            this.simpleButtonCancel.TabIndex = 4;
+            this.simpleButtonCancel.Text = "Cancel";
+            // 
             // AuthenticationView
             // 
             this.Appearance.BackColor = System.Drawing.SystemColors.Control;
@@ -266,7 +266,7 @@
             this.Appearance.Options.UseFont = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(575, 290);
+            this.ClientSize = new System.Drawing.Size(581, 296);
             this.ControlBox = false;
             this.Controls.Add(this.groupControlAuthView);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
