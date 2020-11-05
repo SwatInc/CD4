@@ -22,8 +22,8 @@ namespace CD4.UI.Library.ViewModel
         #region Private Properties
         private CultureInfo cultureInfo = new CultureInfo("en-US");
         private string cin;
-        private DateTimeOffset? sampleCollectionDate;
-        private DateTimeOffset? sampleReceivedDate;
+        private DateTime? sampleCollectionDate;
+        private DateTime? sampleReceivedDate;
         private string nidPp;
         private string fullname;
         private string age;
@@ -133,7 +133,7 @@ namespace CD4.UI.Library.ViewModel
                 //OnPropertyChanged(); called elsewhere
             }
         }
-        public DateTimeOffset? SampleCollectionDate
+        public DateTime? SampleCollectionDate
         {
             get => sampleCollectionDate; set
             {
@@ -142,7 +142,7 @@ namespace CD4.UI.Library.ViewModel
                 OnPropertyChanged();
             }
         }
-        public DateTimeOffset? SampleReceivedDate
+        public DateTime? SampleReceivedDate
         {
             get => sampleReceivedDate; set
             {
@@ -343,8 +343,16 @@ namespace CD4.UI.Library.ViewModel
             this.Cin = result.RequestPatientSampleData.Cin;
             this.EpisodeNumber = result.RequestPatientSampleData.EpisodeNumber;
             this.SelectedSiteId = result.RequestPatientSampleData.SiteId;
-            this.SampleCollectionDate = result.RequestPatientSampleData.CollectionDate;
-            this.SampleReceivedDate = result.RequestPatientSampleData.ReceivedDate;
+
+            if (result.RequestPatientSampleData.CollectionDate != null)
+            {
+                this.SampleCollectionDate = ((DateTimeOffset)result.RequestPatientSampleData.CollectionDate).DateTime;
+            }
+
+            if (result.RequestPatientSampleData.ReceivedDate != null)
+            {
+                this.SampleReceivedDate = ((DateTimeOffset)result.RequestPatientSampleData.ReceivedDate).DateTime;
+            }
             this.NidPp = result.RequestPatientSampleData.NidPp;
             this.Fullname = result.RequestPatientSampleData.Fullname;
             this.SelectedGenderId = result.RequestPatientSampleData.GenderId;
