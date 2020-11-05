@@ -82,6 +82,7 @@
             this.DetailReport = new DevExpress.XtraReports.UI.DetailReportBand();
             this.GroupHeaderDiscipline = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.xrLabel18 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrLabel20 = new DevExpress.XtraReports.UI.XRLabel();
             this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -91,21 +92,21 @@
             this.TopMargin.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrPictureBoxLaboratorylogo,
             this.xrLabelAnalysisReport});
-            this.TopMargin.HeightF = 100.0833F;
+            this.TopMargin.HeightF = 124.0416F;
             this.TopMargin.Name = "TopMargin";
             // 
             // xrPictureBoxLaboratorylogo
             // 
             this.xrPictureBoxLaboratorylogo.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBoxLaboratorylogo.ImageSource"));
-            this.xrPictureBoxLaboratorylogo.LocationFloat = new DevExpress.Utils.PointFloat(454.9849F, 30.12501F);
+            this.xrPictureBoxLaboratorylogo.LocationFloat = new DevExpress.Utils.PointFloat(9.536743E-05F, 0F);
             this.xrPictureBoxLaboratorylogo.Name = "xrPictureBoxLaboratorylogo";
-            this.xrPictureBoxLaboratorylogo.SizeF = new System.Drawing.SizeF(174.0151F, 34.87499F);
-            this.xrPictureBoxLaboratorylogo.Visible = false;
+            this.xrPictureBoxLaboratorylogo.SizeF = new System.Drawing.SizeF(223.8069F, 124.0416F);
+            this.xrPictureBoxLaboratorylogo.Sizing = DevExpress.XtraPrinting.ImageSizeMode.ZoomImage;
             // 
             // xrLabelAnalysisReport
             // 
             this.xrLabelAnalysisReport.Font = new System.Drawing.Font("Segoe UI", 14F, System.Drawing.FontStyle.Bold);
-            this.xrLabelAnalysisReport.LocationFloat = new DevExpress.Utils.PointFloat(36F, 38.75F);
+            this.xrLabelAnalysisReport.LocationFloat = new DevExpress.Utils.PointFloat(454.1667F, 84.79162F);
             this.xrLabelAnalysisReport.Multiline = true;
             this.xrLabelAnalysisReport.Name = "xrLabelAnalysisReport";
             this.xrLabelAnalysisReport.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -135,24 +136,26 @@
             // 
             this.xrLabelLaboratoryPhoneAndFaxFooter.AutoWidth = true;
             this.xrLabelLaboratoryPhoneAndFaxFooter.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.xrLabelLaboratoryPhoneAndFaxFooter.LocationFloat = new DevExpress.Utils.PointFloat(36.00003F, 33.00001F);
+            this.xrLabelLaboratoryPhoneAndFaxFooter.LocationFloat = new DevExpress.Utils.PointFloat(36.00003F, 32.99999F);
             this.xrLabelLaboratoryPhoneAndFaxFooter.Name = "xrLabelLaboratoryPhoneAndFaxFooter";
             this.xrLabelLaboratoryPhoneAndFaxFooter.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabelLaboratoryPhoneAndFaxFooter.SizeF = new System.Drawing.SizeF(215.625F, 23F);
+            this.xrLabelLaboratoryPhoneAndFaxFooter.SizeF = new System.Drawing.SizeF(307.2916F, 23F);
             this.xrLabelLaboratoryPhoneAndFaxFooter.StylePriority.UseFont = false;
-            this.xrLabelLaboratoryPhoneAndFaxFooter.Text = "Phone : 7657111 • Fax : • •";
+            this.xrLabelLaboratoryPhoneAndFaxFooter.Text = "Hotline: 7336613 • Phone : 3300989  ";
             this.xrLabelLaboratoryPhoneAndFaxFooter.WordWrap = false;
             // 
             // xrLabelLaboratoryAddressFooter
             // 
             this.xrLabelLaboratoryAddressFooter.AutoWidth = true;
-            this.xrLabelLaboratoryAddressFooter.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.xrLabelLaboratoryAddressFooter.LocationFloat = new DevExpress.Utils.PointFloat(36.00003F, 9.999995F);
+            this.xrLabelLaboratoryAddressFooter.Font = new System.Drawing.Font("Segoe UI", 8F, System.Drawing.FontStyle.Bold);
+            this.xrLabelLaboratoryAddressFooter.LocationFloat = new DevExpress.Utils.PointFloat(36.00003F, 9.999974F);
             this.xrLabelLaboratoryAddressFooter.Name = "xrLabelLaboratoryAddressFooter";
             this.xrLabelLaboratoryAddressFooter.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabelLaboratoryAddressFooter.SizeF = new System.Drawing.SizeF(215.625F, 23F);
+            this.xrLabelLaboratoryAddressFooter.SizeF = new System.Drawing.SizeF(456.3335F, 23F);
             this.xrLabelLaboratoryAddressFooter.StylePriority.UseFont = false;
-            this.xrLabelLaboratoryAddressFooter.Text = "SwatInc, Labs • • Male\' • Maldives";
+            this.xrLabelLaboratoryAddressFooter.StylePriority.UseTextAlignment = false;
+            this.xrLabelLaboratoryAddressFooter.Text = "Medlab Diagnostics • M. Kulunu Vehi • Buruzu Magu • Male\' • Maldives";
+            this.xrLabelLaboratoryAddressFooter.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
             this.xrLabelLaboratoryAddressFooter.WordWrap = false;
             // 
             // Detail
@@ -185,7 +188,7 @@
             this.xrLine1,
             this.xrLabel4,
             this.xrLabel3});
-            this.PageHeader.HeightF = 237.3334F;
+            this.PageHeader.HeightF = 237.0833F;
             this.PageHeader.Name = "PageHeader";
             // 
             // xrLabel12
@@ -214,11 +217,11 @@
             // 
             this.xrLabel13.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[SampleSite]")});
-            this.xrLabel13.LocationFloat = new DevExpress.Utils.PointFloat(138.0834F, 137.0832F);
+            this.xrLabel13.LocationFloat = new DevExpress.Utils.PointFloat(509.0002F, 183.0832F);
             this.xrLabel13.Multiline = true;
             this.xrLabel13.Name = "xrLabel13";
             this.xrLabel13.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel13.SizeF = new System.Drawing.SizeF(205.2083F, 23F);
+            this.xrLabel13.SizeF = new System.Drawing.SizeF(130.9997F, 23F);
             this.xrLabel13.Text = "xrLabel13";
             // 
             // xrLabel2
@@ -240,19 +243,19 @@
             // 
             this.xrLabel11.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Patient].[Birthdate]")});
-            this.xrLabel11.LocationFloat = new DevExpress.Utils.PointFloat(138.0834F, 183.0833F);
+            this.xrLabel11.LocationFloat = new DevExpress.Utils.PointFloat(138.0835F, 160.0832F);
             this.xrLabel11.Multiline = true;
             this.xrLabel11.Name = "xrLabel11";
             this.xrLabel11.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabel11.SizeF = new System.Drawing.SizeF(205.2083F, 23F);
             this.xrLabel11.Text = "xrLabel11";
-            this.xrLabel11.TextFormatString = "{0:yyyy-MM-dd}";
+            this.xrLabel11.TextFormatString = "{0:dd-MMM-yy}";
             // 
             // xrLabel10
             // 
             this.xrLabel10.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Patient].[AgeSex]")});
-            this.xrLabel10.LocationFloat = new DevExpress.Utils.PointFloat(138.0833F, 160.0833F);
+            this.xrLabel10.LocationFloat = new DevExpress.Utils.PointFloat(138.0834F, 137.0832F);
             this.xrLabel10.Multiline = true;
             this.xrLabel10.Name = "xrLabel10";
             this.xrLabel10.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -263,31 +266,31 @@
             // 
             this.xrLabel9.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[ReceivedDate]")});
-            this.xrLabel9.LocationFloat = new DevExpress.Utils.PointFloat(518F, 160.0832F);
+            this.xrLabel9.LocationFloat = new DevExpress.Utils.PointFloat(509.0002F, 160.0832F);
             this.xrLabel9.Multiline = true;
             this.xrLabel9.Name = "xrLabel9";
             this.xrLabel9.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel9.SizeF = new System.Drawing.SizeF(103.5F, 23F);
+            this.xrLabel9.SizeF = new System.Drawing.SizeF(130.9997F, 23.00002F);
             this.xrLabel9.Text = "xrLabel9";
-            this.xrLabel9.TextFormatString = "{0:yyyy-MM-dd}";
+            this.xrLabel9.TextFormatString = "{0:dd-MMM-yy HH:mm}";
             // 
             // xrLabel8
             // 
             this.xrLabel8.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[CollectedDate]")});
-            this.xrLabel8.LocationFloat = new DevExpress.Utils.PointFloat(518F, 137.0832F);
+            this.xrLabel8.LocationFloat = new DevExpress.Utils.PointFloat(509.0002F, 137.0832F);
             this.xrLabel8.Multiline = true;
             this.xrLabel8.Name = "xrLabel8";
             this.xrLabel8.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel8.SizeF = new System.Drawing.SizeF(103.5001F, 23F);
+            this.xrLabel8.SizeF = new System.Drawing.SizeF(130.9998F, 22.99998F);
             this.xrLabel8.Text = "xrLabel8";
-            this.xrLabel8.TextFormatString = "{0:yyyy-MM-dd}";
+            this.xrLabel8.TextFormatString = "{0:dd-MMM-yy HH:mm}";
             // 
             // xrLabel7
             // 
             this.xrLabel7.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Patient].[Address]")});
-            this.xrLabel7.LocationFloat = new DevExpress.Utils.PointFloat(138.0834F, 206.0833F);
+            this.xrLabel7.LocationFloat = new DevExpress.Utils.PointFloat(138.0835F, 183.0832F);
             this.xrLabel7.Multiline = true;
             this.xrLabel7.Name = "xrLabel7";
             this.xrLabel7.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -297,7 +300,7 @@
             // xrLabelReceivedDateLabel
             // 
             this.xrLabelReceivedDateLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.xrLabelReceivedDateLabel.LocationFloat = new DevExpress.Utils.PointFloat(414.875F, 160.0833F);
+            this.xrLabelReceivedDateLabel.LocationFloat = new DevExpress.Utils.PointFloat(405.8752F, 160.0833F);
             this.xrLabelReceivedDateLabel.Multiline = true;
             this.xrLabelReceivedDateLabel.Name = "xrLabelReceivedDateLabel";
             this.xrLabelReceivedDateLabel.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -308,7 +311,7 @@
             // xrLabelCollectedDateLabel
             // 
             this.xrLabelCollectedDateLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.xrLabelCollectedDateLabel.LocationFloat = new DevExpress.Utils.PointFloat(414.875F, 137.0834F);
+            this.xrLabelCollectedDateLabel.LocationFloat = new DevExpress.Utils.PointFloat(405.8752F, 137.0834F);
             this.xrLabelCollectedDateLabel.Multiline = true;
             this.xrLabelCollectedDateLabel.Name = "xrLabelCollectedDateLabel";
             this.xrLabelCollectedDateLabel.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -319,7 +322,7 @@
             // xrLabelAddressLabel
             // 
             this.xrLabelAddressLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.xrLabelAddressLabel.LocationFloat = new DevExpress.Utils.PointFloat(36.00003F, 206.0833F);
+            this.xrLabelAddressLabel.LocationFloat = new DevExpress.Utils.PointFloat(36.00013F, 183.0832F);
             this.xrLabelAddressLabel.Multiline = true;
             this.xrLabelAddressLabel.Name = "xrLabelAddressLabel";
             this.xrLabelAddressLabel.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -330,7 +333,7 @@
             // xrLabel1BirthdateLabel
             // 
             this.xrLabel1BirthdateLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.xrLabel1BirthdateLabel.LocationFloat = new DevExpress.Utils.PointFloat(36.00003F, 183.0833F);
+            this.xrLabel1BirthdateLabel.LocationFloat = new DevExpress.Utils.PointFloat(36.00013F, 160.0832F);
             this.xrLabel1BirthdateLabel.Multiline = true;
             this.xrLabel1BirthdateLabel.Name = "xrLabel1BirthdateLabel";
             this.xrLabel1BirthdateLabel.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -341,7 +344,7 @@
             // xrLabelAgeSexLabel
             // 
             this.xrLabelAgeSexLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.xrLabelAgeSexLabel.LocationFloat = new DevExpress.Utils.PointFloat(36.00003F, 160.0833F);
+            this.xrLabelAgeSexLabel.LocationFloat = new DevExpress.Utils.PointFloat(36.00013F, 137.0832F);
             this.xrLabelAgeSexLabel.Multiline = true;
             this.xrLabelAgeSexLabel.Name = "xrLabelAgeSexLabel";
             this.xrLabelAgeSexLabel.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -352,13 +355,13 @@
             // xrLabelSiteLabel
             // 
             this.xrLabelSiteLabel.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.xrLabelSiteLabel.LocationFloat = new DevExpress.Utils.PointFloat(36.00003F, 137.0833F);
+            this.xrLabelSiteLabel.LocationFloat = new DevExpress.Utils.PointFloat(406.9169F, 183.0832F);
             this.xrLabelSiteLabel.Multiline = true;
             this.xrLabelSiteLabel.Name = "xrLabelSiteLabel";
             this.xrLabelSiteLabel.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabelSiteLabel.SizeF = new System.Drawing.SizeF(102.0833F, 23F);
             this.xrLabelSiteLabel.StylePriority.UseFont = false;
-            this.xrLabelSiteLabel.Text = "Site";
+            this.xrLabelSiteLabel.Text = "Collection Site";
             // 
             // xrBarCode1
             // 
@@ -405,25 +408,25 @@
             // 
             // xrLabel4
             // 
-            this.xrLabel4.Font = new System.Drawing.Font("Segoe UI", 9.75F);
-            this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(413.375F, 37.00002F);
+            this.xrLabel4.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(405.8752F, 37.00002F);
             this.xrLabel4.Multiline = true;
             this.xrLabel4.Name = "xrLabel4";
             this.xrLabel4.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabel4.SizeF = new System.Drawing.SizeF(215.625F, 23F);
             this.xrLabel4.StylePriority.UseFont = false;
-            this.xrLabel4.Text = "Supervisor : Ahmed Hisaan Saeed";
+            this.xrLabel4.Text = "Molecular Division";
             // 
             // xrLabel3
             // 
             this.xrLabel3.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(413.375F, 14F);
+            this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(405.8752F, 14F);
             this.xrLabel3.Multiline = true;
             this.xrLabel3.Name = "xrLabel3";
             this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel3.SizeF = new System.Drawing.SizeF(215.625F, 23F);
+            this.xrLabel3.SizeF = new System.Drawing.SizeF(215.6247F, 23F);
             this.xrLabel3.StylePriority.UseFont = false;
-            this.xrLabel3.Text = "Swat Inc, Labs";
+            this.xrLabel3.Text = "Medlab Diagnostics";
             // 
             // ReportFooter
             // 
@@ -440,15 +443,15 @@
             this.xrLabel30.AutoWidth = true;
             this.xrLabel30.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.xrLabel30.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(133)))), ((int)(((byte)(133)))));
-            this.xrLabel30.LocationFloat = new DevExpress.Utils.PointFloat(36.00003F, 71.50441F);
+            this.xrLabel30.LocationFloat = new DevExpress.Utils.PointFloat(35.99989F, 56.64476F);
             this.xrLabel30.Name = "xrLabel30";
             this.xrLabel30.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel30.SizeF = new System.Drawing.SizeF(585.5F, 20.80703F);
+            this.xrLabel30.SizeF = new System.Drawing.SizeF(585.5F, 34.34868F);
             this.xrLabel30.StylePriority.UseFont = false;
             this.xrLabel30.StylePriority.UseForeColor = false;
             this.xrLabel30.StylePriority.UseTextAlignment = false;
             this.xrLabel30.Text = "This document shall not be reproduced except in full, without the written approva" +
-    "l of SwatInc, Labs";
+    "l of Medlab Diagnostics.";
             this.xrLabel30.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
             // 
             // xrLabel29
@@ -456,7 +459,7 @@
             this.xrLabel29.AutoWidth = true;
             this.xrLabel29.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.xrLabel29.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(133)))), ((int)(((byte)(133)))));
-            this.xrLabel29.LocationFloat = new DevExpress.Utils.PointFloat(36F, 50.69736F);
+            this.xrLabel29.LocationFloat = new DevExpress.Utils.PointFloat(35.99986F, 35.83768F);
             this.xrLabel29.Name = "xrLabel29";
             this.xrLabel29.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabel29.SizeF = new System.Drawing.SizeF(585.5F, 20.80703F);
@@ -471,14 +474,14 @@
             this.xrLabel6.AutoWidth = true;
             this.xrLabel6.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.xrLabel6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(133)))), ((int)(((byte)(133)))));
-            this.xrLabel6.LocationFloat = new DevExpress.Utils.PointFloat(36.00003F, 29.89034F);
+            this.xrLabel6.LocationFloat = new DevExpress.Utils.PointFloat(35.99989F, 15.03067F);
             this.xrLabel6.Name = "xrLabel6";
             this.xrLabel6.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
             this.xrLabel6.SizeF = new System.Drawing.SizeF(585.5F, 20.80703F);
             this.xrLabel6.StylePriority.UseFont = false;
             this.xrLabel6.StylePriority.UseForeColor = false;
             this.xrLabel6.StylePriority.UseTextAlignment = false;
-            this.xrLabel6.Text = "⚠ Result out of client specified range.";
+            this.xrLabel6.Text = "Electronically authorized by Medlab Diagnostics, no signature required.";
             this.xrLabel6.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
             // 
             // xrLabel28
@@ -515,7 +518,7 @@
             // xrLabelResultHeading
             // 
             this.xrLabelResultHeading.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.xrLabelResultHeading.LocationFloat = new DevExpress.Utils.PointFloat(296.4167F, 25.24999F);
+            this.xrLabelResultHeading.LocationFloat = new DevExpress.Utils.PointFloat(296.4167F, 48.25001F);
             this.xrLabelResultHeading.Multiline = true;
             this.xrLabelResultHeading.Name = "xrLabelResultHeading";
             this.xrLabelResultHeading.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -528,7 +531,7 @@
             // xrLabelUnitHeading
             // 
             this.xrLabelUnitHeading.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.xrLabelUnitHeading.LocationFloat = new DevExpress.Utils.PointFloat(405.8752F, 25.24999F);
+            this.xrLabelUnitHeading.LocationFloat = new DevExpress.Utils.PointFloat(405.8752F, 48.25001F);
             this.xrLabelUnitHeading.Multiline = true;
             this.xrLabelUnitHeading.Name = "xrLabelUnitHeading";
             this.xrLabelUnitHeading.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -539,7 +542,7 @@
             // xrLabelRangeHeading
             // 
             this.xrLabelRangeHeading.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.xrLabelRangeHeading.LocationFloat = new DevExpress.Utils.PointFloat(519.4168F, 26.20837F);
+            this.xrLabelRangeHeading.LocationFloat = new DevExpress.Utils.PointFloat(519.4168F, 49.20839F);
             this.xrLabelRangeHeading.Multiline = true;
             this.xrLabelRangeHeading.Name = "xrLabelRangeHeading";
             this.xrLabelRangeHeading.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -556,7 +559,7 @@
             // xrLabelAbalysisHeading
             // 
             this.xrLabelAbalysisHeading.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.xrLabelAbalysisHeading.LocationFloat = new DevExpress.Utils.PointFloat(36.00009F, 25.24999F);
+            this.xrLabelAbalysisHeading.LocationFloat = new DevExpress.Utils.PointFloat(36.00009F, 48.25001F);
             this.xrLabelAbalysisHeading.Multiline = true;
             this.xrLabelAbalysisHeading.Name = "xrLabelAbalysisHeading";
             this.xrLabelAbalysisHeading.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -567,13 +570,14 @@
             // GroupHeaderCin
             // 
             this.GroupHeaderCin.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrLabel20,
             this.xrLabelAbalysisHeading,
             this.xrLine5,
             this.xrLabelRangeHeading,
             this.xrLabelUnitHeading,
             this.xrLabelResultHeading,
             this.xrLabel14});
-            this.GroupHeaderCin.HeightF = 49.20836F;
+            this.GroupHeaderCin.HeightF = 72.20838F;
             this.GroupHeaderCin.Level = 1;
             this.GroupHeaderCin.Name = "GroupHeaderCin";
             this.GroupHeaderCin.RepeatEveryPage = true;
@@ -672,6 +676,20 @@
             this.xrLabel18.StylePriority.UseTextAlignment = false;
             this.xrLabel18.Text = "xrLabel18";
             this.xrLabel18.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
+            this.xrLabel18.Visible = false;
+            // 
+            // xrLabel20
+            // 
+            this.xrLabel20.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.xrLabel20.LocationFloat = new DevExpress.Utils.PointFloat(36.00013F, 25.25002F);
+            this.xrLabel20.Multiline = true;
+            this.xrLabel20.Name = "xrLabel20";
+            this.xrLabel20.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel20.SizeF = new System.Drawing.SizeF(585.5001F, 22.99999F);
+            this.xrLabel20.StylePriority.UseFont = false;
+            this.xrLabel20.StylePriority.UseTextAlignment = false;
+            this.xrLabel20.Text = "MOLECULAR BIOLOGY";
+            this.xrLabel20.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             // 
             // bindingSource
             // 
@@ -690,6 +708,7 @@
             this.bindingSource});
             this.DataSource = this.bindingSource;
             this.Font = new System.Drawing.Font("Segoe UI", 9.75F);
+            this.Margins = new System.Drawing.Printing.Margins(100, 100, 124, 100);
             this.Version = "18.2";
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
@@ -750,5 +769,6 @@
         private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeaderDiscipline;
         private DevExpress.XtraReports.UI.XRLabel xrLabel18;
         private DevExpress.XtraReports.UI.XRLabel xrLabel19;
+        private DevExpress.XtraReports.UI.XRLabel xrLabel20;
     }
 }

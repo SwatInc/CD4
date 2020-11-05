@@ -43,6 +43,9 @@
             this.simpleButtonSave = new DevExpress.XtraEditors.SimpleButton();
             this.textEditId = new DevExpress.XtraEditors.TextEdit();
             this.textEditDescription = new DevExpress.XtraEditors.TextEdit();
+            this.gridColumnDiscipline = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnSampleType = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnUnit = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlCodifiedValues)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewTests)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
@@ -72,7 +75,10 @@
             this.gridColumnDescription,
             this.gridColumnResultDataType,
             this.gridColumnIsReportable,
-            this.gridColumnMask});
+            this.gridColumnMask,
+            this.gridColumnDiscipline,
+            this.gridColumnSampleType,
+            this.gridColumnUnit});
             this.gridViewTests.GridControl = this.gridControlCodifiedValues;
             this.gridViewTests.Name = "gridViewTests";
             // 
@@ -83,7 +89,7 @@
             this.gridColumnId.Name = "gridColumnId";
             this.gridColumnId.Visible = true;
             this.gridColumnId.VisibleIndex = 0;
-            this.gridColumnId.Width = 45;
+            this.gridColumnId.Width = 35;
             // 
             // gridColumnDescription
             // 
@@ -92,7 +98,7 @@
             this.gridColumnDescription.Name = "gridColumnDescription";
             this.gridColumnDescription.Visible = true;
             this.gridColumnDescription.VisibleIndex = 1;
-            this.gridColumnDescription.Width = 195;
+            this.gridColumnDescription.Width = 125;
             // 
             // gridColumnResultDataType
             // 
@@ -100,8 +106,8 @@
             this.gridColumnResultDataType.FieldName = "ResultDataType";
             this.gridColumnResultDataType.Name = "gridColumnResultDataType";
             this.gridColumnResultDataType.Visible = true;
-            this.gridColumnResultDataType.VisibleIndex = 2;
-            this.gridColumnResultDataType.Width = 113;
+            this.gridColumnResultDataType.VisibleIndex = 3;
+            this.gridColumnResultDataType.Width = 94;
             // 
             // gridColumnIsReportable
             // 
@@ -109,8 +115,8 @@
             this.gridColumnIsReportable.FieldName = "IsReportable";
             this.gridColumnIsReportable.Name = "gridColumnIsReportable";
             this.gridColumnIsReportable.Visible = true;
-            this.gridColumnIsReportable.VisibleIndex = 4;
-            this.gridColumnIsReportable.Width = 80;
+            this.gridColumnIsReportable.VisibleIndex = 5;
+            this.gridColumnIsReportable.Width = 67;
             // 
             // gridColumnMask
             // 
@@ -118,8 +124,8 @@
             this.gridColumnMask.FieldName = "Mask";
             this.gridColumnMask.Name = "gridColumnMask";
             this.gridColumnMask.Visible = true;
-            this.gridColumnMask.VisibleIndex = 3;
-            this.gridColumnMask.Width = 123;
+            this.gridColumnMask.VisibleIndex = 4;
+            this.gridColumnMask.Width = 103;
             // 
             // splitContainerControl
             // 
@@ -206,6 +212,32 @@
             this.textEditDescription.Size = new System.Drawing.Size(173, 20);
             this.textEditDescription.TabIndex = 0;
             // 
+            // gridColumnDiscipline
+            // 
+            this.gridColumnDiscipline.Caption = "Discipline";
+            this.gridColumnDiscipline.FieldName = "Discipline";
+            this.gridColumnDiscipline.Name = "gridColumnDiscipline";
+            this.gridColumnDiscipline.Visible = true;
+            this.gridColumnDiscipline.VisibleIndex = 2;
+            this.gridColumnDiscipline.Width = 63;
+            // 
+            // gridColumnSampleType
+            // 
+            this.gridColumnSampleType.Caption = "Sample Type";
+            this.gridColumnSampleType.FieldName = "SampleType";
+            this.gridColumnSampleType.Name = "gridColumnSampleType";
+            this.gridColumnSampleType.Visible = true;
+            this.gridColumnSampleType.VisibleIndex = 6;
+            this.gridColumnSampleType.Width = 69;
+            // 
+            // gridColumnUnit
+            // 
+            this.gridColumnUnit.Caption = "Unit";
+            this.gridColumnUnit.FieldName = "Unit";
+            this.gridColumnUnit.Name = "gridColumnUnit";
+            this.gridColumnUnit.Visible = true;
+            this.gridColumnUnit.VisibleIndex = 7;
+            // 
             // TestsView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -243,5 +275,8 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnResultDataType;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnIsReportable;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnMask;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnDiscipline;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnSampleType;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnUnit;
     }
 }
