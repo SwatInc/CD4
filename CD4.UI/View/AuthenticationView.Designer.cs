@@ -38,6 +38,7 @@
             this.groupControlAuthView = new DevExpress.XtraEditors.GroupControl();
             this.separatorControl1 = new DevExpress.XtraEditors.SeparatorControl();
             this.simpleButtonCancel = new DevExpress.XtraEditors.SimpleButton();
+            this.labelControlWelcomeMessage = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.textEditPassword.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditUsername.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEditLaboratoryLogo.Properties)).BeginInit();
@@ -49,7 +50,7 @@
             // textEditPassword
             // 
             this.textEditPassword.EnterMoveNextControl = true;
-            this.textEditPassword.Location = new System.Drawing.Point(281, 85);
+            this.textEditPassword.Location = new System.Drawing.Point(288, 124);
             this.textEditPassword.Name = "textEditPassword";
             this.textEditPassword.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textEditPassword.Properties.Appearance.Options.UseFont = true;
@@ -82,7 +83,7 @@
             // textEditUsername
             // 
             this.textEditUsername.EnterMoveNextControl = true;
-            this.textEditUsername.Location = new System.Drawing.Point(281, 51);
+            this.textEditUsername.Location = new System.Drawing.Point(288, 89);
             this.textEditUsername.Name = "textEditUsername";
             this.textEditUsername.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textEditUsername.Properties.Appearance.Options.UseFont = true;
@@ -135,7 +136,7 @@
             // 
             this.SimpleButtonSignIn.Appearance.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.SimpleButtonSignIn.Appearance.Options.UseFont = true;
-            this.SimpleButtonSignIn.Location = new System.Drawing.Point(419, 207);
+            this.SimpleButtonSignIn.Location = new System.Drawing.Point(422, 218);
             this.SimpleButtonSignIn.Name = "SimpleButtonSignIn";
             this.SimpleButtonSignIn.Size = new System.Drawing.Size(102, 30);
             this.SimpleButtonSignIn.TabIndex = 3;
@@ -164,7 +165,7 @@
             this.labelControlCapsLockStatus.AppearancePressed.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
             this.labelControlCapsLockStatus.AppearancePressed.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
             this.labelControlCapsLockStatus.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
-            this.labelControlCapsLockStatus.Location = new System.Drawing.Point(298, 115);
+            this.labelControlCapsLockStatus.Location = new System.Drawing.Point(302, 156);
             this.labelControlCapsLockStatus.Name = "labelControlCapsLockStatus";
             this.labelControlCapsLockStatus.Size = new System.Drawing.Size(222, 27);
             this.labelControlCapsLockStatus.TabIndex = 47;
@@ -188,7 +189,7 @@
             // 
             // groupControlAuthView
             // 
-            this.groupControlAuthView.Controls.Add(this.pictureEditLaboratoryLogo);
+            this.groupControlAuthView.Controls.Add(this.labelControlWelcomeMessage);
             this.groupControlAuthView.Controls.Add(this.ProgressPanelAuthentication);
             this.groupControlAuthView.Controls.Add(this.separatorControl1);
             this.groupControlAuthView.Controls.Add(this.simpleButtonCancel);
@@ -196,17 +197,18 @@
             this.groupControlAuthView.Controls.Add(this.textEditPassword);
             this.groupControlAuthView.Controls.Add(this.labelControlCapsLockStatus);
             this.groupControlAuthView.Controls.Add(this.SimpleButtonSignIn);
+            this.groupControlAuthView.Controls.Add(this.pictureEditLaboratoryLogo);
             this.groupControlAuthView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControlAuthView.Location = new System.Drawing.Point(0, 0);
             this.groupControlAuthView.Name = "groupControlAuthView";
-            this.groupControlAuthView.Size = new System.Drawing.Size(569, 284);
+            this.groupControlAuthView.Size = new System.Drawing.Size(575, 290);
             this.groupControlAuthView.TabIndex = 49;
             // 
             // separatorControl1
             // 
-            this.separatorControl1.Location = new System.Drawing.Point(272, 159);
+            this.separatorControl1.Location = new System.Drawing.Point(288, 187);
             this.separatorControl1.Name = "separatorControl1";
-            this.separatorControl1.Size = new System.Drawing.Size(297, 23);
+            this.separatorControl1.Size = new System.Drawing.Size(258, 23);
             this.separatorControl1.TabIndex = 49;
             // 
             // simpleButtonCancel
@@ -221,11 +223,41 @@
             this.simpleButtonCancel.AppearanceHovered.Options.UseForeColor = true;
             this.simpleButtonCancel.AppearancePressed.ForeColor = System.Drawing.Color.Gray;
             this.simpleButtonCancel.AppearancePressed.Options.UseForeColor = true;
-            this.simpleButtonCancel.Location = new System.Drawing.Point(299, 207);
+            this.simpleButtonCancel.Location = new System.Drawing.Point(302, 218);
             this.simpleButtonCancel.Name = "simpleButtonCancel";
             this.simpleButtonCancel.Size = new System.Drawing.Size(102, 30);
             this.simpleButtonCancel.TabIndex = 4;
             this.simpleButtonCancel.Text = "Cancel";
+            // 
+            // labelControlWelcomeMessage
+            // 
+            this.labelControlWelcomeMessage.Appearance.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.labelControlWelcomeMessage.Appearance.Options.UseFont = true;
+            this.labelControlWelcomeMessage.Appearance.Options.UseTextOptions = true;
+            this.labelControlWelcomeMessage.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.labelControlWelcomeMessage.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.labelControlWelcomeMessage.AppearanceDisabled.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.labelControlWelcomeMessage.AppearanceDisabled.Options.UseFont = true;
+            this.labelControlWelcomeMessage.AppearanceDisabled.Options.UseTextOptions = true;
+            this.labelControlWelcomeMessage.AppearanceDisabled.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.labelControlWelcomeMessage.AppearanceDisabled.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.labelControlWelcomeMessage.AppearanceHovered.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.labelControlWelcomeMessage.AppearanceHovered.Options.UseFont = true;
+            this.labelControlWelcomeMessage.AppearanceHovered.Options.UseTextOptions = true;
+            this.labelControlWelcomeMessage.AppearanceHovered.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.labelControlWelcomeMessage.AppearanceHovered.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.labelControlWelcomeMessage.AppearancePressed.Font = new System.Drawing.Font("Segoe UI Semibold", 10F, System.Drawing.FontStyle.Bold);
+            this.labelControlWelcomeMessage.AppearancePressed.Options.UseFont = true;
+            this.labelControlWelcomeMessage.AppearancePressed.Options.UseTextOptions = true;
+            this.labelControlWelcomeMessage.AppearancePressed.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.labelControlWelcomeMessage.AppearancePressed.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.labelControlWelcomeMessage.AutoSizeMode = DevExpress.XtraEditors.LabelAutoSizeMode.None;
+            this.labelControlWelcomeMessage.Location = new System.Drawing.Point(288, 31);
+            this.labelControlWelcomeMessage.Name = "labelControlWelcomeMessage";
+            this.labelControlWelcomeMessage.Size = new System.Drawing.Size(258, 27);
+            this.labelControlWelcomeMessage.TabIndex = 50;
+            this.labelControlWelcomeMessage.Tag = "";
+            this.labelControlWelcomeMessage.Text = "Welcome to CD4";
             // 
             // AuthenticationView
             // 
@@ -234,7 +266,7 @@
             this.Appearance.Options.UseFont = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(569, 284);
+            this.ClientSize = new System.Drawing.Size(575, 290);
             this.ControlBox = false;
             this.Controls.Add(this.groupControlAuthView);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -270,5 +302,6 @@
         private DevExpress.XtraEditors.GroupControl groupControlAuthView;
         internal DevExpress.XtraEditors.SimpleButton simpleButtonCancel;
         private DevExpress.XtraEditors.SeparatorControl separatorControl1;
+        private DevExpress.XtraEditors.LabelControl labelControlWelcomeMessage;
     }
 }
