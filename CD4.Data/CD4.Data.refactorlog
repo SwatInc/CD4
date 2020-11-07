@@ -91,4 +91,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="ReferenceCode" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="5e8f1b09-89f3-4327-9e5c-ec5cc73fcd7f" ChangeDateTime="11/06/2020 09:21:58">
+    <Property Name="ElementName" Value="[dbo].[WorkStationPrinters].[PrinterType]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[WorkStationPrinters]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PrinterTypeId" />
+  </Operation>
 </Operations>

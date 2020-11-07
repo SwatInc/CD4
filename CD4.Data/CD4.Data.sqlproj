@@ -144,7 +144,6 @@
     <Build Include="dbo\StoredProcedures\usp_ValidateSampleAndApplicableAssociatedTests.sql" />
     <Build Include="dbo\StoredProcedures\usp_MarkSampleCollected.sql" />
     <Build Include="dbo\Tables\SampleType.sql" />
-    <Build Include="dbo\StoredProcedures\usp_GetWorkStationPrinters.sql" />
     <Build Include="dbo\Tables\Discipline.sql" />
     <Build Include="dbo\Tables\Unit.sql" />
     <Build Include="dbo\Tables\RequestTracking.sql" />
@@ -183,6 +182,8 @@
     <Build Include="dbo\StoredProcedures\usp_GetTestHistoryByResultId.sql" />
     <Build Include="dbo\StoredProcedures\usp_CancelTestValidation.sql" />
     <Build Include="auth\StoredProcedures\usp_ChangeUserHash.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetWorkStationSpecificPrinters.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetBarcodeDetails.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
