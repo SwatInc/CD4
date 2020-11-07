@@ -89,6 +89,7 @@
     <Compile Include="Models\AtollModel.cs" />
     <Compile Include="Models\AuditTrailModel.cs" />
     <Compile Include="Models\AuthorizeDetailModel.cs" />
+    <Compile Include="Models\BarcodeDataModel.cs" />
     <Compile Include="Models\ClinicalDetailIdsModel.cs" />
     <Compile Include="Models\ClinicalDetailsDatabaseModel.cs" />
     <Compile Include="Models\ClinicalDetailsModel.cs" />

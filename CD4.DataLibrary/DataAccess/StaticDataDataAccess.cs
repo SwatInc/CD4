@@ -163,9 +163,9 @@ namespace CD4.DataLibrary.DataAccess
         public async Task<List<WorkstationPrintersInfoModel>> GetWorkStationPrintersAsync(string workstationName)
         {
             //the stored procedure name to call
-            var storedProcedure = "[dbo].[usp_GetPrintersByWorkStation]";
+            var storedProcedure = "[dbo].[usp_GetWorkStationSpecificPrinters]";
             //set up the parameters for the stored procedures
-            var parameters = new { WorkStation = workstationName };
+            var parameters = new { WorkStationName = workstationName };
 
             try
             {
