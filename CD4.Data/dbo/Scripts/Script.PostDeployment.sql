@@ -425,8 +425,8 @@ SELECT
 FROM [dbo].[Country]
 WHERE [Country] = 'MALDIVIAN';
 
-INSERT INTO [dbo].[Patient] ([FullName], [NidPp], [Birthdate], [GenderId], [AtollId], [CountryId], [Address], [PhoneNumber])
-  VALUES ('Ahmed Hussain', 'A1234567', '19910214', @MaleGenderId, @SHithadhooId, @MaldivesCountryId, 'Some Address', '772342300');
+--INSERT INTO [dbo].[Patient] ([FullName], [NidPp], [Birthdate], [GenderId], [AtollId], [CountryId], [Address], [PhoneNumber])
+--  VALUES ('Ahmed Hussain', 'A1234567', '19910214', @MaleGenderId, @SHithadhooId, @MaldivesCountryId, 'Some Address', '772342300');
 
 SELECT
   @FeMaleGenderId = [Id]
@@ -442,8 +442,8 @@ SELECT
 FROM [dbo].[Country]
 WHERE [Country] = 'BANGLADESHI';
 
-INSERT INTO [dbo].[Patient] ([FullName], [NidPp], [Birthdate], [GenderId], [AtollId], [CountryId], [Address], [PhoneNumber])
-  VALUES ('Aminath Hussain', 'A987654', '19800214', @FeMaleGenderId, @SHithadhooId, @MaldivesCountryId, 'Some Some Address', '973465347');
+--INSERT INTO [dbo].[Patient] ([FullName], [NidPp], [Birthdate], [GenderId], [AtollId], [CountryId], [Address], [PhoneNumber])
+--  VALUES ('Aminath Hussain', 'A987654', '19800214', @FeMaleGenderId, @SHithadhooId, @MaldivesCountryId, 'Some Some Address', '973465347');
 
 
 --insert user: Bismillah.123!
@@ -490,7 +490,7 @@ INSERT INTO [dbo].[Status] ([Status])
 
 -- insert system printer
 INSERT INTO [dbo].[Printers] ([Description])
-  VALUES ('Microsoft XPS Document Writer');
+  VALUES ('\\RECEPTION1\BarcodePrinter');
 INSERT INTO [dbo].[Printers] ([Description])
   VALUES ('OneNote for Windows 10');
 INSERT INTO [dbo].[PrinterTypes] ([Description])
@@ -498,10 +498,10 @@ INSERT INTO [dbo].[PrinterTypes] ([Description])
 INSERT INTO [dbo].[PrinterTypes] ([Description])
   VALUES ('Document Printer');
 INSERT INTO [dbo].[WorkStations] ([Description])
-  VALUES ('IBRAHIMHUCYN');
-INSERT INTO [dbo].[WorkStationPrinters] ([WorkStationId], [PrinterId], [PrinterType])
+  VALUES ('IbrahimHucyn');
+INSERT INTO [dbo].[WorkStationPrinters] ([WorkStationId], [PrinterId], [PrinterTypeId])
   VALUES (1, 1, 1);
-INSERT INTO [dbo].[WorkStationPrinters] ([WorkStationId], [PrinterId], [PrinterType])
+INSERT INTO [dbo].[WorkStationPrinters] ([WorkStationId], [PrinterId], [PrinterTypeId])
   VALUES (1, 2, 2);
 
 
