@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -39,10 +40,10 @@ namespace CD4.UI.Library.ViewModel
         private string testToAdd;
         private string cinErrorText;
         readonly OrderEntryValidator validator = new OrderEntryValidator();
-        private readonly IMapper mapper;
-        private readonly IStaticDataDataAccess staticData;
-        private readonly IAnalysisRequestDataAccess request;
-        private readonly IStatusDataAccess statusDataAccess;
+        private readonly IMapper _mapper;
+        private readonly IStaticDataDataAccess _staticData;
+        private readonly IAnalysisRequestDataAccess _requestDataAccess;
+        private readonly IStatusDataAccess _statusDataAccess;
         private bool loadingStaticData;
         #endregion
 
@@ -52,7 +53,7 @@ namespace CD4.UI.Library.ViewModel
 
         #region Default Constructor
         public OrderEntryViewModel(IMapper mapper,
-            IStaticDataDataAccess staticData, IAnalysisRequestDataAccess request, IStatusDataAccess statusDataAccess)
+            IStaticDataDataAccess staticData, IAnalysisRequestDataAccess requestDataAccess, IStatusDataAccess statusDataAccess)
         {
             Sites = new List<SitesModel>();
             Gender = new List<GenderModel>();
@@ -65,14 +66,13 @@ namespace CD4.UI.Library.ViewModel
             ClinicalDetails = new BindingList<ClinicalDetailsOrderEntryModel>();
 
             //InitializeDemoData();
-            this.mapper = mapper;
-            this.staticData = staticData;
-            this.request = request;
-            this.statusDataAccess = statusDataAccess;
+            this._mapper = mapper;
+            this._staticData = staticData;
+            this._requestDataAccess = requestDataAccess;
+            this._statusDataAccess = statusDataAccess;
             PropertyChanged += OrderEntryViewModel_PropertyChanged;
             InitializeStaticData += OnInitializeStaticDataAsync;
             InitializeStaticData(this, EventArgs.Empty);
-            InitializePrintingRequirementsDemo();
         }
 
         #endregion
@@ -333,7 +333,7 @@ namespace CD4.UI.Library.ViewModel
 
         public async Task SearchRequestByCinAsync()
         {
-            var result = await request.SearchRequestByCinAsync(Cin);
+            var result = await _requestDataAccess.SearchRequestByCinAsync(Cin);
             //handle no search results
             if (result.RequestPatientSampleData is null)
             {
@@ -434,7 +434,7 @@ namespace CD4.UI.Library.ViewModel
 
         public async Task<bool> ConfirmAnalysisRequest()
         {
-            var mappedRequest = mapper.Map<DataLibrary.Models.AnalysisRequestDataModel>(this);
+            var mappedRequest = _mapper.Map<DataLibrary.Models.AnalysisRequestDataModel>(this);
 
             //add gender, Country, Atoll and, island decriptions 
             mappedRequest.Gender = GetGenderById(mappedRequest.GenderId).Gender;
@@ -442,7 +442,7 @@ namespace CD4.UI.Library.ViewModel
             var atollIslandData = GetAtollModelByAtollAndIslandName(mappedRequest.Atoll, mappedRequest.Island);
             mappedRequest.AtollId = atollIslandData.Id;
 
-            var result = await request.ConfirmRequestAsync
+            var result = await _requestDataAccess.ConfirmRequestAsync
                 (mappedRequest);
 
             return result;
@@ -505,11 +505,12 @@ namespace CD4.UI.Library.ViewModel
             await SetSelectedItemsForLookups(results);
         }
 
+        
         public async Task MarkSampleCollected()
         {
             try
             {
-                _ = await statusDataAccess.MarkSampleCollected(this.Cin);
+                _ = await _statusDataAccess.MarkSampleCollected(this.Cin);
             }
             catch (Exception ex)
             {
@@ -566,10 +567,36 @@ namespace CD4.UI.Library.ViewModel
         #endregion
 
         #region Private Methods
-        private void InitializePrintingRequirementsDemo()
+        private async Task InitializePrintingRequirementsAsync()
         {
-            BarcodePrinterName = "Microsoft XPS Document Writer";
+            //Set the default printer name as BarcodePrinter
+            var workstationName = "BarcodePrinter";
+            //Fetch the workstation name
+            workstationName = GetWorkStationName();
+            //call datalayer to get all the printers with their types (Barcode printer, document printer... etc)
+            var workStationPrinters = await _staticData.GetWorkStationPrintersAsync(workstationName);
+            var barcodePrinter = workStationPrinters.Find((x) => x.PrinterType == 1);
+            if (!string.IsNullOrEmpty(barcodePrinter.PrinterName)) BarcodePrinterName = barcodePrinter.PrinterName;
         }
+
+        /// <summary>
+        /// Returns workstation Name
+        /// </summary>
+        /// <returns>A string of workstation name</returns>
+        private string GetWorkStationName()
+        {
+            try
+            {
+                 return Dns.GetHostName();
+            }
+            catch (Exception ex)
+            {
+
+                Debug.WriteLine(ex.Message + "\n" + ex.StackTrace);
+                throw new Exception("Cannot get the FQDN(Fully Qualified Domain Name) / workstation name");
+            }
+        }
+
         private void ManageValidation()
         {
             var results = ValidateOrderEntry();
@@ -651,7 +678,7 @@ namespace CD4.UI.Library.ViewModel
                 await LoadAllClinicalDetailsAsync();
                 await LoadAllTestsAsync();
                 await LoadAllProfilesAsync();
-
+                await InitializePrintingRequirementsAsync();
             }
             catch (Exception ex)
             {
@@ -669,10 +696,10 @@ namespace CD4.UI.Library.ViewModel
         {
             await Task.Run(async () =>
             {
-                var results = await staticData.GetAllProfileTestsAsync();
+                var results = await _staticData.GetAllProfileTestsAsync();
                 foreach (var item in results)
                 {
-                    this.AllTestsData.Add(mapper.Map<ProfilesAndTestsDatasourceOeModel>(item));
+                    this.AllTestsData.Add(_mapper.Map<ProfilesAndTestsDatasourceOeModel>(item));
                 }
 
             }).ConfigureAwait(true);
@@ -682,60 +709,60 @@ namespace CD4.UI.Library.ViewModel
 
         private async Task LoadAllTestsAsync()
         {
-            var results = await staticData.GetAllTestsAsync();
+            var results = await _staticData.GetAllTestsAsync();
             foreach (var item in results)
             {
-                this.AllTestsData.Add(mapper.Map<ProfilesAndTestsDatasourceOeModel>(item));
+                this.AllTestsData.Add(_mapper.Map<ProfilesAndTestsDatasourceOeModel>(item));
             }
         }
 
         private async Task LoadAllClinicalDetailsAsync()
         {
-            var results = await staticData.GetAllClinicalDetailsAsync();
+            var results = await _staticData.GetAllClinicalDetailsAsync();
 
             foreach (var item in results)
             {
-                this.ClinicalDetails.Add(mapper.Map<ClinicalDetailsOrderEntryModel>(item));
+                this.ClinicalDetails.Add(_mapper.Map<ClinicalDetailsOrderEntryModel>(item));
             }
 
         }
 
         private async Task LoadAllAtollsAndIslandsAsync()
         {
-            var results = await staticData.GetAllAtollsAndIslandsAsync();
+            var results = await _staticData.GetAllAtollsAndIslandsAsync();
             foreach (var item in results)
             {
-                this.AllAtollsWithCorrespondingIsland.Add(mapper.Map<AtollIslandModel>(item));
+                this.AllAtollsWithCorrespondingIsland.Add(_mapper.Map<AtollIslandModel>(item));
             }
         }
 
         private async Task LoadAllGenderAsync()
         {
 
-            var results = await staticData.GetAllGenderAsync();
+            var results = await _staticData.GetAllGenderAsync();
             foreach (var item in results)
             {
-                this.Gender.Add(mapper.Map<GenderModel>(item));
+                this.Gender.Add(_mapper.Map<GenderModel>(item));
             }
 
         }
 
         private async Task LoadAllSitesAsync()
         {
-            var results = await staticData.GetAllSitesAsync();
+            var results = await _staticData.GetAllSitesAsync();
             foreach (var item in results)
             {
-                this.Sites.Add(mapper.Map<SitesModel>(item));
+                this.Sites.Add(_mapper.Map<SitesModel>(item));
             }
         }
         private async Task LoadAllCountriesAsync()
         {
 
-            var results = await staticData.GetAllCountriesAsync();
+            var results = await _staticData.GetAllCountriesAsync();
 
             foreach (var item in results)
             {
-                this.Countries.Add(mapper.Map<CountryModel>(item));
+                this.Countries.Add(_mapper.Map<CountryModel>(item));
             }
 
         }
@@ -764,7 +791,6 @@ namespace CD4.UI.Library.ViewModel
             await RepopulateIslandDatasource(SelectedAtoll); //filter the islands by selected atoll
             this.SelectedIsland = "HITHADHOO";//Select the island
             this.SelectedCountryId = 1;
-            //||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
             foreach (var item in this.ClinicalDetails)
             {//select all clinical details
@@ -971,6 +997,19 @@ namespace CD4.UI.Library.ViewModel
         private AtollIslandModel GetAtollModelByAtollAndIslandName(string atollName, string IslandName)
         {
             return (AllAtollsWithCorrespondingIsland.Where((a) => a.Atoll == atollName && a.Island == IslandName)).FirstOrDefault();
+        }
+
+        public async Task<List<BarcodeDataModel>> GetBarcodeData()
+        {
+            try
+            {
+                var data = await _requestDataAccess.GetBarcodeDataAsync(Cin);
+                return _mapper.Map<List<BarcodeDataModel>>(data);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
         #endregion
     }

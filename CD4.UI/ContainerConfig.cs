@@ -42,6 +42,7 @@ namespace CD4.UI
                 config.CreateMap<DataLibrary.Models.CodifiedResultsModel, Library.Model.CodifiedResultsModel>().ReverseMap();
                 config.CreateMap<DataLibrary.Models.CodifiedResultsModel, Library.Model.CodifiedResultsModel>();
                 config.CreateMap<DataLibrary.Models.CommentsSelectionModel, Library.Model.CommentsSelectionModel>().ReverseMap();
+                config.CreateMap<DataLibrary.Models.BarcodeDataModel, Library.Model.BarcodeDataModel>();
 
                 config.CreateMap<DataLibrary.Models.AnalysisRequestDataModel, Library.ViewModel.OrderEntryViewModel>()
                 .ForMember(dest => dest.SelectedSiteId, opt => opt.MapFrom(src => src.SiteId))

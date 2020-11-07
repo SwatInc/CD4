@@ -44,7 +44,7 @@ namespace CD4.UI.View
 
         private async void SimpleButtonPrintBarcode_Click(object sender, EventArgs e)
         {
-            PrintBarcode();
+            await PrintBarcodeAsync();
             try
             {
                 await _viewModel.MarkSampleCollected();
@@ -196,11 +196,10 @@ namespace CD4.UI.View
                     try
                     {
                         //execute search
-                        await this.InitializeRequestSearchByCinAsync();
+                        await InitializeRequestSearchByCinAsync();
                     }
                     catch (Exception ex)
                     {
-
                         XtraMessageBox.Show(ex.Message);
                     }
 
@@ -408,32 +407,48 @@ namespace CD4.UI.View
             _viewModel.OnReceiveSearchResults(e);
         }
 
-        private bool PrintBarcode()
+        private async Task PrintBarcodeAsync()
         {
-            var barcode = new SeventyFiveMillimeterTubeLabel();
-            barcode.Parameters["Fullname"].Value = _viewModel.Fullname;
-            barcode.Parameters["NidPp"].Value = _viewModel.NidPp;
-            barcode.Parameters["Birthdate"].Value = _viewModel.Birthdate;
-            barcode.Parameters["Age"].Value = _viewModel.Age;
-            barcode.Parameters["AccessionNumber"].Value = _viewModel.Cin;
-            barcode.Parameters["SampleCollectedDate"].Value = _viewModel.SampleCollectionDate;
-            barcode.Parameters["Seq"].Value = 0;
-            barcode.Parameters["Discipline"].Value = "MOLECULAR BIOLOGY";
+            var barcodeData = await _viewModel.GetBarcodeData();
+            if (barcodeData is null) 
+            {
+                XtraMessageBox.Show($"The current sample: {_viewModel.Cin} is not registered!\nPlease confirm the order first.");
+                return;
+            }
 
-            barcode.PrinterName = _viewModel.BarcodePrinterName;
-            barcode.RequestParameters = false;
-            var autoprint = new ReportPrintTool(barcode);
-            try
+            if(barcodeData.Count == 0)
             {
-                barcode.ShowPrintMarginsWarning = false;
-                autoprint.Print(barcode.PrinterName);
-                return true;
+                XtraMessageBox.Show($"The current sample: {_viewModel.Cin} is not registered!\nPlease confirm the order first.");
+                return;
             }
-            catch (Exception ex)
+
+            foreach (var barcode in barcodeData)
             {
-                XtraMessageBox.Show(ex.Message);
-                return false;
+                var barcodeLabel = new SeventyFiveMillimeterTubeLabel();
+                barcodeLabel.Parameters["Fullname"].Value = barcode.FullName;
+                barcodeLabel.Parameters["NidPp"].Value = barcode.NidPp;
+                barcodeLabel.Parameters["Birthdate"].Value = barcode.Birthdate;
+                barcodeLabel.Parameters["Age"].Value = barcode.Age;
+                barcodeLabel.Parameters["AccessionNumber"].Value = barcode.AccessionNumber;
+                barcodeLabel.Parameters["SampleCollectedDate"].Value = barcode.CollectionDate;
+                barcodeLabel.Parameters["Seq"].Value = barcode.Seq;
+                barcodeLabel.Parameters["Discipline"].Value = barcode.Discipline;
+
+                barcodeLabel.PrinterName = _viewModel.BarcodePrinterName;
+                barcodeLabel.RequestParameters = false;
+                var autoprint = new ReportPrintTool(barcodeLabel);
+                try
+                {
+                    barcodeLabel.ShowPrintMarginsWarning = false;
+                    autoprint.Print(barcodeLabel.PrinterName);
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.Message);
+                }
             }
+
+
         }
     }
 }

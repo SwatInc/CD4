@@ -52,5 +52,7 @@ namespace CD4.UI.Library.ViewModel
         event PropertyChangedEventHandler PropertyChanged;
         event EventHandler<string> PushingLogs;
         event EventHandler<string> PushingMessages;
+
+        Task<List<BarcodeDataModel>> GetBarcodeData();
     }
 }
