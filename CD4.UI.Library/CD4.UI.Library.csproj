@@ -69,6 +69,7 @@
     <Compile Include="Model\AuditTrailModel.cs" />
     <Compile Include="Model\Authority.cs" />
     <Compile Include="Model\AuthorizeDetailEventArgs.cs" />
+    <Compile Include="Model\BarcodeDataModel.cs" />
     <Compile Include="Model\CommentsSelectionModel.cs" />
     <Compile Include="Model\PatientModel.cs" />
     <Compile Include="Model\RejectionReasonType.cs" />

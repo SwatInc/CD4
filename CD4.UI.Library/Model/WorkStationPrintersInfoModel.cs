@@ -8,7 +8,7 @@ namespace CD4.UI.Library.Model
 {
     public class WorkStationPrintersInfoModel
     {
-        public string Printer { get; set; }
-        public string PrinterType { get; set; }
+        public string PrinterName { get; set; }
+        public int PrinterType { get; set; }
     }
 }

@@ -10,11 +10,14 @@ namespace CD4.DataLibrary.DataAccess
 {
     public class AnalysisRequestDataAccess : DataAccessBase, IAnalysisRequestDataAccess
     {
+        #region Private Fields
         private readonly IPatientDataAccess patientData;
         private readonly IClinicalDetailsDataAccess clinicalDetailsData;
         private readonly ISampleDataAccess sampleDataAccess;
         private readonly IResultDataAccess resultDataAccess;
         private readonly IStatusDataAccess statusDataAccess;
+
+        #endregion
 
         public AnalysisRequestDataAccess(IPatientDataAccess patientData,
             IClinicalDetailsDataAccess clinicalDetailsData,
@@ -492,6 +495,25 @@ namespace CD4.DataLibrary.DataAccess
             var parameter = new CinParameterModel() { Cin = cin };
 
             return await SelectMultipleRequestDataSets(storedProcedure, parameter);
+        }
+
+        /// <summary>
+        /// Get the fields required for barcode
+        /// </summary>
+        /// <param name="cin">Accession number</param>
+        /// <returns></returns>
+        public async Task<List<BarcodeDataModel>> GetBarcodeDataAsync(string cin)
+        {
+            var storedProcedure = "[dbo].[usp_GetBarcodeDetails]";
+            var parameter = new { Cin = cin };
+            try
+            {
+                return await LoadDataWithParameterAsync<BarcodeDataModel,dynamic>(storedProcedure,parameter);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }

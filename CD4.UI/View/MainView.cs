@@ -1,14 +1,10 @@
 ﻿using CD4.DataLibrary.DataAccess;
-using CD4.UI.Extensions;
 using CD4.UI.Library.ViewModel;
 using DevExpress.Skins;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
 using System;
-using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -79,7 +75,7 @@ namespace CD4.UI.View
 
         private void LoadAuthenticationUi()
         {
-           this.OpenMdiForm<AuthenticationView>();
+            this.OpenMdiForm<AuthenticationView>();
             this.ribbon.Visible = false;
         }
 
@@ -182,7 +178,6 @@ namespace CD4.UI.View
             }
             form.Show();
             form.FormClosed += Form_FormClosed;
-
         }
 
         private void AuthView_UserAuthorized(object sender, Library.Model.AuthorizeDetailEventArgs e)
@@ -218,7 +213,7 @@ namespace CD4.UI.View
             //open report view
             // this.OpenMdiForm<ReportView>(cin);
 
-            var reportView = new ReportView(reportsDataAccess, cin) { MdiParent = this};
+            var reportView = new ReportView(reportsDataAccess, cin) { MdiParent = this };
             reportView.Show();
         }
     }
