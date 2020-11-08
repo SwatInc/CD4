@@ -8,7 +8,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
-using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -421,7 +420,7 @@ namespace CD4.UI.Library.ViewModel
             //Clear all clinical details
             foreach (var item in ClinicalDetails)
             {
-                if (item.IsSelected==true)
+                if (item.IsSelected == true)
                 {
                     item.IsSelected = false;
                 }
@@ -436,16 +435,25 @@ namespace CD4.UI.Library.ViewModel
         {
             var mappedRequest = _mapper.Map<DataLibrary.Models.AnalysisRequestDataModel>(this);
 
-            //add gender, Country, Atoll and, island decriptions 
-            mappedRequest.Gender = GetGenderById(mappedRequest.GenderId).Gender;
-            mappedRequest.Country = (await GetCountryByIdAsync(mappedRequest.CountryId)).Country;
-            var atollIslandData = GetAtollModelByAtollAndIslandName(mappedRequest.Atoll, mappedRequest.Island);
-            mappedRequest.AtollId = atollIslandData.Id;
+            try
+            {
+                //add gender, Country, Atoll and, island decriptions 
+                mappedRequest.Gender = GetGenderById(mappedRequest.GenderId).Gender;
+                mappedRequest.Country = (await GetCountryByIdAsync(mappedRequest.CountryId)).Country;
+                var atollIslandData = GetAtollModelByAtollAndIslandName(mappedRequest.Atoll, mappedRequest.Island);
+                mappedRequest.AtollId = atollIslandData.Id;
 
-            var result = await _requestDataAccess.ConfirmRequestAsync
-                (mappedRequest);
+                var result = await _requestDataAccess.ConfirmRequestAsync
+                    (mappedRequest);
 
-            return result;
+                return result;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
 
         public async Task ManageAddTestToRequestAsync()
@@ -505,7 +513,7 @@ namespace CD4.UI.Library.ViewModel
             await SetSelectedItemsForLookups(results);
         }
 
-        
+
         public async Task MarkSampleCollected()
         {
             try
@@ -587,7 +595,7 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-                 return Dns.GetHostName();
+                return Dns.GetHostName();
             }
             catch (Exception ex)
             {

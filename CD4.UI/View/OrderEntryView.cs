@@ -5,7 +5,6 @@ using CD4.UI.Library.ViewModel;
 using CD4.UI.Report;
 using DevExpress.XtraEditors;
 using DevExpress.XtraReports.UI;
-using Newtonsoft.Json;
 using System;
 using System.ComponentModel;
 using System.Threading.Tasks;
@@ -38,13 +37,15 @@ namespace CD4.UI.View
             _viewModel.PushingMessages += OnPushMessage;
             _viewModel.PropertyChanged += OnPropertyChanged;
             simpleButtonConfirm.Click += OnConfirmAnalysisRequest;
-            simpleButtonSearchRequest.Click+= OnSearchRequest;
+            simpleButtonSearchRequest.Click += OnSearchRequest;
             simpleButtonPrintBarcode.Click += SimpleButtonPrintBarcode_Click;
         }
 
         private async void SimpleButtonPrintBarcode_Click(object sender, EventArgs e)
         {
-            await PrintBarcodeAsync();
+            //If the print barcode function returns false then don't try marking the sample as collected.
+            if (!await PrintBarcodeAsync()) { return; }
+
             try
             {
                 await _viewModel.MarkSampleCollected();
@@ -81,11 +82,16 @@ namespace CD4.UI.View
                 }
 
             }
+            catch (NullReferenceException ex)
+            {
+                XtraMessageBox.Show("Please make sure that all the required fields are completed.");
+            }
             catch (Exception ex)
             {
 
                 //XtraMessageBox.Show(ex.Message +"\n" +ex.StackTrace);
                 XtraMessageBox.Show(ex.Message);
+                XtraMessageBox.Show(ex.StackTrace);
             }
         }
 
@@ -407,19 +413,23 @@ namespace CD4.UI.View
             _viewModel.OnReceiveSearchResults(e);
         }
 
-        private async Task PrintBarcodeAsync()
+        /// <summary>
+        /// loads barcode data from database and tries to print the barcodes
+        /// </summary>
+        /// <returns>True if able to load barcode data from database, even if the printing step fails.</returns>
+        private async Task<bool> PrintBarcodeAsync()
         {
             var barcodeData = await _viewModel.GetBarcodeData();
-            if (barcodeData is null) 
+            if (barcodeData is null)
             {
                 XtraMessageBox.Show($"The current sample: {_viewModel.Cin} is not registered!\nPlease confirm the order first.");
-                return;
+                return false;
             }
 
-            if(barcodeData.Count == 0)
+            if (barcodeData.Count == 0)
             {
                 XtraMessageBox.Show($"The current sample: {_viewModel.Cin} is not registered!\nPlease confirm the order first.");
-                return;
+                return false;
             }
 
             foreach (var barcode in barcodeData)
@@ -448,6 +458,7 @@ namespace CD4.UI.View
                 }
             }
 
+            return true;
 
         }
     }
