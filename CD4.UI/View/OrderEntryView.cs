@@ -440,7 +440,7 @@ namespace CD4.UI.View
                 barcodeLabel.Parameters["Birthdate"].Value = barcode.Birthdate;
                 barcodeLabel.Parameters["Age"].Value = barcode.Age;
                 barcodeLabel.Parameters["AccessionNumber"].Value = barcode.AccessionNumber;
-                barcodeLabel.Parameters["SampleCollectedDate"].Value = barcode.CollectionDate;
+                barcodeLabel.Parameters["SampleCollectedDate"].Value = barcode.CollectionDate.LocalDateTime;
                 barcodeLabel.Parameters["Seq"].Value = barcode.Seq;
                 barcodeLabel.Parameters["Discipline"].Value = barcode.Discipline;
 
