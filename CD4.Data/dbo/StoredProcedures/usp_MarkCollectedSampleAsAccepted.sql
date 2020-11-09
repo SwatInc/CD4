@@ -17,18 +17,21 @@ BEGIN
     BEGIN TRY
         DECLARE @LoggedInUser varchar(256);
         DECLARE @ReceivedStatus int  = 3;
+        DECLARE @RegisteredStatus int  = 1;
         DECLARE @CollectedStatus int  = 2;
         DECLARE @SampleTrackingType int = 2; 
         DECLARE @ResultTrackingType int = 3; 
 		DECLARE @IsSampleAlreadyAccepted int;
+		DECLARE @IsRegisteredSample int;
         DECLARE @AcceptedCins TABLE ([SampleCin] varchar(50));
         DECLARE @AcceptedResultIds TABLE ([ResultId] int);
 
-        -- indicate whether sample is already accepted when this procedure is called
+		-- indicate whether sample is already accepted when this procedure is called
         SELECT @IsSampleAlreadyAccepted = COUNT([SampleCin]) 
 		FROM [dbo].[TrackingHistory] 
 		WHERE [SampleCin] = @Cin AND [TrackingType] = @SampleTrackingType AND [StatusId] = @ReceivedStatus;
-
+		-- check whether the current sample is a registered sample
+		SELECT @IsRegisteredSample = COUNT(Id) FROM [dbo].[SampleTracking] WHERE [StatusId] = @RegisteredStatus AND [SampleCin] = @Cin;
 
         -- If the sample status is collected, change the status to accepted.
         UPDATE [dbo].[SampleTracking]
@@ -52,17 +55,28 @@ BEGIN
         -- SAMPLE tracking history
 		INSERT INTO [dbo].[TrackingHistory] ([TrackingType],[SampleCin],[StatusId],[UsersId],[TimeStamp])
         SELECT @SampleTrackingType,@Cin,@ReceivedStatus,@UserId,SYSDATETIMEOFFSET() 
-		WHERE @IsSampleAlreadyAccepted = 0;
+		WHERE (@IsSampleAlreadyAccepted = 0 AND @IsRegisteredSample = 0);
 
         -- Test/result tracking history
         INSERT INTO [dbo].[TrackingHistory]([TrackingType],[ResultId],[StatusId],[UsersId],[TimeStamp])
         SELECT @ResultTrackingType,[ResultId],@ReceivedStatus,@UserId,SYSDATETIMEOFFSET()
         FROM @AcceptedResultIds
-		WHERE @IsSampleAlreadyAccepted = 0;
+		WHERE (@IsSampleAlreadyAccepted = 0 AND @IsRegisteredSample = 0);
 
+		DECLARE @AuditDetails varchar(100) = CONCAT('Sample ',@Cin,' accepted by user ',@LoggedInUser);
+		DECLARE @InsertedId int;
         -- insert audit trail - sample
-        INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[Cin],[StatusId],[Details],[CreatedAt])
-        VALUES (@ResultTrackingType, @Cin, @ReceivedStatus,CONCAT('Sample ',@Cin,' accepted by user ',@LoggedInUser),SYSDATETIMEOFFSET());
+		IF (@IsSampleAlreadyAccepted = 0 AND @IsRegisteredSample = 0)
+		BEGIN
+			--PRINT 'Got here';
+			--PRINT CONCAT(@IsSampleAlreadyAccepted,'|', @IsRegisteredSample);
+			PRINT @InsertedId;
+			EXECUTE @InsertedId = [dbo].[usp_InsertSampleAuditTrail]
+			@Cin = @Cin,
+			@StatusId = @ReceivedStatus,
+			@Details = @AuditDetails,
+			@InsertedId = @InsertedId OUTPUT;
+		END
 
     COMMIT TRANSACTION;
         -- return data - sample status
