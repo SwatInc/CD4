@@ -92,9 +92,11 @@ BEGIN
         SELECT @TestTrackingTypeId = [Id]
         FROM [dbo].[AuditTypes]
         WHERE [Description] = 'Test';
-        -- get username
+       
+       -- get username
         SELECT @LoggedInUser = [UserName]
-        FROM [dbo].[Users];
+        FROM [dbo].[Users] WHERE [Id]= @UserId;
+
 
         INSERT INTO [dbo].[TrackingHistory]
         (
