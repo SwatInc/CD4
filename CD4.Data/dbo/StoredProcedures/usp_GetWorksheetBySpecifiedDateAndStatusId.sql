@@ -26,11 +26,11 @@ BEGIN
         -- get distinct Cins that have current status as specified in @StatusId and are Collected[Status: 2] on Specified date or later
 		INSERT INTO @TempCins
 		SELECT DISTINCT([S].[Cin]),[S].[AnalysisRequestId] 
-		FROM [dbo].[Sample] [S] 
-		INNER JOIN [dbo].[SampleTracking] [ST] ON [S].[Cin] = [ST].[SampleCin]
+		FROM [dbo].[Sample] [S]
+		INNER JOIN [dbo].[Result] [R] ON [R].[Sample_Cin] = [S].[Cin]
+		INNER JOIN [dbo].[ResultTracking] [RT] ON [R].[Id] = [RT].[ResultId]
 		INNER JOIN [dbo].[TrackingHistory] [TH] ON [TH].[SampleCin] = [S].[Cin]
-		WHERE [TH].[TimeStamp] >= @StartDateInUse AND [TH].[TrackingType] = 2 AND [TH].[StatusId] = @CollectedStatusId AND [ST].[StatusId] = @StatusId;
-		--Tracking type [2] = sample | StatusId 2 = Collected
+		WHERE [TH].[TimeStamp] >= @StartDateInUse AND [TH].[TrackingType] = 2 AND [TH].[StatusId] = @CollectedStatusId AND [RT].[StatusId] = @StatusId;		--Tracking type [2] = sample | StatusId 2 = Collected
 
         -- Get Clinical details
         INSERT INTO @TempClinicalDetails

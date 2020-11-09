@@ -481,7 +481,8 @@ INSERT INTO [dbo].[RoleClaims] ([RoleId], [ClaimValue])
     ('1', 'MainView'),
     ('1', 'Ribbon.Profile'),
     ('1', 'Ribbon.ConfigurationPage'),
-    ('1', 'Ribbon.GeneralPage');
+    ('1', 'Ribbon.GeneralPage'),
+    ('1', 'AcceptSamplesView');
 
 --insert status table data
 INSERT INTO [dbo].[Status] ([Status])
