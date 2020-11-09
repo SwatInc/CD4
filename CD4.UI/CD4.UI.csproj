@@ -155,6 +155,12 @@
     <Compile Include="UserControls\GraphsUserControl.designer.cs">
       <DependentUpon>GraphsUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\AcceptSampleView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\AcceptSampleView.Designer.cs">
+      <DependentUpon>AcceptSampleView.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\AtollIslandView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -283,6 +289,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="UserControls\GraphsUserControl.resx">
       <DependentUpon>GraphsUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\AcceptSampleView.resx">
+      <DependentUpon>AcceptSampleView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\AtollIslandView.resx">
       <DependentUpon>AtollIslandView.cs</DependentUpon>

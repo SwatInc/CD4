@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.barButtonItemCodifiedResults = new DevExpress.XtraBars.BarButtonItem();
@@ -46,9 +47,10 @@
             this.barButtonItemChangePassword = new DevExpress.XtraBars.BarButtonItem();
             this.barStaticItemUsernameAndRole = new DevExpress.XtraBars.BarStaticItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-            this.popupMenu = new DevExpress.XtraBars.PopupMenu();
+            this.popupMenu = new DevExpress.XtraBars.PopupMenu(this.components);
             this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemAcceptSamples = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPageGeneral = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageConfiguration = new DevExpress.XtraBars.Ribbon.RibbonPage();
@@ -84,9 +86,10 @@
             this.barStaticItemUsernameAndRole,
             this.barButtonItem1,
             this.barButtonItem2,
-            this.barButtonItem3});
+            this.barButtonItem3,
+            this.barButtonItemAcceptSamples});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 21;
+            this.ribbon.MaxItemId = 22;
             this.ribbon.Name = "ribbon";
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageGeneral,
@@ -178,6 +181,7 @@
             // barButtonItemOrderEntry
             // 
             this.barButtonItemOrderEntry.Caption = "Order Entry";
+            this.barButtonItemOrderEntry.Hint = "Register samples, create test orders, collect samples";
             this.barButtonItemOrderEntry.Id = 11;
             this.barButtonItemOrderEntry.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemOrderEntry.ImageOptions.SvgImage")));
             this.barButtonItemOrderEntry.Name = "barButtonItemOrderEntry";
@@ -187,6 +191,7 @@
             // barButtonItemResultEntry
             // 
             this.barButtonItemResultEntry.Caption = "Result Entry";
+            this.barButtonItemResultEntry.Hint = "The worksheet for result entry and related functions";
             this.barButtonItemResultEntry.Id = 12;
             this.barButtonItemResultEntry.ImageOptions.SvgImage = global::CD4.UI.Properties.Resources.marker;
             this.barButtonItemResultEntry.Name = "barButtonItemResultEntry";
@@ -194,6 +199,7 @@
             // barButtonItemStatistics
             // 
             this.barButtonItemStatistics.Caption = "Statistics";
+            this.barButtonItemStatistics.Hint = "Generate statistics reports for laboratory";
             this.barButtonItemStatistics.Id = 13;
             this.barButtonItemStatistics.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemStatistics.ImageOptions.SvgImage")));
             this.barButtonItemStatistics.Name = "barButtonItemStatistics";
@@ -253,6 +259,15 @@
             this.barButtonItem3.Name = "barButtonItem3";
             this.barButtonItem3.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
+            // barButtonItemAcceptSamples
+            // 
+            this.barButtonItemAcceptSamples.Caption = "Accept Samples";
+            this.barButtonItemAcceptSamples.Hint = "This function is used to accept sample";
+            this.barButtonItemAcceptSamples.Id = 21;
+            this.barButtonItemAcceptSamples.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem4.ImageOptions.SvgImage")));
+            this.barButtonItemAcceptSamples.Name = "barButtonItemAcceptSamples";
+            this.barButtonItemAcceptSamples.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            // 
             // ribbonPageGeneral
             // 
             this.ribbonPageGeneral.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
@@ -267,6 +282,7 @@
             this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemResultEntry);
             this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemStatistics);
             this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItem1);
+            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemAcceptSamples);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
             this.ribbonPageGroup2.Text = "General Lab Tasks";
             // 
@@ -374,5 +390,6 @@
         private DevExpress.XtraBars.PopupMenu popupMenu;
         private DevExpress.XtraBars.BarButtonItem barButtonItem2;
         private DevExpress.XtraBars.BarButtonItem barButtonItem3;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemAcceptSamples;
     }
 }

@@ -311,8 +311,27 @@ namespace CD4.DataLibrary.DataAccess
             return true;
         }
 
-        /// <summary>
-        /// Database Status table PKs must be equivalent to the Status enums' indexes
-        /// </summary>
+        public async Task<SampleAndResultStatusAndResultModel> MarkCollectedSampleAsAccepted(string cin, int loggedInUserId)
+        {
+            var storedProcedure = "[dbo].[usp_MarkCollectedSampleAsAccepted]";
+            var parameter = new { Cin = cin, UserId = loggedInUserId };
+
+            try
+            {
+                var output = await QueryMultiple_GetModelAndListWithParameterAsync<StatusUpdatedSampleModel, UpdatedResultAndStatusModel, dynamic>
+                    (storedProcedure, parameter);
+
+                return new SampleAndResultStatusAndResultModel()
+                {
+                    SampleData = output.T1,
+                    ResultStatus = output.U1
+                };
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

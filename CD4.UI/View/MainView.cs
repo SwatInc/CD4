@@ -45,6 +45,7 @@ namespace CD4.UI.View
             //General Tab Buttons
             barButtonItemOrderEntry.ItemClick += OpenOrderEntryView;
             barButtonItemResultEntry.ItemClick += OpenResultEntryView;
+            barButtonItemAcceptSamples.ItemClick += OpenAcceptSampleView;
 
             //profile Tab Buttons
             barButtonItemChangePassword.ItemClick += OpenChangePasswordView;
@@ -66,6 +67,11 @@ namespace CD4.UI.View
             {
                 XtraMessageBox.Show(ex.Message);
             }
+        }
+
+        private void OpenAcceptSampleView(object sender, ItemClickEventArgs e)
+        {
+            OpenMdiForm<AcceptSampleView>();
         }
 
         private void OpenChangePasswordView(object sender, ItemClickEventArgs e)
