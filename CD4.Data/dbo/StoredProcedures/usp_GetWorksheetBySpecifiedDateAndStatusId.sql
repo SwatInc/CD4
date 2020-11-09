@@ -20,12 +20,14 @@ BEGIN
         DECLARE @TempCins TABLE ([Cin] VARCHAR(20) PRIMARY KEY, [AnalysisRequestId] INT NOT NULL);
 		DECLARE @TempClinicalDetails TABLE([AnalysisRequestId] INT PRIMARY KEY, [Detail] VARCHAR(100) NULL);
         
-        -- get distinct Cins which is more than specified date and matches the status
-        INSERT INTO @TempCins
-        SELECT DISTINCT([S].[Cin]),[S].[AnalysisRequestId] 
-        FROM [dbo].[Sample] [S] 
-        INNER JOIN [dbo].[AuditTrail] [AT] ON [S].[Cin] = [AT].[Cin]
-        WHERE [AT].[CreatedAt] >= @StartDateInUse AND [AT].[StatusId] = @StatusId;
+        -- get distinct Cins that have current status as specified in @StatusId and are Collected[Status: 2] on Specified date or later
+		INSERT INTO @TempCins
+		SELECT DISTINCT([S].[Cin]),[S].[AnalysisRequestId] 
+		FROM [dbo].[Sample] [S] 
+		INNER JOIN [dbo].[SampleTracking] [ST] ON [S].[Cin] = [ST].[SampleCin]
+		INNER JOIN [dbo].[TrackingHistory] [TH] ON [TH].[SampleCin] = [S].[Cin]
+		WHERE [TH].[TimeStamp] >= @StartDateInUse AND [TH].[TrackingType] = 2 AND [TH].[StatusId] = 2 AND [ST].[StatusId] = @StatusId;
+		--Tracking type [2] = sample | StatusId 2 = Collected
 
         -- Get Clinical details
         INSERT INTO @TempClinicalDetails
