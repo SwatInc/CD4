@@ -103,6 +103,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
             this.Name = "AcceptSampleView";
+            this.Tag = "AcceptSamplesView";
             this.Text = "AcceptSampleView";
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.AcceptSampleView_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.textEditAcceptBarcode.Properties)).EndInit();
