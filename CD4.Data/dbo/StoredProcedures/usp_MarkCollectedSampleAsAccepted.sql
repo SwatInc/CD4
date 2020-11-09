@@ -20,8 +20,14 @@ BEGIN
         DECLARE @CollectedStatus int  = 2;
         DECLARE @SampleTrackingType int = 2; 
         DECLARE @ResultTrackingType int = 3; 
+		DECLARE @IsSampleAlreadyAccepted int;
         DECLARE @AcceptedCins TABLE ([SampleCin] varchar(50));
         DECLARE @AcceptedResultIds TABLE ([ResultId] int);
+
+        -- indicate whether sample is already accepted when this procedure is called
+        SELECT @IsSampleAlreadyAccepted = COUNT([SampleCin]) 
+		FROM [dbo].[TrackingHistory] 
+		WHERE [SampleCin] = @Cin AND [TrackingType] = @SampleTrackingType AND [StatusId] = @ReceivedStatus;
 
 
         -- If the sample status is collected, change the status to accepted.
@@ -44,13 +50,15 @@ BEGIN
         -- get the logged in username
         SELECT @LoggedInUser = [UserName] FROM [dbo].[Users] WHERE [Id]= @UserId;
         -- SAMPLE tracking history
-        INSERT INTO [dbo].[TrackingHistory] ([TrackingType],[SampleCin],[StatusId],[UsersId],[TimeStamp])
-        SELECT @SampleTrackingType,@Cin,@ReceivedStatus,@UserId,SYSDATETIMEOFFSET();
+		INSERT INTO [dbo].[TrackingHistory] ([TrackingType],[SampleCin],[StatusId],[UsersId],[TimeStamp])
+        SELECT @SampleTrackingType,@Cin,@ReceivedStatus,@UserId,SYSDATETIMEOFFSET() 
+		WHERE @IsSampleAlreadyAccepted = 0;
 
         -- Test/result tracking history
         INSERT INTO [dbo].[TrackingHistory]([TrackingType],[ResultId],[StatusId],[UsersId],[TimeStamp])
         SELECT @ResultTrackingType,[ResultId],@ReceivedStatus,@UserId,SYSDATETIMEOFFSET()
-        FROM @AcceptedResultIds;
+        FROM @AcceptedResultIds
+		WHERE @IsSampleAlreadyAccepted = 0;
 
         -- insert audit trail - sample
         INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[Cin],[StatusId],[Details],[CreatedAt])
