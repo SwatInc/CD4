@@ -1,4 +1,6 @@
-﻿using System;
+﻿using CD4.DataLibrary.DataAccess;
+using CD4.UI.Library.Model;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -18,12 +20,16 @@ namespace CD4.UI.Library.ViewModel
         private int _noOfBarcodesRead;
         private readonly string NoReadTemplate = "No. Accepted";
         private readonly string SuccessfullMessageTemplate = "Successfully accepted barcode";
+        private readonly IStatusDataAccess _statusDataAccess;
+        private readonly AuthorizeDetailEventArgs _authorizeDetail;
 
-        public AcceptSampleViewModel()
+        public AcceptSampleViewModel(IStatusDataAccess statusDataAccess, AuthorizeDetailEventArgs authorizeDetail)
         {
             SuccessfullMessage = string.Empty;
             NoOfBarcodesRead = 0;
             IsProcessing = false;
+            _statusDataAccess = statusDataAccess;
+            _authorizeDetail = authorizeDetail;
         }
 
         #region INotifyPropertyChanged Hookup
@@ -83,9 +89,13 @@ namespace CD4.UI.Library.ViewModel
             try
             {
                 NoOfBarcodesRead += 1;
-                await Task.Delay(500);
-                SuccessfullMessage = $"{SuccessfullMessageTemplate}: {AcceptBarcode}";
-                AcceptBarcode = string.Empty;
+                var response = await _statusDataAccess.MarkCollectedSampleAsAccepted(AcceptBarcode, 1);
+                if (response.SampleData.Cin == AcceptBarcode && response.SampleData.StatusId == 3)
+                {
+                    SuccessfullMessage = $"{SuccessfullMessageTemplate}: {AcceptBarcode}";
+                    AcceptBarcode = string.Empty;
+                }
+
                 IsProcessing = false;
 
             }
