@@ -330,6 +330,31 @@ namespace CD4.UI.Library.ViewModel
 
         #region Public Methods
 
+        public async Task GenerateNextSampleNumber()
+        {
+            try
+            {
+               var nextCinSeed = await _requestDataAccess.GetNextCinSeed();
+                var formattedCinSeed = FormatCinSeed(nextCinSeed);
+                this.EpisodeNumber = $"E{formattedCinSeed}";
+                this.Cin = $"ML{formattedCinSeed}";
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private string FormatCinSeed(int nextCinSeed)
+        {
+            var totalLength = 7;
+            var padCharacter = '0';
+            var prefix = "ML";
+
+            return nextCinSeed.ToString().PadLeft(totalLength, padCharacter);
+        }
+
         public async Task SearchRequestByCinAsync()
         {
             var result = await _requestDataAccess.SearchRequestByCinAsync(Cin);
