@@ -3,6 +3,7 @@ using CD4.DataLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -290,16 +291,22 @@ namespace CD4.DataLibrary.DataAccess
             (int patientId, AnalysisRequestDataModel request)
         {
             var insertData = new RequestSampleAndClinicalDetailsInsertDatabaseModel(patientId, request, statusDataAccess);
+            bool success;
 
             if (string.IsNullOrEmpty(insertData.CommaDelimitedClinicalDetailsIds))
             {
                 // when clinical details are not available.
-                return await SelectInsertOrUpdateAsync<bool, dynamic>
+                success =  await SelectInsertOrUpdateAsync<bool, dynamic>
                     ("[dbo].[usp_InsertAnalysisRequestSampleAndRequestedTests]", insertData.GetWithoutClinicalDetails());
+                await InsertSampleCollectedDate(request);
+                return success;
             }
             //with clinical details
-            return await SelectInsertOrUpdateAsync<bool, RequestSampleAndClinicalDetailsInsertDatabaseModel>
+            success = await SelectInsertOrUpdateAsync<bool, RequestSampleAndClinicalDetailsInsertDatabaseModel>
                 ("[dbo].[usp_InsertAnalysisRequestClinicalDetailsSampleAndRequestedTests]", insertData);
+            await InsertSampleCollectedDate(request);
+            return success;
+
         }
 
         /// <summary>
@@ -512,6 +519,28 @@ namespace CD4.DataLibrary.DataAccess
             }
             catch (Exception)
             {
+                throw;
+            }
+        }
+
+        public async Task InsertSampleCollectedDate(AnalysisRequestDataModel request)
+        {
+            var storedProcedure = "[dbo].[usp_UpdateSampleWithCin]";
+            var parameters = new
+            {
+                Cin = request.Cin,
+                SiteId = request.SiteId,
+                CollectionDate = request.SampleCollectionDate,
+                ReceivedDate = request.SampleReceivedDate
+            };
+
+            try
+            {
+                _ = await SelectInsertOrUpdateAsync<dynamic, dynamic>(storedProcedure, parameters);
+            }
+            catch (Exception)
+            {
+
                 throw;
             }
         }
