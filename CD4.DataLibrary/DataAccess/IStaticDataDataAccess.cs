@@ -6,6 +6,7 @@ namespace CD4.DataLibrary.DataAccess
 {
     public interface IStaticDataDataAccess
     {
+        Task<SitesModel> AddSite(string siteName);
         Task<List<AtollIslandModel>> GetAllAtollsAndIslandsAsync();
         Task<List<ClinicalDetailsModel>> GetAllClinicalDetailsAsync();
         Task<List<CodifiedResultsModel>> GetAllCodifiedValuesAsync();
@@ -16,5 +17,6 @@ namespace CD4.DataLibrary.DataAccess
         Task<List<ProfilesAndTestModelOeModel>> GetAllTestsAsync();
         Task<List<WorkstationPrintersInfoModel>> GetWorkStationPrintersAsync(string workstationName);
         void LoadAll();
+        Task<List<SitesModel>> LoadAllSites();
     }
 }

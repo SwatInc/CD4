@@ -1,4 +1,6 @@
-﻿using CD4.UI.Library.Model;
+﻿using AutoMapper;
+using CD4.DataLibrary.DataAccess;
+using CD4.UI.Library.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,15 +13,43 @@ namespace CD4.UI.Library.ViewModel
 {
     public class SitesViewModel : INotifyPropertyChanged, ISitesViewModel
     {
+        private readonly IStaticDataDataAccess _staticDataDataAccess;
+        private readonly IMapper _mapper;
+
         public event EventHandler<String> PushingLogs;
         public event EventHandler<string> PushingMessages;
+        public event EventHandler LoadAllSites;
 
-        public SitesViewModel()
+
+        public SitesViewModel(IStaticDataDataAccess staticDataDataAccess, IMapper mapper)
         {
             this.SiteList = new BindingList<SitesModel>();
             this.SelectedRow = new SitesModel();
 
-            InitializeDemoData();
+            //InitializeDemoData();
+            _staticDataDataAccess = staticDataDataAccess;
+            _mapper = mapper;
+            LoadAllSites += SitesViewModel_LoadAllSites;
+            LoadAllSites?.Invoke(this, EventArgs.Empty);
+        }
+
+        private async void SitesViewModel_LoadAllSites(object sender, EventArgs e)
+        {
+            try
+            {
+                var sitesData = await _staticDataDataAccess.LoadAllSites();
+                var mappedSites = _mapper.Map<List<SitesModel>>(sitesData);
+                SiteList.Clear();
+                foreach (var site in mappedSites)
+                {
+                    SiteList.Add(site);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         private void InitializeDemoData()
@@ -53,7 +83,7 @@ namespace CD4.UI.Library.ViewModel
             this.SelectedRow.Site = selectedRow.Site;
         }
 
-        public void SaveSite(object sender, EventArgs e)
+        public async void SaveSite(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(SelectedRow.Site))
             {
@@ -66,8 +96,19 @@ namespace CD4.UI.Library.ViewModel
                 return;
             }
 
-            //Save from here.
-            PushingMessages?.Invoke(this, $"{SelectedRow.Site} is saved.");
+            try
+            {
+                var sitesModel = await _staticDataDataAccess.AddSite(SelectedRow.Site);
+                var mappedSitesModel = _mapper.Map<SitesModel>(sitesModel);
+                SiteList.Add(mappedSitesModel);
+                PushingMessages?.Invoke(this, $"{SelectedRow.Site} is saved.");
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
 
         }
 
