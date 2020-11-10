@@ -1,6 +1,7 @@
 ﻿using CD4.UI.Library.Model;
 using System;
 using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace CD4.UI.Library.ViewModel
 {
@@ -14,6 +15,6 @@ namespace CD4.UI.Library.ViewModel
         event EventHandler<string> PushingMessages;
 
         void DisplaySelectedSiteData(int selectedId);
-        void SaveSite(object sender, EventArgs e);
+        Task SaveSite(object sender, EventArgs e);
     }
 }
