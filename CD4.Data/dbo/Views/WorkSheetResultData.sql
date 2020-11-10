@@ -14,7 +14,8 @@ SELECT [R].[Id],
 	   [T].[Mask],
 	   [RT].[StatusId],
 	   [R].[ReferenceCode],
-	   [R].[IsDeltaOk]
+	   [R].[IsDeltaOk],
+	   [T].[Reportable]
 FROM [dbo].[Result] [R]
 INNER JOIN [dbo].[Sample] [S] ON [R].[Sample_Cin] = [S].[Cin]
 INNER JOIN [dbo].[Test] [T] ON [R].[TestId] = [T].[Id]

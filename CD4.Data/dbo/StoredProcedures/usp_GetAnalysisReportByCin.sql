@@ -24,7 +24,7 @@ AS
 			FROM [dbo].[WorkSheetResultData] [W]
 			INNER JOIN [dbo].[ResultTracking] [RT] ON [W].[Id] = [RT].[ResultId]
 			INNER JOIN [dbo].[ResultReferenceRanges] [RR] ON [W].[Id] = [RR].[ResultId]
-			WHERE [W].[Cin] = @Cin AND 
+			WHERE [W].[Cin] = @Cin AND [W].[Reportable] = 1 AND
 				 ([W].[Result] IS NOT NULL OR [W].[Result] <> '') AND
 				  [RT].[StatusId] = 5;
 
