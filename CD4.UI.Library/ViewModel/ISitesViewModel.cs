@@ -15,6 +15,6 @@ namespace CD4.UI.Library.ViewModel
         event EventHandler<string> PushingMessages;
 
         void DisplaySelectedSiteData(int selectedId);
-        Task SaveSite(object sender, EventArgs e);
+        void SaveSite(object sender, EventArgs e);
     }
 }

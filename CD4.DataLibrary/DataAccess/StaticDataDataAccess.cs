@@ -213,7 +213,15 @@ namespace CD4.DataLibrary.DataAccess
         public async Task<List<SitesModel>> LoadAllSites()
         {
             var storedProcedure = "[dbo].[usp_LoadAllSites]";
+            try
+            {
+                return await LoadDataAsync<SitesModel>(storedProcedure);
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
         }
     }
 }

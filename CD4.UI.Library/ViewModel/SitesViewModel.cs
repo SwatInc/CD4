@@ -37,7 +37,13 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-                var sitesData = _staticDataDataAccess.LoadAllSites();
+                var sitesData = await _staticDataDataAccess.LoadAllSites();
+                var mappedSites = _mapper.Map<List<SitesModel>>(sitesData);
+                SiteList.Clear();
+                foreach (var site in mappedSites)
+                {
+                    SiteList.Add(site);
+                }
             }
             catch (Exception)
             {
@@ -77,7 +83,7 @@ namespace CD4.UI.Library.ViewModel
             this.SelectedRow.Site = selectedRow.Site;
         }
 
-        public async Task SaveSite(object sender, EventArgs e)
+        public async void SaveSite(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(SelectedRow.Site))
             {
