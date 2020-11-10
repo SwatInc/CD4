@@ -186,6 +186,7 @@
     <Build Include="dbo\StoredProcedures\usp_GetBarcodeDetails.sql" />
     <Build Include="dbo\StoredProcedures\usp_MarkCollectedSampleAsAccepted.sql" />
     <Build Include="dbo\StoredProcedures\usp_MarkSampleCollectedOnlyOnSampleTracking.sql" />
+    <Build Include="dbo\StoredProcedures\usp_ConfigAddSite.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />

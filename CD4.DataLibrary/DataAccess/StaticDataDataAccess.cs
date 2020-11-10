@@ -193,5 +193,27 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
+
+        public async Task<SitesModel> AddSite(string siteName)
+        {
+            var storedProcedure = "[dbo].[usp_ConfigAddSite]";
+            var parameter = new { SiteName = siteName };
+            try
+            {
+                return await SelectInsertOrUpdateAsync<SitesModel, dynamic>(storedProcedure, parameter);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        public async Task<List<SitesModel>> LoadAllSites()
+        {
+            var storedProcedure = "[dbo].[usp_LoadAllSites]";
+
+        }
     }
 }
