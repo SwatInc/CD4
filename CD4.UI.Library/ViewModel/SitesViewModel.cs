@@ -100,6 +100,7 @@ namespace CD4.UI.Library.ViewModel
             {
                 var sitesModel = await _staticDataDataAccess.AddSite(SelectedRow.Site);
                 var mappedSitesModel = _mapper.Map<SitesModel>(sitesModel);
+                SiteList.Add(mappedSitesModel);
                 PushingMessages?.Invoke(this, $"{SelectedRow.Site} is saved.");
             }
             catch (Exception)
