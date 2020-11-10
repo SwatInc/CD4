@@ -48,6 +48,7 @@ namespace CD4.UI.Library.ViewModel
         Task OnReceiveSearchResults(PatientModel results);
         Task SearchRequestByCinAsync();
         Task MarkSampleCollected();
+        Task GenerateNextSampleNumber();
 
         event PropertyChangedEventHandler PropertyChanged;
         event EventHandler<string> PushingLogs;

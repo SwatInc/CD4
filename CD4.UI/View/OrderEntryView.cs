@@ -39,6 +39,19 @@ namespace CD4.UI.View
             simpleButtonConfirm.Click += OnConfirmAnalysisRequest;
             simpleButtonSearchRequest.Click += OnSearchRequest;
             simpleButtonPrintBarcode.Click += SimpleButtonPrintBarcode_Click;
+            simpleButtonGetNextCin.Click += GenerateNextSampleNumber;
+        }
+
+        private async void GenerateNextSampleNumber(object sender, EventArgs e)
+        {
+            try
+            {
+                await _viewModel.GenerateNextSampleNumber();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show($"An error occured while generating new sample number.\n\n{ex.Message}");
+            }
         }
 
         private async void SimpleButtonPrintBarcode_Click(object sender, EventArgs e)

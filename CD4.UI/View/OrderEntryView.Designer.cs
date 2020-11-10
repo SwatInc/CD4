@@ -31,6 +31,7 @@
             this.groupControlRequestData = new DevExpress.XtraEditors.GroupControl();
             this.progressPanelRequest = new DevExpress.XtraWaitForm.ProgressPanel();
             this.dateEditCollectedDate = new DevExpress.XtraEditors.DateEdit();
+            this.textEditEpisodeNumber = new DevExpress.XtraEditors.TextEdit();
             this.lookUpEditSite = new DevExpress.XtraEditors.LookUpEdit();
             this.textEditCin = new DevExpress.XtraEditors.TextEdit();
             this.dateEditSampleReceived = new DevExpress.XtraEditors.DateEdit();
@@ -58,16 +59,16 @@
             this.simpleButtonConfirm = new DevExpress.XtraEditors.SimpleButton();
             this.groupControlTestSelection = new DevExpress.XtraEditors.GroupControl();
             this.progressPanelTestData = new DevExpress.XtraWaitForm.ProgressPanel();
-            this.textEditEpisodeNumber = new DevExpress.XtraEditors.TextEdit();
             this.lookUpEditTests = new DevExpress.XtraEditors.LookUpEdit();
             this.simpleButtonRemoveTest = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButtonSearchRequest = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButtonPrintBarcode = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButtonGetNextCin = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlRequestData)).BeginInit();
             this.groupControlRequestData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditCollectedDate.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditCollectedDate.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditEpisodeNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditSite.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditCin.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditSampleReceived.Properties.CalendarTimeProperties)).BeginInit();
@@ -95,7 +96,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridViewRequestedTests)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlTestSelection)).BeginInit();
             this.groupControlTestSelection.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditEpisodeNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTests.Properties)).BeginInit();
             this.SuspendLayout();
             // 
@@ -143,6 +143,17 @@
             this.dateEditCollectedDate.Properties.ValidateOnEnterKey = true;
             this.dateEditCollectedDate.Size = new System.Drawing.Size(167, 20);
             this.dateEditCollectedDate.TabIndex = 3;
+            // 
+            // textEditEpisodeNumber
+            // 
+            this.textEditEpisodeNumber.Location = new System.Drawing.Point(14, 30);
+            this.textEditEpisodeNumber.Name = "textEditEpisodeNumber";
+            this.textEditEpisodeNumber.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.textEditEpisodeNumber.Properties.NullText = "EpisodeNumber";
+            this.textEditEpisodeNumber.Properties.NullValuePrompt = "EpisodeNumber";
+            this.textEditEpisodeNumber.Properties.NullValuePromptShowForEmptyValue = true;
+            this.textEditEpisodeNumber.Size = new System.Drawing.Size(167, 20);
+            this.textEditEpisodeNumber.TabIndex = 16;
             // 
             // lookUpEditSite
             // 
@@ -526,17 +537,6 @@
             this.progressPanelTestData.TabStop = false;
             this.progressPanelTestData.Text = "Request data";
             // 
-            // textEditEpisodeNumber
-            // 
-            this.textEditEpisodeNumber.Location = new System.Drawing.Point(14, 30);
-            this.textEditEpisodeNumber.Name = "textEditEpisodeNumber";
-            this.textEditEpisodeNumber.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.textEditEpisodeNumber.Properties.NullText = "EpisodeNumber";
-            this.textEditEpisodeNumber.Properties.NullValuePrompt = "EpisodeNumber";
-            this.textEditEpisodeNumber.Properties.NullValuePromptShowForEmptyValue = true;
-            this.textEditEpisodeNumber.Size = new System.Drawing.Size(167, 20);
-            this.textEditEpisodeNumber.TabIndex = 16;
-            // 
             // lookUpEditTests
             // 
             this.lookUpEditTests.Location = new System.Drawing.Point(16, 35);
@@ -581,21 +581,21 @@
             this.simpleButtonPrintBarcode.Tag = "OrderEntry.PrintBarcode";
             this.simpleButtonPrintBarcode.Text = "Print Barcode [ F8 ]";
             // 
-            // simpleButton1
+            // simpleButtonGetNextCin
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(52, 345);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(98, 23);
-            this.simpleButton1.TabIndex = 9;
-            this.simpleButton1.Tag = "OrderEntry.Remove";
-            this.simpleButton1.Text = "Gen. CIN [ F12 ]";
+            this.simpleButtonGetNextCin.Location = new System.Drawing.Point(52, 345);
+            this.simpleButtonGetNextCin.Name = "simpleButtonGetNextCin";
+            this.simpleButtonGetNextCin.Size = new System.Drawing.Size(98, 23);
+            this.simpleButtonGetNextCin.TabIndex = 9;
+            this.simpleButtonGetNextCin.Tag = "OrderEntry.Remove";
+            this.simpleButtonGetNextCin.Text = "Gen. CIN [ F12 ]";
             // 
             // OrderEntryView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(765, 372);
-            this.Controls.Add(this.simpleButton1);
+            this.Controls.Add(this.simpleButtonGetNextCin);
             this.Controls.Add(this.simpleButtonPrintBarcode);
             this.Controls.Add(this.simpleButtonSearchRequest);
             this.Controls.Add(this.simpleButtonRemoveTest);
@@ -617,6 +617,7 @@
             this.groupControlRequestData.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dateEditCollectedDate.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditCollectedDate.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditEpisodeNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditSite.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditCin.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditSampleReceived.Properties.CalendarTimeProperties)).EndInit();
@@ -644,7 +645,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridViewRequestedTests)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlTestSelection)).EndInit();
             this.groupControlTestSelection.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.textEditEpisodeNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTests.Properties)).EndInit();
             this.ResumeLayout(false);
 
@@ -687,6 +687,6 @@
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelPatientData;
         private DevExpress.XtraEditors.SimpleButton simpleButtonSearchRequest;
         private DevExpress.XtraEditors.SimpleButton simpleButtonPrintBarcode;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.SimpleButton simpleButtonGetNextCin;
     }
 }

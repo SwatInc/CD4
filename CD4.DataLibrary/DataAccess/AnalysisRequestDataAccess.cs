@@ -544,5 +544,21 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
+
+        public async Task<int> GetNextCinSeed()
+        {
+            var storedProcedure = "[dbo].[usp_GetNextSampleNumber]";
+            try
+            {
+                var data = await LoadDataAsync<int>(storedProcedure);
+                return data.FirstOrDefault();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
     }
 }

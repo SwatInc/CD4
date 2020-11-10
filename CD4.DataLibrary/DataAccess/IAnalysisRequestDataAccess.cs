@@ -8,6 +8,7 @@ namespace CD4.DataLibrary.DataAccess
     {
         Task<bool> ConfirmRequestAsync(AnalysisRequestDataModel request);
         Task<List<BarcodeDataModel>> GetBarcodeDataAsync(string cin);
+        Task<int> GetNextCinSeed();
         Task<CompleteRequestSearchResultsModel> SearchRequestByCinAsync(string cin = "nCoV-4654/20");
     }
 }
