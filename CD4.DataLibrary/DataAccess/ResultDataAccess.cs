@@ -174,9 +174,9 @@ namespace CD4.DataLibrary.DataAccess
             switch (testStatus)
             {
                 case (int)Status.Registered:
-                    return "Cannot enter a result to a sample/test which is not collected or accepted to the laboratory.";
+                    return "Cannot enter a result to a sample/test which is not accepted to the laboratory.";
                 case (int)Status.Collected:
-                    return null; //OK to proceed with saving the result
+                    return "Cannot enter a result to a sample/test which is not accepted to the laboratory.";
                 case (int)Status.Received:
                     return null; //OK to proceed with saving the result
                 case (int)Status.ToValidate:
