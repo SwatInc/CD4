@@ -6,9 +6,10 @@ returns two lists of data
 CONDITION: 
 Data returned will be filtered form date and Test Status
 */
-CREATE PROCEDURE [dbo].[usp_GetWorksheetBySpecifiedDateAndStatusId]
+ CREATE PROCEDURE [dbo].[usp_GetWorksheetBySpecifiedDateAndStatusId]
 	@StartDate VARCHAR(8),
-	--pass in todays date if no date is specified.
+	--If status is 1 , date searched is registered date. If status is 2, date searched is collected date
+	-- if status is grater than 3 or more , date searched is accepted.
 	-- Format: yyyyMMdd
     @StatusId int -- Look for tests with this status Id
 AS
@@ -16,13 +17,14 @@ BEGIN
 	WHILE (@StartDate IS NOT NULL) AND (@StartDate <> '')
 	BEGIN
 		DECLARE @StartDateInUse DATE = CAST(@StartDate AS DATE);
-        DECLARE @CollectedStatusId int = 2;
+        DECLARE @AcceptedStatusId int = 3;
 
         DECLARE @TempCins TABLE ([Cin] VARCHAR(20) PRIMARY KEY, [AnalysisRequestId] INT NOT NULL);
 		DECLARE @TempClinicalDetails TABLE([AnalysisRequestId] INT PRIMARY KEY, [Detail] VARCHAR(100) NULL);
         
 
-        SELECT @CollectedStatusId = 1 WHERE @StatusId = 1;
+        SELECT @AcceptedStatusId = 1 WHERE @StatusId = 1;
+		SELECT @AcceptedStatusId = 2 WHERE @StatusId = 2;
         -- get distinct Cins that have current status as specified in @StatusId and are Collected[Status: 2] on Specified date or later
 		INSERT INTO @TempCins
 		SELECT DISTINCT([S].[Cin]),[S].[AnalysisRequestId] 
@@ -30,7 +32,7 @@ BEGIN
 		INNER JOIN [dbo].[Result] [R] ON [R].[Sample_Cin] = [S].[Cin]
 		INNER JOIN [dbo].[ResultTracking] [RT] ON [R].[Id] = [RT].[ResultId]
 		INNER JOIN [dbo].[TrackingHistory] [TH] ON [TH].[SampleCin] = [S].[Cin]
-		WHERE [TH].[TimeStamp] >= @StartDateInUse AND [TH].[TrackingType] = 2 AND [TH].[StatusId] = @CollectedStatusId AND [RT].[StatusId] = @StatusId;		--Tracking type [2] = sample | StatusId 2 = Collected
+		WHERE [TH].[TimeStamp] >= @StartDateInUse AND [TH].[TrackingType] = 2 AND [TH].[StatusId] = @AcceptedStatusId AND [RT].[StatusId] = @StatusId;		--Tracking type [2] = sample | StatusId 2 = Collected
 
         -- Get Clinical details
         INSERT INTO @TempClinicalDetails
@@ -60,6 +62,7 @@ BEGIN
 		FROM [dbo].[RequestsWithTestsAndResults] [RW] 
         INNER JOIN @TempClinicalDetails [C] ON [RW].[AnalysisRequestId] = [C].[AnalysisRequestId]
 		WHERE [RW].[RequestedDate] >= @StartDateInUse AND [RW].[TestStatusId] = @StatusId;
+		--NOTE: Need to keep this date as requested date
 
 		-- fetch results data
         SELECT [Id],
