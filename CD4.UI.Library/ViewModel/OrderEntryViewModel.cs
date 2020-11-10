@@ -609,7 +609,7 @@ namespace CD4.UI.Library.ViewModel
             //call datalayer to get all the printers with their types (Barcode printer, document printer... etc)
             var workStationPrinters = await _staticData.GetWorkStationPrintersAsync(workstationName);
             var barcodePrinter = workStationPrinters.Find((x) => x.PrinterType == 1);
-            if (!string.IsNullOrEmpty(barcodePrinter.PrinterName)) BarcodePrinterName = barcodePrinter.PrinterName;
+            if (barcodePrinter != null) BarcodePrinterName = barcodePrinter.PrinterName;
         }
 
         /// <summary>
