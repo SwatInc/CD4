@@ -158,7 +158,7 @@ namespace CD4.UI.Library.ViewModel
         {
             get => nidPp; set
             {
-                if (nidPp.ToUpper() == value.ToUpper().Trim()) return;
+                if (nidPp?.ToUpper() == value.ToUpper().Trim()) return;
                 nidPp = value.ToUpper().Trim();
                 OnPropertyChanged();
             }
@@ -172,7 +172,7 @@ namespace CD4.UI.Library.ViewModel
 
             set
             {
-                if (fullname.ToUpper() == value.ToUpper()) return;
+                if (fullname?.ToUpper() == value.ToUpper()) return;
                 fullname = value.ToUpper().Trim();
                 OnPropertyChanged();
             }
