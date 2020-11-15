@@ -9,39 +9,262 @@ Example:      :setvar TableName MyTable
               SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
-INSERT INTO [dbo].[Sites] ([Name])
-  VALUES ('FARUKOLHU'),
-  ('ANANTARA'),
-  ('KUREIDHOO'),
-  ('IGMH'),
-  ('ISLAND SAFARI'),
-  ('FIF'),
-  ('VELIDHOO'),
-  ('VELIDHOO ISOLATION FACILITY'),
-  ('VILIVARU'),
-  ('HOLIDAY ISLAND RESORT'),
-  ('ROYAL ISLAND'),
-  ('HPA'),
-  ('VEL-IF'),
-  ('ERI-QF'),
-  ('FLU CLINIC-IGMH'),
-  ('RRT-MALE'),
-  ('RRT MALE'),
-  ('HIH-IF'),
-  ('SENAHIYA'),
-  ('RRT-MALE'''),
-  ('FLU CLINIC'),
-  ('HA.ULIGAM HEALTH CENTRE'),
-  ('IGMH FLU CLINIC'),
-  ('HIH'),
-  ('IGMH ER'),
-  ('FLU CINIC'),
-  ('RRT HMH');
+--INSERT INTO [dbo].[Sites] ([Name])
+--  VALUES ('FARUKOLHU'),
+--  ('ANANTARA'),
+--  ('KUREIDHOO'),
+--  ('IGMH'),
+--  ('ISLAND SAFARI'),
+--  ('FIF'),
+--  ('VELIDHOO'),
+--  ('VELIDHOO ISOLATION FACILITY'),
+--  ('VILIVARU'),
+--  ('HOLIDAY ISLAND RESORT'),
+--  ('ROYAL ISLAND'),
+--  ('HPA'),
+--  ('VEL-IF'),
+--  ('ERI-QF'),
+--  ('FLU CLINIC-IGMH'),
+--  ('RRT-MALE'),
+--  ('RRT MALE'),
+--  ('HIH-IF'),
+--  ('SENAHIYA'),
+--  ('RRT-MALE'''),
+--  ('FLU CLINIC'),
+--  ('HA.ULIGAM HEALTH CENTRE'),
+--  ('IGMH FLU CLINIC'),
+--  ('HIH'),
+--  ('IGMH ER'),
+--  ('FLU CINIC'),
+--  ('RRT HMH');
 
 INSERT INTO [dbo].[Country] ([Country])
-  VALUES ('MALDIVIAN'),
-  ('BANGLADESHI'),
-  ('INDIAN');
+  VALUES ('Afghan'),
+('Albanian'),
+('Algerian'),
+('American'),
+('Andorran'),
+('Angolan'),
+('Anguillan'),
+('Argentine'),
+('Armenian'),
+('Australian'),
+('Austrian'),
+('Azerbaijani'),
+('Bahamian'),
+('Bahraini'),
+('Bangladeshi'),
+('Barbadian'),
+('Belarusian'),
+('Belgian'),
+('Belizean'),
+('Beninese'),
+('Bermudian'),
+('Bhutanese'),
+('Bolivian'),
+('Botswanan'),
+('Brazilian'),
+('British'),
+('British Virgin Islander'),
+('Bruneian'),
+('Bulgarian'),
+('Burkinan'),
+('Burmese'),
+('Burundian'),
+('Cambodian'),
+('Cameroonian'),
+('Canadian'),
+('Cape Verdean'),
+('Cayman Islander'),
+('Central African'),
+('Chadian'),
+('Chilean'),
+('Chinese'),
+('Citizen of Antigua and Barbuda'),
+('Citizen of Bosnia and Herzegovina'),
+('Citizen of Guinea-Bissau'),
+('Citizen of Kiribati'),
+('Citizen of Seychelles'),
+('Citizen of the Dominican Republic'),
+('Citizen of Vanuatu'),
+('Colombian'),
+('Comoran'),
+('Congolese (Congo)'),
+('Congolese (DRC)'),
+('Cook Islander'),
+('Costa Rican'),
+('Croatian'),
+('Cuban'),
+('Cymraes'),
+('Cymro'),
+('Cypriot'),
+('Czech'),
+('Danish'),
+('Djiboutian'),
+('Dominican'),
+('Dutch'),
+('East Timorese'),
+('Ecuadorean'),
+('Egyptian'),
+('Emirati'),
+('English'),
+('Equatorial Guinean'),
+('Eritrean'),
+('Estonian'),
+('Ethiopian'),
+('Faroese'),
+('Fijian'),
+('Filipino'),
+('Finnish'),
+('French'),
+('Gabonese'),
+('Gambian'),
+('Georgian'),
+('German'),
+('Ghanaian'),
+('Gibraltarian'),
+('Greek'),
+('Greenlandic'),
+('Grenadian'),
+('Guamanian'),
+('Guatemalan'),
+('Guinean'),
+('Guyanese'),
+('Haitian'),
+('Honduran'),
+('Hong Konger'),
+('Hungarian'),
+('Icelandic'),
+('Indian'),
+('Indonesian'),
+('Iranian'),
+('Iraqi'),
+('Irish'),
+('Israeli'),
+('Italian'),
+('Ivorian'),
+('Jamaican'),
+('Japanese'),
+('Jordanian'),
+('Kazakh'),
+('Kenyan'),
+('Kittitian'),
+('Kosovan'),
+('Kuwaiti'),
+('Kyrgyz'),
+('Lao'),
+('Latvian'),
+('Lebanese'),
+('Liberian'),
+('Libyan'),
+('Liechtenstein citizen'),
+('Lithuanian'),
+('Luxembourger'),
+('Macanese'),
+('Macedonian'),
+('Malagasy'),
+('Malawian'),
+('Malaysian'),
+('Maldivian'),
+('Malian'),
+('Maltese'),
+('Marshallese'),
+('Martiniquais'),
+('Mauritanian'),
+('Mauritian'),
+('Mexican'),
+('Micronesian'),
+('Moldovan'),
+('Monegasque'),
+('Mongolian'),
+('Montenegrin'),
+('Montserratian'),
+('Moroccan'),
+('Mosotho'),
+('Mozambican'),
+('Namibian'),
+('Nauruan'),
+('Nepalese'),
+('New Zealander'),
+('Nicaraguan'),
+('Nigerian'),
+('Nigerien'),
+('Niuean'),
+('North Korean'),
+('Northern Irish'),
+('Norwegian'),
+('Omani'),
+('Pakistani'),
+('Palauan'),
+('Palestinian'),
+('Panamanian'),
+('Papua New Guinean'),
+('Paraguayan'),
+('Peruvian'),
+('Pitcairn Islander'),
+('Polish'),
+('Portuguese'),
+('Prydeinig'),
+('Puerto Rican'),
+('Qatari'),
+('Romanian'),
+('Russian'),
+('Rwandan'),
+('Salvadorean'),
+('Sammarinese'),
+('Samoan'),
+('Sao Tomean'),
+('Saudi Arabian'),
+('Scottish'),
+('Senegalese'),
+('Serbian'),
+('Sierra Leonean'),
+('Singaporean'),
+('Slovak'),
+('Slovenian'),
+('Solomon Islander'),
+('Somali'),
+('South African'),
+('South Korean'),
+('South Sudanese'),
+('Spanish'),
+('Sri Lankan'),
+('St Helenian'),
+('St Lucian'),
+('Stateless'),
+('Sudanese'),
+('Surinamese'),
+('Swazi'),
+('Swedish'),
+('Swiss'),
+('Syrian'),
+('Taiwanese'),
+('Tajik'),
+('Tanzanian'),
+('Thai'),
+('Togolese'),
+('Tongan'),
+('Trinidadian'),
+('Tristanian'),
+('Tunisian'),
+('Turkish'),
+('Turkmen'),
+('Turks and Caicos Islander'),
+('Tuvaluan'),
+('Ugandan'),
+('Ukrainian'),
+('Uruguayan'),
+('Uzbek'),
+('Vatican citizen'),
+('Venezuelan'),
+('Vietnamese'),
+('Vincentian'),
+('Wallisian'),
+('Welsh'),
+('Yemeni'),
+('Zambian'),
+('Zimbabwean');
+
 
 INSERT INTO [dbo].[Gender] ([Gender])
   VALUES ('MALE'),
@@ -343,27 +566,27 @@ WHERE [u].[Unit] = ' ';
 
 
 INSERT INTO [dbo].[Test] ([DisciplineId], [SampleTypeId], [Description], [Mask], [Reportable], [ResultDataTypeId], [UnitId], [DeafultCommented])
-  VALUES (@DisciplineMolecular, @SampleTypeIdSerum, 'E Gene', '##.##', 1, @NumericId, @UnitNA, 0),
-  (@DisciplineMolecular, @SampleTypeIdSerum, 'EAV (Internal Control)', '##.##', 1, @NumericId, @UnitNA, 0),
-  (@DisciplineMolecular, @SampleTypeIdSerum, 'RdRP Gene', '##.##', 1, @NumericId, @UnitNA, 0),
-  (@DisciplineMolecular, @SampleTypeIdSerum, 'SARS-CoV-2 Result', '1|2', 1, @CodifiedId, @UnitNA, 0),
-  (@DisciplineHaematology, @SampleTypeIdWb, 'Haemoglobin', '##.##', 1, @NumericId, @UnitmgdL, 0),
-  (@DisciplineHaematology, @SampleTypeIdWb, 'Haematocrit', '##.##', 1, @NumericId, @UnitPercent, 0);
+  VALUES --(@DisciplineMolecular, @SampleTypeIdSerum, 'E Gene', '##.##', 1, @NumericId, @UnitNA, 0),
+  --(@DisciplineMolecular, @SampleTypeIdSerum, 'EAV (Internal Control)', '##.##', 1, @NumericId, @UnitNA, 0),
+  --(@DisciplineMolecular, @SampleTypeIdSerum, 'RdRP Gene', '##.##', 1, @NumericId, @UnitNA, 0),
+  (@DisciplineMolecular, @SampleTypeIdSerum, 'SARS-CoV-2 Result', '1|2', 1, @CodifiedId, @UnitNA, 0);
+  --(@DisciplineHaematology, @SampleTypeIdWb, 'Haemoglobin', '##.##', 1, @NumericId, @UnitmgdL, 0),
+  --(@DisciplineHaematology, @SampleTypeIdWb, 'Haematocrit', '##.##', 1, @NumericId, @UnitPercent, 0);
 
-INSERT INTO [dbo].[Profiles] ([Description])
-  VALUES ('SARS CoV Profile'),
-  ('Hb/PCV');
+--INSERT INTO [dbo].[Profiles] ([Description])
+--  VALUES ('SARS CoV Profile'),
+--  ('Hb/PCV');
 
-DECLARE @CovProfileId int;
-DECLARE @CovProfileIdHbPcv int;
-SELECT
-  @CovProfileId = [Id]
-FROM [dbo].[Profiles] [p]
-WHERE [p].[Description] = 'SARS CoV Profile';
-SELECT
-  @CovProfileIdHbPcv = [Id]
-FROM [dbo].[Profiles] [p]
-WHERE [p].[Description] = 'Hb/PCV';
+--DECLARE @CovProfileId int;
+--DECLARE @CovProfileIdHbPcv int;
+--SELECT
+--  @CovProfileId = [Id]
+--FROM [dbo].[Profiles] [p]
+--WHERE [p].[Description] = 'SARS CoV Profile';
+--SELECT
+--  @CovProfileIdHbPcv = [Id]
+--FROM [dbo].[Profiles] [p]
+--WHERE [p].[Description] = 'Hb/PCV';
 
 DECLARE @egene int;
 DECLARE @eav int;
@@ -372,38 +595,38 @@ DECLARE @result int;
 DECLARE @resultHb int;
 DECLARE @resultPCV int;
 
-SELECT
-  @egene = [Id]
-FROM [dbo].[Test] [t]
-WHERE [t].[Description] = 'E Gene';
-SELECT
-  @eav = [Id]
-FROM [dbo].[Test] [t]
-WHERE [t].[Description] = 'EAV (Internal Control)';
-SELECT
-  @rdrp = [Id]
-FROM [dbo].[Test] [t]
-WHERE [t].[Description] = 'RdRP Gene';
-SELECT
-  @result = [Id]
-FROM [dbo].[Test] [t]
-WHERE [t].[Description] = 'SARS-CoV-2 Result';
-SELECT
-  @resultHb = [Id]
-FROM [dbo].[Test] [t]
-WHERE [t].[Description] = 'Haemoglobin';
-SELECT
-  @resultPCV = [Id]
-FROM [dbo].[Test] [t]
-WHERE [t].[Description] = 'Haematocrit';
+--SELECT
+--  @egene = [Id]
+--FROM [dbo].[Test] [t]
+--WHERE [t].[Description] = 'E Gene';
+--SELECT
+--  @eav = [Id]
+--FROM [dbo].[Test] [t]
+--WHERE [t].[Description] = 'EAV (Internal Control)';
+--SELECT
+--  @rdrp = [Id]
+--FROM [dbo].[Test] [t]
+--WHERE [t].[Description] = 'RdRP Gene';
+--SELECT
+--  @result = [Id]
+--FROM [dbo].[Test] [t]
+--WHERE [t].[Description] = 'SARS-CoV-2 Result';
+--SELECT
+--  @resultHb = [Id]
+--FROM [dbo].[Test] [t]
+--WHERE [t].[Description] = 'Haemoglobin';
+--SELECT
+--  @resultPCV = [Id]
+--FROM [dbo].[Test] [t]
+--WHERE [t].[Description] = 'Haematocrit';
 
-INSERT INTO [dbo].[Profile_Tests] ([ProfileId], [TestId])
-  VALUES (@CovProfileId, @egene),
-  (@CovProfileId, @eav),
-  (@CovProfileId, @rdrp),
-  (@CovProfileId, @result),
-  (@CovProfileIdHbPcv, @resultHb),
-  (@CovProfileIdHbPcv, @resultPCV);
+--INSERT INTO [dbo].[Profile_Tests] ([ProfileId], [TestId])
+--  VALUES (@CovProfileId, @egene),
+--  (@CovProfileId, @eav),
+--  (@CovProfileId, @rdrp),
+--  (@CovProfileId, @result),
+--  (@CovProfileIdHbPcv, @resultHb),
+--  (@CovProfileIdHbPcv, @resultPCV);
 
 --Preparing to insert patient
 DECLARE @MaleGenderId int;
@@ -452,15 +675,125 @@ INSERT INTO [dbo].[Users] ([Id], [UserName], [Fullname], [PasswordHash], [Access
   VALUES ('1', 'swatincadmin', 'Ibrahim Hussain', 'SHA512:88:lhOgh7mA9H1w9L9wu6FoVPUiK+sYR4Tr5A==:8Y2OSxfDTkF9zcplYHlU5LZ/zM3cvpycvAWeEbUxQeR1I3/mCxb7tLt5bBLl2FWJmPEubhYyH0s9tFP60Wo3EQ==', 0, 0, 0, 0, 0);
 SET IDENTITY_INSERT [Users] OFF
 
+SET IDENTITY_INSERT [Users] ON
+INSERT INTO [dbo].[Users] ([Id], [UserName], [Fullname], [PasswordHash], [AccessFailedCount], [EmailConfirmed], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnabled])
+  VALUES ('2', 'Hishmath', 'Hishmath Ibrahim', 'SHA512:88:lhOgh7mA9H1w9L9wu6FoVPUiK+sYR4Tr5A==:8Y2OSxfDTkF9zcplYHlU5LZ/zM3cvpycvAWeEbUxQeR1I3/mCxb7tLt5bBLl2FWJmPEubhYyH0s9tFP60Wo3EQ==', 0, 0, 0, 0, 0);
+SET IDENTITY_INSERT [Users] OFF
+
+SET IDENTITY_INSERT [Users] ON
+INSERT INTO [dbo].[Users] ([Id], [UserName], [Fullname], [PasswordHash], [AccessFailedCount], [EmailConfirmed], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnabled])
+  VALUES ('3', 'shaaif', 'Mohamed Shaaif Thaufeeg', 'SHA512:88:lhOgh7mA9H1w9L9wu6FoVPUiK+sYR4Tr5A==:8Y2OSxfDTkF9zcplYHlU5LZ/zM3cvpycvAWeEbUxQeR1I3/mCxb7tLt5bBLl2FWJmPEubhYyH0s9tFP60Wo3EQ==', 0, 0, 0, 0, 0);
+SET IDENTITY_INSERT [Users] OFF
+
+SET IDENTITY_INSERT [Users] ON
+INSERT INTO [dbo].[Users] ([Id], [UserName], [Fullname], [PasswordHash], [AccessFailedCount], [EmailConfirmed], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnabled])
+  VALUES ('4', 'Aliumar', 'Ali Umar', 'SHA512:88:lhOgh7mA9H1w9L9wu6FoVPUiK+sYR4Tr5A==:8Y2OSxfDTkF9zcplYHlU5LZ/zM3cvpycvAWeEbUxQeR1I3/mCxb7tLt5bBLl2FWJmPEubhYyH0s9tFP60Wo3EQ==', 0, 0, 0, 0, 0);
+SET IDENTITY_INSERT [Users] OFF
+
+SET IDENTITY_INSERT [Users] ON
+INSERT INTO [dbo].[Users] ([Id], [UserName], [Fullname], [PasswordHash], [AccessFailedCount], [EmailConfirmed], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnabled])
+  VALUES ('5', 'Aisha', 'Aishath Rasheed', 'SHA512:88:lhOgh7mA9H1w9L9wu6FoVPUiK+sYR4Tr5A==:8Y2OSxfDTkF9zcplYHlU5LZ/zM3cvpycvAWeEbUxQeR1I3/mCxb7tLt5bBLl2FWJmPEubhYyH0s9tFP60Wo3EQ==', 0, 0, 0, 0, 0);
+SET IDENTITY_INSERT [Users] OFF
+
+SET IDENTITY_INSERT [Users] ON
+INSERT INTO [dbo].[Users] ([Id], [UserName], [Fullname], [PasswordHash], [AccessFailedCount], [EmailConfirmed], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnabled])
+  VALUES ('6', 'Nashima', 'Nashima Mohamed Rasheed', 'SHA512:88:lhOgh7mA9H1w9L9wu6FoVPUiK+sYR4Tr5A==:8Y2OSxfDTkF9zcplYHlU5LZ/zM3cvpycvAWeEbUxQeR1I3/mCxb7tLt5bBLl2FWJmPEubhYyH0s9tFP60Wo3EQ==', 0, 0, 0, 0, 0);
+SET IDENTITY_INSERT [Users] OFF
+
+SET IDENTITY_INSERT [Users] ON
+INSERT INTO [dbo].[Users] ([Id], [UserName], [Fullname], [PasswordHash], [AccessFailedCount], [EmailConfirmed], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnabled])
+  VALUES ('7', 'Hashma', 'Hawwa Hashma Ali', 'SHA512:88:lhOgh7mA9H1w9L9wu6FoVPUiK+sYR4Tr5A==:8Y2OSxfDTkF9zcplYHlU5LZ/zM3cvpycvAWeEbUxQeR1I3/mCxb7tLt5bBLl2FWJmPEubhYyH0s9tFP60Wo3EQ==', 0, 0, 0, 0, 0);
+SET IDENTITY_INSERT [Users] OFF
+
+SET IDENTITY_INSERT [Users] ON
+INSERT INTO [dbo].[Users] ([Id], [UserName], [Fullname], [PasswordHash], [AccessFailedCount], [EmailConfirmed], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnabled])
+  VALUES ('8', 'Shanee', 'Fathimath Shaanee', 'SHA512:88:lhOgh7mA9H1w9L9wu6FoVPUiK+sYR4Tr5A==:8Y2OSxfDTkF9zcplYHlU5LZ/zM3cvpycvAWeEbUxQeR1I3/mCxb7tLt5bBLl2FWJmPEubhYyH0s9tFP60Wo3EQ==', 0, 0, 0, 0, 0);
+SET IDENTITY_INSERT [Users] OFF
+
+SET IDENTITY_INSERT [Users] ON
+INSERT INTO [dbo].[Users] ([Id], [UserName], [Fullname], [PasswordHash], [AccessFailedCount], [EmailConfirmed], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnabled])
+  VALUES ('9', 'Aliabdulla', 'Ali Abdulla', 'SHA512:88:lhOgh7mA9H1w9L9wu6FoVPUiK+sYR4Tr5A==:8Y2OSxfDTkF9zcplYHlU5LZ/zM3cvpycvAWeEbUxQeR1I3/mCxb7tLt5bBLl2FWJmPEubhYyH0s9tFP60Wo3EQ==', 0, 0, 0, 0, 0);
+SET IDENTITY_INSERT [Users] OFF
+
+
+SET IDENTITY_INSERT [Users] ON
+INSERT INTO [dbo].[Users] ([Id], [UserName], [Fullname], [PasswordHash], [AccessFailedCount], [EmailConfirmed], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnabled])
+  VALUES ('10', 'Kathuma', 'Kathuma Abdulla', 'SHA512:88:lhOgh7mA9H1w9L9wu6FoVPUiK+sYR4Tr5A==:8Y2OSxfDTkF9zcplYHlU5LZ/zM3cvpycvAWeEbUxQeR1I3/mCxb7tLt5bBLl2FWJmPEubhYyH0s9tFP60Wo3EQ==', 0, 0, 0, 0, 0);
+SET IDENTITY_INSERT [Users] OFF
+
+SET IDENTITY_INSERT [Users] ON
+INSERT INTO [dbo].[Users] ([Id], [UserName], [Fullname], [PasswordHash], [AccessFailedCount], [EmailConfirmed], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnabled])
+  VALUES ('11', 'Anisha', 'Fathimath Anisha Ali', 'SHA512:88:lhOgh7mA9H1w9L9wu6FoVPUiK+sYR4Tr5A==:8Y2OSxfDTkF9zcplYHlU5LZ/zM3cvpycvAWeEbUxQeR1I3/mCxb7tLt5bBLl2FWJmPEubhYyH0s9tFP60Wo3EQ==', 0, 0, 0, 0, 0);
+SET IDENTITY_INSERT [Users] OFF
+
+SET IDENTITY_INSERT [Users] ON
+INSERT INTO [dbo].[Users] ([Id], [UserName], [Fullname], [PasswordHash], [AccessFailedCount], [EmailConfirmed], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnabled])
+  VALUES ('12', 'Nasfa', 'Mariyam Nasfa', 'SHA512:88:lhOgh7mA9H1w9L9wu6FoVPUiK+sYR4Tr5A==:8Y2OSxfDTkF9zcplYHlU5LZ/zM3cvpycvAWeEbUxQeR1I3/mCxb7tLt5bBLl2FWJmPEubhYyH0s9tFP60Wo3EQ==', 0, 0, 0, 0, 0);
+SET IDENTITY_INSERT [Users] OFF
+
+SET IDENTITY_INSERT [Users] ON
+INSERT INTO [dbo].[Users] ([Id], [UserName], [Fullname], [PasswordHash], [AccessFailedCount], [EmailConfirmed], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnabled])
+  VALUES ('13', 'Shafa', 'Aminath Shafa Mohamed', 'SHA512:88:lhOgh7mA9H1w9L9wu6FoVPUiK+sYR4Tr5A==:8Y2OSxfDTkF9zcplYHlU5LZ/zM3cvpycvAWeEbUxQeR1I3/mCxb7tLt5bBLl2FWJmPEubhYyH0s9tFP60Wo3EQ==', 0, 0, 0, 0, 0);
+SET IDENTITY_INSERT [Users] OFF
+
+SET IDENTITY_INSERT [Users] ON
+INSERT INTO [dbo].[Users] ([Id], [UserName], [Fullname], [PasswordHash], [AccessFailedCount], [EmailConfirmed], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnabled])
+  VALUES ('14', 'Shaffah', 'Ismail Shaffah', 'SHA512:88:lhOgh7mA9H1w9L9wu6FoVPUiK+sYR4Tr5A==:8Y2OSxfDTkF9zcplYHlU5LZ/zM3cvpycvAWeEbUxQeR1I3/mCxb7tLt5bBLl2FWJmPEubhYyH0s9tFP60Wo3EQ==', 0, 0, 0, 0, 0);
+SET IDENTITY_INSERT [Users] OFF
+
+
+SET IDENTITY_INSERT [Users] ON
+INSERT INTO [dbo].[Users] ([Id], [UserName], [Fullname], [PasswordHash], [AccessFailedCount], [EmailConfirmed], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnabled])
+  VALUES ('15', 'Aiman', 'Mohamed Aiman', 'SHA512:88:lhOgh7mA9H1w9L9wu6FoVPUiK+sYR4Tr5A==:8Y2OSxfDTkF9zcplYHlU5LZ/zM3cvpycvAWeEbUxQeR1I3/mCxb7tLt5bBLl2FWJmPEubhYyH0s9tFP60Wo3EQ==', 0, 0, 0, 0, 0);
+SET IDENTITY_INSERT [Users] OFF
+
+
+SET IDENTITY_INSERT [Users] ON
+INSERT INTO [dbo].[Users] ([Id], [UserName], [Fullname], [PasswordHash], [AccessFailedCount], [EmailConfirmed], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnabled])
+  VALUES ('16', 'Faiha', 'Fathimath Faiha Ibrahim', 'SHA512:88:lhOgh7mA9H1w9L9wu6FoVPUiK+sYR4Tr5A==:8Y2OSxfDTkF9zcplYHlU5LZ/zM3cvpycvAWeEbUxQeR1I3/mCxb7tLt5bBLl2FWJmPEubhYyH0s9tFP60Wo3EQ==', 0, 0, 0, 0, 0);
+SET IDENTITY_INSERT [Users] OFF
+
+
+
+--1 = Swat, Inc Developer
+--2 = Laboratory Manager
+--3 = On-site IT
+--4 = Laboratory Technologist
+--5 = Pathologist
+--6 = Phlebotomist
+--7 = Reception Staff
+
 --insert roles
 INSERT INTO [dbo].[Roles] ([Id], [Name])
-  VALUES ('1', 'Swat, Inc Developer');
+  VALUES ('1', 'Swat, Inc Developer'),
+  ('2', 'Laboratory Manager'),
+  ('3', 'On-site IT'),
+  ('4', 'Laboratory Technologist'),
+  ('5', 'Pathologist'),
+  ('6', 'Phlebotomist'),
+  ('7', 'Reception Staff');
 
 --setup user roles
 INSERT INTO [dbo].[UserRoles] ([UserId], [RoleId])
-  VALUES ('1', '1');
+  VALUES ('1', '1'),
+  ('2', '2'),
+  ('3', '4'),
+  ('4', '4'),
+  ('5', '4'),
+  ('6', '4'),
+  ('7', '4'),
+  ('8', '4'),
+  ('9', '4'),
+  ('10', '4'),
+  ('16', '7'),
+  ('11', '7'),
+  ('12', '7'),
+  ('13', '7'),
+  ('14', '7'),
+  ('15', '3');
 
---setup user claims
+
+--setup user claims - develper
 INSERT INTO [dbo].[RoleClaims] ([RoleId], [ClaimValue])
   VALUES ('1', 'ribbon'),
     ('1', 'OrderEntryView'),
@@ -483,6 +816,125 @@ INSERT INTO [dbo].[RoleClaims] ([RoleId], [ClaimValue])
     ('1', 'Ribbon.ConfigurationPage'),
     ('1', 'Ribbon.GeneralPage'),
     ('1', 'AcceptSamplesView');
+
+    --setup user claims - labManager
+INSERT INTO [dbo].[RoleClaims] ([RoleId], [ClaimValue])
+  VALUES ('2', 'ribbon'),
+    ('2', 'OrderEntryView'),
+    ('2', 'ResultEntryView'),
+    ('2', 'OrderEntry.Search'),
+    ('2', 'OrderEntry.SearchReq'),
+    ('2', 'OrderEntry.Remove'),
+    ('2', 'OrderEntry.Confirm'),
+    ('2', 'OrderEntry.PrintBarcode'),
+    ('2', 'ResultEntryView.LoadWorksheet'),
+    ('2', 'ResultEntryView.Report'),
+    ('2', 'ResultEntry.ValidateSampleOrTest'),
+    ('2', 'ResultEntry.ViewAuditTrail'),
+    ('2', 'ResultEntry.PrintReport'),
+    ('2', 'ResultEntry.RejectSampleOrTest'),
+    ('2', 'ResultEntry.CancelSampleOrTestRejection'),
+    ('2', 'ResultEntry.ShowTestHistory'),
+    ('2', 'MainView'),
+    ('2', 'Ribbon.Profile'),
+    ('2', 'Ribbon.ConfigurationPage'),
+    ('2', 'Ribbon.GeneralPage'),
+    ('2', 'AcceptSamplesView');
+
+    --setup user claims - OnSite IT
+INSERT INTO [dbo].[RoleClaims] ([RoleId], [ClaimValue])
+  VALUES ('3', 'ribbon'),
+    ('3', 'OrderEntryView'),
+    ('3', 'ResultEntryView'),
+    ('3', 'OrderEntry.Search'),
+    ('3', 'OrderEntry.SearchReq'),
+    ('3', 'ResultEntryView.LoadWorksheet'),
+    ('3', 'ResultEntryView.Report'),
+    ('3', 'ResultEntry.ViewAuditTrail'),
+    ('3', 'ResultEntry.PrintReport'),
+    ('3', 'ResultEntry.ShowTestHistory'),
+    ('3', 'MainView'),
+    ('3', 'Ribbon.Profile'),
+    ('3', 'Ribbon.ConfigurationPage'),
+    ('3', 'Ribbon.GeneralPage');
+
+    --setup user claims - technologist
+INSERT INTO [dbo].[RoleClaims] ([RoleId], [ClaimValue])
+  VALUES ('4', 'ribbon'),
+    ('4', 'OrderEntryView'),
+    ('4', 'ResultEntryView'),
+    ('4', 'OrderEntry.Search'),
+    ('4', 'OrderEntry.SearchReq'),
+    ('4', 'OrderEntry.Remove'),
+    ('4', 'OrderEntry.Confirm'),
+    ('4', 'OrderEntry.PrintBarcode'),
+    ('4', 'ResultEntryView.LoadWorksheet'),
+    ('4', 'ResultEntryView.Report'),
+    ('4', 'ResultEntry.ValidateSampleOrTest'),
+    ('4', 'ResultEntry.ViewAuditTrail'),
+    ('4', 'ResultEntry.PrintReport'),
+    ('4', 'ResultEntry.RejectSampleOrTest'),
+    ('4', 'ResultEntry.CancelSampleOrTestRejection'),
+    ('4', 'ResultEntry.ShowTestHistory'),
+    ('4', 'MainView'),
+    ('4', 'Ribbon.Profile'),
+    ('4', 'Ribbon.GeneralPage'),
+    ('4', 'AcceptSamplesView');
+
+--setup user claims - pathologist
+INSERT INTO [dbo].[RoleClaims] ([RoleId], [ClaimValue])
+  VALUES ('5', 'ribbon'),
+    ('5', 'OrderEntryView'),
+    ('5', 'ResultEntryView'),
+    ('5', 'OrderEntry.Search'),
+    ('5', 'OrderEntry.SearchReq'),
+    ('5', 'OrderEntry.Remove'),
+    ('5', 'OrderEntry.Confirm'),
+    ('5', 'OrderEntry.PrintBarcode'),
+    ('5', 'ResultEntryView.LoadWorksheet'),
+    ('5', 'ResultEntryView.Report'),
+    ('5', 'ResultEntry.ValidateSampleOrTest'),
+    ('5', 'ResultEntry.ViewAuditTrail'),
+    ('5', 'ResultEntry.PrintReport'),
+    ('5', 'ResultEntry.RejectSampleOrTest'),
+    ('5', 'ResultEntry.CancelSampleOrTestRejection'),
+    ('5', 'ResultEntry.ShowTestHistory'),
+    ('5', 'MainView'),
+    ('5', 'Ribbon.Profile'),
+    ('5', 'Ribbon.GeneralPage'),
+    ('5', 'AcceptSamplesView');
+
+--setup user claims - phlebotomist
+INSERT INTO [dbo].[RoleClaims] ([RoleId], [ClaimValue])
+  VALUES ('6', 'ribbon'),
+    ('6', 'OrderEntryView'),
+    ('6', 'ResultEntryView'),
+    ('6', 'OrderEntry.Search'),
+    ('6', 'OrderEntry.SearchReq'),
+    ('6', 'OrderEntry.Remove'),
+    ('6', 'OrderEntry.Confirm'),
+    ('6', 'OrderEntry.PrintBarcode'),
+    ('6', 'ResultEntryView.LoadWorksheet'),
+    ('6', 'MainView'),
+    ('6', 'Ribbon.Profile'),
+    ('6', 'Ribbon.GeneralPage'),
+    ('6', 'AcceptSamplesView');
+
+    --setup user claims - reception staff
+INSERT INTO [dbo].[RoleClaims] ([RoleId], [ClaimValue])
+  VALUES ('7', 'ribbon'),
+    ('7', 'OrderEntryView'),
+    ('7', 'ResultEntryView'),
+    ('7', 'OrderEntry.Search'),
+    ('7', 'OrderEntry.SearchReq'),
+    ('7', 'OrderEntry.Remove'),
+    ('7', 'OrderEntry.Confirm'),
+    ('7', 'OrderEntry.PrintBarcode'),
+    ('7', 'ResultEntry.PrintReport'),
+    ('7', 'MainView'),
+    ('7', 'Ribbon.Profile'),
+    ('7', 'Ribbon.GeneralPage'),
+    ('7', 'AcceptSamplesView');
 
 --insert status table data
 INSERT INTO [dbo].[Status] ([Status])
@@ -552,9 +1004,9 @@ WHERE [Description] = 'Not Acceptable';
 -- insert reference range
 --haemoglobin, normal , female, age 0 to 73000 days
 --PCV, normal , female, age 0 to 73000 days
-INSERT INTO [dbo].[ReferenceRange] ([TestId], [GenderId], [FromAgeDays], [ToAgeDays], [DeltaValidityIntervalDays], [BiasFactor], [DisplayNormalRange])
-  VALUES (@resultHb, @FeMaleGenderId, 0, 73000, 0, 0, '11 - 18.2 g/dL'),
-  (@resultPCV, @FeMaleGenderId, 0, 73000, 0, 0, '33.0 - 54.6 %');
+--INSERT INTO [dbo].[ReferenceRange] ([TestId], [GenderId], [FromAgeDays], [ToAgeDays], [DeltaValidityIntervalDays], [BiasFactor], [DisplayNormalRange])
+--  VALUES (@resultHb, @FeMaleGenderId, 0, 73000, 0, 0, '11 - 18.2 g/dL'),
+--  (@resultPCV, @FeMaleGenderId, 0, 73000, 0, 0, '33.0 - 54.6 %');
 
 -- get reference range ids
 DECLARE @ReferenceRangeHgbId int;
@@ -570,17 +1022,17 @@ FROM [ReferenceRange]
 WHERE [TestId] = @resultPCV;
 
 -- insert referece data for Hb and PCV
-INSERT INTO [dbo].[ReferenceData] ([ReferenceRangeId], [ReferenceTypeId], [LowLimitValue], [HighLimitValue])
-  VALUES (@ReferenceRangeHgbId, @NormalId, 11.0, 18.2), -- HGB
-  (@ReferenceRangeHgbId, @AttentionId, 9.0, 20.2),
-  (@ReferenceRangeHgbId, @PathologyId, 7.0, 20.9),
-  (@ReferenceRangeHgbId, @PanicId, 6.0, 21.9),
-  (@ReferenceRangeHgbId, @NotAcceptableId, 2.0, 25.9),
-  (@ReferenceRangePCVId, @NormalId, 33.0, 54.6), -- PCV
-  (@ReferenceRangePCVId, @AttentionId, 27.0, 60.2),
-  (@ReferenceRangePCVId, @PathologyId, 21.0, 60.9),
-  (@ReferenceRangePCVId, @PanicId, 18.0, 65.7),
-  (@ReferenceRangePCVId, @NotAcceptableId, 6.0, 77.9);
+--INSERT INTO [dbo].[ReferenceData] ([ReferenceRangeId], [ReferenceTypeId], [LowLimitValue], [HighLimitValue])
+--  VALUES (@ReferenceRangeHgbId, @NormalId, 11.0, 18.2), -- HGB
+--  (@ReferenceRangeHgbId, @AttentionId, 9.0, 20.2),
+--  (@ReferenceRangeHgbId, @PathologyId, 7.0, 20.9),
+--  (@ReferenceRangeHgbId, @PanicId, 6.0, 21.9),
+--  (@ReferenceRangeHgbId, @NotAcceptableId, 2.0, 25.9),
+--  (@ReferenceRangePCVId, @NormalId, 33.0, 54.6), -- PCV
+--  (@ReferenceRangePCVId, @AttentionId, 27.0, 60.2),
+--  (@ReferenceRangePCVId, @PathologyId, 21.0, 60.9),
+--  (@ReferenceRangePCVId, @PanicId, 18.0, 65.7),
+--  (@ReferenceRangePCVId, @NotAcceptableId, 6.0, 77.9);
 
 USE [CD4Data]
 GO
@@ -602,7 +1054,10 @@ GO
 SET IDENTITY_INSERT [dbo].[CommentList_CommentType] ON
 GO
 INSERT [dbo].[CommentList_CommentType] ([Id], [CommentListId], [CommentTypeId], [IsActive])
-  VALUES (2, 1, 4, 1), (3, 1, 5, 1),(4,2, 4, 1), (5, 1, 5, 1);
+  VALUES (2, 1, 4, 1),
+         (3, 1, 5, 1),
+         (4,2, 4, 1), 
+         (5, 1, 5, 1);
 GO
 SET IDENTITY_INSERT [dbo].[CommentList_CommentType] OFF
 GO
