@@ -43,6 +43,7 @@ namespace CD4.UI.Library.ViewModel
         private readonly IStaticDataDataAccess _staticData;
         private readonly IAnalysisRequestDataAccess _requestDataAccess;
         private readonly IStatusDataAccess _statusDataAccess;
+        private readonly AuthorizeDetailEventArgs _authorizeDetail;
         private bool loadingStaticData;
         #endregion
 
@@ -52,7 +53,7 @@ namespace CD4.UI.Library.ViewModel
 
         #region Default Constructor
         public OrderEntryViewModel(IMapper mapper,
-            IStaticDataDataAccess staticData, IAnalysisRequestDataAccess requestDataAccess, IStatusDataAccess statusDataAccess)
+            IStaticDataDataAccess staticData, IAnalysisRequestDataAccess requestDataAccess, IStatusDataAccess statusDataAccess, AuthorizeDetailEventArgs authorizeDetail)
         {
             Sites = new List<SitesModel>();
             Gender = new List<GenderModel>();
@@ -69,6 +70,7 @@ namespace CD4.UI.Library.ViewModel
             this._staticData = staticData;
             this._requestDataAccess = requestDataAccess;
             this._statusDataAccess = statusDataAccess;
+            _authorizeDetail = authorizeDetail;
             PropertyChanged += OrderEntryViewModel_PropertyChanged;
             InitializeStaticData += OnInitializeStaticDataAsync;
             InitializeStaticData(this, EventArgs.Empty);
@@ -469,7 +471,7 @@ namespace CD4.UI.Library.ViewModel
                 mappedRequest.AtollId = atollIslandData.Id;
 
                 var result = await _requestDataAccess.ConfirmRequestAsync
-                    (mappedRequest);
+                    (mappedRequest, _authorizeDetail.UserId);
 
                 return result;
             }

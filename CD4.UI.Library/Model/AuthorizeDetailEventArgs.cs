@@ -17,6 +17,7 @@ namespace CD4.UI.Library.Model
             this.Username = authorizeDetailEvent.Username;
             this.FullName = authorizeDetailEvent.FullName;
             this.ClaimsCsv = authorizeDetailEvent.ClaimsCsv;
+            this.UserId = authorizeDetailEvent.UserId;
             this.IsAuthenticated = authorizeDetailEvent.IsAuthenticated;
         }
 
@@ -32,7 +33,7 @@ namespace CD4.UI.Library.Model
                 SetClaims();
             }
         }
-
+        public int UserId { get; set; }
         /// <summary>
         /// Generate a list of claims from ClaimsCsv
         /// </summary>
@@ -44,11 +45,9 @@ namespace CD4.UI.Library.Model
                 Claims.Add(claim);
             }
         }
-
         public bool IsAuthenticated { get; set; }
         public string Message { get; set; }
         public List<string> Claims { get; set; }
-
         /// <summary>
         /// checks for the presence of the claim passed-in in the user claims
         /// </summary>
