@@ -7,12 +7,12 @@ namespace CD4.DataLibrary.DataAccess
 {
     public class ReportsDataAccess : DataAccessBase, IReportsDataAccess
     {
-        public async Task<List<AnalysisRequestReportModel>> GetAnalysisReportByCinAsync(string cin)
+        public async Task<List<AnalysisRequestReportModel>> GetAnalysisReportByCinAsync(string cin, int loggedInUserId)
         {
             //stored procedure name to call
             var storedProcedure = "[dbo].[usp_GetAnalysisReportByCin]";
             //dynamic parameter with cin
-            var parameters = new { Cin = cin };
+            var parameters = new { Cin = cin, UserId = loggedInUserId };
 
             //Execute the stored procedure by calling LoadAnalysisReportByCinAsync method
             var output = await LoadAnalysisReportByCinAsync<dynamic>(storedProcedure, parameters);
