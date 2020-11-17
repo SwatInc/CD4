@@ -2,7 +2,8 @@
 	@Cin varchar(50),
 	@SiteId int,
 	@CollectionDate datetimeoffset,
-	@ReceivedDate datetimeoffset
+	@ReceivedDate datetimeoffset,
+	@UserId int
 AS
 BEGIN
 SET NOCOUNT ON;
@@ -18,6 +19,7 @@ DECLARE @ReturnValue bit = 0;
 				DECLARE @SampleAuditType int  = 2;
 				DECLARE @CollectedStatusId int = 2;
 				DECLARE @AcceptedStatusId int = 2;
+				DECLARE @Username varchar(256);
 
 				-- check whether sample is accepted / collected
 				SELECT @IsSampleCollected = COUNT([Id]) FROM [dbo].[TrackingHistory] WHERE [SampleCin] = @Cin AND [StatusId] = 2;
@@ -50,11 +52,11 @@ DECLARE @ReturnValue bit = 0;
 				WHERE [SampleCin] = @Cin AND [StatusId] = 3;
 
 
-
+				SELECT @Username = [UserName] FROM [dbo].[Users] WHERE [Id] = @UserId;
 				-- AUDIT
 				SELECT @AuditTypeIdSample = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Sample';
 				INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[Cin],[StatusId],[Details])
-				VALUES(@AuditTypeIdSample, @Cin,@CurrentStatus, 'Sample Update.... site, collected and received dates.');
+				VALUES(@AuditTypeIdSample, @Cin,@CurrentStatus, CONCAT('Sample Update.... site, collected and received dates by user: ',@Username,'.'));
 
 				COMMIT TRANSACTION;
 				SET @ReturnValue = 1;

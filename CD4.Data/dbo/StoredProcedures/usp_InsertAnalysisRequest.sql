@@ -1,7 +1,8 @@
 ﻿CREATE PROCEDURE [dbo].[usp_InsertAnalysisRequest]
 	@PatientId int,
 	@EpisodeNumber varchar(15),
-	@Age varchar(20)
+	@Age varchar(20),
+	@UserId int
 AS
 BEGIN
 SET NOCOUNT ON;
@@ -10,6 +11,7 @@ SET XACT_ABORT ON;
 		BEGIN TRY
 
 			DECLARE @InsertedRequestId int;
+			DECLARE @LoggedInUser varchar(256);
 			DECLARE @AuditTypeIdRequest int;
 			DECLARE @AuditPatientInfo varchar(200);
 
@@ -35,6 +37,9 @@ SET XACT_ABORT ON;
 			INSERT INTO [dbo].[TrackingHistory]([TrackingType],[AnalysisRequestId],[StatusId],[UsersId])
 			VALUES (@AuditTypeIdRequest,@InsertedRequestId,1,1)
 
+			-- get username
+			SELECT @LoggedInUser =  [UserName] FROM [dbo].[Users] WHERE [Id] = @UserId;
+
 			--AUDIT
 			SELECT @AuditPatientInfo = CONCAT([FullName], ' (',[Id],' | ',[NidPp],')') FROM [dbo].[Patient] WHERE [Id] = @PatientId;
 
@@ -42,7 +47,7 @@ SET XACT_ABORT ON;
 				 VALUES
 					   (@AuditTypeIdRequest,
 					   1,
-					   'Created analysis request for episode number: ['+@EpisodeNumber+'] by user: NA for '+ @AuditPatientInfo);
+					   CONCAT('Created analysis request for episode number: [',@EpisodeNumber,'] by user: ',@LoggedInUser,' for ', @AuditPatientInfo));
 
 	COMMIT TRANSACTION;
 		END TRY
