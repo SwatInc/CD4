@@ -12,5 +12,6 @@ namespace CD4.DataLibrary.Models
         public int SiteId { get; set; }
         public DateTimeOffset? CollectionDate { get; set; }
         public DateTimeOffset? ReceivedDate { get; set; }
+        public int UserId { get; set; }
     }
 }

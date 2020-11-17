@@ -16,10 +16,10 @@ namespace CD4.DataLibrary.Models
     {
         #region Default Constructor
         public RequestSampleAndClinicalDetailsInsertDatabaseModel
-            (int patientId, AnalysisRequestDataModel request, IStatusDataAccess statusData)
+            (int patientId, AnalysisRequestDataModel request, IStatusDataAccess statusData, int loggedInUserId)
         {
             //set demo authId
-            this.UserId = 1;
+            this.UserId = loggedInUserId;
 
             PatientId = patientId;
             EpisodeNumber = request.EpisodeNumber;
