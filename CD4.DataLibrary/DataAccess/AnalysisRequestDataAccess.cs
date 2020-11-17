@@ -33,7 +33,7 @@ namespace CD4.DataLibrary.DataAccess
             this.statusDataAccess = statusDataAccess;
         }
 
-        public async Task<bool> ConfirmRequestAsync(AnalysisRequestDataModel request)
+        public async Task<bool> ConfirmRequestAsync(AnalysisRequestDataModel request, int loggedInUserId)
         {
             RequestDataStatus requestSampleStatus = RequestDataStatus.New;
             RequestDataStatus patientStatus = RequestDataStatus.New;
@@ -161,7 +161,7 @@ namespace CD4.DataLibrary.DataAccess
             {
                 //IF REQUEST IS NEW:: CLINICAL DETAILS, SAMPLE AND REQUESTED TESTS
                 //WILL BE NEW FOR SURE. SO HANDLE THEM ALL AT THE SAME TIME
-                return await InsertNewCompleteRequest(GetPatientId(patient, InsertedPatientId), request);
+                return await InsertNewCompleteRequest(GetPatientId(patient, InsertedPatientId), request, loggedInUserId);
 
             }
 
@@ -178,7 +178,7 @@ namespace CD4.DataLibrary.DataAccess
                     EpisodeNumber = request.EpisodeNumber,
                     Age = request.Age
                 };
-                var isRequestUpdated = await UpdateRequestAsync(requestToUpdate);
+                var isRequestUpdated = await UpdateRequestAsync(requestToUpdate, loggedInUserId);
                 if (!isRequestUpdated)
                 {
                     throw new Exception("Cannot update request data! [ either episode number, age or patient associated with request was not updated ]");
@@ -201,7 +201,7 @@ namespace CD4.DataLibrary.DataAccess
 
                 };
 
-                var output = await sampleDataAccess.UpdateSample(sampleToUpdate);
+                var output = await sampleDataAccess.UpdateSample(sampleToUpdate,loggedInUserId);
                 if (!output)
                 {
                     throw new Exception("Cannot sample details. [May include: Site, collected date or received date]. Please verify!");
@@ -288,9 +288,9 @@ namespace CD4.DataLibrary.DataAccess
         }
 
         private async Task<bool> InsertNewCompleteRequest
-            (int patientId, AnalysisRequestDataModel request)
+            (int patientId, AnalysisRequestDataModel request, int loggedInUserId)
         {
-            var insertData = new RequestSampleAndClinicalDetailsInsertDatabaseModel(patientId, request, statusDataAccess);
+            var insertData = new RequestSampleAndClinicalDetailsInsertDatabaseModel(patientId, request, statusDataAccess, loggedInUserId);
             bool success;
 
             if (string.IsNullOrEmpty(insertData.CommaDelimitedClinicalDetailsIds))
@@ -298,13 +298,13 @@ namespace CD4.DataLibrary.DataAccess
                 // when clinical details are not available.
                 success =  await SelectInsertOrUpdateAsync<bool, dynamic>
                     ("[dbo].[usp_InsertAnalysisRequestSampleAndRequestedTests]", insertData.GetWithoutClinicalDetails());
-                await InsertSampleCollectedDate(request);
+                await InsertSampleCollectedDate(request, loggedInUserId);
                 return success;
             }
             //with clinical details
             success = await SelectInsertOrUpdateAsync<bool, RequestSampleAndClinicalDetailsInsertDatabaseModel>
                 ("[dbo].[usp_InsertAnalysisRequestClinicalDetailsSampleAndRequestedTests]", insertData);
-            await InsertSampleCollectedDate(request);
+            await InsertSampleCollectedDate(request, loggedInUserId);
             return success;
 
         }
@@ -480,13 +480,21 @@ namespace CD4.DataLibrary.DataAccess
                 (storedProcedure, request);
         }
 
-        public async Task<bool> UpdateRequestAsync(AnalysisRequestUpdateDatabaseModel request)
+        public async Task<bool> UpdateRequestAsync(AnalysisRequestUpdateDatabaseModel request, int loggedInUserId)
         {
             try
             {
                 var storedProcedure = "[dbo].[usp_UpdateAnalysisRequest]";
-                _ = await SelectInsertOrUpdateAsync<bool, AnalysisRequestUpdateDatabaseModel>
-                    (storedProcedure, request);
+                var parameters = new
+                {
+                    Id = request.Id,
+                    PatientId = request.PatientId,
+                    EpisodeNumber = request.EpisodeNumber,
+                    Age = request.Age,
+                    UserId = loggedInUserId
+                };
+                _ = await SelectInsertOrUpdateAsync<bool, dynamic>
+                    (storedProcedure, parameters);
                 return true;
             }
             catch (Exception)
@@ -496,7 +504,7 @@ namespace CD4.DataLibrary.DataAccess
         }
 
         public async Task<CompleteRequestSearchResultsModel>SearchRequestByCinAsync
-            (string cin = "nCoV-4654/20")
+            (string cin)
         {
             var storedProcedure = "[dbo].[usp_GetCompleteRequestByCin]";
             var parameter = new CinParameterModel() { Cin = cin };
@@ -523,7 +531,7 @@ namespace CD4.DataLibrary.DataAccess
             }
         }
 
-        public async Task InsertSampleCollectedDate(AnalysisRequestDataModel request)
+        public async Task InsertSampleCollectedDate(AnalysisRequestDataModel request, int loggedInUserId)
         {
             var storedProcedure = "[dbo].[usp_UpdateSampleWithCin]";
             var parameters = new
@@ -531,7 +539,8 @@ namespace CD4.DataLibrary.DataAccess
                 Cin = request.Cin,
                 SiteId = request.SiteId,
                 CollectionDate = request.SampleCollectionDate,
-                ReceivedDate = request.SampleReceivedDate
+                ReceivedDate = request.SampleReceivedDate,
+                UserId = loggedInUserId
             };
 
             try

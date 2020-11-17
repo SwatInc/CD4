@@ -7,9 +7,10 @@ namespace CD4.DataLibrary.DataAccess
 {
     public class SampleDataAccess : DataAccessBase, ISampleDataAccess
     {
-        public async Task<bool> UpdateSample(SampleUpdateDatabaseModel sample)
+        public async Task<bool> UpdateSample(SampleUpdateDatabaseModel sample, int loggedInUserId)
         {
             var storedProcedure = "[dbo].[usp_UpdateSampleWithCin]";
+            sample.UserId = loggedInUserId;
             return await SelectInsertOrUpdateAsync<bool, SampleUpdateDatabaseModel>(storedProcedure, sample);
         }
 
