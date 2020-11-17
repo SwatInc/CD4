@@ -1,8 +1,11 @@
 ﻿CREATE PROCEDURE [dbo].[usp_GetAnalysisReportByCin]
-	@Cin VARCHAR(50)
+	@Cin VARCHAR(50),
+	@UserId int
 AS
 	BEGIN
 	SET NOCOUNT ON;
+		DECLARE @SampleAuditTypeId int = 2;
+		DECLARE @LoggedInUser varchar(256);
 		DECLARE @ReportResult TABLE
 		(
 			[Cin] VARCHAR(50) NOT NULL,
@@ -42,4 +45,11 @@ AS
 		,[R].[Cin]
 		FROM [dbo].[RequestsWithTestsWithResults] [R]
 		WHERE [R].[Cin] = @Cin;
+
+		--get logged in user
+		SELECT @LoggedInUser = [UserName] FROM [dbo].[Users] WHERE [Id] =@UserId;
+		-- audit trail entry for now. Do not mark sample as printed, beofore that, Need a workflow to retract a dispatched report.
+		INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[Cin],[StatusId],[Details])
+		VALUES
+		(@SampleAuditTypeId,@Cin,5,CONCAT('Report printed by user: ',@LoggedInUser));
 END
