@@ -215,7 +215,7 @@ namespace CD4.DataLibrary.DataAccess
 
             if (TestsToInsert.Count > 0 || TestsToRemove.Count > 0)
             {
-                var output = await resultDataAccess.ManageRequestedTestsDataAsync(TestsToInsert, TestsToRemove, request.Cin);
+                var output = await resultDataAccess.ManageRequestedTestsDataAsync(TestsToInsert, TestsToRemove, request.Cin,loggedInUserId);
                 if (!output)
                 {
                     throw new Exception("Error adding or removing requested tests!");
