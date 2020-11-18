@@ -920,7 +920,7 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-                var result  = await _resultDataAccess.CancelResultValidation(testData.Id, testData.Cin, 1);
+                var result  = await _resultDataAccess.CancelResultValidation(testData.Id, testData.Cin, _authorizeDetail.UserId);
                 var mappedData = _mapper.Map<SampleAndResultStatusAndResultModel>(result);
                 //updateUI, the following method can be used to Update UI after cancelling test rejection. Refactoring required
                 UpdateUiOnSampleRejectionOrRejectionCancellation(mappedData);

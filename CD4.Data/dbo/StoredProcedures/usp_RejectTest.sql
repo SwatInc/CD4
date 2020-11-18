@@ -20,8 +20,8 @@ BEGIN
         DECLARE @InsertedSampleAuditTrailId int;
         DECLARE @InsertedSamplevalidatedAuditTrailId int;
         DECLARE @RejectedTestName varchar(50);
-        DECLARE @AutoSampleRejectionReason varchar(100);
-        DECLARE @AutoSampleValidatedMessage varchar(100);
+        DECLARE @AutoSampleRejectionReason varchar(200);
+        DECLARE @AutoSampleValidatedMessage varchar(200);
 
         --get the comment string
         SELECT @Comment = [Description]
