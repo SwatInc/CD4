@@ -16,13 +16,16 @@ namespace CD4.UI.View
     public partial class ReportView : DevExpress.XtraEditors.XtraForm
     {
         private readonly IReportsDataAccess reportsData;
+        private readonly int _loggedInUserId;
+
         public event EventHandler OnSearchByCin;
-        public ReportView(IReportsDataAccess reportsData, string cin)
+        public ReportView(IReportsDataAccess reportsData, string cin, int loggedInUserId)
         {
             InitializeComponent();
 
             //assign report data access library as a private field
             this.reportsData = reportsData;
+            _loggedInUserId = loggedInUserId;
             //Write cin to form Tag
             this.Tag = cin;
             StartReportGenerationSequence();
@@ -57,7 +60,7 @@ namespace CD4.UI.View
 
             try
             {
-                var report = await reportsData.GetAnalysisReportByCinAsync((string)this.Tag).ConfigureAwait(true);
+                var report = await reportsData.GetAnalysisReportByCinAsync((string)this.Tag, _loggedInUserId).ConfigureAwait(true);
                 MapDataToReport(report.FirstOrDefault());
             }
             catch (Exception ex)

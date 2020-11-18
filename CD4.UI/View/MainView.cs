@@ -219,7 +219,7 @@ namespace CD4.UI.View
             //open report view
             // this.OpenMdiForm<ReportView>(cin);
 
-            var reportView = new ReportView(reportsDataAccess, cin) { MdiParent = this };
+            var reportView = new ReportView(reportsDataAccess, cin, _viewModel.GetloggedInUserId()) { MdiParent = this };
             reportView.Show();
         }
     }
