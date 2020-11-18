@@ -26,6 +26,7 @@ namespace CD4.UI.Library.ViewModel
         private readonly IStatusDataAccess _statusDataAccess;
         private readonly ISampleDataAccess _sampleDataAccess;
         private readonly IStaticDataDataAccess _staticDataDataAccess;
+        private readonly AuthorizeDetailEventArgs _authorizeDetail;
         #endregion
 
         #region Events
@@ -42,7 +43,7 @@ namespace CD4.UI.Library.ViewModel
         #region Default Constructor
         public ResultEntryViewModel
             (IWorkSheetDataAccess workSheetDataAccess, IMapper mapper, IResultDataAccess resultDataAccess, IStatusDataAccess statusDataAccess,
-            ISampleDataAccess sampleDataAccess, IStaticDataDataAccess staticDataDataAccess)
+            ISampleDataAccess sampleDataAccess, IStaticDataDataAccess staticDataDataAccess, AuthorizeDetailEventArgs authorizeDetail)
         {
             GridTestActiveDatasource = GridControlTestActiveDatasource.Tests;
             GridSampleActiveDatasource = GridControlSampleActiveDatasource.Sample;
@@ -67,6 +68,7 @@ namespace CD4.UI.Library.ViewModel
             this._statusDataAccess = statusDataAccess;
             _sampleDataAccess = sampleDataAccess;
             _staticDataDataAccess = staticDataDataAccess;
+            _authorizeDetail = authorizeDetail;
             SelectedResultData.ListChanged += UpdateDatabaseResults;
             LoadAllStatusDataAndCodifiedValues += GetAllStatusData;
             LoadAllStatusDataAndCodifiedValues += FetchAllCodifiedData;
@@ -282,12 +284,34 @@ namespace CD4.UI.Library.ViewModel
 
         public async Task GetWorkSheet()
         {
+            if (GetSelectedStatusIdOrDefault() == 0)
+            {
+
+               await LoadWorkSheetWithAllSamplesFromDateAsync();
+                return;
+            }
             try
             {
                 //Disable the load worksheet button to avoid multiple clicks
                 IsloadWorkSheetButtonEnabled = false;
                 var worksheet = await _workSheetDataAccess.GetWorklistBySpecifiedDateAndStatusIdAsync
                     (GetSelectedStatusIdOrDefault(), LoadWorksheetFromDate);
+                await DisplayWorksheet(worksheet);
+            }
+            finally
+            {
+                //enable the load worksheet button again even if the call fails
+                IsloadWorkSheetButtonEnabled = true;
+            }
+        }
+
+        private async Task LoadWorkSheetWithAllSamplesFromDateAsync()
+        {
+            try
+            {
+                //Disable the load worksheet button to avoid multiple clicks
+                IsloadWorkSheetButtonEnabled = false;
+                var worksheet = await _workSheetDataAccess.GetWorklistBySpecifiedDateAndAllStatusAsync(LoadWorksheetFromDate);
                 await DisplayWorksheet(worksheet);
             }
             finally
@@ -355,7 +379,7 @@ namespace CD4.UI.Library.ViewModel
             try
             {
                 //mark the test as validated.
-                var output = await _statusDataAccess.ValidateTest(resultModel.Cin, resultModel.Test, resultModel.StatusIconId, resultModel.Result);
+                var output = await _statusDataAccess.ValidateTest(resultModel.Cin, resultModel.Test, resultModel.StatusIconId, resultModel.Result,_authorizeDetail.UserId);
                 //Update the UI to show that the test as validated...ie., if it has been validated.
                 UpdateUiAfterOnTestValidation(output, resultModel);
             }
@@ -373,7 +397,7 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-                var output = await _statusDataAccess.ValidateSample(requestSampleModel.Cin, requestSampleModel.StatusIconId);
+                var output = await _statusDataAccess.ValidateSample(requestSampleModel.Cin, requestSampleModel.StatusIconId,_authorizeDetail.UserId);
                 UpdateUiAOnSampleValidation(output, requestSampleModel);
             }
             catch (Exception ex)
@@ -431,6 +455,7 @@ namespace CD4.UI.Library.ViewModel
                 //automap the data onto a list of corresponding local model
                 var statusModel = _mapper.Map<List<Model.StatusModel>>(result);
                 //add the data to the datasource.
+                AllStatus.Add(new Model.StatusModel() { Id = 0, Status = "All" });
                 foreach (var item in statusModel)
                 {
                     AllStatus.Add(item);
@@ -567,7 +592,7 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-                var response = await _resultDataAccess.InsertUpdateResultByResultIdAsync(resultId, result, testStatus);
+                var response = await _resultDataAccess.InsertUpdateResultByResultIdAsync(resultId, result, testStatus,_authorizeDetail.UserId);
                 UpdateUiOnResultEntry(response);
             }
             catch (Exception ex)
@@ -745,7 +770,7 @@ namespace CD4.UI.Library.ViewModel
             if (SelectedStatus is null)
             {
                 //assign the Id as 4, which corresponds to the ToValidate status.
-                selectedStatusId = 4;
+                selectedStatusId = 0;
             }
             else
             {

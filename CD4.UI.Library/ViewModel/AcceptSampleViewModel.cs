@@ -89,7 +89,7 @@ namespace CD4.UI.Library.ViewModel
             try
             {
                 NoOfBarcodesRead += 1;
-                var response = await _statusDataAccess.MarkCollectedSampleAsAccepted(AcceptBarcode, 1);
+                var response = await _statusDataAccess.MarkCollectedSampleAsAccepted(AcceptBarcode, _authorizeDetail.UserId);
                 if (response.SampleData.Cin == AcceptBarcode && response.SampleData.StatusId == 3)
                 {
                     SuccessfullMessage = $"{SuccessfullMessageTemplate}: {AcceptBarcode}";

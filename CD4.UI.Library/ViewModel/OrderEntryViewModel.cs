@@ -545,7 +545,7 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-                _ = await _statusDataAccess.MarkSampleCollected(this.Cin);
+                _ = await _statusDataAccess.MarkSampleCollected(this.Cin,_authorizeDetail.UserId);
             }
             catch (Exception ex)
             {
