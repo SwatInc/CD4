@@ -67,7 +67,7 @@ BEGIN
         FROM [dbo].[AuditTypes]
         WHERE [Description] = 'Test';
         -- get username
-        SELECT @LoggedInUser = [UserName] FROM [dbo].[Users];
+        SELECT @LoggedInUser = [UserName] FROM [dbo].[Users] WHERE [Id] = @UserId;
 
         -- Get the number of tests not rejected for the sample
         SELECT @NumTestsNotRejected = COUNT([RT].[Id])

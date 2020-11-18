@@ -190,6 +190,7 @@
     <Build Include="dbo\StoredProcedures\usp_GetNextSampleNumber.sql" />
     <Build Include="dbo\StoredProcedures\usp_ConfigAddSite.sql" />
     <Build Include="dbo\StoredProcedures\usp_LoadAllSites.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetWorksheetBySpecifiedDate.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />

@@ -16,6 +16,7 @@ SET XACT_ABORT ON;
 		DECLARE @CurrentData varchar(100);
 		DECLARE @Cin varchar(50);
 		DECLARE @AuditTypeIdTest int;
+		DECLARE @Username varchar(256);
 
 		--AUDIT PROCESS
 		--get cin
@@ -65,8 +66,10 @@ SET XACT_ABORT ON;
 
 		SELECT @AuditTypeIdTest = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Test';
 
+		SELECT @Username = [UserName] FROM [dbo].[Users] WHERE [Id] = @UsersId;
+
 		INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[Cin],[StatusId],[Details])
-		VALUES(@AuditTypeIdTest,@Cin, @StatusId,CONCAT('PREVIOUS: ',@PreviousData,' | CURRENT: ', @CurrentData));
+		VALUES(@AuditTypeIdTest,@Cin, @StatusId,CONCAT('PREVIOUS: ',@PreviousData,' | CURRENT: ', @CurrentData,' by user: ',@Username));
 
 		-- select return data
 		SELECT [R].[Id] AS [ResultId],

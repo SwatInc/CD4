@@ -9,6 +9,7 @@ SET NOCOUNT ON;
 	DECLARE @ResultDataToValidate TABLE([ResultId] int not null PRIMARY KEY, [TestDesc] varchar(50),[Result] varchar(50));
 	DECLARE @AuditTypeIdTest int;
 	DECLARE @StatusText varchar(50);
+	DECLARE @Username varchar(256);
 
 	--APPLICABLE TEST RESULTS VALIDATION
 	--Note: StatusId 5 => Validated, StatusId 4 => ToValidate, StatusId 7 => Rejected
@@ -55,6 +56,8 @@ SET NOCOUNT ON;
 
 	--AUDIT TRAIL... (NOTE: Audit for sample trail done in the [dbo].[usp_ValidateOnlySample])
 
+	SELECT @Username = [UserName] FROM [dbo].[Users] WHERE [Id] = @UserId;
+
 	SELECT @AuditTypeIdTest = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Test';
 	SELECT @StatusText = [Status] FROM [dbo].[Status] WHERE [Id] = 5;
 
@@ -62,6 +65,6 @@ SET NOCOUNT ON;
 
 	--insert audit trail
 	INSERT INTO [dbo].[AuditTrail] ([AuditTypeId],[Cin],[StatusId],[Details])
-	VALUES (@AuditTypeIdTest,@Cin,5,CONCAT('Validated: ', @ValidatedTestsWithResults));
+	VALUES (@AuditTypeIdTest,@Cin,5,CONCAT('Validated: ', @ValidatedTestsWithResults,' by user: ',@Username));
 
 END
