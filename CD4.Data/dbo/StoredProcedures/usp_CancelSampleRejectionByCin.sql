@@ -45,7 +45,7 @@ BEGIN
 				SELECT @TestTrackingTypeId = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Test';
 
 				-- get username
-				SELECT @LoggedInUser =  [UserName] FROM [dbo].[Users];
+				SELECT @LoggedInUser =  [UserName] FROM [dbo].[Users] WHERE [Id] = @UserId;
 
 				-- Write audit logs - sample
 				INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[Cin],[StatusId],[Details])

@@ -190,6 +190,7 @@
     <Build Include="dbo\StoredProcedures\usp_GetNextSampleNumber.sql" />
     <Build Include="dbo\StoredProcedures\usp_ConfigAddSite.sql" />
     <Build Include="dbo\StoredProcedures\usp_LoadAllSites.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetWorksheetBySpecifiedDate.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
@@ -200,6 +201,7 @@
     <Build Include="dbo\Views\WorkSheetResultData.sql" />
     <None Include="CD4_1.Data.publish.xml" />
     <None Include="Production.CD4.Data.publish.xml" />
+    <None Include="Staging.CD4.Data.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\Scripts\Script.PostDeployment.sql" />

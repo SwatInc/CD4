@@ -18,8 +18,8 @@ BEGIN
 		INNER JOIN [dbo].[Test] [T] ON [T].[Id] = [R].[TestId]
 		INNER JOIN [dbo].[Discipline] [D] ON [D].[Id] = [T].[DisciplineId]
 		INNER JOIN [dbo].[TrackingHistory] [TH] ON [TH].[SampleCin] = [S].[Cin]
-		WHERE [TH].[StatusId] = 1 AND [TH].[TrackingType] = 2 AND [S].[Cin] = @Cin;
+		WHERE [TH].[StatusId] = 2 AND [TH].[TrackingType] = 2 AND [S].[Cin] = @Cin;
 
-		--Status Id 1 is Registered
+		--Status Id 2 is Collected. Need collected date for barcode
 		--Tracking Type 2 is "Sample" in dbo.AuditType
 END

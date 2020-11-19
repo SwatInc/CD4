@@ -7,7 +7,7 @@
 	[ResultId] int,
 	[StatusId] INT NOT NULL,
 	[UsersId] INT NOT NULL,
-	[TimeStamp] DATETIMEOFFSET DEFAULT SYSDATETIMEOFFSET(), 
+	[TimeStamp] DATETIMEOFFSET DEFAULT SYSDATETIMEOFFSET() NOT NULL, 
     CONSTRAINT [FK_TrackingHistory_AnalysisRequest] FOREIGN KEY ([AnalysisRequestId]) REFERENCES [dbo].[AnalysisRequest]([Id]),
     CONSTRAINT [FK_TrackingHistory_Sample] FOREIGN KEY ([SampleCin]) REFERENCES [dbo].[Sample]([Cin]),
     CONSTRAINT [FK_TrackingHistory_Result] FOREIGN KEY ([ResultId]) REFERENCES [dbo].[Result]([Id]), 

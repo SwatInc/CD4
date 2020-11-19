@@ -16,13 +16,16 @@ namespace CD4.UI.View
     public partial class ReportView : DevExpress.XtraEditors.XtraForm
     {
         private readonly IReportsDataAccess reportsData;
+        private readonly int _loggedInUserId;
+
         public event EventHandler OnSearchByCin;
-        public ReportView(IReportsDataAccess reportsData, string cin)
+        public ReportView(IReportsDataAccess reportsData, string cin, int loggedInUserId)
         {
             InitializeComponent();
 
             //assign report data access library as a private field
             this.reportsData = reportsData;
+            _loggedInUserId = loggedInUserId;
             //Write cin to form Tag
             this.Tag = cin;
             StartReportGenerationSequence();
@@ -57,7 +60,7 @@ namespace CD4.UI.View
 
             try
             {
-                var report = await reportsData.GetAnalysisReportByCinAsync((string)this.Tag).ConfigureAwait(true);
+                var report = await reportsData.GetAnalysisReportByCinAsync((string)this.Tag, _loggedInUserId).ConfigureAwait(true);
                 MapDataToReport(report.FirstOrDefault());
             }
             catch (Exception ex)
@@ -87,8 +90,8 @@ namespace CD4.UI.View
             //Map patient
             var patient = new Patient()
             {
-                NidPp = reportModel.Patient.NidPp,
-                Fullname = reportModel.Patient.Fullname,
+                NidPp = reportModel.Patient.NidPp.ToUpper().Trim(),
+                Fullname = reportModel.Patient.Fullname.ToUpper().Trim(),
                 AgeSex = reportModel.Patient.AgeSex,
                 Birthdate = reportModel.Patient.Birthdate,
                 Address = reportModel.Patient.Address
@@ -111,12 +114,14 @@ namespace CD4.UI.View
             //add patient and assays to report
             report.Assays = assays;
             report.Patient = patient;
+            report.PrintedDate = DateTime.Now.ToString("dd-MM-yyyy HH:mm");
 
             //add report to a list of reports to make it compatible as datasource
             var reports = new List<AnalysisRequestReport>();
             reports.Add(report);
 
-            var xtraReport = new AnalysisReport() { DataSource = reports };
+            var xtraReport = new AnalysisReport() { DataSource = reports, RequestParameters = false};
+            //xtraReport.Parameters["PrintedDateTime"].Value = DateTime.Now.ToString("dd-MM-yyyy");
             ReportPrintTool tool = new ReportPrintTool(xtraReport);
 
             //hide unnecessary buttons
@@ -205,6 +210,7 @@ namespace CD4.UI.View
         public string SampleSite { get; set; }
         public DateTimeOffset? CollectedDate { get; set; }
         public DateTimeOffset? ReceivedDate { get; set; }
+        public string PrintedDate { get; set; }
         public Patient Patient { get; set; }
         public BindingList<Assays> Assays { get; set; }
 

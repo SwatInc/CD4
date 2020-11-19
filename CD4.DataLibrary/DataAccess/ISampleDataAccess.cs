@@ -9,6 +9,6 @@ namespace CD4.DataLibrary.DataAccess
         Task<SampleAndResultStatusAndResultModel> CancelSampleRejectionByCinAsync(string cin, int userId);
         Task<List<AuditTrailModel>> GetAuditTrailByCinAsync(string cin);
         Task<SampleAndResultStatusAndResultModel> RejectSampleAsync(string cin, int commentListId, int userId);
-        Task<bool> UpdateSample(SampleUpdateDatabaseModel sample);
+        Task<bool> UpdateSample(SampleUpdateDatabaseModel sample, int loggedInUserId);
     }
 }

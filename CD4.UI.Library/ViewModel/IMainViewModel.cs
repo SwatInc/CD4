@@ -7,5 +7,6 @@ namespace CD4.UI.Library.ViewModel
     public interface IMainViewModel
     {
         Task<List<WorkStationPrintersInfoModel>> GetApplicationWideStaticData();
+        int GetloggedInUserId();
     }
 }

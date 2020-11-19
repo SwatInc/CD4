@@ -2,7 +2,8 @@
 	@Id int,
 	@PatientId int,
 	@EpisodeNumber varchar(15),
-	@Age varchar(20)
+	@Age varchar(20),
+	@UserId int
 AS
 BEGIN
 SET NOCOUNT ON;
@@ -34,7 +35,7 @@ SET NOCOUNT ON;
 	WHERE [AR].[Id] = @Id;
 
 	SELECT @AuditTypeIdRequest = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'AnalysisRequest';
-	SELECT @Username = [UserName] FROM [dbo].[Users] WHERE [Id] = 1 -- Get the Id passed in.
+	SELECT @Username = [UserName] FROM [dbo].[Users] WHERE [Id] = @UserId; -- Get the Id passed in.
 	SELECT @CurrentStatusId = [Id] FROM [dbo].[RequestTracking] WHERE [AnalysisRequestId] = @Id;
 
 	INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[StatusId],[Details])

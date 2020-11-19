@@ -21,6 +21,16 @@ namespace CD4.DataLibrary.DataAccess
 
         }
 
+        public async Task<WorklistModel> GetWorklistBySpecifiedDateAndAllStatusAsync(DateTime? startDate = null)
+        {
+            var storedProcedure = "[dbo].[usp_GetWorksheetBySpecifiedDate]";
+            var parameter = new { StartDate = GetStartDate(startDate) };
+
+            var results = await SelectWorksheetDatasets<dynamic>(storedProcedure, parameter);
+            return results;
+
+        }
+
         /// <summary>
         /// Returns the start date in the format: yyyyMMdd
         /// </summary>

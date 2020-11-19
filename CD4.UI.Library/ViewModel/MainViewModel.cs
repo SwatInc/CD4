@@ -11,11 +11,13 @@ namespace CD4.UI.Library.ViewModel
     {
         private readonly IStaticDataDataAccess staticDataDataAccess;
         private readonly IMapper mapper;
+        private readonly AuthorizeDetailEventArgs _authorizeDetail;
 
-        public MainViewModel(IStaticDataDataAccess staticDataDataAccess, IMapper mapper)
+        public MainViewModel(IStaticDataDataAccess staticDataDataAccess, IMapper mapper, AuthorizeDetailEventArgs authorizeDetail)
         {
             this.staticDataDataAccess = staticDataDataAccess;
             this.mapper = mapper;
+            _authorizeDetail = authorizeDetail;
         }
 
         public async Task<List<WorkStationPrintersInfoModel>> GetApplicationWideStaticData()
@@ -34,6 +36,11 @@ namespace CD4.UI.Library.ViewModel
 
                 throw;
             }
+        }
+
+        public int GetloggedInUserId()
+        {
+            return _authorizeDetail.UserId;
         }
 
         private string GetWorkStationName()

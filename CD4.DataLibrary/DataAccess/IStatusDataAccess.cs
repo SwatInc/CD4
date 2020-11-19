@@ -11,8 +11,8 @@ namespace CD4.DataLibrary.DataAccess
         int GetRegisteredStatusId();
         int GetToValidateStatusId();
         Task<SampleAndResultStatusAndResultModel> MarkCollectedSampleAsAccepted(string cin, int loggedInUserId);
-        Task<bool> MarkSampleCollected(string cin);
-        Task<StatusUpdatedSampleAndTestStatusModel> ValidateSample(string cin, int currentSampleStatus);
-        Task<bool> ValidateTest(string cin, string testDescription, int testStatus, string result);
+        Task<bool> MarkSampleCollected(string cin, int loggedInUserId);
+        Task<StatusUpdatedSampleAndTestStatusModel> ValidateSample(string cin, int currentSampleStatus, int loggedInUserId);
+        Task<bool> ValidateTest(string cin, string testDescription, int testStatus, string result, int loggedInUserId);
     }
 }

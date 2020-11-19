@@ -12,6 +12,7 @@ namespace CD4.DataLibrary.Models
         public string Username { get; set; }
         public string FullName { get; set; }
         public string ClaimsCsv { get; set; }
+        public int UserId { get; set; }
         public bool IsAuthenticated { get; set; }
         public string Message { get; set; }
     }

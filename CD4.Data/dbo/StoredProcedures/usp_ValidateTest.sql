@@ -2,7 +2,8 @@
 CREATE PROCEDURE [dbo].[usp_ValidateTest]
 	@Cin varchar(50),
 	@TestDescription varchar(50),
-	@TestStatus int
+	@TestStatus int,
+	@UserId int
 AS	
 BEGIN
 SET NOCOUNT ON;
@@ -12,6 +13,7 @@ SET NOCOUNT ON;
 	DECLARE @AuditTypeIdTest int;
 	DECLARE @StatusText varchar(50);
 	DECLARE @TestResult_Audit varchar(50);
+	DECLARE @Username varchar(256);
 
 -- fetch the test Id from description
 	SELECT @TestId = [Id] FROM [dbo].[Test] WHERE [Description] = @TestDescription;
@@ -35,9 +37,11 @@ SET NOCOUNT ON;
 
 -- tracking history
 	INSERT INTO [dbo].[TrackingHistory] ([TrackingType],[ResultId],[StatusId],[UsersId]) VALUES
-	(3,@ResultId,@TestStatus,1);
+	(3,@ResultId,@TestStatus,@UserId);
 
 -- audit trail
+	SELECT @Username  = [UserName] FROM [dbo].[Users] WHERE [Id] = @UserId;
+
 	--select audit type and status text(eg: validated instead of Id) 
 	SELECT @AuditTypeIdTest = [Id] FROM [dbo].[AuditTypes] WHERE [Description] = 'Test';
 	SELECT @StatusText = [Status] FROM [dbo].[Status] WHERE [Id] = @TestStatus;
@@ -46,5 +50,5 @@ SET NOCOUNT ON;
 	--insert audit trail
 	INSERT INTO [dbo].[AuditTrail] ([AuditTypeId],[Cin],[StatusId],[Details])
 	VALUES (@AuditTypeIdTest,@Cin,@TestStatus,
-	'Test status of '+@TestDescription+ ' changed to '+ @StatusText +' with result ' + @TestResult_Audit);
+	CONCAT('Test status of ',@TestDescription, ' changed to ', @StatusText ,' with result ',@TestResult_Audit,' by user: ', @Username));
 END

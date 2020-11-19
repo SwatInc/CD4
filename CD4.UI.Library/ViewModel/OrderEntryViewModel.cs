@@ -43,6 +43,7 @@ namespace CD4.UI.Library.ViewModel
         private readonly IStaticDataDataAccess _staticData;
         private readonly IAnalysisRequestDataAccess _requestDataAccess;
         private readonly IStatusDataAccess _statusDataAccess;
+        private readonly AuthorizeDetailEventArgs _authorizeDetail;
         private bool loadingStaticData;
         #endregion
 
@@ -52,7 +53,7 @@ namespace CD4.UI.Library.ViewModel
 
         #region Default Constructor
         public OrderEntryViewModel(IMapper mapper,
-            IStaticDataDataAccess staticData, IAnalysisRequestDataAccess requestDataAccess, IStatusDataAccess statusDataAccess)
+            IStaticDataDataAccess staticData, IAnalysisRequestDataAccess requestDataAccess, IStatusDataAccess statusDataAccess, AuthorizeDetailEventArgs authorizeDetail)
         {
             Sites = new List<SitesModel>();
             Gender = new List<GenderModel>();
@@ -69,6 +70,7 @@ namespace CD4.UI.Library.ViewModel
             this._staticData = staticData;
             this._requestDataAccess = requestDataAccess;
             this._statusDataAccess = statusDataAccess;
+            _authorizeDetail = authorizeDetail;
             PropertyChanged += OrderEntryViewModel_PropertyChanged;
             InitializeStaticData += OnInitializeStaticDataAsync;
             InitializeStaticData(this, EventArgs.Empty);
@@ -158,8 +160,8 @@ namespace CD4.UI.Library.ViewModel
         {
             get => nidPp; set
             {
-                if (nidPp == value) return;
-                nidPp = value;
+                if (nidPp?.ToUpper() == value.ToUpper().Trim()) return;
+                nidPp = value.ToUpper().Trim();
                 OnPropertyChanged();
             }
         }
@@ -172,8 +174,8 @@ namespace CD4.UI.Library.ViewModel
 
             set
             {
-                if (fullname == value) return;
-                fullname = value;
+                if (fullname?.ToUpper() == value.ToUpper()) return;
+                fullname = value.ToUpper().Trim();
                 OnPropertyChanged();
             }
         }
@@ -469,7 +471,7 @@ namespace CD4.UI.Library.ViewModel
                 mappedRequest.AtollId = atollIslandData.Id;
 
                 var result = await _requestDataAccess.ConfirmRequestAsync
-                    (mappedRequest);
+                    (mappedRequest, _authorizeDetail.UserId);
 
                 return result;
             }
@@ -543,7 +545,7 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-                _ = await _statusDataAccess.MarkSampleCollected(this.Cin);
+                _ = await _statusDataAccess.MarkSampleCollected(this.Cin,_authorizeDetail.UserId);
             }
             catch (Exception ex)
             {

@@ -20,8 +20,8 @@ BEGIN
         DECLARE @InsertedSampleAuditTrailId int;
         DECLARE @InsertedSamplevalidatedAuditTrailId int;
         DECLARE @RejectedTestName varchar(50);
-        DECLARE @AutoSampleRejectionReason varchar(100);
-        DECLARE @AutoSampleValidatedMessage varchar(100);
+        DECLARE @AutoSampleRejectionReason varchar(200);
+        DECLARE @AutoSampleValidatedMessage varchar(200);
 
         --get the comment string
         SELECT @Comment = [Description]
@@ -67,7 +67,7 @@ BEGIN
         FROM [dbo].[AuditTypes]
         WHERE [Description] = 'Test';
         -- get username
-        SELECT @LoggedInUser = [UserName] FROM [dbo].[Users];
+        SELECT @LoggedInUser = [UserName] FROM [dbo].[Users] WHERE [Id] = @UserId;
 
         -- Get the number of tests not rejected for the sample
         SELECT @NumTestsNotRejected = COUNT([RT].[Id])

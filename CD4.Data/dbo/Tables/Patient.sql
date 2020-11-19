@@ -1,8 +1,8 @@
 ﻿CREATE TABLE [dbo].[Patient]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
-    [FullName] VARCHAR(100) NULL, 
-    [NidPp] VARCHAR(50) NULL, 
+    [FullName] NVARCHAR(100) NULL, 
+    [NidPp] NVARCHAR(50) NULL, 
     [Birthdate] DATE NULL,  
     [GenderId] INT NOT NULL, --MALE, FEMALE, UNKNOWN
     [AtollId] INT NOT NULL DEFAULT 0,  -- 0 will be as UNKNOWN Atoll table

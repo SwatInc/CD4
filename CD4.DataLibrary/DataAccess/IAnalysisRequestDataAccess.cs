@@ -6,9 +6,9 @@ namespace CD4.DataLibrary.DataAccess
 {
     public interface IAnalysisRequestDataAccess
     {
-        Task<bool> ConfirmRequestAsync(AnalysisRequestDataModel request);
+        Task<bool> ConfirmRequestAsync(AnalysisRequestDataModel request, int loggedInUserId);
         Task<List<BarcodeDataModel>> GetBarcodeDataAsync(string cin);
         Task<int> GetNextCinSeed();
-        Task<CompleteRequestSearchResultsModel> SearchRequestByCinAsync(string cin = "nCoV-4654/20");
+        Task<CompleteRequestSearchResultsModel> SearchRequestByCinAsync(string cin);
     }
 }

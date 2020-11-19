@@ -26,7 +26,7 @@ namespace CD4.DataLibrary.DataAccess
         /// <param name="cin">The CIN for which tests are to be inserted or deleted or both</param>
         /// <returns>Returns true or false indicating the successfull/unsuccessfull completion of the insert/delete operation</returns>
         public async Task<bool> ManageRequestedTestsDataAsync
-            (List<TestsModel> testsToInsert, List<TestsModel> testsToRemove, string cin)
+            (List<TestsModel> testsToInsert, List<TestsModel> testsToRemove, string cin, int loggedInUserId)
         {
             var testToInsertTable = await GetTestsTableAsync(testsToInsert, cin, statusData);
             var testToRemoveTable = await GetTestsTableAsync(testsToRemove, cin, statusData);
@@ -39,7 +39,7 @@ namespace CD4.DataLibrary.DataAccess
                 {
                     TestsToInsert = testToInsertTable,
                     TestsToRemove = testToRemoveTable,
-                    UserId = 1
+                    UserId = loggedInUserId
                 };
 
                 await SyncResultTableDataAsync(syncData);
@@ -50,7 +50,7 @@ namespace CD4.DataLibrary.DataAccess
                 var insertData = new
                 {
                     TestsToInsert = testToInsertTable,
-                    UserId = 1
+                    UserId = loggedInUserId
                 };
                 return await InsertResultTableDataAsync(insertData);
             }
@@ -59,7 +59,7 @@ namespace CD4.DataLibrary.DataAccess
                 var removeData = new
                 {
                     TestsToRemove = testToRemoveTable,
-                    UserId = 1
+                    UserId = loggedInUserId
                 };
                 return await RemoveResultTableDataAsync(removeData);
 
@@ -144,7 +144,7 @@ namespace CD4.DataLibrary.DataAccess
 
         }
 
-        public async Task<UpdatedResultAndStatusModel> InsertUpdateResultByResultIdAsync(int resultId, string result, int testStatus)
+        public async Task<UpdatedResultAndStatusModel> InsertUpdateResultByResultIdAsync(int resultId, string result, int testStatus, int userId)
         {
             var referenceData = await _referenceRangeDataAccess.GetReferenceRangeByResultIdAsync(resultId);
             var referenceCode = referenceData.GetResultReferenceCode(result, resultId);
@@ -159,7 +159,7 @@ namespace CD4.DataLibrary.DataAccess
             //Make a database query to get Id for Status equivalent to "ToValidate".
             var statusId = statusData.GetToValidateStatusId();
             //prepare the parameter to pass to the query.
-            var parameter = new { Result = result, ResultId = resultId, StatusId = statusId, ReferenceCode = referenceCode, UsersId = 1 };
+            var parameter = new { Result = result, ResultId = resultId, StatusId = statusId, ReferenceCode = referenceCode, UsersId = userId };
             //insert result and result status
             return await SelectInsertOrUpdateAsync<UpdatedResultAndStatusModel, dynamic>(storedProcedure, parameter);
         }
@@ -192,10 +192,10 @@ namespace CD4.DataLibrary.DataAccess
             }
         }
 
-        public async Task<bool> UpdateSampleStatusByResultId(int resultId, int sampleStatus)
+        public async Task<bool> UpdateSampleStatusByResultId(int resultId, int sampleStatus, int loggedInUserId)
         {
             var storedProcedure = "[dbo].[usp_UpdateSampleStatusResultId]";
-            var parameter = new { ResultId = resultId, SampleStatus = sampleStatus, UserId = 1 };
+            var parameter = new { ResultId = resultId, SampleStatus = sampleStatus, UserId = loggedInUserId };
             return await SelectInsertOrUpdateAsync<bool, dynamic>(storedProcedure, parameter);
         }
 

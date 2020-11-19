@@ -152,7 +152,7 @@ namespace CD4.DataLibrary.DataAccess
         /// <param name="testStatus">The current status for the test on the test</param>
         /// <param name="isResulted">True if the sample has a result</param>
         /// <returns>returns a bool to indicate the task completed successfully</returns>
-        public async Task<bool> ValidateTest(string cin, string testDescription, int testStatus,string result)
+        public async Task<bool> ValidateTest(string cin, string testDescription, int testStatus,string result, int loggedInUserId)
         {
             //Verify that the test can be validated based on the current test status
             var isOkToValidateMessage = IsTestStatusOrSampleStatusAcceptableToValidate(testStatus);
@@ -168,7 +168,7 @@ namespace CD4.DataLibrary.DataAccess
             //set the stored procedure name
             var storedProcedure = "usp_ValidateTest";
             //set the parameters for the stored procedure
-            var parameters = new { Cin = cin, TestDescription = testDescription, TestStatus = (int)Status.Validated };
+            var parameters = new { Cin = cin, TestDescription = testDescription, TestStatus = (int)Status.Validated, UserId = loggedInUserId };
 
             try
             {
@@ -179,7 +179,7 @@ namespace CD4.DataLibrary.DataAccess
                 {   //check whether the status is validated.
                     if (output.First<StatusIdModel>().StatusId == (int)Status.Validated)
                     {//Mark sample sample status as validated
-                        await ValidateOnlySample(cin);
+                        await ValidateOnlySample(cin,loggedInUserId);
                     }
                 }
 
@@ -200,7 +200,7 @@ namespace CD4.DataLibrary.DataAccess
         /// </summary>
         /// <param name="cin">The CIN for the sample to validate</param>
         /// <returns>A model containing sample status and associated tests status after update operation which can be used to chnage displayed UI status</returns>
-        public async Task<StatusUpdatedSampleAndTestStatusModel> ValidateSample(string cin, int currentSampleStatus)
+        public async Task<StatusUpdatedSampleAndTestStatusModel> ValidateSample(string cin, int currentSampleStatus,int loggedInUserId)
         {
             //Can the sample be validated.
             var isOkToValidateMessage = IsTestStatusOrSampleStatusAcceptableToValidate(currentSampleStatus);
@@ -211,7 +211,7 @@ namespace CD4.DataLibrary.DataAccess
             //set the stored procedure name
             var storedProcedure = "[dbo].[usp_ValidateSampleAndApplicableAssociatedTests]";
             //set the parameters for the stored procedure
-            var parameters = new { Cin = cin, UserId =1 };
+            var parameters = new { Cin = cin, UserId =loggedInUserId };
 
             try
             {
@@ -230,12 +230,12 @@ namespace CD4.DataLibrary.DataAccess
         /// </summary>
         /// <param name="cin">Cin to mark as collected</param>
         /// <returns>true if the procedure completes without error</returns>
-        public async Task<bool> MarkSampleCollected(string cin)
+        public async Task<bool> MarkSampleCollected(string cin, int loggedInUserId)
         {
             //set the stored procedure name
             var storedProcedure = "[dbo].[usp_DecideToAndExecuteMarkSampleCollected]";
             //set the parameters for the stored procedure
-            var parameters = new { Cin = cin, UserId =1 };
+            var parameters = new { Cin = cin, UserId =loggedInUserId };
             try
             {
                 _ = await SelectInsertOrUpdateAsync<dynamic, dynamic>(storedProcedure, parameters);
@@ -254,10 +254,10 @@ namespace CD4.DataLibrary.DataAccess
         /// Do not use this method if test status needs to be marked as validated on validating sample.
         /// </summary>
         /// <param name="cin">Sample CIN</param>
-        private async Task ValidateOnlySample(string cin)
+        private async Task ValidateOnlySample(string cin, int loggedInUserId)
         {
             var storedProcedure = "usp_ValidateOnlysample";
-            var parameter = new { Cin = cin, UserId = 1 };
+            var parameter = new { Cin = cin, UserId = loggedInUserId };
             try
             {
                 _ = await SelectInsertOrUpdateAsync<dynamic, dynamic>(storedProcedure, parameter);
