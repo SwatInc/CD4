@@ -114,12 +114,14 @@ namespace CD4.UI.View
             //add patient and assays to report
             report.Assays = assays;
             report.Patient = patient;
+            report.PrintedDate = DateTime.Now.ToString("dd-MM-yyyy HH:mm");
 
             //add report to a list of reports to make it compatible as datasource
             var reports = new List<AnalysisRequestReport>();
             reports.Add(report);
 
-            var xtraReport = new AnalysisReport() { DataSource = reports };
+            var xtraReport = new AnalysisReport() { DataSource = reports, RequestParameters = false};
+            //xtraReport.Parameters["PrintedDateTime"].Value = DateTime.Now.ToString("dd-MM-yyyy");
             ReportPrintTool tool = new ReportPrintTool(xtraReport);
 
             //hide unnecessary buttons
@@ -208,6 +210,7 @@ namespace CD4.UI.View
         public string SampleSite { get; set; }
         public DateTimeOffset? CollectedDate { get; set; }
         public DateTimeOffset? ReceivedDate { get; set; }
+        public string PrintedDate { get; set; }
         public Patient Patient { get; set; }
         public BindingList<Assays> Assays { get; set; }
 
