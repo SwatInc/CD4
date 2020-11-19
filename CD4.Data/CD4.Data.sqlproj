@@ -201,6 +201,7 @@
     <Build Include="dbo\Views\WorkSheetResultData.sql" />
     <None Include="CD4_1.Data.publish.xml" />
     <None Include="Production.CD4.Data.publish.xml" />
+    <None Include="Staging.CD4.Data.publish.xml" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\Scripts\Script.PostDeployment.sql" />

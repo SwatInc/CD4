@@ -1,7 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[usp_UpdatePatientWithId]
 	@Id int,
-	@Fullname varchar(100),
-	@NidPp varchar(50),
+	@Fullname nvarchar(100),
+	@NidPp nvarchar(50),
 	@Birthdate char(8),
 	@GenderId int,
 	@AtollId int,
