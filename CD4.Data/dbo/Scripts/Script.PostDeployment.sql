@@ -9,34 +9,34 @@ Example:      :setvar TableName MyTable
               SELECT * FROM [$(TableName)]					
 --------------------------------------------------------------------------------------
 */
---INSERT INTO [dbo].[Sites] ([Name])
---  VALUES ('FARUKOLHU'),
---  ('ANANTARA'),
---  ('KUREIDHOO'),
---  ('IGMH'),
---  ('ISLAND SAFARI'),
---  ('FIF'),
---  ('VELIDHOO'),
---  ('VELIDHOO ISOLATION FACILITY'),
---  ('VILIVARU'),
---  ('HOLIDAY ISLAND RESORT'),
---  ('ROYAL ISLAND'),
---  ('HPA'),
---  ('VEL-IF'),
---  ('ERI-QF'),
---  ('FLU CLINIC-IGMH'),
---  ('RRT-MALE'),
---  ('RRT MALE'),
---  ('HIH-IF'),
---  ('SENAHIYA'),
---  ('RRT-MALE'''),
---  ('FLU CLINIC'),
---  ('HA.ULIGAM HEALTH CENTRE'),
---  ('IGMH FLU CLINIC'),
---  ('HIH'),
---  ('IGMH ER'),
---  ('FLU CINIC'),
---  ('RRT HMH');
+INSERT INTO [dbo].[Sites] ([Name])
+  VALUES ('FARUKOLHU'),
+  ('ANANTARA'),
+  ('KUREIDHOO'),
+  ('IGMH'),
+  ('ISLAND SAFARI'),
+  ('FIF'),
+  ('VELIDHOO'),
+  ('VELIDHOO ISOLATION FACILITY'),
+  ('VILIVARU'),
+  ('HOLIDAY ISLAND RESORT'),
+  ('ROYAL ISLAND'),
+  ('HPA'),
+  ('VEL-IF'),
+  ('ERI-QF'),
+  ('FLU CLINIC-IGMH'),
+  ('RRT-MALE'),
+  ('RRT MALE'),
+  ('HIH-IF'),
+  ('SENAHIYA'),
+  ('RRT-MALE'''),
+  ('FLU CLINIC'),
+  ('HA.ULIGAM HEALTH CENTRE'),
+  ('IGMH FLU CLINIC'),
+  ('HIH'),
+  ('IGMH ER'),
+  ('FLU CINIC'),
+  ('RRT HMH');
 
 INSERT INTO [dbo].[Country] ([Country])
   VALUES ('Afghan'),
@@ -566,27 +566,27 @@ WHERE [u].[Unit] = ' ';
 
 
 INSERT INTO [dbo].[Test] ([DisciplineId], [SampleTypeId], [Description], [Mask], [Reportable], [ResultDataTypeId], [UnitId], [DeafultCommented])
-  VALUES --(@DisciplineMolecular, @SampleTypeIdSerum, 'E Gene', '##.##', 1, @NumericId, @UnitNA, 0),
-  --(@DisciplineMolecular, @SampleTypeIdSerum, 'EAV (Internal Control)', '##.##', 1, @NumericId, @UnitNA, 0),
-  --(@DisciplineMolecular, @SampleTypeIdSerum, 'RdRP Gene', '##.##', 1, @NumericId, @UnitNA, 0),
-  (@DisciplineMolecular, @SampleTypeIdSerum, 'SARS-CoV-2 Result', '1|2', 1, @CodifiedId, @UnitNA, 0);
-  --(@DisciplineHaematology, @SampleTypeIdWb, 'Haemoglobin', '##.##', 1, @NumericId, @UnitmgdL, 0),
-  --(@DisciplineHaematology, @SampleTypeIdWb, 'Haematocrit', '##.##', 1, @NumericId, @UnitPercent, 0);
+  VALUES (@DisciplineMolecular, @SampleTypeIdSerum, 'E Gene', '##.##', 1, @NumericId, @UnitNA, 0),
+  (@DisciplineMolecular, @SampleTypeIdSerum, 'EAV (Internal Control)', '##.##', 1, @NumericId, @UnitNA, 0),
+  (@DisciplineMolecular, @SampleTypeIdSerum, 'RdRP Gene', '##.##', 1, @NumericId, @UnitNA, 0),
+  (@DisciplineMolecular, @SampleTypeIdSerum, 'SARS-CoV-2 Result', '1|2', 1, @CodifiedId, @UnitNA, 0),
+  (@DisciplineHaematology, @SampleTypeIdWb, 'Haemoglobin', '##.##', 1, @NumericId, @UnitmgdL, 0),
+  (@DisciplineHaematology, @SampleTypeIdWb, 'Haematocrit', '##.##', 1, @NumericId, @UnitPercent, 0);
 
---INSERT INTO [dbo].[Profiles] ([Description])
---  VALUES ('SARS CoV Profile'),
---  ('Hb/PCV');
+INSERT INTO [dbo].[Profiles] ([Description])
+  VALUES ('SARS CoV Profile'),
+  ('Hb/PCV');
 
---DECLARE @CovProfileId int;
---DECLARE @CovProfileIdHbPcv int;
---SELECT
---  @CovProfileId = [Id]
---FROM [dbo].[Profiles] [p]
---WHERE [p].[Description] = 'SARS CoV Profile';
---SELECT
---  @CovProfileIdHbPcv = [Id]
---FROM [dbo].[Profiles] [p]
---WHERE [p].[Description] = 'Hb/PCV';
+DECLARE @CovProfileId int;
+DECLARE @CovProfileIdHbPcv int;
+SELECT
+  @CovProfileId = [Id]
+FROM [dbo].[Profiles] [p]
+WHERE [p].[Description] = 'SARS CoV Profile';
+SELECT
+  @CovProfileIdHbPcv = [Id]
+FROM [dbo].[Profiles] [p]
+WHERE [p].[Description] = 'Hb/PCV';
 
 DECLARE @egene int;
 DECLARE @eav int;
@@ -595,38 +595,38 @@ DECLARE @result int;
 DECLARE @resultHb int;
 DECLARE @resultPCV int;
 
---SELECT
---  @egene = [Id]
---FROM [dbo].[Test] [t]
---WHERE [t].[Description] = 'E Gene';
---SELECT
---  @eav = [Id]
---FROM [dbo].[Test] [t]
---WHERE [t].[Description] = 'EAV (Internal Control)';
---SELECT
---  @rdrp = [Id]
---FROM [dbo].[Test] [t]
---WHERE [t].[Description] = 'RdRP Gene';
---SELECT
---  @result = [Id]
---FROM [dbo].[Test] [t]
---WHERE [t].[Description] = 'SARS-CoV-2 Result';
---SELECT
---  @resultHb = [Id]
---FROM [dbo].[Test] [t]
---WHERE [t].[Description] = 'Haemoglobin';
---SELECT
---  @resultPCV = [Id]
---FROM [dbo].[Test] [t]
---WHERE [t].[Description] = 'Haematocrit';
+SELECT
+  @egene = [Id]
+FROM [dbo].[Test] [t]
+WHERE [t].[Description] = 'E Gene';
+SELECT
+  @eav = [Id]
+FROM [dbo].[Test] [t]
+WHERE [t].[Description] = 'EAV (Internal Control)';
+SELECT
+  @rdrp = [Id]
+FROM [dbo].[Test] [t]
+WHERE [t].[Description] = 'RdRP Gene';
+SELECT
+  @result = [Id]
+FROM [dbo].[Test] [t]
+WHERE [t].[Description] = 'SARS-CoV-2 Result';
+SELECT
+  @resultHb = [Id]
+FROM [dbo].[Test] [t]
+WHERE [t].[Description] = 'Haemoglobin';
+SELECT
+  @resultPCV = [Id]
+FROM [dbo].[Test] [t]
+WHERE [t].[Description] = 'Haematocrit';
 
---INSERT INTO [dbo].[Profile_Tests] ([ProfileId], [TestId])
---  VALUES (@CovProfileId, @egene),
---  (@CovProfileId, @eav),
---  (@CovProfileId, @rdrp),
---  (@CovProfileId, @result),
---  (@CovProfileIdHbPcv, @resultHb),
---  (@CovProfileIdHbPcv, @resultPCV);
+INSERT INTO [dbo].[Profile_Tests] ([ProfileId], [TestId])
+  VALUES (@CovProfileId, @egene),
+  (@CovProfileId, @eav),
+  (@CovProfileId, @rdrp),
+  (@CovProfileId, @result),
+  (@CovProfileIdHbPcv, @resultHb),
+  (@CovProfileIdHbPcv, @resultPCV);
 
 --Preparing to insert patient
 DECLARE @MaleGenderId int;
@@ -648,8 +648,8 @@ SELECT
 FROM [dbo].[Country]
 WHERE [Country] = 'MALDIVIAN';
 
---INSERT INTO [dbo].[Patient] ([FullName], [NidPp], [Birthdate], [GenderId], [AtollId], [CountryId], [Address], [PhoneNumber])
---  VALUES ('Ahmed Hussain', 'A1234567', '19910214', @MaleGenderId, @SHithadhooId, @MaldivesCountryId, 'Some Address', '772342300');
+INSERT INTO [dbo].[Patient] ([FullName], [NidPp], [Birthdate], [GenderId], [AtollId], [CountryId], [Address], [PhoneNumber])
+  VALUES ('Ahmed Hussain', 'A1234567', '19910214', @MaleGenderId, @SHithadhooId, @MaldivesCountryId, 'Some Address', '772342300');
 
 SELECT
   @FeMaleGenderId = [Id]
@@ -665,8 +665,8 @@ SELECT
 FROM [dbo].[Country]
 WHERE [Country] = 'BANGLADESHI';
 
---INSERT INTO [dbo].[Patient] ([FullName], [NidPp], [Birthdate], [GenderId], [AtollId], [CountryId], [Address], [PhoneNumber])
---  VALUES ('Aminath Hussain', 'A987654', '19800214', @FeMaleGenderId, @SHithadhooId, @MaldivesCountryId, 'Some Some Address', '973465347');
+INSERT INTO [dbo].[Patient] ([FullName], [NidPp], [Birthdate], [GenderId], [AtollId], [CountryId], [Address], [PhoneNumber])
+  VALUES ('Aminath Hussain', 'A987654', '19800214', @FeMaleGenderId, @SHithadhooId, @MaldivesCountryId, 'Some Some Address', '973465347');
 
 
 --insert user: Bismillah.123!
@@ -1004,9 +1004,9 @@ WHERE [Description] = 'Not Acceptable';
 -- insert reference range
 --haemoglobin, normal , female, age 0 to 73000 days
 --PCV, normal , female, age 0 to 73000 days
---INSERT INTO [dbo].[ReferenceRange] ([TestId], [GenderId], [FromAgeDays], [ToAgeDays], [DeltaValidityIntervalDays], [BiasFactor], [DisplayNormalRange])
---  VALUES (@resultHb, @FeMaleGenderId, 0, 73000, 0, 0, '11 - 18.2 g/dL'),
---  (@resultPCV, @FeMaleGenderId, 0, 73000, 0, 0, '33.0 - 54.6 %');
+INSERT INTO [dbo].[ReferenceRange] ([TestId], [GenderId], [FromAgeDays], [ToAgeDays], [DeltaValidityIntervalDays], [BiasFactor], [DisplayNormalRange])
+  VALUES (@resultHb, @FeMaleGenderId, 0, 73000, 0, 0, '11 - 18.2 g/dL'),
+  (@resultPCV, @FeMaleGenderId, 0, 73000, 0, 0, '33.0 - 54.6 %');
 
 -- get reference range ids
 DECLARE @ReferenceRangeHgbId int;
@@ -1022,17 +1022,17 @@ FROM [ReferenceRange]
 WHERE [TestId] = @resultPCV;
 
 -- insert referece data for Hb and PCV
---INSERT INTO [dbo].[ReferenceData] ([ReferenceRangeId], [ReferenceTypeId], [LowLimitValue], [HighLimitValue])
---  VALUES (@ReferenceRangeHgbId, @NormalId, 11.0, 18.2), -- HGB
---  (@ReferenceRangeHgbId, @AttentionId, 9.0, 20.2),
---  (@ReferenceRangeHgbId, @PathologyId, 7.0, 20.9),
---  (@ReferenceRangeHgbId, @PanicId, 6.0, 21.9),
---  (@ReferenceRangeHgbId, @NotAcceptableId, 2.0, 25.9),
---  (@ReferenceRangePCVId, @NormalId, 33.0, 54.6), -- PCV
---  (@ReferenceRangePCVId, @AttentionId, 27.0, 60.2),
---  (@ReferenceRangePCVId, @PathologyId, 21.0, 60.9),
---  (@ReferenceRangePCVId, @PanicId, 18.0, 65.7),
---  (@ReferenceRangePCVId, @NotAcceptableId, 6.0, 77.9);
+INSERT INTO [dbo].[ReferenceData] ([ReferenceRangeId], [ReferenceTypeId], [LowLimitValue], [HighLimitValue])
+  VALUES (@ReferenceRangeHgbId, @NormalId, 11.0, 18.2), -- HGB
+  (@ReferenceRangeHgbId, @AttentionId, 9.0, 20.2),
+  (@ReferenceRangeHgbId, @PathologyId, 7.0, 20.9),
+  (@ReferenceRangeHgbId, @PanicId, 6.0, 21.9),
+  (@ReferenceRangeHgbId, @NotAcceptableId, 2.0, 25.9),
+  (@ReferenceRangePCVId, @NormalId, 33.0, 54.6), -- PCV
+  (@ReferenceRangePCVId, @AttentionId, 27.0, 60.2),
+  (@ReferenceRangePCVId, @PathologyId, 21.0, 60.9),
+  (@ReferenceRangePCVId, @PanicId, 18.0, 65.7),
+  (@ReferenceRangePCVId, @NotAcceptableId, 6.0, 77.9);
 
 USE [CD4Data]
 GO
