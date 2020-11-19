@@ -6,6 +6,7 @@ AS
 	SET NOCOUNT ON;
 		DECLARE @SampleAuditTypeId int = 2;
 		DECLARE @LoggedInUser varchar(256);
+		DECLARE @ResultDataPrinted varchar(1000);
 		DECLARE @ReportResult TABLE
 		(
 			[Cin] VARCHAR(50) NOT NULL,
@@ -49,7 +50,10 @@ AS
 		--get logged in user
 		SELECT @LoggedInUser = [UserName] FROM [dbo].[Users] WHERE [Id] =@UserId;
 		-- audit trail entry for now. Do not mark sample as printed, beofore that, Need a workflow to retract a dispatched report.
+
+		SELECT @ResultDataPrinted = STRING_AGG(CONCAT([Assay],':',[Result]),'|') FROM @ReportResult;
+
 		INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[Cin],[StatusId],[Details])
 		VALUES
-		(@SampleAuditTypeId,@Cin,5,CONCAT('Report printed by user: ',@LoggedInUser));
+		(@SampleAuditTypeId,@Cin,5,CONCAT('Report printed by user: ',@LoggedInUser,' printed results: ',@ResultDataPrinted));
 END
