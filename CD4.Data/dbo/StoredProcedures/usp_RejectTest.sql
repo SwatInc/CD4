@@ -44,7 +44,7 @@ BEGIN
         SET [Result] = NULL
         WHERE [Id] = @ResultId;
 
-        -- insert test comments for rejected test
+        -- insert test comments for rejected test to be viewed on test comments window
         INSERT INTO [dbo].[Comment]
         (
             [CommentListId],
@@ -121,7 +121,7 @@ BEGIN
               @TestTrackingTypeId
             , @Cin
             , 7
-            ,CONCAT(@RejectedTestName,' on ',@Cin, ' rejected by user ',@LoggedInUser)
+            ,CONCAT(@RejectedTestName,' on ',@Cin, ' rejected by user ',@LoggedInUser,'. ', 'Reason: ',@Comment)
         );
 
         -- Generate auto sample rejection comment
