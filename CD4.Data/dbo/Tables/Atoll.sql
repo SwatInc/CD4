@@ -2,5 +2,5 @@
 (
 	[Id] INT NOT NULL  PRIMARY KEY IDENTITY, 
     [Atoll] VARCHAR(50) NOT NULL, 
-    [Island] VARCHAR(50) NOT NULL
+    [Island] NVARCHAR(50) NOT NULL
 )
