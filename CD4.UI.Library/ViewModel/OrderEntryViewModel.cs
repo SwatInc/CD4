@@ -44,6 +44,7 @@ namespace CD4.UI.Library.ViewModel
         private readonly IAnalysisRequestDataAccess _requestDataAccess;
         private readonly IStatusDataAccess _statusDataAccess;
         private readonly AuthorizeDetailEventArgs _authorizeDetail;
+        private readonly IGlobalSettingsDataAccess _globalSettingsDataAccess;
         private bool loadingStaticData;
         #endregion
 
@@ -53,7 +54,11 @@ namespace CD4.UI.Library.ViewModel
 
         #region Default Constructor
         public OrderEntryViewModel(IMapper mapper,
-            IStaticDataDataAccess staticData, IAnalysisRequestDataAccess requestDataAccess, IStatusDataAccess statusDataAccess, AuthorizeDetailEventArgs authorizeDetail)
+            IStaticDataDataAccess staticData, 
+            IAnalysisRequestDataAccess requestDataAccess, 
+            IStatusDataAccess statusDataAccess, 
+            AuthorizeDetailEventArgs authorizeDetail, 
+            IGlobalSettingsDataAccess globalSettingsDataAccess)
         {
             Sites = new List<SitesModel>();
             Gender = new List<GenderModel>();
@@ -71,6 +76,7 @@ namespace CD4.UI.Library.ViewModel
             this._requestDataAccess = requestDataAccess;
             this._statusDataAccess = statusDataAccess;
             _authorizeDetail = authorizeDetail;
+            _globalSettingsDataAccess = globalSettingsDataAccess;
             PropertyChanged += OrderEntryViewModel_PropertyChanged;
             InitializeStaticData += OnInitializeStaticDataAsync;
             InitializeStaticData(this, EventArgs.Empty);
@@ -331,6 +337,50 @@ namespace CD4.UI.Library.ViewModel
         #endregion
 
         #region Public Methods
+
+        /// <summary>
+        /// reads global settings and checks whether NidPp verification is required on order confirmation.
+        /// </summary>
+        public async Task<DemographicsConfirmationModel> OrderRequiresNidPpConfirmationAsync()
+        {
+            bool IsconfirmationRequired = true;
+            try
+            {
+                var result = await _globalSettingsDataAccess.ReadAllGlobalSettingsAsync();
+                if (result is null)
+                {
+                    PushingMessages.Invoke(this, "Cannot load global settings data, assuming defaults");
+                }
+                else
+                {
+                    IsconfirmationRequired = result.VerifyNidPpOnOrder;
+                }
+            }
+            catch (Exception ex)
+            {
+                PushingMessages.Invoke(this, ex.Message);
+                PushingLogs.Invoke(this, $"{ex.Message}\n{ex.StackTrace}");
+            }
+
+            if (!IsconfirmationRequired)
+            {
+                return new DemographicsConfirmationModel() { IsConfirmationRequired = IsconfirmationRequired };
+            }
+
+            return new DemographicsConfirmationModel()
+            {
+                Patient = new PatientModel()
+                {
+                    Fullname = this.Fullname,
+                    Birthdate = DateTime.Parse(Birthdate.ToString()),
+                    Gender = Gender.Find(x => x.Id == SelectedGenderId).Gender,
+                    PhoneNumber = this.PhoneNumber,
+                    NidPp = this.nidPp
+                },
+                IsConfirmationRequired  = IsconfirmationRequired,
+                Age = this.Age
+            };
+        }
 
         public async Task GenerateNextSampleNumber()
         {

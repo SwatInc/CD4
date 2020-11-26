@@ -82,6 +82,16 @@ namespace CD4.UI.View
 
         private async void OnConfirmAnalysisRequest(object sender, EventArgs e)
         {
+            var demographicsConfirmRequired = await _viewModel.OrderRequiresNidPpConfirmationAsync();
+            if (demographicsConfirmRequired.IsConfirmationRequired)
+            {
+                var dialog = new PatientDetailsConfirmationView(demographicsConfirmRequired);
+                dialog.ShowDialog();
+                if (dialog.DialogResult == DialogResult.Cancel)
+                {
+                    return;
+                }
+            }
             try
             {
                 var status = await _viewModel.ConfirmAnalysisRequest();
