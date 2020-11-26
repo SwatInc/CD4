@@ -44,10 +44,9 @@
             this.progressPanelAccept.Caption = "Please Wait";
             this.progressPanelAccept.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.progressPanelAccept.Description = "Accepting the sample...";
-            this.progressPanelAccept.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.progressPanelAccept.Location = new System.Drawing.Point(0, 0);
+            this.progressPanelAccept.Location = new System.Drawing.Point(238, 77);
             this.progressPanelAccept.Name = "progressPanelAccept";
-            this.progressPanelAccept.Size = new System.Drawing.Size(395, 125);
+            this.progressPanelAccept.Size = new System.Drawing.Size(157, 48);
             this.progressPanelAccept.TabIndex = 5;
             this.progressPanelAccept.Text = "progressPanelAccept";
             // 

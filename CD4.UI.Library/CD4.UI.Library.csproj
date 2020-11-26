@@ -71,6 +71,7 @@
     <Compile Include="Model\AuthorizeDetailEventArgs.cs" />
     <Compile Include="Model\BarcodeDataModel.cs" />
     <Compile Include="Model\CommentsSelectionModel.cs" />
+    <Compile Include="Model\DemographicsConfirmationModel.cs" />
     <Compile Include="Model\PatientModel.cs" />
     <Compile Include="Model\RejectionReasonType.cs" />
     <Compile Include="Model\ResultModel.cs" />
