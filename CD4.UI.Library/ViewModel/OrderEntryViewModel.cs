@@ -359,7 +359,7 @@ namespace CD4.UI.Library.ViewModel
             catch (Exception ex)
             {
                 PushingMessages.Invoke(this, ex.Message);
-                PushingLogs.Invoke(this, $"{ex.Message}\n{ex.StackTrace}");
+                PushingLogs?.Invoke(this, $"{ex.Message}\n{ex.StackTrace}");
             }
 
             if (!IsconfirmationRequired)
