@@ -32,12 +32,6 @@ namespace CD4.UI.View
             this.textEditNidPp = new DevExpress.XtraEditors.TextEdit();
             this.labelInstruction = new System.Windows.Forms.Label();
             this.panelControl1 = new DevExpress.XtraEditors.PanelControl();
-            this.labelContactNo = new System.Windows.Forms.Label();
-            this.labelGender = new System.Windows.Forms.Label();
-            this.labelAge = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.labelDob = new System.Windows.Forms.Label();
-            this.LabelPatientName = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -45,6 +39,12 @@ namespace CD4.UI.View
             this.simpleButtonVerified = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButtonCancel = new DevExpress.XtraEditors.SimpleButton();
             this.separatorControl1 = new DevExpress.XtraEditors.SeparatorControl();
+            this.LabelPatientName = new System.Windows.Forms.Label();
+            this.labelDob = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.labelAge = new System.Windows.Forms.Label();
+            this.labelGender = new System.Windows.Forms.Label();
+            this.labelContactNo = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.textEditNidPp.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControl1)).BeginInit();
             this.panelControl1.SuspendLayout();
@@ -55,7 +55,7 @@ namespace CD4.UI.View
             // 
             this.textEditNidPp.Location = new System.Drawing.Point(64, 158);
             this.textEditNidPp.Name = "textEditNidPp";
-            this.textEditNidPp.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI Semibold", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.textEditNidPp.Properties.Appearance.Font = new System.Drawing.Font("Segoe UI", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.textEditNidPp.Properties.Appearance.Options.UseFont = true;
             this.textEditNidPp.Properties.Appearance.Options.UseTextOptions = true;
             this.textEditNidPp.Properties.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
@@ -94,66 +94,6 @@ namespace CD4.UI.View
             this.panelControl1.Name = "panelControl1";
             this.panelControl1.Size = new System.Drawing.Size(436, 91);
             this.panelControl1.TabIndex = 6;
-            // 
-            // labelContactNo
-            // 
-            this.labelContactNo.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelContactNo.Location = new System.Drawing.Point(300, 56);
-            this.labelContactNo.Name = "labelContactNo";
-            this.labelContactNo.Size = new System.Drawing.Size(130, 27);
-            this.labelContactNo.TabIndex = 15;
-            this.labelContactNo.Text = "79765544";
-            this.labelContactNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // labelGender
-            // 
-            this.labelGender.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelGender.Location = new System.Drawing.Point(300, 29);
-            this.labelGender.Name = "labelGender";
-            this.labelGender.Size = new System.Drawing.Size(130, 27);
-            this.labelGender.TabIndex = 14;
-            this.labelGender.Text = "MALE";
-            this.labelGender.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // labelAge
-            // 
-            this.labelAge.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelAge.Location = new System.Drawing.Point(49, 56);
-            this.labelAge.Name = "labelAge";
-            this.labelAge.Size = new System.Drawing.Size(157, 27);
-            this.labelAge.TabIndex = 13;
-            this.labelAge.Text = "29 Y 5 M 2 D";
-            this.labelAge.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // label6
-            // 
-            this.label6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(5, 56);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(78, 27);
-            this.label6.TabIndex = 12;
-            this.label6.Text = "Age: ";
-            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // labelDob
-            // 
-            this.labelDob.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDob.Location = new System.Drawing.Point(49, 29);
-            this.labelDob.Name = "labelDob";
-            this.labelDob.Size = new System.Drawing.Size(157, 27);
-            this.labelDob.TabIndex = 11;
-            this.labelDob.Text = "14-Feb-1991";
-            this.labelDob.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
-            // LabelPatientName
-            // 
-            this.LabelPatientName.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.LabelPatientName.Location = new System.Drawing.Point(49, 2);
-            this.LabelPatientName.Name = "LabelPatientName";
-            this.LabelPatientName.Size = new System.Drawing.Size(382, 27);
-            this.LabelPatientName.TabIndex = 10;
-            this.LabelPatientName.Text = "Ahmed Ibrahim Manik";
-            this.LabelPatientName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // label4
             // 
@@ -218,12 +158,71 @@ namespace CD4.UI.View
             this.separatorControl1.Size = new System.Drawing.Size(436, 19);
             this.separatorControl1.TabIndex = 9;
             // 
+            // LabelPatientName
+            // 
+            this.LabelPatientName.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.LabelPatientName.Location = new System.Drawing.Point(49, 2);
+            this.LabelPatientName.Name = "LabelPatientName";
+            this.LabelPatientName.Size = new System.Drawing.Size(382, 27);
+            this.LabelPatientName.TabIndex = 10;
+            this.LabelPatientName.Text = "Ahmed Ibrahim Manik";
+            this.LabelPatientName.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelDob
+            // 
+            this.labelDob.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDob.Location = new System.Drawing.Point(49, 29);
+            this.labelDob.Name = "labelDob";
+            this.labelDob.Size = new System.Drawing.Size(157, 27);
+            this.labelDob.TabIndex = 11;
+            this.labelDob.Text = "14-Feb-1991";
+            this.labelDob.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // label6
+            // 
+            this.label6.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(5, 56);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(78, 27);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Age: ";
+            this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelAge
+            // 
+            this.labelAge.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAge.Location = new System.Drawing.Point(49, 56);
+            this.labelAge.Name = "labelAge";
+            this.labelAge.Size = new System.Drawing.Size(157, 27);
+            this.labelAge.TabIndex = 13;
+            this.labelAge.Text = "29 Y 5 M 2 D";
+            this.labelAge.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelGender
+            // 
+            this.labelGender.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelGender.Location = new System.Drawing.Point(300, 29);
+            this.labelGender.Name = "labelGender";
+            this.labelGender.Size = new System.Drawing.Size(130, 27);
+            this.labelGender.TabIndex = 14;
+            this.labelGender.Text = "MALE";
+            this.labelGender.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // labelContactNo
+            // 
+            this.labelContactNo.Font = new System.Drawing.Font("Segoe UI Semibold", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelContactNo.Location = new System.Drawing.Point(300, 56);
+            this.labelContactNo.Name = "labelContactNo";
+            this.labelContactNo.Size = new System.Drawing.Size(130, 27);
+            this.labelContactNo.TabIndex = 15;
+            this.labelContactNo.Text = "79765544";
+            this.labelContactNo.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
             // PatientDetailsConfirmationView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(459, 246);
-            this.ControlBox = false;
             this.Controls.Add(this.textEditNidPp);
             this.Controls.Add(this.separatorControl1);
             this.Controls.Add(this.simpleButtonCancel);
