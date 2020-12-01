@@ -87,8 +87,8 @@
             this.DetailReport = new DevExpress.XtraReports.UI.DetailReportBand();
             this.GroupHeaderDiscipline = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.xrLabel18 = new DevExpress.XtraReports.UI.XRLabel();
-            this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.xrPictureBoxInstituteStamp = new DevExpress.XtraReports.UI.XRPictureBox();
+            this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
@@ -217,7 +217,7 @@
             this.xrLabel24.Multiline = true;
             this.xrLabel24.Name = "xrLabel24";
             this.xrLabel24.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.xrLabel24.SizeF = new System.Drawing.SizeF(521.2289F, 58.41998F);
+            this.xrLabel24.SizeF = new System.Drawing.SizeF(597.9584F, 58.41992F);
             this.xrLabel24.Text = "xrLabel24";
             // 
             // xrLabel22
@@ -289,11 +289,11 @@
             this.xrLabel11.Dpi = 254F;
             this.xrLabel11.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Patient].[Birthdate]")});
-            this.xrLabel11.LocationFloat = new DevExpress.Utils.PointFloat(350.7321F, 406.6114F);
+            this.xrLabel11.LocationFloat = new DevExpress.Utils.PointFloat(350.7321F, 406.6113F);
             this.xrLabel11.Multiline = true;
             this.xrLabel11.Name = "xrLabel11";
             this.xrLabel11.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.xrLabel11.SizeF = new System.Drawing.SizeF(521.2291F, 58.41998F);
+            this.xrLabel11.SizeF = new System.Drawing.SizeF(597.958F, 58.41995F);
             this.xrLabel11.Text = "xrLabel11";
             this.xrLabel11.TextFormatString = "{0:dd-MMM-yy}";
             // 
@@ -306,7 +306,7 @@
             this.xrLabel10.Multiline = true;
             this.xrLabel10.Name = "xrLabel10";
             this.xrLabel10.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.xrLabel10.SizeF = new System.Drawing.SizeF(521.229F, 58.42001F);
+            this.xrLabel10.SizeF = new System.Drawing.SizeF(597.9584F, 58.42001F);
             this.xrLabel10.Text = "xrLabel10";
             // 
             // xrLabel9
@@ -344,7 +344,7 @@
             this.xrLabel7.Multiline = true;
             this.xrLabel7.Name = "xrLabel7";
             this.xrLabel7.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.xrLabel7.SizeF = new System.Drawing.SizeF(521.2291F, 58.42001F);
+            this.xrLabel7.SizeF = new System.Drawing.SizeF(597.9581F, 58.42007F);
             this.xrLabel7.Text = "xrLabel7";
             // 
             // xrLabelReceivedDateLabel
@@ -503,7 +503,7 @@
             this.xrLabel6,
             this.xrLabel28});
             this.ReportFooter.Dpi = 254F;
-            this.ReportFooter.HeightF = 726.5458F;
+            this.ReportFooter.HeightF = 725.0875F;
             this.ReportFooter.Name = "ReportFooter";
             // 
             // xrLabel23
@@ -809,18 +809,18 @@
             this.xrLabel18.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             this.xrLabel18.Visible = false;
             // 
-            // bindingSource
-            // 
-            this.bindingSource.DataSource = typeof(CD4.UI.View.AnalysisRequestReport);
-            // 
             // xrPictureBoxInstituteStamp
             // 
             this.xrPictureBoxInstituteStamp.Dpi = 254F;
             this.xrPictureBoxInstituteStamp.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBoxInstituteStamp.ImageSource"));
-            this.xrPictureBoxInstituteStamp.LocationFloat = new DevExpress.Utils.PointFloat(1038.923F, 355.3808F);
+            this.xrPictureBoxInstituteStamp.LocationFloat = new DevExpress.Utils.PointFloat(1038.923F, 354.6308F);
             this.xrPictureBoxInstituteStamp.Name = "xrPictureBoxInstituteStamp";
-            this.xrPictureBoxInstituteStamp.SizeF = new System.Drawing.SizeF(439.95F, 360.0447F);
+            this.xrPictureBoxInstituteStamp.SizeF = new System.Drawing.SizeF(439.95F, 370.4568F);
             this.xrPictureBoxInstituteStamp.Sizing = DevExpress.XtraPrinting.ImageSizeMode.ZoomImage;
+            // 
+            // bindingSource
+            // 
+            this.bindingSource.DataSource = typeof(CD4.UI.View.AnalysisRequestReport);
             // 
             // AnalysisReport
             // 
