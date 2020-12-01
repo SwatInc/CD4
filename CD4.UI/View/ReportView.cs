@@ -1,13 +1,11 @@
 ﻿using CD4.DataLibrary.DataAccess;
 using CD4.UI.Report;
-using DevExpress.DataProcessing;
 using DevExpress.XtraEditors;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics;
 using System.Linq;
 using System.Windows.Forms;
 
