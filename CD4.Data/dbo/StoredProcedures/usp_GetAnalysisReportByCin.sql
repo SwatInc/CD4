@@ -40,6 +40,7 @@ AS
 		,[R].[AgeSex]
 		,[R].[Birthdate]
 		,CONCAT([R].[Address],' ',[R].[AtollIslandCountry]) AS [Address]
+		,[R].[Nationality]
 		,[R].[Site] AS [SampleSite]
 		,[R].[CollectionDate] AS [CollectedDate]
 		,[R].[ReceivedDate]

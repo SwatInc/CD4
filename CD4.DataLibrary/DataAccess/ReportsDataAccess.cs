@@ -44,6 +44,7 @@ namespace CD4.DataLibrary.DataAccess
                 Patient = new PatientModel()
                 {
                     Address = databaseModel.Patient.Address,
+                    Nationality = databaseModel.Patient.Nationality,
                     AgeSex = databaseModel.Patient.AgeSex,
                     Birthdate = databaseModel.Patient.Birthdate,
                     Fullname = databaseModel.Patient.Fullname,

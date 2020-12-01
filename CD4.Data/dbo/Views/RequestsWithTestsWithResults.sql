@@ -12,6 +12,7 @@
        [PhoneNumber],
        [Address],
 	   [AtollIslandCountry],
+       [Nationality],
 	   [EpisodeNumber],
 	   [Site]
 )
@@ -28,7 +29,8 @@ SELECT [R].[Id],
        [P].[Birthdate],
        [P].[PhoneNumber],
        [P].[Address],
-	   ISNULL(CONCAT([A].[Atoll],'. ',[A].[Island],', ',[C].[Country]),'')AS [AtollIslandCountry],
+	   ISNULL(CONCAT([A].[Atoll],'. ',[A].[Island]),'')AS [AtollIslandCountry],
+       ISNULL([C].[Country],'') AS [Nationality],
 	   [AR].[EpisodeNumber],
 	   [SI].[Name] AS [Site]
 FROM [dbo].[Result] [R] 
