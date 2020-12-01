@@ -63,6 +63,7 @@
             this.xrLabel4 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel3 = new DevExpress.XtraReports.UI.XRLabel();
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
+            this.xrLabel23 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel21 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel30 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel29 = new DevExpress.XtraReports.UI.XRLabel();
@@ -85,7 +86,6 @@
             this.GroupHeaderDiscipline = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.xrLabel18 = new DevExpress.XtraReports.UI.XRLabel();
             this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.xrLabel23 = new DevExpress.XtraReports.UI.XRLabel();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
@@ -104,6 +104,7 @@
             this.xrPictureBoxLaboratorylogo.Name = "xrPictureBoxLaboratorylogo";
             this.xrPictureBoxLaboratorylogo.SizeF = new System.Drawing.SizeF(223.8069F, 124.0416F);
             this.xrPictureBoxLaboratorylogo.Sizing = DevExpress.XtraPrinting.ImageSizeMode.ZoomImage;
+            this.xrPictureBoxLaboratorylogo.Visible = false;
             // 
             // xrLabelAnalysisReport
             // 
@@ -442,6 +443,19 @@
             this.ReportFooter.HeightF = 139.6184F;
             this.ReportFooter.Name = "ReportFooter";
             // 
+            // xrLabel23
+            // 
+            this.xrLabel23.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[PrintedDate]")});
+            this.xrLabel23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(133)))), ((int)(((byte)(133)))));
+            this.xrLabel23.LocationFloat = new DevExpress.Utils.PointFloat(149.9999F, 91.61841F);
+            this.xrLabel23.Multiline = true;
+            this.xrLabel23.Name = "xrLabel23";
+            this.xrLabel23.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel23.SizeF = new System.Drawing.SizeF(246.4168F, 23F);
+            this.xrLabel23.StylePriority.UseForeColor = false;
+            this.xrLabel23.Text = "xrLabel23";
+            // 
             // xrLabel21
             // 
             this.xrLabel21.AutoWidth = true;
@@ -713,19 +727,6 @@
             // bindingSource
             // 
             this.bindingSource.DataSource = typeof(CD4.UI.View.AnalysisRequestReport);
-            // 
-            // xrLabel23
-            // 
-            this.xrLabel23.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[PrintedDate]")});
-            this.xrLabel23.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(133)))), ((int)(((byte)(133)))));
-            this.xrLabel23.LocationFloat = new DevExpress.Utils.PointFloat(149.9999F, 91.61841F);
-            this.xrLabel23.Multiline = true;
-            this.xrLabel23.Name = "xrLabel23";
-            this.xrLabel23.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel23.SizeF = new System.Drawing.SizeF(246.4168F, 23F);
-            this.xrLabel23.StylePriority.UseForeColor = false;
-            this.xrLabel23.Text = "xrLabel23";
             // 
             // AnalysisReport
             // 

@@ -58,6 +58,21 @@ namespace CD4.UI.View
             KeyUp += ResultEntryView_KeyUp;
             lookUpEditSampleStatusFilter.EditValueChanged += LookUpEditSampleStatusFilter_EditValueChanged;
 
+            this.ParentChanged += ResultEntryView_ParentChanged;
+
+        }
+
+        private void ResultEntryView_ParentChanged(object sender, EventArgs e)
+        {
+            if (this.MdiParent is null) return;
+            if (this.MdiParent.GetType() != typeof(MainView)) return;
+            var mainView = (MainView)this.MdiParent;
+            mainView.SelectedDisciplineChanged += OnDisciplineSwitched;
+        }
+
+        private void OnDisciplineSwitched(object sender, int disciplineId)
+        {
+            XtraMessageBox.Show($"switched Id: {disciplineId}");
         }
 
         /// <summary>

@@ -186,6 +186,7 @@
             this.pictureEditLaboratoryLogo.Properties.ZoomPercent = 75D;
             this.pictureEditLaboratoryLogo.Size = new System.Drawing.Size(276, 269);
             this.pictureEditLaboratoryLogo.TabIndex = 48;
+            this.pictureEditLaboratoryLogo.Visible = false;
             // 
             // groupControlAuthView
             // 
@@ -201,7 +202,7 @@
             this.groupControlAuthView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControlAuthView.Location = new System.Drawing.Point(0, 0);
             this.groupControlAuthView.Name = "groupControlAuthView";
-            this.groupControlAuthView.Size = new System.Drawing.Size(593, 308);
+            this.groupControlAuthView.Size = new System.Drawing.Size(599, 314);
             this.groupControlAuthView.TabIndex = 49;
             // 
             // labelControlWelcomeMessage
@@ -266,7 +267,7 @@
             this.Appearance.Options.UseFont = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(593, 308);
+            this.ClientSize = new System.Drawing.Size(599, 314);
             this.ControlBox = false;
             this.Controls.Add(this.groupControlAuthView);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));

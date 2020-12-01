@@ -1,10 +1,13 @@
 ﻿using CD4.DataLibrary.DataAccess;
 using CD4.UI.Library.ViewModel;
+using CD4.UI.UiSpecificModels;
 using DevExpress.Skins;
 using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
+using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -15,11 +18,15 @@ namespace CD4.UI.View
         private readonly IReportsDataAccess reportsDataAccess;
         private readonly IUserAuthEvaluator _authEvaluator;
 
+        public event EventHandler<int> SelectedDisciplineChanged;
+
         private IMainViewModel _viewModel { get; }
 
         public MainView(IMainViewModel viewModel, IReportsDataAccess reportsDataAccess, IUserAuthEvaluator authEvaluator)
         {
             InitializeComponent();
+            //this.popupMenu.AddItem(this.barButtonItemChangePassword);
+            this.popupMenuDiscipline.AddItem(this.barButtonItemCountries);
             SkinManager.EnableFormSkins();
             SkinManager.EnableMdiFormSkins();
             _viewModel = viewModel;
@@ -53,6 +60,74 @@ namespace CD4.UI.View
 
             //load app wide static data from database
             LoadAppWideStaticData().GetAwaiter().GetResult();
+
+            //this.barButtonItem2.ItemClick += BarButtonItem2_ItemClick;
+            this.MdiChildActivate += MainView_MdiChildActivate;
+
+            SetDisciplineRibbonOptions();
+
+        }
+
+        /// <summary>
+        /// Creates and adds discipline popup menu buttons to the popup menu and hook to their click events
+        /// </summary>
+        private void SetDisciplineRibbonOptions()
+        {
+            if(Properties.Resources.IsMultipleDisciplinesEnabled == "0") 
+            {
+                return;
+            }
+
+            //read discipline data
+            var disciplineMenu = JsonConvert.DeserializeObject<List<DiscplineMenuModel>>(Properties.Resources.popupMenuDisciplines);
+            //create barbuttonItems
+            foreach (var item in disciplineMenu)
+            {
+                var button = new BarButtonItem()
+                {
+                    Name = item.Name,
+                    Caption = item.Caption,
+                    Tag = item.Tag,
+                    ButtonStyle = BarButtonStyle.Default,
+                    RibbonStyle = RibbonItemStyles.Large
+                };
+
+                button.ImageOptions.Image = _viewModel.GetDisciplineImage(item.Image);
+
+                button.ItemClick += OnChangedSelectedDiscipline;
+                popupMenuDiscipline.AddItem(button);
+            }
+
+            ribbonPageDiscipline.Visible = true;
+        }
+
+        private void OnChangedSelectedDiscipline(object sender, ItemClickEventArgs e)
+        {
+            
+            var barButton = (BarBaseButtonItem)e.Item;
+            //change the barButtonItemAllDisciplines image and caption
+            barButtonItemDisciplineSelector.Caption = barButton.Caption;
+            barButtonItemDisciplineSelector.ImageOptions.Image  = barButton.ImageOptions.Image;
+
+            //inform listeners about about the change with discipline Id
+            SelectedDisciplineChanged?.Invoke(this, (int)barButton.Tag);
+        }
+        private void MainView_MdiChildActivate(object sender, EventArgs e)
+        {
+            if (this.ActiveMdiChild is null)
+            {
+                this.ribbonPageDiscipline.Visible = false;
+                return;
+            }
+            if (this.ActiveMdiChild.Name == "ResultEntryView" && Properties.Resources.IsMultipleDisciplinesEnabled != "0")
+            {
+                this.ribbonPageDiscipline.Visible = true;
+            }
+            else
+            {
+                this.ribbonPageDiscipline.Visible = false;
+            }
+
         }
 
         private async Task LoadAppWideStaticData()

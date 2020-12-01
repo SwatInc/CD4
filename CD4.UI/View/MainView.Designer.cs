@@ -46,11 +46,12 @@
             this.barButtonItemViewProfile = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemChangePassword = new DevExpress.XtraBars.BarButtonItem();
             this.barStaticItemUsernameAndRole = new DevExpress.XtraBars.BarStaticItem();
-            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-            this.popupMenu = new DevExpress.XtraBars.PopupMenu(this.components);
-            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem3 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemAcceptSamples = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemDisciplineSelector = new DevExpress.XtraBars.BarButtonItem();
+            this.popupMenuDiscipline = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.ribbonPageCategoryDiscipline = new DevExpress.XtraBars.Ribbon.RibbonPageCategory();
+            this.ribbonPageDiscipline = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGeneral = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageConfiguration = new DevExpress.XtraBars.Ribbon.RibbonPage();
@@ -60,7 +61,7 @@
             this.repositoryItemRatingControl1 = new DevExpress.XtraEditors.Repository.RepositoryItemRatingControl();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.popupMenu)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenuDiscipline)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRatingControl1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -84,13 +85,13 @@
             this.barButtonItemViewProfile,
             this.barButtonItemChangePassword,
             this.barStaticItemUsernameAndRole,
-            this.barButtonItem1,
-            this.barButtonItem2,
-            this.barButtonItem3,
-            this.barButtonItemAcceptSamples});
+            this.barButtonItemAcceptSamples,
+            this.barButtonItemDisciplineSelector});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 22;
+            this.ribbon.MaxItemId = 27;
             this.ribbon.Name = "ribbon";
+            this.ribbon.PageCategories.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageCategory[] {
+            this.ribbonPageCategoryDiscipline});
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageGeneral,
             this.ribbonPageConfiguration,
@@ -225,48 +226,49 @@
             this.barStaticItemUsernameAndRole.Id = 17;
             this.barStaticItemUsernameAndRole.Name = "barStaticItemUsernameAndRole";
             // 
-            // barButtonItem1
-            // 
-            this.barButtonItem1.ActAsDropDown = true;
-            this.barButtonItem1.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.DropDown;
-            this.barButtonItem1.Caption = "Discipline";
-            this.barButtonItem1.DropDownControl = this.popupMenu;
-            this.barButtonItem1.Id = 18;
-            this.barButtonItem1.Name = "barButtonItem1";
-            this.barButtonItem1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            // 
-            // popupMenu
-            // 
-            this.popupMenu.ItemLinks.Add(this.barButtonItem2);
-            this.popupMenu.ItemLinks.Add(this.barButtonItem3);
-            this.popupMenu.MenuDrawMode = DevExpress.XtraBars.MenuDrawMode.LargeImagesText;
-            this.popupMenu.Name = "popupMenu";
-            this.popupMenu.Ribbon = this.ribbon;
-            // 
-            // barButtonItem2
-            // 
-            this.barButtonItem2.Caption = "barButtonItemTest1";
-            this.barButtonItem2.Id = 19;
-            this.barButtonItem2.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem2.ImageOptions.SvgImage")));
-            this.barButtonItem2.Name = "barButtonItem2";
-            this.barButtonItem2.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            // 
-            // barButtonItem3
-            // 
-            this.barButtonItem3.Caption = "barButtonItemTest2";
-            this.barButtonItem3.Id = 20;
-            this.barButtonItem3.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem3.ImageOptions.SvgImage")));
-            this.barButtonItem3.Name = "barButtonItem3";
-            this.barButtonItem3.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
-            // 
             // barButtonItemAcceptSamples
             // 
             this.barButtonItemAcceptSamples.Caption = "Accept Samples";
             this.barButtonItemAcceptSamples.Hint = "This function is used to accept sample";
             this.barButtonItemAcceptSamples.Id = 21;
-            this.barButtonItemAcceptSamples.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem4.ImageOptions.SvgImage")));
+            this.barButtonItemAcceptSamples.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemAcceptSamples.ImageOptions.SvgImage")));
             this.barButtonItemAcceptSamples.Name = "barButtonItemAcceptSamples";
             this.barButtonItemAcceptSamples.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            // 
+            // barButtonItemDisciplineSelector
+            // 
+            this.barButtonItemDisciplineSelector.ActAsDropDown = true;
+            this.barButtonItemDisciplineSelector.ButtonStyle = DevExpress.XtraBars.BarButtonStyle.DropDown;
+            this.barButtonItemDisciplineSelector.Caption = "Discipline";
+            this.barButtonItemDisciplineSelector.DropDownControl = this.popupMenuDiscipline;
+            this.barButtonItemDisciplineSelector.Id = 24;
+            this.barButtonItemDisciplineSelector.Name = "barButtonItemDisciplineSelector";
+            this.barButtonItemDisciplineSelector.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            // 
+            // popupMenuDiscipline
+            // 
+            this.popupMenuDiscipline.Name = "popupMenuDiscipline";
+            this.popupMenuDiscipline.Ribbon = this.ribbon;
+            // 
+            // ribbonPageCategoryDiscipline
+            // 
+            this.ribbonPageCategoryDiscipline.Name = "ribbonPageCategoryDiscipline";
+            this.ribbonPageCategoryDiscipline.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
+            this.ribbonPageDiscipline});
+            this.ribbonPageCategoryDiscipline.Text = "Laboratory Disciplines";
+            // 
+            // ribbonPageDiscipline
+            // 
+            this.ribbonPageDiscipline.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup4});
+            this.ribbonPageDiscipline.Name = "ribbonPageDiscipline";
+            this.ribbonPageDiscipline.Text = "Discipline Options";
+            // 
+            // ribbonPageGroup4
+            // 
+            this.ribbonPageGroup4.ItemLinks.Add(this.barButtonItemDisciplineSelector);
+            this.ribbonPageGroup4.Name = "ribbonPageGroup4";
+            this.ribbonPageGroup4.Text = "Discipline";
             // 
             // ribbonPageGeneral
             // 
@@ -281,7 +283,6 @@
             this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemOrderEntry);
             this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemResultEntry);
             this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemStatistics);
-            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItem1);
             this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemAcceptSamples);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
             this.ribbonPageGroup2.Text = "General Lab Tasks";
@@ -353,7 +354,7 @@
             this.Text = "MainView";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.popupMenu)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.popupMenuDiscipline)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRatingControl1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -386,10 +387,11 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup3;
         private DevExpress.XtraBars.BarStaticItem barStaticItemUsernameAndRole;
         private DevExpress.XtraEditors.Repository.RepositoryItemRatingControl repositoryItemRatingControl1;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
-        private DevExpress.XtraBars.PopupMenu popupMenu;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem3;
         private DevExpress.XtraBars.BarButtonItem barButtonItemAcceptSamples;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemDisciplineSelector;
+        private DevExpress.XtraBars.Ribbon.RibbonPageCategory ribbonPageCategoryDiscipline;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageDiscipline;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup4;
+        private DevExpress.XtraBars.PopupMenu popupMenuDiscipline;
     }
 }
