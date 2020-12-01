@@ -65,6 +65,7 @@
             this.xrLabel4 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel3 = new DevExpress.XtraReports.UI.XRLabel();
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
+            this.xrPictureBoxInstituteStamp = new DevExpress.XtraReports.UI.XRPictureBox();
             this.xrLabel23 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel21 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel30 = new DevExpress.XtraReports.UI.XRLabel();
@@ -87,7 +88,6 @@
             this.DetailReport = new DevExpress.XtraReports.UI.DetailReportBand();
             this.GroupHeaderDiscipline = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.xrLabel18 = new DevExpress.XtraReports.UI.XRLabel();
-            this.xrPictureBoxInstituteStamp = new DevExpress.XtraReports.UI.XRPictureBox();
             this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
@@ -503,8 +503,17 @@
             this.xrLabel6,
             this.xrLabel28});
             this.ReportFooter.Dpi = 254F;
-            this.ReportFooter.HeightF = 725.0875F;
+            this.ReportFooter.HeightF = 775.5638F;
             this.ReportFooter.Name = "ReportFooter";
+            // 
+            // xrPictureBoxInstituteStamp
+            // 
+            this.xrPictureBoxInstituteStamp.Dpi = 254F;
+            this.xrPictureBoxInstituteStamp.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBoxInstituteStamp.ImageSource"));
+            this.xrPictureBoxInstituteStamp.LocationFloat = new DevExpress.Utils.PointFloat(1030.922F, 354.6308F);
+            this.xrPictureBoxInstituteStamp.Name = "xrPictureBoxInstituteStamp";
+            this.xrPictureBoxInstituteStamp.SizeF = new System.Drawing.SizeF(458.6996F, 420.933F);
+            this.xrPictureBoxInstituteStamp.Sizing = DevExpress.XtraPrinting.ImageSizeMode.ZoomImage;
             // 
             // xrLabel23
             // 
@@ -808,15 +817,6 @@
             this.xrLabel18.Text = "xrLabel18";
             this.xrLabel18.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             this.xrLabel18.Visible = false;
-            // 
-            // xrPictureBoxInstituteStamp
-            // 
-            this.xrPictureBoxInstituteStamp.Dpi = 254F;
-            this.xrPictureBoxInstituteStamp.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBoxInstituteStamp.ImageSource"));
-            this.xrPictureBoxInstituteStamp.LocationFloat = new DevExpress.Utils.PointFloat(1038.923F, 354.6308F);
-            this.xrPictureBoxInstituteStamp.Name = "xrPictureBoxInstituteStamp";
-            this.xrPictureBoxInstituteStamp.SizeF = new System.Drawing.SizeF(439.95F, 370.4568F);
-            this.xrPictureBoxInstituteStamp.Sizing = DevExpress.XtraPrinting.ImageSizeMode.ZoomImage;
             // 
             // bindingSource
             // 

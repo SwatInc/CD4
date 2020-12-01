@@ -85,12 +85,16 @@ namespace CD4.UI.View
             var demographicsConfirmRequired = await _viewModel.OrderRequiresNidPpConfirmationAsync();
             if (demographicsConfirmRequired.IsConfirmationRequired)
             {
+                this._viewModel.LoadingStaticDataStatus = true;
                 var dialog = new PatientDetailsConfirmationView(demographicsConfirmRequired);
                 dialog.ShowDialog();
                 if (dialog.DialogResult == DialogResult.Cancel)
                 {
+                    this._viewModel.LoadingStaticDataStatus = false;
                     return;
                 }
+                this._viewModel.LoadingStaticDataStatus = false;
+
             }
             try
             {
