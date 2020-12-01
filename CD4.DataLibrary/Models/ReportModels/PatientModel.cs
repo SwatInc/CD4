@@ -12,5 +12,6 @@ namespace CD4.DataLibrary.Models.ReportModels
         public string AgeSex { get; set; }
         public DateTime Birthdate { get; set; }
         public string Address { get; set; }
+        public string Nationality { get; set; }
     }
 }

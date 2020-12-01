@@ -94,7 +94,8 @@ namespace CD4.UI.View
                 Fullname = reportModel.Patient.Fullname.ToUpper().Trim(),
                 AgeSex = reportModel.Patient.AgeSex,
                 Birthdate = reportModel.Patient.Birthdate,
-                Address = reportModel.Patient.Address
+                Address = reportModel.Patient.Address,
+                Nationality = reportModel.Patient.Nationality
             };
             //map Assays
             var assays = new BindingList<Assays>();
@@ -233,5 +234,6 @@ namespace CD4.UI.View
         public string AgeSex { get; set; }
         public DateTime Birthdate { get; set; }
         public string Address { get; set; }
+        public string Nationality { get; set; }
     }
 }
