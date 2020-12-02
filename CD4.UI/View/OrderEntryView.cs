@@ -489,5 +489,9 @@ namespace CD4.UI.View
 
         }
 
+        private void dateEditBirthdate_EditValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

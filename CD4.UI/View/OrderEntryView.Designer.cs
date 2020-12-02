@@ -145,7 +145,7 @@
             this.dateEditCollectedDate.Properties.NullValuePrompt = "Sample Collection date";
             this.dateEditCollectedDate.Properties.ValidateOnEnterKey = true;
             this.dateEditCollectedDate.Size = new System.Drawing.Size(167, 20);
-            this.dateEditCollectedDate.TabIndex = 3;
+            this.dateEditCollectedDate.TabIndex = 4;
             // 
             // textEditEpisodeNumber
             // 
@@ -156,7 +156,7 @@
             this.textEditEpisodeNumber.Properties.NullValuePrompt = "EpisodeNumber";
             this.textEditEpisodeNumber.Properties.NullValuePromptShowForEmptyValue = true;
             this.textEditEpisodeNumber.Size = new System.Drawing.Size(167, 20);
-            this.textEditEpisodeNumber.TabIndex = 16;
+            this.textEditEpisodeNumber.TabIndex = 1;
             // 
             // lookUpEditSite
             // 
@@ -172,7 +172,7 @@
             this.lookUpEditSite.Properties.ShowNullValuePromptWhenFocused = true;
             this.lookUpEditSite.Properties.ValidateOnEnterKey = true;
             this.lookUpEditSite.Size = new System.Drawing.Size(167, 20);
-            this.lookUpEditSite.TabIndex = 2;
+            this.lookUpEditSite.TabIndex = 3;
             // 
             // textEditCin
             // 
@@ -193,7 +193,7 @@
             this.textEditCin.Properties.NullValuePromptShowForEmptyValue = true;
             this.textEditCin.Properties.ValidateOnEnterKey = true;
             this.textEditCin.Size = new System.Drawing.Size(167, 20);
-            this.textEditCin.TabIndex = 1;
+            this.textEditCin.TabIndex = 2;
             // 
             // dateEditSampleReceived
             // 
@@ -272,7 +272,8 @@
             this.textEditAge.Properties.NullValuePromptShowForEmptyValue = true;
             this.textEditAge.Properties.ValidateOnEnterKey = true;
             this.textEditAge.Size = new System.Drawing.Size(167, 20);
-            this.textEditAge.TabIndex = 8;
+            this.textEditAge.TabIndex = 10;
+            this.textEditAge.TabStop = false;
             // 
             // textEditAddress
             // 
@@ -285,7 +286,7 @@
             this.textEditAddress.Properties.NullValuePromptShowForEmptyValue = true;
             this.textEditAddress.Properties.ValidateOnEnterKey = true;
             this.textEditAddress.Size = new System.Drawing.Size(167, 20);
-            this.textEditAddress.TabIndex = 11;
+            this.textEditAddress.TabIndex = 12;
             // 
             // textEditFullname
             // 
@@ -365,12 +366,14 @@
             this.dateEditBirthdate.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateEditBirthdate.Properties.CalendarTimeProperties.Mask.EditMask = "d";
+            this.dateEditBirthdate.Properties.Mask.EditMask = "dd-MMM-yyyy";
             this.dateEditBirthdate.Properties.Mask.UseMaskAsDisplayFormat = true;
             this.dateEditBirthdate.Properties.NullText = "Birthdate";
             this.dateEditBirthdate.Properties.NullValuePrompt = "Birthdate";
             this.dateEditBirthdate.Properties.ValidateOnEnterKey = true;
             this.dateEditBirthdate.Size = new System.Drawing.Size(167, 20);
-            this.dateEditBirthdate.TabIndex = 10;
+            this.dateEditBirthdate.TabIndex = 8;
+            this.dateEditBirthdate.EditValueChanged += new System.EventHandler(this.dateEditBirthdate_EditValueChanged);
             // 
             // lookUpEditCountry
             // 
@@ -386,7 +389,7 @@
             this.lookUpEditCountry.Properties.ShowNullValuePromptWhenFocused = true;
             this.lookUpEditCountry.Properties.ValidateOnEnterKey = true;
             this.lookUpEditCountry.Size = new System.Drawing.Size(167, 20);
-            this.lookUpEditCountry.TabIndex = 14;
+            this.lookUpEditCountry.TabIndex = 11;
             // 
             // lookUpEditIsland
             // 
@@ -402,7 +405,7 @@
             this.lookUpEditIsland.Properties.ShowNullValuePromptWhenFocused = true;
             this.lookUpEditIsland.Properties.ValidateOnEnterKey = true;
             this.lookUpEditIsland.Size = new System.Drawing.Size(167, 20);
-            this.lookUpEditIsland.TabIndex = 13;
+            this.lookUpEditIsland.TabIndex = 14;
             // 
             // lookUpEditAtoll
             // 
@@ -418,7 +421,7 @@
             this.lookUpEditAtoll.Properties.ShowNullValuePromptWhenFocused = true;
             this.lookUpEditAtoll.Properties.ValidateOnEnterKey = true;
             this.lookUpEditAtoll.Size = new System.Drawing.Size(167, 20);
-            this.lookUpEditAtoll.TabIndex = 12;
+            this.lookUpEditAtoll.TabIndex = 13;
             // 
             // groupControlClinicalDetails
             // 

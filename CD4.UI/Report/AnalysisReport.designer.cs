@@ -275,14 +275,13 @@
             this.xrLabel2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Patient].[Fullname]")});
             this.xrLabel2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(91.44F, 35.56F);
+            this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(91.43999F, 35.56001F);
             this.xrLabel2.Multiline = true;
             this.xrLabel2.Name = "xrLabel2";
             this.xrLabel2.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.xrLabel2.SizeF = new System.Drawing.SizeF(547.6875F, 58.42F);
+            this.xrLabel2.SizeF = new System.Drawing.SizeF(857.2502F, 58.41998F);
             this.xrLabel2.StylePriority.UseFont = false;
             this.xrLabel2.Text = "xrLabel2";
-            this.xrLabel2.WordWrap = false;
             // 
             // xrLabel11
             // 
