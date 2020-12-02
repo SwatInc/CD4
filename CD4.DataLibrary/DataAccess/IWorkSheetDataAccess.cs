@@ -6,7 +6,7 @@ namespace CD4.DataLibrary.DataAccess
 {
     public interface IWorkSheetDataAccess
     {
-        Task<WorklistModel> GetWorklistBySpecifiedDateAndAllStatusAsync(DateTime? startDate = null);
-        Task<WorklistModel> GetWorklistBySpecifiedDateAndStatusIdAsync(int selectedStatusId, DateTime? startDate = null);
+        Task<WorklistModel> GetWorklistBySpecifiedDateAndAllStatusAsync(int worksheetId, DateTime? startDate = null);
+        Task<WorklistModel> GetWorklistBySpecifiedDateAndStatusIdAsync(int selectedStatusId,int worksheetId, DateTime? startDate = null);
     }
 }

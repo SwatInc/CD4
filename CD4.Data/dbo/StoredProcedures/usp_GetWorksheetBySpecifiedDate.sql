@@ -46,7 +46,7 @@ BEGIN
                ISNULL([C].[Detail],'') AS [ClinicalDetails]
 		FROM [dbo].[RequestsWithTestsAndResults] [RW] 
         INNER JOIN @TempClinicalDetails [C] ON [RW].[AnalysisRequestId] = [C].[AnalysisRequestId]
-		WHERE [RW].[RequestedDate] >= @StartDateInUse;
+		WHERE [RW].[RequestedDate] >= @StartDateInUse AND [RW].[Cin] IN (SELECT [Cin] FROM @TempCins);
 		--NOTE: Need to keep this date as requested date
 
 		-- fetch results data

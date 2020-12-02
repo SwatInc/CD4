@@ -20,6 +20,7 @@ namespace CD4.UI.Library.ViewModel
         private bool _isLoadingAnimationEnabled;
         private GridControlTestActiveDatasource _gridTestActiveDatasource;
         private GridControlSampleActiveDatasource _gridSampleActiveDatasource;
+        private int _selectedDisciplineId;
         private readonly IWorkSheetDataAccess _workSheetDataAccess;
         private readonly IMapper _mapper;
         private readonly IResultDataAccess _resultDataAccess;
@@ -128,6 +129,16 @@ namespace CD4.UI.Library.ViewModel
         public List<Model.CodifiedResultsModel> AllCodifiedPhrases { get; set; }
         public List<Model.StatusModel> AllStatus { get; set; }
         public Model.StatusModel SelectedStatus { get; set; }
+        public int SelectedDisciplineId
+        {
+            get => _selectedDisciplineId; set
+            {
+                if (_selectedDisciplineId == value) return;
+                _selectedDisciplineId = value;
+                //no need to raise npc, load worksheet instead
+                GetWorkSheet();
+            }
+        }
 
         //enable/disable status of loadWorksheet button
         public bool IsloadWorkSheetButtonEnabled
@@ -287,7 +298,7 @@ namespace CD4.UI.Library.ViewModel
             if (GetSelectedStatusIdOrDefault() == 0)
             {
 
-               await LoadWorkSheetWithAllSamplesFromDateAsync();
+                await LoadWorkSheetWithAllSamplesFromDateAsync();
                 return;
             }
             try
@@ -295,7 +306,7 @@ namespace CD4.UI.Library.ViewModel
                 //Disable the load worksheet button to avoid multiple clicks
                 IsloadWorkSheetButtonEnabled = false;
                 var worksheet = await _workSheetDataAccess.GetWorklistBySpecifiedDateAndStatusIdAsync
-                    (GetSelectedStatusIdOrDefault(), LoadWorksheetFromDate);
+                    (GetSelectedStatusIdOrDefault(),SelectedDisciplineId, LoadWorksheetFromDate);
                 await DisplayWorksheet(worksheet);
             }
             finally
@@ -311,7 +322,7 @@ namespace CD4.UI.Library.ViewModel
             {
                 //Disable the load worksheet button to avoid multiple clicks
                 IsloadWorkSheetButtonEnabled = false;
-                var worksheet = await _workSheetDataAccess.GetWorklistBySpecifiedDateAndAllStatusAsync(LoadWorksheetFromDate);
+                var worksheet = await _workSheetDataAccess.GetWorklistBySpecifiedDateAndAllStatusAsync(SelectedDisciplineId, LoadWorksheetFromDate);
                 await DisplayWorksheet(worksheet);
             }
             finally
@@ -379,7 +390,7 @@ namespace CD4.UI.Library.ViewModel
             try
             {
                 //mark the test as validated.
-                var output = await _statusDataAccess.ValidateTest(resultModel.Cin, resultModel.Test, resultModel.StatusIconId, resultModel.Result,_authorizeDetail.UserId);
+                var output = await _statusDataAccess.ValidateTest(resultModel.Cin, resultModel.Test, resultModel.StatusIconId, resultModel.Result, _authorizeDetail.UserId);
                 //Update the UI to show that the test as validated...ie., if it has been validated.
                 UpdateUiAfterOnTestValidation(output, resultModel);
             }
@@ -397,7 +408,7 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-                var output = await _statusDataAccess.ValidateSample(requestSampleModel.Cin, requestSampleModel.StatusIconId,_authorizeDetail.UserId);
+                var output = await _statusDataAccess.ValidateSample(requestSampleModel.Cin, requestSampleModel.StatusIconId, _authorizeDetail.UserId);
                 UpdateUiAOnSampleValidation(output, requestSampleModel);
             }
             catch (Exception ex)
@@ -592,7 +603,7 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-                var response = await _resultDataAccess.InsertUpdateResultByResultIdAsync(resultId, result, testStatus,_authorizeDetail.UserId);
+                var response = await _resultDataAccess.InsertUpdateResultByResultIdAsync(resultId, result, testStatus, _authorizeDetail.UserId);
                 UpdateUiOnResultEntry(response);
             }
             catch (Exception ex)
@@ -920,7 +931,7 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-                var result  = await _resultDataAccess.CancelResultValidation(testData.Id, testData.Cin, _authorizeDetail.UserId);
+                var result = await _resultDataAccess.CancelResultValidation(testData.Id, testData.Cin, _authorizeDetail.UserId);
                 var mappedData = _mapper.Map<SampleAndResultStatusAndResultModel>(result);
                 //updateUI, the following method can be used to Update UI after cancelling test rejection. Refactoring required
                 UpdateUiOnSampleRejectionOrRejectionCancellation(mappedData);
