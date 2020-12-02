@@ -72,7 +72,8 @@ namespace CD4.UI.View
 
         private void OnDisciplineSwitched(object sender, int disciplineId)
         {
-            XtraMessageBox.Show($"switched Id: {disciplineId}");
+            Debug.WriteLine("Selected discipline changed to " + disciplineId);
+            _viewModel.SelectedDisciplineId = disciplineId;
         }
 
         /// <summary>
