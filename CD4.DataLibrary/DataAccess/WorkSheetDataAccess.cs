@@ -1,30 +1,50 @@
 ﻿using CD4.DataLibrary.Helpers;
 using CD4.DataLibrary.Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CD4.DataLibrary.DataAccess
 {
     public class WorkSheetDataAccess : DataAccessBase, IWorkSheetDataAccess
     {
-        public async Task<WorklistModel> GetWorklistBySpecifiedDateAndStatusIdAsync(int selectedStatusId, DateTime? startDate = null)
+        public async Task<WorklistModel> GetWorklistBySpecifiedDateAndStatusIdAsync(int selectedStatusId, int worksheetId, DateTime? startDate = null)
         {
-            var storedProcedure = "[dbo].[usp_GetWorksheetBySpecifiedDateAndStatusId]";
-            var parameter = new { StartDate = GetStartDate(startDate), StatusId = selectedStatusId };
+            var storedProcedure = "";
+            dynamic parameter;
+
+            switch (worksheetId)
+            {
+                case 0:
+                    storedProcedure = "[dbo].[usp_GetWorksheetBySpecifiedDateAndStatusId]";
+                    parameter = new { StartDate = GetStartDate(startDate), StatusId = selectedStatusId };
+                    break;
+                default:
+                    storedProcedure = "[dbo].[usp_GetWorksheetBySpecifiedDateStatusIdAndDiscipline]";
+                    parameter = new { StartDate = GetStartDate(startDate), StatusId = selectedStatusId, DisciplineId = worksheetId };
+                    break;
+            }
 
             var results = await SelectWorksheetDatasets<dynamic>(storedProcedure, parameter);
             return results;
 
         }
 
-        public async Task<WorklistModel> GetWorklistBySpecifiedDateAndAllStatusAsync(DateTime? startDate = null)
+        public async Task<WorklistModel> GetWorklistBySpecifiedDateAndAllStatusAsync(int worksheetId, DateTime? startDate = null)
         {
-            var storedProcedure = "[dbo].[usp_GetWorksheetBySpecifiedDate]";
-            var parameter = new { StartDate = GetStartDate(startDate) };
+            var storedProcedure = "";
+            dynamic parameter;
+
+            switch (worksheetId)
+            {
+                case 0:
+                    storedProcedure = "[dbo].[usp_GetWorksheetBySpecifiedDate]";
+                    parameter = new { StartDate = GetStartDate(startDate) };
+                    break;
+                default:
+                    storedProcedure = "[dbo].[usp_GetWorksheetBySpecifiedDateAndDiscipline]";
+                    parameter = new { StartDate = GetStartDate(startDate), DisciplineId = worksheetId };
+                    break;
+            }
 
             var results = await SelectWorksheetDatasets<dynamic>(storedProcedure, parameter);
             return results;
