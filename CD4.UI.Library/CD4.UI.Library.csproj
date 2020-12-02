@@ -80,6 +80,7 @@
   <ItemGroup>
     <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="DiskIO.cs" />
+    <Compile Include="Helpers\NamesAbbreviator.cs" />
     <Compile Include="Helpers\ValidationHelper.cs" />
     <Compile Include="Model\AnalysisRequestDataModel.cs" />
     <Compile Include="Model\AtollIslandModel.cs" />

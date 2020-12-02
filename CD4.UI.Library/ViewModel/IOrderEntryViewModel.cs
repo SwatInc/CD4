@@ -56,5 +56,6 @@ namespace CD4.UI.Library.ViewModel
 
         Task<List<BarcodeDataModel>> GetBarcodeData();
         Task<DemographicsConfirmationModel> OrderRequiresNidPpConfirmationAsync();
+        string GetAbbreviatedFullname(string fullName);
     }
 }

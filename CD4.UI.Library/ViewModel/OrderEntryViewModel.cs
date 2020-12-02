@@ -1096,6 +1096,11 @@ namespace CD4.UI.Library.ViewModel
                 throw;
             }
         }
+
+        public string GetAbbreviatedFullname(string fullName)
+        {
+            return Helpers.NamesAbbreviator.Execute(fullName, 25);
+        }
         #endregion
     }
 

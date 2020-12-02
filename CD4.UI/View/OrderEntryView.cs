@@ -462,7 +462,7 @@ namespace CD4.UI.View
             foreach (var barcode in barcodeData)
             {
                 var barcodeLabel = new SeventyFiveMillimeterTubeLabel();
-                barcodeLabel.Parameters["Fullname"].Value = barcode.FullName;
+                barcodeLabel.Parameters["Fullname"].Value = _viewModel.GetAbbreviatedFullname(barcode.FullName);
                 barcodeLabel.Parameters["NidPp"].Value = barcode.NidPp;
                 barcodeLabel.Parameters["Birthdate"].Value = barcode.Birthdate;
                 barcodeLabel.Parameters["Age"].Value = barcode.Age;
