@@ -270,7 +270,6 @@
             // 
             // xrLabel2
             // 
-            this.xrLabel2.AutoWidth = true;
             this.xrLabel2.Dpi = 254F;
             this.xrLabel2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Patient].[Fullname]")});
