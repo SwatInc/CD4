@@ -40,6 +40,15 @@ namespace CD4.UI.View
             simpleButtonSearchRequest.Click += OnSearchRequest;
             simpleButtonPrintBarcode.Click += SimpleButtonPrintBarcode_Click;
             simpleButtonGetNextCin.Click += GenerateNextSampleNumber;
+            textEditNidPp.LostFocus += InitiatePatientSearchOnNidPp_LostFocus;
+        }
+
+        private void InitiatePatientSearchOnNidPp_LostFocus(object sender, EventArgs e)
+        {
+            var tempNidPp = _viewModel.NidPp;
+            if (string.IsNullOrEmpty(tempNidPp)) return;
+            OnPatientSearch(sender,e);
+            if (string.IsNullOrEmpty(_viewModel.NidPp)) { _viewModel.NidPp = tempNidPp; }
         }
 
         private async void GenerateNextSampleNumber(object sender, EventArgs e)
