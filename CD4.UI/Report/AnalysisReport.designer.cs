@@ -109,6 +109,7 @@
             this.xrPictureBoxLaboratorylogo.Name = "xrPictureBoxLaboratorylogo";
             this.xrPictureBoxLaboratorylogo.SizeF = new System.Drawing.SizeF(568.4695F, 315.0657F);
             this.xrPictureBoxLaboratorylogo.Sizing = DevExpress.XtraPrinting.ImageSizeMode.ZoomImage;
+            this.xrPictureBoxLaboratorylogo.Visible = false;
             // 
             // xrLabelAnalysisReport
             // 
@@ -512,6 +513,7 @@
             this.xrPictureBoxInstituteStamp.Name = "xrPictureBoxInstituteStamp";
             this.xrPictureBoxInstituteStamp.SizeF = new System.Drawing.SizeF(458.6996F, 420.933F);
             this.xrPictureBoxInstituteStamp.Sizing = DevExpress.XtraPrinting.ImageSizeMode.ZoomImage;
+            this.xrPictureBoxInstituteStamp.Visible = false;
             // 
             // xrLabel23
             // 
