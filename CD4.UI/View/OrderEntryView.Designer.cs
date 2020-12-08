@@ -624,7 +624,6 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.KeyPreview = true;
             this.MaximizeBox = false;
-            this.MinimizeBox = false;
             this.Name = "OrderEntryView";
             this.Tag = "OrderEntryView";
             this.Text = "Order Entry";
