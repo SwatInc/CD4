@@ -6,6 +6,7 @@ using CD4.UI.Report;
 using DevExpress.XtraEditors;
 using DevExpress.XtraReports.UI;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -47,7 +48,7 @@ namespace CD4.UI.View
         {
             var tempNidPp = _viewModel.NidPp;
             if (string.IsNullOrEmpty(tempNidPp)) return;
-            OnPatientSearch(sender,e);
+            OnPatientSearch(sender, e);
             if (string.IsNullOrEmpty(_viewModel.NidPp)) { _viewModel.NidPp = tempNidPp; }
         }
 
@@ -81,12 +82,26 @@ namespace CD4.UI.View
 
         private async void OnSearchRequest(object sender, EventArgs e)
         {
-            await InitializeRequestSearchByCinAsync();
+            try
+            {
+                await InitializeRequestSearchByCinAsync();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
         }
 
         private async Task InitializeRequestSearchByCinAsync()
         {
-            await _viewModel.SearchRequestByCinAsync();
+            try
+            {
+                await _viewModel.SearchRequestByCinAsync();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
         }
 
         private async void OnConfirmAnalysisRequest(object sender, EventArgs e)
@@ -267,7 +282,14 @@ namespace CD4.UI.View
 
         private async void LookUpEditTests_Validated(object sender, EventArgs e)
         {
-            await _viewModel.ManageAddTestToRequestAsync();
+            try
+            {
+                await _viewModel.ManageAddTestToRequestAsync();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
         }
 
         private void InitializeDataBinding()
@@ -455,7 +477,17 @@ namespace CD4.UI.View
         /// <returns>True if able to load barcode data from database, even if the printing step fails.</returns>
         private async Task<bool> PrintBarcodeAsync()
         {
-            var barcodeData = await _viewModel.GetBarcodeData();
+            List<BarcodeDataModel> barcodeData;
+            try
+            {
+                barcodeData = await _viewModel.GetBarcodeData();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+                return false;
+            }
+
             if (barcodeData is null)
             {
                 XtraMessageBox.Show($"The current sample: {_viewModel.Cin} is not registered!\nPlease confirm the order first.");
