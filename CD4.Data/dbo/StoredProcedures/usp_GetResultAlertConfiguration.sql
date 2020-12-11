@@ -10,4 +10,5 @@ BEGIN
 	FROM [dbo].[ResultAlertConfiguration] [rac]
 	INNER JOIN [dbo].[Test] [t] ON [rac].[TestId] = [t].[Id]
 	INNER JOIN [dbo].[ResultDataType] [rdt] ON [t].[ResultDataTypeId] = [rdt].[Id]
+	WHERE [rac].[IsEnabled] = 1;
 END
