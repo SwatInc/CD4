@@ -876,8 +876,85 @@ namespace CD4.UI.View
             //check if the user is authorised
             if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.PrintReport")) return;
 
+            if (!DecideToContinuePrinting(cin)) return;
+
             //Raise an event indicating that a sample report is requested.
             GenerateReportByCin?.Invoke(this, cin);
+        }
+
+        private bool DecideToContinuePrinting(string cin)
+        {
+            var desicion = false;
+            //Is the application locally(on workstation) configured to show result alert notifications?
+            if (Properties.Resources.IsResultAlertEnabledOnReportPrint != "1") return desicion;
+
+            //Get all test names and results associated with the cin
+            var resultData = _viewModel.GetResultData(cin);
+            var alertMessages = GetApplicableAlertMessages(resultData);
+
+            //display the messages
+            if(!string.IsNullOrEmpty(alertMessages))
+            {
+                var userResponse = XtraMessageBox.Show($"Result alert notification triggered. Please read the following message(s).\n{alertMessages}"
+                    , "Result Print Alert", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if(userResponse == DialogResult.Yes) { desicion = true; }
+            }
+            else
+            {
+                desicion =  true;
+            }
+
+            return desicion;
+        }
+
+        private string GetApplicableAlertMessages(List<ResultModel> resultData)
+        {
+            string alertMessages = "";
+            foreach (var result in resultData)
+            {
+                var alertData = ResultAlertModelCollection.ResultAlertData.Find((x) => x.TestName == result.Test);
+                if (alertData is null) continue;
+
+                switch (alertData.ResultType)
+                {
+                    case "CODIFIED":
+                        if (alertData.Result == result.Result) { alertMessages += alertData.AlertMessage + "\n"; }
+                        break;
+                    case "NUMERIC":
+                        //remove any possible > or < from the result
+                        var processedResult = result.Result.Replace('>', ' ').Replace('<', ' ').Trim();
+                        double validatedNumericResult;
+                        double validatedNumericResultComparer;
+
+                        var numericResult = double.TryParse(processedResult, out validatedNumericResult);
+                        var isCompareResultNumeric = double.TryParse(alertData.Result, out validatedNumericResultComparer);
+
+                        if (!numericResult || !isCompareResultNumeric) continue;
+
+                        switch (alertData.Operator)
+                        {
+                            case "=":
+                                if (validatedNumericResultComparer == validatedNumericResult) { alertMessages += alertData.AlertMessage + "\n"; }
+                                break;
+                            case ">=":
+                                if (validatedNumericResultComparer >= validatedNumericResult) { alertMessages += alertData.AlertMessage + "\n"; }
+                                break;
+                            case "<":
+                                if (validatedNumericResultComparer < validatedNumericResult) { alertMessages += alertData.AlertMessage + "\n"; }
+                                break;
+                            case "<=":
+                                if (validatedNumericResultComparer <= validatedNumericResult) { alertMessages += alertData.AlertMessage + "\n"; }
+                                break;
+                            default:
+                                break;
+                        }
+
+                        break;
+                    default:
+                        break;
+                }
+            }
+            return alertMessages;
         }
 
         /// <summary>

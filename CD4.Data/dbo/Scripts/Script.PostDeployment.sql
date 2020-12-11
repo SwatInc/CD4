@@ -564,7 +564,6 @@ SELECT
 FROM [dbo].[unit] [u]
 WHERE [u].[Unit] = ' ';
 
-
 INSERT INTO [dbo].[Test] ([DisciplineId], [SampleTypeId], [Description], [Mask], [Reportable], [ResultDataTypeId], [UnitId], [DeafultCommented])
   VALUES (@DisciplineMolecular, @SampleTypeIdSerum, 'E Gene', '##.##', 1, @NumericId, @UnitNA, 0),
   (@DisciplineMolecular, @SampleTypeIdSerum, 'EAV (Internal Control)', '##.##', 1, @NumericId, @UnitNA, 0),
@@ -1062,6 +1061,11 @@ GO
 SET IDENTITY_INSERT [dbo].[CommentList_CommentType] OFF
 GO
 
+INSERT [dbo].[ResultAlertConfiguration]([TestId],[Result],[AlertMessage],[Operator],[IsEnabled])
+VALUES
+(@result,'POSITIVE',CONCAT('Result for ',@result,' is POSITIVE. Are you sure that you want to print the report?'));
+
+GO
 ----Get a patient Id
 --DECLARE @PatientId int;
 --DECLARE @ScientistId int;

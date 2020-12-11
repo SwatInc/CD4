@@ -943,6 +943,11 @@ namespace CD4.UI.Library.ViewModel
             }
         }
 
+        public List<ResultModel> GetResultData(string cin)
+        {
+            return AllResultData.FindAll((x) => x.Cin == cin).ToList();
+        }
+
         #endregion
 
     }

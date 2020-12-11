@@ -47,5 +47,6 @@ namespace CD4.UI.Library.ViewModel
         Task<dynamic> GetResultHistoryAsync(ResultModel testRecord);
         bool CanCancelTestValidation(ResultModel testData);
         Task CancelTestValidation(ResultModel testData);
+        List<ResultModel> GetResultData(string cin);
     }
 }
