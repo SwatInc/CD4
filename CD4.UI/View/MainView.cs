@@ -65,7 +65,6 @@ namespace CD4.UI.View
             this.MdiChildActivate += MainView_MdiChildActivate;
 
             SetDisciplineRibbonOptions();
-
         }
 
         /// <summary>
@@ -261,11 +260,22 @@ namespace CD4.UI.View
             form.FormClosed += Form_FormClosed;
         }
 
-        private void AuthView_UserAuthorized(object sender, Library.Model.AuthorizeDetailEventArgs e)
+        private async void AuthView_UserAuthorized(object sender, Library.Model.AuthorizeDetailEventArgs e)
         {
             //Todo: assign this via MainViewModel by databinding
             barStaticItemUsernameAndRole.Caption = $"Welcome {e.FullName} ({e.UserRole})";
             EvaluateMainViewAuth();
+
+            try
+            {
+                //Get result alert configuration
+                var alertData = await _viewModel.GetResultAlertData();
+                ResultAlertModelCollection.ResultAlertData.AddRange(alertData);
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show($"An error occured while loading result alert data.\n{ex.Message}");
+            }
         }
 
         private void EvaluateMainViewAuth()
