@@ -120,6 +120,7 @@
     <Compile Include="Models\CompleteRequestSearchResultsModel.cs" />
     <Compile Include="Models\GenericModelAndListModel.cs" />
     <Compile Include="Models\GlobalSettingsModel.cs" />
+    <Compile Include="Models\ResultAlertModel.cs" />
     <Compile Include="Models\ResultHistoryModel.cs" />
     <Compile Include="Models\ResultReferenceRangeModel.cs" />
     <Compile Include="Models\SampleAndResultStatusAndResultModel.cs" />

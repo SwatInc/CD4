@@ -79,6 +79,15 @@ namespace CD4.UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 1.
+        /// </summary>
+        internal static string IsResultAlertEnabledOnReportPrint {
+            get {
+                return ResourceManager.GetString("IsResultAlertEnabledOnReportPrint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
         /// </summary>
         internal static DevExpress.Utils.Svg.SvgImage marker {
