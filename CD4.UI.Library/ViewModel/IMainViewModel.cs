@@ -10,5 +10,6 @@ namespace CD4.UI.Library.ViewModel
         Task<List<WorkStationPrintersInfoModel>> GetApplicationWideStaticData();
         int GetloggedInUserId();
         Image GetDisciplineImage(string image);
+        Task<List<ResultAlertModel>> GetResultAlertData();
     }
 }

@@ -94,6 +94,7 @@
     <Compile Include="Model\DemographicsConfirmationModel.cs" />
     <Compile Include="Model\PatientModel.cs" />
     <Compile Include="Model\RejectionReasonType.cs" />
+    <Compile Include="Model\ResultAlertModel.cs" />
     <Compile Include="Model\ResultModel.cs" />
     <Compile Include="Model\RequestSampleModel.cs" />
     <Compile Include="Model\StatusModel.cs" />

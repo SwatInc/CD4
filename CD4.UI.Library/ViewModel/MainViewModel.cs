@@ -76,6 +76,20 @@ namespace CD4.UI.Library.ViewModel
             return _authorizeDetail.UserId;
         }
 
+        public async Task<List<ResultAlertModel>> GetResultAlertData()
+        {
+            try
+            {
+                var result = await staticDataDataAccess.GetResultAlertData();
+                return mapper.Map<List<ResultAlertModel>>(result);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         private string GetWorkStationName()
         {
             return Environment.MachineName;
