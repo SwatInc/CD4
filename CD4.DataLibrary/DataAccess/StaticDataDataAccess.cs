@@ -1,9 +1,7 @@
 ﻿using CD4.DataLibrary.Models;
-using Dapper;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -220,6 +218,19 @@ namespace CD4.DataLibrary.DataAccess
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        public async Task<List<ResultAlertModel>> GetResultAlertData()
+        {
+            var storedProcedure = "[dbo].[usp_GetResultAlertConfiguration]";
+            try
+            {
+                return await LoadDataAsync<ResultAlertModel>(storedProcedure);
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

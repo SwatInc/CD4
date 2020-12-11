@@ -15,6 +15,7 @@ namespace CD4.DataLibrary.DataAccess
         Task<List<ProfilesAndTestModelOeModel>> GetAllProfileTestsAsync();
         Task<List<SitesModel>> GetAllSitesAsync();
         Task<List<ProfilesAndTestModelOeModel>> GetAllTestsAsync();
+        Task<List<ResultAlertModel>> GetResultAlertData();
         Task<List<WorkstationPrintersInfoModel>> GetWorkStationPrintersAsync(string workstationName);
         void LoadAll();
         Task<List<SitesModel>> LoadAllSites();
