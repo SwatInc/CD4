@@ -222,6 +222,8 @@
     <Build Include="dbo\StoredProcedures\usp_GetWorksheetBySpecifiedDateStatusIdAndDiscipline.sql" />
     <Build Include="dbo\StoredProcedures\usp_ReadGlobalSettings.sql" />
     <Build Include="dbo\StoredProcedures\usp_UpdateGlobalSettings.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetResultAlertConfiguration.sql" />
+    <Build Include="dbo\Tables\ResultAlertConfiguration.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />

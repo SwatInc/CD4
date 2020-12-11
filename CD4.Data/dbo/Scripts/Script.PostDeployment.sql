@@ -1063,7 +1063,7 @@ GO
 
 INSERT [dbo].[ResultAlertConfiguration]([TestId],[Result],[AlertMessage],[Operator],[IsEnabled])
 VALUES
-(@result,'POSITIVE',CONCAT('Result for ',@result,' is POSITIVE. Are you sure that you want to print the report?'));
+(@result,'POSITIVE','Result for <b>SARS-CoV-2 by RT-PCR</b> is <color=red><b><u>POSITIVE</u></b></color>. Are you sure that you want to print the report?','=',1);
 
 GO
 ----Get a patient Id

@@ -896,7 +896,7 @@ namespace CD4.UI.View
             if(!string.IsNullOrEmpty(alertMessages))
             {
                 var userResponse = XtraMessageBox.Show($"Result alert notification triggered. Please read the following message(s).\n{alertMessages}"
-                    , "Result Print Alert", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    , "Result Print Alert", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, allowHtmlText: DevExpress.Utils.DefaultBoolean.True);
                 if(userResponse == DialogResult.Yes) { desicion = true; }
             }
             else
