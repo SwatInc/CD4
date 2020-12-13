@@ -1100,7 +1100,7 @@ namespace CD4.UI.View
             splitContainerControlFunctions.SplitterPosition = (int)(height - 90m);
 
             //set splitter for sample and test functions panel
-            splitContainerControlSamplesAndTest.SplitterPosition = (int)(0.5 * this.Width);
+            splitContainerControlSamplesAndTest.SplitterPosition = (int)(0.5 * Width);
         }
 
     }
