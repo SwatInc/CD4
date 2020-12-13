@@ -965,6 +965,8 @@ namespace CD4.UI.View
             dataRefreshTimer.Enabled = false;
             gridControlSamples.RefreshDataSource();
             gridControlTests.RefreshDataSource();
+
+            SelectedSampleChanged(gridViewSamples, new FocusedRowChangedEventArgs(0, gridViewSamples.FocusedRowHandle));
         }
 
         private void CopyCinToClipBoard(object sender, EventArgs e)
