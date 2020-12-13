@@ -7,6 +7,7 @@ namespace CD4.UI.Library.Model
 {
     public class RequestSampleModel : INotifyPropertyChanged
     {
+        
         #region Private properties
         private int id;
         private int analysisRequestId;
@@ -25,6 +26,7 @@ namespace CD4.UI.Library.Model
         private string clinicalDetails;
         private int statusIconId;
         private string birthDateString;
+        private string _completeAddress;
 
         #endregion
 
@@ -146,9 +148,20 @@ namespace CD4.UI.Library.Model
             {
                 if (atollIslandCountry == value) return;
                 atollIslandCountry = value;
+                CompleteAddress = $"{Address}, {AtollIslandCountry}";
                 OnPropertyChanged();
             }
         }
+
+        public string CompleteAddress
+        {
+            get => _completeAddress; set
+            {
+                _completeAddress = value;
+                OnPropertyChanged();
+            }
+        }
+
         public string EpisodeNumber
         {
             get => episodeNumber; set
