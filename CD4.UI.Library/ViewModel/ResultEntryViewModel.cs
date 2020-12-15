@@ -260,7 +260,7 @@ namespace CD4.UI.Library.ViewModel
             try
             {
                 //call datalayer to reject the sample.
-                var output = await _sampleDataAccess.RejectSampleAsync(cin, commentListId, 1);
+                var output = await _sampleDataAccess.RejectSampleAsync(cin, commentListId, _authorizeDetail.UserId);
                 //map-out the result returned.
                 var mappedData = _mapper.Map<SampleAndResultStatusAndResultModel>(output);
                 //updateUI
@@ -836,7 +836,7 @@ namespace CD4.UI.Library.ViewModel
             {
                 // get the actual commentId and user Id to pass in
                 var output = await _resultDataAccess.RejectTestByResultId
-                    (testToReject.Id, testToReject.Cin, commentListId, 1);
+                    (testToReject.Id, testToReject.Cin, commentListId, _authorizeDetail.UserId);
 
                 var mappedData = _mapper.Map<SampleAndResultStatusAndResultModel>(output);
                 //updateUI
