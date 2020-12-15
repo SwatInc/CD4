@@ -855,12 +855,18 @@ namespace CD4.UI.View
             try
             {
                 await _viewModel.GetWorkSheet();
+                RefreshPatientPanelAndSelectedSampleTestsManually();
             }
             catch (Exception ex)
             {
 
                 XtraMessageBox.Show(ex.Message);
             }
+        }
+
+        private void RefreshPatientPanelAndSelectedSampleTestsManually()
+        {
+            SelectedSampleChanged(gridViewSamples, new FocusedRowChangedEventArgs(0, gridViewSamples.FocusedRowHandle));
         }
 
         private void SimpleButtonReport_Click(object sender, EventArgs e)
@@ -966,7 +972,7 @@ namespace CD4.UI.View
             gridControlSamples.RefreshDataSource();
             gridControlTests.RefreshDataSource();
 
-            SelectedSampleChanged(gridViewSamples, new FocusedRowChangedEventArgs(0, gridViewSamples.FocusedRowHandle));
+            Debug.WriteLine(sender.GetType().FullName);
         }
 
         private void CopyCinToClipBoard(object sender, EventArgs e)
