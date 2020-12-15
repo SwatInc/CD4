@@ -60,6 +60,16 @@ namespace CD4.UI.View
 
             this.ParentChanged += ResultEntryView_ParentChanged;
 
+            this.gridViewSamples.ColumnFilterChanged += OnSampleSearchComplete_RefreshPatientRibbonAndSelectedTests;
+        }
+
+        /// <summary>
+        /// Occurs when a column's filter condition changes. This event also raises when the Find Panel finishes its search.
+        /// This refreshes the patient details ribbon and selected tests to reflect the newly selected sample on search
+        /// </summary>
+        private void OnSampleSearchComplete_RefreshPatientRibbonAndSelectedTests(object sender, EventArgs e)
+        {
+            RefreshPatientPanelAndSelectedSampleTestsManually();
         }
 
         private void ResultEntryView_ParentChanged(object sender, EventArgs e)
