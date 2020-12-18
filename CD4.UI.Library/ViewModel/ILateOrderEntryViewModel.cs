@@ -9,8 +9,9 @@ namespace CD4.UI.Library.ViewModel
     {
         List<ProfilesAndTestsDatasourceOeModel> AllTestsData { get; set; }
         BindingList<TestModel> AddedTests { get; set; }
-        Task<bool> ConfirmAnalysisRequest();
+        Task<bool> ConfirmAnalysisRequestAync();
         Task ManageAddTestToRequestAsync();
+        void SetCurrentTestsOnSample(List<ResultModel> currentTests);
 
         string TestToAdd { get; set; }
         bool LoadingStaticDataStatus { get; set; }

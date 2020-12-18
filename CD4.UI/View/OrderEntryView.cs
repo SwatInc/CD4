@@ -223,7 +223,7 @@ namespace CD4.UI.View
                 if (XtraMessageBox.Show($"Do you want to selected {rowsSelected.Length} tests?",
                     "Confirmation", MessageBoxButtons.YesNo) != DialogResult.No)
                 {
-                    DeleteSelectedRow();
+                    gridViewRequestedTests.DeleteSelectedRows();
                 }
             }
 

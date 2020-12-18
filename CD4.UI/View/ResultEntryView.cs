@@ -1,19 +1,16 @@
 ﻿using CD4.UI.Library.Model;
 using CD4.UI.Library.ViewModel;
 using CD4.UI.UiSpecificModels;
-using DevExpress.Utils.DirectXPaint;
 using DevExpress.Utils.Menu;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid.Columns;
 using DevExpress.XtraGrid.Views.Base;
 using DevExpress.XtraGrid.Views.Grid;
-using DevExpress.XtraReports.UI;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CD4.UI.View
@@ -23,11 +20,15 @@ namespace CD4.UI.View
         private readonly IResultEntryViewModel _viewModel;
         private readonly IRejectionCommentViewModel _rejectionCommentViewModel;
         private readonly IUserAuthEvaluator _authEvaluator;
+        private readonly ILateOrderEntryViewModel _lateOrderEntryViewModel;
         System.Windows.Forms.Timer dataRefreshTimer = new System.Windows.Forms.Timer() { Enabled = true, Interval = 1000 };
 
         public event EventHandler<string> GenerateReportByCin;
 
-        public ResultEntryView(IResultEntryViewModel viewModel, IRejectionCommentViewModel rejectionCommentViewModel, IUserAuthEvaluator authEvaluator)
+        public ResultEntryView(IResultEntryViewModel viewModel,
+            IRejectionCommentViewModel rejectionCommentViewModel,
+            IUserAuthEvaluator authEvaluator,
+            ILateOrderEntryViewModel lateOrderEntryViewModel)
         {
             InitializeComponent();
             //Initialize grid columns
@@ -39,6 +40,7 @@ namespace CD4.UI.View
             _viewModel.TestHistoryData = new List<TestHistoryModel>();
             _rejectionCommentViewModel = rejectionCommentViewModel;
             _authEvaluator = authEvaluator;
+            _lateOrderEntryViewModel = lateOrderEntryViewModel;
             InitializeBinding();
 
 
@@ -333,7 +335,7 @@ namespace CD4.UI.View
                     //get the selected row handle
                     var selectedRowhandle = gridViewSamples.FocusedRowHandle;
                     //Ignore if no row is selected
-                    if (selectedRowhandle >=0)
+                    if (selectedRowhandle >= 0)
                     {
                         //if test not displayed.., return
                         if (_viewModel.GridTestActiveDatasource != ResultEntryViewModel.GridControlTestActiveDatasource.Tests) return;
@@ -426,7 +428,7 @@ namespace CD4.UI.View
                     break;
                 case Keys.Escape:
                     //if in test history mode, exit test history mode.
-                    if(_viewModel.GridSampleActiveDatasource == ResultEntryViewModel.GridControlSampleActiveDatasource.TestHistory)
+                    if (_viewModel.GridSampleActiveDatasource == ResultEntryViewModel.GridControlSampleActiveDatasource.TestHistory)
                     {
                         _viewModel.GridSampleActiveDatasource = ResultEntryViewModel.GridControlSampleActiveDatasource.Sample;
                         _viewModel.GridTestActiveDatasource = ResultEntryViewModel.GridControlTestActiveDatasource.Tests;
@@ -439,13 +441,22 @@ namespace CD4.UI.View
                     break;
                 case Keys.P: //handle Ctrl+P (Print report)
 
-                    if (e.Modifiers==Keys.Control)
+                    if (e.Modifiers == Keys.Control)
                     {
                         //check if the user is authorised
                         if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.PrintReport")) return;
 
                         SimpleButtonReport_Click(this, EventArgs.Empty);
                     }
+                    break;
+                case Keys.Insert:
+                    var senderItemForReflexTests = new DXMenuItem()
+                    {
+                        Tag = new RowInfo(gridViewSamples, gridViewSamples.FocusedRowHandle)
+                    };
+
+                    OnAddTestsToSampleAsync(senderItemForReflexTests, EventArgs.Empty);
+
                     break;
                 default:
                     break;
@@ -538,13 +549,42 @@ namespace CD4.UI.View
             menuItems.Add(new DXMenuItem("Reject Sample [ Shift+F11 ]", new EventHandler(OnRejectSampleClickAsync)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Cancel Sample Rejection [ Ctlr+Shift+F11 ]", new EventHandler(OnCancelRejectSampleClickAsync)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Sample Audit Trail [ F12 ]", new EventHandler(OnSampleAuditTrailClick)) { Tag = new RowInfo(view, rowHandle) });
+            menuItems.Add(new DXMenuItem("Add Test(s) [ Insert ]", new EventHandler(OnAddTestsToSampleAsync)) { Tag = new RowInfo(view, rowHandle) });
             return menuItems;
+        }
+
+        private async void OnAddTestsToSampleAsync(object sender, EventArgs e)
+        {
+            //check if the user is authorised
+            if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.ReflexTesting")) {return;}
+
+
+            var sample = GetSampleForMenu(sender, e);
+            var resultData = _viewModel.GetResultData(sample.Cin);
+            var reflexTestDialog = new LateOrderEntryView(_lateOrderEntryViewModel, resultData) 
+            {
+                StartPosition = FormStartPosition.CenterScreen
+            };
+            reflexTestDialog.ShowDialog();
+            if (reflexTestDialog.DialogResult)
+            {
+                try
+                {
+                    await _viewModel.RefreshResultDataOnUiAsync(sample.Cin);
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show(ex.Message);
+                }
+            }
+
+
         }
 
         private async void OnCancelRejectSampleClickAsync(object sender, EventArgs e)
         {
             //check if the user is authorised
-            if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.CancelSampleOrTestRejection")) return;
+            if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.CancelSampleOrTestRejection")) { return; }
 
             var sample = GetSampleForMenu(sender, e);
             Debug.WriteLine("Cancelling sample rejection: " + sample.Cin);
@@ -685,12 +725,12 @@ namespace CD4.UI.View
                 _viewModel.TestHistoryData.Clear();
                 foreach (var item in data)
                 {
-                    _viewModel.TestHistoryData.Add(new TestHistoryModel() 
+                    _viewModel.TestHistoryData.Add(new TestHistoryModel()
                     {
                         Number = item.Id,
                         Result = double.Parse(item.Result),
                         ResultDate = item.ResultDate,
-                        TestName = testRecord.Test 
+                        TestName = testRecord.Test
                     });
                 }
                 this.graphsUserControl.InitializeChart(_viewModel.TestHistoryData,
@@ -774,7 +814,7 @@ namespace CD4.UI.View
         {
             //check if the user is authorised
             if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.ValidateSampleOrTest")) return;
-            
+
             var sampleToValidate = GetSampleForMenu(sender, e);
             Debug.WriteLine("validating sample: " + sampleToValidate.Cin);
             //Call the view model to mark the sample and applicable associated tests as validated.
@@ -784,7 +824,7 @@ namespace CD4.UI.View
         /// <summary>
         /// Call the view model to reject the sample
         /// </summary>
-         async void OnRejectSampleClickAsync(object sender, EventArgs e)
+        async void OnRejectSampleClickAsync(object sender, EventArgs e)
         {
             //check if the user is authorised
             if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.RejectSampleOrTest")) return;
@@ -909,15 +949,15 @@ namespace CD4.UI.View
             var alertMessages = GetApplicableAlertMessages(resultData);
 
             //display the messages
-            if(!string.IsNullOrEmpty(alertMessages))
+            if (!string.IsNullOrEmpty(alertMessages))
             {
                 var userResponse = XtraMessageBox.Show($"Result alert notification triggered. Please read the following message(s).\n{alertMessages}"
                     , "Result Print Alert", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, allowHtmlText: DevExpress.Utils.DefaultBoolean.True);
-                if(userResponse == DialogResult.Yes) { desicion = true; }
+                if (userResponse == DialogResult.Yes) { desicion = true; }
             }
             else
             {
-                desicion =  true;
+                desicion = true;
             }
 
             return desicion;

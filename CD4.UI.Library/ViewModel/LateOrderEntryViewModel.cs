@@ -18,6 +18,10 @@ namespace CD4.UI.Library.ViewModel
         private bool _loadingStaticData;
         private readonly IMapper _mapper;
         private readonly IStaticDataDataAccess _staticData;
+        private readonly AuthorizeDetailEventArgs _authorizeDetail;
+        private readonly IResultDataAccess _resultDataAccess;
+        private  List<TestModel> _testsAlreadyPresentOnSample;
+        private string _cin = string.Empty;
         #endregion
 
         public event EventHandler<string> PushingLogs;
@@ -25,15 +29,23 @@ namespace CD4.UI.Library.ViewModel
         private event EventHandler InitializeStaticData;
 
         #region Default Constructor
-        public LateOrderEntryViewModel(IMapper mapper, IStaticDataDataAccess staticData)
+        public LateOrderEntryViewModel(IMapper mapper,
+            IStaticDataDataAccess staticData,
+            AuthorizeDetailEventArgs authorizeDetail,
+            IResultDataAccess resultDataAccess)
         {
             AddedTests = new BindingList<TestModel>();
             AllTestsData = new List<ProfilesAndTestsDatasourceOeModel>();
+            _testsAlreadyPresentOnSample = new List<TestModel>();
+
+            _mapper = mapper;
+            _staticData = staticData;
+            _authorizeDetail = authorizeDetail;
+            _resultDataAccess = resultDataAccess;
 
             InitializeStaticData += OnInitializeStaticDataAsync;
             InitializeStaticData(this, EventArgs.Empty);
-            _mapper = mapper;
-            _staticData = staticData;
+
         }
 
         #endregion
@@ -63,9 +75,18 @@ namespace CD4.UI.Library.ViewModel
         #endregion
 
         #region Public Methods
-        public Task<bool> ConfirmAnalysisRequest()
+        public async Task<bool> ConfirmAnalysisRequestAync()
         {
-            throw new NotImplementedException();
+            var testsToInsert = _mapper.Map<List<DataLibrary.Models.TestsModel>>(AddedTests);
+            try
+            {
+                await _resultDataAccess.ManageReflexTests(testsToInsert,_cin, _authorizeDetail.UserId);
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         public async Task ManageAddTestToRequestAsync()
@@ -90,6 +111,18 @@ namespace CD4.UI.Library.ViewModel
 
             Debug.WriteLine("Clearing the lookupedit box.");
             TestToAdd = null;
+        }
+
+        public void SetCurrentTestsOnSample(List<ResultModel> sampleResultData)
+        {
+            if (sampleResultData != null)
+            {
+                _testsAlreadyPresentOnSample = 
+                    _mapper.Map<List<TestModel>>(sampleResultData);
+
+                _cin = sampleResultData.FirstOrDefault().Cin;
+            }
+
         }
 
         #endregion
@@ -170,10 +203,12 @@ namespace CD4.UI.Library.ViewModel
 
         private async Task<bool> IsTestPresentOnRequest(string testDescription)
         {
-            Debug.WriteLine("Checking whether the test is already added.");
+            Debug.WriteLine("Checking whether the test is already added or is already present on sample");
             return await Task.Run(() =>
             {
-                return AddedTests.Any((t) => t.Description == testDescription);
+                var isTestAdded =  AddedTests.Any((t) => t.Description == testDescription);
+                var isPresentOnSample = _testsAlreadyPresentOnSample.Any((t) => t.Description == testDescription);
+                return isTestAdded || isPresentOnSample;
             });
         }
         #endregion

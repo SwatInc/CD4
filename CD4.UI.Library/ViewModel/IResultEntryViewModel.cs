@@ -48,5 +48,6 @@ namespace CD4.UI.Library.ViewModel
         bool CanCancelTestValidation(ResultModel testData);
         Task CancelTestValidation(ResultModel testData);
         List<ResultModel> GetResultData(string cin);
+        Task RefreshResultDataOnUiAsync(string cin);
     }
 }

@@ -33,10 +33,11 @@ namespace CD4.UI.View
             this.gridControlRequestedTests = new DevExpress.XtraGrid.GridControl();
             this.gridViewRequestedTests = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.groupControlTestSelection = new DevExpress.XtraEditors.GroupControl();
+            this.simpleButtonDeleteSelectedRows = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButtonClose = new DevExpress.XtraEditors.SimpleButton();
             this.progressPanelTestData = new DevExpress.XtraWaitForm.ProgressPanel();
-            this.lookUpEditTests = new DevExpress.XtraEditors.LookUpEdit();
             this.simpleButtonConfirm = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
+            this.lookUpEditTests = new DevExpress.XtraEditors.LookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlSelectedTestData)).BeginInit();
             this.groupControlSelectedTestData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlRequestedTests)).BeginInit();
@@ -48,10 +49,13 @@ namespace CD4.UI.View
             // 
             // groupControlSelectedTestData
             // 
+            this.groupControlSelectedTestData.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupControlSelectedTestData.Controls.Add(this.gridControlRequestedTests);
             this.groupControlSelectedTestData.Location = new System.Drawing.Point(3, 3);
             this.groupControlSelectedTestData.Name = "groupControlSelectedTestData";
-            this.groupControlSelectedTestData.Size = new System.Drawing.Size(350, 186);
+            this.groupControlSelectedTestData.Size = new System.Drawing.Size(350, 218);
             this.groupControlSelectedTestData.TabIndex = 1;
             this.groupControlSelectedTestData.Text = "Selected Tests Data";
             // 
@@ -61,7 +65,7 @@ namespace CD4.UI.View
             this.gridControlRequestedTests.Location = new System.Drawing.Point(2, 20);
             this.gridControlRequestedTests.MainView = this.gridViewRequestedTests;
             this.gridControlRequestedTests.Name = "gridControlRequestedTests";
-            this.gridControlRequestedTests.Size = new System.Drawing.Size(346, 164);
+            this.gridControlRequestedTests.Size = new System.Drawing.Size(346, 196);
             this.gridControlRequestedTests.TabIndex = 0;
             this.gridControlRequestedTests.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewRequestedTests});
@@ -77,15 +81,37 @@ namespace CD4.UI.View
             // 
             // groupControlTestSelection
             // 
-            this.groupControlTestSelection.Controls.Add(this.simpleButton1);
+            this.groupControlTestSelection.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupControlTestSelection.Controls.Add(this.progressPanelTestData);
+            this.groupControlTestSelection.Controls.Add(this.simpleButtonDeleteSelectedRows);
+            this.groupControlTestSelection.Controls.Add(this.simpleButtonClose);
             this.groupControlTestSelection.Controls.Add(this.simpleButtonConfirm);
             this.groupControlTestSelection.Controls.Add(this.lookUpEditTests);
             this.groupControlTestSelection.Location = new System.Drawing.Point(357, 3);
             this.groupControlTestSelection.Name = "groupControlTestSelection";
-            this.groupControlTestSelection.Size = new System.Drawing.Size(196, 186);
+            this.groupControlTestSelection.Size = new System.Drawing.Size(196, 218);
             this.groupControlTestSelection.TabIndex = 2;
+            this.groupControlTestSelection.Tag = "ResultEntry.ReflexTesting";
             this.groupControlTestSelection.Text = "Test Selection";
+            // 
+            // simpleButtonDeleteSelectedRows
+            // 
+            this.simpleButtonDeleteSelectedRows.Location = new System.Drawing.Point(101, 157);
+            this.simpleButtonDeleteSelectedRows.Name = "simpleButtonDeleteSelectedRows";
+            this.simpleButtonDeleteSelectedRows.Size = new System.Drawing.Size(82, 23);
+            this.simpleButtonDeleteSelectedRows.TabIndex = 18;
+            this.simpleButtonDeleteSelectedRows.Tag = "";
+            this.simpleButtonDeleteSelectedRows.Text = "Delete [ Del ]";
+            // 
+            // simpleButtonClose
+            // 
+            this.simpleButtonClose.Location = new System.Drawing.Point(101, 186);
+            this.simpleButtonClose.Name = "simpleButtonClose";
+            this.simpleButtonClose.Size = new System.Drawing.Size(82, 23);
+            this.simpleButtonClose.TabIndex = 17;
+            this.simpleButtonClose.Tag = "";
+            this.simpleButtonClose.Text = "Close [ F4 ]";
             // 
             // progressPanelTestData
             // 
@@ -93,12 +119,23 @@ namespace CD4.UI.View
             this.progressPanelTestData.Appearance.Options.UseBackColor = true;
             this.progressPanelTestData.BarAnimationElementThickness = 2;
             this.progressPanelTestData.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.progressPanelTestData.Location = new System.Drawing.Point(156, 82);
+            this.progressPanelTestData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressPanelTestData.Location = new System.Drawing.Point(2, 20);
             this.progressPanelTestData.Name = "progressPanelTestData";
-            this.progressPanelTestData.Size = new System.Drawing.Size(38, 31);
+            this.progressPanelTestData.Size = new System.Drawing.Size(192, 196);
             this.progressPanelTestData.TabIndex = 0;
             this.progressPanelTestData.TabStop = false;
             this.progressPanelTestData.Text = "Request data";
+            this.progressPanelTestData.Visible = false;
+            // 
+            // simpleButtonConfirm
+            // 
+            this.simpleButtonConfirm.Location = new System.Drawing.Point(13, 186);
+            this.simpleButtonConfirm.Name = "simpleButtonConfirm";
+            this.simpleButtonConfirm.Size = new System.Drawing.Size(82, 23);
+            this.simpleButtonConfirm.TabIndex = 16;
+            this.simpleButtonConfirm.Tag = "OrderEntry.Confirm";
+            this.simpleButtonConfirm.Text = "Confirm [ F6 ]";
             // 
             // lookUpEditTests
             // 
@@ -115,34 +152,17 @@ namespace CD4.UI.View
             this.lookUpEditTests.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.Standard;
             this.lookUpEditTests.Properties.ValidateOnEnterKey = true;
             this.lookUpEditTests.Size = new System.Drawing.Size(167, 20);
-            this.lookUpEditTests.TabIndex = 15;
-            // 
-            // simpleButtonConfirm
-            // 
-            this.simpleButtonConfirm.Location = new System.Drawing.Point(16, 154);
-            this.simpleButtonConfirm.Name = "simpleButtonConfirm";
-            this.simpleButtonConfirm.Size = new System.Drawing.Size(82, 23);
-            this.simpleButtonConfirm.TabIndex = 16;
-            this.simpleButtonConfirm.Tag = "OrderEntry.Confirm";
-            this.simpleButtonConfirm.Text = "Confirm [ F6 ]";
-            // 
-            // simpleButton1
-            // 
-            this.simpleButton1.Location = new System.Drawing.Point(104, 154);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(82, 23);
-            this.simpleButton1.TabIndex = 17;
-            this.simpleButton1.Tag = "OrderEntry.Confirm";
-            this.simpleButton1.Text = "Close [ F4 ]";
+            this.lookUpEditTests.TabIndex = 1;
             // 
             // LateOrderEntryView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(557, 192);
+            this.ClientSize = new System.Drawing.Size(557, 224);
             this.ControlBox = false;
             this.Controls.Add(this.groupControlSelectedTestData);
             this.Controls.Add(this.groupControlTestSelection);
+            this.KeyPreview = true;
             this.Name = "LateOrderEntryView";
             this.Text = "Add Tests / Profile Tests";
             ((System.ComponentModel.ISupportInitialize)(this.groupControlSelectedTestData)).EndInit();
@@ -164,7 +184,8 @@ namespace CD4.UI.View
         private DevExpress.XtraEditors.GroupControl groupControlTestSelection;
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelTestData;
         private DevExpress.XtraEditors.LookUpEdit lookUpEditTests;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.SimpleButton simpleButtonClose;
         private DevExpress.XtraEditors.SimpleButton simpleButtonConfirm;
+        private DevExpress.XtraEditors.SimpleButton simpleButtonDeleteSelectedRows;
     }
 }
