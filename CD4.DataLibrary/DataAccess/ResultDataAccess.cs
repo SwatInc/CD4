@@ -11,11 +11,15 @@ namespace CD4.DataLibrary.DataAccess
     {
         private readonly IStatusDataAccess statusData;
         private readonly IReferenceRangeDataAccess _referenceRangeDataAccess;
+        private readonly ISampleDataAccess _sampleDataAccess;
 
-        public ResultDataAccess(IStatusDataAccess statusData, IReferenceRangeDataAccess referenceRangeDataAccess)
+        public ResultDataAccess(IStatusDataAccess statusData,
+            IReferenceRangeDataAccess referenceRangeDataAccess,
+            ISampleDataAccess sampleDataAccess)
         {
             this.statusData = statusData;
             _referenceRangeDataAccess = referenceRangeDataAccess;
+            _sampleDataAccess = sampleDataAccess;
         }
 
         /// <summary>
@@ -28,8 +32,8 @@ namespace CD4.DataLibrary.DataAccess
         public async Task<bool> ManageRequestedTestsDataAsync
             (List<TestsModel> testsToInsert, List<TestsModel> testsToRemove, string cin, int loggedInUserId)
         {
-            var testToInsertTable = await GetTestsTableAsync(testsToInsert, cin, statusData);
-            var testToRemoveTable = await GetTestsTableAsync(testsToRemove, cin, statusData);
+            var testToInsertTable = await GetTestsTableAsync(testsToInsert, cin);
+            var testToRemoveTable = await GetTestsTableAsync(testsToRemove, cin);
 
             //determine whether to create, delete or sync result table data
             if (testsToInsert.Count > 0 && testsToRemove.Count > 0)
@@ -96,6 +100,7 @@ namespace CD4.DataLibrary.DataAccess
         private async Task<bool> InsertResultTableDataAsync(dynamic insertData)
         {
             var storedProcedure = "[dbo].[usp_InsertResultsTableData]";
+
             return await SelectInsertOrUpdateAsync<bool, dynamic>(storedProcedure, insertData);
 
         }
@@ -116,7 +121,7 @@ namespace CD4.DataLibrary.DataAccess
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         public static async Task<SqlMapper.ICustomQueryParameter> GetTestsTableAsync
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
-            (List<TestsModel> tests, string cin, IStatusDataAccess statusData)
+            (List<TestsModel> tests, string cin)
         {
             //Declare datatable instance and add the columns required for UDT
             var returnTable = new DataTable();
@@ -125,8 +130,6 @@ namespace CD4.DataLibrary.DataAccess
 
             try
             {
-                //Fetch Status Id for "Registered Status"
-                var statusId = statusData.GetRegisteredStatusId();
 
                 //Add rows to the Datatable declared, and return
                 foreach (var item in tests)
@@ -301,6 +304,69 @@ namespace CD4.DataLibrary.DataAccess
                     SampleData = output.T1,
                     ResultStatus = output.U1
                 };
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task ManageReflexTests(List<TestsModel> reflexTests, string cin, int loggedInUserId)
+        {
+            try
+            {
+                //getting sample status
+                var status = await _sampleDataAccess.GetSampleStatusAsync(cin);
+                var testToInsertTable = await GetTestsTableAsync(reflexTests, cin);
+                var paramters = new { TestsToInsert = testToInsertTable, UserId = loggedInUserId, InitialTestsStatus = status };
+
+                switch (status)
+                {
+                    case 1: //registered
+
+                        break;
+                    case 2: //collected
+
+                        break;
+                    case 3: //Received
+                        break;
+                    case 4: //To validate
+                        paramters = new { TestsToInsert = testToInsertTable, UserId = loggedInUserId, InitialTestsStatus = 3 };
+
+                        break;
+                    case 5: //validated
+                        throw new Exception("Cannot add reflex tests to a validated sample.");
+                    case 6: //Processing
+                        paramters = new { TestsToInsert = testToInsertTable, UserId = loggedInUserId, InitialTestsStatus = 3 };
+
+                        break;
+                    case 7: //Rejected
+                        throw new Exception("Cannot add reflex tests to a rejected sample.");
+                    case 8: //Removed
+                        throw new Exception("Cannot add reflex tests to a removed sample.");
+                    default:
+                        throw new Exception($"Cannnot determine sample status for sample number: [ {cin} ]");
+                }
+
+                await InsertResultTableDataAsync(paramters);
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<List<UpdatedResultAndStatusModel>> GetResultAndResultStatusDataByCin(string cin)
+        {
+            var storedProcedure = "[dbo].[usp_FetchResultWithStatusDataByCin]";
+            var parameters = new { Cin = cin };
+            try
+            {
+                return await LoadDataWithParameterAsync<UpdatedResultAndStatusModel, dynamic>
+                    (storedProcedure, parameters);
             }
             catch (Exception)
             {

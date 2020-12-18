@@ -28,7 +28,7 @@ namespace CD4.DataLibrary.Models
             SampleStatusId = request.StatusId;
             SiteId = request.SiteId;
             CommaDelimitedClinicalDetailsIds = ClinicalDetailsDataAccess.GetCsvClinicalDetails(request.ClinicalDetails);
-            RequestedTestData =  ResultDataAccess.GetTestsTableAsync(request.Tests, request.Cin, statusData).GetAwaiter().GetResult();
+            RequestedTestData =  ResultDataAccess.GetTestsTableAsync(request.Tests, request.Cin).GetAwaiter().GetResult();
         }
 
         #endregion

@@ -63,5 +63,21 @@ namespace CD4.DataLibrary.DataAccess
             }
 
         }
+
+        public async Task<int> GetSampleStatusAsync(string cin)
+        {
+            var storedProcedure = "usp_GetSampleStatus";
+            var parameter = new { Cin = cin };
+
+            try
+            {
+                return await SelectInsertOrUpdateAsync<int, dynamic>(storedProcedure, parameter);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
