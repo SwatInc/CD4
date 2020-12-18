@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[usp_SearchPatientByNidPp]
-	@NidPp varchar(50)
+	@NidPp nvarchar(50)
 AS
 BEGIN
 SET NOCOUNT ON;

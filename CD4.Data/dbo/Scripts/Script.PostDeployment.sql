@@ -1061,10 +1061,19 @@ GO
 SET IDENTITY_INSERT [dbo].[CommentList_CommentType] OFF
 GO
 
+DECLARE @resultnCoV int;
+
+SELECT
+  @resultnCoV = [Id]
+FROM [dbo].[Test] [t]
+WHERE [t].[Description] = 'SARS-CoV-2 Result';
+
 INSERT [dbo].[ResultAlertConfiguration]([TestId],[Result],[AlertMessage],[Operator],[IsEnabled])
 VALUES
-(@result,'POSITIVE','Result for <b>SARS-CoV-2 by RT-PCR</b> is <color=red><b><u>POSITIVE</u></b></color>. Are you sure that you want to print the report?','=',1);
+(@resultnCoV,'POSITIVE','Result for <b>SARS-CoV-2 by RT-PCR</b> is <color=red><b><u>POSITIVE</u></b></color>. Are you sure that you want to print the report?','=',1);
 
+GO
+INSERT INTO [dbo].[GlobalSettings]([VerifyNidPpOnOrder]) VALUES (1)
 GO
 ----Get a patient Id
 --DECLARE @PatientId int;

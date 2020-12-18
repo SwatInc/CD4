@@ -117,29 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AuditColumns" xml:space="preserve">
-    <value>[{"Caption":"Event Time","FieldName":"CreatedAt","AllowEdit":false,"Name":"gridColumnCreatedAt","Visible":true,"VisibleIndex":0,"Width":110},{"Caption":"Event Details","FieldName":"Details","AllowEdit":false,"Name":"gridColumnDetails","Visible":true,"VisibleIndex":1,"Width":300},{"Caption":"CIN","FieldName":"Cin","AllowEdit":false,"Name":"gridColumnCinAudit","Visible":true,"VisibleIndex":2,"Width":50}]</value>
-  </data>
-  <data name="IsMultipleDisciplinesEnabled" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <data name="IsResultAlertEnabledOnReportPrint" xml:space="preserve">
-    <value>1</value>
-  </data>
-  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="marker" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\marker.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v18.2, Version=18.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
-  </data>
-  <data name="popupMenuDisciplines" xml:space="preserve">
-    <value>[{"Caption":"All Disciplines","Image":"Disciplines","Name":"barButtonItemAllDisciplines","Tag":0},{"Caption":"Diagnostic Haematology","Image":"Haematology","Name":"barButtonItemHaematology","Tag":1},{"Caption":"ClinicalPathology","Image":"ClinicalPathology","Name":"barButtonItemClinicalPathology","Tag":4},{"Caption":"Microbiology","Image":"Microbiology","Name":"barButtonItemMicrobiology","Tag":3},{"Caption":"Molecular Biology","Image":"Molecular","Name":"barButtonItemMolecular","Tag":2},{"Caption":"Clinical Chemistry","Image":"ClinicalChemistry","Name":"barButtonItemChemistry","Tag":5},{"Caption":"Immunology &amp; Serology","Image":"ImmunologyAndSerology","Name":"barButtonItemImmunologyAndSerology","Tag":6}]</value>
-  </data>
-  <data name="SampleColumns" xml:space="preserve">
-    <value>[{"Caption":"Seq.","FieldName":"Id","AllowEdit":false,"Name":"gridColumnSequence","Visible":true,"VisibleIndex":0,"Width":40},{"Caption":" ","FieldName":"StatusIcon","AllowEdit":false,"Name":"gridColumnSampleStatus","Visible":true,"VisibleIndex":1,"Width":32},{"Caption":"CIN","FieldName":"Cin","AllowEdit":false,"Name":"gridColumnCin","Visible":true,"VisibleIndex":2,"Width":100},{"Caption":"Nid \/ PP","FieldName":"NationalId","AllowEdit":false,"Name":"gridColumnNationalId","Visible":true,"VisibleIndex":3,"Width":100},{"Caption":"Patient Name","FieldName":"PatientName","AllowEdit":false,"Name":"gridColumnPatientName","Visible":true,"VisibleIndex":4,"Width":200},{"Caption":"Address &amp; Nationality","FieldName":"CompleteAddress","AllowEdit":false,"Name":"gridColumnAddress","Visible":true,"VisibleIndex":5,"Width":200},{"Caption":"Rec. Date","FieldName":"ReceivedDate","AllowEdit":false,"Name":"gridColumnReceivedDate","Visible":true,"VisibleIndex":6,"Width":100},{"Caption":"Col. Date","FieldName":"CollectionDate","AllowEdit":false,"Name":"gridColumnCollectedDate","Visible":true,"VisibleIndex":7,"Width":110}]</value>
-  </data>
-  <data name="TestColumns" xml:space="preserve">
-    <value>[{"Caption":"Test","FieldName":"Test","AllowEdit":false,"Name":"gridColumnTestName","Visible":true,"VisibleIndex":0,"Width":109},{"Caption":" ","FieldName":"StatusIcon","AllowEdit":false,"Name":"gridColumnStatusIcon","Visible":true,"VisibleIndex":1,"Width":36},{"Caption":"Result","FieldName":"Result","AllowEdit":true,"Name":"gridColumnResult","Visible":true,"VisibleIndex":2,"Width":109},{"Caption":"Unit","FieldName":"Unit","AllowEdit":false,"Name":"gridColumnUnit","Visible":true,"VisibleIndex":3,"Width":170},{"Caption":"Ref. Code","FieldName":"ReferenceCode","AllowEdit":false,"Name":"gridColumnReferenceCode","Visible":false,"VisibleIndex":4,"Width":1},{"Caption":"Is Delta OK","FieldName":"IsDeltaOk","AllowEdit":false,"Name":"gridColumnIsDeltaOk","Visible":false,"VisibleIndex":5,"Width":1}]</value>
-  </data>
-  <data name="TestHistoryColumns" xml:space="preserve">
-    <value>[{"Caption":"Seq.","FieldName":"Number","AllowEdit":false,"Name":"gridColumnNumber","Visible":true,"VisibleIndex":0,"Width":40},{"Caption":"Assay","FieldName":"TestName","AllowEdit":false,"Name":"gridColumnTestName","Visible":true,"VisibleIndex":1,"Width":100},{"Caption":"Result","FieldName":"Result","AllowEdit":false,"Name":"gridColumnResult","Visible":true,"VisibleIndex":2,"Width":100},{"Caption":"Result Date","FieldName":"ResultDate","AllowEdit":false,"Name":"gridColumnResultDate","Visible":true,"VisibleIndex":3,"Width":150}]</value>
-  </data>
 </root>

@@ -192,7 +192,19 @@ namespace CD4.UI.Library.ViewModel
         #endregion
 
         #region Public Methods
+        public async Task RefreshResultDataOnUiAsync(string cin)
+        {
+            try
+            {
+                var data = await _resultDataAccess.GetResultAndResultStatusDataByCin(cin);
+                UpdateUiOnAddingReflexTests(data, cin);
+            }
+            catch (Exception)
+            {
 
+                throw;
+            }
+        }
         public enum GridControlTestActiveDatasource
         {
             Tests,
@@ -260,7 +272,7 @@ namespace CD4.UI.Library.ViewModel
             try
             {
                 //call datalayer to reject the sample.
-                var output = await _sampleDataAccess.RejectSampleAsync(cin, commentListId, 1);
+                var output = await _sampleDataAccess.RejectSampleAsync(cin, commentListId, _authorizeDetail.UserId);
                 //map-out the result returned.
                 var mappedData = _mapper.Map<SampleAndResultStatusAndResultModel>(output);
                 //updateUI
@@ -556,6 +568,52 @@ namespace CD4.UI.Library.ViewModel
             RequestDataRefreshed?.Invoke(this, EventArgs.Empty);
         }
 
+        private void UpdateUiOnAddingReflexTests
+            (List<UpdatedResultAndStatusModel> sampleResultAndResultStatus, string cin)
+        {
+            if (sampleResultAndResultStatus is null) { return; }
+
+            //iterate the response
+            foreach (var item in sampleResultAndResultStatus)
+            {
+                //look for the presence of result
+                var result = SelectedResultData.FirstOrDefault((r) => r.Id == item.ResultId);
+                if (result != null)
+                {
+                    result.Result = item.Result;
+                    result.ReferenceCode = item.ReferenceCode;
+                    result.StatusIconId = item.StatusId;
+                }
+                else
+                {
+                    //add test that are not present currently
+                    SelectedResultData.Add(new ResultModel()
+                    {
+                        Id = item.ResultId,
+                        Cin = item.Cin,
+                        Test = item.TestName,
+                        Result = item.Result,
+                        ReferenceCode = item.ReferenceCode,
+                        StatusIconId = item.StatusId,
+                        Unit = item.Unit
+                    });
+                    AllResultData.Add(new ResultModel()
+                    {
+                        Id = item.ResultId,
+                        Cin = item.Cin,
+                        Test = item.TestName,
+                        Result = item.Result,
+                        ReferenceCode = item.ReferenceCode,
+                        StatusIconId = item.StatusId,
+                        Unit = item.Unit
+                    });
+                }
+            }
+
+            //refresh ui
+            RequestDataRefreshed?.Invoke(this, EventArgs.Empty);
+        }
+
         /// <summary>
         /// updates UI after sample is rejected.
         /// </summary>
@@ -836,7 +894,7 @@ namespace CD4.UI.Library.ViewModel
             {
                 // get the actual commentId and user Id to pass in
                 var output = await _resultDataAccess.RejectTestByResultId
-                    (testToReject.Id, testToReject.Cin, commentListId, 1);
+                    (testToReject.Id, testToReject.Cin, commentListId, _authorizeDetail.UserId);
 
                 var mappedData = _mapper.Map<SampleAndResultStatusAndResultModel>(output);
                 //updateUI

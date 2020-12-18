@@ -2,18 +2,13 @@
 using CD4.UI.Library.ViewModel;
 using CD4.UI.View;
 using DevExpress.UserSkins;
-using DevExpress.XtraReports;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CD4.UI
 {
 
-    public class Cd4Application :ICd4Application
+    public class Cd4Application : ICd4Application
     {
         private static readonly log4net.ILog _log = LogHelper.GetLogger();
         private readonly IReportsDataAccess reportsDataAccess;
@@ -34,8 +29,16 @@ namespace CD4.UI
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            BonusSkins.Register();
-            Application.Run(new MainView(_mainViewModel, reportsDataAccess, _userAuthEvaluator) {Tag = "MainView" });
+            try
+            {
+                BonusSkins.Register();
+                Application.Run(new MainView(_mainViewModel, reportsDataAccess, _userAuthEvaluator) { Tag = "MainView" });
+
+            }
+            catch (Exception ex)
+            {
+                _log.Fatal(ex);
+            }
 
         }
     }

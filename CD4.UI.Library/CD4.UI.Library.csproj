@@ -138,6 +138,7 @@
     <Compile Include="ViewModel\ICodifiedValuesViewModel.cs" />
     <Compile Include="ViewModel\ICountryViewModel.cs" />
     <Compile Include="ViewModel\IGenderViewModel.cs" />
+    <Compile Include="ViewModel\ILateOrderEntryViewModel.cs" />
     <Compile Include="ViewModel\IMainViewModel.cs" />
     <Compile Include="ViewModel\IOrderEntryViewModel.cs" />
     <Compile Include="ViewModel\IPatientSearchResultsViewModel.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="ViewModel\IScientistViewModel.cs" />
     <Compile Include="ViewModel\ISitesViewModel.cs" />
     <Compile Include="ViewModel\ITestViewModel.cs" />
+    <Compile Include="ViewModel\LateOrderEntryViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\OrderEntryViewModel.cs" />
     <Compile Include="ViewModel\PatientSearchResultsViewModel.cs" />

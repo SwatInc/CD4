@@ -106,20 +106,28 @@ namespace CD4.UI.View
 
         private async void OnConfirmAnalysisRequest(object sender, EventArgs e)
         {
-            var demographicsConfirmRequired = await _viewModel.OrderRequiresNidPpConfirmationAsync();
-            if (demographicsConfirmRequired.IsConfirmationRequired)
+            try
             {
-                this._viewModel.LoadingStaticDataStatus = true;
-                var dialog = new PatientDetailsConfirmationView(demographicsConfirmRequired);
-                dialog.ShowDialog();
-                if (dialog.DialogResult == DialogResult.Cancel)
+                var demographicsConfirmRequired = await _viewModel.OrderRequiresNidPpConfirmationAsync();
+                if (demographicsConfirmRequired.IsConfirmationRequired)
                 {
+                    this._viewModel.LoadingStaticDataStatus = true;
+                    var dialog = new PatientDetailsConfirmationView(demographicsConfirmRequired);
+                    dialog.ShowDialog();
+                    if (dialog.DialogResult == DialogResult.Cancel)
+                    {
+                        this._viewModel.LoadingStaticDataStatus = false;
+                        return;
+                    }
                     this._viewModel.LoadingStaticDataStatus = false;
-                    return;
-                }
-                this._viewModel.LoadingStaticDataStatus = false;
 
+                }
             }
+            catch (Exception)
+            {
+                //ignore
+            }
+
             try
             {
                 var status = await _viewModel.ConfirmAnalysisRequest();
@@ -133,16 +141,23 @@ namespace CD4.UI.View
                 }
 
             }
-            catch (NullReferenceException ex)
+            catch (NullReferenceException)
             {
                 XtraMessageBox.Show("Please make sure that all the required fields are completed.");
             }
             catch (Exception ex)
             {
-
-                //XtraMessageBox.Show(ex.Message +"\n" +ex.StackTrace);
-                XtraMessageBox.Show(ex.Message);
-                XtraMessageBox.Show(ex.StackTrace);
+                // REMOVE THIS. HANDLES THIS PROPERLY IN DATALAYER
+                if (ex.Message.Contains("NULL") && ex.Message.Contains("TimeStamp") && ex.Message.Contains("CD4Data.dbo.TrackingHistory"))
+                {
+                    XtraMessageBox.Show("Analysis request confirmed. The sample collected date was not specified though");
+                    return;
+                }
+                else
+                {
+                    XtraMessageBox.Show(ex.Message);
+                    //XtraMessageBox.Show(ex.StackTrace);
+                }
             }
         }
 
@@ -208,7 +223,7 @@ namespace CD4.UI.View
                 if (XtraMessageBox.Show($"Do you want to selected {rowsSelected.Length} tests?",
                     "Confirmation", MessageBoxButtons.YesNo) != DialogResult.No)
                 {
-                    DeleteSelectedRow();
+                    gridViewRequestedTests.DeleteSelectedRows();
                 }
             }
 

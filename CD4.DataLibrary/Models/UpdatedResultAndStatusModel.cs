@@ -13,6 +13,8 @@ namespace CD4.DataLibrary.Models
         public string Result { get; set; }
         public string ReferenceCode { get; set; }
         public int StatusId { get; set; }
+        public string TestName { get; set; }
+        public string Unit { get; set; }
 
     }
 }

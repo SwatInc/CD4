@@ -16,6 +16,14 @@ namespace CD4.UI.Library.Helpers
 
             var names = fullname.Split(' ');
 
+            //two names in fullname and length graterthan max length
+            if (names.Length == 2 && fullname.Length > maxLength)
+            {
+                //abbreviate 1st name segment
+                var name = $"{names[0].Substring(0, 1)}.";
+                abbreviatedFullname =  $"{name} {names[1]}";
+            }
+
             //Not abbreviating first and last name
             for (int i = 1; i < names.Length-1; i++)
             {

@@ -15,6 +15,8 @@ BEGIN
 
         SELECT @AcceptedStatusId = 1 WHERE @StatusId = 1;
 		SELECT @AcceptedStatusId = 2 WHERE @StatusId = 2;
+		SELECT @AcceptedStatusId = 7 WHERE @StatusId = 7;
+
         -- get distinct Cins that have current status as specified in @StatusId and are Collected[Status: 2] on Specified date or later and the specified discipline
 		INSERT INTO @TempCins
 		SELECT DISTINCT([S].[Cin]),[S].[AnalysisRequestId] 

@@ -121,9 +121,10 @@
             this.progressPanelRequest.Appearance.Options.UseBackColor = true;
             this.progressPanelRequest.BarAnimationElementThickness = 2;
             this.progressPanelRequest.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.progressPanelRequest.Location = new System.Drawing.Point(174, 125);
+            this.progressPanelRequest.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressPanelRequest.Location = new System.Drawing.Point(2, 20);
             this.progressPanelRequest.Name = "progressPanelRequest";
-            this.progressPanelRequest.Size = new System.Drawing.Size(20, 14);
+            this.progressPanelRequest.Size = new System.Drawing.Size(192, 119);
             this.progressPanelRequest.TabIndex = 0;
             this.progressPanelRequest.TabStop = false;
             this.progressPanelRequest.Text = "Request data";
@@ -152,8 +153,8 @@
             this.textEditEpisodeNumber.Location = new System.Drawing.Point(14, 30);
             this.textEditEpisodeNumber.Name = "textEditEpisodeNumber";
             this.textEditEpisodeNumber.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.textEditEpisodeNumber.Properties.NullText = "EpisodeNumber";
-            this.textEditEpisodeNumber.Properties.NullValuePrompt = "EpisodeNumber";
+            this.textEditEpisodeNumber.Properties.NullText = "Receipt Number";
+            this.textEditEpisodeNumber.Properties.NullValuePrompt = "Receipt Number";
             this.textEditEpisodeNumber.Properties.NullValuePromptShowForEmptyValue = true;
             this.textEditEpisodeNumber.Size = new System.Drawing.Size(167, 20);
             this.textEditEpisodeNumber.TabIndex = 1;

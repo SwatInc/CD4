@@ -1,6 +1,7 @@
 ﻿CREATE PROCEDURE [dbo].[usp_InsertResultsTableData]
 	@TestsToInsert [dbo].[ResultTableInsertDataUDT] READONLY,
-	@UserId int
+	@UserId int,
+	@InitialTestsStatus int = 1
 AS
 BEGIN
 SET NOCOUNT ON;
@@ -41,11 +42,11 @@ DECLARE @ReturnValue bit = 0;
             INSERT INTO [dbo].[ResultTracking] ([ResultId],[StatusId],[UsersId])
 			OUTPUT 3, INSERTED.[ResultId],INSERTED.[CreatedAt]
 					INTO @TempTrackingHistory([TrackingType],[ResultId],[TimeStamp])
-			SELECT [ResultId],1,@UserId FROM @TrackingData;
+			SELECT [ResultId],@InitialTestsStatus,@UserId FROM @TrackingData;
 
 			--TRACKING HISTORY
 			INSERT INTO [dbo].[TrackingHistory]([TrackingType],[AnalysisRequestId],[SampleCin],[ResultId],[StatusId],[UsersId],[TimeStamp])
-			SELECT [TrackingType],[AnalysisRequestId],[SampleCin],[ResultId],1,@UserId,[TimeStamp]
+			SELECT [TrackingType],[AnalysisRequestId],[SampleCin],[ResultId],@InitialTestsStatus,@UserId,[TimeStamp]
 			FROM @TempTrackingHistory;
 
             -- AUDIT
@@ -56,7 +57,7 @@ DECLARE @ReturnValue bit = 0;
 			INSERT INTO [dbo].[AuditTrail]([AuditTypeId],[Cin],[StatusId],[Details])
 			SELECT @AuditTypeIdtest
 				, [I].[Sample_Cin]
-				, 1 -- registered status
+				, @InitialTestsStatus -- registered status / passed-in status Id
 				, (SELECT CONCAT('User: ',@Username,N' registered for Cin: ',[Sample_Cin] ,N' ', [Description]) 
 			FROM [dbo].[Test] WHERE [Id] = [I].[TestId]) 
 			FROM @TestsToInsert [I];

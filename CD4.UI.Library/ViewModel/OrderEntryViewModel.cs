@@ -387,9 +387,7 @@ namespace CD4.UI.Library.ViewModel
             try
             {
                var nextCinSeed = await _requestDataAccess.GetNextCinSeed();
-                var formattedCinSeed = FormatCinSeed(nextCinSeed);
-                this.EpisodeNumber = $"E{formattedCinSeed}";
-                this.Cin = $"ML{formattedCinSeed}";
+               Cin = FormatCinSeed(nextCinSeed);
             }
             catch (Exception)
             {
@@ -404,7 +402,8 @@ namespace CD4.UI.Library.ViewModel
             var padCharacter = '0';
             var prefix = "ML";
 
-            return nextCinSeed.ToString().PadLeft(totalLength, padCharacter);
+            var paddedNextSeed =  nextCinSeed.ToString().PadLeft(totalLength, padCharacter);
+            return $"{prefix}{paddedNextSeed}";
         }
 
         public async Task SearchRequestByCinAsync()
@@ -520,6 +519,11 @@ namespace CD4.UI.Library.ViewModel
                 var atollIslandData = GetAtollModelByAtollAndIslandName(mappedRequest.Atoll, mappedRequest.Island);
                 mappedRequest.AtollId = atollIslandData.Id;
 
+                if(!validateAnalysisRequest(mappedRequest))
+                {
+
+                }
+
                 var result = await _requestDataAccess.ConfirmRequestAsync
                     (mappedRequest, _authorizeDetail.UserId);
 
@@ -531,6 +535,29 @@ namespace CD4.UI.Library.ViewModel
                 throw;
             }
 
+        }
+
+        private bool validateAnalysisRequest(DataLibrary.Models.AnalysisRequestDataModel mappedRequest)
+        {
+            string valdationFailMessage = "";
+            if(mappedRequest.SiteId == 0)
+            {
+                valdationFailMessage += "Sample collection site needs to be specified to save the Analysis Request.\n";
+            }
+
+            if (string.IsNullOrEmpty(mappedRequest.EpisodeNumber))
+            {
+                valdationFailMessage += "Please specify receipt number.\n";
+            }
+
+            if(string.IsNullOrEmpty(valdationFailMessage))
+            {
+                return true;
+            }
+            else
+            {
+                throw new Exception($"Analysis request validation failed! please refer to the following messages.\n\n{valdationFailMessage}");
+            }
         }
 
         public async Task ManageAddTestToRequestAsync()

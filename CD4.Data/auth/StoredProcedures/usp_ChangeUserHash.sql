@@ -5,5 +5,5 @@ AS
 BEGIN
 	UPDATE [dbo].[Users]
 	SET [PasswordHash] = @PasswordHash
-	WHERE [Username] = @UserName;
+	WHERE [UserName] = @UserName;
 END
