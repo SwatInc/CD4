@@ -128,7 +128,7 @@
   </data>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="marker" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\marker.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v18.2, Version=18.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+    <value>..\Resources\marker.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="popupMenuDisciplines" xml:space="preserve">
     <value>[{"Caption":"All Disciplines","Image":"Disciplines","Name":"barButtonItemAllDisciplines","Tag":0},{"Caption":"Diagnostic Haematology","Image":"Haematology","Name":"barButtonItemHaematology","Tag":1},{"Caption":"ClinicalPathology","Image":"ClinicalPathology","Name":"barButtonItemClinicalPathology","Tag":4},{"Caption":"Microbiology","Image":"Microbiology","Name":"barButtonItemMicrobiology","Tag":3},{"Caption":"Molecular Biology","Image":"Molecular","Name":"barButtonItemMolecular","Tag":2},{"Caption":"Clinical Chemistry","Image":"ClinicalChemistry","Name":"barButtonItemChemistry","Tag":5},{"Caption":"Immunology &amp; Serology","Image":"ImmunologyAndSerology","Name":"barButtonItemImmunologyAndSerology","Tag":6}]</value>
