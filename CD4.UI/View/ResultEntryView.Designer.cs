@@ -30,6 +30,7 @@ namespace CD4.UI.View
         /// </summary>
         private void InitializeComponent()
         {
+            
             this.labelControlNationalId = new DevExpress.XtraEditors.LabelControl();
             this.labelControlAgeSex = new DevExpress.XtraEditors.LabelControl();
             this.labelControlBirthdate = new DevExpress.XtraEditors.LabelControl();
@@ -59,7 +60,7 @@ namespace CD4.UI.View
             this.dateEditLoadWorksheetFrom = new DevExpress.XtraEditors.DateEdit();
             this.simpleButtonReport = new DevExpress.XtraEditors.SimpleButton();
             this.gridColumnSampleStatus = new DevExpress.XtraGrid.Columns.GridColumn();
-            labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
+            this.labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).BeginInit();
             this.splitContainerControlPatient.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlSelectedPatientRequestClinicalDetailsArea)).BeginInit();
@@ -85,7 +86,7 @@ namespace CD4.UI.View
             // 
             this.labelControlNationalId.Location = new System.Drawing.Point(12, 50);
             this.labelControlNationalId.Name = "labelControlNationalId";
-            this.labelControlNationalId.Size = new System.Drawing.Size(49, 13);
+            this.labelControlNationalId.Size = new System.Drawing.Size(54, 13);
             this.labelControlNationalId.TabIndex = 1;
             this.labelControlNationalId.Text = "NationalId";
             // 
@@ -101,7 +102,7 @@ namespace CD4.UI.View
             // 
             this.labelControlBirthdate.Location = new System.Drawing.Point(167, 50);
             this.labelControlBirthdate.Name = "labelControlBirthdate";
-            this.labelControlBirthdate.Size = new System.Drawing.Size(44, 13);
+            this.labelControlBirthdate.Size = new System.Drawing.Size(47, 13);
             this.labelControlBirthdate.TabIndex = 3;
             this.labelControlBirthdate.Text = "Birthdate";
             // 
@@ -109,7 +110,7 @@ namespace CD4.UI.View
             // 
             this.labelControlPhoneNumber.Location = new System.Drawing.Point(167, 69);
             this.labelControlPhoneNumber.Name = "labelControlPhoneNumber";
-            this.labelControlPhoneNumber.Size = new System.Drawing.Size(67, 13);
+            this.labelControlPhoneNumber.Size = new System.Drawing.Size(74, 13);
             this.labelControlPhoneNumber.TabIndex = 4;
             this.labelControlPhoneNumber.Text = "PhoneNumber";
             // 
@@ -117,7 +118,7 @@ namespace CD4.UI.View
             // 
             this.labelControlAddress.Location = new System.Drawing.Point(280, 50);
             this.labelControlAddress.Name = "labelControlAddress";
-            this.labelControlAddress.Size = new System.Drawing.Size(39, 13);
+            this.labelControlAddress.Size = new System.Drawing.Size(41, 13);
             this.labelControlAddress.TabIndex = 5;
             this.labelControlAddress.Text = "Address";
             // 
@@ -125,7 +126,7 @@ namespace CD4.UI.View
             // 
             this.labelControlAtollIslandCountry.Location = new System.Drawing.Point(280, 69);
             this.labelControlAtollIslandCountry.Name = "labelControlAtollIslandCountry";
-            this.labelControlAtollIslandCountry.Size = new System.Drawing.Size(103, 13);
+            this.labelControlAtollIslandCountry.Size = new System.Drawing.Size(108, 13);
             this.labelControlAtollIslandCountry.TabIndex = 6;
             this.labelControlAtollIslandCountry.Text = "Atoll, Island, Country";
             // 
@@ -133,7 +134,7 @@ namespace CD4.UI.View
             // 
             this.labelControlEpisodeNumber.Location = new System.Drawing.Point(472, 50);
             this.labelControlEpisodeNumber.Name = "labelControlEpisodeNumber";
-            this.labelControlEpisodeNumber.Size = new System.Drawing.Size(74, 13);
+            this.labelControlEpisodeNumber.Size = new System.Drawing.Size(82, 13);
             this.labelControlEpisodeNumber.TabIndex = 8;
             this.labelControlEpisodeNumber.Text = "EpisodeNumber";
             // 
@@ -157,7 +158,7 @@ namespace CD4.UI.View
             // 
             this.labelControlSite.Location = new System.Drawing.Point(472, 69);
             this.labelControlSite.Name = "labelControlSite";
-            this.labelControlSite.Size = new System.Drawing.Size(18, 13);
+            this.labelControlSite.Size = new System.Drawing.Size(19, 13);
             this.labelControlSite.TabIndex = 11;
             this.labelControlSite.Text = "Site";
             // 
@@ -208,19 +209,19 @@ namespace CD4.UI.View
             // 
             // labelControlPatientName
             // 
-            labelControlPatientName.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.Appearance.Options.UseFont = true;
-            labelControlPatientName.AppearanceDisabled.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.AppearanceDisabled.Options.UseFont = true;
-            labelControlPatientName.AppearanceHovered.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.AppearanceHovered.Options.UseFont = true;
-            labelControlPatientName.AppearancePressed.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            labelControlPatientName.AppearancePressed.Options.UseFont = true;
-            labelControlPatientName.Location = new System.Drawing.Point(12, 23);
-            labelControlPatientName.Name = "labelControlPatientName";
-            labelControlPatientName.Size = new System.Drawing.Size(118, 21);
-            labelControlPatientName.TabIndex = 0;
-            labelControlPatientName.Text = "PATIENT NAME";
+            this.labelControlPatientName.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.labelControlPatientName.Appearance.Options.UseFont = true;
+            this.labelControlPatientName.AppearanceDisabled.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.labelControlPatientName.AppearanceDisabled.Options.UseFont = true;
+            this.labelControlPatientName.AppearanceHovered.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.labelControlPatientName.AppearanceHovered.Options.UseFont = true;
+            this.labelControlPatientName.AppearancePressed.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.labelControlPatientName.AppearancePressed.Options.UseFont = true;
+            this.labelControlPatientName.Location = new System.Drawing.Point(12, 23);
+            this.labelControlPatientName.Name = "labelControlPatientName";
+            this.labelControlPatientName.Size = new System.Drawing.Size(118, 21);
+            this.labelControlPatientName.TabIndex = 0;
+            this.labelControlPatientName.Text = "PATIENT NAME";
             // 
             // splitContainerControlFunctions
             // 
@@ -378,7 +379,7 @@ namespace CD4.UI.View
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(12, 29);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(98, 13);
+            this.label1.Size = new System.Drawing.Size(103, 13);
             this.label1.TabIndex = 2;
             this.label1.Text = "Select Sample date";
             // 
