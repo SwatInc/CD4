@@ -1033,7 +1033,6 @@ INSERT INTO [dbo].[ReferenceData] ([ReferenceRangeId], [ReferenceTypeId], [LowLi
   (@ReferenceRangePCVId, @PanicId, 18.0, 65.7),
   (@ReferenceRangePCVId, @NotAcceptableId, 6.0, 77.9);
 
-USE [CD4Data]
 GO
 SET IDENTITY_INSERT [dbo].[CommentList] ON
 GO
