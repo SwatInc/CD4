@@ -79,5 +79,21 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
+
+        public async Task<int> GetNotesCountAsync(string cin)
+        {
+            var storedProcedure = "[dbo].[usp_GetNotesCountForSample]";
+            var parameter = new { Cin = cin };
+
+            try
+            {
+                return await SelectInsertOrUpdateAsync<int, dynamic>(storedProcedure, parameter);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
