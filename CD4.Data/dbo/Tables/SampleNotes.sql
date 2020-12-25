@@ -1,0 +1,7 @@
+﻿CREATE TABLE [dbo].[SampleNotes]
+(
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+    [Cin] VARCHAR(50) NOT NULL, 
+    [Note] VARCHAR(200) NOT NULL, 
+    [IsAttended] BIT NOT NULL DEFAULT 0
+)
