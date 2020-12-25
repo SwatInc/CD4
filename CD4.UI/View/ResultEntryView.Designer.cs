@@ -30,7 +30,6 @@ namespace CD4.UI.View
         /// </summary>
         private void InitializeComponent()
         {
-            
             this.labelControlNationalId = new DevExpress.XtraEditors.LabelControl();
             this.labelControlAgeSex = new DevExpress.XtraEditors.LabelControl();
             this.labelControlBirthdate = new DevExpress.XtraEditors.LabelControl();
@@ -54,13 +53,14 @@ namespace CD4.UI.View
             this.repositoryItemLookUpEditCodifiedPhrases = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.graphsUserControl = new CD4.UI.UserControls.GraphsUserControl();
             this.groupControlFunctions = new DevExpress.XtraEditors.GroupControl();
+            this.simpleButtonNotes = new DevExpress.XtraEditors.SimpleButton();
             this.lookUpEditSampleStatusFilter = new DevExpress.XtraEditors.LookUpEdit();
             this.simpleButtonLoadWorksheet = new DevExpress.XtraEditors.SimpleButton();
             this.label1 = new System.Windows.Forms.Label();
             this.dateEditLoadWorksheetFrom = new DevExpress.XtraEditors.DateEdit();
             this.simpleButtonReport = new DevExpress.XtraEditors.SimpleButton();
             this.gridColumnSampleStatus = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
+            labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).BeginInit();
             this.splitContainerControlPatient.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlSelectedPatientRequestClinicalDetailsArea)).BeginInit();
@@ -188,7 +188,7 @@ namespace CD4.UI.View
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(this.labelControlBirthdate);
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(this.labelControlAgeSex);
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(this.labelControlNationalId);
-            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(this.labelControlPatientName);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Controls.Add(labelControlPatientName);
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Location = new System.Drawing.Point(0, 0);
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Name = "groupControlSelectedPatientRequestClinicalDetailsArea";
@@ -209,19 +209,19 @@ namespace CD4.UI.View
             // 
             // labelControlPatientName
             // 
-            this.labelControlPatientName.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.labelControlPatientName.Appearance.Options.UseFont = true;
-            this.labelControlPatientName.AppearanceDisabled.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.labelControlPatientName.AppearanceDisabled.Options.UseFont = true;
-            this.labelControlPatientName.AppearanceHovered.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.labelControlPatientName.AppearanceHovered.Options.UseFont = true;
-            this.labelControlPatientName.AppearancePressed.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.labelControlPatientName.AppearancePressed.Options.UseFont = true;
-            this.labelControlPatientName.Location = new System.Drawing.Point(12, 23);
-            this.labelControlPatientName.Name = "labelControlPatientName";
-            this.labelControlPatientName.Size = new System.Drawing.Size(118, 21);
-            this.labelControlPatientName.TabIndex = 0;
-            this.labelControlPatientName.Text = "PATIENT NAME";
+            labelControlPatientName.Appearance.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.Appearance.Options.UseFont = true;
+            labelControlPatientName.AppearanceDisabled.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearanceDisabled.Options.UseFont = true;
+            labelControlPatientName.AppearanceHovered.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearanceHovered.Options.UseFont = true;
+            labelControlPatientName.AppearancePressed.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            labelControlPatientName.AppearancePressed.Options.UseFont = true;
+            labelControlPatientName.Location = new System.Drawing.Point(12, 23);
+            labelControlPatientName.Name = "labelControlPatientName";
+            labelControlPatientName.Size = new System.Drawing.Size(118, 21);
+            labelControlPatientName.TabIndex = 0;
+            labelControlPatientName.Text = "PATIENT NAME";
             // 
             // splitContainerControlFunctions
             // 
@@ -340,6 +340,7 @@ namespace CD4.UI.View
             // 
             // groupControlFunctions
             // 
+            this.groupControlFunctions.Controls.Add(this.simpleButtonNotes);
             this.groupControlFunctions.Controls.Add(this.lookUpEditSampleStatusFilter);
             this.groupControlFunctions.Controls.Add(this.simpleButtonLoadWorksheet);
             this.groupControlFunctions.Controls.Add(this.label1);
@@ -351,6 +352,14 @@ namespace CD4.UI.View
             this.groupControlFunctions.Size = new System.Drawing.Size(839, 77);
             this.groupControlFunctions.TabIndex = 1;
             this.groupControlFunctions.Text = "Functions";
+            // 
+            // simpleButtonNotes
+            // 
+            this.simpleButtonNotes.Location = new System.Drawing.Point(499, 43);
+            this.simpleButtonNotes.Name = "simpleButtonNotes";
+            this.simpleButtonNotes.Size = new System.Drawing.Size(108, 23);
+            this.simpleButtonNotes.TabIndex = 8;
+            this.simpleButtonNotes.Text = "Notes [ 2 ]";
             // 
             // lookUpEditSampleStatusFilter
             // 
@@ -402,7 +411,7 @@ namespace CD4.UI.View
             // 
             this.simpleButtonReport.Location = new System.Drawing.Point(727, 43);
             this.simpleButtonReport.Name = "simpleButtonReport";
-            this.simpleButtonReport.Size = new System.Drawing.Size(98, 23);
+            this.simpleButtonReport.Size = new System.Drawing.Size(108, 23);
             this.simpleButtonReport.TabIndex = 0;
             this.simpleButtonReport.Tag = "ResultEntryView.Report";
             this.simpleButtonReport.Text = "Report [ Ctrl+P ]";
@@ -478,5 +487,6 @@ namespace CD4.UI.View
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelSamples;
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelTests;
         private UserControls.GraphsUserControl graphsUserControl;
+        private SimpleButton simpleButtonNotes;
     }
 }

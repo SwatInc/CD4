@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CD4.UI.View
@@ -60,9 +61,9 @@ namespace CD4.UI.View
             KeyUp += ResultEntryView_KeyUp;
             lookUpEditSampleStatusFilter.EditValueChanged += LookUpEditSampleStatusFilter_EditValueChanged;
 
-            this.ParentChanged += ResultEntryView_ParentChanged;
+            ParentChanged += ResultEntryView_ParentChanged;
 
-            this.gridViewSamples.ColumnFilterChanged += OnSampleSearchComplete_RefreshPatientRibbonAndSelectedTests;
+            gridViewSamples.ColumnFilterChanged += OnSampleSearchComplete_RefreshPatientRibbonAndSelectedTests;
         }
 
         /// <summary>
@@ -76,8 +77,8 @@ namespace CD4.UI.View
 
         private void ResultEntryView_ParentChanged(object sender, EventArgs e)
         {
-            if (this.MdiParent is null) return;
-            if (this.MdiParent.GetType() != typeof(MainView)) return;
+            if (MdiParent is null) return;
+            if (MdiParent.GetType() != typeof(MainView)) return;
             var mainView = (MainView)this.MdiParent;
             mainView.SelectedDisciplineChanged += OnDisciplineSwitched;
         }
@@ -140,14 +141,14 @@ namespace CD4.UI.View
         {
             if (IsTestHistoryMode)
             {
-                this.gridControlTests.Visible = false;
-                this.graphsUserControl.Visible = true;
+                gridControlTests.Visible = false;
+                graphsUserControl.Visible = true;
             }
 
             if (!IsTestHistoryMode)
             {
-                this.gridControlTests.Visible = true;
-                this.graphsUserControl.Visible = false;
+                gridControlTests.Visible = true;
+                graphsUserControl.Visible = false;
             }
         }
 
@@ -1050,7 +1051,32 @@ namespace CD4.UI.View
             }
 
             var selectedSample = (RequestSampleModel)gridViewSamples.GetRow(e.FocusedRowHandle);
-            await _viewModel.SetSelectedSampleAsync(selectedSample);
+            try
+            {
+                await _viewModel.SetSelectedSampleAsync(selectedSample);
+                await GetNotesCountAsync(selectedSample?.Cin);
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+
+        }
+
+        public async Task GetNotesCountAsync(string cin)
+        {
+            if (string.IsNullOrEmpty(cin)) { _viewModel.NotesCountButtonLabel = "View Notes [ 0 ]"; }
+
+            try
+            {
+                simpleButtonNotes.Tag = cin;
+                await _viewModel.GetNotesCountAsync(cin);
+            }
+            catch (Exception ex)
+            {
+                _viewModel.NotesCountButtonLabel = "View Notes [ 0 ]";
+                XtraMessageBox.Show($"Unable to load sample notes data.\n{ex.Message}");
+            }
         }
 
         /// <summary>
@@ -1116,6 +1142,8 @@ namespace CD4.UI.View
             labelControlAddress.DataBindings.Add
                 (new Binding("Text", _viewModel.SelectedRequestData, nameof(RequestSampleModel.Address)));
 
+            simpleButtonNotes.DataBindings.Add
+                (new Binding("Text", _viewModel, nameof(_viewModel.NotesCountButtonLabel),false,DataSourceUpdateMode.OnPropertyChanged));
             //Clinical Details
             listBoxControlClinicalDetails.DataSource = _viewModel.SelectedClinicalDetails;
             #endregion

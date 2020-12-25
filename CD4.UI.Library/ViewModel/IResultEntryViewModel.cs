@@ -29,6 +29,7 @@ namespace CD4.UI.Library.ViewModel
         ResultEntryViewModel.GridControlSampleActiveDatasource GridSampleActiveDatasource { get; set; }
         dynamic TestHistoryData { get; set; }
         int SelectedDisciplineId { get; set; }
+        string NotesCountButtonLabel { get; set; }
 
         event PropertyChangedEventHandler PropertyChanged;
         event EventHandler RequestDataRefreshed;
@@ -49,5 +50,6 @@ namespace CD4.UI.Library.ViewModel
         Task CancelTestValidation(ResultModel testData);
         List<ResultModel> GetResultData(string cin);
         Task RefreshResultDataOnUiAsync(string cin);
+        Task GetNotesCountAsync(string cin);
     }
 }
