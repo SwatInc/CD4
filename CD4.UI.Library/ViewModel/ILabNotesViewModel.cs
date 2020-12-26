@@ -7,9 +7,11 @@ namespace CD4.UI.Library.ViewModel
     public interface ILabNotesViewModel
     {
         BindingList<SampleNotesModel> Notes { get; set; }
+        string ViewName { get; set; }
+        string NewNote { get; set; }
 
         event PropertyChangedEventHandler PropertyChanged;
 
-        Task GetNotesForSample(string cin);
+        void AddNewNote();
     }
 }
