@@ -92,6 +92,7 @@
     <Compile Include="Model\BarcodeDataModel.cs" />
     <Compile Include="Model\CommentsSelectionModel.cs" />
     <Compile Include="Model\DemographicsConfirmationModel.cs" />
+    <Compile Include="Model\SampleNotesModel.cs" />
     <Compile Include="Model\PatientModel.cs" />
     <Compile Include="Model\RejectionReasonType.cs" />
     <Compile Include="Model\ResultAlertModel.cs" />
@@ -138,6 +139,7 @@
     <Compile Include="ViewModel\ICodifiedValuesViewModel.cs" />
     <Compile Include="ViewModel\ICountryViewModel.cs" />
     <Compile Include="ViewModel\IGenderViewModel.cs" />
+    <Compile Include="ViewModel\ILabNotesViewModel.cs" />
     <Compile Include="ViewModel\ILateOrderEntryViewModel.cs" />
     <Compile Include="ViewModel\IMainViewModel.cs" />
     <Compile Include="ViewModel\IOrderEntryViewModel.cs" />
@@ -149,6 +151,7 @@
     <Compile Include="ViewModel\IScientistViewModel.cs" />
     <Compile Include="ViewModel\ISitesViewModel.cs" />
     <Compile Include="ViewModel\ITestViewModel.cs" />
+    <Compile Include="ViewModel\LabNotesViewModel.cs" />
     <Compile Include="ViewModel\LateOrderEntryViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\OrderEntryViewModel.cs" />
