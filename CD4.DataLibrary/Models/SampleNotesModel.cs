@@ -4,6 +4,7 @@ namespace CD4.DataLibrary.Models
 {
     public class SampleNotesModel
     {
+        public int Id { get; set; }
         public string CIN { get; set; }
         public string Note { get; set; }
         public bool IsAttended { get; set; }
