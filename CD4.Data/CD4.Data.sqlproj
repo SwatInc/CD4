@@ -227,6 +227,10 @@
     <Build Include="dbo\StoredProcedures\usp_GetSampleStatus.sql" />
     <Build Include="dbo\StoredProcedures\usp_FetchResultWithStatusDataByCin.sql" />
     <Build Include="dbo\Tables\SampleNotes.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetNotesCountForSample.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetSampleNotesByCin.sql" />
+    <Build Include="dbo\StoredProcedures\usp_InsertSampleNoteByCin.sql" />
+    <Build Include="dbo\StoredProcedures\usp_UpdateSampleNoteAttendedStatus.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
