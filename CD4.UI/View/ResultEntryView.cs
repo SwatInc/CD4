@@ -75,6 +75,8 @@ namespace CD4.UI.View
             var notesView = new LabNotesView(_labNotesViewModel);
             notesView.SetSampleNumber(((SimpleButton)sender).Tag?.ToString());
             notesView.ShowDialog();
+            //_viewModel.GetNotesCountAsync(cin);  this is the actual way..., but I am gonna cheat here. No need for a database call
+            _viewModel.SetNotesCountManually(notesView.DialogResult.ToString());
         }
 
         /// <summary>

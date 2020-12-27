@@ -203,6 +203,15 @@ namespace CD4.UI.Library.ViewModel
 
         #region Public Methods
 
+        /// <summary>
+        /// Sets notes count button without a database call. Uses the passed in string value as count of notes
+        /// </summary>
+        /// <param name="notesCount">The number of notes as a string</param>
+        public void SetNotesCountManually(string notesCount)
+        {
+            NotesCountButtonLabel = $"View Notes [ {notesCount} ]";
+        }
+
         public async Task GetNotesCountAsync(string cin)
         {
             var notesCount = await _sampleDataAccess.GetNotesCountAsync(cin);

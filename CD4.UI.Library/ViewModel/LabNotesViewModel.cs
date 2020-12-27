@@ -104,6 +104,7 @@ namespace CD4.UI.Library.ViewModel
                     UserId = _authorizeDetail.UserId,
                     TimeStamp = DateTimeOffset.Now
                 });
+                NewNote = null;
             }
         }
             

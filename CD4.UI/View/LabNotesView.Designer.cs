@@ -31,12 +31,12 @@ namespace CD4.UI.View
         {
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.groupControlAddSampleNotes = new DevExpress.XtraEditors.GroupControl();
+            this.simpleButtonSave = new DevExpress.XtraEditors.SimpleButton();
             this.labelControlInstructionLabel = new DevExpress.XtraEditors.LabelControl();
             this.textEditSampleNote = new DevExpress.XtraEditors.TextEdit();
             this.groupControlSampleNotes = new DevExpress.XtraEditors.GroupControl();
             this.gridControlSampleNotes = new DevExpress.XtraGrid.GridControl();
             this.gridViewSampleNotes = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlAddSampleNotes)).BeginInit();
@@ -64,7 +64,7 @@ namespace CD4.UI.View
             // 
             // groupControlAddSampleNotes
             // 
-            this.groupControlAddSampleNotes.Controls.Add(this.simpleButton1);
+            this.groupControlAddSampleNotes.Controls.Add(this.simpleButtonSave);
             this.groupControlAddSampleNotes.Controls.Add(this.labelControlInstructionLabel);
             this.groupControlAddSampleNotes.Controls.Add(this.textEditSampleNote);
             this.groupControlAddSampleNotes.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -73,6 +73,14 @@ namespace CD4.UI.View
             this.groupControlAddSampleNotes.Size = new System.Drawing.Size(580, 88);
             this.groupControlAddSampleNotes.TabIndex = 0;
             this.groupControlAddSampleNotes.Text = "Add Sample Notes";
+            // 
+            // simpleButtonSave
+            // 
+            this.simpleButtonSave.Location = new System.Drawing.Point(489, 47);
+            this.simpleButtonSave.Name = "simpleButtonSave";
+            this.simpleButtonSave.Size = new System.Drawing.Size(75, 23);
+            this.simpleButtonSave.TabIndex = 2;
+            this.simpleButtonSave.Text = "Save [ F6 ]";
             // 
             // labelControlInstructionLabel
             // 
@@ -116,14 +124,6 @@ namespace CD4.UI.View
             this.gridViewSampleNotes.Name = "gridViewSampleNotes";
             this.gridViewSampleNotes.OptionsView.ShowGroupPanel = false;
             // 
-            // simpleButton1
-            // 
-            this.simpleButton1.Location = new System.Drawing.Point(489, 47);
-            this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(75, 23);
-            this.simpleButton1.TabIndex = 2;
-            this.simpleButton1.Text = "Save";
-            // 
             // LabNotesView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -156,6 +156,6 @@ namespace CD4.UI.View
         private DevExpress.XtraEditors.TextEdit textEditSampleNote;
         private DevExpress.XtraGrid.GridControl gridControlSampleNotes;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewSampleNotes;
-        private DevExpress.XtraEditors.SimpleButton simpleButton1;
+        private DevExpress.XtraEditors.SimpleButton simpleButtonSave;
     }
 }

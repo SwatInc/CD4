@@ -51,5 +51,6 @@ namespace CD4.UI.Library.ViewModel
         List<ResultModel> GetResultData(string cin);
         Task RefreshResultDataOnUiAsync(string cin);
         Task GetNotesCountAsync(string cin);
+        void SetNotesCountManually(string notesCount);
     }
 }
