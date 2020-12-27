@@ -13,5 +13,6 @@ namespace CD4.UI.Library.ViewModel
         event PropertyChangedEventHandler PropertyChanged;
 
         void AddNewNote();
+        void Reset();
     }
 }

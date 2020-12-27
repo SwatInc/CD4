@@ -1,4 +1,6 @@
-﻿using CD4.UI.Library.Model;
+﻿using AutoMapper;
+using CD4.DataLibrary.DataAccess;
+using CD4.UI.Library.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,10 +17,16 @@ namespace CD4.UI.Library.ViewModel
         private string _newNote;
         private string _currentCin;
         private readonly AuthorizeDetailEventArgs _authorizeDetail;
+        private readonly ISampleDataAccess _sampleDataAccess;
+        private readonly IMapper _mapper;
 
         #endregion
 
+        #region Events
+
         private event EventHandler<string> OnSampleSet;
+
+        #endregion
 
         #region INotifyPropertyChanged Hookup
 
@@ -32,14 +40,18 @@ namespace CD4.UI.Library.ViewModel
         #endregion
 
         #region Default Constructor
-        public LabNotesViewModel(AuthorizeDetailEventArgs authorizeDetail)
+        public LabNotesViewModel(AuthorizeDetailEventArgs authorizeDetail, ISampleDataAccess sampleDataAccess, IMapper mapper)
         {
             ViewName = "Sample Notes";
             _currentCin = null;
             _authorizeDetail = authorizeDetail;
+            _sampleDataAccess = sampleDataAccess;
+            _mapper = mapper;
             Notes = new BindingList<SampleNotesModel>();
+            
             Notes.ListChanged += Notes_ListChanged;
             OnSampleSet += GetNotesForSample;
+            
         }
 
         #endregion
@@ -55,8 +67,9 @@ namespace CD4.UI.Library.ViewModel
                 OnPropertyChanged();
 
                 //load all notes for sample
-                if (!string.IsNullOrEmpty(value.Trim()))
+                if (!string.IsNullOrEmpty(value?.Trim()))
                 {
+                    _currentCin = value.Trim();
                     OnSampleSet?.Invoke(this, value);
                 }
             }
@@ -78,9 +91,9 @@ namespace CD4.UI.Library.ViewModel
         {
             if (string.IsNullOrEmpty(_currentCin))
             {
-                throw new Exception("Sample CIN needs to be set before adding a note");
+                return;
             }
-            if (string.IsNullOrEmpty(NewNote.Trim()))
+            if (!string.IsNullOrEmpty(NewNote.Trim()))
             {
                 Notes.Add(new SampleNotesModel()
                 {
@@ -93,43 +106,83 @@ namespace CD4.UI.Library.ViewModel
                 });
             }
         }
+            
+        public void Reset()
+        {
+            Notes.ListChanged -= Notes_ListChanged;
+
+            ViewName = "Sample Notes";
+            _currentCin = null;
+            Notes.Clear();
+        }
         #endregion
 
         #region Private Methods
-       
+
         /// <summary>
         /// Loads all notes for the cin.
         /// DO NOT call this method directly, use the event OnSampleSet instead
         /// </summary>
         private async void GetNotesForSample(object sender, string cin)
         {
-            //Get the data from datalayer
-            throw new NotImplementedException();
-            //display the data on to the screen
-            DisplayNotes(new List<SampleNotesModel>());
+            try
+            {
+                var notes = await _sampleDataAccess.GetSampleNotesByCin(cin);
+                var mappedNotes = _mapper.Map<List<SampleNotesModel>>(notes);
+                DisplayNotes(mappedNotes);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
         private void DisplayNotes(List<SampleNotesModel> notes)
         {
             if (notes is null) return;
+
             Notes.ListChanged -= Notes_ListChanged;
-            //add data to display binding list
+            Notes.Clear();
+            foreach (var item in notes)
+            {
+                Notes.Add(item);
+            }
+
             Notes.ListChanged += Notes_ListChanged;
         }
 
         private async Task UpdateSampleNotesAsync(SampleNotesModel notesModel)
         {
-            throw new NotImplementedException();
+            try
+            {
+                await _sampleDataAccess.UpdateSampleNoteAttendedStatus(notesModel.Id, notesModel.IsAttended);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         private async Task AddNewNoteAsync(SampleNotesModel notesModel)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var mappedNotes = _mapper.Map<DataLibrary.Models.SampleNotesModel>(notesModel);
+                var inserted = await _sampleDataAccess.InsertSampleNote(mappedNotes);
+
+                OnSampleSet?.Invoke(this, _currentCin);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         private async void Notes_ListChanged(object sender, ListChangedEventArgs e)
         {
-            if (e.PropertyDescriptor.Name == "IsAttended" && e.ListChangedType == ListChangedType.ItemChanged)
+            if (e.PropertyDescriptor?.Name == "IsAttended" && e.ListChangedType == ListChangedType.ItemChanged)
             {
                 var changedNote = Notes[e.NewIndex];
                 try
@@ -144,8 +197,17 @@ namespace CD4.UI.Library.ViewModel
 
             if (e.ListChangedType == ListChangedType.ItemAdded)
             {
-                await AddNewNoteAsync(Notes[e.NewIndex]);
+                try
+                {
+                    await AddNewNoteAsync(Notes[e.NewIndex]);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
             }
+
         }
 
         #endregion

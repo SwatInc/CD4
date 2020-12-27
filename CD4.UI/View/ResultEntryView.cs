@@ -22,6 +22,7 @@ namespace CD4.UI.View
         private readonly IRejectionCommentViewModel _rejectionCommentViewModel;
         private readonly IUserAuthEvaluator _authEvaluator;
         private readonly ILateOrderEntryViewModel _lateOrderEntryViewModel;
+        private readonly ILabNotesViewModel _labNotesViewModel;
         System.Windows.Forms.Timer dataRefreshTimer = new System.Windows.Forms.Timer() { Enabled = true, Interval = 1000 };
 
         public event EventHandler<string> GenerateReportByCin;
@@ -29,7 +30,8 @@ namespace CD4.UI.View
         public ResultEntryView(IResultEntryViewModel viewModel,
             IRejectionCommentViewModel rejectionCommentViewModel,
             IUserAuthEvaluator authEvaluator,
-            ILateOrderEntryViewModel lateOrderEntryViewModel)
+            ILateOrderEntryViewModel lateOrderEntryViewModel,
+            ILabNotesViewModel labNotesViewModel)
         {
             InitializeComponent();
             //Initialize grid columns
@@ -42,6 +44,7 @@ namespace CD4.UI.View
             _rejectionCommentViewModel = rejectionCommentViewModel;
             _authEvaluator = authEvaluator;
             _lateOrderEntryViewModel = lateOrderEntryViewModel;
+            _labNotesViewModel = labNotesViewModel;
             InitializeBinding();
 
 
@@ -53,6 +56,7 @@ namespace CD4.UI.View
             dataRefreshTimer.Tick += RefreshViewData;
             simpleButtonReport.Click += SimpleButtonReport_Click;
             simpleButtonLoadWorksheet.Click += LoadWorkSheet;
+            simpleButtonNotes.Click += ShowSampleNotesDialog;
             _viewModel.RequestDataRefreshed += RefreshViewData;
             _viewModel.PushingMessages += _viewModel_PushingMessages;
             _viewModel.PropertyChanged += _viewModel_PropertyChanged;
@@ -64,6 +68,13 @@ namespace CD4.UI.View
             ParentChanged += ResultEntryView_ParentChanged;
 
             gridViewSamples.ColumnFilterChanged += OnSampleSearchComplete_RefreshPatientRibbonAndSelectedTests;
+        }
+
+        private void ShowSampleNotesDialog(object sender, EventArgs e)
+        {
+            var notesView = new LabNotesView(_labNotesViewModel);
+            notesView.SetSampleNumber(((SimpleButton)sender).Tag?.ToString());
+            notesView.ShowDialog();
         }
 
         /// <summary>

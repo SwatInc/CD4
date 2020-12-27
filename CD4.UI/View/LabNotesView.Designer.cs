@@ -31,20 +31,21 @@ namespace CD4.UI.View
         {
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.groupControlAddSampleNotes = new DevExpress.XtraEditors.GroupControl();
-            this.groupControlSampleNotes = new DevExpress.XtraEditors.GroupControl();
-            this.textEditSampleNote = new DevExpress.XtraEditors.TextEdit();
             this.labelControlInstructionLabel = new DevExpress.XtraEditors.LabelControl();
+            this.textEditSampleNote = new DevExpress.XtraEditors.TextEdit();
+            this.groupControlSampleNotes = new DevExpress.XtraEditors.GroupControl();
             this.gridControlSampleNotes = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridViewSampleNotes = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.simpleButton1 = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlAddSampleNotes)).BeginInit();
             this.groupControlAddSampleNotes.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditSampleNote.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlSampleNotes)).BeginInit();
             this.groupControlSampleNotes.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditSampleNote.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlSampleNotes)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewSampleNotes)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainerControl1
@@ -63,6 +64,7 @@ namespace CD4.UI.View
             // 
             // groupControlAddSampleNotes
             // 
+            this.groupControlAddSampleNotes.Controls.Add(this.simpleButton1);
             this.groupControlAddSampleNotes.Controls.Add(this.labelControlInstructionLabel);
             this.groupControlAddSampleNotes.Controls.Add(this.textEditSampleNote);
             this.groupControlAddSampleNotes.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -71,6 +73,21 @@ namespace CD4.UI.View
             this.groupControlAddSampleNotes.Size = new System.Drawing.Size(580, 88);
             this.groupControlAddSampleNotes.TabIndex = 0;
             this.groupControlAddSampleNotes.Text = "Add Sample Notes";
+            // 
+            // labelControlInstructionLabel
+            // 
+            this.labelControlInstructionLabel.Location = new System.Drawing.Point(12, 30);
+            this.labelControlInstructionLabel.Name = "labelControlInstructionLabel";
+            this.labelControlInstructionLabel.Size = new System.Drawing.Size(259, 13);
+            this.labelControlInstructionLabel.TabIndex = 1;
+            this.labelControlInstructionLabel.Text = "Please press enter after entering a note for sample";
+            // 
+            // textEditSampleNote
+            // 
+            this.textEditSampleNote.Location = new System.Drawing.Point(12, 49);
+            this.textEditSampleNote.Name = "textEditSampleNote";
+            this.textEditSampleNote.Size = new System.Drawing.Size(453, 20);
+            this.textEditSampleNote.TabIndex = 0;
             // 
             // groupControlSampleNotes
             // 
@@ -82,37 +99,30 @@ namespace CD4.UI.View
             this.groupControlSampleNotes.TabIndex = 0;
             this.groupControlSampleNotes.Text = "Sample Notes";
             // 
-            // textEditSampleNote
-            // 
-            this.textEditSampleNote.Location = new System.Drawing.Point(12, 49);
-            this.textEditSampleNote.Name = "textEditSampleNote";
-            this.textEditSampleNote.Size = new System.Drawing.Size(556, 20);
-            this.textEditSampleNote.TabIndex = 0;
-            // 
-            // labelControlInstructionLabel
-            // 
-            this.labelControlInstructionLabel.Location = new System.Drawing.Point(12, 30);
-            this.labelControlInstructionLabel.Name = "labelControlInstructionLabel";
-            this.labelControlInstructionLabel.Size = new System.Drawing.Size(259, 13);
-            this.labelControlInstructionLabel.TabIndex = 1;
-            this.labelControlInstructionLabel.Text = "Please press enter after entering a note for sample";
-            // 
             // gridControlSampleNotes
             // 
             this.gridControlSampleNotes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControlSampleNotes.Location = new System.Drawing.Point(2, 20);
-            this.gridControlSampleNotes.MainView = this.gridView1;
+            this.gridControlSampleNotes.MainView = this.gridViewSampleNotes;
             this.gridControlSampleNotes.Name = "gridControlSampleNotes";
             this.gridControlSampleNotes.Size = new System.Drawing.Size(576, 182);
             this.gridControlSampleNotes.TabIndex = 0;
             this.gridControlSampleNotes.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
+            this.gridViewSampleNotes});
             // 
-            // gridView1
+            // gridViewSampleNotes
             // 
-            this.gridView1.GridControl = this.gridControlSampleNotes;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsView.ShowGroupPanel = false;
+            this.gridViewSampleNotes.GridControl = this.gridControlSampleNotes;
+            this.gridViewSampleNotes.Name = "gridViewSampleNotes";
+            this.gridViewSampleNotes.OptionsView.ShowGroupPanel = false;
+            // 
+            // simpleButton1
+            // 
+            this.simpleButton1.Location = new System.Drawing.Point(489, 47);
+            this.simpleButton1.Name = "simpleButton1";
+            this.simpleButton1.Size = new System.Drawing.Size(75, 23);
+            this.simpleButton1.TabIndex = 2;
+            this.simpleButton1.Text = "Save";
             // 
             // LabNotesView
             // 
@@ -128,11 +138,11 @@ namespace CD4.UI.View
             ((System.ComponentModel.ISupportInitialize)(this.groupControlAddSampleNotes)).EndInit();
             this.groupControlAddSampleNotes.ResumeLayout(false);
             this.groupControlAddSampleNotes.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditSampleNote.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlSampleNotes)).EndInit();
             this.groupControlSampleNotes.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.textEditSampleNote.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlSampleNotes)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewSampleNotes)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -145,6 +155,7 @@ namespace CD4.UI.View
         private DevExpress.XtraEditors.LabelControl labelControlInstructionLabel;
         private DevExpress.XtraEditors.TextEdit textEditSampleNote;
         private DevExpress.XtraGrid.GridControl gridControlSampleNotes;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewSampleNotes;
+        private DevExpress.XtraEditors.SimpleButton simpleButton1;
     }
 }

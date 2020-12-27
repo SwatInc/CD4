@@ -59,7 +59,7 @@ namespace CD4.UI.Library.ViewModel
             TempCodifiedPhrasesList = new List<Model.CodifiedResultsModel>();
             AllStatus = new List<Model.StatusModel>();
             SampleAuditTrail = new List<Model.AuditTrailModel>();
-
+            NotesCountButtonLabel = "View Notes";
             //set the date to load worksheet from
             LoadWorksheetFromDate = DateTime.Today;
 
