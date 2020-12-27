@@ -58,7 +58,7 @@ namespace CD4.UI.View
             this.splitContainerControl1.Panel1.Text = "Panel1";
             this.splitContainerControl1.Panel2.Controls.Add(this.groupControlSampleNotes);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(580, 297);
+            this.splitContainerControl1.Size = new System.Drawing.Size(1135, 447);
             this.splitContainerControl1.SplitterPosition = 88;
             this.splitContainerControl1.TabIndex = 0;
             // 
@@ -70,7 +70,7 @@ namespace CD4.UI.View
             this.groupControlAddSampleNotes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControlAddSampleNotes.Location = new System.Drawing.Point(0, 0);
             this.groupControlAddSampleNotes.Name = "groupControlAddSampleNotes";
-            this.groupControlAddSampleNotes.Size = new System.Drawing.Size(580, 88);
+            this.groupControlAddSampleNotes.Size = new System.Drawing.Size(1135, 88);
             this.groupControlAddSampleNotes.TabIndex = 0;
             this.groupControlAddSampleNotes.Text = "Add Sample Notes";
             // 
@@ -103,7 +103,7 @@ namespace CD4.UI.View
             this.groupControlSampleNotes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControlSampleNotes.Location = new System.Drawing.Point(0, 0);
             this.groupControlSampleNotes.Name = "groupControlSampleNotes";
-            this.groupControlSampleNotes.Size = new System.Drawing.Size(580, 204);
+            this.groupControlSampleNotes.Size = new System.Drawing.Size(1135, 354);
             this.groupControlSampleNotes.TabIndex = 0;
             this.groupControlSampleNotes.Text = "Sample Notes";
             // 
@@ -113,7 +113,7 @@ namespace CD4.UI.View
             this.gridControlSampleNotes.Location = new System.Drawing.Point(2, 20);
             this.gridControlSampleNotes.MainView = this.gridViewSampleNotes;
             this.gridControlSampleNotes.Name = "gridControlSampleNotes";
-            this.gridControlSampleNotes.Size = new System.Drawing.Size(576, 182);
+            this.gridControlSampleNotes.Size = new System.Drawing.Size(1131, 332);
             this.gridControlSampleNotes.TabIndex = 0;
             this.gridControlSampleNotes.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewSampleNotes});
@@ -128,7 +128,7 @@ namespace CD4.UI.View
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(580, 297);
+            this.ClientSize = new System.Drawing.Size(1135, 447);
             this.Controls.Add(this.splitContainerControl1);
             this.KeyPreview = true;
             this.Name = "LabNotesView";
