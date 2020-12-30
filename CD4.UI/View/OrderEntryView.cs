@@ -19,9 +19,10 @@ namespace CD4.UI.View
         private readonly IMapper mapper;
         private readonly IPatientDataAccess dataAccess;
         private readonly IUserAuthEvaluator _authEvaluator;
+        private readonly ILabNotesViewModel _labNotesViewModel;
 
         public OrderEntryView(IOrderEntryViewModel viewModel,
-            IMapper mapper, IPatientDataAccess dataAccess, IUserAuthEvaluator authEvaluator)
+            IMapper mapper, IPatientDataAccess dataAccess, IUserAuthEvaluator authEvaluator, ILabNotesViewModel labNotesViewModel)
         {
             InitializeComponent();
             //Evaluate user authorisation
@@ -29,6 +30,7 @@ namespace CD4.UI.View
             this.mapper = mapper;
             this.dataAccess = dataAccess;
             _authEvaluator = authEvaluator;
+            this._labNotesViewModel = labNotesViewModel;
             InitializeDataBinding();
 
             lookUpEditTests.Validated += LookUpEditTests_Validated;
@@ -41,7 +43,18 @@ namespace CD4.UI.View
             simpleButtonSearchRequest.Click += OnSearchRequest;
             simpleButtonPrintBarcode.Click += SimpleButtonPrintBarcode_Click;
             simpleButtonGetNextCin.Click += GenerateNextSampleNumber;
+            simpleButtonViewNotes.Click += OpenViewNotesDialog;
             textEditNidPp.LostFocus += InitiatePatientSearchOnNidPp_LostFocus;
+        }
+
+        private void OpenViewNotesDialog(object sender, EventArgs e)
+        {
+            var notesView = new LabNotesView(_labNotesViewModel);
+            notesView.SetSampleNumber(_viewModel.Cin);
+            notesView.ShowDialog();
+            //_viewModel.GetNotesCountAsync(cin);  this is the actual way..., but I am gonna cheat here. No need for a database call
+           // _viewModel.SetNotesCountManually(notesView.DialogResult.ToString());
+
         }
 
         private void InitiatePatientSearchOnNidPp_LostFocus(object sender, EventArgs e)

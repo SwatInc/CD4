@@ -65,6 +65,7 @@
             this.simpleButtonPrintBarcode = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButtonGetNextCin = new DevExpress.XtraEditors.SimpleButton();
             this.panelControlOE = new DevExpress.XtraEditors.PanelControl();
+            this.simpleButtonViewNotes = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlRequestData)).BeginInit();
             this.groupControlRequestData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditCollectedDate.Properties.CalendarTimeProperties)).BeginInit();
@@ -504,7 +505,7 @@
             // 
             // simpleButtonSearch
             // 
-            this.simpleButtonSearch.Location = new System.Drawing.Point(258, 343);
+            this.simpleButtonSearch.Location = new System.Drawing.Point(218, 343);
             this.simpleButtonSearch.Name = "simpleButtonSearch";
             this.simpleButtonSearch.Size = new System.Drawing.Size(98, 23);
             this.simpleButtonSearch.TabIndex = 1;
@@ -513,7 +514,7 @@
             // 
             // simpleButtonConfirm
             // 
-            this.simpleButtonConfirm.Location = new System.Drawing.Point(466, 343);
+            this.simpleButtonConfirm.Location = new System.Drawing.Point(426, 343);
             this.simpleButtonConfirm.Name = "simpleButtonConfirm";
             this.simpleButtonConfirm.Size = new System.Drawing.Size(98, 23);
             this.simpleButtonConfirm.TabIndex = 0;
@@ -564,7 +565,7 @@
             // 
             // simpleButtonRemoveTest
             // 
-            this.simpleButtonRemoveTest.Location = new System.Drawing.Point(154, 343);
+            this.simpleButtonRemoveTest.Location = new System.Drawing.Point(114, 343);
             this.simpleButtonRemoveTest.Name = "simpleButtonRemoveTest";
             this.simpleButtonRemoveTest.Size = new System.Drawing.Size(98, 23);
             this.simpleButtonRemoveTest.TabIndex = 6;
@@ -573,7 +574,7 @@
             // 
             // simpleButtonSearchRequest
             // 
-            this.simpleButtonSearchRequest.Location = new System.Drawing.Point(362, 343);
+            this.simpleButtonSearchRequest.Location = new System.Drawing.Point(322, 343);
             this.simpleButtonSearchRequest.Name = "simpleButtonSearchRequest";
             this.simpleButtonSearchRequest.Size = new System.Drawing.Size(98, 23);
             this.simpleButtonSearchRequest.TabIndex = 7;
@@ -582,7 +583,7 @@
             // 
             // simpleButtonPrintBarcode
             // 
-            this.simpleButtonPrintBarcode.Location = new System.Drawing.Point(570, 343);
+            this.simpleButtonPrintBarcode.Location = new System.Drawing.Point(530, 343);
             this.simpleButtonPrintBarcode.Name = "simpleButtonPrintBarcode";
             this.simpleButtonPrintBarcode.Size = new System.Drawing.Size(122, 23);
             this.simpleButtonPrintBarcode.TabIndex = 8;
@@ -591,7 +592,7 @@
             // 
             // simpleButtonGetNextCin
             // 
-            this.simpleButtonGetNextCin.Location = new System.Drawing.Point(50, 343);
+            this.simpleButtonGetNextCin.Location = new System.Drawing.Point(10, 343);
             this.simpleButtonGetNextCin.Name = "simpleButtonGetNextCin";
             this.simpleButtonGetNextCin.Size = new System.Drawing.Size(98, 23);
             this.simpleButtonGetNextCin.TabIndex = 9;
@@ -600,6 +601,7 @@
             // 
             // panelControlOE
             // 
+            this.panelControlOE.Controls.Add(this.simpleButtonViewNotes);
             this.panelControlOE.Controls.Add(this.groupControlPatientData);
             this.panelControlOE.Controls.Add(this.simpleButtonGetNextCin);
             this.panelControlOE.Controls.Add(this.groupControlRequestData);
@@ -615,6 +617,15 @@
             this.panelControlOE.Name = "panelControlOE";
             this.panelControlOE.Size = new System.Drawing.Size(763, 372);
             this.panelControlOE.TabIndex = 10;
+            // 
+            // simpleButtonViewNotes
+            // 
+            this.simpleButtonViewNotes.Location = new System.Drawing.Point(658, 343);
+            this.simpleButtonViewNotes.Name = "simpleButtonViewNotes";
+            this.simpleButtonViewNotes.Size = new System.Drawing.Size(98, 23);
+            this.simpleButtonViewNotes.TabIndex = 10;
+            this.simpleButtonViewNotes.Tag = "OrderEntry.Remove";
+            this.simpleButtonViewNotes.Text = "Add Note";
             // 
             // OrderEntryView
             // 
@@ -706,5 +717,6 @@
         private DevExpress.XtraEditors.SimpleButton simpleButtonPrintBarcode;
         private DevExpress.XtraEditors.SimpleButton simpleButtonGetNextCin;
         private DevExpress.XtraEditors.PanelControl panelControlOE;
+        private DevExpress.XtraEditors.SimpleButton simpleButtonViewNotes;
     }
 }
