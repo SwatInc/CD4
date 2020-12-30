@@ -37,6 +37,7 @@ namespace CD4.UI.View
             this.groupControlSampleNotes = new DevExpress.XtraEditors.GroupControl();
             this.gridControlSampleNotes = new DevExpress.XtraGrid.GridControl();
             this.gridViewSampleNotes = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.progressPanelNotes = new DevExpress.XtraWaitForm.ProgressPanel();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlAddSampleNotes)).BeginInit();
@@ -58,7 +59,7 @@ namespace CD4.UI.View
             this.splitContainerControl1.Panel1.Text = "Panel1";
             this.splitContainerControl1.Panel2.Controls.Add(this.groupControlSampleNotes);
             this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(1135, 447);
+            this.splitContainerControl1.Size = new System.Drawing.Size(742, 366);
             this.splitContainerControl1.SplitterPosition = 88;
             this.splitContainerControl1.TabIndex = 0;
             // 
@@ -70,7 +71,7 @@ namespace CD4.UI.View
             this.groupControlAddSampleNotes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControlAddSampleNotes.Location = new System.Drawing.Point(0, 0);
             this.groupControlAddSampleNotes.Name = "groupControlAddSampleNotes";
-            this.groupControlAddSampleNotes.Size = new System.Drawing.Size(1135, 88);
+            this.groupControlAddSampleNotes.Size = new System.Drawing.Size(742, 88);
             this.groupControlAddSampleNotes.TabIndex = 0;
             this.groupControlAddSampleNotes.Text = "Add Sample Notes";
             // 
@@ -103,7 +104,7 @@ namespace CD4.UI.View
             this.groupControlSampleNotes.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControlSampleNotes.Location = new System.Drawing.Point(0, 0);
             this.groupControlSampleNotes.Name = "groupControlSampleNotes";
-            this.groupControlSampleNotes.Size = new System.Drawing.Size(1135, 354);
+            this.groupControlSampleNotes.Size = new System.Drawing.Size(742, 273);
             this.groupControlSampleNotes.TabIndex = 0;
             this.groupControlSampleNotes.Text = "Sample Notes";
             // 
@@ -113,7 +114,7 @@ namespace CD4.UI.View
             this.gridControlSampleNotes.Location = new System.Drawing.Point(2, 20);
             this.gridControlSampleNotes.MainView = this.gridViewSampleNotes;
             this.gridControlSampleNotes.Name = "gridControlSampleNotes";
-            this.gridControlSampleNotes.Size = new System.Drawing.Size(1131, 332);
+            this.gridControlSampleNotes.Size = new System.Drawing.Size(738, 251);
             this.gridControlSampleNotes.TabIndex = 0;
             this.gridControlSampleNotes.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewSampleNotes});
@@ -124,11 +125,25 @@ namespace CD4.UI.View
             this.gridViewSampleNotes.Name = "gridViewSampleNotes";
             this.gridViewSampleNotes.OptionsView.ShowGroupPanel = false;
             // 
+            // progressPanelNotes
+            // 
+            this.progressPanelNotes.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.progressPanelNotes.Appearance.Options.UseBackColor = true;
+            this.progressPanelNotes.BarAnimationElementThickness = 2;
+            this.progressPanelNotes.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.progressPanelNotes.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressPanelNotes.Location = new System.Drawing.Point(0, 0);
+            this.progressPanelNotes.Name = "progressPanelNotes";
+            this.progressPanelNotes.Size = new System.Drawing.Size(742, 366);
+            this.progressPanelNotes.TabIndex = 1;
+            this.progressPanelNotes.Text = "progressPanel1";
+            // 
             // LabNotesView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1135, 447);
+            this.ClientSize = new System.Drawing.Size(742, 366);
+            this.Controls.Add(this.progressPanelNotes);
             this.Controls.Add(this.splitContainerControl1);
             this.KeyPreview = true;
             this.Name = "LabNotesView";
@@ -157,5 +172,6 @@ namespace CD4.UI.View
         private DevExpress.XtraGrid.GridControl gridControlSampleNotes;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewSampleNotes;
         private DevExpress.XtraEditors.SimpleButton simpleButtonSave;
+        private DevExpress.XtraWaitForm.ProgressPanel progressPanelNotes;
     }
 }

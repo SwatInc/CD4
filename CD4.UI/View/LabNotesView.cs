@@ -69,6 +69,9 @@ namespace CD4.UI.View
                 false, DataSourceUpdateMode.OnPropertyChanged));
             //Binding the grid
             gridControlSampleNotes.DataSource = _viewModel.Notes;
+
+            progressPanelNotes.DataBindings.Add
+                (new Binding("Visible", _viewModel, nameof(_viewModel.ProgressPanelVisible), false, DataSourceUpdateMode.OnPropertyChanged));
         }
 
         public void SetSampleNumber(string cin)
