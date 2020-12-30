@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CD4.DataLibrary.DataAccess;
 using CD4.UI.Library.Model;
+using DevExpress.XtraEditors;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,6 +17,7 @@ namespace CD4.UI.Library.ViewModel
         private string _viewName;
         private string _newNote;
         private string _currentCin;
+        private bool progressPanelVisible;
         private readonly AuthorizeDetailEventArgs _authorizeDetail;
         private readonly ISampleDataAccess _sampleDataAccess;
         private readonly IMapper _mapper;
@@ -48,10 +50,10 @@ namespace CD4.UI.Library.ViewModel
             _sampleDataAccess = sampleDataAccess;
             _mapper = mapper;
             Notes = new BindingList<SampleNotesModel>();
-            
+
             Notes.ListChanged += Notes_ListChanged;
             OnSampleSet += GetNotesForSample;
-            
+
         }
 
         #endregion
@@ -83,6 +85,14 @@ namespace CD4.UI.Library.ViewModel
                 OnPropertyChanged();
             }
         }
+        public bool ProgressPanelVisible
+        {
+            get => progressPanelVisible; set
+            {
+                progressPanelVisible = value;
+                OnPropertyChanged();
+            }
+        }
 
         #endregion
 
@@ -93,7 +103,7 @@ namespace CD4.UI.Library.ViewModel
             {
                 return;
             }
-            if (!string.IsNullOrEmpty(NewNote.Trim()))
+            if (!string.IsNullOrEmpty(NewNote?.Trim()))
             {
                 Notes.Add(new SampleNotesModel()
                 {
@@ -107,7 +117,7 @@ namespace CD4.UI.Library.ViewModel
                 NewNote = null;
             }
         }
-            
+
         public void Reset()
         {
             Notes.ListChanged -= Notes_ListChanged;
@@ -115,6 +125,8 @@ namespace CD4.UI.Library.ViewModel
             ViewName = "Sample Notes";
             _currentCin = null;
             Notes.Clear();
+
+            Notes.ListChanged += Notes_ListChanged;
         }
         #endregion
 
@@ -128,48 +140,64 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
+                ProgressPanelVisible = true;
                 var notes = await _sampleDataAccess.GetSampleNotesByCin(cin);
                 var mappedNotes = _mapper.Map<List<SampleNotesModel>>(notes);
                 DisplayNotes(mappedNotes);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                ProgressPanelVisible = false;
+                XtraMessageBox.Show(ex.Message);
             }
+
+            ProgressPanelVisible = false;
 
         }
 
         private void DisplayNotes(List<SampleNotesModel> notes)
         {
             if (notes is null) return;
-
-            Notes.ListChanged -= Notes_ListChanged;
-            Notes.Clear();
-            foreach (var item in notes)
+            try
             {
-                Notes.Add(item);
+                Notes.ListChanged -= Notes_ListChanged;
+                Notes.Clear();
+                foreach (var item in notes)
+                {
+                    Notes.Add(item);
+                }
+            }
+            finally
+            {
+                Notes.ListChanged += Notes_ListChanged;
             }
 
-            Notes.ListChanged += Notes_ListChanged;
+
         }
 
         private async Task UpdateSampleNotesAsync(SampleNotesModel notesModel)
         {
             try
             {
+                ProgressPanelVisible = true;
                 await _sampleDataAccess.UpdateSampleNoteAttendedStatus(notesModel.Id, notesModel.IsAttended);
             }
             catch (Exception)
             {
+                ProgressPanelVisible = false;
 
                 throw;
             }
+            ProgressPanelVisible = false;
+
         }
 
         private async Task AddNewNoteAsync(SampleNotesModel notesModel)
         {
             try
             {
+                ProgressPanelVisible = true;
+
                 var mappedNotes = _mapper.Map<DataLibrary.Models.SampleNotesModel>(notesModel);
                 var inserted = await _sampleDataAccess.InsertSampleNote(mappedNotes);
 
@@ -177,12 +205,18 @@ namespace CD4.UI.Library.ViewModel
             }
             catch (Exception)
             {
+                ProgressPanelVisible = false;
+
                 throw;
             }
+            ProgressPanelVisible = false;
+
         }
 
         private async void Notes_ListChanged(object sender, ListChangedEventArgs e)
         {
+            ProgressPanelVisible = true;
+
             if (e.PropertyDescriptor?.Name == "IsAttended" && e.ListChangedType == ListChangedType.ItemChanged)
             {
                 var changedNote = Notes[e.NewIndex];
@@ -190,9 +224,11 @@ namespace CD4.UI.Library.ViewModel
                 {
                     await UpdateSampleNotesAsync(changedNote);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    throw;
+                    ProgressPanelVisible = false;
+
+                    XtraMessageBox.Show($"An error occured while setting attended status\n{ex.Message}");
                 }
             }
 
@@ -202,12 +238,22 @@ namespace CD4.UI.Library.ViewModel
                 {
                     await AddNewNoteAsync(Notes[e.NewIndex]);
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
+                    ProgressPanelVisible = true;
 
-                    throw;
+                    if (ex.Message.Contains("FOREIGN KEY"))
+                    {
+                        XtraMessageBox.Show($"An error occured while adding the note to sample. Please make sure that the order is confirmed.\n{ex.Message}");
+                    }
+                    else
+                    {
+                        XtraMessageBox.Show($"An error occured while adding the note to sample.\n{ex.Message}");
+                    }
+                    if(Notes.Count > 0) { Notes.RemoveAt(e.NewIndex); }
                 }
             }
+            ProgressPanelVisible = false;
 
         }
 

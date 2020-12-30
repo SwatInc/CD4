@@ -9,6 +9,7 @@ namespace CD4.UI.Library.ViewModel
         BindingList<SampleNotesModel> Notes { get; set; }
         string ViewName { get; set; }
         string NewNote { get; set; }
+        bool ProgressPanelVisible { get; set; }
 
         event PropertyChangedEventHandler PropertyChanged;
 

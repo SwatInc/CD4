@@ -59,7 +59,7 @@ namespace CD4.UI.Library.ViewModel
             TempCodifiedPhrasesList = new List<Model.CodifiedResultsModel>();
             AllStatus = new List<Model.StatusModel>();
             SampleAuditTrail = new List<Model.AuditTrailModel>();
-            NotesCountButtonLabel = "View Notes";
+            NotesCountButtonLabel = "View Notes [ Ctrl+N ]";
             //set the date to load worksheet from
             LoadWorksheetFromDate = DateTime.Today;
 
@@ -209,13 +209,13 @@ namespace CD4.UI.Library.ViewModel
         /// <param name="notesCount">The number of notes as a string</param>
         public void SetNotesCountManually(string notesCount)
         {
-            NotesCountButtonLabel = $"View Notes [ {notesCount} ]";
+            NotesCountButtonLabel = $"View Notes ( {notesCount} ) [ Ctrl+N ]";
         }
 
         public async Task GetNotesCountAsync(string cin)
         {
             var notesCount = await _sampleDataAccess.GetNotesCountAsync(cin);
-            NotesCountButtonLabel = $"View Notes [ {notesCount} ]";
+            NotesCountButtonLabel = $"View Notes ( {notesCount} ) [ Ctrl+N ]";
         }
 
         public async Task RefreshResultDataOnUiAsync(string cin)
