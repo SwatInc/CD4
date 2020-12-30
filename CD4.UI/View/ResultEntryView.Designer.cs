@@ -172,7 +172,7 @@ namespace CD4.UI.View
             this.splitContainerControlPatient.Panel1.Text = "Panel1";
             this.splitContainerControlPatient.Panel2.Controls.Add(this.splitContainerControlFunctions);
             this.splitContainerControlPatient.Panel2.Text = "Panel2";
-            this.splitContainerControlPatient.Size = new System.Drawing.Size(839, 401);
+            this.splitContainerControlPatient.Size = new System.Drawing.Size(1002, 401);
             this.splitContainerControlPatient.SplitterPosition = 90;
             this.splitContainerControlPatient.TabIndex = 0;
             // 
@@ -192,7 +192,7 @@ namespace CD4.UI.View
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Location = new System.Drawing.Point(0, 0);
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Name = "groupControlSelectedPatientRequestClinicalDetailsArea";
-            this.groupControlSelectedPatientRequestClinicalDetailsArea.Size = new System.Drawing.Size(839, 90);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Size = new System.Drawing.Size(1002, 90);
             this.groupControlSelectedPatientRequestClinicalDetailsArea.TabIndex = 0;
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Text = "Selected Patient, Request and Clinical Details Information";
             // 
@@ -202,7 +202,7 @@ namespace CD4.UI.View
             this.listBoxControlClinicalDetails.Appearance.BackColor = System.Drawing.SystemColors.Control;
             this.listBoxControlClinicalDetails.Appearance.Options.UseBackColor = true;
             this.listBoxControlClinicalDetails.HorizontalScrollbar = true;
-            this.listBoxControlClinicalDetails.Location = new System.Drawing.Point(613, 21);
+            this.listBoxControlClinicalDetails.Location = new System.Drawing.Point(776, 21);
             this.listBoxControlClinicalDetails.Name = "listBoxControlClinicalDetails";
             this.listBoxControlClinicalDetails.Size = new System.Drawing.Size(223, 66);
             this.listBoxControlClinicalDetails.TabIndex = 9;
@@ -233,7 +233,7 @@ namespace CD4.UI.View
             this.splitContainerControlFunctions.Panel1.Text = "Panel1";
             this.splitContainerControlFunctions.Panel2.Controls.Add(this.groupControlFunctions);
             this.splitContainerControlFunctions.Panel2.Text = "Panel2";
-            this.splitContainerControlFunctions.Size = new System.Drawing.Size(839, 306);
+            this.splitContainerControlFunctions.Size = new System.Drawing.Size(1002, 306);
             this.splitContainerControlFunctions.SplitterPosition = 224;
             this.splitContainerControlFunctions.TabIndex = 0;
             // 
@@ -249,7 +249,7 @@ namespace CD4.UI.View
             this.splitContainerControlSamplesAndTest.Panel2.Controls.Add(this.gridControlTests);
             this.splitContainerControlSamplesAndTest.Panel2.Controls.Add(this.graphsUserControl);
             this.splitContainerControlSamplesAndTest.Panel2.Text = "Panel2";
-            this.splitContainerControlSamplesAndTest.Size = new System.Drawing.Size(839, 224);
+            this.splitContainerControlSamplesAndTest.Size = new System.Drawing.Size(1002, 224);
             this.splitContainerControlSamplesAndTest.SplitterPosition = 400;
             this.splitContainerControlSamplesAndTest.TabIndex = 0;
             // 
@@ -295,7 +295,7 @@ namespace CD4.UI.View
             this.progressPanelTests.Dock = System.Windows.Forms.DockStyle.Fill;
             this.progressPanelTests.Location = new System.Drawing.Point(0, 0);
             this.progressPanelTests.Name = "progressPanelTests";
-            this.progressPanelTests.Size = new System.Drawing.Size(434, 224);
+            this.progressPanelTests.Size = new System.Drawing.Size(597, 224);
             this.progressPanelTests.TabIndex = 3;
             // 
             // gridControlTests
@@ -306,7 +306,7 @@ namespace CD4.UI.View
             this.gridControlTests.Name = "gridControlTests";
             this.gridControlTests.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemLookUpEditCodifiedPhrases});
-            this.gridControlTests.Size = new System.Drawing.Size(434, 224);
+            this.gridControlTests.Size = new System.Drawing.Size(597, 224);
             this.gridControlTests.TabIndex = 0;
             this.gridControlTests.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewTests});
@@ -335,7 +335,7 @@ namespace CD4.UI.View
             this.graphsUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.graphsUserControl.Location = new System.Drawing.Point(0, 0);
             this.graphsUserControl.Name = "graphsUserControl";
-            this.graphsUserControl.Size = new System.Drawing.Size(434, 224);
+            this.graphsUserControl.Size = new System.Drawing.Size(597, 224);
             this.graphsUserControl.TabIndex = 4;
             // 
             // groupControlFunctions
@@ -349,15 +349,15 @@ namespace CD4.UI.View
             this.groupControlFunctions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControlFunctions.Location = new System.Drawing.Point(0, 0);
             this.groupControlFunctions.Name = "groupControlFunctions";
-            this.groupControlFunctions.Size = new System.Drawing.Size(839, 77);
+            this.groupControlFunctions.Size = new System.Drawing.Size(1002, 77);
             this.groupControlFunctions.TabIndex = 1;
             this.groupControlFunctions.Text = "Functions";
             // 
             // simpleButtonNotes
             // 
-            this.simpleButtonNotes.Location = new System.Drawing.Point(499, 43);
+            this.simpleButtonNotes.Location = new System.Drawing.Point(554, 43);
             this.simpleButtonNotes.Name = "simpleButtonNotes";
-            this.simpleButtonNotes.Size = new System.Drawing.Size(108, 23);
+            this.simpleButtonNotes.Size = new System.Drawing.Size(159, 23);
             this.simpleButtonNotes.TabIndex = 8;
             this.simpleButtonNotes.Text = "Notes [ 2 ]";
             // 
@@ -376,12 +376,12 @@ namespace CD4.UI.View
             // 
             // simpleButtonLoadWorksheet
             // 
-            this.simpleButtonLoadWorksheet.Location = new System.Drawing.Point(613, 43);
+            this.simpleButtonLoadWorksheet.Location = new System.Drawing.Point(389, 43);
             this.simpleButtonLoadWorksheet.Name = "simpleButtonLoadWorksheet";
-            this.simpleButtonLoadWorksheet.Size = new System.Drawing.Size(108, 23);
+            this.simpleButtonLoadWorksheet.Size = new System.Drawing.Size(159, 23);
             this.simpleButtonLoadWorksheet.TabIndex = 6;
             this.simpleButtonLoadWorksheet.Tag = "ResultEntryView.LoadWorksheet";
-            this.simpleButtonLoadWorksheet.Text = "Load Worksheet";
+            this.simpleButtonLoadWorksheet.Text = "Load Worksheet [ Ctrl+L ]";
             // 
             // label1
             // 
@@ -409,9 +409,9 @@ namespace CD4.UI.View
             // 
             // simpleButtonReport
             // 
-            this.simpleButtonReport.Location = new System.Drawing.Point(727, 43);
+            this.simpleButtonReport.Location = new System.Drawing.Point(719, 43);
             this.simpleButtonReport.Name = "simpleButtonReport";
-            this.simpleButtonReport.Size = new System.Drawing.Size(108, 23);
+            this.simpleButtonReport.Size = new System.Drawing.Size(159, 23);
             this.simpleButtonReport.TabIndex = 0;
             this.simpleButtonReport.Tag = "ResultEntryView.Report";
             this.simpleButtonReport.Text = "Report [ Ctrl+P ]";
@@ -424,7 +424,7 @@ namespace CD4.UI.View
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(839, 401);
+            this.ClientSize = new System.Drawing.Size(1002, 401);
             this.Controls.Add(this.splitContainerControlPatient);
             this.KeyPreview = true;
             this.Name = "ResultEntryView";

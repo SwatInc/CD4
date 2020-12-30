@@ -68,6 +68,17 @@ namespace CD4.UI.View
             ParentChanged += ResultEntryView_ParentChanged;
 
             gridViewSamples.ColumnFilterChanged += OnSampleSearchComplete_RefreshPatientRibbonAndSelectedTests;
+            DisableResultEntryReadWriteAccessForUnauthorizedUsers();
+        }
+
+        private void DisableResultEntryReadWriteAccessForUnauthorizedUsers()
+        {
+            if (!_authEvaluator.IsFunctionAuthorized("ResultEntryView.ReadWriteAccess")) 
+            {
+                gridViewTests.OptionsBehavior.Editable = false;
+                Text = "Result Entry View [Read Only]";
+            };
+            
         }
 
         private void ShowSampleNotesDialog(object sender, EventArgs e)
@@ -471,6 +482,20 @@ namespace CD4.UI.View
 
                     OnAddTestsToSampleAsync(senderItemForReflexTests, EventArgs.Empty);
 
+                    break;
+                case Keys.N:
+                    if (e.Modifiers == Keys.Control)
+                    {
+                        //view notes
+                        ShowSampleNotesDialog(simpleButtonNotes, EventArgs.Empty);
+                    }
+                    break;
+                case Keys.L:
+                    if (e.Modifiers == Keys.Control)
+                    {
+                        //load worksheet
+                        LoadWorkSheet(simpleButtonLoadWorksheet, EventArgs.Empty);
+                    }
                     break;
                 default:
                     break;
@@ -1155,8 +1180,7 @@ namespace CD4.UI.View
             labelControlAddress.DataBindings.Add
                 (new Binding("Text", _viewModel.SelectedRequestData, nameof(RequestSampleModel.Address)));
 
-            simpleButtonNotes.DataBindings.Add
-                (new Binding("Text", _viewModel, nameof(_viewModel.NotesCountButtonLabel),false,DataSourceUpdateMode.OnPropertyChanged));
+
             //Clinical Details
             listBoxControlClinicalDetails.DataSource = _viewModel.SelectedClinicalDetails;
             #endregion
@@ -1179,6 +1203,9 @@ namespace CD4.UI.View
 
             //bind the enable/disable functionality of "Load Worksheet" button
             simpleButtonLoadWorksheet.DataBindings.Add(new Binding("Enabled", _viewModel, nameof(_viewModel.IsloadWorkSheetButtonEnabled)));
+            
+            simpleButtonNotes.DataBindings.Add
+                (new Binding("Text", _viewModel, nameof(_viewModel.NotesCountButtonLabel), false, DataSourceUpdateMode.OnPropertyChanged));
             #endregion
 
             #region Loading Animations
@@ -1199,7 +1226,6 @@ namespace CD4.UI.View
             //set splitter for sample and test functions panel
             splitContainerControlSamplesAndTest.SplitterPosition = (int)(0.5 * Width);
         }
-
     }
 
     class RowInfo
