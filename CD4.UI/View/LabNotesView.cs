@@ -43,13 +43,13 @@ namespace CD4.UI.View
             _viewModel.Reset();
         }
 
-        private void LabNotesView_KeyUp(object sender, KeyEventArgs e)
+        private async void LabNotesView_KeyUp(object sender, KeyEventArgs e)
         {
             //if enter is pressed...
             if (e.KeyCode == Keys.Enter)
             {
                 //Call view model to add new note..., will model will validate the input.
-                _viewModel.AddNewNote();
+                await _viewModel.AddNewNoteAsync();
             }
             if (e.KeyCode == Keys.F6)
             {

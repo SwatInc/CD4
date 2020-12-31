@@ -51,7 +51,6 @@ namespace CD4.UI.Library.ViewModel
             _mapper = mapper;
             Notes = new BindingList<SampleNotesModel>();
 
-            Notes.ListChanged += Notes_ListChanged;
             OnSampleSet += GetNotesForSample;
 
         }
@@ -97,7 +96,7 @@ namespace CD4.UI.Library.ViewModel
         #endregion
 
         #region public Methods
-        public void AddNewNote()
+        public async Task AddNewNoteAsync()
         {
             if (string.IsNullOrEmpty(_currentCin))
             {
@@ -105,7 +104,7 @@ namespace CD4.UI.Library.ViewModel
             }
             if (!string.IsNullOrEmpty(NewNote?.Trim()))
             {
-                Notes.Add(new SampleNotesModel()
+                var note = new SampleNotesModel()
                 {
                     CIN = _currentCin,
                     Note = NewNote,
@@ -113,20 +112,33 @@ namespace CD4.UI.Library.ViewModel
                     Username = _authorizeDetail.Username,
                     UserId = _authorizeDetail.UserId,
                     TimeStamp = DateTimeOffset.Now
-                });
+                };
                 NewNote = null;
+
+                try
+                {
+                    await AddNewNoteAsync(note);
+                }
+                catch (Exception ex)
+                {
+
+                    if (ex.Message.Contains("FOREIGN KEY"))
+                    {
+                        XtraMessageBox.Show($"An error occured while adding the note to sample. Please make sure that the order is confirmed.\n{ex.Message}");
+                    }
+                    else
+                    {
+                        XtraMessageBox.Show($"An error occured while adding the note to sample.\n{ex.Message}");
+                    }
+                }
             }
         }
 
         public void Reset()
         {
-            Notes.ListChanged -= Notes_ListChanged;
-
             ViewName = "Sample Notes";
             _currentCin = null;
             Notes.Clear();
-
-            Notes.ListChanged += Notes_ListChanged;
         }
         #endregion
 
@@ -140,83 +152,69 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-                ProgressPanelVisible = true;
+                progressPanelVisible = true;
                 var notes = await _sampleDataAccess.GetSampleNotesByCin(cin);
                 var mappedNotes = _mapper.Map<List<SampleNotesModel>>(notes);
                 DisplayNotes(mappedNotes);
             }
             catch (Exception ex)
             {
-                ProgressPanelVisible = false;
                 XtraMessageBox.Show(ex.Message);
             }
-
-            ProgressPanelVisible = false;
-
+            finally
+            {
+                progressPanelVisible = false;
+            }
         }
 
         private void DisplayNotes(List<SampleNotesModel> notes)
         {
             if (notes is null) return;
-            try
-            {
-                Notes.ListChanged -= Notes_ListChanged;
-                Notes.Clear();
-                foreach (var item in notes)
-                {
-                    Notes.Add(item);
-                }
-            }
-            finally
-            {
-                Notes.ListChanged += Notes_ListChanged;
-            }
 
-
+            Notes.Clear();
+            foreach (var item in notes)
+            {
+                Notes.Add(item);
+            }
         }
 
         private async Task UpdateSampleNotesAsync(SampleNotesModel notesModel)
         {
             try
             {
-                ProgressPanelVisible = true;
                 await _sampleDataAccess.UpdateSampleNoteAttendedStatus(notesModel.Id, notesModel.IsAttended);
             }
             catch (Exception)
             {
-                ProgressPanelVisible = false;
-
                 throw;
             }
-            ProgressPanelVisible = false;
-
         }
 
         private async Task AddNewNoteAsync(SampleNotesModel notesModel)
         {
             try
             {
-                ProgressPanelVisible = true;
-
+                progressPanelVisible = true;
                 var mappedNotes = _mapper.Map<DataLibrary.Models.SampleNotesModel>(notesModel);
                 var inserted = await _sampleDataAccess.InsertSampleNote(mappedNotes);
 
-                OnSampleSet?.Invoke(this, _currentCin);
+                notesModel.Id = inserted.Id;
+                notesModel.TimeStamp = inserted.TimeStamp;
+
+                Notes.Add(notesModel);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                ProgressPanelVisible = false;
-
-                throw;
+                XtraMessageBox.Show($"Cannot load sample notes for {notesModel.CIN}.\n{ex.Message}");
             }
-            ProgressPanelVisible = false;
-
+            finally
+            {
+                progressPanelVisible = false;
+            }
         }
 
         private async void Notes_ListChanged(object sender, ListChangedEventArgs e)
         {
-            ProgressPanelVisible = true;
-
             if (e.PropertyDescriptor?.Name == "IsAttended" && e.ListChangedType == ListChangedType.ItemChanged)
             {
                 var changedNote = Notes[e.NewIndex];
@@ -226,34 +224,9 @@ namespace CD4.UI.Library.ViewModel
                 }
                 catch (Exception ex)
                 {
-                    ProgressPanelVisible = false;
-
                     XtraMessageBox.Show($"An error occured while setting attended status\n{ex.Message}");
                 }
             }
-
-            if (e.ListChangedType == ListChangedType.ItemAdded)
-            {
-                try
-                {
-                    await AddNewNoteAsync(Notes[e.NewIndex]);
-                }
-                catch (Exception ex)
-                {
-                    ProgressPanelVisible = true;
-
-                    if (ex.Message.Contains("FOREIGN KEY"))
-                    {
-                        XtraMessageBox.Show($"An error occured while adding the note to sample. Please make sure that the order is confirmed.\n{ex.Message}");
-                    }
-                    else
-                    {
-                        XtraMessageBox.Show($"An error occured while adding the note to sample.\n{ex.Message}");
-                    }
-                    if(Notes.Count > 0) { Notes.RemoveAt(e.NewIndex); }
-                }
-            }
-            ProgressPanelVisible = false;
 
         }
 

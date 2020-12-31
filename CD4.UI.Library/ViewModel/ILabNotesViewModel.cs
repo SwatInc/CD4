@@ -13,7 +13,7 @@ namespace CD4.UI.Library.ViewModel
 
         event PropertyChangedEventHandler PropertyChanged;
 
-        void AddNewNote();
+        Task AddNewNoteAsync();
         void Reset();
     }
 }
