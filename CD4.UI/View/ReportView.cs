@@ -120,7 +120,8 @@ namespace CD4.UI.View
             reports.Add(report);
 
             var xtraReport = new AnalysisReport() { DataSource = reports, RequestParameters = false};
-            //xtraReport.Parameters["PrintedDateTime"].Value = DateTime.Now.ToString("dd-MM-yyyy");
+
+            xtraReport.DisplayName = $"{report.Patient.Fullname}({report.Patient.NidPp})_[{report.SampleSite}]";
             ReportPrintTool tool = new ReportPrintTool(xtraReport);
 
             //hide unnecessary buttons
@@ -131,7 +132,7 @@ namespace CD4.UI.View
             tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Open, CommandVisibility.None);
             tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Watermark, CommandVisibility.None);
             tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Save, CommandVisibility.None);
-            
+
             //Set Main view as mdi parent.
             tool.PreviewForm.MdiParent = this.MdiParent;
             //Show the report
