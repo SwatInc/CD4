@@ -231,6 +231,7 @@
     <Build Include="dbo\StoredProcedures\usp_GetSampleNotesByCin.sql" />
     <Build Include="dbo\StoredProcedures\usp_InsertSampleNoteByCin.sql" />
     <Build Include="dbo\StoredProcedures\usp_UpdateSampleNoteAttendedStatus.sql" />
+    <Build Include="dbo\StoredProcedures\usp_CollectLateRegisteredTests.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />

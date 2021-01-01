@@ -49,7 +49,7 @@ namespace CD4.UI.Library.ViewModel
             SampleRejectionCommentsList = _mapper.Map<List<Model.CommentsSelectionModel>>(reasons);
 
             //test rejection CommentTypeId is 5
-            reasons = await _commentsDataAccess.GetAllCommentsByTypeId(4);
+            reasons = await _commentsDataAccess.GetAllCommentsByTypeId(5);
             TestRejectionCommentsList = _mapper.Map<List<Model.CommentsSelectionModel>>(reasons);
 
             IsLoading = false;
