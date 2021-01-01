@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CD4.UI.View
@@ -21,6 +22,7 @@ namespace CD4.UI.View
         private readonly IRejectionCommentViewModel _rejectionCommentViewModel;
         private readonly IUserAuthEvaluator _authEvaluator;
         private readonly ILateOrderEntryViewModel _lateOrderEntryViewModel;
+        private readonly ILabNotesViewModel _labNotesViewModel;
         System.Windows.Forms.Timer dataRefreshTimer = new System.Windows.Forms.Timer() { Enabled = true, Interval = 1000 };
 
         public event EventHandler<string> GenerateReportByCin;
@@ -28,7 +30,8 @@ namespace CD4.UI.View
         public ResultEntryView(IResultEntryViewModel viewModel,
             IRejectionCommentViewModel rejectionCommentViewModel,
             IUserAuthEvaluator authEvaluator,
-            ILateOrderEntryViewModel lateOrderEntryViewModel)
+            ILateOrderEntryViewModel lateOrderEntryViewModel,
+            ILabNotesViewModel labNotesViewModel)
         {
             InitializeComponent();
             //Initialize grid columns
@@ -41,6 +44,7 @@ namespace CD4.UI.View
             _rejectionCommentViewModel = rejectionCommentViewModel;
             _authEvaluator = authEvaluator;
             _lateOrderEntryViewModel = lateOrderEntryViewModel;
+            _labNotesViewModel = labNotesViewModel;
             InitializeBinding();
 
 
@@ -52,6 +56,7 @@ namespace CD4.UI.View
             dataRefreshTimer.Tick += RefreshViewData;
             simpleButtonReport.Click += SimpleButtonReport_Click;
             simpleButtonLoadWorksheet.Click += LoadWorkSheet;
+            simpleButtonNotes.Click += ShowSampleNotesDialog;
             _viewModel.RequestDataRefreshed += RefreshViewData;
             _viewModel.PushingMessages += _viewModel_PushingMessages;
             _viewModel.PropertyChanged += _viewModel_PropertyChanged;
@@ -60,9 +65,29 @@ namespace CD4.UI.View
             KeyUp += ResultEntryView_KeyUp;
             lookUpEditSampleStatusFilter.EditValueChanged += LookUpEditSampleStatusFilter_EditValueChanged;
 
-            this.ParentChanged += ResultEntryView_ParentChanged;
+            ParentChanged += ResultEntryView_ParentChanged;
 
-            this.gridViewSamples.ColumnFilterChanged += OnSampleSearchComplete_RefreshPatientRibbonAndSelectedTests;
+            gridViewSamples.ColumnFilterChanged += OnSampleSearchComplete_RefreshPatientRibbonAndSelectedTests;
+            DisableResultEntryReadWriteAccessForUnauthorizedUsers();
+        }
+
+        private void DisableResultEntryReadWriteAccessForUnauthorizedUsers()
+        {
+            if (!_authEvaluator.IsFunctionAuthorized("ResultEntryView.ReadWriteAccess")) 
+            {
+                gridViewTests.OptionsBehavior.Editable = false;
+                Text = "Result Entry View [Read Only]";
+            };
+            
+        }
+
+        private void ShowSampleNotesDialog(object sender, EventArgs e)
+        {
+            var notesView = new LabNotesView(_labNotesViewModel);
+            notesView.SetSampleNumber(((SimpleButton)sender).Tag?.ToString());
+            notesView.ShowDialog();
+            //_viewModel.GetNotesCountAsync(cin);  this is the actual way..., but I am gonna cheat here. No need for a database call
+            _viewModel.SetNotesCountManually(notesView.DialogResult.ToString());
         }
 
         /// <summary>
@@ -76,8 +101,8 @@ namespace CD4.UI.View
 
         private void ResultEntryView_ParentChanged(object sender, EventArgs e)
         {
-            if (this.MdiParent is null) return;
-            if (this.MdiParent.GetType() != typeof(MainView)) return;
+            if (MdiParent is null) return;
+            if (MdiParent.GetType() != typeof(MainView)) return;
             var mainView = (MainView)this.MdiParent;
             mainView.SelectedDisciplineChanged += OnDisciplineSwitched;
         }
@@ -140,14 +165,14 @@ namespace CD4.UI.View
         {
             if (IsTestHistoryMode)
             {
-                this.gridControlTests.Visible = false;
-                this.graphsUserControl.Visible = true;
+                gridControlTests.Visible = false;
+                graphsUserControl.Visible = true;
             }
 
             if (!IsTestHistoryMode)
             {
-                this.gridControlTests.Visible = true;
-                this.graphsUserControl.Visible = false;
+                gridControlTests.Visible = true;
+                graphsUserControl.Visible = false;
             }
         }
 
@@ -457,6 +482,20 @@ namespace CD4.UI.View
 
                     OnAddTestsToSampleAsync(senderItemForReflexTests, EventArgs.Empty);
 
+                    break;
+                case Keys.N:
+                    if (e.Modifiers == Keys.Control)
+                    {
+                        //view notes
+                        ShowSampleNotesDialog(simpleButtonNotes, EventArgs.Empty);
+                    }
+                    break;
+                case Keys.L:
+                    if (e.Modifiers == Keys.Control)
+                    {
+                        //load worksheet
+                        LoadWorkSheet(simpleButtonLoadWorksheet, EventArgs.Empty);
+                    }
                     break;
                 default:
                     break;
@@ -1050,7 +1089,32 @@ namespace CD4.UI.View
             }
 
             var selectedSample = (RequestSampleModel)gridViewSamples.GetRow(e.FocusedRowHandle);
-            await _viewModel.SetSelectedSampleAsync(selectedSample);
+            try
+            {
+                await _viewModel.SetSelectedSampleAsync(selectedSample);
+                await GetNotesCountAsync(selectedSample?.Cin);
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+
+        }
+
+        public async Task GetNotesCountAsync(string cin)
+        {
+            if (string.IsNullOrEmpty(cin)) { _viewModel.NotesCountButtonLabel = "View Notes [ 0 ]"; }
+
+            try
+            {
+                simpleButtonNotes.Tag = cin;
+                await _viewModel.GetNotesCountAsync(cin);
+            }
+            catch (Exception ex)
+            {
+                _viewModel.NotesCountButtonLabel = "View Notes [ 0 ]";
+                XtraMessageBox.Show($"Unable to load sample notes data.\n{ex.Message}");
+            }
         }
 
         /// <summary>
@@ -1116,6 +1180,7 @@ namespace CD4.UI.View
             labelControlAddress.DataBindings.Add
                 (new Binding("Text", _viewModel.SelectedRequestData, nameof(RequestSampleModel.Address)));
 
+
             //Clinical Details
             listBoxControlClinicalDetails.DataSource = _viewModel.SelectedClinicalDetails;
             #endregion
@@ -1138,6 +1203,9 @@ namespace CD4.UI.View
 
             //bind the enable/disable functionality of "Load Worksheet" button
             simpleButtonLoadWorksheet.DataBindings.Add(new Binding("Enabled", _viewModel, nameof(_viewModel.IsloadWorkSheetButtonEnabled)));
+            
+            simpleButtonNotes.DataBindings.Add
+                (new Binding("Text", _viewModel, nameof(_viewModel.NotesCountButtonLabel), false, DataSourceUpdateMode.OnPropertyChanged));
             #endregion
 
             #region Loading Animations
@@ -1158,7 +1226,6 @@ namespace CD4.UI.View
             //set splitter for sample and test functions panel
             splitContainerControlSamplesAndTest.SplitterPosition = (int)(0.5 * Width);
         }
-
     }
 
     class RowInfo

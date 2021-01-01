@@ -79,5 +79,68 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
+
+        public async Task<int> GetNotesCountAsync(string cin)
+        {
+            var storedProcedure = "[dbo].[usp_GetNotesCountForSample]";
+            var parameter = new { Cin = cin };
+
+            try
+            {
+                return await SelectInsertOrUpdateAsync<int, dynamic>(storedProcedure, parameter);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<List<SampleNotesModel>> GetSampleNotesByCin(string cin)
+        {
+            var storedProcedure = "[dbo].[usp_GetSampleNotesByCin]";
+            var parameters = new { Cin = cin };
+            try
+            {
+                return await LoadDataWithParameterAsync<SampleNotesModel, dynamic>(storedProcedure, parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<SampleNotesModel> InsertSampleNote(SampleNotesModel sampleNotes)
+        {
+            var storedProcedure = "[dbo].[usp_InsertSampleNoteByCin]";
+            var parameters = new { Cin = sampleNotes.CIN, Note = sampleNotes.Note, UserId = sampleNotes.UserId };
+
+            try
+            {
+                return await SelectInsertOrUpdateAsync<SampleNotesModel, dynamic>(storedProcedure, parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task UpdateSampleNoteAttendedStatus(int noteId, bool isAttended)
+        {
+            var storedProcedure = "[dbo].[usp_UpdateSampleNoteAttendedStatus]";
+            var parameters = new { NoteId = noteId, IsAttended = isAttended };
+
+            try
+            {
+                _ = await SelectInsertOrUpdateAsync<dynamic, dynamic>(storedProcedure, parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

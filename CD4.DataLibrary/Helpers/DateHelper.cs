@@ -14,7 +14,7 @@ namespace CD4.DataLibrary.Helpers
             {
                 return null;
             }
-            return nullabledate.Value.ToLocalTime().ToString("yyyyMMdd");
+            return nullabledate.Value.ToLocalTime().ToString("yyyyMMddHHmmss.fff");
         }
     }
 }

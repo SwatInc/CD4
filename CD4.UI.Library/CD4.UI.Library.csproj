@@ -53,6 +53,7 @@
     <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="DevExpress.XtraEditors.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
     <Reference Include="FluentValidation, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentValidation.8.6.2\lib\net45\FluentValidation.dll</HintPath>
     </Reference>
@@ -92,6 +93,7 @@
     <Compile Include="Model\BarcodeDataModel.cs" />
     <Compile Include="Model\CommentsSelectionModel.cs" />
     <Compile Include="Model\DemographicsConfirmationModel.cs" />
+    <Compile Include="Model\SampleNotesModel.cs" />
     <Compile Include="Model\PatientModel.cs" />
     <Compile Include="Model\RejectionReasonType.cs" />
     <Compile Include="Model\ResultAlertModel.cs" />
@@ -138,6 +140,7 @@
     <Compile Include="ViewModel\ICodifiedValuesViewModel.cs" />
     <Compile Include="ViewModel\ICountryViewModel.cs" />
     <Compile Include="ViewModel\IGenderViewModel.cs" />
+    <Compile Include="ViewModel\ILabNotesViewModel.cs" />
     <Compile Include="ViewModel\ILateOrderEntryViewModel.cs" />
     <Compile Include="ViewModel\IMainViewModel.cs" />
     <Compile Include="ViewModel\IOrderEntryViewModel.cs" />
@@ -149,6 +152,7 @@
     <Compile Include="ViewModel\IScientistViewModel.cs" />
     <Compile Include="ViewModel\ISitesViewModel.cs" />
     <Compile Include="ViewModel\ITestViewModel.cs" />
+    <Compile Include="ViewModel\LabNotesViewModel.cs" />
     <Compile Include="ViewModel\LateOrderEntryViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\OrderEntryViewModel.cs" />

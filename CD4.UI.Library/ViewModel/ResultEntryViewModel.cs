@@ -21,6 +21,7 @@ namespace CD4.UI.Library.ViewModel
         private GridControlTestActiveDatasource _gridTestActiveDatasource;
         private GridControlSampleActiveDatasource _gridSampleActiveDatasource;
         private int _selectedDisciplineId;
+        private string notesCountButtonLabel;
         private readonly IWorkSheetDataAccess _workSheetDataAccess;
         private readonly IMapper _mapper;
         private readonly IResultDataAccess _resultDataAccess;
@@ -58,7 +59,7 @@ namespace CD4.UI.Library.ViewModel
             TempCodifiedPhrasesList = new List<Model.CodifiedResultsModel>();
             AllStatus = new List<Model.StatusModel>();
             SampleAuditTrail = new List<Model.AuditTrailModel>();
-
+            NotesCountButtonLabel = "View Notes [ Ctrl+N ]";
             //set the date to load worksheet from
             LoadWorksheetFromDate = DateTime.Today;
 
@@ -139,6 +140,15 @@ namespace CD4.UI.Library.ViewModel
                 GetWorkSheet();
             }
         }
+        public string NotesCountButtonLabel
+        {
+            get => notesCountButtonLabel; set
+            {
+                if (notesCountButtonLabel == value) return;
+                notesCountButtonLabel = value;
+                OnPropertyChanged();
+            }
+        }
 
         //enable/disable status of loadWorksheet button
         public bool IsloadWorkSheetButtonEnabled
@@ -192,6 +202,22 @@ namespace CD4.UI.Library.ViewModel
         #endregion
 
         #region Public Methods
+
+        /// <summary>
+        /// Sets notes count button without a database call. Uses the passed in string value as count of notes
+        /// </summary>
+        /// <param name="notesCount">The number of notes as a string</param>
+        public void SetNotesCountManually(string notesCount)
+        {
+            NotesCountButtonLabel = $"View Notes ( {notesCount} ) [ Ctrl+N ]";
+        }
+
+        public async Task GetNotesCountAsync(string cin)
+        {
+            var notesCount = await _sampleDataAccess.GetNotesCountAsync(cin);
+            NotesCountButtonLabel = $"View Notes ( {notesCount} ) [ Ctrl+N ]";
+        }
+
         public async Task RefreshResultDataOnUiAsync(string cin)
         {
             try
@@ -318,7 +344,7 @@ namespace CD4.UI.Library.ViewModel
                 //Disable the load worksheet button to avoid multiple clicks
                 IsloadWorkSheetButtonEnabled = false;
                 var worksheet = await _workSheetDataAccess.GetWorklistBySpecifiedDateAndStatusIdAsync
-                    (GetSelectedStatusIdOrDefault(),SelectedDisciplineId, LoadWorksheetFromDate);
+                    (GetSelectedStatusIdOrDefault(), SelectedDisciplineId, LoadWorksheetFromDate);
                 await DisplayWorksheet(worksheet);
             }
             finally
