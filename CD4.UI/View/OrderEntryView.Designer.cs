@@ -430,7 +430,7 @@
             this.groupControlClinicalDetails.Controls.Add(this.gridControlClinicalDetails);
             this.groupControlClinicalDetails.Location = new System.Drawing.Point(5, 153);
             this.groupControlClinicalDetails.Name = "groupControlClinicalDetails";
-            this.groupControlClinicalDetails.Size = new System.Drawing.Size(196, 186);
+            this.groupControlClinicalDetails.Size = new System.Drawing.Size(196, 193);
             this.groupControlClinicalDetails.TabIndex = 0;
             this.groupControlClinicalDetails.Text = "Clinical Details";
             // 
@@ -440,7 +440,7 @@
             this.gridControlClinicalDetails.Location = new System.Drawing.Point(2, 20);
             this.gridControlClinicalDetails.MainView = this.gridViewClinicalDetails;
             this.gridControlClinicalDetails.Name = "gridControlClinicalDetails";
-            this.gridControlClinicalDetails.Size = new System.Drawing.Size(192, 164);
+            this.gridControlClinicalDetails.Size = new System.Drawing.Size(192, 171);
             this.gridControlClinicalDetails.TabIndex = 1;
             this.gridControlClinicalDetails.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewClinicalDetails});
@@ -479,7 +479,7 @@
             this.groupControlSelectedTestData.Controls.Add(this.gridControlRequestedTests);
             this.groupControlSelectedTestData.Location = new System.Drawing.Point(207, 153);
             this.groupControlSelectedTestData.Name = "groupControlSelectedTestData";
-            this.groupControlSelectedTestData.Size = new System.Drawing.Size(350, 186);
+            this.groupControlSelectedTestData.Size = new System.Drawing.Size(350, 193);
             this.groupControlSelectedTestData.TabIndex = 0;
             this.groupControlSelectedTestData.Text = "Selected Tests Data";
             // 
@@ -489,7 +489,7 @@
             this.gridControlRequestedTests.Location = new System.Drawing.Point(2, 20);
             this.gridControlRequestedTests.MainView = this.gridViewRequestedTests;
             this.gridControlRequestedTests.Name = "gridControlRequestedTests";
-            this.gridControlRequestedTests.Size = new System.Drawing.Size(346, 164);
+            this.gridControlRequestedTests.Size = new System.Drawing.Size(346, 171);
             this.gridControlRequestedTests.TabIndex = 0;
             this.gridControlRequestedTests.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewRequestedTests});
@@ -505,16 +505,16 @@
             // 
             // simpleButtonSearch
             // 
-            this.simpleButtonSearch.Location = new System.Drawing.Point(218, 343);
+            this.simpleButtonSearch.Location = new System.Drawing.Point(218, 352);
             this.simpleButtonSearch.Name = "simpleButtonSearch";
-            this.simpleButtonSearch.Size = new System.Drawing.Size(98, 23);
+            this.simpleButtonSearch.Size = new System.Drawing.Size(123, 23);
             this.simpleButtonSearch.TabIndex = 1;
             this.simpleButtonSearch.Tag = "OrderEntry.Search";
             this.simpleButtonSearch.Text = "Search [ F2 ]";
             // 
             // simpleButtonConfirm
             // 
-            this.simpleButtonConfirm.Location = new System.Drawing.Point(426, 343);
+            this.simpleButtonConfirm.Location = new System.Drawing.Point(451, 352);
             this.simpleButtonConfirm.Name = "simpleButtonConfirm";
             this.simpleButtonConfirm.Size = new System.Drawing.Size(98, 23);
             this.simpleButtonConfirm.TabIndex = 0;
@@ -528,7 +528,7 @@
             this.groupControlTestSelection.Controls.Add(this.lookUpEditTests);
             this.groupControlTestSelection.Location = new System.Drawing.Point(561, 153);
             this.groupControlTestSelection.Name = "groupControlTestSelection";
-            this.groupControlTestSelection.Size = new System.Drawing.Size(196, 186);
+            this.groupControlTestSelection.Size = new System.Drawing.Size(196, 193);
             this.groupControlTestSelection.TabIndex = 0;
             this.groupControlTestSelection.Text = "Test Selection";
             // 
@@ -541,7 +541,7 @@
             this.progressPanelTestData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.progressPanelTestData.Location = new System.Drawing.Point(2, 20);
             this.progressPanelTestData.Name = "progressPanelTestData";
-            this.progressPanelTestData.Size = new System.Drawing.Size(192, 164);
+            this.progressPanelTestData.Size = new System.Drawing.Size(192, 171);
             this.progressPanelTestData.TabIndex = 0;
             this.progressPanelTestData.TabStop = false;
             this.progressPanelTestData.Text = "Request data";
@@ -565,7 +565,7 @@
             // 
             // simpleButtonRemoveTest
             // 
-            this.simpleButtonRemoveTest.Location = new System.Drawing.Point(114, 343);
+            this.simpleButtonRemoveTest.Location = new System.Drawing.Point(114, 352);
             this.simpleButtonRemoveTest.Name = "simpleButtonRemoveTest";
             this.simpleButtonRemoveTest.Size = new System.Drawing.Size(98, 23);
             this.simpleButtonRemoveTest.TabIndex = 6;
@@ -574,7 +574,7 @@
             // 
             // simpleButtonSearchRequest
             // 
-            this.simpleButtonSearchRequest.Location = new System.Drawing.Point(322, 343);
+            this.simpleButtonSearchRequest.Location = new System.Drawing.Point(347, 352);
             this.simpleButtonSearchRequest.Name = "simpleButtonSearchRequest";
             this.simpleButtonSearchRequest.Size = new System.Drawing.Size(98, 23);
             this.simpleButtonSearchRequest.TabIndex = 7;
@@ -583,7 +583,7 @@
             // 
             // simpleButtonPrintBarcode
             // 
-            this.simpleButtonPrintBarcode.Location = new System.Drawing.Point(530, 343);
+            this.simpleButtonPrintBarcode.Location = new System.Drawing.Point(555, 352);
             this.simpleButtonPrintBarcode.Name = "simpleButtonPrintBarcode";
             this.simpleButtonPrintBarcode.Size = new System.Drawing.Size(122, 23);
             this.simpleButtonPrintBarcode.TabIndex = 8;
@@ -592,7 +592,7 @@
             // 
             // simpleButtonGetNextCin
             // 
-            this.simpleButtonGetNextCin.Location = new System.Drawing.Point(10, 343);
+            this.simpleButtonGetNextCin.Location = new System.Drawing.Point(113, 381);
             this.simpleButtonGetNextCin.Name = "simpleButtonGetNextCin";
             this.simpleButtonGetNextCin.Size = new System.Drawing.Size(98, 23);
             this.simpleButtonGetNextCin.TabIndex = 9;
@@ -615,23 +615,23 @@
             this.panelControlOE.Controls.Add(this.simpleButtonConfirm);
             this.panelControlOE.Location = new System.Drawing.Point(1, 1);
             this.panelControlOE.Name = "panelControlOE";
-            this.panelControlOE.Size = new System.Drawing.Size(763, 372);
+            this.panelControlOE.Size = new System.Drawing.Size(763, 410);
             this.panelControlOE.TabIndex = 10;
             // 
             // simpleButtonViewNotes
             // 
-            this.simpleButtonViewNotes.Location = new System.Drawing.Point(658, 343);
+            this.simpleButtonViewNotes.Location = new System.Drawing.Point(219, 381);
             this.simpleButtonViewNotes.Name = "simpleButtonViewNotes";
-            this.simpleButtonViewNotes.Size = new System.Drawing.Size(98, 23);
+            this.simpleButtonViewNotes.Size = new System.Drawing.Size(122, 23);
             this.simpleButtonViewNotes.TabIndex = 10;
             this.simpleButtonViewNotes.Tag = "OrderEntry.Remove";
-            this.simpleButtonViewNotes.Text = "Add Note";
+            this.simpleButtonViewNotes.Text = "Add Note [ Ctrl+N ]";
             // 
             // OrderEntryView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(765, 374);
+            this.ClientSize = new System.Drawing.Size(765, 412);
             this.Controls.Add(this.panelControlOE);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.KeyPreview = true;

@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.barButtonItemCodifiedResults = new DevExpress.XtraBars.BarButtonItem();
@@ -48,7 +47,7 @@
             this.barStaticItemUsernameAndRole = new DevExpress.XtraBars.BarStaticItem();
             this.barButtonItemAcceptSamples = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemDisciplineSelector = new DevExpress.XtraBars.BarButtonItem();
-            this.popupMenuDiscipline = new DevExpress.XtraBars.PopupMenu(this.components);
+            this.popupMenuDiscipline = new DevExpress.XtraBars.PopupMenu();
             this.ribbonPageCategoryDiscipline = new DevExpress.XtraBars.Ribbon.RibbonPageCategory();
             this.ribbonPageDiscipline = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -60,6 +59,7 @@
             this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.repositoryItemRatingControl1 = new DevExpress.XtraEditors.Repository.RepositoryItemRatingControl();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
+            this.barButtonItemBulkImportOrders = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuDiscipline)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRatingControl1)).BeginInit();
@@ -86,9 +86,10 @@
             this.barButtonItemChangePassword,
             this.barStaticItemUsernameAndRole,
             this.barButtonItemAcceptSamples,
-            this.barButtonItemDisciplineSelector});
+            this.barButtonItemDisciplineSelector,
+            this.barButtonItemBulkImportOrders});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 27;
+            this.ribbon.MaxItemId = 28;
             this.ribbon.Name = "ribbon";
             this.ribbon.PageCategories.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageCategory[] {
             this.ribbonPageCategoryDiscipline});
@@ -284,6 +285,7 @@
             this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemResultEntry);
             this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemStatistics);
             this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemAcceptSamples);
+            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemBulkImportOrders);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
             this.ribbonPageGroup2.Text = "General Lab Tasks";
             // 
@@ -336,6 +338,15 @@
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
             this.ribbonStatusBar.Size = new System.Drawing.Size(1110, 31);
+            // 
+            // barButtonItemBulkImportOrders
+            // 
+            this.barButtonItemBulkImportOrders.Caption = "Bulk Import Orders";
+            this.barButtonItemBulkImportOrders.Id = 27;
+            this.barButtonItemBulkImportOrders.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
+            this.barButtonItemBulkImportOrders.Name = "barButtonItemBulkImportOrders";
+            this.barButtonItemBulkImportOrders.RibbonStyle = ((DevExpress.XtraBars.Ribbon.RibbonItemStyles)(((DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithText) 
+            | DevExpress.XtraBars.Ribbon.RibbonItemStyles.SmallWithoutText)));
             // 
             // MainView
             // 
@@ -393,5 +404,6 @@
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageDiscipline;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup4;
         private DevExpress.XtraBars.PopupMenu popupMenuDiscipline;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemBulkImportOrders;
     }
 }
