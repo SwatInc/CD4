@@ -52,6 +52,7 @@ namespace CD4.UI.Library.ViewModel
             Notes = new BindingList<SampleNotesModel>();
 
             OnSampleSet += GetNotesForSample;
+            Notes.ListChanged += Notes_ListChanged;
 
         }
 
