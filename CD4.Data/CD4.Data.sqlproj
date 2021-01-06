@@ -243,5 +243,6 @@
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\Scripts\Script.PostDeployment.sql" />
+    <None Include="dbo\Scripts\StaticDataSeed.PostDeployment1.sql" />
   </ItemGroup>
 </Project>
