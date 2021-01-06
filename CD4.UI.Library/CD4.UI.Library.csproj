@@ -53,15 +53,36 @@
     <Reference Include="AutoMapper, Version=9.0.0.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.9.0.0\lib\net461\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="BouncyCastle.Crypto, Version=1.8.6.0, Culture=neutral, PublicKeyToken=0e99375e54769942, processorArchitecture=MSIL">
+      <HintPath>..\packages\Portable.BouncyCastle.1.8.6\lib\net40\BouncyCastle.Crypto.dll</HintPath>
+    </Reference>
     <Reference Include="DevExpress.XtraEditors.v18.2, Version=18.2.7.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a, processorArchitecture=MSIL" />
+    <Reference Include="ExcelMapper">
+      <HintPath>..\..\..\ExcelMapper\ExcelMapper\bin\Debug\net472\ExcelMapper.dll</HintPath>
+    </Reference>
     <Reference Include="FluentValidation, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
       <HintPath>..\packages\FluentValidation.8.6.2\lib\net45\FluentValidation.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.2.0.246, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.2.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI, Version=2.5.2.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.2\lib\net45\NPOI.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OOXML, Version=2.5.2.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.2\lib\net45\NPOI.OOXML.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXml4Net, Version=2.5.2.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.2\lib\net45\NPOI.OpenXml4Net.dll</HintPath>
+    </Reference>
+    <Reference Include="NPOI.OpenXmlFormats, Version=2.5.2.0, Culture=neutral, PublicKeyToken=0df73ec7942b34e1, processorArchitecture=MSIL">
+      <HintPath>..\packages\NPOI.2.5.2\lib\net45\NPOI.OpenXmlFormats.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Annotations, Version=4.2.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
@@ -91,6 +112,7 @@
     <Compile Include="Model\Authority.cs" />
     <Compile Include="Model\AuthorizeDetailEventArgs.cs" />
     <Compile Include="Model\BarcodeDataModel.cs" />
+    <Compile Include="Model\BulkSchemaModel.cs" />
     <Compile Include="Model\CommentsSelectionModel.cs" />
     <Compile Include="Model\DemographicsConfirmationModel.cs" />
     <Compile Include="Model\SampleNotesModel.cs" />
@@ -128,6 +150,7 @@
     <Compile Include="Validations\OrderEntryValidator.cs" />
     <Compile Include="ViewModel\AcceptSampleViewModel.cs" />
     <Compile Include="ViewModel\AuthenticationViewModel.cs" />
+    <Compile Include="ViewModel\BulkOrdersImportViewModel.cs" />
     <Compile Include="ViewModel\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModel\ClinicalDetailsViewModel.cs" />
     <Compile Include="ViewModel\CodifiedValuesViewModel.cs" />
@@ -135,6 +158,7 @@
     <Compile Include="ViewModel\GenderViewModel.cs" />
     <Compile Include="ViewModel\IAcceptSampleViewModel.cs" />
     <Compile Include="ViewModel\IAuthenticationViewModel.cs" />
+    <Compile Include="ViewModel\IBulkOrdersImportViewModel.cs" />
     <Compile Include="ViewModel\IChangePasswordViewModel.cs" />
     <Compile Include="ViewModel\IClinicalDetailsViewModel.cs" />
     <Compile Include="ViewModel\ICodifiedValuesViewModel.cs" />
@@ -172,6 +196,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="app.config" />
     <None Include="packages.config" />
     <None Include="RegexValidationData.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

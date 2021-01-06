@@ -163,7 +163,7 @@ namespace CD4.UI.View
                 // REMOVE THIS. HANDLES THIS PROPERLY IN DATALAYER
                 if (ex.Message.Contains("NULL") && ex.Message.Contains("TimeStamp") && ex.Message.Contains("CD4Data.dbo.TrackingHistory"))
                 {
-                    XtraMessageBox.Show("Analysis request confirmed. The sample collected date was not specified though");
+                    XtraMessageBox.Show($"Analysis request confirmed. The sample collected date was not specified though\n{ex.Message}");
                     return;
                 }
                 else

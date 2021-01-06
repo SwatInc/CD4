@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -17,7 +18,7 @@ namespace CD4.UI.Library.Helpers
             var names = fullname.Split(' ');
 
             //two names in fullname and length graterthan max length
-            if (names.Length == 2 && fullname.Length > maxLength)
+            if (names.Length == 2 && fullname.Length >= maxLength)
             {
                 //abbreviate 1st name segment
                 var name = $"{names[0].Substring(0, 1)}.";

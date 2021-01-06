@@ -53,6 +53,7 @@ namespace CD4.UI.View
             barButtonItemOrderEntry.ItemClick += OpenOrderEntryView;
             barButtonItemResultEntry.ItemClick += OpenResultEntryView;
             barButtonItemAcceptSamples.ItemClick += OpenAcceptSampleView;
+            barButtonItemBulkImportOrders.ItemClick += OpenBulkOrdersView;
 
             //profile Tab Buttons
             barButtonItemChangePassword.ItemClick += OpenChangePasswordView;
@@ -65,6 +66,11 @@ namespace CD4.UI.View
             this.MdiChildActivate += MainView_MdiChildActivate;
 
             SetDisciplineRibbonOptions();
+        }
+
+        private void OpenBulkOrdersView(object sender, ItemClickEventArgs e)
+        {
+            OpenMdiForm<BulkOrdersImportView>();
         }
 
         /// <summary>
