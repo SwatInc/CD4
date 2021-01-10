@@ -40,27 +40,6 @@ namespace CD4.UI.View
             //receipt number
             textEditReceiptNumber.DataBindings.Add(new Binding("EditValue", _viewModel, nameof(_viewModel.ReceiptNumber),
                 false,DataSourceUpdateMode.OnPropertyChanged));
-            //site
-            lookUpEditSite.Properties.DataSource = _viewModel.Sites;
-            lookUpEditSite.Properties.DisplayMember = nameof(SitesModel.Site);
-            lookUpEditSite.Properties.ValueMember = nameof(SitesModel.Id);
-            lookUpEditSite.DataBindings.Add
-                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedSiteId)));
-
-            //Atolls and Selected Atoll
-            lookUpEditAtoll.Properties.DataSource = _viewModel.Atolls;
-            lookUpEditAtoll.Properties.DisplayMember = nameof(AtollModel.Atoll);
-            lookUpEditAtoll.Properties.ValueMember = nameof(AtollModel.Atoll);
-            lookUpEditAtoll.DataBindings.Add
-                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedAtoll), true,
-                DataSourceUpdateMode.OnPropertyChanged));
-
-            //Islands and Selected Island
-            lookUpEditIsland.Properties.DataSource = _viewModel.Islands;
-            lookUpEditIsland.Properties.DisplayMember = nameof(IslandModel.Island);
-            lookUpEditIsland.Properties.ValueMember = nameof(IslandModel.Island);
-            lookUpEditIsland.DataBindings.Add
-                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedIsland)));
 
             //Tests and profiles lookupEdit datasource
             lookUpEditTests.Properties.DataSource = _viewModel.AllTestsData;

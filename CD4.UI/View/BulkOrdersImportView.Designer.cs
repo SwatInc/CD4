@@ -35,11 +35,7 @@ namespace CD4.UI.View
             this.xtraOpenFileDialog = new DevExpress.XtraEditors.XtraOpenFileDialog(this.components);
             this.simpleButtonBrowse = new DevExpress.XtraEditors.SimpleButton();
             this.groupControlChooseFile = new DevExpress.XtraEditors.GroupControl();
-            this.lookUpEditSite = new DevExpress.XtraEditors.LookUpEdit();
             this.textEditReceiptNumber = new DevExpress.XtraEditors.TextEdit();
-            this.textEditAddress = new DevExpress.XtraEditors.TextEdit();
-            this.lookUpEditIsland = new DevExpress.XtraEditors.LookUpEdit();
-            this.lookUpEditAtoll = new DevExpress.XtraEditors.LookUpEdit();
             this.lookUpEditTests = new DevExpress.XtraEditors.LookUpEdit();
             this.simpleButtonConfirmUpload = new DevExpress.XtraEditors.SimpleButton();
             this.labelImportFilePathDisplay = new System.Windows.Forms.Label();
@@ -63,14 +59,14 @@ namespace CD4.UI.View
             this.groupControlSelectedTestData = new DevExpress.XtraEditors.GroupControl();
             this.gridControlRequestedTests = new DevExpress.XtraGrid.GridControl();
             this.gridViewRequestedTests = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumnAddress = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnAtoll = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnIsland = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnSampleSite = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEditExcelImportsIcon.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlChooseFile)).BeginInit();
             this.groupControlChooseFile.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditSite.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditReceiptNumber.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditAddress.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditIsland.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditAtoll.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTests.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
             this.splitContainerControl1.SuspendLayout();
@@ -118,11 +114,7 @@ namespace CD4.UI.View
             // 
             // groupControlChooseFile
             // 
-            this.groupControlChooseFile.Controls.Add(this.lookUpEditSite);
             this.groupControlChooseFile.Controls.Add(this.textEditReceiptNumber);
-            this.groupControlChooseFile.Controls.Add(this.textEditAddress);
-            this.groupControlChooseFile.Controls.Add(this.lookUpEditIsland);
-            this.groupControlChooseFile.Controls.Add(this.lookUpEditAtoll);
             this.groupControlChooseFile.Controls.Add(this.lookUpEditTests);
             this.groupControlChooseFile.Controls.Add(this.simpleButtonConfirmUpload);
             this.groupControlChooseFile.Controls.Add(this.labelImportFilePathDisplay);
@@ -135,22 +127,6 @@ namespace CD4.UI.View
             this.groupControlChooseFile.TabIndex = 3;
             this.groupControlChooseFile.Text = "Choose Import File";
             // 
-            // lookUpEditSite
-            // 
-            this.lookUpEditSite.EnterMoveNextControl = true;
-            this.lookUpEditSite.Location = new System.Drawing.Point(754, 38);
-            this.lookUpEditSite.Name = "lookUpEditSite";
-            this.lookUpEditSite.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
-            this.lookUpEditSite.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpEditSite.Properties.NullText = "Select Site";
-            this.lookUpEditSite.Properties.NullValuePrompt = "Select Site";
-            this.lookUpEditSite.Properties.NullValuePromptShowForEmptyValue = true;
-            this.lookUpEditSite.Properties.ShowNullValuePromptWhenFocused = true;
-            this.lookUpEditSite.Properties.ValidateOnEnterKey = true;
-            this.lookUpEditSite.Size = new System.Drawing.Size(206, 20);
-            this.lookUpEditSite.TabIndex = 21;
-            // 
             // textEditReceiptNumber
             // 
             this.textEditReceiptNumber.EditValue = "Receipt Number";
@@ -158,57 +134,12 @@ namespace CD4.UI.View
             this.textEditReceiptNumber.Location = new System.Drawing.Point(129, 52);
             this.textEditReceiptNumber.Name = "textEditReceiptNumber";
             this.textEditReceiptNumber.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.textEditReceiptNumber.Properties.NullText = "Address";
-            this.textEditReceiptNumber.Properties.NullValuePrompt = "Address";
+            this.textEditReceiptNumber.Properties.NullText = "Receipt Number";
+            this.textEditReceiptNumber.Properties.NullValuePrompt = "Receipt Number";
             this.textEditReceiptNumber.Properties.NullValuePromptShowForEmptyValue = true;
             this.textEditReceiptNumber.Properties.ValidateOnEnterKey = true;
             this.textEditReceiptNumber.Size = new System.Drawing.Size(206, 20);
             this.textEditReceiptNumber.TabIndex = 20;
-            // 
-            // textEditAddress
-            // 
-            this.textEditAddress.EnterMoveNextControl = true;
-            this.textEditAddress.Location = new System.Drawing.Point(966, 38);
-            this.textEditAddress.Name = "textEditAddress";
-            this.textEditAddress.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.textEditAddress.Properties.NullText = "Address";
-            this.textEditAddress.Properties.NullValuePrompt = "Address";
-            this.textEditAddress.Properties.NullValuePromptShowForEmptyValue = true;
-            this.textEditAddress.Properties.ValidateOnEnterKey = true;
-            this.textEditAddress.Size = new System.Drawing.Size(206, 20);
-            this.textEditAddress.TabIndex = 17;
-            // 
-            // lookUpEditIsland
-            // 
-            this.lookUpEditIsland.EnterMoveNextControl = true;
-            this.lookUpEditIsland.Location = new System.Drawing.Point(966, 90);
-            this.lookUpEditIsland.Name = "lookUpEditIsland";
-            this.lookUpEditIsland.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
-            this.lookUpEditIsland.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpEditIsland.Properties.NullText = "Select Island";
-            this.lookUpEditIsland.Properties.NullValuePrompt = "Select Island";
-            this.lookUpEditIsland.Properties.NullValuePromptShowForEmptyValue = true;
-            this.lookUpEditIsland.Properties.ShowNullValuePromptWhenFocused = true;
-            this.lookUpEditIsland.Properties.ValidateOnEnterKey = true;
-            this.lookUpEditIsland.Size = new System.Drawing.Size(206, 20);
-            this.lookUpEditIsland.TabIndex = 19;
-            // 
-            // lookUpEditAtoll
-            // 
-            this.lookUpEditAtoll.EnterMoveNextControl = true;
-            this.lookUpEditAtoll.Location = new System.Drawing.Point(966, 64);
-            this.lookUpEditAtoll.Name = "lookUpEditAtoll";
-            this.lookUpEditAtoll.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
-            this.lookUpEditAtoll.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpEditAtoll.Properties.NullText = "Select Atoll";
-            this.lookUpEditAtoll.Properties.NullValuePrompt = "Select Atoll";
-            this.lookUpEditAtoll.Properties.NullValuePromptShowForEmptyValue = true;
-            this.lookUpEditAtoll.Properties.ShowNullValuePromptWhenFocused = true;
-            this.lookUpEditAtoll.Properties.ValidateOnEnterKey = true;
-            this.lookUpEditAtoll.Size = new System.Drawing.Size(206, 20);
-            this.lookUpEditAtoll.TabIndex = 18;
             // 
             // lookUpEditTests
             // 
@@ -309,7 +240,11 @@ namespace CD4.UI.View
             this.gridColumnCough,
             this.gridColumnFever,
             this.gridColumnTravelHistory,
-            this.gridColumnSampleCollectedDateTime});
+            this.gridColumnSampleCollectedDateTime,
+            this.gridColumnAddress,
+            this.gridColumnAtoll,
+            this.gridColumnIsland,
+            this.gridColumnSampleSite});
             this.gridView1.GridControl = this.gridControlExcelData;
             this.gridView1.Name = "gridView1";
             // 
@@ -364,7 +299,7 @@ namespace CD4.UI.View
             this.gridColumnNationality.FieldName = "Nationality";
             this.gridColumnNationality.Name = "gridColumnNationality";
             this.gridColumnNationality.Visible = true;
-            this.gridColumnNationality.VisibleIndex = 5;
+            this.gridColumnNationality.VisibleIndex = 9;
             this.gridColumnNationality.Width = 92;
             // 
             // gridColumnSOB
@@ -373,7 +308,7 @@ namespace CD4.UI.View
             this.gridColumnSOB.FieldName = "BreathingDifficulty";
             this.gridColumnSOB.Name = "gridColumnSOB";
             this.gridColumnSOB.Visible = true;
-            this.gridColumnSOB.VisibleIndex = 6;
+            this.gridColumnSOB.VisibleIndex = 10;
             this.gridColumnSOB.Width = 51;
             // 
             // gridColumnCough
@@ -382,7 +317,7 @@ namespace CD4.UI.View
             this.gridColumnCough.FieldName = "Cough";
             this.gridColumnCough.Name = "gridColumnCough";
             this.gridColumnCough.Visible = true;
-            this.gridColumnCough.VisibleIndex = 7;
+            this.gridColumnCough.VisibleIndex = 11;
             this.gridColumnCough.Width = 50;
             // 
             // gridColumnFever
@@ -391,7 +326,7 @@ namespace CD4.UI.View
             this.gridColumnFever.FieldName = "Fever";
             this.gridColumnFever.Name = "gridColumnFever";
             this.gridColumnFever.Visible = true;
-            this.gridColumnFever.VisibleIndex = 8;
+            this.gridColumnFever.VisibleIndex = 12;
             this.gridColumnFever.Width = 49;
             // 
             // gridColumnTravelHistory
@@ -400,7 +335,7 @@ namespace CD4.UI.View
             this.gridColumnTravelHistory.FieldName = "TravelHistory";
             this.gridColumnTravelHistory.Name = "gridColumnTravelHistory";
             this.gridColumnTravelHistory.Visible = true;
-            this.gridColumnTravelHistory.VisibleIndex = 9;
+            this.gridColumnTravelHistory.VisibleIndex = 13;
             this.gridColumnTravelHistory.Width = 84;
             // 
             // gridColumnSampleCollectedDateTime
@@ -410,7 +345,7 @@ namespace CD4.UI.View
             this.gridColumnSampleCollectedDateTime.FieldName = "SampleCollectedDateTime";
             this.gridColumnSampleCollectedDateTime.Name = "gridColumnSampleCollectedDateTime";
             this.gridColumnSampleCollectedDateTime.Visible = true;
-            this.gridColumnSampleCollectedDateTime.VisibleIndex = 10;
+            this.gridColumnSampleCollectedDateTime.VisibleIndex = 14;
             this.gridColumnSampleCollectedDateTime.Width = 175;
             // 
             // repositoryItemDateEditCollectedAt
@@ -454,6 +389,38 @@ namespace CD4.UI.View
             this.gridViewRequestedTests.OptionsSelection.MultiSelect = true;
             this.gridViewRequestedTests.OptionsView.ShowGroupPanel = false;
             // 
+            // gridColumnAddress
+            // 
+            this.gridColumnAddress.Caption = "Address";
+            this.gridColumnAddress.FieldName = "Address";
+            this.gridColumnAddress.Name = "gridColumnAddress";
+            this.gridColumnAddress.Visible = true;
+            this.gridColumnAddress.VisibleIndex = 7;
+            // 
+            // gridColumnAtoll
+            // 
+            this.gridColumnAtoll.Caption = "Atoll";
+            this.gridColumnAtoll.FieldName = "Atoll";
+            this.gridColumnAtoll.Name = "gridColumnAtoll";
+            this.gridColumnAtoll.Visible = true;
+            this.gridColumnAtoll.VisibleIndex = 5;
+            // 
+            // gridColumnIsland
+            // 
+            this.gridColumnIsland.Caption = "Island";
+            this.gridColumnIsland.FieldName = "Island";
+            this.gridColumnIsland.Name = "gridColumnIsland";
+            this.gridColumnIsland.Visible = true;
+            this.gridColumnIsland.VisibleIndex = 6;
+            // 
+            // gridColumnSampleSite
+            // 
+            this.gridColumnSampleSite.Caption = "Site";
+            this.gridColumnSampleSite.FieldName = "SampleSite";
+            this.gridColumnSampleSite.Name = "gridColumnSampleSite";
+            this.gridColumnSampleSite.Visible = true;
+            this.gridColumnSampleSite.VisibleIndex = 8;
+            // 
             // BulkOrdersImportView
             // 
             this.Appearance.Options.UseFont = true;
@@ -469,11 +436,7 @@ namespace CD4.UI.View
             ((System.ComponentModel.ISupportInitialize)(this.groupControlChooseFile)).EndInit();
             this.groupControlChooseFile.ResumeLayout(false);
             this.groupControlChooseFile.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditSite.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditReceiptNumber.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditAddress.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditIsland.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditAtoll.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTests.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
             this.splitContainerControl1.ResumeLayout(false);
@@ -510,11 +473,7 @@ namespace CD4.UI.View
         private DevExpress.XtraGrid.GridControl gridControlRequestedTests;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewRequestedTests;
         private DevExpress.XtraEditors.LookUpEdit lookUpEditTests;
-        private DevExpress.XtraEditors.TextEdit textEditAddress;
-        private DevExpress.XtraEditors.LookUpEdit lookUpEditIsland;
-        private DevExpress.XtraEditors.LookUpEdit lookUpEditAtoll;
         private DevExpress.XtraEditors.TextEdit textEditReceiptNumber;
-        private DevExpress.XtraEditors.LookUpEdit lookUpEditSite;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnNidPp;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnFullname;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnGender;
@@ -527,5 +486,9 @@ namespace CD4.UI.View
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnTravelHistory;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnSampleCollectedDateTime;
         private DevExpress.XtraEditors.Repository.RepositoryItemDateEdit repositoryItemDateEditCollectedAt;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnAddress;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnAtoll;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnIsland;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnSampleSite;
     }
 }
