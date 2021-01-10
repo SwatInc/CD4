@@ -43,10 +43,14 @@ namespace CD4.UI.Library.Model
                 nationality = value.Trim().ToUpper();
             }
         }
+        public string Address { get; set; }
+        public string Atoll { get; set; }
+        public string Island { get; set; }
         public bool BreathingDifficulty { get; set; }
         public bool Cough { get; set; }
         public bool Fever { get; set; }
         public bool TravelHistory { get; set; }
+        public string SampleSite { get; set; }
         public DateTime SampleCollectedDateTime { get; set; }
 
     }
