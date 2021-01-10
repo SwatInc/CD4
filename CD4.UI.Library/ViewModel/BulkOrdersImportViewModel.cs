@@ -60,42 +60,6 @@ namespace CD4.UI.Library.ViewModel
                 OnPropertyChanged();
             }
         }
-        public string Address
-        {
-            get => address; set
-            {
-                if (address == value) { return; }
-                address = value;
-                OnPropertyChanged();
-            }
-        }
-        public string SelectedAtoll
-        {
-            get => selectedAtoll; set
-            {
-                if (selectedAtoll == value) { return; }
-                selectedAtoll = value;
-                OnPropertyChanged();
-            }
-        }
-        public string SelectedIsland
-        {
-            get => selectedIsland; set
-            {
-                if (selectedAtoll == value) { return; }
-                selectedIsland = value;
-                OnPropertyChanged();
-            }
-        }
-        public int SelectedSiteId
-        {
-            get => selectedSiteId; set
-            {
-                if (selectedSiteId == value) { return; }
-                selectedSiteId = value;
-                OnPropertyChanged();
-            }
-        }
         public string TestToAdd
         {
             get => testToAdd; set
@@ -112,8 +76,13 @@ namespace CD4.UI.Library.ViewModel
                 if(excelFilePath == value) { return; }
                 excelFilePath = value;
                 LoadExcelFile();
+                ValidateData();
                 OnPropertyChanged();
             }
+        }
+
+        private void ValidateData()
+        {
         }
 
         private List<AtollIslandModel> AllAtollsWithCorrespondingIsland { get; set; }
