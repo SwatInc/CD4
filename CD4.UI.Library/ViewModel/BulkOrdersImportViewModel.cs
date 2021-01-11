@@ -28,11 +28,10 @@ namespace CD4.UI.Library.ViewModel
         #region Default Constructor
         public BulkOrdersImportViewModel()
         {
-            Atolls = new List<AtollModel>();
             Islands = new BindingList<IslandModel>();
             Sites = new List<SitesModel>();
             AllAtollsWithCorrespondingIsland = new List<AtollIslandModel>();
-            Countries = new List<CountryModel>();
+            Nationalities = new List<CountryModel>();
             AllTestsData = new List<ProfilesAndTestsDatasourceOeModel>();
             BulkDataList = new BindingList<BulkSchemaModel>();
         }
@@ -81,22 +80,23 @@ namespace CD4.UI.Library.ViewModel
             }
         }
 
-        private void ValidateData()
-        {
-        }
-
         private List<AtollIslandModel> AllAtollsWithCorrespondingIsland { get; set; }
-        public List<AtollModel> Atolls { get; set; }
         public BindingList<IslandModel> Islands { get; set; }
         public List<SitesModel> Sites { get; set; }
-        public List<CountryModel> Countries { get; set; }
+        public List<CountryModel> Nationalities { get; set; }
         public BindingList<TestModel> AddedTests { get; set; }
         public List<ProfilesAndTestsDatasourceOeModel> AllTestsData { get; set; }
         public BindingList<BulkSchemaModel> BulkDataList { get; set; }
+        public List<GenderModel> GenderList { get; set; }
+        public BindingList<ClinicalDetailsOrderEntryModel> ClinicalDetails { get; set; }
 
         #endregion
 
         #region Private Methods
+        private void ValidateData()
+        {
+        }
+
         private void LoadExcelFile()
         {
             var excelData = new ExcelMapper(ExcelFilePath).Fetch<BulkSchemaModel>();
