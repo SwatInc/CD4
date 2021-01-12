@@ -6,12 +6,8 @@ using System.Threading.Tasks;
 
 namespace CD4.DataLibrary.Models
 {
-    //Shadows dbo.Atolls
-    public class AtollIslandModel : AtollModel
+    public class TypesModel
     {
-        private string island;
-
-        public string Island { get; set; }
-
+        public List<Type> GenericModelsList { get; set; }
     }
 }

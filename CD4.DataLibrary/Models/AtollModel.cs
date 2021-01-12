@@ -8,40 +8,10 @@ using System.Threading.Tasks;
 
 namespace CD4.DataLibrary.Models
 {
-    public class AtollModel : INotifyPropertyChanged
+    public class AtollModel
     {
-        private int id;
-        private string atoll;
-
-        public int Id
-        {
-            get => id; set
-            {
-                if (id == value) return;
-                id = value;
-                OnPropertyChanged();
-            }
-        }
-        public string Atoll
-        {
-            get => atoll; set
-            {
-                if (atoll == value) return;
-                atoll = value;
-                OnPropertyChanged();
-            }
-        }
-
-        #region INotifyPropertyChanged Hookup
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        internal void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        #endregion
+        public int Id { get; set; }
+        public string Atoll { get; set; }
 
     }
 }
