@@ -1,16 +1,17 @@
 ﻿CREATE PROCEDURE [dbo].[usp_LoadStaticDataForBulkImport]
 AS
 BEGIN
+SET NOCOUNT ON;
 	-- load genders list
-    SELECT [Id],[Gender] FROM [dbo].[Gender];
+    EXEC [dbo].[usp_GetAllGenders];
 	-- load atoll island data
-    SELECT [Id],[Atoll],[Island] FROM [dbo].[Atoll];
+    EXEC [dbo].[usp_GetAllAtollAndIslands];
 	-- load Sites data
-    SELECT [Id],[Name] FROM [dbo].[Sites];
+    EXEC [dbo].[usp_GetAllSites];
 	-- load all nationalities
-    SELECT [Id],[Country] FROM [dbo].[Country];
+    EXEC [dbo].[usp_GetAllNationalities];
 	-- load all clinical details data
-    SELECT [Id],[Detail] FROM [dbo].[ClinicalDetail];
+    EXEC [dbo].[usp_GetAllClinicalDetails];
 	-- load all tests data
-    SELECT [Id],[Description] FROM [dbo].[Test];
+    EXEC [dbo].[usp_GetAllTests];
 END
