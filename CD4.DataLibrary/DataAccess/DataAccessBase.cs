@@ -123,6 +123,31 @@ namespace CD4.DataLibrary.DataAccess
             return returnData;
         }
 
+        internal async Task<dynamic> QueryMultiple_WithProvidedReturnTypes_NoParameters(string storedProcedure, TypesModel types)
+        {
+            List<dynamic> dynamicResults = new List<dynamic>();
+            foreach (var item in types.GenericModelsList)
+            {
+                dynamicResults.Add(Activator.CreateInstance(item));
+            }
+
+            using (IDbConnection connection = new SqlConnection(helper.GetConnectionString()))
+            {
+                using (var lists = await connection.QueryMultipleAsync(storedProcedure, commandType: CommandType.StoredProcedure))
+                {
+                    int counter = 0;
+                    foreach (var item in dynamicResults)
+                    {
+                        var t = item.GetType();
+                        dynamicResults[counter] = lists.Read<dynamic>().ToList();
+                    }
+                }
+            }
+
+            return dynamicResults;
+
+        }
+
         internal async Task<T> SelectInsertOrUpdateAsync<T,U>(string storedProcedure, U parameters)
         {
             using (IDbConnection connection = new SqlConnection(helper.GetConnectionString()))
