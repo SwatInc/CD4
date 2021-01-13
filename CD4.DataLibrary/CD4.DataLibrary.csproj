@@ -82,6 +82,7 @@
     <Compile Include="DataAccess\GlobalSettingsDataAccess.cs" />
     <Compile Include="DataAccess\IAnalysisRequestDataAccess.cs" />
     <Compile Include="DataAccess\IAuthenticationDataAccess.cs" />
+    <Compile Include="DataAccess\IBulkOrdersImportDataAccess.cs" />
     <Compile Include="DataAccess\IClinicalDetailsDataAccess.cs" />
     <Compile Include="DataAccess\ICommentsDataAccess.cs" />
     <Compile Include="DataAccess\IGlobalSettingsDataAccess.cs" />

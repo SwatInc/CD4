@@ -123,10 +123,11 @@ namespace CD4.DataLibrary.DataAccess
             return returnData;
         }
 
-        internal async Task<dynamic> QueryMultiple_WithProvidedReturnTypes_NoParameters(string storedProcedure, TypesModel types)
+        internal async Task<dynamic> QueryMultiple_WithProvidedReturnTypes_NoParameters(string storedProcedure, TypesModel listTypes, dynamic simpleTypes)
         {
             List<dynamic> dynamicResults = new List<dynamic>();
-            foreach (var item in types.GenericModelsList)
+
+            foreach (var item in listTypes.GenericModelsList)
             {
                 dynamicResults.Add(Activator.CreateInstance(item));
             }
@@ -136,10 +137,11 @@ namespace CD4.DataLibrary.DataAccess
                 using (var lists = await connection.QueryMultipleAsync(storedProcedure, commandType: CommandType.StoredProcedure))
                 {
                     int counter = 0;
-                    foreach (var item in dynamicResults)
+                    foreach (var item in simpleTypes)
                     {
                         var t = item.GetType();
-                        dynamicResults[counter] = lists.Read<dynamic>().ToList();
+                        dynamicResults[counter] = lists.Read(t);
+                        counter += 1;
                     }
                 }
             }

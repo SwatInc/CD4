@@ -15,7 +15,6 @@ namespace CD4.DataLibrary.Models
             {
                 if (isSelected == value) return;
                 isSelected = value;
-                OnPropertyChanged();
             }
         }
     }

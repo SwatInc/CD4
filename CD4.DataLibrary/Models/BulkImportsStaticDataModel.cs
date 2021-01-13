@@ -15,12 +15,15 @@ namespace CD4.DataLibrary.Models
             Sites = new List<SitesModel>();
             Countries = new List<CountryModel>();
             ClinicalDetails = new List<ClinicalDetailsModel>();
+            Tests = new List<TestsModel>();
         }
         public List<GenderModel> Genders { get; set; }
         public List<AtollIslandModel> AtollsAndIslands { get; set; }
         public List<SitesModel> Sites { get; set; }
         public List<CountryModel> Countries { get; set; }
         public List<ClinicalDetailsModel> ClinicalDetails { get; set; }
+        public List<TestsModel> Tests { get; set; }
+
 
     }
 }
