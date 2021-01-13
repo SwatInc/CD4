@@ -14,20 +14,11 @@ namespace CD4.DataLibrary.Models
     /// </summary>
     public class ProfilesAndTestModelOeModel : TestsModel
     {
-        private bool isProfile;
         public ProfilesAndTestModelOeModel()
         {
             TestsInProfile = new List<TestsModel>();
         }
-        public bool IsProfile
-        {
-            get => isProfile; set
-            {
-                if (isProfile == value) return;
-                isProfile = value;
-                OnPropertyChanged();
-            }
-        }
+        public bool IsProfile { get;set; }
         public List<TestsModel> TestsInProfile { get; set; }
 
         public override bool Equals(object obj)

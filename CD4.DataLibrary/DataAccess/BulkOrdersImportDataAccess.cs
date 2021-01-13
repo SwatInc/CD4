@@ -19,6 +19,8 @@ namespace CD4.DataLibrary.DataAccess
             types.GenericModelsList.Add(returnData.Countries.GetType());
             types.GenericModelsList.Add(returnData.ClinicalDetails.GetType());
             types.GenericModelsList.Add(returnData.Tests.GetType());
+            types.GenericModelsList.Add(returnData.ProfileTests.GetType());
+            types.GenericModelsList.Add(returnData.Tests.GetType());
 
             var simpleTypes = new List<dynamic>()
             {
@@ -27,7 +29,9 @@ namespace CD4.DataLibrary.DataAccess
                  new SitesModel(),
                  new CountryModel(),
                  new ClinicalDetailsModel(),
-                 new TestsModel()
+                 new ProfilesAndTestModelOeModel(),
+                 new ProfileTestsDatabaseModel(),
+                 new ProfilesAndTestModelOeModel()
             };
 
             try
@@ -58,6 +62,15 @@ namespace CD4.DataLibrary.DataAccess
                 {
                     returnData.Tests.Add(item);
                 }
+                foreach (var item in results[6])
+                {
+                    returnData.ProfileTests.Add(item);
+                }
+                foreach (var item in results[7])
+                {
+                    returnData.Tests.Add(item);
+                }
+
 
                 return returnData;
             }

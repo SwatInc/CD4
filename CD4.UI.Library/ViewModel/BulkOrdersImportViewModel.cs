@@ -1,4 +1,6 @@
-﻿using CD4.UI.Library.Model;
+﻿using AutoMapper;
+using CD4.DataLibrary.DataAccess;
+using CD4.UI.Library.Model;
 using Ganss.Excel;
 using System;
 using System.Collections.Generic;
@@ -22,18 +24,48 @@ namespace CD4.UI.Library.ViewModel
         private string selectedIsland;
         private int selectedSiteId;
         private string excelFilePath;
+        private readonly IBulkOrdersImportDataAccess _ordersImportDataAccess;
+        private readonly IMapper _mapper;
 
         #endregion
 
+        private event EventHandler InitializeData;
+
         #region Default Constructor
-        public BulkOrdersImportViewModel()
+        public BulkOrdersImportViewModel(IBulkOrdersImportDataAccess ordersImportDataAccess, IMapper mapper)
         {
             Islands = new BindingList<IslandModel>();
             Sites = new List<SitesModel>();
             AllAtollsWithCorrespondingIsland = new List<AtollIslandModel>();
             Nationalities = new List<CountryModel>();
             AllTestsData = new List<ProfilesAndTestsDatasourceOeModel>();
+            GenderList = new List<GenderModel>();
             BulkDataList = new BindingList<BulkSchemaModel>();
+            ClinicalDetails = new List<ClinicalDetailsOrderEntryModel>();
+            _ordersImportDataAccess = ordersImportDataAccess;
+            this._mapper = mapper;
+            InitializeData += BulkOrdersImportViewModel_InitializeData;
+            InitializeData?.Invoke(this, EventArgs.Empty);
+        }
+
+        private async void BulkOrdersImportViewModel_InitializeData(object sender, EventArgs e)
+        {
+            try
+            {
+                var results  = await _ordersImportDataAccess.GetAllStaticDataForBulkImport();
+                //map them out
+                GenderList.AddRange(_mapper.Map<List<GenderModel>>(results.Genders));
+                AllAtollsWithCorrespondingIsland.AddRange(_mapper.Map<List<AtollIslandModel>>(results.AtollsAndIslands));
+                Sites.AddRange(_mapper.Map<List<SitesModel>>(results.Sites));
+                Nationalities.AddRange(_mapper.Map<List<CountryModel>>(results.Countries));
+                ClinicalDetails.AddRange(_mapper.Map<List<ClinicalDetailsOrderEntryModel>>(results.ClinicalDetails));
+                AllTestsData.AddRange(_mapper.Map<List<ProfilesAndTestsDatasourceOeModel>>(results.Tests));
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
         #endregion
 
@@ -88,7 +120,7 @@ namespace CD4.UI.Library.ViewModel
         public List<ProfilesAndTestsDatasourceOeModel> AllTestsData { get; set; }
         public BindingList<BulkSchemaModel> BulkDataList { get; set; }
         public List<GenderModel> GenderList { get; set; }
-        public BindingList<ClinicalDetailsOrderEntryModel> ClinicalDetails { get; set; }
+        public List<ClinicalDetailsOrderEntryModel> ClinicalDetails { get; set; }
 
         #endregion
 

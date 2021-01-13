@@ -12,6 +12,8 @@ SET NOCOUNT ON;
     EXEC [dbo].[usp_GetAllNationalities];
 	-- load all clinical details data
     EXEC [dbo].[usp_GetAllClinicalDetails];
-	-- load all tests data
+	-- load all profiles and profile tests
+    EXEC [dbo].[usp_GetAllProfilesAndProfileTests];
+	-- load all profiles and profile tests
     EXEC [dbo].[usp_GetAllTests];
 END

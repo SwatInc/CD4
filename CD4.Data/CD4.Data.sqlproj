@@ -232,6 +232,8 @@
     <Build Include="dbo\StoredProcedures\usp_InsertSampleNoteByCin.sql" />
     <Build Include="dbo\StoredProcedures\usp_UpdateSampleNoteAttendedStatus.sql" />
     <Build Include="dbo\StoredProcedures\usp_CollectLateRegisteredTests.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetAllNationalities.sql" />
+    <Build Include="dbo\StoredProcedures\usp_LoadStaticDataForBulkImport.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
