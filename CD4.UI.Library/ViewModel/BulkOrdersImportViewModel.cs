@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CD4.DataLibrary.DataAccess;
 using CD4.UI.Library.Model;
+using DevExpress.XtraEditors;
 using Ganss.Excel;
 using System;
 using System.Collections.Generic;
@@ -61,10 +62,9 @@ namespace CD4.UI.Library.ViewModel
                 ClinicalDetails.AddRange(_mapper.Map<List<ClinicalDetailsOrderEntryModel>>(results.ClinicalDetails));
                 AllTestsData.AddRange(_mapper.Map<List<ProfilesAndTestsDatasourceOeModel>>(results.Tests));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                throw;
+                XtraMessageBox.Show(ex.Message);
             }
         }
         #endregion
