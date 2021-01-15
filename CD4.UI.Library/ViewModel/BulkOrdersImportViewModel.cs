@@ -8,8 +8,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace CD4.UI.Library.ViewModel
@@ -44,7 +42,7 @@ namespace CD4.UI.Library.ViewModel
             BulkDataList = new BindingList<BulkSchemaModel>();
             ClinicalDetails = new List<ClinicalDetailsOrderEntryModel>();
             _ordersImportDataAccess = ordersImportDataAccess;
-            this._mapper = mapper;
+            _mapper = mapper;
             InitializeData += BulkOrdersImportViewModel_InitializeData;
             InitializeData?.Invoke(this, EventArgs.Empty);
         }
@@ -53,7 +51,7 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-                var results  = await _ordersImportDataAccess.GetAllStaticDataForBulkImport();
+                var results = await _ordersImportDataAccess.GetAllStaticDataForBulkImport();
                 //map them out
                 GenderList.AddRange(_mapper.Map<List<GenderModel>>(results.Genders));
                 AllAtollsWithCorrespondingIsland.AddRange(_mapper.Map<List<AtollIslandModel>>(results.AtollsAndIslands));
@@ -104,10 +102,13 @@ namespace CD4.UI.Library.ViewModel
         {
             get => excelFilePath; set
             {
-                if(excelFilePath == value) { return; }
+                if (excelFilePath == value) { return; }
                 excelFilePath = value;
                 LoadExcelFile();
+                CalculateHash();
+                CheckForDublicates();
                 ValidateData();
+                SetUnderlyingIds();
                 OnPropertyChanged();
             }
         }
@@ -125,8 +126,67 @@ namespace CD4.UI.Library.ViewModel
         #endregion
 
         #region Private Methods
+
+        /// <summary>
+        /// combines nid/pp and sample collection date and calculates a hash
+        /// This is used to check whether the record has already been imported.
+        /// </summary>
+        private void CalculateHash()
+        {
+            foreach (var item in BulkDataList)
+            {
+                item.Hash = (item.NidPp, item.SampleCollectedDateTime).GetHashCode();
+            }
+        }
+        private void CheckForDublicates()
+        {
+            foreach (var item in BulkDataList)
+            {
+                var data = BulkDataList.Where((x) => x.NidPp == item.NidPp && x.SampleCollectedDateTime == item.SampleCollectedDateTime);
+                item.IsDublicate = data?.Count() > 1;
+
+            }
+        }
+
         private void ValidateData()
         {
+
+        }
+        private void SetUnderlyingIds()
+        {
+            foreach (var item in BulkDataList)
+            {
+                //verify that none of the required columns are null
+                if (item.Gender is null || item.Nationality is null || item.Atoll is null || item.Island is null || item.SampleSite is null)
+                {
+                    item.IsValidData = false;
+                    return;
+                }
+                
+                //get gender Id
+                var gender = GenderList.Find((x) => x.Gender.Trim().ToLower() == item.Gender.Trim().ToLower());
+                if(gender is null) { item.IsValidData = false; return; }
+                item.GenderId = gender.Id;
+
+                //get nationalityId
+                var nationality = Nationalities.Find((x) => x.Country.Trim().ToLower() == item.Nationality.Trim().ToLower());
+                if(nationality is null) { item.IsValidData = false; return; }
+                item.NationalityId = nationality.Id;
+
+                //get atollIslandId
+                var atollAndIsland = AllAtollsWithCorrespondingIsland.Find((x) =>
+                    x.Island.Trim().ToLower() == item.Island.Trim().ToLower() &&
+                    x.Atoll.Trim().ToLower() == item.Atoll.Trim().ToLower()
+                );
+                
+                if(atollAndIsland is null) { item.IsValidData = false; return; }
+                item.AtollIslandId = atollAndIsland.Id;
+
+                //SiteId
+                var site = Sites.Find((x) => x.Site.Trim().ToLower() == item.SampleSite.Trim().ToLower());
+                if(site is null) { item.IsValidData = false; return; }
+                item.SiteId = site.Id;
+            }
         }
 
         private void LoadExcelFile()
@@ -136,7 +196,7 @@ namespace CD4.UI.Library.ViewModel
 
             if (excelData != null)
             {
-                if(excelData.ToList().Count < 1) { return; }
+                if (excelData.ToList().Count < 1) { return; }
                 foreach (var item in excelData)
                 {
                     BulkDataList.Add(item);

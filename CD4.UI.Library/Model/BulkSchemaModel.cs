@@ -13,6 +13,11 @@ namespace CD4.UI.Library.Model
         private string gender;
         private string nationality;
 
+        public BulkSchemaModel()
+        {
+            IsValidData = true;
+        }
+
         public string NidPp
         {
             get => nidPp; set
@@ -52,6 +57,15 @@ namespace CD4.UI.Library.Model
         public bool TravelHistory { get; set; }
         public string SampleSite { get; set; }
         public DateTime SampleCollectedDateTime { get; set; }
+        public int Hash { get; set; }
+        public bool IsDublicate { get; set; }
+        public bool IsValidData { get; set; }
 
+        #region underlying IDs
+        public int GenderId { get; set; }
+        public int NationalityId { get; set; }
+        public int AtollIslandId { get; set; }
+        public int SiteId { get; set; }
+        #endregion
     }
 }
