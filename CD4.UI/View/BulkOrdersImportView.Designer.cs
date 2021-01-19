@@ -35,6 +35,7 @@ namespace CD4.UI.View
             this.xtraOpenFileDialog = new DevExpress.XtraEditors.XtraOpenFileDialog(this.components);
             this.simpleButtonBrowse = new DevExpress.XtraEditors.SimpleButton();
             this.groupControlChooseFile = new DevExpress.XtraEditors.GroupControl();
+            this.simpleButtonCollectSelected = new DevExpress.XtraEditors.SimpleButton();
             this.textEditReceiptNumber = new DevExpress.XtraEditors.TextEdit();
             this.lookUpEditTests = new DevExpress.XtraEditors.LookUpEdit();
             this.simpleButtonConfirmUpload = new DevExpress.XtraEditors.SimpleButton();
@@ -60,10 +61,14 @@ namespace CD4.UI.View
             this.gridColumnAtoll = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnIsland = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnSampleSite = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnIsValid = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnIsIsDublicate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControlSelectedTestData = new DevExpress.XtraEditors.GroupControl();
             this.gridControlRequestedTests = new DevExpress.XtraGrid.GridControl();
             this.gridViewRequestedTests = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.simpleButtonCollectSelected = new DevExpress.XtraEditors.SimpleButton();
+            this.progressPanelExcelData = new DevExpress.XtraWaitForm.ProgressPanel();
+            this.progressPanelSelectedTests = new DevExpress.XtraWaitForm.ProgressPanel();
+            this.progressPanelImportArea = new DevExpress.XtraWaitForm.ProgressPanel();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEditExcelImportsIcon.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlChooseFile)).BeginInit();
             this.groupControlChooseFile.SuspendLayout();
@@ -115,6 +120,7 @@ namespace CD4.UI.View
             // 
             // groupControlChooseFile
             // 
+            this.groupControlChooseFile.Controls.Add(this.progressPanelImportArea);
             this.groupControlChooseFile.Controls.Add(this.simpleButtonCollectSelected);
             this.groupControlChooseFile.Controls.Add(this.textEditReceiptNumber);
             this.groupControlChooseFile.Controls.Add(this.lookUpEditTests);
@@ -128,6 +134,14 @@ namespace CD4.UI.View
             this.groupControlChooseFile.Size = new System.Drawing.Size(1247, 140);
             this.groupControlChooseFile.TabIndex = 3;
             this.groupControlChooseFile.Text = "Choose Import File";
+            // 
+            // simpleButtonCollectSelected
+            // 
+            this.simpleButtonCollectSelected.Location = new System.Drawing.Point(261, 104);
+            this.simpleButtonCollectSelected.Name = "simpleButtonCollectSelected";
+            this.simpleButtonCollectSelected.Size = new System.Drawing.Size(123, 23);
+            this.simpleButtonCollectSelected.TabIndex = 21;
+            this.simpleButtonCollectSelected.Text = "Collect Selected [  ]";
             // 
             // textEditReceiptNumber
             // 
@@ -208,6 +222,7 @@ namespace CD4.UI.View
             // 
             // groupControl1
             // 
+            this.groupControl1.Controls.Add(this.progressPanelExcelData);
             this.groupControl1.Controls.Add(this.gridControlExcelData);
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
@@ -246,7 +261,9 @@ namespace CD4.UI.View
             this.gridColumnAddress,
             this.gridColumnAtoll,
             this.gridColumnIsland,
-            this.gridColumnSampleSite});
+            this.gridColumnSampleSite,
+            this.gridColumnIsValid,
+            this.gridColumnIsIsDublicate});
             this.gridView1.GridControl = this.gridControlExcelData;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsSelection.MultiSelect = true;
@@ -399,8 +416,25 @@ namespace CD4.UI.View
             this.gridColumnSampleSite.VisibleIndex = 9;
             this.gridColumnSampleSite.Width = 33;
             // 
+            // gridColumnIsValid
+            // 
+            this.gridColumnIsValid.Caption = "Is valid";
+            this.gridColumnIsValid.FieldName = "IsValidData";
+            this.gridColumnIsValid.Name = "gridColumnIsValid";
+            this.gridColumnIsValid.Visible = true;
+            this.gridColumnIsValid.VisibleIndex = 16;
+            // 
+            // gridColumnIsIsDublicate
+            // 
+            this.gridColumnIsIsDublicate.Caption = "Is Dublicate";
+            this.gridColumnIsIsDublicate.FieldName = "IsDublicate";
+            this.gridColumnIsIsDublicate.Name = "gridColumnIsIsDublicate";
+            this.gridColumnIsIsDublicate.Visible = true;
+            this.gridColumnIsIsDublicate.VisibleIndex = 17;
+            // 
             // groupControlSelectedTestData
             // 
+            this.groupControlSelectedTestData.Controls.Add(this.progressPanelSelectedTests);
             this.groupControlSelectedTestData.Controls.Add(this.gridControlRequestedTests);
             this.groupControlSelectedTestData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControlSelectedTestData.Location = new System.Drawing.Point(0, 0);
@@ -429,13 +463,44 @@ namespace CD4.UI.View
             this.gridViewRequestedTests.OptionsSelection.MultiSelect = true;
             this.gridViewRequestedTests.OptionsView.ShowGroupPanel = false;
             // 
-            // simpleButtonCollectSelected
+            // progressPanelExcelData
             // 
-            this.simpleButtonCollectSelected.Location = new System.Drawing.Point(261, 104);
-            this.simpleButtonCollectSelected.Name = "simpleButtonCollectSelected";
-            this.simpleButtonCollectSelected.Size = new System.Drawing.Size(123, 23);
-            this.simpleButtonCollectSelected.TabIndex = 21;
-            this.simpleButtonCollectSelected.Text = "Collect Selected [  ]";
+            this.progressPanelExcelData.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.progressPanelExcelData.Appearance.Options.UseBackColor = true;
+            this.progressPanelExcelData.BarAnimationElementThickness = 2;
+            this.progressPanelExcelData.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.progressPanelExcelData.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressPanelExcelData.Location = new System.Drawing.Point(2, 20);
+            this.progressPanelExcelData.Name = "progressPanelExcelData";
+            this.progressPanelExcelData.Size = new System.Drawing.Size(869, 425);
+            this.progressPanelExcelData.TabIndex = 2;
+            this.progressPanelExcelData.TabStop = false;
+            // 
+            // progressPanelSelectedTests
+            // 
+            this.progressPanelSelectedTests.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.progressPanelSelectedTests.Appearance.Options.UseBackColor = true;
+            this.progressPanelSelectedTests.BarAnimationElementThickness = 2;
+            this.progressPanelSelectedTests.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.progressPanelSelectedTests.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressPanelSelectedTests.Location = new System.Drawing.Point(2, 20);
+            this.progressPanelSelectedTests.Name = "progressPanelSelectedTests";
+            this.progressPanelSelectedTests.Size = new System.Drawing.Size(365, 425);
+            this.progressPanelSelectedTests.TabIndex = 1;
+            this.progressPanelSelectedTests.TabStop = false;
+            // 
+            // progressPanelImportArea
+            // 
+            this.progressPanelImportArea.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.progressPanelImportArea.Appearance.Options.UseBackColor = true;
+            this.progressPanelImportArea.BarAnimationElementThickness = 2;
+            this.progressPanelImportArea.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.progressPanelImportArea.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressPanelImportArea.Location = new System.Drawing.Point(2, 20);
+            this.progressPanelImportArea.Name = "progressPanelImportArea";
+            this.progressPanelImportArea.Size = new System.Drawing.Size(1243, 118);
+            this.progressPanelImportArea.TabIndex = 22;
+            this.progressPanelImportArea.TabStop = false;
             // 
             // BulkOrdersImportView
             // 
@@ -507,5 +572,10 @@ namespace CD4.UI.View
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnIsland;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnSampleSite;
         private DevExpress.XtraEditors.SimpleButton simpleButtonCollectSelected;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnIsValid;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnIsIsDublicate;
+        private DevExpress.XtraWaitForm.ProgressPanel progressPanelImportArea;
+        private DevExpress.XtraWaitForm.ProgressPanel progressPanelExcelData;
+        private DevExpress.XtraWaitForm.ProgressPanel progressPanelSelectedTests;
     }
 }
