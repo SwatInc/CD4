@@ -55,6 +55,11 @@ namespace CD4.UI.View
 
             //grid control excel data
             gridControlExcelData.DataSource = _viewModel.BulkDataList;
+
+            //progress panels
+            progressPanelImportArea.DataBindings.Add(new Binding("Visible", _viewModel, nameof(_viewModel.LoadingAnimationVisible)));
+            progressPanelExcelData.DataBindings.Add(new Binding("Visible", _viewModel, nameof(_viewModel.LoadingAnimationVisible)));
+            progressPanelSelectedTests.DataBindings.Add(new Binding("Visible", _viewModel, nameof(_viewModel.LoadingAnimationVisible)));
         }
 
         private void PromptForFile(object sender, EventArgs e)
