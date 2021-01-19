@@ -137,6 +137,7 @@ namespace CD4.UI.View
             // 
             // simpleButtonCollectSelected
             // 
+            this.simpleButtonCollectSelected.Enabled = false;
             this.simpleButtonCollectSelected.Location = new System.Drawing.Point(261, 104);
             this.simpleButtonCollectSelected.Name = "simpleButtonCollectSelected";
             this.simpleButtonCollectSelected.Size = new System.Drawing.Size(123, 23);
@@ -176,6 +177,7 @@ namespace CD4.UI.View
             // 
             // simpleButtonConfirmUpload
             // 
+            this.simpleButtonConfirmUpload.Enabled = false;
             this.simpleButtonConfirmUpload.Location = new System.Drawing.Point(129, 104);
             this.simpleButtonConfirmUpload.Name = "simpleButtonConfirmUpload";
             this.simpleButtonConfirmUpload.Size = new System.Drawing.Size(123, 23);
@@ -469,10 +471,9 @@ namespace CD4.UI.View
             this.progressPanelExcelData.Appearance.Options.UseBackColor = true;
             this.progressPanelExcelData.BarAnimationElementThickness = 2;
             this.progressPanelExcelData.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.progressPanelExcelData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.progressPanelExcelData.Location = new System.Drawing.Point(2, 20);
+            this.progressPanelExcelData.Location = new System.Drawing.Point(652, 247);
             this.progressPanelExcelData.Name = "progressPanelExcelData";
-            this.progressPanelExcelData.Size = new System.Drawing.Size(869, 425);
+            this.progressPanelExcelData.Size = new System.Drawing.Size(192, 171);
             this.progressPanelExcelData.TabIndex = 2;
             this.progressPanelExcelData.TabStop = false;
             // 
@@ -495,10 +496,9 @@ namespace CD4.UI.View
             this.progressPanelImportArea.Appearance.Options.UseBackColor = true;
             this.progressPanelImportArea.BarAnimationElementThickness = 2;
             this.progressPanelImportArea.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.progressPanelImportArea.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.progressPanelImportArea.Location = new System.Drawing.Point(2, 20);
+            this.progressPanelImportArea.Location = new System.Drawing.Point(1050, 25);
             this.progressPanelImportArea.Name = "progressPanelImportArea";
-            this.progressPanelImportArea.Size = new System.Drawing.Size(1243, 118);
+            this.progressPanelImportArea.Size = new System.Drawing.Size(143, 79);
             this.progressPanelImportArea.TabIndex = 22;
             this.progressPanelImportArea.TabStop = false;
             // 

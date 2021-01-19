@@ -64,6 +64,14 @@ namespace CD4.UI.View
 
         private void PromptForFile(object sender, EventArgs e)
         {
+            //confirm action if a sheet is already loaded
+            if (_viewModel.ExcelFilePath?.Length > 3 && _viewModel.BulkDataList?.Count> 0)
+            {
+                if(XtraMessageBox.Show("An excel sheet is already loaded. Do you want to load a new data set?","Confirmation",MessageBoxButtons.YesNo) != DialogResult.Yes)
+                {
+                    return;
+                }
+            }
             if (xtraOpenFileDialog.ShowDialog() == DialogResult.OK)
             {
                 try
