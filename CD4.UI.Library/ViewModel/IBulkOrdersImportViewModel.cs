@@ -13,6 +13,7 @@ namespace CD4.UI.Library.ViewModel
         BindingList<TestModel> AddedTests { get; set; }
         BindingList<BulkSchemaModel> BulkDataList { get; set; }
         string ExcelFilePath { get; set; }
+        bool LoadingAnimationVisible { get; set; }
 
         event PropertyChangedEventHandler PropertyChanged;
     }

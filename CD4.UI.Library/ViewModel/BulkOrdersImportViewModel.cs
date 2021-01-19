@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
-
+using System.Threading.Tasks;
 
 namespace CD4.UI.Library.ViewModel
 {
@@ -23,12 +23,14 @@ namespace CD4.UI.Library.ViewModel
         private string selectedIsland;
         private int selectedSiteId;
         private string excelFilePath;
+        private bool loadingAnimationVisible;
         private readonly IBulkOrdersImportDataAccess _ordersImportDataAccess;
         private readonly IMapper _mapper;
 
         #endregion
 
         private event EventHandler InitializeData;
+        private event EventHandler InitializeExcelFileRead;
 
         #region Default Constructor
         public BulkOrdersImportViewModel(IBulkOrdersImportDataAccess ordersImportDataAccess, IMapper mapper)
@@ -43,8 +45,36 @@ namespace CD4.UI.Library.ViewModel
             ClinicalDetails = new List<ClinicalDetailsOrderEntryModel>();
             _ordersImportDataAccess = ordersImportDataAccess;
             _mapper = mapper;
+            LoadingAnimationVisible = false;
             InitializeData += BulkOrdersImportViewModel_InitializeData;
+            InitializeExcelFileRead += BulkOrdersImportViewModel_InitializeExcelFileRead;
             InitializeData?.Invoke(this, EventArgs.Empty);
+        }
+
+        private async void BulkOrdersImportViewModel_InitializeExcelFileRead(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadingAnimationVisible = true;
+                await LoadExcelFile();
+
+                await Task.Run(() =>
+                    {
+                        CalculateHash();
+                        CheckForDublicates();
+                        ValidateData();
+                        SetUnderlyingIds();
+                    });
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                LoadingAnimationVisible = false;
+            }
+
         }
 
         private async void BulkOrdersImportViewModel_InitializeData(object sender, EventArgs e)
@@ -104,12 +134,8 @@ namespace CD4.UI.Library.ViewModel
             {
                 if (excelFilePath == value) { return; }
                 excelFilePath = value;
-                LoadExcelFile();
-                CalculateHash();
-                CheckForDublicates();
-                ValidateData();
-                SetUnderlyingIds();
                 OnPropertyChanged();
+                InitializeExcelFileRead?.Invoke(this, EventArgs.Empty);
             }
         }
 
@@ -122,6 +148,14 @@ namespace CD4.UI.Library.ViewModel
         public BindingList<BulkSchemaModel> BulkDataList { get; set; }
         public List<GenderModel> GenderList { get; set; }
         public List<ClinicalDetailsOrderEntryModel> ClinicalDetails { get; set; }
+        public bool LoadingAnimationVisible
+        {
+            get => loadingAnimationVisible; set
+            {
+                loadingAnimationVisible = value;
+                OnPropertyChanged();
+            }
+        }
 
         #endregion
 
@@ -160,17 +194,17 @@ namespace CD4.UI.Library.ViewModel
                 if (item.Gender is null || item.Nationality is null || item.Atoll is null || item.Island is null || item.SampleSite is null)
                 {
                     item.IsValidData = false;
-                    return;
+                    continue;
                 }
-                
+
                 //get gender Id
                 var gender = GenderList.Find((x) => x.Gender.Trim().ToLower() == item.Gender.Trim().ToLower());
-                if(gender is null) { item.IsValidData = false; return; }
+                if (gender is null) { item.IsValidData = false; continue; }
                 item.GenderId = gender.Id;
 
                 //get nationalityId
                 var nationality = Nationalities.Find((x) => x.Country.Trim().ToLower() == item.Nationality.Trim().ToLower());
-                if(nationality is null) { item.IsValidData = false; return; }
+                if (nationality is null) { item.IsValidData = false; continue; }
                 item.NationalityId = nationality.Id;
 
                 //get atollIslandId
@@ -178,20 +212,23 @@ namespace CD4.UI.Library.ViewModel
                     x.Island.Trim().ToLower() == item.Island.Trim().ToLower() &&
                     x.Atoll.Trim().ToLower() == item.Atoll.Trim().ToLower()
                 );
-                
-                if(atollAndIsland is null) { item.IsValidData = false; return; }
+
+                if (atollAndIsland is null) { item.IsValidData = false; continue; }
                 item.AtollIslandId = atollAndIsland.Id;
 
                 //SiteId
                 var site = Sites.Find((x) => x.Site.Trim().ToLower() == item.SampleSite.Trim().ToLower());
-                if(site is null) { item.IsValidData = false; return; }
+                if (site is null) { item.IsValidData = false; continue; }
                 item.SiteId = site.Id;
             }
         }
 
-        private void LoadExcelFile()
+        private async Task LoadExcelFile()
         {
-            var excelData = new ExcelMapper(ExcelFilePath).Fetch<BulkSchemaModel>();
+            var excelData = await Task.Run(async () =>
+           {
+               return await new ExcelMapper().FetchAsync<BulkSchemaModel>(ExcelFilePath, 0);
+           });
             BulkDataList.Clear();
 
             if (excelData != null)
