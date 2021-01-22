@@ -56,11 +56,12 @@ namespace CD4.UI.Library.Model
         public bool BreathingDifficulty { get; set; }
         public bool Cough { get; set; }
         public bool Fever { get; set; }
+        public bool RunnyNose { get; set; }
         public bool TravelHistory { get; set; }
         public string SampleSite { get; set; }
         public DateTime SampleCollectedDateTime { get; set; }
         public int Hash { get; set; }
-        public bool IsDublicate { get; set; }
+        public bool IsDublicate { get; private set; }
         public bool IsValidData
         {
             get => isValidData; set
@@ -76,7 +77,7 @@ namespace CD4.UI.Library.Model
                 }
             }
         }
-        public Image IsValidIcon { get; set; }
+        public Image IsValidIcon { get; private set; }
 
         #region underlying IDs
         public int GenderId { get; set; }
@@ -84,5 +85,10 @@ namespace CD4.UI.Library.Model
         public int AtollIslandId { get; set; }
         public int SiteId { get; set; }
         #endregion
+
+        public void SetDublicateStatus(bool isDublicate)
+        {
+            this.IsDublicate = isDublicate;
+        }
     }
 }

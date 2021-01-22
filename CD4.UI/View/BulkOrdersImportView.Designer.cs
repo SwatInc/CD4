@@ -69,6 +69,7 @@ namespace CD4.UI.View
             this.progressPanelSelectedTests = new DevExpress.XtraWaitForm.ProgressPanel();
             this.gridControlRequestedTests = new DevExpress.XtraGrid.GridControl();
             this.gridViewRequestedTests = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumnRunnyNose = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEditExcelImportsIcon.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlChooseFile)).BeginInit();
             this.groupControlChooseFile.SuspendLayout();
@@ -289,7 +290,8 @@ namespace CD4.UI.View
             this.gridColumnIsland,
             this.gridColumnSampleSite,
             this.gridColumnIsValid,
-            this.gridColumnIsIsDublicate});
+            this.gridColumnIsIsDublicate,
+            this.gridColumnRunnyNose});
             this.gridView1.GridControl = this.gridControlExcelData;
             this.gridView1.Name = "gridView1";
             this.gridView1.OptionsSelection.MultiSelect = true;
@@ -382,7 +384,7 @@ namespace CD4.UI.View
             this.gridColumnTravelHistory.FieldName = "TravelHistory";
             this.gridColumnTravelHistory.Name = "gridColumnTravelHistory";
             this.gridColumnTravelHistory.Visible = true;
-            this.gridColumnTravelHistory.VisibleIndex = 14;
+            this.gridColumnTravelHistory.VisibleIndex = 15;
             this.gridColumnTravelHistory.Width = 49;
             // 
             // gridColumnSampleCollectedDateTime
@@ -392,7 +394,7 @@ namespace CD4.UI.View
             this.gridColumnSampleCollectedDateTime.FieldName = "SampleCollectedDateTime";
             this.gridColumnSampleCollectedDateTime.Name = "gridColumnSampleCollectedDateTime";
             this.gridColumnSampleCollectedDateTime.Visible = true;
-            this.gridColumnSampleCollectedDateTime.VisibleIndex = 15;
+            this.gridColumnSampleCollectedDateTime.VisibleIndex = 16;
             this.gridColumnSampleCollectedDateTime.Width = 114;
             // 
             // repositoryItemDateEditCollectedAt
@@ -448,7 +450,7 @@ namespace CD4.UI.View
             this.gridColumnIsValid.FieldName = "IsValidIcon";
             this.gridColumnIsValid.Name = "gridColumnIsValid";
             this.gridColumnIsValid.Visible = true;
-            this.gridColumnIsValid.VisibleIndex = 16;
+            this.gridColumnIsValid.VisibleIndex = 17;
             // 
             // gridColumnIsIsDublicate
             // 
@@ -456,7 +458,7 @@ namespace CD4.UI.View
             this.gridColumnIsIsDublicate.FieldName = "IsDublicate";
             this.gridColumnIsIsDublicate.Name = "gridColumnIsIsDublicate";
             this.gridColumnIsIsDublicate.Visible = true;
-            this.gridColumnIsIsDublicate.VisibleIndex = 17;
+            this.gridColumnIsIsDublicate.VisibleIndex = 18;
             // 
             // groupControlSelectedTestData
             // 
@@ -501,6 +503,14 @@ namespace CD4.UI.View
             this.gridViewRequestedTests.OptionsBehavior.Editable = false;
             this.gridViewRequestedTests.OptionsSelection.MultiSelect = true;
             this.gridViewRequestedTests.OptionsView.ShowGroupPanel = false;
+            // 
+            // gridColumnRunnyNose
+            // 
+            this.gridColumnRunnyNose.Caption = "Runny Nose";
+            this.gridColumnRunnyNose.FieldName = "RunnyNose";
+            this.gridColumnRunnyNose.Name = "gridColumnRunnyNose";
+            this.gridColumnRunnyNose.Visible = true;
+            this.gridColumnRunnyNose.VisibleIndex = 14;
             // 
             // BulkOrdersImportView
             // 
@@ -577,5 +587,6 @@ namespace CD4.UI.View
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelImportArea;
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelExcelData;
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelSelectedTests;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnRunnyNose;
     }
 }

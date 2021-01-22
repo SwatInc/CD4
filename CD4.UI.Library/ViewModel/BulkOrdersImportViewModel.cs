@@ -193,7 +193,7 @@ namespace CD4.UI.Library.ViewModel
             foreach (var item in BulkDataList)
             {
                 var data = BulkDataList.Where((x) => x.NidPp == item.NidPp && x.SampleCollectedDateTime == item.SampleCollectedDateTime);
-                item.IsDublicate = data?.Count() > 1;
+                item.SetDublicateStatus(data?.Count() > 1);
 
             }
         }
@@ -322,9 +322,70 @@ namespace CD4.UI.Library.ViewModel
             throw new NotImplementedException();
         }
 
-        private List<AnalysisRequestDataModel> BulkSchemaModelToAnalysisRequestModels(List<BulkSchemaModel> analysisRequests)
+        private List<AnalysisRequestDataModel> BulkSchemaModelToAnalysisRequestModels(List<BulkSchemaModel> bulkAnalysisRequests)
         {
-            throw new NotImplementedException();
+            var analysisRequest = new List<AnalysisRequestDataModel>();
+
+            foreach (var item in bulkAnalysisRequests)
+            {
+                analysisRequest.Add(new AnalysisRequestDataModel()
+                {
+                    /*NOT INCLUDED
+                        Cin: generated later
+                        Sample received date time: when sample barcode is read
+                     */
+                    SelectedSiteId = item.SiteId,
+                    SampleCollectionDate = item.SampleCollectedDateTime,
+
+                    NationalIdPassport = item.NidPp,
+                    Fullname = item.Fullname,
+                    GenderId = item.GenderId,
+                    Age = "11", //handle this better
+                    PhoneNumber = item.PhoneNumber.ToString(),
+                    Birthdate = item.Birthdate,
+                    Address = item.Address,
+                    AtollId = item.AtollIslandId,
+                    CountryId = item.NationalityId,
+
+                    //clinical details
+                    //tests
+                    
+                    ClinicalDetails = new List<ClinicalDetailsOrderEntryModel>(),
+                    Tests = new List<TestModel>(),
+                    EpisodeNumber = this.ReceiptNumber
+                }) ;
+
+                foreach (var detail in this.ClinicalDetails)
+                {
+                    if (detail.ClinicalDetail == "Breathing Difficulty")
+                    {
+                    }
+
+                    switch (detail.ClinicalDetail)
+                    {
+                        case "Breathing Difficulty":
+                            detail.IsSelected = item.BreathingDifficulty;
+                            break;
+                        case "Cough":
+                            detail.IsSelected = item.Cough;
+                            break;
+                        case "Fever":
+                            detail.IsSelected = item.Fever;
+                            break;
+                        case "Runny Nose":
+                            detail.IsSelected = item.RunnyNose;
+                            break;
+                        case "Travel History":
+                            detail.IsSelected = item.TravelHistory;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            return analysisRequest;
+
         }
 
         #endregion
