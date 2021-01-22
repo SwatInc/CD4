@@ -25,6 +25,7 @@ namespace CD4.UI.Library.ViewModel
         private string excelFilePath;
         private bool loadingAnimationVisible;
         private readonly IBulkOrdersImportDataAccess _ordersImportDataAccess;
+        private readonly IAnalysisRequestDataAccess _requestDataAccess;
         private readonly IMapper _mapper;
 
         #endregion
@@ -33,7 +34,9 @@ namespace CD4.UI.Library.ViewModel
         private event EventHandler InitializeExcelFileRead;
 
         #region Default Constructor
-        public BulkOrdersImportViewModel(IBulkOrdersImportDataAccess ordersImportDataAccess, IMapper mapper)
+        public BulkOrdersImportViewModel(IBulkOrdersImportDataAccess ordersImportDataAccess,
+            IAnalysisRequestDataAccess requestDataAccess,
+            IMapper mapper)
         {
             Islands = new BindingList<IslandModel>();
             Sites = new List<SitesModel>();
@@ -43,7 +46,9 @@ namespace CD4.UI.Library.ViewModel
             GenderList = new List<GenderModel>();
             BulkDataList = new BindingList<BulkSchemaModel>();
             ClinicalDetails = new List<ClinicalDetailsOrderEntryModel>();
+            ErrorMessages = new BindingList<string>();
             _ordersImportDataAccess = ordersImportDataAccess;
+            _requestDataAccess = requestDataAccess;
             _mapper = mapper;
             LoadingAnimationVisible = false;
             InitializeData += BulkOrdersImportViewModel_InitializeData;
@@ -51,59 +56,6 @@ namespace CD4.UI.Library.ViewModel
             InitializeData?.Invoke(this, EventArgs.Empty);
         }
 
-        private async void BulkOrdersImportViewModel_InitializeExcelFileRead(object sender, EventArgs e)
-        {
-            try
-            {
-                LoadingAnimationVisible = true;
-                await LoadExcelFile();
-
-                await Task.Run(() =>
-                    {
-                        CalculateHash();
-                        CheckForDublicates();
-                        ValidateData();
-                        SetUnderlyingIds();
-                    });
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                LoadingAnimationVisible = false;
-            }
-
-        }
-
-        private async void BulkOrdersImportViewModel_InitializeData(object sender, EventArgs e)
-        {
-            LoadingAnimationVisible = true;
-            try
-            {
-                var results = await _ordersImportDataAccess.GetAllStaticDataForBulkImport();
-                //map them out
-                await Task.Run(() =>
-                {
-                    GenderList.AddRange(_mapper.Map<List<GenderModel>>(results.Genders));
-                    AllAtollsWithCorrespondingIsland.AddRange(_mapper.Map<List<AtollIslandModel>>(results.AtollsAndIslands));
-                    Sites.AddRange(_mapper.Map<List<SitesModel>>(results.Sites));
-                    Nationalities.AddRange(_mapper.Map<List<CountryModel>>(results.Countries));
-                    ClinicalDetails.AddRange(_mapper.Map<List<ClinicalDetailsOrderEntryModel>>(results.ClinicalDetails));
-                    AllTestsData.AddRange(_mapper.Map<List<ProfilesAndTestsDatasourceOeModel>>(results.Tests));
-                });
-
-            }
-            catch (Exception ex)
-            {
-                XtraMessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                LoadingAnimationVisible = false;
-            }
-        }
         #endregion
 
         #region INotifyPropertyChanged Hookup
@@ -157,6 +109,7 @@ namespace CD4.UI.Library.ViewModel
         public BindingList<BulkSchemaModel> BulkDataList { get; set; }
         public List<GenderModel> GenderList { get; set; }
         public List<ClinicalDetailsOrderEntryModel> ClinicalDetails { get; set; }
+        public BindingList<string> ErrorMessages { get; set; }
         public bool LoadingAnimationVisible
         {
             get => loadingAnimationVisible; set
@@ -169,6 +122,60 @@ namespace CD4.UI.Library.ViewModel
         #endregion
 
         #region Private Methods
+        private async void BulkOrdersImportViewModel_InitializeExcelFileRead(object sender, EventArgs e)
+        {
+            try
+            {
+                LoadingAnimationVisible = true;
+                await LoadExcelFile();
+
+                await Task.Run(() =>
+                {
+                    CalculateHash();
+                    CheckForDublicates();
+                    ValidateData();
+                    SetUnderlyingIds();
+                });
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                LoadingAnimationVisible = false;
+            }
+
+        }
+
+        private async void BulkOrdersImportViewModel_InitializeData(object sender, EventArgs e)
+        {
+            LoadingAnimationVisible = true;
+            try
+            {
+                var results = await _ordersImportDataAccess.GetAllStaticDataForBulkImport();
+                //map them out
+                await Task.Run(() =>
+                {
+                    GenderList.AddRange(_mapper.Map<List<GenderModel>>(results.Genders));
+                    AllAtollsWithCorrespondingIsland.AddRange(_mapper.Map<List<AtollIslandModel>>(results.AtollsAndIslands));
+                    Sites.AddRange(_mapper.Map<List<SitesModel>>(results.Sites));
+                    Nationalities.AddRange(_mapper.Map<List<CountryModel>>(results.Countries));
+                    ClinicalDetails.AddRange(_mapper.Map<List<ClinicalDetailsOrderEntryModel>>(results.ClinicalDetails));
+                    AllTestsData.AddRange(_mapper.Map<List<ProfilesAndTestsDatasourceOeModel>>(results.Tests));
+                });
+
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                LoadingAnimationVisible = false;
+            }
+        }
+
 
         /// <summary>
         /// combines nid/pp and sample collection date and calculates a hash
@@ -197,23 +204,40 @@ namespace CD4.UI.Library.ViewModel
         }
         private void SetUnderlyingIds()
         {
+            ErrorMessages.Clear();
+
             foreach (var item in BulkDataList)
             {
+
                 //verify that none of the required columns are null
                 if (item.Gender is null || item.Nationality is null || item.Atoll is null || item.Island is null || item.SampleSite is null)
                 {
+                    ErrorMessages.Add($"Required data not provided for record: {item.NidPp} | {item.Fullname}.\n\t" +
+                        $"Gender: {item.Gender}\n\t" +
+                        $"Nationality: {item.Nationality}\n\t" +
+                        $"Atoll: {item.Atoll}\n\t" +
+                        $"Island: {item.Island}\n\t" +
+                        $"Sample Site: {item.SampleSite}");
                     item.IsValidData = false;
                     continue;
                 }
 
                 //get gender Id
                 var gender = GenderList.Find((x) => x.Gender.Trim().ToLower() == item.Gender.Trim().ToLower());
-                if (gender is null) { item.IsValidData = false; continue; }
+                if (gender is null)
+                {
+                    ErrorMessages.Add(BuildErrorMessage(nameof(BulkSchemaModel.Gender), item.Gender));
+                    item.IsValidData = false; continue;
+                }
                 item.GenderId = gender.Id;
 
                 //get nationalityId
                 var nationality = Nationalities.Find((x) => x.Country.Trim().ToLower() == item.Nationality.Trim().ToLower());
-                if (nationality is null) { item.IsValidData = false; continue; }
+                if (nationality is null)
+                {
+                    ErrorMessages.Add(BuildErrorMessage(nameof(BulkSchemaModel.Nationality), item.Nationality));
+                    item.IsValidData = false; continue;
+                }
                 item.NationalityId = nationality.Id;
 
                 //get atollIslandId
@@ -222,14 +246,29 @@ namespace CD4.UI.Library.ViewModel
                     x.Atoll.Trim().ToLower() == item.Atoll.Trim().ToLower()
                 );
 
-                if (atollAndIsland is null) { item.IsValidData = false; continue; }
+                if (atollAndIsland is null)
+                {
+                    ErrorMessages.Add(BuildErrorMessage($"{nameof(BulkSchemaModel.Atoll)} and {nameof(BulkSchemaModel.Island)}", $"{item.Atoll} | {item.Island}"));
+                    item.IsValidData = false; continue;
+                }
                 item.AtollIslandId = atollAndIsland.Id;
 
                 //SiteId
                 var site = Sites.Find((x) => x.Site.Trim().ToLower() == item.SampleSite.Trim().ToLower());
-                if (site is null) { item.IsValidData = false; continue; }
+                if (site is null)
+                {
+                    ErrorMessages.Add(BuildErrorMessage(nameof(BulkSchemaModel.SampleSite), item.SampleSite));
+                    item.IsValidData = false; continue;
+                }
                 item.SiteId = site.Id;
+
+
             }
+        }
+
+        private string BuildErrorMessage(string propertyName, string propertyValue)
+        {
+            return $"Specified data cannot be found. {propertyName}: {propertyValue}";
         }
 
         private async Task LoadExcelFile()
@@ -249,6 +288,45 @@ namespace CD4.UI.Library.ViewModel
                 }
             }
         }
+        #endregion
+
+        #region Public Methods
+        public async Task ConformUploadSelected()
+        {
+            var temp = new List<BulkSchemaModel>();
+
+            //get a list of data layer model to call to data layer
+            List<AnalysisRequestDataModel> analysisRequests = BulkSchemaModelToAnalysisRequestModels(temp);
+
+            //confirm analysis requests
+            try
+            {
+                foreach (var request in analysisRequests)
+                {
+                    //check whether hash exists on database
+                    //confirm if has is new hash
+                    //generate a new CIN
+                    await ConfirmAnalysisRequest(request);
+                    //call database to get the with Cin to get the request for displaying
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private Task ConfirmAnalysisRequest(AnalysisRequestDataModel request)
+        {
+            throw new NotImplementedException();
+        }
+
+        private List<AnalysisRequestDataModel> BulkSchemaModelToAnalysisRequestModels(List<BulkSchemaModel> analysisRequests)
+        {
+            throw new NotImplementedException();
+        }
+
         #endregion
     }
 }

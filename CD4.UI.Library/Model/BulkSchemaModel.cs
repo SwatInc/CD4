@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,6 +13,7 @@ namespace CD4.UI.Library.Model
         private string nidPp;
         private string gender;
         private string nationality;
+        private bool isValidData;
 
         public BulkSchemaModel()
         {
@@ -59,7 +61,22 @@ namespace CD4.UI.Library.Model
         public DateTime SampleCollectedDateTime { get; set; }
         public int Hash { get; set; }
         public bool IsDublicate { get; set; }
-        public bool IsValidData { get; set; }
+        public bool IsValidData
+        {
+            get => isValidData; set
+            {
+                isValidData = value;
+                if (value)
+                {
+                    IsValidIcon = Properties.Resources.valid;
+                }
+                else
+                {
+                    IsValidIcon = Properties.Resources.invalid;
+                }
+            }
+        }
+        public Image IsValidIcon { get; set; }
 
         #region underlying IDs
         public int GenderId { get; set; }
