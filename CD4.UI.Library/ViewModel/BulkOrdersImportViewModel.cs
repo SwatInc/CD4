@@ -56,6 +56,7 @@ namespace CD4.UI.Library.ViewModel
             InitializeData?.Invoke(this, EventArgs.Empty);
         }
 
+
         #endregion
 
         #region INotifyPropertyChanged Hookup
@@ -118,10 +119,19 @@ namespace CD4.UI.Library.ViewModel
                 OnPropertyChanged();
             }
         }
+        public string ButtonErrorsCountlabel { get => $"View Errors [ {ErrorMessages.Count} ]"; }
+        public bool ButtonErrorsCountEnabled
+        {
+            get
+            {
+                return ErrorMessages.Count > 0;
+            }
+        }
 
         #endregion
 
         #region Private Methods
+
         private async void BulkOrdersImportViewModel_InitializeExcelFileRead(object sender, EventArgs e)
         {
             try
@@ -136,6 +146,9 @@ namespace CD4.UI.Library.ViewModel
                     ValidateData();
                     SetUnderlyingIds();
                 });
+
+                OnPropertyChanged(nameof(ButtonErrorsCountlabel));
+                OnPropertyChanged(nameof(ButtonErrorsCountEnabled));
             }
             catch (Exception ex)
             {
@@ -175,7 +188,6 @@ namespace CD4.UI.Library.ViewModel
                 LoadingAnimationVisible = false;
             }
         }
-
 
         /// <summary>
         /// combines nid/pp and sample collection date and calculates a hash
@@ -349,11 +361,11 @@ namespace CD4.UI.Library.ViewModel
 
                     //clinical details
                     //tests
-                    
+
                     ClinicalDetails = new List<ClinicalDetailsOrderEntryModel>(),
                     Tests = new List<TestModel>(),
                     EpisodeNumber = this.ReceiptNumber
-                }) ;
+                });
 
                 foreach (var detail in this.ClinicalDetails)
                 {

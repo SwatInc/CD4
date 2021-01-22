@@ -17,7 +17,13 @@ namespace CD4.UI.View
             InitializeBinding();
 
             simpleButtonBrowse.Click += PromptForFile;
+            simpleButtonViewErrors.Click += SimpleButtonViewErrors_Click;
             KeyUp += BulkOrdersImportView_KeyUp;
+        }
+
+        private void SimpleButtonViewErrors_Click(object sender, EventArgs e)
+        {
+
         }
 
         private void BulkOrdersImportView_KeyUp(object sender, KeyEventArgs e)
@@ -60,6 +66,10 @@ namespace CD4.UI.View
             progressPanelImportArea.DataBindings.Add(new Binding("Visible", _viewModel, nameof(_viewModel.LoadingAnimationVisible)));
             progressPanelExcelData.DataBindings.Add(new Binding("Visible", _viewModel, nameof(_viewModel.LoadingAnimationVisible)));
             progressPanelSelectedTests.DataBindings.Add(new Binding("Visible", _viewModel, nameof(_viewModel.LoadingAnimationVisible)));
+
+            //button view errors
+            simpleButtonViewErrors.DataBindings.Add(new Binding("Text", _viewModel, nameof(_viewModel.ButtonErrorsCountlabel)));
+            simpleButtonViewErrors.DataBindings.Add(new Binding("Enabled", _viewModel, nameof(_viewModel.ButtonErrorsCountEnabled)));
         }
 
         private void PromptForFile(object sender, EventArgs e)

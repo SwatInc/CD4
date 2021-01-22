@@ -65,11 +65,12 @@ namespace CD4.UI.View
             this.gridColumnSampleSite = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnIsValid = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnIsIsDublicate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnRunnyNose = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControlSelectedTestData = new DevExpress.XtraEditors.GroupControl();
             this.progressPanelSelectedTests = new DevExpress.XtraWaitForm.ProgressPanel();
             this.gridControlRequestedTests = new DevExpress.XtraGrid.GridControl();
             this.gridViewRequestedTests = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.gridColumnRunnyNose = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.simpleButtonViewErrors = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEditExcelImportsIcon.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlChooseFile)).BeginInit();
             this.groupControlChooseFile.SuspendLayout();
@@ -121,6 +122,7 @@ namespace CD4.UI.View
             // 
             // groupControlChooseFile
             // 
+            this.groupControlChooseFile.Controls.Add(this.simpleButtonViewErrors);
             this.groupControlChooseFile.Controls.Add(this.progressPanelImportArea);
             this.groupControlChooseFile.Controls.Add(this.simpleButtonCollectSelected);
             this.groupControlChooseFile.Controls.Add(this.textEditReceiptNumber);
@@ -139,7 +141,9 @@ namespace CD4.UI.View
             // progressPanelImportArea
             // 
             this.progressPanelImportArea.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.progressPanelImportArea.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.progressPanelImportArea.Appearance.Options.UseBackColor = true;
+            this.progressPanelImportArea.Appearance.Options.UseFont = true;
             this.progressPanelImportArea.BarAnimationElementThickness = 2;
             this.progressPanelImportArea.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.progressPanelImportArea.Location = new System.Drawing.Point(1050, 25);
@@ -151,7 +155,7 @@ namespace CD4.UI.View
             // simpleButtonCollectSelected
             // 
             this.simpleButtonCollectSelected.Enabled = false;
-            this.simpleButtonCollectSelected.Location = new System.Drawing.Point(261, 104);
+            this.simpleButtonCollectSelected.Location = new System.Drawing.Point(258, 104);
             this.simpleButtonCollectSelected.Name = "simpleButtonCollectSelected";
             this.simpleButtonCollectSelected.Size = new System.Drawing.Size(123, 23);
             this.simpleButtonCollectSelected.TabIndex = 21;
@@ -249,7 +253,9 @@ namespace CD4.UI.View
             // progressPanelExcelData
             // 
             this.progressPanelExcelData.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.progressPanelExcelData.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.progressPanelExcelData.Appearance.Options.UseBackColor = true;
+            this.progressPanelExcelData.Appearance.Options.UseFont = true;
             this.progressPanelExcelData.BarAnimationElementThickness = 2;
             this.progressPanelExcelData.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.progressPanelExcelData.Location = new System.Drawing.Point(652, 247);
@@ -460,6 +466,14 @@ namespace CD4.UI.View
             this.gridColumnIsIsDublicate.Visible = true;
             this.gridColumnIsIsDublicate.VisibleIndex = 18;
             // 
+            // gridColumnRunnyNose
+            // 
+            this.gridColumnRunnyNose.Caption = "Runny Nose";
+            this.gridColumnRunnyNose.FieldName = "RunnyNose";
+            this.gridColumnRunnyNose.Name = "gridColumnRunnyNose";
+            this.gridColumnRunnyNose.Visible = true;
+            this.gridColumnRunnyNose.VisibleIndex = 14;
+            // 
             // groupControlSelectedTestData
             // 
             this.groupControlSelectedTestData.Controls.Add(this.progressPanelSelectedTests);
@@ -474,7 +488,9 @@ namespace CD4.UI.View
             // progressPanelSelectedTests
             // 
             this.progressPanelSelectedTests.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.progressPanelSelectedTests.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.progressPanelSelectedTests.Appearance.Options.UseBackColor = true;
+            this.progressPanelSelectedTests.Appearance.Options.UseFont = true;
             this.progressPanelSelectedTests.BarAnimationElementThickness = 2;
             this.progressPanelSelectedTests.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.progressPanelSelectedTests.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -504,13 +520,14 @@ namespace CD4.UI.View
             this.gridViewRequestedTests.OptionsSelection.MultiSelect = true;
             this.gridViewRequestedTests.OptionsView.ShowGroupPanel = false;
             // 
-            // gridColumnRunnyNose
+            // simpleButtonViewErrors
             // 
-            this.gridColumnRunnyNose.Caption = "Runny Nose";
-            this.gridColumnRunnyNose.FieldName = "RunnyNose";
-            this.gridColumnRunnyNose.Name = "gridColumnRunnyNose";
-            this.gridColumnRunnyNose.Visible = true;
-            this.gridColumnRunnyNose.VisibleIndex = 14;
+            this.simpleButtonViewErrors.Enabled = false;
+            this.simpleButtonViewErrors.Location = new System.Drawing.Point(387, 104);
+            this.simpleButtonViewErrors.Name = "simpleButtonViewErrors";
+            this.simpleButtonViewErrors.Size = new System.Drawing.Size(123, 23);
+            this.simpleButtonViewErrors.TabIndex = 23;
+            this.simpleButtonViewErrors.Text = "View Errors";
             // 
             // BulkOrdersImportView
             // 
@@ -588,5 +605,6 @@ namespace CD4.UI.View
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelExcelData;
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelSelectedTests;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRunnyNose;
+        private DevExpress.XtraEditors.SimpleButton simpleButtonViewErrors;
     }
 }

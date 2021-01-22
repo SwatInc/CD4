@@ -14,6 +14,9 @@ namespace CD4.UI.Library.ViewModel
         BindingList<BulkSchemaModel> BulkDataList { get; set; }
         string ExcelFilePath { get; set; }
         bool LoadingAnimationVisible { get; set; }
+        string ButtonErrorsCountlabel { get; }
+        bool ButtonErrorsCountEnabled { get; }
+        BindingList<string> ErrorMessages { get; set; }
 
         event PropertyChangedEventHandler PropertyChanged;
     }
