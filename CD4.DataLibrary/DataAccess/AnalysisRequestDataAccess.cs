@@ -554,13 +554,13 @@ namespace CD4.DataLibrary.DataAccess
             }
         }
 
-        public async Task<int> GetNextCinSeed()
+        public async Task<string> GetNextCinSeed()
         {
             var storedProcedure = "[dbo].[usp_GetNextSampleNumber]";
             try
             {
                 var data = await LoadDataAsync<int>(storedProcedure);
-                return data.FirstOrDefault();
+                return FormatCinSeed(data.FirstOrDefault());
             }
             catch (Exception)
             {
@@ -568,6 +568,16 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
 
+        }
+
+        private string FormatCinSeed(int nextCinSeed)
+        {
+            var totalLength = 7;
+            var padCharacter = '0';
+            var prefix = "ML";
+
+            var paddedNextSeed = nextCinSeed.ToString().PadLeft(totalLength, padCharacter);
+            return $"{prefix}{paddedNextSeed}";
         }
     }
 }

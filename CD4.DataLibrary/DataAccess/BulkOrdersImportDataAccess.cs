@@ -64,7 +64,16 @@ namespace CD4.DataLibrary.DataAccess
                 }
                 foreach (var item in results[6])
                 {
-                    returnData.ProfileTests.Add(item);
+                    var profileTest = (ProfileTestsDatabaseModel)item;
+                    var profile = returnData.Tests.Find((x) => x.Id == profileTest.ProfileId);
+                    profile.TestsInProfile.Add(new TestsModel()
+                    {
+                        Id = profileTest.TestId,
+                        Description = profileTest.Test,
+                        Mask = profileTest.Mask,
+                        ResultDataType = profileTest.ResultDataType,
+                        IsReportable = profileTest.IsReportable
+                    });
                 }
                 foreach (var item in results[7])
                 {
@@ -74,13 +83,50 @@ namespace CD4.DataLibrary.DataAccess
 
                 return returnData;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
 
                 throw;
             }
         }
 
+        /// <summary>
+        /// searches the database and return the number 
+        /// </summary>
+        /// <param name="hash"></param>
+        /// <returns></returns>
+        public async Task<string> GetCinForImportedHash(int hash)
+        {
+            var storedProcedure = "[dbo].[usp_GetCinForImportHash]";
+            var parameter = new { Hash = hash };
+
+            try
+            {
+                return await SelectInsertOrUpdateAsync<string, dynamic>(storedProcedure, parameter);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        public async Task InsertHash(int recordHash, string cin)
+        {
+            var storedProcedure = "[dbo].[usp_InsertImportRecordHash]";
+            var parameter = new { Cin = cin, Hash = recordHash };
+
+            try
+            {
+                await SelectInsertOrUpdateAsync<int, dynamic>(storedProcedure, parameter);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
     }
 }
