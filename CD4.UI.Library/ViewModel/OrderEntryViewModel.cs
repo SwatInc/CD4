@@ -386,24 +386,13 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-               var nextCinSeed = await _requestDataAccess.GetNextCinSeed();
-               Cin = FormatCinSeed(nextCinSeed);
+               Cin = await _requestDataAccess.GetNextCinSeed();
             }
             catch (Exception)
             {
 
                 throw;
             }
-        }
-
-        private string FormatCinSeed(int nextCinSeed)
-        {
-            var totalLength = 7;
-            var padCharacter = '0';
-            var prefix = "ML";
-
-            var paddedNextSeed =  nextCinSeed.ToString().PadLeft(totalLength, padCharacter);
-            return $"{prefix}{paddedNextSeed}";
         }
 
         public async Task SearchRequestByCinAsync()

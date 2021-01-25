@@ -3,9 +3,11 @@ using CD4.DataLibrary.DataAccess;
 using CD4.UI.Library.Model;
 using DevExpress.XtraEditors;
 using Ganss.Excel;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
@@ -18,15 +20,13 @@ namespace CD4.UI.Library.ViewModel
 
         private string testToAdd;
         private string receiptNumber;
-        private string address;
-        private string selectedAtoll;
-        private string selectedIsland;
-        private int selectedSiteId;
         private string excelFilePath;
         private bool loadingAnimationVisible;
+        private bool errorsPanelVisible;
         private readonly IBulkOrdersImportDataAccess _ordersImportDataAccess;
         private readonly IAnalysisRequestDataAccess _requestDataAccess;
         private readonly IMapper _mapper;
+        private readonly AuthorizeDetailEventArgs _authorizeDetail;
 
         #endregion
 
@@ -36,20 +36,23 @@ namespace CD4.UI.Library.ViewModel
         #region Default Constructor
         public BulkOrdersImportViewModel(IBulkOrdersImportDataAccess ordersImportDataAccess,
             IAnalysisRequestDataAccess requestDataAccess,
-            IMapper mapper)
+            IMapper mapper,
+            AuthorizeDetailEventArgs authorizeDetail)
         {
             Islands = new BindingList<IslandModel>();
             Sites = new List<SitesModel>();
             AllAtollsWithCorrespondingIsland = new List<AtollIslandModel>();
             Nationalities = new List<CountryModel>();
             AllTestsData = new List<ProfilesAndTestsDatasourceOeModel>();
+            AddedTests = new BindingList<TestModel>();
             GenderList = new List<GenderModel>();
             BulkDataList = new BindingList<BulkSchemaModel>();
             ClinicalDetails = new List<ClinicalDetailsOrderEntryModel>();
-            ErrorMessages = new BindingList<string>();
+            ErrorMessages = new List<string>();
             _ordersImportDataAccess = ordersImportDataAccess;
             _requestDataAccess = requestDataAccess;
             _mapper = mapper;
+            this._authorizeDetail = authorizeDetail;
             LoadingAnimationVisible = false;
             InitializeData += BulkOrdersImportViewModel_InitializeData;
             InitializeExcelFileRead += BulkOrdersImportViewModel_InitializeExcelFileRead;
@@ -110,7 +113,7 @@ namespace CD4.UI.Library.ViewModel
         public BindingList<BulkSchemaModel> BulkDataList { get; set; }
         public List<GenderModel> GenderList { get; set; }
         public List<ClinicalDetailsOrderEntryModel> ClinicalDetails { get; set; }
-        public BindingList<string> ErrorMessages { get; set; }
+        public List<string> ErrorMessages { get; set; }
         public bool LoadingAnimationVisible
         {
             get => loadingAnimationVisible; set
@@ -127,6 +130,24 @@ namespace CD4.UI.Library.ViewModel
                 return ErrorMessages.Count > 0;
             }
         }
+        public bool ErrorsPanelVisible
+        {
+            get => errorsPanelVisible; set
+            {
+                errorsPanelVisible = value;
+                OnPropertyChanged();
+                OnPropertyChanged(nameof(MainPanelVisible));
+            }
+        }
+
+        public bool MainPanelVisible
+        {
+            get
+            {
+                return !ErrorsPanelVisible;
+            }
+
+        }
 
         #endregion
 
@@ -139,11 +160,14 @@ namespace CD4.UI.Library.ViewModel
                 LoadingAnimationVisible = true;
                 await LoadExcelFile();
 
+                ErrorMessages.Clear();
+
                 await Task.Run(() =>
                 {
                     CalculateHash();
                     CheckForDublicates();
                     ValidateData();
+
                     SetUnderlyingIds();
                 });
 
@@ -216,7 +240,6 @@ namespace CD4.UI.Library.ViewModel
         }
         private void SetUnderlyingIds()
         {
-            ErrorMessages.Clear();
 
             foreach (var item in BulkDataList)
             {
@@ -300,40 +323,36 @@ namespace CD4.UI.Library.ViewModel
                 }
             }
         }
-        #endregion
-
-        #region Public Methods
-        public async Task ConformUploadSelected()
+        private async Task ConfirmAnalysisRequest(AnalysisRequestDataModel request)
         {
-            var temp = new List<BulkSchemaModel>();
-
-            //get a list of data layer model to call to data layer
-            List<AnalysisRequestDataModel> analysisRequests = BulkSchemaModelToAnalysisRequestModels(temp);
-
-            //confirm analysis requests
-            try
+            var data = new DataLibrary.Models.AnalysisRequestDataModel()
             {
-                foreach (var request in analysisRequests)
-                {
-                    //check whether hash exists on database
-                    //confirm if has is new hash
-                    //generate a new CIN
-                    await ConfirmAnalysisRequest(request);
-                    //call database to get the with Cin to get the request for displaying
-                }
-            }
-            catch (Exception)
-            {
+                EpisodeNumber = request.EpisodeNumber,
+                Cin = request.Cin,
+                SiteId = request.SelectedSiteId,
+                SampleCollectionDate = request.SampleCollectionDate,
+                SampleReceivedDate = request.SampleReceivedDate,
+                NationalIdPassport = request.NationalIdPassport,
+                Fullname = request.Fullname,
+                GenderId = request.GenderId,
+                Birthdate = request.Birthdate,
+                Age = SetAge(request.Birthdate),
+                PhoneNumber = request.PhoneNumber,
+                Address = request.Address,
+                AtollId = request.AtollId,
+                CountryId = request.CountryId,
+                ClinicalDetails = new List<DataLibrary.Models.ClinicalDetailsSelectionModel>(),
+                Tests = new List<DataLibrary.Models.TestsModel>()
+            };
 
-                throw;
-            }
+            data.ClinicalDetails = _mapper.Map<List<DataLibrary.Models.ClinicalDetailsSelectionModel>>(request.ClinicalDetails);
+            data.Tests = _mapper.Map<List<DataLibrary.Models.TestsModel>>(request.Tests);
+            await _requestDataAccess.ConfirmRequestAsync(data, _authorizeDetail.UserId);
         }
-
-        private Task ConfirmAnalysisRequest(AnalysisRequestDataModel request)
+        private string SetAge(DateTime birthdate)
         {
-            throw new NotImplementedException();
+            return DateTimeExtensions.ToAgeString(birthdate);
         }
-
         private List<AnalysisRequestDataModel> BulkSchemaModelToAnalysisRequestModels(List<BulkSchemaModel> bulkAnalysisRequests)
         {
             var analysisRequest = new List<AnalysisRequestDataModel>();
@@ -398,6 +417,173 @@ namespace CD4.UI.Library.ViewModel
 
             return analysisRequest;
 
+        }
+        private async Task<ProfilesAndTestsDatasourceOeModel> GetSelectedTestOrProfileByDescriptionAsync(string testDescription)
+        {
+            return await Task.Run(() =>
+            {
+                return AllTestsData.SingleOrDefault(t => t.Description == testDescription);
+            });
+        }
+
+        private async Task AddTestListToRequestAsync(List<TestModel> testModelList)
+        {
+            if (testModelList is null) throw new ArgumentNullException(nameof(testModelList));
+
+            foreach (var test in testModelList)
+            {
+                await AddSingleTestToRequestAsync(test);
+            }
+        }
+
+        private async Task AddSingleTestToRequestAsync(TestModel test)
+        {
+            if (test is null) return;
+            if (await IsTestPresentOnRequest(test.Description) == false)
+            {
+                Debug.WriteLine("Test is not present on AR! Continuing to add.");
+                AddedTests.Add(test);
+            }
+        }
+
+        private async Task<bool> IsTestPresentOnRequest(string testDescription)
+        {
+            Debug.WriteLine("Checking whether the test is already added.");
+            return await Task.Run(() =>
+            {
+                return AddedTests.Any((t) => t.Description == testDescription);
+            });
+        }
+
+        #endregion
+
+        #region Public Methods
+        public async Task ManageAddTestToRequestAsync()
+        {
+            Debug.WriteLine("Called: ManageAddTestToRequestAsync");
+            if (TestToAdd is null) return;
+            var selectedTest = await GetSelectedTestOrProfileByDescriptionAsync(TestToAdd);
+            if (selectedTest is null) return;
+            switch (selectedTest.IsProfile)
+            {
+                case true:
+                    Debug.WriteLine("Selected a profile test. Proceeding to add corresponding tests...");
+                    await AddTestListToRequestAsync(selectedTest.TestsInProfile);
+                    break;
+                case false:
+                    Debug.WriteLine("Not a profile test. Proceeding...");
+                    await AddSingleTestToRequestAsync(selectedTest);
+                    break;
+                default:
+                    throw new Exception("IsProfile parameter must be specified.");
+            }
+
+            Debug.WriteLine("Clearing the lookupedit box.");
+            TestToAdd = null;
+        }
+        public async Task ConformUploadSelected(List<BulkSchemaModel> selectedRecordsToImport)
+        {
+            //handling null parameter
+            if (selectedRecordsToImport is null)
+            {
+                XtraMessageBox.Show("No records selected to import");
+                return;
+            }
+
+            //if the parameter has no items to upload to database..., return
+            if (selectedRecordsToImport.Count == 0)
+            {
+                XtraMessageBox.Show("No records selected to import");
+                return;
+            }
+
+            //new up a temp list
+            var temp = new List<BulkSchemaModel>();
+
+            //check whether the data selected is not dublicate or invalid
+            foreach (var item in selectedRecordsToImport)
+            {
+                if (item.IsDublicate == false && item.IsValidData == true)
+                {
+                    //check whether hash exists on database
+                    if (!await IsImportedBefore(item))
+                    {
+                        //if record hash does not exist on database..., add it to temp list
+                        temp.Add(item);
+                    }
+                }
+            }
+
+            if (temp.Count == 0)
+            {
+                XtraMessageBox.Show("Cannot import any of the selected records. " +
+                    "The records are either invalid, dublicated or all records have been previously imported.");
+                return;
+            }
+
+            //get a list of data layer model to call to data layer
+            List<AnalysisRequestDataModel> analysisRequests = BulkSchemaModelToAnalysisRequestModels(temp);
+
+            //confirm analysis requests
+            try
+            {
+                foreach (var request in analysisRequests)
+                {
+                    //generate a new CIN
+                    request.Cin = await _requestDataAccess.GetNextCinSeed();
+                    //add selected tests to the request
+                    request.Tests.AddRange(AddedTests);
+                    await ConfirmAnalysisRequest(request);
+                    //call database to get the with Cin to get the request for displaying
+                    var bulkDataItem = BulkDataList.FirstOrDefault
+                        ((x) => x.NidPp == request.NationalIdPassport && x.SampleCollectedDateTime == request.SampleCollectionDate);
+                    if (bulkDataItem != null)
+                    {
+                        bulkDataItem.Cin = request.Cin;
+                    }
+
+                    await _ordersImportDataAccess.InsertHash(bulkDataItem.Hash, request.Cin);
+                }
+            }
+            catch (Exception ex)
+            {
+
+                XtraMessageBox.Show(ex.Message);
+            }
+        }
+
+        private async Task<bool> IsImportedBefore(BulkSchemaModel item)
+        {
+            //look for a cin for the hash
+            var cinForHash = await _ordersImportDataAccess.GetCinForImportedHash(item.Hash);
+            //if returned cin is null or empty
+            if (string.IsNullOrEmpty(cinForHash))
+            {
+                //not imported before
+                return false;
+            }
+            else
+            {
+                var bulkDataItem = BulkDataList.FirstOrDefault((x) => x.NidPp == item.NidPp && x.SampleCollectedDateTime == item.SampleCollectedDateTime);
+                if (bulkDataItem != null)
+                {
+                    bulkDataItem.Cin = cinForHash;
+                }
+                //imported before... update the bulk list to reflect the value
+                ErrorMessages.Add($"The record has been imported earlier as {cinForHash}. " +
+                    $"Please find the details below.\n\n{JsonConvert.SerializeObject(item, Formatting.Indented)}");
+
+                //XtraMessageBox.Show($"The record has been imported earlier as {cinForHash}. " +
+                //            $"Please find the details below.\n\n{JsonConvert.SerializeObject(item, Formatting.Indented)}");
+                return true;
+            }
+        }
+
+        public void ClearErrorMessages()
+        {
+            ErrorMessages.Clear();
+            OnPropertyChanged(nameof(ButtonErrorsCountlabel));
+            OnPropertyChanged(nameof(ButtonErrorsCountEnabled));
         }
 
         #endregion
