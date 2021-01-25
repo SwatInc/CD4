@@ -36,17 +36,18 @@ namespace CD4.UI.View
             this.simpleButtonBrowse = new DevExpress.XtraEditors.SimpleButton();
             this.groupControlChooseFile = new DevExpress.XtraEditors.GroupControl();
             this.progressPanelImportArea = new DevExpress.XtraWaitForm.ProgressPanel();
+            this.simpleButtonViewErrors = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButtonCollectSelected = new DevExpress.XtraEditors.SimpleButton();
             this.textEditReceiptNumber = new DevExpress.XtraEditors.TextEdit();
             this.lookUpEditTests = new DevExpress.XtraEditors.LookUpEdit();
             this.simpleButtonConfirmUpload = new DevExpress.XtraEditors.SimpleButton();
             this.labelImportFilePathDisplay = new System.Windows.Forms.Label();
-            this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
+            this.splitContainerControlMain = new DevExpress.XtraEditors.SplitContainerControl();
             this.splitContainerControl2 = new DevExpress.XtraEditors.SplitContainerControl();
             this.groupControl1 = new DevExpress.XtraEditors.GroupControl();
             this.progressPanelExcelData = new DevExpress.XtraWaitForm.ProgressPanel();
             this.gridControlExcelData = new DevExpress.XtraGrid.GridControl();
-            this.gridView1 = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridViewExcelData = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.gridColumnNidPp = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnFullname = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnGender = new DevExpress.XtraGrid.Columns.GridColumn();
@@ -66,30 +67,39 @@ namespace CD4.UI.View
             this.gridColumnIsValid = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnIsIsDublicate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnRunnyNose = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnCin = new DevExpress.XtraGrid.Columns.GridColumn();
             this.groupControlSelectedTestData = new DevExpress.XtraEditors.GroupControl();
             this.progressPanelSelectedTests = new DevExpress.XtraWaitForm.ProgressPanel();
             this.gridControlRequestedTests = new DevExpress.XtraGrid.GridControl();
             this.gridViewRequestedTests = new DevExpress.XtraGrid.Views.Grid.GridView();
-            this.simpleButtonViewErrors = new DevExpress.XtraEditors.SimpleButton();
+            this.groupControlErrorsPanel = new DevExpress.XtraEditors.GroupControl();
+            this.simpleButtonHideErrors = new DevExpress.XtraEditors.SimpleButton();
+            this.progressPanelErrorsPanel = new DevExpress.XtraWaitForm.ProgressPanel();
+            this.gridControlImportErrors = new DevExpress.XtraGrid.GridControl();
+            this.gridView2 = new DevExpress.XtraGrid.Views.Grid.GridView();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEditExcelImportsIcon.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlChooseFile)).BeginInit();
             this.groupControlChooseFile.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEditReceiptNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTests.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).BeginInit();
-            this.splitContainerControl1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlMain)).BeginInit();
+            this.splitContainerControlMain.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).BeginInit();
             this.splitContainerControl2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlExcelData)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewExcelData)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditCollectedAt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditCollectedAt.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlSelectedTestData)).BeginInit();
             this.groupControlSelectedTestData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlRequestedTests)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewRequestedTests)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControlErrorsPanel)).BeginInit();
+            this.groupControlErrorsPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlImportErrors)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).BeginInit();
             this.SuspendLayout();
             // 
             // pictureEditExcelImportsIcon
@@ -122,8 +132,8 @@ namespace CD4.UI.View
             // 
             // groupControlChooseFile
             // 
-            this.groupControlChooseFile.Controls.Add(this.simpleButtonViewErrors);
             this.groupControlChooseFile.Controls.Add(this.progressPanelImportArea);
+            this.groupControlChooseFile.Controls.Add(this.simpleButtonViewErrors);
             this.groupControlChooseFile.Controls.Add(this.simpleButtonCollectSelected);
             this.groupControlChooseFile.Controls.Add(this.textEditReceiptNumber);
             this.groupControlChooseFile.Controls.Add(this.lookUpEditTests);
@@ -134,7 +144,7 @@ namespace CD4.UI.View
             this.groupControlChooseFile.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControlChooseFile.Location = new System.Drawing.Point(0, 0);
             this.groupControlChooseFile.Name = "groupControlChooseFile";
-            this.groupControlChooseFile.Size = new System.Drawing.Size(1247, 140);
+            this.groupControlChooseFile.Size = new System.Drawing.Size(1070, 140);
             this.groupControlChooseFile.TabIndex = 3;
             this.groupControlChooseFile.Text = "Choose Import File";
             // 
@@ -146,11 +156,21 @@ namespace CD4.UI.View
             this.progressPanelImportArea.Appearance.Options.UseFont = true;
             this.progressPanelImportArea.BarAnimationElementThickness = 2;
             this.progressPanelImportArea.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.progressPanelImportArea.Location = new System.Drawing.Point(1050, 25);
+            this.progressPanelImportArea.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressPanelImportArea.Location = new System.Drawing.Point(2, 20);
             this.progressPanelImportArea.Name = "progressPanelImportArea";
-            this.progressPanelImportArea.Size = new System.Drawing.Size(143, 79);
+            this.progressPanelImportArea.Size = new System.Drawing.Size(1066, 118);
             this.progressPanelImportArea.TabIndex = 22;
             this.progressPanelImportArea.TabStop = false;
+            // 
+            // simpleButtonViewErrors
+            // 
+            this.simpleButtonViewErrors.Enabled = false;
+            this.simpleButtonViewErrors.Location = new System.Drawing.Point(387, 104);
+            this.simpleButtonViewErrors.Name = "simpleButtonViewErrors";
+            this.simpleButtonViewErrors.Size = new System.Drawing.Size(123, 23);
+            this.simpleButtonViewErrors.TabIndex = 23;
+            this.simpleButtonViewErrors.Text = "View Errors";
             // 
             // simpleButtonCollectSelected
             // 
@@ -194,7 +214,6 @@ namespace CD4.UI.View
             // 
             // simpleButtonConfirmUpload
             // 
-            this.simpleButtonConfirmUpload.Enabled = false;
             this.simpleButtonConfirmUpload.Location = new System.Drawing.Point(129, 104);
             this.simpleButtonConfirmUpload.Name = "simpleButtonConfirmUpload";
             this.simpleButtonConfirmUpload.Size = new System.Drawing.Size(123, 23);
@@ -212,19 +231,19 @@ namespace CD4.UI.View
             this.labelImportFilePathDisplay.Tag = "Import File: ";
             this.labelImportFilePathDisplay.Text = "Import File: ";
             // 
-            // splitContainerControl1
+            // splitContainerControlMain
             // 
-            this.splitContainerControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainerControl1.Horizontal = false;
-            this.splitContainerControl1.Location = new System.Drawing.Point(0, 0);
-            this.splitContainerControl1.Name = "splitContainerControl1";
-            this.splitContainerControl1.Panel1.Controls.Add(this.groupControlChooseFile);
-            this.splitContainerControl1.Panel1.Text = "Panel1";
-            this.splitContainerControl1.Panel2.Controls.Add(this.splitContainerControl2);
-            this.splitContainerControl1.Panel2.Text = "Panel2";
-            this.splitContainerControl1.Size = new System.Drawing.Size(1247, 592);
-            this.splitContainerControl1.SplitterPosition = 140;
-            this.splitContainerControl1.TabIndex = 4;
+            this.splitContainerControlMain.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainerControlMain.Horizontal = false;
+            this.splitContainerControlMain.Location = new System.Drawing.Point(0, 0);
+            this.splitContainerControlMain.Name = "splitContainerControlMain";
+            this.splitContainerControlMain.Panel1.Controls.Add(this.groupControlChooseFile);
+            this.splitContainerControlMain.Panel1.Text = "Panel1";
+            this.splitContainerControlMain.Panel2.Controls.Add(this.splitContainerControl2);
+            this.splitContainerControlMain.Panel2.Text = "Panel2";
+            this.splitContainerControlMain.Size = new System.Drawing.Size(1070, 592);
+            this.splitContainerControlMain.SplitterPosition = 140;
+            this.splitContainerControlMain.TabIndex = 4;
             // 
             // splitContainerControl2
             // 
@@ -235,7 +254,7 @@ namespace CD4.UI.View
             this.splitContainerControl2.Panel1.Text = "Panel1";
             this.splitContainerControl2.Panel2.Controls.Add(this.groupControlSelectedTestData);
             this.splitContainerControl2.Panel2.Text = "Panel2";
-            this.splitContainerControl2.Size = new System.Drawing.Size(1247, 447);
+            this.splitContainerControl2.Size = new System.Drawing.Size(1070, 447);
             this.splitContainerControl2.SplitterPosition = 873;
             this.splitContainerControl2.TabIndex = 1;
             // 
@@ -268,18 +287,18 @@ namespace CD4.UI.View
             // 
             this.gridControlExcelData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gridControlExcelData.Location = new System.Drawing.Point(2, 20);
-            this.gridControlExcelData.MainView = this.gridView1;
+            this.gridControlExcelData.MainView = this.gridViewExcelData;
             this.gridControlExcelData.Name = "gridControlExcelData";
             this.gridControlExcelData.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemDateEditCollectedAt});
             this.gridControlExcelData.Size = new System.Drawing.Size(869, 425);
             this.gridControlExcelData.TabIndex = 1;
             this.gridControlExcelData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
-            this.gridView1});
+            this.gridViewExcelData});
             // 
-            // gridView1
+            // gridViewExcelData
             // 
-            this.gridView1.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridViewExcelData.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
             this.gridColumnNidPp,
             this.gridColumnFullname,
             this.gridColumnGender,
@@ -297,11 +316,12 @@ namespace CD4.UI.View
             this.gridColumnSampleSite,
             this.gridColumnIsValid,
             this.gridColumnIsIsDublicate,
-            this.gridColumnRunnyNose});
-            this.gridView1.GridControl = this.gridControlExcelData;
-            this.gridView1.Name = "gridView1";
-            this.gridView1.OptionsSelection.MultiSelect = true;
-            this.gridView1.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
+            this.gridColumnRunnyNose,
+            this.gridColumnCin});
+            this.gridViewExcelData.GridControl = this.gridControlExcelData;
+            this.gridViewExcelData.Name = "gridViewExcelData";
+            this.gridViewExcelData.OptionsSelection.MultiSelect = true;
+            this.gridViewExcelData.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
             // 
             // gridColumnNidPp
             // 
@@ -309,7 +329,7 @@ namespace CD4.UI.View
             this.gridColumnNidPp.FieldName = "NidPp";
             this.gridColumnNidPp.Name = "gridColumnNidPp";
             this.gridColumnNidPp.Visible = true;
-            this.gridColumnNidPp.VisibleIndex = 1;
+            this.gridColumnNidPp.VisibleIndex = 2;
             this.gridColumnNidPp.Width = 63;
             // 
             // gridColumnFullname
@@ -318,7 +338,7 @@ namespace CD4.UI.View
             this.gridColumnFullname.FieldName = "Fullname";
             this.gridColumnFullname.Name = "gridColumnFullname";
             this.gridColumnFullname.Visible = true;
-            this.gridColumnFullname.VisibleIndex = 2;
+            this.gridColumnFullname.VisibleIndex = 3;
             this.gridColumnFullname.Width = 114;
             // 
             // gridColumnGender
@@ -327,7 +347,7 @@ namespace CD4.UI.View
             this.gridColumnGender.FieldName = "Gender";
             this.gridColumnGender.Name = "gridColumnGender";
             this.gridColumnGender.Visible = true;
-            this.gridColumnGender.VisibleIndex = 3;
+            this.gridColumnGender.VisibleIndex = 4;
             this.gridColumnGender.Width = 37;
             // 
             // gridColumnBirthdate
@@ -336,7 +356,7 @@ namespace CD4.UI.View
             this.gridColumnBirthdate.FieldName = "Birthdate";
             this.gridColumnBirthdate.Name = "gridColumnBirthdate";
             this.gridColumnBirthdate.Visible = true;
-            this.gridColumnBirthdate.VisibleIndex = 4;
+            this.gridColumnBirthdate.VisibleIndex = 5;
             this.gridColumnBirthdate.Width = 38;
             // 
             // gridColumnPhoneNumber
@@ -345,7 +365,7 @@ namespace CD4.UI.View
             this.gridColumnPhoneNumber.FieldName = "PhoneNumber";
             this.gridColumnPhoneNumber.Name = "gridColumnPhoneNumber";
             this.gridColumnPhoneNumber.Visible = true;
-            this.gridColumnPhoneNumber.VisibleIndex = 5;
+            this.gridColumnPhoneNumber.VisibleIndex = 6;
             this.gridColumnPhoneNumber.Width = 41;
             // 
             // gridColumnNationality
@@ -354,7 +374,7 @@ namespace CD4.UI.View
             this.gridColumnNationality.FieldName = "Nationality";
             this.gridColumnNationality.Name = "gridColumnNationality";
             this.gridColumnNationality.Visible = true;
-            this.gridColumnNationality.VisibleIndex = 10;
+            this.gridColumnNationality.VisibleIndex = 11;
             this.gridColumnNationality.Width = 41;
             // 
             // gridColumnSOB
@@ -363,7 +383,7 @@ namespace CD4.UI.View
             this.gridColumnSOB.FieldName = "BreathingDifficulty";
             this.gridColumnSOB.Name = "gridColumnSOB";
             this.gridColumnSOB.Visible = true;
-            this.gridColumnSOB.VisibleIndex = 11;
+            this.gridColumnSOB.VisibleIndex = 12;
             this.gridColumnSOB.Width = 21;
             // 
             // gridColumnCough
@@ -372,7 +392,7 @@ namespace CD4.UI.View
             this.gridColumnCough.FieldName = "Cough";
             this.gridColumnCough.Name = "gridColumnCough";
             this.gridColumnCough.Visible = true;
-            this.gridColumnCough.VisibleIndex = 12;
+            this.gridColumnCough.VisibleIndex = 13;
             this.gridColumnCough.Width = 21;
             // 
             // gridColumnFever
@@ -381,7 +401,7 @@ namespace CD4.UI.View
             this.gridColumnFever.FieldName = "Fever";
             this.gridColumnFever.Name = "gridColumnFever";
             this.gridColumnFever.Visible = true;
-            this.gridColumnFever.VisibleIndex = 13;
+            this.gridColumnFever.VisibleIndex = 14;
             this.gridColumnFever.Width = 21;
             // 
             // gridColumnTravelHistory
@@ -390,7 +410,7 @@ namespace CD4.UI.View
             this.gridColumnTravelHistory.FieldName = "TravelHistory";
             this.gridColumnTravelHistory.Name = "gridColumnTravelHistory";
             this.gridColumnTravelHistory.Visible = true;
-            this.gridColumnTravelHistory.VisibleIndex = 15;
+            this.gridColumnTravelHistory.VisibleIndex = 16;
             this.gridColumnTravelHistory.Width = 49;
             // 
             // gridColumnSampleCollectedDateTime
@@ -400,7 +420,7 @@ namespace CD4.UI.View
             this.gridColumnSampleCollectedDateTime.FieldName = "SampleCollectedDateTime";
             this.gridColumnSampleCollectedDateTime.Name = "gridColumnSampleCollectedDateTime";
             this.gridColumnSampleCollectedDateTime.Visible = true;
-            this.gridColumnSampleCollectedDateTime.VisibleIndex = 16;
+            this.gridColumnSampleCollectedDateTime.VisibleIndex = 17;
             this.gridColumnSampleCollectedDateTime.Width = 114;
             // 
             // repositoryItemDateEditCollectedAt
@@ -420,7 +440,7 @@ namespace CD4.UI.View
             this.gridColumnAddress.FieldName = "Address";
             this.gridColumnAddress.Name = "gridColumnAddress";
             this.gridColumnAddress.Visible = true;
-            this.gridColumnAddress.VisibleIndex = 8;
+            this.gridColumnAddress.VisibleIndex = 9;
             this.gridColumnAddress.Width = 33;
             // 
             // gridColumnAtoll
@@ -429,7 +449,7 @@ namespace CD4.UI.View
             this.gridColumnAtoll.FieldName = "Atoll";
             this.gridColumnAtoll.Name = "gridColumnAtoll";
             this.gridColumnAtoll.Visible = true;
-            this.gridColumnAtoll.VisibleIndex = 6;
+            this.gridColumnAtoll.VisibleIndex = 7;
             this.gridColumnAtoll.Width = 33;
             // 
             // gridColumnIsland
@@ -438,7 +458,7 @@ namespace CD4.UI.View
             this.gridColumnIsland.FieldName = "Island";
             this.gridColumnIsland.Name = "gridColumnIsland";
             this.gridColumnIsland.Visible = true;
-            this.gridColumnIsland.VisibleIndex = 7;
+            this.gridColumnIsland.VisibleIndex = 8;
             this.gridColumnIsland.Width = 33;
             // 
             // gridColumnSampleSite
@@ -447,7 +467,7 @@ namespace CD4.UI.View
             this.gridColumnSampleSite.FieldName = "SampleSite";
             this.gridColumnSampleSite.Name = "gridColumnSampleSite";
             this.gridColumnSampleSite.Visible = true;
-            this.gridColumnSampleSite.VisibleIndex = 9;
+            this.gridColumnSampleSite.VisibleIndex = 10;
             this.gridColumnSampleSite.Width = 33;
             // 
             // gridColumnIsValid
@@ -456,7 +476,7 @@ namespace CD4.UI.View
             this.gridColumnIsValid.FieldName = "IsValidIcon";
             this.gridColumnIsValid.Name = "gridColumnIsValid";
             this.gridColumnIsValid.Visible = true;
-            this.gridColumnIsValid.VisibleIndex = 17;
+            this.gridColumnIsValid.VisibleIndex = 18;
             // 
             // gridColumnIsIsDublicate
             // 
@@ -464,7 +484,7 @@ namespace CD4.UI.View
             this.gridColumnIsIsDublicate.FieldName = "IsDublicate";
             this.gridColumnIsIsDublicate.Name = "gridColumnIsIsDublicate";
             this.gridColumnIsIsDublicate.Visible = true;
-            this.gridColumnIsIsDublicate.VisibleIndex = 18;
+            this.gridColumnIsIsDublicate.VisibleIndex = 19;
             // 
             // gridColumnRunnyNose
             // 
@@ -472,7 +492,15 @@ namespace CD4.UI.View
             this.gridColumnRunnyNose.FieldName = "RunnyNose";
             this.gridColumnRunnyNose.Name = "gridColumnRunnyNose";
             this.gridColumnRunnyNose.Visible = true;
-            this.gridColumnRunnyNose.VisibleIndex = 14;
+            this.gridColumnRunnyNose.VisibleIndex = 15;
+            // 
+            // gridColumnCin
+            // 
+            this.gridColumnCin.Caption = "SID";
+            this.gridColumnCin.FieldName = "Cin";
+            this.gridColumnCin.Name = "gridColumnCin";
+            this.gridColumnCin.Visible = true;
+            this.gridColumnCin.VisibleIndex = 1;
             // 
             // groupControlSelectedTestData
             // 
@@ -481,7 +509,7 @@ namespace CD4.UI.View
             this.groupControlSelectedTestData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControlSelectedTestData.Location = new System.Drawing.Point(0, 0);
             this.groupControlSelectedTestData.Name = "groupControlSelectedTestData";
-            this.groupControlSelectedTestData.Size = new System.Drawing.Size(369, 447);
+            this.groupControlSelectedTestData.Size = new System.Drawing.Size(192, 447);
             this.groupControlSelectedTestData.TabIndex = 1;
             this.groupControlSelectedTestData.Text = "Selected Tests Data";
             // 
@@ -496,7 +524,7 @@ namespace CD4.UI.View
             this.progressPanelSelectedTests.Dock = System.Windows.Forms.DockStyle.Fill;
             this.progressPanelSelectedTests.Location = new System.Drawing.Point(2, 20);
             this.progressPanelSelectedTests.Name = "progressPanelSelectedTests";
-            this.progressPanelSelectedTests.Size = new System.Drawing.Size(365, 425);
+            this.progressPanelSelectedTests.Size = new System.Drawing.Size(188, 425);
             this.progressPanelSelectedTests.TabIndex = 1;
             this.progressPanelSelectedTests.TabStop = false;
             // 
@@ -506,7 +534,7 @@ namespace CD4.UI.View
             this.gridControlRequestedTests.Location = new System.Drawing.Point(2, 20);
             this.gridControlRequestedTests.MainView = this.gridViewRequestedTests;
             this.gridControlRequestedTests.Name = "gridControlRequestedTests";
-            this.gridControlRequestedTests.Size = new System.Drawing.Size(365, 425);
+            this.gridControlRequestedTests.Size = new System.Drawing.Size(188, 425);
             this.gridControlRequestedTests.TabIndex = 0;
             this.gridControlRequestedTests.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewRequestedTests});
@@ -520,22 +548,81 @@ namespace CD4.UI.View
             this.gridViewRequestedTests.OptionsSelection.MultiSelect = true;
             this.gridViewRequestedTests.OptionsView.ShowGroupPanel = false;
             // 
-            // simpleButtonViewErrors
+            // groupControlErrorsPanel
             // 
-            this.simpleButtonViewErrors.Enabled = false;
-            this.simpleButtonViewErrors.Location = new System.Drawing.Point(387, 104);
-            this.simpleButtonViewErrors.Name = "simpleButtonViewErrors";
-            this.simpleButtonViewErrors.Size = new System.Drawing.Size(123, 23);
-            this.simpleButtonViewErrors.TabIndex = 23;
-            this.simpleButtonViewErrors.Text = "View Errors";
+            this.groupControlErrorsPanel.Controls.Add(this.simpleButtonHideErrors);
+            this.groupControlErrorsPanel.Controls.Add(this.progressPanelErrorsPanel);
+            this.groupControlErrorsPanel.Controls.Add(this.gridControlImportErrors);
+            this.groupControlErrorsPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.groupControlErrorsPanel.Location = new System.Drawing.Point(0, 0);
+            this.groupControlErrorsPanel.Name = "groupControlErrorsPanel";
+            this.groupControlErrorsPanel.Size = new System.Drawing.Size(1070, 592);
+            this.groupControlErrorsPanel.TabIndex = 5;
+            this.groupControlErrorsPanel.Text = "Import Errors";
+            // 
+            // simpleButtonHideErrors
+            // 
+            this.simpleButtonHideErrors.Appearance.Options.UseTextOptions = true;
+            this.simpleButtonHideErrors.Appearance.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.simpleButtonHideErrors.Appearance.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.simpleButtonHideErrors.AppearanceDisabled.Options.UseTextOptions = true;
+            this.simpleButtonHideErrors.AppearanceDisabled.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.simpleButtonHideErrors.AppearanceDisabled.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.simpleButtonHideErrors.AppearanceHovered.Options.UseTextOptions = true;
+            this.simpleButtonHideErrors.AppearanceHovered.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.simpleButtonHideErrors.AppearanceHovered.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.simpleButtonHideErrors.AppearancePressed.Options.UseTextOptions = true;
+            this.simpleButtonHideErrors.AppearancePressed.TextOptions.HAlignment = DevExpress.Utils.HorzAlignment.Center;
+            this.simpleButtonHideErrors.AppearancePressed.TextOptions.VAlignment = DevExpress.Utils.VertAlignment.Center;
+            this.simpleButtonHideErrors.Location = new System.Drawing.Point(349, 1);
+            this.simpleButtonHideErrors.Name = "simpleButtonHideErrors";
+            this.simpleButtonHideErrors.Size = new System.Drawing.Size(18, 17);
+            this.simpleButtonHideErrors.TabIndex = 2;
+            this.simpleButtonHideErrors.Text = "X";
+            // 
+            // progressPanelErrorsPanel
+            // 
+            this.progressPanelErrorsPanel.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.progressPanelErrorsPanel.Appearance.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.progressPanelErrorsPanel.Appearance.Options.UseBackColor = true;
+            this.progressPanelErrorsPanel.Appearance.Options.UseFont = true;
+            this.progressPanelErrorsPanel.BarAnimationElementThickness = 2;
+            this.progressPanelErrorsPanel.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
+            this.progressPanelErrorsPanel.Location = new System.Drawing.Point(181, 387);
+            this.progressPanelErrorsPanel.Name = "progressPanelErrorsPanel";
+            this.progressPanelErrorsPanel.Size = new System.Drawing.Size(186, 58);
+            this.progressPanelErrorsPanel.TabIndex = 1;
+            this.progressPanelErrorsPanel.TabStop = false;
+            // 
+            // gridControlImportErrors
+            // 
+            this.gridControlImportErrors.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlImportErrors.Location = new System.Drawing.Point(2, 20);
+            this.gridControlImportErrors.MainView = this.gridView2;
+            this.gridControlImportErrors.Name = "gridControlImportErrors";
+            this.gridControlImportErrors.Size = new System.Drawing.Size(1066, 570);
+            this.gridControlImportErrors.TabIndex = 0;
+            this.gridControlImportErrors.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridView2});
+            // 
+            // gridView2
+            // 
+            this.gridView2.GridControl = this.gridControlImportErrors;
+            this.gridView2.Name = "gridView2";
+            this.gridView2.OptionsBehavior.AutoSelectAllInEditor = false;
+            this.gridView2.OptionsBehavior.Editable = false;
+            this.gridView2.OptionsSelection.MultiSelect = true;
+            this.gridView2.OptionsView.RowAutoHeight = true;
+            this.gridView2.OptionsView.ShowGroupPanel = false;
             // 
             // BulkOrdersImportView
             // 
             this.Appearance.Options.UseFont = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1247, 592);
-            this.Controls.Add(this.splitContainerControl1);
+            this.ClientSize = new System.Drawing.Size(1070, 592);
+            this.Controls.Add(this.splitContainerControlMain);
+            this.Controls.Add(this.groupControlErrorsPanel);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.KeyPreview = true;
             this.Name = "BulkOrdersImportView";
@@ -546,20 +633,24 @@ namespace CD4.UI.View
             this.groupControlChooseFile.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.textEditReceiptNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTests.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl1)).EndInit();
-            this.splitContainerControl1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlMain)).EndInit();
+            this.splitContainerControlMain.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl2)).EndInit();
             this.splitContainerControl2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControlExcelData)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.gridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewExcelData)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditCollectedAt.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemDateEditCollectedAt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlSelectedTestData)).EndInit();
             this.groupControlSelectedTestData.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gridControlRequestedTests)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewRequestedTests)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.groupControlErrorsPanel)).EndInit();
+            this.groupControlErrorsPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlImportErrors)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridView2)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -571,11 +662,11 @@ namespace CD4.UI.View
         private DevExpress.XtraEditors.SimpleButton simpleButtonBrowse;
         private DevExpress.XtraEditors.GroupControl groupControlChooseFile;
         private System.Windows.Forms.Label labelImportFilePathDisplay;
-        private DevExpress.XtraEditors.SplitContainerControl splitContainerControl1;
+        private DevExpress.XtraEditors.SplitContainerControl splitContainerControlMain;
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControl2;
         private DevExpress.XtraEditors.GroupControl groupControl1;
         private DevExpress.XtraGrid.GridControl gridControlExcelData;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridView1;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewExcelData;
         private DevExpress.XtraEditors.SimpleButton simpleButtonConfirmUpload;
         private DevExpress.XtraEditors.GroupControl groupControlSelectedTestData;
         private DevExpress.XtraGrid.GridControl gridControlRequestedTests;
@@ -606,5 +697,11 @@ namespace CD4.UI.View
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelSelectedTests;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnRunnyNose;
         private DevExpress.XtraEditors.SimpleButton simpleButtonViewErrors;
+        private DevExpress.XtraEditors.GroupControl groupControlErrorsPanel;
+        private DevExpress.XtraWaitForm.ProgressPanel progressPanelErrorsPanel;
+        private DevExpress.XtraGrid.GridControl gridControlImportErrors;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridView2;
+        private DevExpress.XtraEditors.SimpleButton simpleButtonHideErrors;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnCin;
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -7,19 +8,27 @@ using System.Threading.Tasks;
 
 namespace CD4.UI.Library.Model
 {
-    public class BulkSchemaModel
+    public class BulkSchemaModel : INotifyPropertyChanged
     {
         private string fullname;
         private string nidPp;
         private string gender;
         private string nationality;
         private bool isValidData;
+        private string cin;
 
         public BulkSchemaModel()
         {
             IsValidData = true;
         }
-
+        public string Cin
+        {
+            get => cin; set
+            {
+                cin = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(Cin)));
+            }
+        }
         public string NidPp
         {
             get => nidPp; set
@@ -84,6 +93,8 @@ namespace CD4.UI.Library.Model
         public int NationalityId { get; set; }
         public int AtollIslandId { get; set; }
         public int SiteId { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
         #endregion
 
         public void SetDublicateStatus(bool isDublicate)
