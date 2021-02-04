@@ -23,7 +23,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <LangVersion>latest</LangVersion>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -49,6 +49,24 @@
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
     <PlatformTarget>x64</PlatformTarget>
+    <LangVersion>latest</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <LangVersion>latest</LangVersion>
+    <ErrorReport>prompt</ErrorReport>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
     <LangVersion>latest</LangVersion>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
@@ -91,6 +109,7 @@
     <Compile Include="DataAccess\IReportsDataAccess.cs" />
     <Compile Include="DataAccess\IResultDataAccess.cs" />
     <Compile Include="DataAccess\ISampleDataAccess.cs" />
+    <Compile Include="DataAccess\IScriptDataAccess.cs" />
     <Compile Include="DataAccess\IStaticDataDataAccess.cs" />
     <Compile Include="DataAccess\IStatusDataAccess.cs" />
     <Compile Include="DataAccess\IWorkSheetDataAccess.cs" />
@@ -99,6 +118,7 @@
     <Compile Include="DataAccess\ReportsDataAccess.cs" />
     <Compile Include="DataAccess\ResultDataAccess.cs" />
     <Compile Include="DataAccess\SampleDataAccess.cs" />
+    <Compile Include="DataAccess\ScriptDataAccess.cs" />
     <Compile Include="DataAccess\StaticDataDataAccess.cs" />
     <Compile Include="DataAccess\StatusDataAccess.cs" />
     <Compile Include="DataAccess\WorkSheetDataAccess.cs" />

@@ -162,7 +162,34 @@ namespace CD4.DataLibrary.DataAccess
             //Make a database query to get Id for Status equivalent to "ToValidate".
             var statusId = statusData.GetToValidateStatusId();
             //prepare the parameter to pass to the query.
-            var parameter = new { Result = result, ResultId = resultId, StatusId = statusId, ReferenceCode = referenceCode, UsersId = userId };
+            var parameter = new { Result = result, TestId = resultId, StatusId = statusId, ReferenceCode = referenceCode, UsersId = userId };
+            //insert result and result status
+            return await SelectInsertOrUpdateAsync<UpdatedResultAndStatusModel, dynamic>(storedProcedure, parameter);
+        }
+
+        public async Task<UpdatedResultAndStatusModel> InterfaceUpdateResultByTestIdAndCinAsync(int testId,string cin, string result,string batchId,string referenceCode, int testStatus, int userId)
+        {
+            //check whether the test status is acceptable for result entry
+            var InvalidTestStatusMessage = IsTestStatusValidForResultEntry(testStatus);
+            if (!string.IsNullOrEmpty(InvalidTestStatusMessage))
+            {
+                throw new Exception(InvalidTestStatusMessage);
+            }
+            //Set the stored procedure to call
+            var storedProcedure = "[dbo].[usp_InterfaceResultByTestCodeAndCin]";
+            //Make a database query to get Id for Status equivalent to "ToValidate".
+            var statusId = statusData.GetToValidateStatusId();
+            //prepare the parameter to pass to the query.
+            var parameter = new 
+            { 
+                Result = result,
+                TestId = testId, 
+                Cin = cin,
+                BatchId = batchId,
+                StatusId = statusId,
+                ReferenceCode = referenceCode,
+                UsersId = userId 
+            };
             //insert result and result status
             return await SelectInsertOrUpdateAsync<UpdatedResultAndStatusModel, dynamic>(storedProcedure, parameter);
         }
