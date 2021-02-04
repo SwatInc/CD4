@@ -5,6 +5,11 @@ public class PcrResultsOnDownloadScript
 {
     public List<dynamic> Kits { get; set; }
 
+    public PcrResultsOnDownloadScript()
+    {
+        Kits = new List<dynamic>();
+        Kits.Add(new { Id = 1, Kit = "Zeesan" });
+    }
     public bool IsScriptLoaded()
     {
         return true;
@@ -12,8 +17,7 @@ public class PcrResultsOnDownloadScript
 
     public List<dynamic> GetKitNames()
     {
-        Kits = new List<dynamic>();
-        Kits.Add(new { Id = 1, Kit = "Zeesan" });
+
         return Kits;
     }
     public string GetInterpretation(int kit, dynamic measurements)

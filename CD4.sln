@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CD4.UI.Library.Test", "CD4.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CD4.ExcelInterface", "CD4.ExcelInterface\CD4.ExcelInterface.csproj", "{9E29C2BD-43AC-47D6-B546-90F918FEC8D6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CD4.ExcelInterface.Tests", "CD4.ExcelInterface.Tests\CD4.ExcelInterface.Tests.csproj", "{8BF007D0-24D7-48A8-83A1-360DBC2A99CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,6 +105,18 @@ Global
 		{9E29C2BD-43AC-47D6-B546-90F918FEC8D6}.Release|x64.Build.0 = Release|x64
 		{9E29C2BD-43AC-47D6-B546-90F918FEC8D6}.Release|x86.ActiveCfg = Release|x86
 		{9E29C2BD-43AC-47D6-B546-90F918FEC8D6}.Release|x86.Build.0 = Release|x86
+		{8BF007D0-24D7-48A8-83A1-360DBC2A99CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8BF007D0-24D7-48A8-83A1-360DBC2A99CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8BF007D0-24D7-48A8-83A1-360DBC2A99CD}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{8BF007D0-24D7-48A8-83A1-360DBC2A99CD}.Debug|x64.Build.0 = Debug|Any CPU
+		{8BF007D0-24D7-48A8-83A1-360DBC2A99CD}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{8BF007D0-24D7-48A8-83A1-360DBC2A99CD}.Debug|x86.Build.0 = Debug|Any CPU
+		{8BF007D0-24D7-48A8-83A1-360DBC2A99CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8BF007D0-24D7-48A8-83A1-360DBC2A99CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8BF007D0-24D7-48A8-83A1-360DBC2A99CD}.Release|x64.ActiveCfg = Release|Any CPU
+		{8BF007D0-24D7-48A8-83A1-360DBC2A99CD}.Release|x64.Build.0 = Release|Any CPU
+		{8BF007D0-24D7-48A8-83A1-360DBC2A99CD}.Release|x86.ActiveCfg = Release|Any CPU
+		{8BF007D0-24D7-48A8-83A1-360DBC2A99CD}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
