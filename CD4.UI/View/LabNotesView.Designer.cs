@@ -131,10 +131,9 @@ namespace CD4.UI.View
             this.progressPanelNotes.Appearance.Options.UseBackColor = true;
             this.progressPanelNotes.BarAnimationElementThickness = 2;
             this.progressPanelNotes.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.progressPanelNotes.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.progressPanelNotes.Location = new System.Drawing.Point(0, 0);
+            this.progressPanelNotes.Location = new System.Drawing.Point(0, 322);
             this.progressPanelNotes.Name = "progressPanelNotes";
-            this.progressPanelNotes.Size = new System.Drawing.Size(742, 366);
+            this.progressPanelNotes.Size = new System.Drawing.Size(216, 44);
             this.progressPanelNotes.TabIndex = 1;
             this.progressPanelNotes.Text = "progressPanel1";
             // 

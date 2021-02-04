@@ -1,6 +1,8 @@
-﻿using CD4.UI.Library.Model;
-using CD4.UI.Library.ViewModel;
+﻿using CD4.UI.Library.ViewModel;
+using DevExpress.XtraEditors;
+using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Windows.Forms;
 
 namespace CD4.UI.View
@@ -45,18 +47,28 @@ namespace CD4.UI.View
 
         private async void LabNotesView_KeyUp(object sender, KeyEventArgs e)
         {
-            //if enter is pressed...
-            if (e.KeyCode == Keys.Enter)
+            try
             {
-                //Call view model to add new note..., will model will validate the input.
-                await _viewModel.AddNewNoteAsync();
+                //if enter is pressed...
+                if (e.KeyCode == Keys.Enter)
+                {
+                    //Call view model to add new note..., will model will validate the input.
+                    await _viewModel.AddNewNoteAsync();
+                }
+                if (e.KeyCode == Keys.F6)
+                {
+                    //focuses the Save button so that selected grid row validates
+                    simpleButtonSave.Focus();
+                    Close(); // Close the dialog view
+                }
             }
-            if (e.KeyCode == Keys.F6)
+            catch (Exception ex)
             {
-                //focuses the Save button so that selected grid row validates
-                simpleButtonSave.Focus();
-                Close(); // Close the dialog view
+
+                XtraMessageBox.Show($"An error occured while saving the note for the sample: [{_viewModel.ViewName}]");
+                Debug.WriteLine(ex.Message);
             }
+
         }
 
         private void InitializeBinding()
