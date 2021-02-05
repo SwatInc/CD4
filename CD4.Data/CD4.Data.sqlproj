@@ -267,6 +267,7 @@
     <Build Include="dbo\Tables\ChannelMap.sql" />
     <Build Include="dbo\Tables\Analyser.sql" />
     <Build Include="dbo\Tables\CSScript.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetChannelMapping.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
