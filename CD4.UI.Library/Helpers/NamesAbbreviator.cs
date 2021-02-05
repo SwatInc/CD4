@@ -28,6 +28,8 @@ namespace CD4.UI.Library.Helpers
             //Not abbreviating first and last name
             for (int i = 1; i < names.Length-1; i++)
             {
+                //catches if there is an extra space within the names
+                if (string.IsNullOrEmpty(names[i])) { continue; }
                 //abbreviate the name segment
                 var name = $"{names[i].Substring(0, 1)}.";
                 names[i] = name;
