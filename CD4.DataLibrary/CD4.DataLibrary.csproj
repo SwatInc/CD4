@@ -134,6 +134,7 @@
     <Compile Include="Models\AuthorizeDetailModel.cs" />
     <Compile Include="Models\BarcodeDataModel.cs" />
     <Compile Include="Models\BulkImportsStaticDataModel.cs" />
+    <Compile Include="Models\ChannelMappingModel.cs" />
     <Compile Include="Models\ClinicalDetailIdsModel.cs" />
     <Compile Include="Models\ClinicalDetailsDatabaseModel.cs" />
     <Compile Include="Models\ClinicalDetailsModel.cs" />
