@@ -19,6 +19,11 @@ namespace CD4.ResultsInterface
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddHostedService<Worker>();
+                    services.AddTransient<DataLibrary.DataAccess.IResultDataAccess, DataLibrary.DataAccess.ResultDataAccess>();
+                    services.AddTransient<DataLibrary.DataAccess.IStatusDataAccess, DataLibrary.DataAccess.StatusDataAccess>();
+                    services.AddTransient<DataLibrary.DataAccess.ISampleDataAccess, DataLibrary.DataAccess.SampleDataAccess>();
+                    services.AddTransient<DataLibrary.DataAccess.IReferenceRangeDataAccess, DataLibrary.DataAccess.ReferenceRangeDataAccess>();
+                    services.AddTransient<DataLibrary.DataAccess.IStaticDataDataAccess, DataLibrary.DataAccess.StaticDataDataAccess>();
                 });
     }
 }
