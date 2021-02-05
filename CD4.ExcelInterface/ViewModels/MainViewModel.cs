@@ -308,10 +308,10 @@ namespace CD4.ExcelInterface.ViewModels
 
             var isSuccessfull = false;
             var exportData = JsonConvert.SerializeObject(InterfaceResults, Formatting.Indented);
-            var uniencoding = new UnicodeEncoding();
+            var asciiencoding = new ASCIIEncoding();
             var filenameWithoutExtension = $"{Configuration.ExportPath}\\{DateTime.Now.ToString("yyyyMMdd_HHmmss_fffffff")}";
 
-            byte[] result = uniencoding.GetBytes(exportData);
+            byte[] result = asciiencoding.GetBytes(exportData);
             try
             {
                 using (FileStream SourceStream = File.Open($"{filenameWithoutExtension}.{Configuration.DataExtension}", FileMode.OpenOrCreate))
