@@ -333,5 +333,20 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
+
+        public async Task<int> GetTestStatusByTestIdAndCin(int testId, string cin)
+        {
+            var storedProcedure = "[dbo].[usp_GetTestStatusByTestIdAndCin]";
+            var parameters = new { TestId = testId, Cin = cin };
+            try
+            {
+                return await SelectInsertOrUpdateAsync<int, dynamic>(storedProcedure, parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

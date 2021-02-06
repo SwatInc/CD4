@@ -12,6 +12,6 @@ namespace CD4.DataLibrary.Models
         public string Download { get; set; }
         public string Upload { get; set; }
         public string Unit { get; set; }
-        public string Description { get; set; }
+        public string AnalyserName { get; set; }
     }
 }

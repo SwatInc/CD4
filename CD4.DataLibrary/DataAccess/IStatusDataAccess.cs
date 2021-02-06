@@ -9,6 +9,7 @@ namespace CD4.DataLibrary.DataAccess
         Task<int> DetermineSampleStatus(int resultId);
         Task<List<StatusModel>> GetAllStatus();
         int GetRegisteredStatusId();
+        Task<int> GetTestStatusByTestIdAndCin(int testId, string cin);
         int GetToValidateStatusId();
         Task<SampleAndResultStatusAndResultModel> MarkCollectedSampleAsAccepted(string cin, int loggedInUserId);
         Task<bool> MarkSampleCollected(string cin, int loggedInUserId);
