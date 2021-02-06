@@ -111,6 +111,7 @@ namespace CD4.ExcelInterface.ViewModels
                 var result = (List<InterfaceResults>)(e.Result);
                 foreach (var item in result)
                 {
+                    item.InstrumentId.InstrumentCode = Configuration.AnalyserName;
                     InterfaceResults.Add(item);
                 }
             }
