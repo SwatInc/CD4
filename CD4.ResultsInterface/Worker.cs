@@ -46,13 +46,14 @@ namespace CD4.ResultsInterface
             try
             {
                 var mappingData = await _staticDataDataAccess.GetChannelMappingData();
+                _logger.LogInformation($"Channel mapping data loaded: {JsonConvert.SerializeObject(mappingData)}");
                 if (mappingData is null) {return; }
 
                 foreach (var item in mappingData)
                 {
                     _channelMappings.Add(new ChannelMappingModel()
                     { 
-                        Description = item.Description,
+                        AnalyserName = item.AnalyserName,
                         Download = item.Download,
                         TestId = item.TestId,
                         Unit = item.Unit,
@@ -119,19 +120,63 @@ namespace CD4.ResultsInterface
 
                         //pass for uploading
                         await UploadResultsAsync(data);
+
                     }
 
+                    DeleteExistingFile(dataFilePath.Replace(".json", ".ok"));
+                    File.Move(dataFilePath, dataFilePath.Replace(".json", ".sav"));
                 }
                 catch (Exception ex)
                 {
-                    _logger.LogError($"An error occured while processing interface results. Please find the error information below.\n{ex.Message}\n{ex.StackTrace}");
+                    _logger.LogError("An error occured while processing interface results." +
+                        $" Please find the error information below.\n{ex.Message}\n{ex.StackTrace}");
                 }
+            }
+        }
+
+        private void DeleteExistingFile(string flepath)
+        {
+            var fileInfo = new FileInfo(flepath);
+            if (fileInfo.Exists)
+            {
+                fileInfo.Delete();
             }
         }
 
         private async Task UploadResultsAsync(List<InterfaceResultsModel> resultsData)
         {
+            if(resultsData is null) { return; }
 
+            //iterate all specimens in the upload data
+            foreach (var sample in resultsData)
+            {
+                //iterate all results for sample.
+                foreach (var test in sample.Measurements)
+                {
+                    var mapping = _channelMappings.Find((x) => x.Upload == test.TestCode && x.AnalyserName == sample.InstrumentId.InstrumentCode);
+                    if (mapping is null)
+                    {
+                        _logger.LogWarning($"Cannot find upload channel mapping for test [{test.TestCode}] on analyser [{sample.InstrumentId.InstrumentCode}]. " +
+                            $"Result [{test.MeasurementValue}] for SID: [{sample.SampleId}] is discarded.");
+                        continue;
+                    }
+
+                    //if mapping is not null continue
+                    try
+                    {
+                        //call data layer to upload result.
+                        _ = await _resultDataAccess.InterfaceUpdateResultByTestIdAndCinAsync
+                            (mapping.TestId, sample.SampleId, test.MeasurementValue, sample.BatchId, "NM", 1);
+                        _logger.LogInformation($"Upload requested for test [{test.TestCode}] with result [{test.MeasurementValue}] for sample [{sample.SampleId}]");
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError("An error occured while uploading result to CD4" +
+                            $"\n{ex.Message}\n{ex.StackTrace}");
+                    }
+
+                }
+            }
         }
     }
 }
