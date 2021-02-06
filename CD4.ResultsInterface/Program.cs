@@ -1,5 +1,7 @@
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +13,28 @@ namespace CD4.ResultsInterface
     {
         public static void Main(string[] args)
         {
-            CreateHostBuilder(args).Build().Run();
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json")
+                .Build();
+
+            Log.Logger =  new LoggerConfiguration()
+                .ReadFrom.Configuration(configuration)
+                .CreateLogger();
+
+            try
+            {
+                Log.Information("Starting up service.");
+                CreateHostBuilder(args).Build().Run();
+
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "There was a problem starting the service.");
+            }
+            finally 
+            {
+                Log.CloseAndFlush();
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -24,6 +47,7 @@ namespace CD4.ResultsInterface
                     services.AddTransient<DataLibrary.DataAccess.ISampleDataAccess, DataLibrary.DataAccess.SampleDataAccess>();
                     services.AddTransient<DataLibrary.DataAccess.IReferenceRangeDataAccess, DataLibrary.DataAccess.ReferenceRangeDataAccess>();
                     services.AddTransient<DataLibrary.DataAccess.IStaticDataDataAccess, DataLibrary.DataAccess.StaticDataDataAccess>();
-                });
+                })
+                .UseSerilog();
     }
 }
