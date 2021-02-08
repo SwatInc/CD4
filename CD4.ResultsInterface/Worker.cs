@@ -36,11 +36,6 @@ namespace CD4.ResultsInterface
             LoadChannelMappingAsync().GetAwaiter().GetResult();
         }
 
-        public override Task StartAsync(CancellationToken cancellationToken)
-        {
-            return base.StartAsync(cancellationToken);
-        }
-
         private async Task LoadChannelMappingAsync()
         {
             try
@@ -69,10 +64,10 @@ namespace CD4.ResultsInterface
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-
             while (!stoppingToken.IsCancellationRequested)
             {
                 var path = _configuration.GetValue<string>("IncomingDirectory");
+                var waitInterval = _configuration.GetValue<int>("WaitIntervalMilliseconds");
                 var controlFileExtension = _configuration.GetValue<string>("ControlFileExtension");
                 string[] files;
                 try
@@ -88,7 +83,6 @@ namespace CD4.ResultsInterface
                         _logger.LogInformation("No incoming results for processing.");
                     }
 
-
                 }
                 catch (Exception ex)
                 {
@@ -96,7 +90,8 @@ namespace CD4.ResultsInterface
                 }
                 finally
                 {
-                    await Task.Delay(5 * 1000, stoppingToken);
+                    _logger.LogInformation($"Waiting for {waitInterval} milliseconds.");
+                    await Task.Delay(waitInterval, stoppingToken);
                 }
 
             }

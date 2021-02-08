@@ -4,7 +4,9 @@ using Microsoft.Extensions.Hosting;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace CD4.ResultsInterface
@@ -13,6 +15,7 @@ namespace CD4.ResultsInterface
     {
         public static void Main(string[] args)
         {
+
             var configuration = new ConfigurationBuilder()
                 .AddJsonFile("appsettings.json")
                 .Build();
@@ -33,12 +36,14 @@ namespace CD4.ResultsInterface
             }
             finally 
             {
+                Log.Information("closing!");
                 Log.CloseAndFlush();
             }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .UseWindowsService()
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddHostedService<Worker>();
