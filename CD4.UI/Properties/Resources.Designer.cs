@@ -70,6 +70,16 @@ namespace CD4.UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
+        /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage dispatchPlane {
+            get {
+                object obj = ResourceManager.GetObject("dispatchPlane", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 1.
         /// </summary>
         internal static string IsMultipleDisciplinesEnabled {
@@ -130,6 +140,16 @@ namespace CD4.UI.Properties {
         internal static string TestHistoryColumns {
             get {
                 return ResourceManager.GetString("TestHistoryColumns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
+        /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage updateUser {
+            get {
+                object obj = ResourceManager.GetObject("updateUser", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
             }
         }
     }

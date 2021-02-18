@@ -52,6 +52,8 @@
             this.barButtonItemBulkImportOrders = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemViewAllNotes = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemContacts = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPageCategoryDiscipline = new DevExpress.XtraBars.Ribbon.RibbonPageCategory();
             this.ribbonPageDiscipline = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -59,8 +61,10 @@
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageConfiguration = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonPage1 = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageProfile = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup3 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageRestricted = new DevExpress.XtraBars.Ribbon.RibbonPage();
+            this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.repositoryItemRatingControl1 = new DevExpress.XtraEditors.Repository.RepositoryItemRatingControl();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
@@ -92,16 +96,19 @@
             this.barButtonItemDisciplineSelector,
             this.barButtonItemBulkImportOrders,
             this.barButtonItemViewAllNotes,
-            this.barButtonItemContacts});
+            this.barButtonItemContacts,
+            this.barButtonItem1,
+            this.barButtonItem2});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 30;
+            this.ribbon.MaxItemId = 32;
             this.ribbon.Name = "ribbon";
             this.ribbon.PageCategories.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageCategory[] {
             this.ribbonPageCategoryDiscipline});
             this.ribbon.Pages.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPage[] {
             this.ribbonPageGeneral,
             this.ribbonPageConfiguration,
-            this.ribbonPage1});
+            this.ribbonPageProfile,
+            this.ribbonPageRestricted});
             this.ribbon.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemRatingControl1});
             this.ribbon.ShowApplicationButton = DevExpress.Utils.DefaultBoolean.False;
@@ -269,7 +276,7 @@
             // 
             this.barButtonItemViewAllNotes.Caption = "View All Notes";
             this.barButtonItemViewAllNotes.Id = 28;
-            this.barButtonItemViewAllNotes.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemViewNotes.ImageOptions.SvgImage")));
+            this.barButtonItemViewAllNotes.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemViewAllNotes.ImageOptions.SvgImage")));
             this.barButtonItemViewAllNotes.Name = "barButtonItemViewAllNotes";
             this.barButtonItemViewAllNotes.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
@@ -277,9 +284,25 @@
             // 
             this.barButtonItemContacts.Caption = "Contacts";
             this.barButtonItemContacts.Id = 29;
-            this.barButtonItemContacts.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
+            this.barButtonItemContacts.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemContacts.ImageOptions.SvgImage")));
             this.barButtonItemContacts.Name = "barButtonItemContacts";
             this.barButtonItemContacts.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            // 
+            // barButtonItem1
+            // 
+            this.barButtonItem1.Caption = "Dispatch Reports";
+            this.barButtonItem1.Id = 30;
+            this.barButtonItem1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
+            this.barButtonItem1.Name = "barButtonItem1";
+            this.barButtonItem1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            // 
+            // barButtonItem2
+            // 
+            this.barButtonItem2.Caption = "Update Patient Details";
+            this.barButtonItem2.Id = 31;
+            this.barButtonItem2.ImageOptions.SvgImage = global::CD4.UI.Properties.Resources.updateUser;
+            this.barButtonItem2.Name = "barButtonItem2";
+            this.barButtonItem2.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
             // ribbonPageCategoryDiscipline
             // 
@@ -307,15 +330,16 @@
             this.ribbonPageGroup2});
             this.ribbonPageGeneral.Name = "ribbonPageGeneral";
             this.ribbonPageGeneral.Tag = "Ribbon.GeneralPage";
-            this.ribbonPageGeneral.Text = "GeneralPage";
+            this.ribbonPageGeneral.Text = "General";
             // 
             // ribbonPageGroup2
             // 
             this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemOrderEntry);
-            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemResultEntry);
-            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemStatistics);
-            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemAcceptSamples);
             this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemBulkImportOrders);
+            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemAcceptSamples);
+            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemResultEntry);
+            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItem1);
+            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemStatistics);
             this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemViewAllNotes);
             this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemContacts);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
@@ -343,13 +367,13 @@
             this.ribbonPageGroup1.Name = "ribbonPageGroup1";
             this.ribbonPageGroup1.Text = "Configuration";
             // 
-            // ribbonPage1
+            // ribbonPageProfile
             // 
-            this.ribbonPage1.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageProfile.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroup3});
-            this.ribbonPage1.Name = "ribbonPage1";
-            this.ribbonPage1.Tag = "Ribbon.Profile";
-            this.ribbonPage1.Text = "Profile";
+            this.ribbonPageProfile.Name = "ribbonPageProfile";
+            this.ribbonPageProfile.Tag = "Ribbon.Profile";
+            this.ribbonPageProfile.Text = "Profile";
             // 
             // ribbonPageGroup3
             // 
@@ -357,6 +381,20 @@
             this.ribbonPageGroup3.ItemLinks.Add(this.barButtonItemChangePassword);
             this.ribbonPageGroup3.Name = "ribbonPageGroup3";
             this.ribbonPageGroup3.Text = "ribbonPageGroup3";
+            // 
+            // ribbonPageRestricted
+            // 
+            this.ribbonPageRestricted.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
+            this.ribbonPageGroup5});
+            this.ribbonPageRestricted.Name = "ribbonPageRestricted";
+            this.ribbonPageRestricted.Tag = "Ribbon.Restricted";
+            this.ribbonPageRestricted.Text = "Restricted";
+            // 
+            // ribbonPageGroup5
+            // 
+            this.ribbonPageGroup5.ItemLinks.Add(this.barButtonItem2);
+            this.ribbonPageGroup5.Name = "ribbonPageGroup5";
+            this.ribbonPageGroup5.Text = "Restricted Functions";
             // 
             // repositoryItemRatingControl1
             // 
@@ -417,7 +455,7 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItemStatistics;
         private DevExpress.XtraBars.BarButtonItem barButtonItemViewProfile;
         private DevExpress.XtraBars.BarButtonItem barButtonItemChangePassword;
-        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPage1;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageProfile;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup3;
         private DevExpress.XtraBars.BarStaticItem barStaticItemUsernameAndRole;
         private DevExpress.XtraEditors.Repository.RepositoryItemRatingControl repositoryItemRatingControl1;
@@ -430,5 +468,9 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItemBulkImportOrders;
         private DevExpress.XtraBars.BarButtonItem barButtonItemViewAllNotes;
         private DevExpress.XtraBars.BarButtonItem barButtonItemContacts;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem1;
+        private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageRestricted;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup5;
+        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
     }
 }

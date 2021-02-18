@@ -290,6 +290,9 @@ namespace CD4.UI.View
             }
         }
 
+        /// <summary>
+        /// show or hide ribbon pages depending on authorization
+        /// </summary>
         private void EvaluateMainViewAuth()
         {
 

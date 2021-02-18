@@ -255,7 +255,7 @@ namespace CD4.UI.View
             this.splitContainerControl2.Panel2.Controls.Add(this.groupControlSelectedTestData);
             this.splitContainerControl2.Panel2.Text = "Panel2";
             this.splitContainerControl2.Size = new System.Drawing.Size(1070, 447);
-            this.splitContainerControl2.SplitterPosition = 873;
+            this.splitContainerControl2.SplitterPosition = 780;
             this.splitContainerControl2.TabIndex = 1;
             // 
             // groupControl1
@@ -265,7 +265,7 @@ namespace CD4.UI.View
             this.groupControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControl1.Location = new System.Drawing.Point(0, 0);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(873, 447);
+            this.groupControl1.Size = new System.Drawing.Size(780, 447);
             this.groupControl1.TabIndex = 0;
             this.groupControl1.Text = "Excel Data";
             // 
@@ -291,7 +291,7 @@ namespace CD4.UI.View
             this.gridControlExcelData.Name = "gridControlExcelData";
             this.gridControlExcelData.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemDateEditCollectedAt});
-            this.gridControlExcelData.Size = new System.Drawing.Size(869, 425);
+            this.gridControlExcelData.Size = new System.Drawing.Size(776, 425);
             this.gridControlExcelData.TabIndex = 1;
             this.gridControlExcelData.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewExcelData});
@@ -509,7 +509,7 @@ namespace CD4.UI.View
             this.groupControlSelectedTestData.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControlSelectedTestData.Location = new System.Drawing.Point(0, 0);
             this.groupControlSelectedTestData.Name = "groupControlSelectedTestData";
-            this.groupControlSelectedTestData.Size = new System.Drawing.Size(192, 447);
+            this.groupControlSelectedTestData.Size = new System.Drawing.Size(285, 447);
             this.groupControlSelectedTestData.TabIndex = 1;
             this.groupControlSelectedTestData.Text = "Selected Tests Data";
             // 
@@ -524,7 +524,7 @@ namespace CD4.UI.View
             this.progressPanelSelectedTests.Dock = System.Windows.Forms.DockStyle.Fill;
             this.progressPanelSelectedTests.Location = new System.Drawing.Point(2, 20);
             this.progressPanelSelectedTests.Name = "progressPanelSelectedTests";
-            this.progressPanelSelectedTests.Size = new System.Drawing.Size(188, 425);
+            this.progressPanelSelectedTests.Size = new System.Drawing.Size(281, 425);
             this.progressPanelSelectedTests.TabIndex = 1;
             this.progressPanelSelectedTests.TabStop = false;
             // 
@@ -534,7 +534,7 @@ namespace CD4.UI.View
             this.gridControlRequestedTests.Location = new System.Drawing.Point(2, 20);
             this.gridControlRequestedTests.MainView = this.gridViewRequestedTests;
             this.gridControlRequestedTests.Name = "gridControlRequestedTests";
-            this.gridControlRequestedTests.Size = new System.Drawing.Size(188, 425);
+            this.gridControlRequestedTests.Size = new System.Drawing.Size(281, 425);
             this.gridControlRequestedTests.TabIndex = 0;
             this.gridControlRequestedTests.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewRequestedTests});
