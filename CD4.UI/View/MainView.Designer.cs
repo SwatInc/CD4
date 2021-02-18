@@ -67,6 +67,8 @@
             this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.repositoryItemRatingControl1 = new DevExpress.XtraEditors.Repository.RepositoryItemRatingControl();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
+            this.ribbonPageGroup6 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuDiscipline)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRatingControl1)).BeginInit();
@@ -327,7 +329,9 @@
             // ribbonPageGeneral
             // 
             this.ribbonPageGeneral.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
-            this.ribbonPageGroup2});
+            this.ribbonPageGroup2,
+            this.ribbonPageGroup6,
+            this.ribbonPageGroup7});
             this.ribbonPageGeneral.Name = "ribbonPageGeneral";
             this.ribbonPageGeneral.Tag = "Ribbon.GeneralPage";
             this.ribbonPageGeneral.Text = "General";
@@ -336,14 +340,8 @@
             // 
             this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemOrderEntry);
             this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemBulkImportOrders);
-            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemAcceptSamples);
-            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemResultEntry);
-            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItem1);
-            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemStatistics);
-            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemViewAllNotes);
-            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemContacts);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
-            this.ribbonPageGroup2.Text = "General Lab Tasks";
+            this.ribbonPageGroup2.Text = "Pre-Analytical";
             // 
             // ribbonPageConfiguration
             // 
@@ -409,6 +407,22 @@
             this.ribbonStatusBar.Ribbon = this.ribbon;
             this.ribbonStatusBar.Size = new System.Drawing.Size(1110, 31);
             // 
+            // ribbonPageGroup6
+            // 
+            this.ribbonPageGroup6.ItemLinks.Add(this.barButtonItemAcceptSamples);
+            this.ribbonPageGroup6.ItemLinks.Add(this.barButtonItemResultEntry);
+            this.ribbonPageGroup6.Name = "ribbonPageGroup6";
+            this.ribbonPageGroup6.Text = "Analytical";
+            // 
+            // ribbonPageGroup7
+            // 
+            this.ribbonPageGroup7.ItemLinks.Add(this.barButtonItem1);
+            this.ribbonPageGroup7.ItemLinks.Add(this.barButtonItemStatistics);
+            this.ribbonPageGroup7.ItemLinks.Add(this.barButtonItemViewAllNotes);
+            this.ribbonPageGroup7.ItemLinks.Add(this.barButtonItemContacts);
+            this.ribbonPageGroup7.Name = "ribbonPageGroup7";
+            this.ribbonPageGroup7.Text = "Post-Analytical && Others";
+            // 
             // MainView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -472,5 +486,7 @@
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageRestricted;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup5;
         private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup6;
+        private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup7;
     }
 }
