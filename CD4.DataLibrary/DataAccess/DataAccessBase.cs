@@ -323,5 +323,26 @@ namespace CD4.DataLibrary.DataAccess
 
         }
 
+        public SqlMapper.ICustomQueryParameter GetCinTable(List<string> sampleCins)
+        {
+            var returnTable = new DataTable();
+            returnTable.Columns.Add("Cin");
+
+            try
+            {
+
+                //Add rows to the Datatable declared, and return
+                foreach (var cin in sampleCins)
+                {
+                    returnTable.Rows.Add(cin);
+                }
+                return returnTable.AsTableValuedParameter("SampleCinsUDT");
+            }
+            catch (Exception)
+            {
+                //throw the exception right out! It will be handled down the line.
+                throw;
+            }
+        }
     }
 }
