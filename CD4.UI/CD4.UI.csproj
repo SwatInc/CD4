@@ -224,6 +224,8 @@
     <Compile Include="ContainerConfig.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="FormFactory.cs" />
+    <Compile Include="Helpers\BarcodeHelper.cs" />
+    <Compile Include="Helpers\IBarcodeHelper.cs" />
     <Compile Include="ICd4Application.cs" />
     <Compile Include="IFormFactory.cs" />
     <Compile Include="IUserAuthEvaluator.cs" />

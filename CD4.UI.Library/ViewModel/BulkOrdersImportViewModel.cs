@@ -25,6 +25,7 @@ namespace CD4.UI.Library.ViewModel
         private bool errorsPanelVisible;
         private readonly IBulkOrdersImportDataAccess _ordersImportDataAccess;
         private readonly IAnalysisRequestDataAccess _requestDataAccess;
+        private readonly IStatusDataAccess _statusDataAccess;
         private readonly IMapper _mapper;
         private readonly AuthorizeDetailEventArgs _authorizeDetail;
 
@@ -36,6 +37,7 @@ namespace CD4.UI.Library.ViewModel
         #region Default Constructor
         public BulkOrdersImportViewModel(IBulkOrdersImportDataAccess ordersImportDataAccess,
             IAnalysisRequestDataAccess requestDataAccess,
+            IStatusDataAccess statusDataAccess,
             IMapper mapper,
             AuthorizeDetailEventArgs authorizeDetail)
         {
@@ -51,6 +53,7 @@ namespace CD4.UI.Library.ViewModel
             ErrorMessages = new List<string>();
             _ordersImportDataAccess = ordersImportDataAccess;
             _requestDataAccess = requestDataAccess;
+            _statusDataAccess = statusDataAccess;
             _mapper = mapper;
             this._authorizeDetail = authorizeDetail;
             LoadingAnimationVisible = false;
@@ -584,6 +587,33 @@ namespace CD4.UI.Library.ViewModel
             ErrorMessages.Clear();
             OnPropertyChanged(nameof(ButtonErrorsCountlabel));
             OnPropertyChanged(nameof(ButtonErrorsCountEnabled));
+        }
+
+
+        public async Task<List<BarcodeDataModel>> GetBarcodeData(List<string> selectedCins)
+        {
+            try
+            {
+                var data = await _requestDataAccess.GetBarcodeDataForMultipleSamplesAsync(selectedCins);
+                return _mapper.Map<List<BarcodeDataModel>>(data);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task MarkMultipleSamplesCollected(List<string> selectedCins)
+        {
+            try
+            {
+                _ = await _statusDataAccess.MarkMultipleSamplesCollectedAsync(selectedCins, _authorizeDetail.UserId);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
 
         #endregion

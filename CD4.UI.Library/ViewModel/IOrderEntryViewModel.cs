@@ -1,4 +1,5 @@
-﻿using CD4.UI.Library.Model;
+﻿using CD4.UI.Library.Helpers;
+using CD4.UI.Library.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -33,15 +34,11 @@ namespace CD4.UI.Library.ViewModel
         int SelectedGenderId { get; set; }
         string SelectedIsland { get; set; }
         int SelectedSiteId { get; set; }
-
         Task<bool> ConfirmAnalysisRequest();
-
         List<SitesModel> Sites { get; set; }
-
         Task SearchDataExperimentation();
-
         string TestToAdd { get; set; }
-        string BarcodePrinterName { get; set; }
+        IPrintingHelper PrintingHelper { get; }
 
         Task ManageAddTestToRequestAsync();
         void RemoveTestModelFromAddedTests(TestModel testModel);
@@ -56,6 +53,5 @@ namespace CD4.UI.Library.ViewModel
 
         Task<List<BarcodeDataModel>> GetBarcodeData();
         Task<DemographicsConfirmationModel> OrderRequiresNidPpConfirmationAsync();
-        string GetAbbreviatedFullname(string fullName);
     }
 }

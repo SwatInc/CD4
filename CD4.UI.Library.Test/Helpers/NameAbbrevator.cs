@@ -15,8 +15,7 @@ namespace CD4.UI.Library.Test.Helpers
 
             foreach (var name in names)
             {
-
-                var abbrevatedName = NamesAbbreviator.Execute(name,25);
+                var abbrevatedName = new NamesAbbreviator().Execute(name,25);
                 Assert.IsFalse(string.IsNullOrEmpty(abbrevatedName));
                 Assert.IsTrue(abbrevatedName.Length != 0);
 
