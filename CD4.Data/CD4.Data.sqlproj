@@ -270,6 +270,7 @@
     <Build Include="dbo\StoredProcedures\usp_GetChannelMapping.sql" />
     <Build Include="dbo\Types\SampleCinsUDT.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetBarcodeDetailsForMultipleSamples.sql" />
+    <Build Include="dbo\StoredProcedures\usp_CollectMultipleSamples.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
