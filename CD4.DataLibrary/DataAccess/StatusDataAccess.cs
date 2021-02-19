@@ -179,7 +179,7 @@ namespace CD4.DataLibrary.DataAccess
                 {   //check whether the status is validated.
                     if (output.First<StatusIdModel>().StatusId == (int)Status.Validated)
                     {//Mark sample sample status as validated
-                        await ValidateOnlySample(cin,loggedInUserId);
+                        await ValidateOnlySampleAsync(cin,loggedInUserId);
                     }
                 }
 
@@ -230,7 +230,7 @@ namespace CD4.DataLibrary.DataAccess
         /// </summary>
         /// <param name="cin">Cin to mark as collected</param>
         /// <returns>true if the procedure completes without error</returns>
-        public async Task<bool> MarkSampleCollected(string cin, int loggedInUserId)
+        public async Task<bool> MarkSampleCollectedAsync(string cin, int loggedInUserId)
         {
             //set the stored procedure name
             var storedProcedure = "[dbo].[usp_DecideToAndExecuteMarkSampleCollected]";
@@ -250,11 +250,35 @@ namespace CD4.DataLibrary.DataAccess
         }
 
         /// <summary>
+        /// marks all the samples as Collected if the samples and associated tests have registered status
+        /// </summary>
+        /// <param name="sampleCins">list of cins to mark as collected</param>
+        /// <returns>true if the procedure completes without error</returns>
+        public async Task<bool> MarkMultipleSamplesCollectedAsync(List<string> sampleCins, int loggedInUserId)
+        {
+            //set the stored procedure name
+            var storedProcedure = "[dbo].[usp_CollectMultipleSamples]";
+            //set the parameters for the stored procedure
+            var parameters = new { SampleCins = GetCinTable(sampleCins), UserId = loggedInUserId };
+            try
+            {
+                _ = await SelectInsertOrUpdateAsync<dynamic, dynamic>(storedProcedure, parameters);
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        /// <summary>
         /// Change only sample status to validated. Does not mess with test status.
         /// Do not use this method if test status needs to be marked as validated on validating sample.
         /// </summary>
         /// <param name="cin">Sample CIN</param>
-        private async Task ValidateOnlySample(string cin, int loggedInUserId)
+        private async Task ValidateOnlySampleAsync(string cin, int loggedInUserId)
         {
             var storedProcedure = "usp_ValidateOnlysample";
             var parameter = new { Cin = cin, UserId = loggedInUserId };
