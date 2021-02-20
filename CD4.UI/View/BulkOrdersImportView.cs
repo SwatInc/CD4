@@ -1,8 +1,11 @@
-﻿using CD4.UI.Library.Model;
+﻿using CD4.UI.Helpers;
+using CD4.UI.Library.Model;
 using CD4.UI.Library.ViewModel;
 using DevExpress.XtraEditors;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CD4.UI.View
@@ -10,11 +13,13 @@ namespace CD4.UI.View
     public partial class BulkOrdersImportView : DevExpress.XtraEditors.XtraForm
     {
         private readonly IBulkOrdersImportViewModel _viewModel;
+        private readonly IBarcodeHelper _barcodeHelper;
 
-        public BulkOrdersImportView(IBulkOrdersImportViewModel viewModel)
+        public BulkOrdersImportView(IBulkOrdersImportViewModel viewModel, IBarcodeHelper barcodeHelper)
         {
             InitializeComponent();
-            this._viewModel = viewModel;
+            _viewModel = viewModel;
+            _barcodeHelper = barcodeHelper;
             InitializeBinding();
 
             lookUpEditTests.Validated += LookUpEditTests_Validated;
@@ -22,8 +27,38 @@ namespace CD4.UI.View
             simpleButtonViewErrors.Click += SimpleButtonViewErrors_Click;
             simpleButtonHideErrors.Click += SimpleButtonHideErrors_Click;
             simpleButtonConfirmUpload.Click += OnConfirmUpload;
+            simpleButtonCollectSelected.Click += OnClick_CollectSelectedSamples;
             gridControlImportErrors.DataSourceChanged += GridControlImportErrors_DataSourceChanged;
+            gridViewExcelData.SelectionChanged += GridViewExcelData_SelectionChanged;
             KeyUp += BulkOrdersImportView_KeyUp;
+        }
+
+        private async void OnClick_CollectSelectedSamples(object sender, EventArgs e)
+        {
+            var selectedRowIndexes = gridViewExcelData.GetSelectedRows();
+            var selectedCins = new List<string>();
+            foreach (var index in selectedRowIndexes)
+            {
+                selectedCins.Add(((BulkSchemaModel)(gridViewExcelData.GetRow(index))).Cin);
+            }
+            var collectedCins = await _viewModel.MarkMultipleSamplesCollected(selectedCins);
+            XtraMessageBox.Show($"The following sample numbers are marked collected. \n{JsonConvert.SerializeObject(collectedCins)}");
+
+            //print the collected cins
+            await PrintBarcodesAsync(collectedCins);
+
+        }
+
+        private void GridViewExcelData_SelectionChanged(object sender, DevExpress.Data.SelectionChangedEventArgs e)
+        {
+            var selectedRowIndexes = gridViewExcelData.GetSelectedRows();
+            var selectedRows = new List<BulkSchemaModel>();
+            foreach (var index in selectedRowIndexes)
+            {
+                selectedRows.Add((BulkSchemaModel)(gridViewExcelData.GetRow(index)));
+            }
+
+            _viewModel.CanCollectSelectedSamples(selectedRows);
         }
 
         private void OnConfirmUpload(object sender, EventArgs e)
@@ -100,6 +135,9 @@ namespace CD4.UI.View
             //button view errors
             simpleButtonViewErrors.DataBindings.Add(new Binding("Text", _viewModel, nameof(_viewModel.ButtonErrorsCountlabel)));
             simpleButtonViewErrors.DataBindings.Add(new Binding("Enabled", _viewModel, nameof(_viewModel.ButtonErrorsCountEnabled)));
+
+            //button collect samples
+            simpleButtonCollectSelected.DataBindings.Add(new Binding("Enabled", _viewModel, nameof(_viewModel.CanCollectSamples)));
         }
 
         private void PromptForFile(object sender, EventArgs e)
@@ -137,6 +175,22 @@ namespace CD4.UI.View
             {
                 XtraMessageBox.Show(ex.Message);
             }
+        }
+
+        private async Task<bool> PrintBarcodesAsync(List<string> cins)
+        {
+            List<BarcodeDataModel> barcodeData;
+            try
+            {
+                barcodeData = await _viewModel.GetBarcodeData(cins);
+                return _barcodeHelper.PrintMultipleSampleBarcode(barcodeData);
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+                return false;
+            }
+
         }
     }
 }

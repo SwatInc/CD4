@@ -23,6 +23,7 @@ namespace CD4.UI.Library.ViewModel
         private string excelFilePath;
         private bool loadingAnimationVisible;
         private bool errorsPanelVisible;
+        private bool canCollectSamples;
         private readonly IBulkOrdersImportDataAccess _ordersImportDataAccess;
         private readonly IAnalysisRequestDataAccess _requestDataAccess;
         private readonly IStatusDataAccess _statusDataAccess;
@@ -41,6 +42,7 @@ namespace CD4.UI.Library.ViewModel
             IMapper mapper,
             AuthorizeDetailEventArgs authorizeDetail)
         {
+            canCollectSamples = false;
             Islands = new BindingList<IslandModel>();
             Sites = new List<SitesModel>();
             AllAtollsWithCorrespondingIsland = new List<AtollIslandModel>();
@@ -150,6 +152,15 @@ namespace CD4.UI.Library.ViewModel
                 return !ErrorsPanelVisible;
             }
 
+        }
+
+        public bool CanCollectSamples
+        {
+            get => canCollectSamples; set
+            {
+                canCollectSamples = value;
+                OnPropertyChanged();
+            }
         }
 
         #endregion
@@ -461,6 +472,19 @@ namespace CD4.UI.Library.ViewModel
         #endregion
 
         #region Public Methods
+        /// <summary>
+        /// decides whether samples on the selected rows can be collected.
+        /// </summary>
+        /// <param name="selectedRows">selected rows as BulkSchemaModel</param>
+        public void CanCollectSelectedSamples(List<BulkSchemaModel> selectedRows)
+        {
+            if(selectedRows.Count == 0) { CanCollectSamples = false; return; }
+            var canCollect = selectedRows.Find((x) => x.Cin?.Trim().Length > 0);
+            if (canCollect is null) { CanCollectSamples = false; return; }
+
+            //if any item in the selected item has a value in Cin field. ENABLE Collect button
+            CanCollectSamples = true;
+        }
         public async Task ManageAddTestToRequestAsync()
         {
             Debug.WriteLine("Called: ManageAddTestToRequestAsync");
@@ -603,17 +627,42 @@ namespace CD4.UI.Library.ViewModel
             }
         }
 
-        public async Task MarkMultipleSamplesCollected(List<string> selectedCins)
+        public async Task<List<string>> MarkMultipleSamplesCollected(List<string> selectedCins)
         {
+            //make sure that there are some cins to mark as collected.
+            if(selectedCins is null) { return new List<string>(); }
+            if (selectedCins.Count == 0) { return new List<string>(); }
+
             try
             {
-                _ = await _statusDataAccess.MarkMultipleSamplesCollectedAsync(selectedCins, _authorizeDetail.UserId);
+                //extract the registered cins from the provided list.
+                var registeredCins = ExtractRegisteredCins(selectedCins);
+                //call database to collect the samples
+                var isCollectionSuccess = await _statusDataAccess.MarkMultipleSamplesCollectedAsync(registeredCins, _authorizeDetail.UserId);
+                //If successful: return collected list for printing barcode. Otherwise: return an empty list
+                return isCollectionSuccess ? registeredCins : new List<string>();
             }
             catch (Exception)
             {
                 throw;
             }
 
+        }
+
+        private List<string> ExtractRegisteredCins(List<string> selectedCins)
+        {
+            //prepare a list to return
+            var registeredList = new List<string>();
+            //iterate through the list...
+            foreach (var cin in selectedCins)
+            {
+                //find the cin row from bulk data list
+                var data = BulkDataList.FirstOrDefault((x) => x.Cin == cin);
+                //add to return list if cin matches with the search result
+                if(data?.Cin == cin) { registeredList.Add(cin); }
+            }
+
+            return registeredList;
         }
 
         #endregion

@@ -20,6 +20,31 @@ namespace CD4.UI.Helpers
             _printingHelper = printingHelper;
             _namesAbbreviator = namesAbbreviator;
         }
+
+        public bool PrintMultipleSampleBarcode(List<BarcodeDataModel> barcodeData)
+        {
+            if (barcodeData is null)
+            {
+                throw new Exception($"Cannot print barcodes, no data avaliable to generate labels.");
+            }
+
+            if (barcodeData.Count == 0)
+            {
+                throw new Exception($"Cannot print barcodes, no data avaliable to generate labels.");
+            }
+
+            try
+            {
+                GenerateLabelAndSendToPrinter(barcodeData);
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
         public bool PrintSingleSampleBarcode(List<BarcodeDataModel> barcodeData, string cin)
         {
             if (barcodeData is null)
@@ -32,7 +57,20 @@ namespace CD4.UI.Helpers
                 throw new Exception($"The current sample: {cin} is not registered!\nPlease confirm the order first.");
             }
 
+            try
+            {
+                GenerateLabelAndSendToPrinter(barcodeData);
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
 
+        }
+
+        private void GenerateLabelAndSendToPrinter(List<BarcodeDataModel> barcodeData)
+        {
             foreach (var barcode in barcodeData)
             {
                 var barcodeLabel = new SeventyFiveMillimeterTubeLabel();
@@ -58,7 +96,6 @@ namespace CD4.UI.Helpers
                     throw;
                 }
             }
-            return true;
         }
 
         private string GetAbbreviatedName(string fullname)

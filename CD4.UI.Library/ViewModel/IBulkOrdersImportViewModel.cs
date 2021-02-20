@@ -20,11 +20,15 @@ namespace CD4.UI.Library.ViewModel
         List<string> ErrorMessages { get; set; }
         bool ErrorsPanelVisible { get; set; }
         bool MainPanelVisible { get; }
+        bool CanCollectSamples { get; set; }
 
         event PropertyChangedEventHandler PropertyChanged;
 
+        void CanCollectSelectedSamples(List<BulkSchemaModel> selectedRows);
         void ClearErrorMessages();
         Task ConformUploadSelected(List<BulkSchemaModel> selectedRecordsToImport);
+        Task<List<BarcodeDataModel>> GetBarcodeData(List<string> selectedCins);
         Task ManageAddTestToRequestAsync();
+        Task<List<string>> MarkMultipleSamplesCollected(List<string> selectedCins);
     }
 }
