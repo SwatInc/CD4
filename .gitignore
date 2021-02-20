@@ -339,3 +339,5 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 /SQLQuery1.sql
+/CD4.Data/dbo/Scripts/StaticDataSeed.PostDeployment1.sql
+/CD4.ResultsInterface/log20210206.txt

@@ -53,6 +53,8 @@ namespace CD4.UI.View
             barButtonItemOrderEntry.ItemClick += OpenOrderEntryView;
             barButtonItemResultEntry.ItemClick += OpenResultEntryView;
             barButtonItemAcceptSamples.ItemClick += OpenAcceptSampleView;
+            barButtonItemBulkImportOrders.ItemClick += OpenBulkOrdersView;
+            barButtonItemViewAllNotes.ItemClick += OpenLabNotesView;
 
             //profile Tab Buttons
             barButtonItemChangePassword.ItemClick += OpenChangePasswordView;
@@ -65,6 +67,16 @@ namespace CD4.UI.View
             this.MdiChildActivate += MainView_MdiChildActivate;
 
             SetDisciplineRibbonOptions();
+        }
+
+        private void OpenLabNotesView(object sender, ItemClickEventArgs e)
+        {
+            OpenMdiForm<LabNotesView>();
+        }
+
+        private void OpenBulkOrdersView(object sender, ItemClickEventArgs e)
+        {
+            OpenMdiForm<BulkOrdersImportView>();
         }
 
         /// <summary>
@@ -278,6 +290,9 @@ namespace CD4.UI.View
             }
         }
 
+        /// <summary>
+        /// show or hide ribbon pages depending on authorization
+        /// </summary>
         private void EvaluateMainViewAuth()
         {
 

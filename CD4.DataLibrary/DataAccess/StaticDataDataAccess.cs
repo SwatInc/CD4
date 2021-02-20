@@ -234,5 +234,19 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
+
+        public async Task<List<ChannelMappingModel>> GetChannelMappingData()
+        {
+            var storedProcedure = "[dbo].[usp_GetChannelMapping]";
+            try
+            {
+                return await LoadDataAsync<ChannelMappingModel>(storedProcedure);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

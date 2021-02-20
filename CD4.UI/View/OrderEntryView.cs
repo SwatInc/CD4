@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CD4.DataLibrary.DataAccess;
+using CD4.UI.Helpers;
 using CD4.UI.Library.Model;
 using CD4.UI.Library.ViewModel;
 using CD4.UI.Report;
@@ -16,21 +17,27 @@ namespace CD4.UI.View
     public partial class OrderEntryView : XtraForm
     {
         private readonly IOrderEntryViewModel _viewModel;
-        private readonly IMapper mapper;
-        private readonly IPatientDataAccess dataAccess;
+        private readonly IMapper _mapper;
+        private readonly IPatientDataAccess _dataAccess;
         private readonly IUserAuthEvaluator _authEvaluator;
         private readonly ILabNotesViewModel _labNotesViewModel;
+        private readonly IBarcodeHelper _barcodeHelper;
 
         public OrderEntryView(IOrderEntryViewModel viewModel,
-            IMapper mapper, IPatientDataAccess dataAccess, IUserAuthEvaluator authEvaluator, ILabNotesViewModel labNotesViewModel)
+            IMapper mapper,
+            IPatientDataAccess dataAccess,
+            IUserAuthEvaluator authEvaluator,
+            ILabNotesViewModel labNotesViewModel,
+            IBarcodeHelper barcodeHelper)
         {
             InitializeComponent();
             //Evaluate user authorisation
-            this._viewModel = viewModel;
-            this.mapper = mapper;
-            this.dataAccess = dataAccess;
+            _viewModel = viewModel;
+            _mapper = mapper;
+            _dataAccess = dataAccess;
             _authEvaluator = authEvaluator;
-            this._labNotesViewModel = labNotesViewModel;
+            _labNotesViewModel = labNotesViewModel;
+            _barcodeHelper = barcodeHelper;
             InitializeDataBinding();
 
             lookUpEditTests.Validated += LookUpEditTests_Validated;
@@ -163,7 +170,7 @@ namespace CD4.UI.View
                 // REMOVE THIS. HANDLES THIS PROPERLY IN DATALAYER
                 if (ex.Message.Contains("NULL") && ex.Message.Contains("TimeStamp") && ex.Message.Contains("CD4Data.dbo.TrackingHistory"))
                 {
-                    XtraMessageBox.Show("Analysis request confirmed. The sample collected date was not specified though");
+                    XtraMessageBox.Show($"Analysis request confirmed. The sample collected date was not specified though\n{ex.Message}");
                     return;
                 }
                 else
@@ -448,7 +455,7 @@ namespace CD4.UI.View
                     allowHtmlText: DevExpress.Utils.DefaultBoolean.True);
                 return;
             }
-            var searchViewModel = new PatientSearchResultsViewModel(mapper, dataAccess)
+            var searchViewModel = new PatientSearchResultsViewModel(_mapper, _dataAccess)
             {
                 SearchTerm = searchTerm,
                 SearchType = GetSearchType()
@@ -509,52 +516,13 @@ namespace CD4.UI.View
             try
             {
                 barcodeData = await _viewModel.GetBarcodeData();
+                return _barcodeHelper.PrintSingleSampleBarcode(barcodeData, _viewModel.Cin);
             }
             catch (Exception ex)
             {
                 XtraMessageBox.Show(ex.Message);
                 return false;
             }
-
-            if (barcodeData is null)
-            {
-                XtraMessageBox.Show($"The current sample: {_viewModel.Cin} is not registered!\nPlease confirm the order first.");
-                return false;
-            }
-
-            if (barcodeData.Count == 0)
-            {
-                XtraMessageBox.Show($"The current sample: {_viewModel.Cin} is not registered!\nPlease confirm the order first.");
-                return false;
-            }
-
-            foreach (var barcode in barcodeData)
-            {
-                var barcodeLabel = new SeventyFiveMillimeterTubeLabel();
-                barcodeLabel.Parameters["Fullname"].Value = _viewModel.GetAbbreviatedFullname(barcode.FullName);
-                barcodeLabel.Parameters["NidPp"].Value = barcode.NidPp;
-                barcodeLabel.Parameters["Birthdate"].Value = barcode.Birthdate;
-                barcodeLabel.Parameters["Age"].Value = barcode.Age;
-                barcodeLabel.Parameters["AccessionNumber"].Value = barcode.AccessionNumber;
-                barcodeLabel.Parameters["SampleCollectedDate"].Value = barcode.CollectionDate.LocalDateTime;
-                barcodeLabel.Parameters["Seq"].Value = barcode.Seq;
-                barcodeLabel.Parameters["Discipline"].Value = barcode.Discipline;
-
-                barcodeLabel.PrinterName = _viewModel.BarcodePrinterName;
-                barcodeLabel.RequestParameters = false;
-                var autoprint = new ReportPrintTool(barcodeLabel);
-                try
-                {
-                    barcodeLabel.ShowPrintMarginsWarning = false;
-                    autoprint.Print(barcodeLabel.PrinterName);
-                }
-                catch (Exception ex)
-                {
-                    XtraMessageBox.Show(ex.Message);
-                }
-            }
-
-            return true;
 
         }
 

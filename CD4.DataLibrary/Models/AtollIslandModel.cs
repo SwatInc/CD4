@@ -11,15 +11,7 @@ namespace CD4.DataLibrary.Models
     {
         private string island;
 
-        public string Island
-        {
-            get => island; set
-            {
-                if (island == value) return;
-                island = value;
-                OnPropertyChanged();
-            }
-        }
+        public string Island { get; set; }
 
     }
 }

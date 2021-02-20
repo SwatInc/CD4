@@ -1,0 +1,4 @@
+﻿CREATE TYPE [dbo].[SampleCinsUDT] AS TABLE
+(
+	[Cin] VARCHAR(50) NOT NULL
+);

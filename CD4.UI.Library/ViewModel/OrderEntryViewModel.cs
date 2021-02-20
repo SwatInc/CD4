@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CD4.DataLibrary.DataAccess;
+using CD4.UI.Library.Helpers;
 using CD4.UI.Library.Model;
 using CD4.UI.Library.Validations;
 using FluentValidation.Results;
@@ -58,7 +59,8 @@ namespace CD4.UI.Library.ViewModel
             IAnalysisRequestDataAccess requestDataAccess, 
             IStatusDataAccess statusDataAccess, 
             AuthorizeDetailEventArgs authorizeDetail, 
-            IGlobalSettingsDataAccess globalSettingsDataAccess)
+            IGlobalSettingsDataAccess globalSettingsDataAccess,
+            IPrintingHelper printingHelper)
         {
             Sites = new List<SitesModel>();
             Gender = new List<GenderModel>();
@@ -77,6 +79,7 @@ namespace CD4.UI.Library.ViewModel
             this._statusDataAccess = statusDataAccess;
             _authorizeDetail = authorizeDetail;
             _globalSettingsDataAccess = globalSettingsDataAccess;
+            PrintingHelper = printingHelper;
             PropertyChanged += OrderEntryViewModel_PropertyChanged;
             InitializeStaticData += OnInitializeStaticDataAsync;
             InitializeStaticData(this, EventArgs.Empty);
@@ -105,7 +108,6 @@ namespace CD4.UI.Library.ViewModel
             }
         }
         private List<AtollIslandModel> AllAtollsWithCorrespondingIsland { get; set; }
-        public string BarcodePrinterName { get; set; }
 
         #region Request
         public string Cin
@@ -331,7 +333,9 @@ namespace CD4.UI.Library.ViewModel
             }
         }
 
+
         #endregion
+        public IPrintingHelper PrintingHelper { get; }
 
 
         #endregion
@@ -386,24 +390,13 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-               var nextCinSeed = await _requestDataAccess.GetNextCinSeed();
-               Cin = FormatCinSeed(nextCinSeed);
+               Cin = await _requestDataAccess.GetNextCinSeed();
             }
             catch (Exception)
             {
 
                 throw;
             }
-        }
-
-        private string FormatCinSeed(int nextCinSeed)
-        {
-            var totalLength = 7;
-            var padCharacter = '0';
-            var prefix = "ML";
-
-            var paddedNextSeed =  nextCinSeed.ToString().PadLeft(totalLength, padCharacter);
-            return $"{prefix}{paddedNextSeed}";
         }
 
         public async Task SearchRequestByCinAsync()
@@ -622,7 +615,7 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-                _ = await _statusDataAccess.MarkSampleCollected(this.Cin,_authorizeDetail.UserId);
+                _ = await _statusDataAccess.MarkSampleCollectedAsync(this.Cin,_authorizeDetail.UserId);
             }
             catch (Exception ex)
             {
@@ -679,35 +672,6 @@ namespace CD4.UI.Library.ViewModel
         #endregion
 
         #region Private Methods
-        private async Task InitializePrintingRequirementsAsync()
-        {
-            //Set the default printer name as BarcodePrinter
-            var workstationName = "BarcodePrinter";
-            //Fetch the workstation name
-            workstationName = GetWorkStationName();
-            //call datalayer to get all the printers with their types (Barcode printer, document printer... etc)
-            var workStationPrinters = await _staticData.GetWorkStationPrintersAsync(workstationName);
-            var barcodePrinter = workStationPrinters.Find((x) => x.PrinterType == 1);
-            if (barcodePrinter != null) BarcodePrinterName = barcodePrinter.PrinterName;
-        }
-
-        /// <summary>
-        /// Returns workstation Name
-        /// </summary>
-        /// <returns>A string of workstation name</returns>
-        private string GetWorkStationName()
-        {
-            try
-            {
-                return Dns.GetHostName();
-            }
-            catch (Exception ex)
-            {
-
-                Debug.WriteLine(ex.Message + "\n" + ex.StackTrace);
-                throw new Exception("Cannot get the FQDN(Fully Qualified Domain Name) / workstation name");
-            }
-        }
 
         private void ManageValidation()
         {
@@ -790,7 +754,6 @@ namespace CD4.UI.Library.ViewModel
                 await LoadAllClinicalDetailsAsync();
                 await LoadAllTestsAsync();
                 await LoadAllProfilesAsync();
-                await InitializePrintingRequirementsAsync();
             }
             catch (Exception ex)
             {
@@ -1122,11 +1085,6 @@ namespace CD4.UI.Library.ViewModel
             {
                 throw;
             }
-        }
-
-        public string GetAbbreviatedFullname(string fullName)
-        {
-            return Helpers.NamesAbbreviator.Execute(fullName, 25);
         }
         #endregion
     }

@@ -121,7 +121,7 @@ namespace CD4.UI.View
 
             var xtraReport = new AnalysisReport() { DataSource = reports, RequestParameters = false};
 
-            xtraReport.DisplayName = $"{report.Patient.Fullname}({report.Patient.NidPp})_[{report.SampleSite}]";
+            xtraReport.DisplayName = $"{this.Tag}_{report.Patient.Fullname}({report.Patient.NidPp.Replace('/','-')})";
             ReportPrintTool tool = new ReportPrintTool(xtraReport);
 
             //hide unnecessary buttons

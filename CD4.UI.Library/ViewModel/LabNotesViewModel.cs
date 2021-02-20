@@ -44,7 +44,7 @@ namespace CD4.UI.Library.ViewModel
         #region Default Constructor
         public LabNotesViewModel(AuthorizeDetailEventArgs authorizeDetail, ISampleDataAccess sampleDataAccess, IMapper mapper)
         {
-            ViewName = "Sample Notes";
+            ViewName = "";
             _currentCin = null;
             _authorizeDetail = authorizeDetail;
             _sampleDataAccess = sampleDataAccess;
@@ -52,6 +52,7 @@ namespace CD4.UI.Library.ViewModel
             Notes = new BindingList<SampleNotesModel>();
 
             OnSampleSet += GetNotesForSample;
+            Notes.ListChanged += Notes_ListChanged;
 
         }
 
@@ -100,6 +101,7 @@ namespace CD4.UI.Library.ViewModel
         {
             if (string.IsNullOrEmpty(_currentCin))
             {
+                XtraMessageBox.Show("A sample needs to be selected to add a sample note.");
                 return;
             }
             if (!string.IsNullOrEmpty(NewNote?.Trim()))
@@ -136,7 +138,7 @@ namespace CD4.UI.Library.ViewModel
 
         public void Reset()
         {
-            ViewName = "Sample Notes";
+            ViewName = "";
             _currentCin = null;
             Notes.Clear();
         }
@@ -205,7 +207,7 @@ namespace CD4.UI.Library.ViewModel
             }
             catch (Exception ex)
             {
-                XtraMessageBox.Show($"Cannot load sample notes for {notesModel.CIN}.\n{ex.Message}");
+                XtraMessageBox.Show($"Cannot add sample note for barcode [{notesModel.CIN}].\n{ex.Message}");
             }
             finally
             {

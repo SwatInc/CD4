@@ -79,7 +79,6 @@
             this.xrLine5 = new DevExpress.XtraReports.UI.XRLine();
             this.xrLabelAbalysisHeading = new DevExpress.XtraReports.UI.XRLabel();
             this.GroupHeaderCin = new DevExpress.XtraReports.UI.GroupHeaderBand();
-            this.xrLabel20 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel15 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel16 = new DevExpress.XtraReports.UI.XRLabel();
             this.DetailResults = new DevExpress.XtraReports.UI.DetailBand();
@@ -629,7 +628,7 @@
             // 
             this.xrLabelResultHeading.Dpi = 254F;
             this.xrLabelResultHeading.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.xrLabelResultHeading.LocationFloat = new DevExpress.Utils.PointFloat(752.8984F, 122.555F);
+            this.xrLabelResultHeading.LocationFloat = new DevExpress.Utils.PointFloat(752.8984F, 64.13503F);
             this.xrLabelResultHeading.Multiline = true;
             this.xrLabelResultHeading.Name = "xrLabelResultHeading";
             this.xrLabelResultHeading.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
@@ -643,7 +642,7 @@
             // 
             this.xrLabelUnitHeading.Dpi = 254F;
             this.xrLabelUnitHeading.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.xrLabelUnitHeading.LocationFloat = new DevExpress.Utils.PointFloat(1030.923F, 122.555F);
+            this.xrLabelUnitHeading.LocationFloat = new DevExpress.Utils.PointFloat(1030.923F, 64.13503F);
             this.xrLabelUnitHeading.Multiline = true;
             this.xrLabelUnitHeading.Name = "xrLabelUnitHeading";
             this.xrLabelUnitHeading.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
@@ -655,7 +654,7 @@
             // 
             this.xrLabelRangeHeading.Dpi = 254F;
             this.xrLabelRangeHeading.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.xrLabelRangeHeading.LocationFloat = new DevExpress.Utils.PointFloat(1319.319F, 124.9893F);
+            this.xrLabelRangeHeading.LocationFloat = new DevExpress.Utils.PointFloat(1319.319F, 66.56933F);
             this.xrLabelRangeHeading.Multiline = true;
             this.xrLabelRangeHeading.Name = "xrLabelRangeHeading";
             this.xrLabelRangeHeading.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
@@ -674,7 +673,7 @@
             // 
             this.xrLabelAbalysisHeading.Dpi = 254F;
             this.xrLabelAbalysisHeading.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.xrLabelAbalysisHeading.LocationFloat = new DevExpress.Utils.PointFloat(91.44023F, 122.555F);
+            this.xrLabelAbalysisHeading.LocationFloat = new DevExpress.Utils.PointFloat(91.44023F, 64.13503F);
             this.xrLabelAbalysisHeading.Multiline = true;
             this.xrLabelAbalysisHeading.Name = "xrLabelAbalysisHeading";
             this.xrLabelAbalysisHeading.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
@@ -685,7 +684,6 @@
             // GroupHeaderCin
             // 
             this.GroupHeaderCin.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrLabel20,
             this.xrLabelAbalysisHeading,
             this.xrLine5,
             this.xrLabelRangeHeading,
@@ -693,24 +691,10 @@
             this.xrLabelResultHeading,
             this.xrLabel14});
             this.GroupHeaderCin.Dpi = 254F;
-            this.GroupHeaderCin.HeightF = 183.4093F;
+            this.GroupHeaderCin.HeightF = 125.7117F;
             this.GroupHeaderCin.Level = 1;
             this.GroupHeaderCin.Name = "GroupHeaderCin";
             this.GroupHeaderCin.RepeatEveryPage = true;
-            // 
-            // xrLabel20
-            // 
-            this.xrLabel20.Dpi = 254F;
-            this.xrLabel20.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
-            this.xrLabel20.LocationFloat = new DevExpress.Utils.PointFloat(91.44033F, 64.13505F);
-            this.xrLabel20.Multiline = true;
-            this.xrLabel20.Name = "xrLabel20";
-            this.xrLabel20.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.xrLabel20.SizeF = new System.Drawing.SizeF(1487.17F, 58.41998F);
-            this.xrLabel20.StylePriority.UseFont = false;
-            this.xrLabel20.StylePriority.UseTextAlignment = false;
-            this.xrLabel20.Text = "MOLECULAR BIOLOGY";
-            this.xrLabel20.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             // 
             // xrLabel15
             // 
@@ -721,9 +705,8 @@
             this.xrLabel15.LocationFloat = new DevExpress.Utils.PointFloat(127F, 0F);
             this.xrLabel15.Name = "xrLabel15";
             this.xrLabel15.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.xrLabel15.SizeF = new System.Drawing.SizeF(254F, 58.42F);
+            this.xrLabel15.SizeF = new System.Drawing.SizeF(583.5653F, 58.42F);
             this.xrLabel15.Text = "xrLabel15";
-            this.xrLabel15.WordWrap = false;
             // 
             // xrLabel16
             // 
@@ -814,7 +797,6 @@
             this.xrLabel18.StylePriority.UseTextAlignment = false;
             this.xrLabel18.Text = "xrLabel18";
             this.xrLabel18.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
-            this.xrLabel18.Visible = false;
             // 
             // bindingSource
             // 
@@ -899,7 +881,6 @@
         private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeaderDiscipline;
         private DevExpress.XtraReports.UI.XRLabel xrLabel18;
         private DevExpress.XtraReports.UI.XRLabel xrLabel19;
-        private DevExpress.XtraReports.UI.XRLabel xrLabel20;
         private DevExpress.XtraReports.UI.XRLabel xrLabel21;
         private DevExpress.XtraReports.UI.XRLabel xrLabel23;
         private DevExpress.XtraReports.UI.XRLabel xrLabel22;

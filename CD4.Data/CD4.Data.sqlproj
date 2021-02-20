@@ -77,6 +77,31 @@
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x64</PlatformTarget>
   </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>False</TreatWarningsAsErrors>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <OutputPath>bin\Debug\</OutputPath>
+    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+  </PropertyGroup>
   <Import Condition="'$(SQLDBExtensionsRefPath)' != ''" Project="$(SQLDBExtensionsRefPath)\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <Import Condition="'$(SQLDBExtensionsRefPath)' == ''" Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
@@ -232,6 +257,21 @@
     <Build Include="dbo\StoredProcedures\usp_InsertSampleNoteByCin.sql" />
     <Build Include="dbo\StoredProcedures\usp_UpdateSampleNoteAttendedStatus.sql" />
     <Build Include="dbo\StoredProcedures\usp_CollectLateRegisteredTests.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetAllNationalities.sql" />
+    <Build Include="dbo\StoredProcedures\usp_LoadStaticDataForBulkImport.sql" />
+    <Build Include="dbo\Tables\BulkImportedHash.sql" />
+    <Build Include="dbo\StoredProcedures\usp_InsertImportRecordHash.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetCinForImportHash.sql" />
+    <Build Include="dbo\StoredProcedures\usp_LoadScriptByName.sql" />
+    <Build Include="dbo\StoredProcedures\usp_InterfaceResultByTestCodeAndCin.sql" />
+    <Build Include="dbo\Tables\ChannelMap.sql" />
+    <Build Include="dbo\Tables\Analyser.sql" />
+    <Build Include="dbo\Tables\CSScript.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetChannelMapping.sql" />
+    <Build Include="dbo\Types\SampleCinsUDT.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetBarcodeDetailsForMultipleSamples.sql" />
+    <Build Include="dbo\StoredProcedures\usp_CollectMultipleSamples.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetTestStatusByTestIdAndCin.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
@@ -243,5 +283,6 @@
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\Scripts\Script.PostDeployment.sql" />
+    <None Include="dbo\Scripts\StaticDataSeed.PostDeployment1.sql" />
   </ItemGroup>
 </Project>

@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace CD4.UI.Library.Helpers
 {
-    public static class NamesAbbreviator
+    public class NamesAbbreviator : INamesAbbreviator
     {
-        public static string Execute(string fullname, int maxLength)
+        public string Execute(string fullname, int maxLength)
         {
             string abbreviatedFullname = "";
             //check whether abbreviation is necessary
@@ -17,16 +18,18 @@ namespace CD4.UI.Library.Helpers
             var names = fullname.Split(' ');
 
             //two names in fullname and length graterthan max length
-            if (names.Length == 2 && fullname.Length > maxLength)
+            if (names.Length == 2 && fullname.Length >= maxLength)
             {
                 //abbreviate 1st name segment
                 var name = $"{names[0].Substring(0, 1)}.";
-                abbreviatedFullname =  $"{name} {names[1]}";
+                abbreviatedFullname = $"{name} {names[1]}";
             }
 
             //Not abbreviating first and last name
-            for (int i = 1; i < names.Length-1; i++)
+            for (int i = 1; i < names.Length - 1; i++)
             {
+                //catches if there is an extra space within the names
+                if (string.IsNullOrEmpty(names[i])) { continue; }
                 //abbreviate the name segment
                 var name = $"{names[i].Substring(0, 1)}.";
                 names[i] = name;
@@ -39,7 +42,7 @@ namespace CD4.UI.Library.Helpers
             return abbreviatedFullname.Trim();
         }
 
-        private static string AssembleName(string[] names)
+        private string AssembleName(string[] names)
         {
             var assembledName = "";
             foreach (var name in names)

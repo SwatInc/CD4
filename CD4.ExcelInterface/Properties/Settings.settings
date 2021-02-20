@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CD4.ExcelInterface.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Config" Type="System.String" Scope="User">
+      <Value Profile="(Default)">{"MainFormTitle":"CD4 Interface","AnalyserName":"PCR1","ExcelFileDirectory":"C:\\Logs\\","ExportPath":"C:\\Export\\","DataExtension":"json","ControlFileExtension":"ok","LisExportExtension":"*.xls","BatchId":{"Row":0,"Column":0},"DataRange":{"StartRow":4,"EndRow":47},"SidColumn":2,"SamplePositionColumn":1,"ExcludeRows":[2],"PositiveControlSID":"","NegativeControlSID":"","Measurements":[{"TestCodeColumn":3,"MeasurementValueColumn":4,"Unit":""},{"TestCodeColumn":6,"MeasurementValueColumn":7,"Unit":""},{"TestCodeColumn":9,"MeasurementValueColumn":10,"Unit":""},{"TestCodeColumn":12,"MeasurementValueColumn":13,"Unit":""}]}</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

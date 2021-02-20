@@ -123,6 +123,33 @@ namespace CD4.DataLibrary.DataAccess
             return returnData;
         }
 
+        internal async Task<dynamic> QueryMultiple_WithProvidedReturnTypes_NoParameters(string storedProcedure, TypesModel listTypes, dynamic simpleTypes)
+        {
+            List<dynamic> dynamicResults = new List<dynamic>();
+
+            foreach (var item in listTypes.GenericModelsList)
+            {
+                dynamicResults.Add(Activator.CreateInstance(item));
+            }
+
+            using (IDbConnection connection = new SqlConnection(helper.GetConnectionString()))
+            {
+                using (var lists = await connection.QueryMultipleAsync(storedProcedure, commandType: CommandType.StoredProcedure))
+                {
+                    int counter = 0;
+                    foreach (var item in simpleTypes)
+                    {
+                        var t = item.GetType();
+                        dynamicResults[counter] = lists.Read(t);
+                        counter += 1;
+                    }
+                }
+            }
+
+            return dynamicResults;
+
+        }
+
         internal async Task<T> SelectInsertOrUpdateAsync<T,U>(string storedProcedure, U parameters)
         {
             using (IDbConnection connection = new SqlConnection(helper.GetConnectionString()))
@@ -296,5 +323,26 @@ namespace CD4.DataLibrary.DataAccess
 
         }
 
+        public SqlMapper.ICustomQueryParameter GetCinTable(List<string> sampleCins)
+        {
+            var returnTable = new DataTable();
+            returnTable.Columns.Add("Cin");
+
+            try
+            {
+
+                //Add rows to the Datatable declared, and return
+                foreach (var cin in sampleCins)
+                {
+                    returnTable.Rows.Add(cin);
+                }
+                return returnTable.AsTableValuedParameter("SampleCinsUDT");
+            }
+            catch (Exception)
+            {
+                //throw the exception right out! It will be handled down the line.
+                throw;
+            }
+        }
     }
 }

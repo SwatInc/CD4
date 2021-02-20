@@ -1,5 +1,7 @@
 ﻿using Autofac;
 using AutoMapper;
+using CD4.UI.Helpers;
+using CD4.UI.Library.Helpers;
 using CD4.UI.Library.Model;
 using CD4.UI.Library.ViewModel;
 using CD4.UI.View;
@@ -101,6 +103,9 @@ namespace CD4.UI
                 .SingleInstance();
 
             builder.RegisterType<UserAuthEvaluator>().As<IUserAuthEvaluator>();
+            builder.RegisterType<PrintingHelper>().As<IPrintingHelper>();
+            builder.RegisterType<NamesAbbreviator>().As<INamesAbbreviator>();
+            builder.RegisterType<BarcodeHelper>().As<IBarcodeHelper>();
 
             return builder.Build();
         }

@@ -9,7 +9,7 @@ namespace CD4.DataLibrary.DataAccess
 {
     public class ResultDataAccess : DataAccessBase, IResultDataAccess
     {
-        private readonly IStatusDataAccess statusData;
+        private readonly IStatusDataAccess _statusData;
         private readonly IReferenceRangeDataAccess _referenceRangeDataAccess;
         private readonly ISampleDataAccess _sampleDataAccess;
 
@@ -17,7 +17,7 @@ namespace CD4.DataLibrary.DataAccess
             IReferenceRangeDataAccess referenceRangeDataAccess,
             ISampleDataAccess sampleDataAccess)
         {
-            this.statusData = statusData;
+            this._statusData = statusData;
             _referenceRangeDataAccess = referenceRangeDataAccess;
             _sampleDataAccess = sampleDataAccess;
         }
@@ -147,6 +147,14 @@ namespace CD4.DataLibrary.DataAccess
 
         }
 
+        /// <summary>
+        /// Inserts a result to the result Id specified and enters an audit trail for the sample.
+        /// </summary>
+        /// <param name="resultId">The result Id of the record to update.</param>
+        /// <param name="result">the resut to update</param>
+        /// <param name="testStatus">This is the CURRENT test status. NOT the status required for the tests after insert</param>
+        /// <param name="userId">logged in user Id</param>
+        /// <returns>returns the resulting UpdatedResultAndStatusModel</returns>
         public async Task<UpdatedResultAndStatusModel> InsertUpdateResultByResultIdAsync(int resultId, string result, int testStatus, int userId)
         {
             var referenceData = await _referenceRangeDataAccess.GetReferenceRangeByResultIdAsync(resultId);
@@ -160,11 +168,67 @@ namespace CD4.DataLibrary.DataAccess
             //Set the stored procedure to call
             var storedProcedure = "[dbo].[usp_UpdateResultByResultId]";
             //Make a database query to get Id for Status equivalent to "ToValidate".
-            var statusId = statusData.GetToValidateStatusId();
+            var statusId = _statusData.GetToValidateStatusId();
             //prepare the parameter to pass to the query.
             var parameter = new { Result = result, ResultId = resultId, StatusId = statusId, ReferenceCode = referenceCode, UsersId = userId };
             //insert result and result status
-            return await SelectInsertOrUpdateAsync<UpdatedResultAndStatusModel, dynamic>(storedProcedure, parameter);
+            try
+            {
+                return await SelectInsertOrUpdateAsync<UpdatedResultAndStatusModel, dynamic>(storedProcedure, parameter);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task<UpdatedResultAndStatusModel> InterfaceUpdateResultByTestIdAndCinAsync
+            (int testId,string cin, string result,string batchId,string referenceCode, int userId)
+        {
+            //get test status from database
+            int testStatusId;
+            try
+            {
+                testStatusId = await _statusData.GetTestStatusByTestIdAndCin(testId, cin);
+                if (testStatusId == 0)
+                {
+                    throw new Exception("Cannot determine test status. Cannot update result.");
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            //check whether the test status is acceptable for result entry
+            var InvalidTestStatusMessage = IsTestStatusValidForResultEntry(testStatusId);
+            if (!string.IsNullOrEmpty(InvalidTestStatusMessage))
+            {
+                throw new Exception(InvalidTestStatusMessage);
+            }
+            //Set the stored procedure to call
+            var storedProcedure = "[dbo].[usp_InterfaceResultByTestCodeAndCin]";
+            //Make a database query to get Id for Status equivalent to "ToValidate".
+            var statusId = _statusData.GetToValidateStatusId();
+            //prepare the parameter to pass to the query.
+            var parameter = new 
+            { 
+                Result = result,
+                TestId = testId, 
+                Cin = cin,
+                BatchId = batchId,
+                StatusId = statusId,
+                ReferenceCode = referenceCode,
+                UsersId = userId 
+            };
+            //insert result and result status
+            try
+            {
+                return await SelectInsertOrUpdateAsync<UpdatedResultAndStatusModel, dynamic>(storedProcedure, parameter);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
 
         /// <summary>

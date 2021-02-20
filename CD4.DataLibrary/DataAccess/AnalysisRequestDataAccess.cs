@@ -531,6 +531,25 @@ namespace CD4.DataLibrary.DataAccess
             }
         }
 
+        /// <summary>
+        /// Gets barcode data for multiple samples at the same time.
+        /// </summary>
+        /// <param name="sampleCins">The list of cins to fetch the barcodes</param>
+        /// <returns>List of barcode data models</returns>
+        public async Task<List<BarcodeDataModel>> GetBarcodeDataForMultipleSamplesAsync(List<string> sampleCins)
+        {
+            var storedProcedure = "[dbo].[usp_GetBarcodeDetailsForMultipleSamples]";
+            var parameter = new { SampleCins = GetCinTable(sampleCins) };
+            try
+            {
+                return await LoadDataWithParameterAsync<BarcodeDataModel, dynamic>(storedProcedure, parameter);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public async Task InsertSampleCollectedDate(AnalysisRequestDataModel request, int loggedInUserId)
         {
             var storedProcedure = "[dbo].[usp_UpdateSampleWithCin]";
@@ -554,13 +573,13 @@ namespace CD4.DataLibrary.DataAccess
             }
         }
 
-        public async Task<int> GetNextCinSeed()
+        public async Task<string> GetNextCinSeed()
         {
             var storedProcedure = "[dbo].[usp_GetNextSampleNumber]";
             try
             {
                 var data = await LoadDataAsync<int>(storedProcedure);
-                return data.FirstOrDefault();
+                return FormatCinSeed(data.FirstOrDefault());
             }
             catch (Exception)
             {
@@ -568,6 +587,16 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
 
+        }
+
+        private string FormatCinSeed(int nextCinSeed)
+        {
+            var totalLength = 7;
+            var padCharacter = '0';
+            var prefix = "ML";
+
+            var paddedNextSeed = nextCinSeed.ToString().PadLeft(totalLength, padCharacter);
+            return $"{prefix}{paddedNextSeed}";
         }
     }
 }
