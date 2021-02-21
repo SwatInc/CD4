@@ -32,7 +32,6 @@ namespace CD4.UI.View
             this.simpleButtonSave = new DevExpress.XtraEditors.SimpleButton();
             this.progressPanelPatientData = new DevExpress.XtraWaitForm.ProgressPanel();
             this.textEditPhoneNumber = new DevExpress.XtraEditors.TextEdit();
-            this.textEditAge = new DevExpress.XtraEditors.TextEdit();
             this.textEditAddress = new DevExpress.XtraEditors.TextEdit();
             this.textEditFullname = new DevExpress.XtraEditors.TextEdit();
             this.textEditNidPp = new DevExpress.XtraEditors.TextEdit();
@@ -42,7 +41,6 @@ namespace CD4.UI.View
             this.lookUpEditIsland = new DevExpress.XtraEditors.LookUpEdit();
             this.lookUpEditAtoll = new DevExpress.XtraEditors.LookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditPhoneNumber.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditAge.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditAddress.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditFullname.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditNidPp.Properties)).BeginInit();
@@ -89,20 +87,6 @@ namespace CD4.UI.View
             this.textEditPhoneNumber.Size = new System.Drawing.Size(167, 20);
             this.textEditPhoneNumber.TabIndex = 22;
             // 
-            // textEditAge
-            // 
-            this.textEditAge.EnterMoveNextControl = true;
-            this.textEditAge.Location = new System.Drawing.Point(185, 64);
-            this.textEditAge.Name = "textEditAge";
-            this.textEditAge.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
-            this.textEditAge.Properties.NullText = "Age";
-            this.textEditAge.Properties.NullValuePrompt = "Age";
-            this.textEditAge.Properties.NullValuePromptShowForEmptyValue = true;
-            this.textEditAge.Properties.ValidateOnEnterKey = true;
-            this.textEditAge.Size = new System.Drawing.Size(167, 20);
-            this.textEditAge.TabIndex = 23;
-            this.textEditAge.TabStop = false;
-            // 
             // textEditAddress
             // 
             this.textEditAddress.EnterMoveNextControl = true;
@@ -122,7 +106,7 @@ namespace CD4.UI.View
             this.textEditFullname.Location = new System.Drawing.Point(185, 12);
             this.textEditFullname.Name = "textEditFullname";
             this.textEditFullname.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
-            this.textEditFullname.Properties.Appearance.BackColor = System.Drawing.Color.Lavender;
+            this.textEditFullname.Properties.Appearance.BackColor = System.Drawing.Color.White;
             this.textEditFullname.Properties.Appearance.BorderColor = System.Drawing.Color.Transparent;
             this.textEditFullname.Properties.Appearance.Options.UseBackColor = true;
             this.textEditFullname.Properties.Appearance.Options.UseBorderColor = true;
@@ -205,7 +189,7 @@ namespace CD4.UI.View
             // lookUpEditCountry
             // 
             this.lookUpEditCountry.EnterMoveNextControl = true;
-            this.lookUpEditCountry.Location = new System.Drawing.Point(12, 90);
+            this.lookUpEditCountry.Location = new System.Drawing.Point(185, 64);
             this.lookUpEditCountry.Name = "lookUpEditCountry";
             this.lookUpEditCountry.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
             this.lookUpEditCountry.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -258,7 +242,6 @@ namespace CD4.UI.View
             this.Controls.Add(this.simpleButtonSave);
             this.Controls.Add(this.progressPanelPatientData);
             this.Controls.Add(this.textEditPhoneNumber);
-            this.Controls.Add(this.textEditAge);
             this.Controls.Add(this.textEditAddress);
             this.Controls.Add(this.textEditFullname);
             this.Controls.Add(this.textEditNidPp);
@@ -269,9 +252,9 @@ namespace CD4.UI.View
             this.Controls.Add(this.lookUpEditAtoll);
             this.MaximizeBox = false;
             this.Name = "UpdatePatientView";
+            this.Tag = "UpdatePatientViewAccess";
             this.Text = "UpdatePatientView";
             ((System.ComponentModel.ISupportInitialize)(this.textEditPhoneNumber.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.textEditAge.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditAddress.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditFullname.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditNidPp.Properties)).EndInit();
@@ -290,7 +273,6 @@ namespace CD4.UI.View
         private DevExpress.XtraEditors.SimpleButton simpleButtonSave;
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelPatientData;
         private DevExpress.XtraEditors.TextEdit textEditPhoneNumber;
-        private DevExpress.XtraEditors.TextEdit textEditAge;
         private DevExpress.XtraEditors.TextEdit textEditAddress;
         private DevExpress.XtraEditors.TextEdit textEditFullname;
         private DevExpress.XtraEditors.TextEdit textEditNidPp;

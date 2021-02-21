@@ -58,6 +58,9 @@ namespace CD4.UI.View
 
             //profile Tab Buttons
             barButtonItemChangePassword.ItemClick += OpenChangePasswordView;
+            barButtonItemUpdatePatientDetailsView.ItemClick += OpenPatientUpdateView;
+            //restricted tab buttons
+
             #endregion
 
             //load app wide static data from database
@@ -67,6 +70,12 @@ namespace CD4.UI.View
             this.MdiChildActivate += MainView_MdiChildActivate;
 
             SetDisciplineRibbonOptions();
+        }
+
+        private void OpenPatientUpdateView(object sender, ItemClickEventArgs e)
+        {
+            OpenMdiForm<UpdatePatientView>();
+
         }
 
         private void OpenLabNotesView(object sender, ItemClickEventArgs e)

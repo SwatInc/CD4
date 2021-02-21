@@ -199,6 +199,7 @@
     <Compile Include="ViewModel\IScientistViewModel.cs" />
     <Compile Include="ViewModel\ISitesViewModel.cs" />
     <Compile Include="ViewModel\ITestViewModel.cs" />
+    <Compile Include="ViewModel\IUpdatePatientViewModel.cs" />
     <Compile Include="ViewModel\LabNotesViewModel.cs" />
     <Compile Include="ViewModel\LateOrderEntryViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
@@ -211,6 +212,7 @@
     <Compile Include="ViewModel\ScientistViewModel.cs" />
     <Compile Include="ViewModel\SitesViewModel.cs" />
     <Compile Include="ViewModel\TestViewModel.cs" />
+    <Compile Include="ViewModel\UpdatePatientViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CD4.DataLibrary\CD4.DataLibrary.csproj">

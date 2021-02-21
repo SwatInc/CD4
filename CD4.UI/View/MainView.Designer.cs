@@ -53,12 +53,14 @@
             this.barButtonItemViewAllNotes = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemContacts = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItem2 = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemUpdatePatientDetailsView = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPageCategoryDiscipline = new DevExpress.XtraBars.Ribbon.RibbonPageCategory();
             this.ribbonPageDiscipline = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageGeneral = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup2 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup6 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
+            this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageConfiguration = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup1 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.ribbonPageProfile = new DevExpress.XtraBars.Ribbon.RibbonPage();
@@ -67,8 +69,6 @@
             this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.repositoryItemRatingControl1 = new DevExpress.XtraEditors.Repository.RepositoryItemRatingControl();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
-            this.ribbonPageGroup6 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
-            this.ribbonPageGroup7 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuDiscipline)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRatingControl1)).BeginInit();
@@ -100,7 +100,7 @@
             this.barButtonItemViewAllNotes,
             this.barButtonItemContacts,
             this.barButtonItem1,
-            this.barButtonItem2});
+            this.barButtonItemUpdatePatientDetailsView});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
             this.ribbon.MaxItemId = 32;
             this.ribbon.Name = "ribbon";
@@ -298,13 +298,13 @@
             this.barButtonItem1.Name = "barButtonItem1";
             this.barButtonItem1.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
-            // barButtonItem2
+            // barButtonItemUpdatePatientDetailsView
             // 
-            this.barButtonItem2.Caption = "Update Patient Details";
-            this.barButtonItem2.Id = 31;
-            this.barButtonItem2.ImageOptions.SvgImage = global::CD4.UI.Properties.Resources.updateUser;
-            this.barButtonItem2.Name = "barButtonItem2";
-            this.barButtonItem2.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.barButtonItemUpdatePatientDetailsView.Caption = "Update Patient Details";
+            this.barButtonItemUpdatePatientDetailsView.Id = 31;
+            this.barButtonItemUpdatePatientDetailsView.ImageOptions.SvgImage = global::CD4.UI.Properties.Resources.updateUser;
+            this.barButtonItemUpdatePatientDetailsView.Name = "barButtonItemUpdatePatientDetailsView";
+            this.barButtonItemUpdatePatientDetailsView.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
             // ribbonPageCategoryDiscipline
             // 
@@ -342,6 +342,22 @@
             this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemBulkImportOrders);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
             this.ribbonPageGroup2.Text = "Pre-Analytical";
+            // 
+            // ribbonPageGroup6
+            // 
+            this.ribbonPageGroup6.ItemLinks.Add(this.barButtonItemAcceptSamples);
+            this.ribbonPageGroup6.ItemLinks.Add(this.barButtonItemResultEntry);
+            this.ribbonPageGroup6.Name = "ribbonPageGroup6";
+            this.ribbonPageGroup6.Text = "Analytical";
+            // 
+            // ribbonPageGroup7
+            // 
+            this.ribbonPageGroup7.ItemLinks.Add(this.barButtonItem1);
+            this.ribbonPageGroup7.ItemLinks.Add(this.barButtonItemStatistics);
+            this.ribbonPageGroup7.ItemLinks.Add(this.barButtonItemViewAllNotes);
+            this.ribbonPageGroup7.ItemLinks.Add(this.barButtonItemContacts);
+            this.ribbonPageGroup7.Name = "ribbonPageGroup7";
+            this.ribbonPageGroup7.Text = "Post-Analytical && Others";
             // 
             // ribbonPageConfiguration
             // 
@@ -385,12 +401,12 @@
             this.ribbonPageRestricted.Groups.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageGroup[] {
             this.ribbonPageGroup5});
             this.ribbonPageRestricted.Name = "ribbonPageRestricted";
-            this.ribbonPageRestricted.Tag = "Ribbon.Restricted";
+            this.ribbonPageRestricted.Tag = "Ribbon.RestrictedAccess";
             this.ribbonPageRestricted.Text = "Restricted";
             // 
             // ribbonPageGroup5
             // 
-            this.ribbonPageGroup5.ItemLinks.Add(this.barButtonItem2);
+            this.ribbonPageGroup5.ItemLinks.Add(this.barButtonItemUpdatePatientDetailsView);
             this.ribbonPageGroup5.Name = "ribbonPageGroup5";
             this.ribbonPageGroup5.Text = "Restricted Functions";
             // 
@@ -406,22 +422,6 @@
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
             this.ribbonStatusBar.Size = new System.Drawing.Size(1110, 31);
-            // 
-            // ribbonPageGroup6
-            // 
-            this.ribbonPageGroup6.ItemLinks.Add(this.barButtonItemAcceptSamples);
-            this.ribbonPageGroup6.ItemLinks.Add(this.barButtonItemResultEntry);
-            this.ribbonPageGroup6.Name = "ribbonPageGroup6";
-            this.ribbonPageGroup6.Text = "Analytical";
-            // 
-            // ribbonPageGroup7
-            // 
-            this.ribbonPageGroup7.ItemLinks.Add(this.barButtonItem1);
-            this.ribbonPageGroup7.ItemLinks.Add(this.barButtonItemStatistics);
-            this.ribbonPageGroup7.ItemLinks.Add(this.barButtonItemViewAllNotes);
-            this.ribbonPageGroup7.ItemLinks.Add(this.barButtonItemContacts);
-            this.ribbonPageGroup7.Name = "ribbonPageGroup7";
-            this.ribbonPageGroup7.Text = "Post-Analytical && Others";
             // 
             // MainView
             // 
@@ -485,7 +485,7 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItem1;
         private DevExpress.XtraBars.Ribbon.RibbonPage ribbonPageRestricted;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup5;
-        private DevExpress.XtraBars.BarButtonItem barButtonItem2;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemUpdatePatientDetailsView;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup6;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup7;
     }
