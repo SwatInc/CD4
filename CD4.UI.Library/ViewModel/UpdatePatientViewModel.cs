@@ -13,6 +13,7 @@ namespace CD4.UI.Library.ViewModel
     public class UpdatePatientViewModel : INotifyPropertyChanged, IUpdatePatientViewModel
     {
         #region Private Properties
+        private int? Id; //patient Id used to update all details including NidPp
         private string nidPp;
         private string fullname;
         private string address;
@@ -210,7 +211,7 @@ namespace CD4.UI.Library.ViewModel
         private async Task DisplayDataOnViewAsync(PatientModel mappedPatient)
         {
             if(mappedPatient is null) { return; }
-
+            Id = mappedPatient.Id;
             NidPp = mappedPatient.NidPp;
             Fullname = mappedPatient.Fullname;
             Address = mappedPatient.Address;
@@ -225,6 +226,7 @@ namespace CD4.UI.Library.ViewModel
         }
         private void ResetViewData()
         {
+            Id = null;
             NidPp = string.Empty;
             Fullname = string.Empty;
             Address = string.Empty;
