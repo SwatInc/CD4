@@ -24,6 +24,20 @@ namespace CD4.UI.View
             _viewModel = viewModel;
             InitializeDataBinding();
             textEditNidPp.KeyDown += LoadPatientOnNidPp;
+            simpleButtonSave.Click += SaveUpdatedPatientData;
+        }
+
+        private async void SaveUpdatedPatientData(object sender, EventArgs e)
+        {
+            try
+            {
+                await _viewModel.UpdatePatientAsync();
+                XtraMessageBox.Show("Patient Updated!");
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(JsonConvert.SerializeObject(ex, Formatting.Indented));
+            }
         }
 
         private void LoadPatientOnNidPp(object sender, KeyEventArgs e)

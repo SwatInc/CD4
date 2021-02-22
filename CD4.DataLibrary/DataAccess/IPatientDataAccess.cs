@@ -10,6 +10,7 @@ namespace CD4.DataLibrary.DataAccess
         Task<List<PatientModel>> GetPatientByPartialName(string partialName);
         Task<PatientNidPpAndNameModel> GetPatientBySamplCin(string cin);
         Task<int> InsertPatient(PatientInsertDatabaseModel patient);
-        Task<bool> UpdatePatient(PatientUpdateDatabaseModel patient);
+        Task<bool> UpdatePatientById(PatientUpdateDatabaseModel patient);
+        Task<PatientUpdateDatabaseModel> UpdatePatientByIdReturnInserted(PatientUpdateDatabaseModel patient);
     }
 }

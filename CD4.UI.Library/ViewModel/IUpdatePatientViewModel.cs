@@ -26,6 +26,6 @@ namespace CD4.UI.Library.ViewModel
         event PropertyChangedEventHandler PropertyChanged;
 
         Task LoadPatientByNidPp();
-        Task UpdatePatient();
+        Task UpdatePatientAsync();
     }
 }

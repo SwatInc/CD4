@@ -127,7 +127,7 @@ namespace CD4.DataLibrary.DataAccess
                     Address = request.Address,
                     PhoneNumber = request.PhoneNumber
                 };
-                var isPatientUpdated = await patientData.UpdatePatient(patientToUpdate);
+                var isPatientUpdated = await patientData.UpdatePatientById(patientToUpdate);
                 if (!isPatientUpdated) { throw new Exception("Cannot update patient data!"); }
             }
             if (patientStatus == RequestDataStatus.New)

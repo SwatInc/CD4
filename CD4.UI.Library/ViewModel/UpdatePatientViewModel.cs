@@ -180,17 +180,31 @@ namespace CD4.UI.Library.ViewModel
 
         }
 
-        public async Task UpdatePatient()
+        public async Task UpdatePatientAsync()
         {
             try
             {
                 _isLoading = true;
+                //call db to update patient
+                var patient = new PatientUpdateModel()
+                {
+                    Id = (int)Id,
+                    Fullname = fullname,
+                    NidPp = nidPp,
+                    Birthdate = Birthdate.GetValueOrDefault().ToString("yyyyMMdd"),
+                    GenderId = selectedGenderId,
+                    AtollId = (AllAtollsWithCorrespondingIsland.Find((x)=> x.Atoll == SelectedAtoll && x.Island == SelectedIsland)).Id,
+                    CountryId = SelectedNationalityId,
+                    Address = Address,
+                    PhoneNumber = PhoneNumber
+                };
+                var mappedPatient = _mapper.Map<DataLibrary.Models.PatientUpdateDatabaseModel>(patient);
+                var updated = await _patientDataAccess.UpdatePatientByIdReturnInserted(mappedPatient);
+                var updatedmapped = _mapper.Map<PatientUpdateModel>(updated);
                 //reset form data
                 ResetViewData();
-                //call db to update patient
-                await Task.Run(() => { throw new NotImplementedException(); });
                 //display updated data on view
-               // DisplayDataOnView();
+                await DisplayDataOnViewAsync(updatedmapped);
 
             }
             catch (Exception)
@@ -208,20 +222,39 @@ namespace CD4.UI.Library.ViewModel
         #endregion
 
         #region Private Methods
-        private async Task DisplayDataOnViewAsync(PatientModel mappedPatient)
+        private async Task DisplayDataOnViewAsync(PatientModel patientModel)
         {
-            if(mappedPatient is null) { return; }
-            Id = mappedPatient.Id;
-            NidPp = mappedPatient.NidPp;
-            Fullname = mappedPatient.Fullname;
-            Address = mappedPatient.Address;
-            SelectedGenderId = Gender.FirstOrDefault((x) => x.Gender == mappedPatient.Gender).Id;
-            Birthdate = mappedPatient.Birthdate;
-            SelectedAtoll = mappedPatient.Atoll;
+            if(patientModel is null) { return; }
+            Id = patientModel.Id;
+            NidPp = patientModel.NidPp;
+            Fullname = patientModel.Fullname;
+            Address = patientModel.Address;
+            SelectedGenderId = Gender.FirstOrDefault((x) => x.Gender == patientModel.Gender).Id;
+            Birthdate = patientModel.Birthdate;
+            SelectedAtoll = patientModel.Atoll;
             await RepopulateIslandDatasource(SelectedAtoll);
-            SelectedIsland = mappedPatient.Island;
-            PhoneNumber = mappedPatient.PhoneNumber;
-            SelectedNationalityId = Nationalities.FirstOrDefault((x) => x.Country == mappedPatient.Country).Id;
+            SelectedIsland = patientModel.Island;
+            PhoneNumber = patientModel.PhoneNumber;
+            SelectedNationalityId = Nationalities.FirstOrDefault((x) => x.Country == patientModel.Country).Id;
+
+        }
+        private async Task DisplayDataOnViewAsync(PatientUpdateModel patientUpdateModel)
+        {
+            if (patientUpdateModel is null) { return; }
+            Id = patientUpdateModel.Id;
+            NidPp = patientUpdateModel.NidPp;
+            Fullname = patientUpdateModel.Fullname;
+            Address = patientUpdateModel.Address;
+            SelectedGenderId = patientUpdateModel.GenderId;
+            Birthdate = DateTime.Parse(patientUpdateModel.Birthdate);
+
+            var atollData = AllAtollsWithCorrespondingIsland.Find((x) => x.Id == patientUpdateModel.AtollId);
+            
+            SelectedAtoll = (atollData).Atoll;
+            await RepopulateIslandDatasource(SelectedAtoll);
+            SelectedIsland = atollData.Island;
+            PhoneNumber = patientUpdateModel.PhoneNumber;
+            SelectedNationalityId = patientUpdateModel.CountryId;
 
         }
         private void ResetViewData()

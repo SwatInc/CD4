@@ -80,7 +80,7 @@ namespace CD4.UI.View
 
         private void OpenLabNotesView(object sender, ItemClickEventArgs e)
         {
-            OpenMdiForm<LabNotesView>();
+            //OpenMdiForm<LabNotesView>();
         }
 
         private void OpenBulkOrdersView(object sender, ItemClickEventArgs e)

@@ -70,12 +70,12 @@ namespace CD4.DataLibrary.DataAccess
                 (storedProcedure, patient);
         }
 
-        public async Task<bool> UpdatePatient(PatientUpdateDatabaseModel patient)
+        public async Task<bool> UpdatePatientById(PatientUpdateDatabaseModel patient)
         {
             try
             {
                 var storedProcedure = "[dbo].[usp_UpdatePatientWithId]";
-                _ = await SelectInsertOrUpdateAsync<bool, PatientUpdateDatabaseModel>
+                _ = await SelectInsertOrUpdateAsync<dynamic, PatientUpdateDatabaseModel>
                     (storedProcedure, patient);
                 return true;
             }
@@ -85,5 +85,18 @@ namespace CD4.DataLibrary.DataAccess
             }
         }
 
+        public async Task<PatientUpdateDatabaseModel> UpdatePatientByIdReturnInserted(PatientUpdateDatabaseModel patient)
+        {
+            try
+            {
+                var storedProcedure = "[dbo].[usp_UpdatePatientWithId]";
+                return await SelectInsertOrUpdateAsync<PatientUpdateDatabaseModel, PatientUpdateDatabaseModel>
+                    (storedProcedure, patient);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

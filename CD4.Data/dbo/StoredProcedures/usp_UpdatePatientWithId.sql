@@ -21,4 +21,16 @@ SET NOCOUNT ON;
 		[Address] = @Address,
 		[PhoneNumber] = @PhoneNumber
 	WHERE [Id] = @Id;
+
+	SELECT [Id]
+		  ,[Fullname]
+		  ,[NidPp]
+		  ,[Birthdate]
+		  ,[GenderId]
+		  ,[AtollId]
+		  ,[CountryId]
+		  ,[Address]
+		  ,[PhoneNumber]
+	FROM [dbo].[Patient]
+	WHERE [Id] = @Id;
 END
