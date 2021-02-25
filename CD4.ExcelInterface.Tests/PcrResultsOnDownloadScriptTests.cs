@@ -2,6 +2,8 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Windows.Forms;
 
 namespace CD4.ExcelInterface.Tests
 {
@@ -180,6 +182,36 @@ namespace CD4.ExcelInterface.Tests
             Assert.IsTrue(result1.ToLower().Contains("negative"));
             Assert.IsTrue(result2.ToLower().Contains("negative"));
             Assert.IsTrue(result3.ToLower().Contains("negative"));
+        }
+
+        [DataTestMethod]
+        [DataRow("12","13", "14","positive")]
+        [DataRow("37","37", "37","positive")]
+        [DataRow("37","37", "42","rerun")]
+        [DataRow("37", "37", "38", "rerun")]
+        [DataRow("37","38", "37", "negative")]
+        [DataRow("38","37", "37", "negative")]
+        [DataRow("37","38", "38", "negative")]
+        [DataRow("38","37", "38", "negative")]
+        [DataRow("-","-", "38", "negative")]
+        [DataRow("-", "-", "42", "negative")]
+        [DataRow("-","-", "20", "negative")]
+        [DataRow("-","-", "-", "invalid")]
+        [DataRow("20","-", "-", "invalid")]
+        [DataRow("20", "20", "-", "invalid")]
+        public void PerkinEmler_AllTargets_PositiveNegativeRerunInvalid(string orf1ab, string ngene, string cy5, string actualResult)
+        {
+            var test = new List<MeasurementValues>();
+            test.Add(new MeasurementValues() { TestCode = "ORF1ab", MeasurementValue = orf1ab });
+            test.Add(new MeasurementValues() { TestCode = "N-Gene", MeasurementValue = ngene });
+            test.Add(new MeasurementValues() { TestCode = "IC", MeasurementValue = cy5 });
+
+            var script = new PcrResultsOnDownloadScript();
+
+            var interpretedResult = script.GetInterpretation(3, test);
+
+            Assert.IsTrue(interpretedResult.ToLower().Contains(actualResult));
+
         }
     }
     
