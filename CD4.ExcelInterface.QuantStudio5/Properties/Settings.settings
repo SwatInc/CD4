@@ -1,0 +1,9 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="CD4.ExcelInterface.QuantStudio5.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Config" Type="System.String" Scope="User">
+      <Value Profile="(Default)">{"MainFormTitle":"CD4 Interface (QuantStudio5)","AnalyserName":"QuantStudio5-01","ExcelFileDirectory":"C:\\Logs\\","ExportPath":"C:\\Export\\","DataExtension":"json","ControlFileExtension":"ok","LisExportExtension":"*.xlsx","BatchId":{"Row":0,"Column":0},"DataRange":{"StartRow":45,"EndRow":1000},"SidColumn":3,"SamplePositionColumn":1,"ExcludeRows":[2],"PositiveControlSID":"","NegativeControlSID":"","Measurements":[{"TestCodeColumn":4,"MeasurementValueColumn":8,"Unit":""}]}</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

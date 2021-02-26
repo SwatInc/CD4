@@ -9,7 +9,7 @@ public class PcrResultsOnDownloadScript
     {
         Kits = new List<dynamic>();
         Kits.Add(new { Id = 1, Kit = "Zeesan" });
-        Kits.Add(new { Id = 2, Kit = "LabGun" });
+        //Kits.Add(new { Id = 2, Kit = "LabGun" });
         Kits.Add(new { Id = 3, Kit = "PerkinElmer" });
     }
     public bool IsScriptLoaded()
