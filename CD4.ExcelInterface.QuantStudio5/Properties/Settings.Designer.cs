@@ -25,7 +25,7 @@ namespace CD4.ExcelInterface.QuantStudio5.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"{""MainFormTitle"":""CD4 Interface (QuantStudio5)"",""AnalyserName"":""QuantStudio5-01"",""ExcelFileDirectory"":""C:\\Logs\\"",""ExportPath"":""C:\\Export\\"",""DataExtension"":""json"",""ControlFileExtension"":""ok"",""LisExportExtension"":""*.xlsx"",""BatchId"":{""Row"":0,""Column"":0},""DataRange"":{""StartRow"":45,""EndRow"":1000},""SidColumn"":3,""SamplePositionColumn"":1,""ExcludeRows"":[2],""PositiveControlSID"":"""",""NegativeControlSID"":"""",""Measurements"":[{""TestCodeColumn"":4,""MeasurementValueColumn"":8,""Unit"":""""}]}")]
+        [global::System.Configuration.DefaultSettingValueAttribute(@"{""MainFormTitle"":""CD4 Interface (QuantStudio5-01)"",""AnalyserName"":""QuantStudio5-01"",""ExcelFileDirectory"":""C:\\Logs\\"",""ExportPath"":""C:\\Export\\"",""DataExtension"":""json"",""ControlFileExtension"":""ok"",""LisExportExtension"":""*.xlsx"",""BatchId"":{""Row"":0,""Column"":0},""DataRange"":{""StartRow"":45,""EndRow"":1000},""SidColumn"":3,""SamplePositionColumn"":1,""ExcludeRows"":[2],""PositiveControlSID"":"""",""NegativeControlSID"":"""",""Measurements"":[{""TestCodeColumn"":4,""MeasurementValueColumn"":8,""Unit"":""""}]}")]
         public string Config {
             get {
                 return ((string)(this["Config"]));

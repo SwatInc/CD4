@@ -2,7 +2,6 @@
 using CD4.ExcelInterface.QuantStudio5.Models;
 using CSScriptLibrary;
 using Newtonsoft.Json;
-using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
 using NPOI.XSSF.UserModel;
 using System;
@@ -107,11 +106,13 @@ namespace CD4.ExcelInterface.QuantStudio5.ViewModels
 
         private void _backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            var batchId = "";
             if (!(e.Result is null))
             {
                 var result = (List<InterfaceResults>)(e.Result);
                 foreach (var item in result)
                 {
+                    if (string.IsNullOrEmpty(batchId)) { batchId = item.BatchId; }
                     item.InstrumentId.InstrumentCode = Configuration.AnalyserName;
                     InterfaceResults.Add(item);
                 }
@@ -119,8 +120,26 @@ namespace CD4.ExcelInterface.QuantStudio5.ViewModels
                 result = null;
             }
 
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(KitNames)));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(KitNames)));
 
+            //run interpretations if analyser is QuantStudio
+            if (batchId.ToLower().Contains("perkinelmer"))
+            {
+                Logs.Add(new LogModel() { Date = DateTime.Now, Log = "Auto selected PerkinElmer kit." });
+                InterpretData(3);
+            }
+            if (batchId.ToLower().Contains("zeesan"))
+            {
+                Logs.Add(new LogModel() { Date = DateTime.Now, Log = "Auto selected Zeesan kit." });
+                InterpretData(1);
+            }
+            if (batchId.ToLower().Contains("labgun"))
+            {
+                Logs.Add(new LogModel() { Date = DateTime.Now, Log = "Auto selected LabGun kit." });
+                InterpretData(2);
+            }
+
+            //auto export to LIS
             ExportToUploader().GetAwaiter().GetResult();
         }
 
@@ -221,18 +240,39 @@ namespace CD4.ExcelInterface.QuantStudio5.ViewModels
                         result.BatchId = experimentName.StringCellValue;
 
                         //result
+                        bool skipResult = false;
                         foreach (var item in Configuration.Measurements)
                         {
+                            skipResult = false;
                             var testcode = dataRow.GetCell(item.TestCodeColumn)?.StringCellValue;
                             if (string.IsNullOrEmpty(testcode)) { continue; }
-                            result.Measurements.Add(new MeasurementValues()
+
+                            //if sample number is already present in previous rows
+                            var sample = processedInterfaceResults.Find((x) => x.SampleId == result.SampleId);
+                            if (!(sample is null))
                             {
-                                TestCode = testcode,
-                                MeasurementValue = dataRow.GetCell(item.MeasurementValueColumn)?.ToString()
-                            });
+                                sample.Measurements.Add(new MeasurementValues()
+                                {
+                                    TestCode = testcode,
+                                    MeasurementValue = dataRow.GetCell(item.MeasurementValueColumn)?.ToString()
+                                });
+                                skipResult = true;
+                            }
+                            else
+                            {
+                                //if new sample number
+                                result.Measurements.Add(new MeasurementValues()
+                                {
+                                    TestCode = testcode,
+                                    MeasurementValue = dataRow.GetCell(item.MeasurementValueColumn)?.ToString()
+                                });
+                                skipResult = false;
+                            }
+
+
                         }
                         //add the results to a temp list..., if the result has a sample Id
-                        if (!string.IsNullOrEmpty(result.SampleId)) processedInterfaceResults.Add(result);
+                        if (!string.IsNullOrEmpty(result.SampleId) && !skipResult) processedInterfaceResults.Add(result);
                     }
                 }
                 //report progress
