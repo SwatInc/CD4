@@ -221,7 +221,7 @@ public class QuantStudio5OnDownloadScript
             //negative
             if (orf1abDecimal > 37M || ngeneDecimal > 37M || cy5Decimal <= 37M)
             {
-                return GetInterpretationTestCode() + "|1Negative";
+                return GetInterpretationTestCode() + "|Negative";
             }
 
             //does not fit any condition specified.
@@ -232,11 +232,11 @@ public class QuantStudio5OnDownloadScript
             //Case 2: Atleast one Ct is not numeric
             if (!cy5IsDecimal)
             {
-                return GetInterpretationTestCode() + "|IInvalid";
+                return GetInterpretationTestCode() + "|Invalid";
             }
             else
             {
-                return GetInterpretationTestCode() + "|2Negative";
+                return GetInterpretationTestCode() + "|Negative";
             }
         }
 

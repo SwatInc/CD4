@@ -57,7 +57,7 @@
     <OutputPath>bin\x86\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <DebugType>full</DebugType>
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>x64</PlatformTarget>
     <LangVersion>latest</LangVersion>
     <ErrorReport>prompt</ErrorReport>
   </PropertyGroup>
@@ -152,6 +152,7 @@
     <Compile Include="Models\ResultReferenceRangeModel.cs" />
     <Compile Include="Models\SampleAndResultStatusAndResultModel.cs" />
     <Compile Include="Models\SampleNotesModel.cs" />
+    <Compile Include="Models\SampleWithTestIdModel.cs" />
     <Compile Include="Models\TypesModel.cs" />
     <Compile Include="Models\UpdatedResultAndStatusModel.cs" />
     <Compile Include="Models\WorkstationPrintersInfoModel.cs" />

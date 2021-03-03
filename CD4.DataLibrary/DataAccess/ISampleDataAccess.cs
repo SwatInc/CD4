@@ -7,6 +7,7 @@ namespace CD4.DataLibrary.DataAccess
     public interface ISampleDataAccess
     {
         Task<SampleAndResultStatusAndResultModel> CancelSampleRejectionByCinAsync(string cin, int userId);
+        Task<List<SampleWithTestIdModel>> GetAllTestIdsForAllSpecifiedSamples(List<string> cins);
         Task<List<AuditTrailModel>> GetAuditTrailByCinAsync(string cin);
         Task<int> GetNotesCountAsync(string cin);
         Task<List<SampleNotesModel>> GetSampleNotesByCin(string cin);

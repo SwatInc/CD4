@@ -225,7 +225,7 @@ namespace CD4.ExcelInterface.ViewModels
                     }
                 }
                 //report progress
-                _backgroundWorker.ReportProgress(1, $" {JsonConvert.SerializeObject(processedInterfaceResults, Formatting.Indented)}");
+                _backgroundWorker.ReportProgress(1, $" {JsonConvert.SerializeObject(processedInterfaceResults)}");
                 return processedInterfaceResults;
             }
             catch (Exception ex)
@@ -315,7 +315,7 @@ namespace CD4.ExcelInterface.ViewModels
             }
 
             var isSuccessfull = false;
-            var exportData = JsonConvert.SerializeObject(InterfaceResults, Formatting.Indented);
+            var exportData = JsonConvert.SerializeObject(InterfaceResults);
             var asciiencoding = new ASCIIEncoding();
             var filenameWithoutExtension = $"{Configuration.ExportPath}\\{DateTime.Now.ToString("yyyyMMdd_HHmmss_fffffff")}";
 

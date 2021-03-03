@@ -272,6 +272,7 @@
     <Build Include="dbo\StoredProcedures\usp_GetBarcodeDetailsForMultipleSamples.sql" />
     <Build Include="dbo\StoredProcedures\usp_CollectMultipleSamples.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetTestStatusByTestIdAndCin.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetAllAssociatedTestIdsForSamples.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />

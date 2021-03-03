@@ -7,7 +7,6 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -18,17 +17,21 @@ namespace CD4.ResultsInterface
         private readonly ILogger<Worker> _logger;
         private readonly IConfiguration _configuration;
         private readonly IResultDataAccess _resultDataAccess;
+        private readonly ISampleDataAccess _sampleDataAccess;
         private readonly IStaticDataDataAccess _staticDataDataAccess;
         private List<ChannelMappingModel> _channelMappings;
+        private bool searchedTestData;
 
         public Worker(ILogger<Worker> logger,
             IConfiguration configuration,
             IResultDataAccess resultDataAccess,
+            ISampleDataAccess sampleDataAccess,
             IStaticDataDataAccess staticDataDataAccess)
         {
             _logger = logger;
             _configuration = configuration;
             _resultDataAccess = resultDataAccess;
+            _sampleDataAccess = sampleDataAccess;
             _staticDataDataAccess = staticDataDataAccess;
 
             _channelMappings = new List<ChannelMappingModel>();
@@ -42,12 +45,12 @@ namespace CD4.ResultsInterface
             {
                 var mappingData = await _staticDataDataAccess.GetChannelMappingData();
                 _logger.LogInformation($"Channel mapping data loaded: {JsonConvert.SerializeObject(mappingData)}");
-                if (mappingData is null) {return; }
+                if (mappingData is null) { return; }
 
                 foreach (var item in mappingData)
                 {
                     _channelMappings.Add(new ChannelMappingModel()
-                    { 
+                    {
                         AnalyserName = item.AnalyserName,
                         Download = item.Download,
                         TestId = item.TestId,
@@ -99,7 +102,7 @@ namespace CD4.ResultsInterface
 
         private async Task StartProcessingIncomingAsync(string[] files)
         {
-            _logger.LogInformation($"Starting to process incoming files\n\n{JsonConvert.SerializeObject(files, Formatting.Indented)}");
+            _logger.LogInformation($"Starting to process incoming files\n\n{JsonConvert.SerializeObject(files)}");
 
             foreach (var item in files)
             {
@@ -140,11 +143,26 @@ namespace CD4.ResultsInterface
 
         private async Task UploadResultsAsync(List<InterfaceResultsModel> resultsData)
         {
-            if(resultsData is null) { return; }
+            if (resultsData is null) { return; }
+            //load all testIds in all SIDs
+            var samplesWithTests = await GetAllSamplesWithAssociatedTestsAsync(resultsData);
+            //set the interface user Id
+            var interfaceUserId = _configuration.GetValue<int>("InterfaceUserId");
+            var canAddTests = _configuration.GetValue<bool>("AddTests");
 
             //iterate all specimens in the upload data
             foreach (var sample in resultsData)
             {
+                //verify that CIN exists on data base
+                var sampleData = samplesWithTests.FindAll((x) => x.Cin == sample.SampleId);
+                if (sampleData.Count == 0)
+                {
+                    _logger.LogWarning($"Cannot find sample Id {sample.SampleId}. Skipping the processing of the sample.");
+                    continue;
+                }
+
+                _logger.LogInformation($"Found sample: {sample.SampleId} with {sampleData.Count} test(s).");
+
                 //iterate all results for sample.
                 foreach (var test in sample.Measurements)
                 {
@@ -156,12 +174,23 @@ namespace CD4.ResultsInterface
                         continue;
                     }
 
-                    //if mapping is not null continue
+                    //if mapping is not null continue to upload
                     try
                     {
+
+                        //check wheher the TestId Exists for SID... 
+                        var searchedTestData = sampleData.Find((x) => x.TestId == mapping.TestId);
+                        if (searchedTestData is null && canAddTests)
+                        {
+                            _logger.LogInformation($"Adding new test {mapping.Upload} [ Id: {mapping.TestId}] for sample: {sample.SampleId}");
+                            //if test does not exist on sample... and if AddTests is true... Add the test
+                            await _resultDataAccess.ManageReflexTests(new List<DataLibrary.Models.TestsModel>()
+                                {new DataLibrary.Models.TestsModel(){Id = mapping.TestId}}, sample.SampleId, interfaceUserId);
+                        }
+
                         //call data layer to upload result.
                         _ = await _resultDataAccess.InterfaceUpdateResultByTestIdAndCinAsync
-                            (mapping.TestId, sample.SampleId, test.MeasurementValue, sample.BatchId, "NM", 1);
+                            (mapping.TestId, sample.SampleId, test.MeasurementValue, sample.BatchId, "NM", interfaceUserId);
                         _logger.LogInformation($"Upload requested for test [{test.TestCode}] with result [{test.MeasurementValue}] for sample [{sample.SampleId}]");
                     }
                     catch (Exception ex)
@@ -171,6 +200,37 @@ namespace CD4.ResultsInterface
                     }
 
                 }
+            }
+        }
+
+        private async Task<List<SampleWithTestIdModel>> GetAllSamplesWithAssociatedTestsAsync(List<InterfaceResultsModel> resultsData)
+        {
+            try
+            {
+                var cins = new List<string>();
+                foreach (var item in resultsData)
+                {
+                    cins.Add(item.SampleId);
+                }
+                var samplesAndTests = await _sampleDataAccess.GetAllTestIdsForAllSpecifiedSamples(cins);
+                if (samplesAndTests is null)
+                {
+                    return new List<SampleWithTestIdModel>();
+                }
+                var returnData = new List<SampleWithTestIdModel>();
+                foreach (var item in samplesAndTests)
+                {
+                    returnData.Add(new SampleWithTestIdModel() { Cin = item.Cin, TestId = item.TestId });
+                }
+
+                _logger.LogInformation("Successfully loaded all SIDs with associated tests required for the current processing batch.");
+                _logger.LogInformation(JsonConvert.SerializeObject(returnData));
+                return returnData;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex.Message, ex);
+                return new List<SampleWithTestIdModel>();
             }
         }
     }

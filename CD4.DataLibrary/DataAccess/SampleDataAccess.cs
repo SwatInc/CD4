@@ -42,6 +42,21 @@ namespace CD4.DataLibrary.DataAccess
             }
         }
 
+        public async Task<List<SampleWithTestIdModel>> GetAllTestIdsForAllSpecifiedSamples(List<string> cins)
+        {
+            var storedProcedure = "[dbo].[usp_GetAllAssociatedTestIdsForSamples]";
+            var parameters = new { SampleCins = GetCinTable(cins) };
+
+            try
+            {
+                return await LoadDataWithParameterAsync<SampleWithTestIdModel, dynamic>(storedProcedure, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public async Task<SampleAndResultStatusAndResultModel> CancelSampleRejectionByCinAsync(string cin, int userId)
         {
             var storedProcedure = "[dbo].[usp_CancelSampleRejectionByCin]";
