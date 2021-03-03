@@ -192,7 +192,7 @@ namespace CD4.DataLibrary.DataAccess
                 testStatusId = await _statusData.GetTestStatusByTestIdAndCin(testId, cin);
                 if (testStatusId == 0)
                 {
-                    throw new Exception("Cannot determine test status. Cannot update result.");
+                    throw new Exception($"Cannot determine test status. Cannot update sample [{cin} of batch {batchId}] result: {result} for TestId: {testId}");
                 }
             }
             catch (Exception)
