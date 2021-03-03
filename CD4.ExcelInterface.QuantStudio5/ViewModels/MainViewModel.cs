@@ -211,14 +211,16 @@ namespace CD4.ExcelInterface.QuantStudio5.ViewModels
             IWorkbook workbook = new XSSFWorkbook(fileStream);
             ISheet sheet = workbook.GetSheet("Results");
 
-            //Get Experiment name
-            IRow row = sheet.GetRow(30);
-            var experimentName = row.GetCell(1);
-            var a = experimentName.StringCellValue;
+
             try
             {
                 if (sheet != null)
                 {
+                    //auto determine start row
+                    if (Configuration.DataRange.AutoDetectStartRow.Active) { DetectStartRowAutomatically(sheet); }
+                    //Get Experiment name
+                    var experimentName = GetExperimentName(sheet);
+
                     for (int i = Configuration.DataRange.StartRow; i < Configuration.DataRange.EndRow; i++)
                     {
                         IRow dataRow = sheet.GetRow(i);
@@ -237,7 +239,7 @@ namespace CD4.ExcelInterface.QuantStudio5.ViewModels
                         result.ResultType = "NM";
 
                         //Batch Id
-                        result.BatchId = experimentName.StringCellValue;
+                        result.BatchId = experimentName;
 
                         //result
                         bool skipResult = false;
@@ -286,6 +288,81 @@ namespace CD4.ExcelInterface.QuantStudio5.ViewModels
             }
 
         }
+
+        private string GetExperimentName(ISheet sheet)
+        {
+            var experimentName = "";
+            var keywords = Configuration.BatchId.CsvKeywords.Split(',');
+            //scan until start row
+            for (int i = 0; i < Configuration.DataRange.StartRow; i++)
+            {
+                IRow row = sheet.GetRow(i);
+                if (row is null) { continue; }
+                var rowValue = (row.GetCell(Configuration.BatchId.ScanColumnIndex)).StringCellValue;
+
+                //iaterate all keywords to find a match
+                foreach (var item in keywords)
+                {
+                    if (rowValue.Contains(item.Trim()))
+                    {
+                        //get the data from data column
+                        var dataValue = (row.GetCell(Configuration.BatchId.DataColumnIndex)).StringCellValue;
+
+                        if (dataValue.Contains("\\"))
+                        {
+                            var data = dataValue.Substring(dataValue.LastIndexOf('\\')+1);
+                            experimentName = $"{experimentName} {data}";
+                            continue;
+                        }
+
+                        if (!(experimentName.Contains(dataValue.Trim()))) { experimentName = $"{experimentName} {dataValue}"; }
+                        
+                    }
+                }
+
+            }
+
+            Logs.Add(new LogModel() { Log = $"Experiment Name: {experimentName}" });
+            return experimentName.Replace(".eds", "").Trim();
+
+        }
+
+        /// <summary>
+        /// automatically detects data start row based on configuration
+        /// </summary>
+        /// <param name="sheet">The sheet to read through to detect start row</param>
+        private void DetectStartRowAutomatically(ISheet sheet)
+        {
+            try
+            {
+                //iterate 1st 200 rows... exit loop early if keyword is found
+                for (int i = 1; i < 200; i++)
+                {
+                    //get the currnt row cell value
+                    IRow row = sheet.GetRow(i);
+                    if (row is null) { continue; }
+                    var rowValue = (row.GetCell(Configuration.DataRange.AutoDetectStartRow.ColumnIndex)).StringCellValue;
+
+                    //if the cell value equals the keyword.... 
+                    if (rowValue == Configuration.DataRange.AutoDetectStartRow.Keyword)
+                    {
+                        //next row is the start row
+                        var startRow = i + 1;
+                        Logs.Add(new LogModel() { Log = $"Auto-detected start row: {startRow}" });
+                        //overwrite config start row data
+                        Configuration.DataRange.StartRow = startRow;
+                        //exit the for loop
+                        break;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Logs.Add(new LogModel() { Log = $"An error occured while trying to detect starting row: {ex.Message}" });
+            }
+
+        }
+
         private void DeleteIfExists(FileInfo fileInfo)
         {
             if (fileInfo.Exists)
@@ -323,6 +400,13 @@ namespace CD4.ExcelInterface.QuantStudio5.ViewModels
         #region Public Methods
         public void InterpretData(int selectedKitId)
         {
+            //check whether the script is loaded... return otherwise
+            if (!_isScriptLoaded) 
+            {
+                Logs.Add(new LogModel() { Log = $"Cannot interpret data. Script [ {Configuration.AnalyserName} ] not loaded" });
+                return; 
+            }
+
             if (InterfaceResults.Count == 0)
             {
                 Logs.Add(new LogModel() { Log = "No results in queue to process" });

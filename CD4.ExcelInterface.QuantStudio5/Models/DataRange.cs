@@ -2,6 +2,7 @@
 {
     public class DataRange
     {
+        public AutoDetectStartRow AutoDetectStartRow { get; set; }
         public int StartRow { get; set; }
         public int EndRow { get; set; }
     }

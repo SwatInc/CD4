@@ -272,6 +272,13 @@ namespace CD4.ExcelInterface.ViewModels
         #region Public Methods
         public void InterpretData(int selectedKitId)
         {
+            //check whether the script is loaded... return otherwise
+            if (!_isScriptLoaded)
+            {
+                Logs.Add(new LogModel() { Log = $"Cannot interpret data. Script [ {Configuration.AnalyserName} ] not loaded" });
+                return;
+            }
+
             if (InterfaceResults.Count == 0)
             {
                 Logs.Add(new LogModel() { Log = "No results in queue to process" });

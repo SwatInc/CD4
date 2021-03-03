@@ -230,6 +230,7 @@
     <Compile Include="MainView.Designer.cs">
       <DependentUpon>MainView.cs</DependentUpon>
     </Compile>
+    <Compile Include="Models\AutoDetectStartRow.cs" />
     <Compile Include="Models\BatchId.cs" />
     <Compile Include="Models\ChannelMap.cs" />
     <Compile Include="Models\Config.cs" />

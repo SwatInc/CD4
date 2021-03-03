@@ -2,7 +2,8 @@
 {
     public class BatchId
     {
-        public int Row { get; set; }
-        public int Column { get; set; }
+        public int ScanColumnIndex { get; set; }
+        public int DataColumnIndex { get; set; }
+        public string CsvKeywords { get; set; }
     }
 }

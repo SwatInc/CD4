@@ -132,7 +132,7 @@ public class QuantStudio5OnDownloadScript
                 rdrp = item.MeasurementValue.ToString();
                 rdrpPresent = true;
             }
-            if (item.TestCode == "N-Gene")
+            if (item.TestCode == "N gene")
             {
                 ngene = item.MeasurementValue.ToString();
                 ngenePresent = true;
@@ -180,7 +180,7 @@ public class QuantStudio5OnDownloadScript
 
         foreach (var item in measurements)
         {
-            if (item.TestCode == "ORF1ab gene")
+            if (item.TestCode == "ORF1ab")
             {
                 orf1ab = item.MeasurementValue.ToString();
                 orf1abPresent = true;
