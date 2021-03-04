@@ -30,6 +30,7 @@ namespace CD4.ExcelInterface.QuantStudio5
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.barManager = new DevExpress.XtraBars.BarManager(this.components);
             this.bar1 = new DevExpress.XtraBars.Bar();
             this.barButtonItemExportToLIS = new DevExpress.XtraBars.BarButtonItem();
@@ -199,6 +200,7 @@ namespace CD4.ExcelInterface.QuantStudio5
             this.Controls.Add(this.barDockControlRight);
             this.Controls.Add(this.barDockControlBottom);
             this.Controls.Add(this.barDockControlTop);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainView";
             this.Text = "MainView";
             ((System.ComponentModel.ISupportInitialize)(this.barManager)).EndInit();
