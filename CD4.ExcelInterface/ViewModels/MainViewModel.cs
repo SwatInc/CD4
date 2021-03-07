@@ -106,17 +106,39 @@ namespace CD4.ExcelInterface.ViewModels
 
         private void _backgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
         {
+            var batchId = "";
             if (!(e.Result is null))
             {
                 var result = (List<InterfaceResults>)(e.Result);
                 foreach (var item in result)
                 {
+                    if (string.IsNullOrEmpty(batchId)) { batchId = item.BatchId; }
                     item.InstrumentId.InstrumentCode = Configuration.AnalyserName;
                     InterfaceResults.Add(item);
                 }
             }
 
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(KitNames)));
+
+            //run interpretations if analyser is QuantStudio
+            if (batchId.ToLower().Contains("perkinelmer"))
+            {
+                Logs.Add(new LogModel() { Date = DateTime.Now, Log = "Auto selected PerkinElmer kit." });
+                InterpretData(3);
+            }
+            if (batchId.ToLower().Contains("zeesan"))
+            {
+                Logs.Add(new LogModel() { Date = DateTime.Now, Log = "Auto selected Zeesan kit." });
+                InterpretData(1);
+            }
+            if (batchId.ToLower().Contains("labgun"))
+            {
+                Logs.Add(new LogModel() { Date = DateTime.Now, Log = "Auto selected LabGun kit." });
+                InterpretData(2);
+            }
+
+            //auto export to LIS
+            ExportToUploader().GetAwaiter().GetResult();
         }
         #endregion
 
