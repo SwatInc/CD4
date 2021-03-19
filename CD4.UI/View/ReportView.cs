@@ -122,21 +122,30 @@ namespace CD4.UI.View
             var xtraReport = new AnalysisReport() { DataSource = reports, RequestParameters = false};
 
             xtraReport.DisplayName = $"{this.Tag}_{report.Patient.Fullname}({report.Patient.NidPp.Replace('/','-')})";
-            ReportPrintTool tool = new ReportPrintTool(xtraReport);
+            //ReportPrintTool tool = new ReportPrintTool(xtraReport);
 
             //hide unnecessary buttons
-            tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Customize,CommandVisibility.None);
-            tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Background,CommandVisibility.None);
-            tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.EditPageHF, CommandVisibility.None);
-            tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.HighlightEditingFields, CommandVisibility.None);
-            tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Open, CommandVisibility.None);
-            tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Watermark, CommandVisibility.None);
-            tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Save, CommandVisibility.None);
+            //tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Customize,CommandVisibility.None);
+            //tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Background,CommandVisibility.None);
+            //tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.EditPageHF, CommandVisibility.None);
+            //tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.HighlightEditingFields, CommandVisibility.None);
+            //tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Open, CommandVisibility.None);
+            //tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Watermark, CommandVisibility.None);
+            //tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Save, CommandVisibility.None);
+            
+            //hide the bar with icons
+            //tool.PreviewForm.PrintBarManager.Bars[0].Visible = false;
+            //tool.PreviewForm.PrintBarManager.MainMenu.Visible = false;
 
             //Set Main view as mdi parent.
-            tool.PreviewForm.MdiParent = this.MdiParent;
+            //tool.PreviewForm.MdiParent = this.MdiParent;
             //Show the report
-            tool.ShowPreview();
+            //tool.ShowPreview();
+            xtraReport.ExportToPdf(Environment.GetFolderPath
+                (Environment.SpecialFolder.MyDocuments)+"\\"+xtraReport.DisplayName+".pdf");
+            xtraReport.PrinterName= "OneNote for Windows 10";
+            xtraReport.CreateDocument();
+            xtraReport.Print();
             //Close this form
             DisposeMe();
 
