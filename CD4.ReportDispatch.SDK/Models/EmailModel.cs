@@ -8,7 +8,7 @@ namespace CD4.ReportDispatch.SDK.Models
         public EmailModel()
         {
             //get this at another place... later
-            TemplateModel = new { Name = "Bob" };
+            TemplateModel = new { Name = "Bob", media = "@media", import = "@import" };
         }
         public string ToAddress { get; set; }
         public string ToDisplayName { get; set; }
