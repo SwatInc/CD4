@@ -1,5 +1,8 @@
 ﻿using CD4.DataLibrary.DataAccess;
+using CD4.Entensibility.ReportingFramework;
+using CD4.Entensibility.ReportingFramework.Models;
 using CD4.UI.Report;
+using CD4.UI.UiSpecificModels;
 using DevExpress.XtraEditors;
 using DevExpress.XtraPrinting;
 using DevExpress.XtraReports.UI;
@@ -13,19 +16,24 @@ namespace CD4.UI.View
 {
     public partial class ReportView : DevExpress.XtraEditors.XtraForm
     {
-        private readonly IReportsDataAccess reportsData;
+        private readonly IReportsDataAccess _reportsData;
+        private readonly CinAndReportIdModel _cinAndReportId;
         private readonly int _loggedInUserId;
+        private readonly ILoadMultipleExtensions _reportExtensions;
 
         public event EventHandler OnSearchByCin;
-        public ReportView(IReportsDataAccess reportsData, string cin, int loggedInUserId)
+        public ReportView(IReportsDataAccess reportsData, CinAndReportIdModel cinAndReportId, int loggedInUserId, ILoadMultipleExtensions reportExtensions)
         {
             InitializeComponent();
-
+            
             //assign report data access library as a private field
-            this.reportsData = reportsData;
+            _reportsData = reportsData;
+            _cinAndReportId = cinAndReportId;
             _loggedInUserId = loggedInUserId;
+            _reportExtensions = reportExtensions;
+
             //Write cin to form Tag
-            this.Tag = cin;
+            Tag = cinAndReportId.Cin;
             StartReportGenerationSequence();
 
         }
@@ -58,7 +66,7 @@ namespace CD4.UI.View
 
             try
             {
-                var report = await reportsData.GetAnalysisReportByCinAsync((string)this.Tag, _loggedInUserId).ConfigureAwait(true);
+                var report = await _reportsData.GetAnalysisReportByCinAsync((string)this.Tag, _loggedInUserId).ConfigureAwait(true);
                 MapDataToReport(report.FirstOrDefault());
             }
             catch (Exception ex)
@@ -79,7 +87,7 @@ namespace CD4.UI.View
             }
             
             //map AnalysisRequestReport
-            var report = new AnalysisRequestReport()
+            var report = new AnalysisRequestReportModel()
             {
                 SampleSite = reportModel.SampleSite,
                 CollectedDate = reportModel.CollectedDate,
@@ -116,10 +124,15 @@ namespace CD4.UI.View
             report.PrintedDate = DateTime.Now.ToString("dd-MM-yyyy HH:mm");
 
             //add report to a list of reports to make it compatible as datasource
-            var reports = new List<AnalysisRequestReport>();
+            var reports = new List<AnalysisRequestReportModel>();
             reports.Add(report);
 
-            var xtraReport = new AnalysisReport() { DataSource = reports, RequestParameters = false};
+            //ReportTemplates[0] The ZERO need to be handled dynamically to be truly extensible
+            var xtraReport = _reportExtensions.ReportTemplates[0].Execute((ReportTemplate)_cinAndReportId.ReportIndex);
+            xtraReport.DataSource = reports;
+            xtraReport.RequestParameters = false;
+
+            //var xtraReport = new AnalysisReport() { DataSource = reports, RequestParameters = false};
 
             xtraReport.DisplayName = $"{this.Tag}_{report.Patient.Fullname}({report.Patient.NidPp.Replace('/','-')})";
             //ReportPrintTool tool = new ReportPrintTool(xtraReport);
@@ -143,7 +156,7 @@ namespace CD4.UI.View
             //tool.ShowPreview();
             xtraReport.ExportToPdf(Environment.GetFolderPath
                 (Environment.SpecialFolder.MyDocuments)+"\\"+xtraReport.DisplayName+".pdf");
-            xtraReport.PrinterName= "OneNote for Windows 10";
+            xtraReport.PrinterName= "doPDF 10";
             xtraReport.CreateDocument();
             xtraReport.Print();
             //Close this form
@@ -161,7 +174,7 @@ namespace CD4.UI.View
         private void InitializeReport(string cin)
         {
 
-            var report = new AnalysisRequestReport()
+            var report = new AnalysisRequestReportModel()
             {
                 SampleSite = "Flu Clinic",
                 CollectedDate = DateTime.Today,
@@ -202,46 +215,16 @@ namespace CD4.UI.View
             report.Patient = patient;
             report.Assays = Assays;
 
-            var reports = new List<AnalysisRequestReport>();
+            var reports = new List<AnalysisRequestReportModel>();
             reports.Add(report);
 
             
 
-            var xreport = new AnalysisReport() { DataSource = reports };
-
+            var xreport = _reportExtensions.ReportTemplates[0].Execute(ReportTemplate.AnalysisReportDefault);
+            xreport.DataSource = reports;
             ReportPrintTool tool = new ReportPrintTool(xreport);
             tool.ShowPreview();
         }
     }
 
-    public class AnalysisRequestReport
-    {
-        public string SampleSite { get; set; }
-        public DateTimeOffset? CollectedDate { get; set; }
-        public DateTimeOffset? ReceivedDate { get; set; }
-        public string PrintedDate { get; set; }
-        public Patient Patient { get; set; }
-        public BindingList<Assays> Assays { get; set; }
-
-    }
-
-    public class Assays
-    {
-        public string Cin { get; set; }
-        public string Discipline { get; set; }
-        public string Assay { get; set; }
-        public string Result { get; set; }
-        public string Unit { get; set; }
-        public string DisplayNormalRange { get; set; }
-    }
-
-    public class Patient
-    {
-        public string NidPp { get; set; }
-        public string Fullname { get; set; }
-        public string AgeSex { get; set; }
-        public DateTime Birthdate { get; set; }
-        public string Address { get; set; }
-        public string Nationality { get; set; }
-    }
 }

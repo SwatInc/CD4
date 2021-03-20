@@ -1,4 +1,5 @@
-﻿using CD4.UI.Library.Model;
+﻿using CD4.Entensibility.ReportingFramework;
+using CD4.UI.Library.Model;
 using CD4.UI.Library.ViewModel;
 using CD4.UI.UiSpecificModels;
 using DevExpress.Utils.Menu;
@@ -23,15 +24,16 @@ namespace CD4.UI.View
         private readonly IUserAuthEvaluator _authEvaluator;
         private readonly ILateOrderEntryViewModel _lateOrderEntryViewModel;
         private readonly ILabNotesViewModel _labNotesViewModel;
+        private readonly ILoadMultipleExtensions _reportExtensions;
         System.Windows.Forms.Timer dataRefreshTimer = new System.Windows.Forms.Timer() { Enabled = true, Interval = 1000 };
 
-        public event EventHandler<string> GenerateReportByCin;
+        public event EventHandler<CinAndReportIdModel> GenerateReportByCin;
 
         public ResultEntryView(IResultEntryViewModel viewModel,
             IRejectionCommentViewModel rejectionCommentViewModel,
             IUserAuthEvaluator authEvaluator,
             ILateOrderEntryViewModel lateOrderEntryViewModel,
-            ILabNotesViewModel labNotesViewModel)
+            ILabNotesViewModel labNotesViewModel, ILoadMultipleExtensions reportExtensions)
         {
             InitializeComponent();
             //Initialize grid columns
@@ -45,8 +47,9 @@ namespace CD4.UI.View
             _authEvaluator = authEvaluator;
             _lateOrderEntryViewModel = lateOrderEntryViewModel;
             _labNotesViewModel = labNotesViewModel;
+            _reportExtensions = reportExtensions;
             InitializeBinding();
-
+            InitializePrintMenu();
 
             SizeChanged += OnSizeChangedAdjustSplitContainers;
             labelControlCin.DoubleClick += CopyCinToClipBoard;
@@ -69,6 +72,23 @@ namespace CD4.UI.View
 
             gridViewSamples.ColumnFilterChanged += OnSampleSearchComplete_RefreshPatientRibbonAndSelectedTests;
             DisableResultEntryReadWriteAccessForUnauthorizedUsers();
+        }
+
+        /// <summary>
+        /// Initializes print menu depending on the templates avalilable from plug-ins / AR template extensions installed on system
+        /// </summary>
+        private void InitializePrintMenu()
+        {
+            var menu = new DXPopupMenu();
+            foreach (var template in _reportExtensions.ReportTemplates)
+            {
+                foreach (var item in template.GetExtensionInformation())
+                {
+                    if (item.ReportType == ReportType.Barcode) continue;
+                    menu.Items.Add(new DXMenuItem(item.TemplateName, SimpleButtonReport_Click) { Tag = item.Index });
+                }
+            }
+            dropDownButton1.DropDownControl = menu;
         }
 
         private void DisableResultEntryReadWriteAccessForUnauthorizedUsers()
@@ -973,8 +993,41 @@ namespace CD4.UI.View
 
             if (!DecideToContinuePrinting(cin)) return;
 
+            //get the instance of XtraReport to generate report with..
+            var reportId = GetReportIndex(sender);
             //Raise an event indicating that a sample report is requested.
-            GenerateReportByCin?.Invoke(this, cin);
+            GenerateReportByCin?.Invoke(this, new CinAndReportIdModel() {Cin = cin, ReportIndex = reportId});
+        }
+
+        private int GetReportIndex(object sender)
+        {
+            // determine whether the initial event is raised by a menu item...
+            if (sender.GetType() == typeof(DXMenuItem))
+            {
+                //if raised by menu, try to get the report Id
+                var reportId = ((DXMenuItem)sender).Tag.ToString();
+                var isInt = int.TryParse(reportId, out var parsedReportId);
+
+                //if the report ID is successfully identified, then return the Id....
+                if (isInt) { return parsedReportId; }
+                //show a message
+                XtraMessageBox.Show("Cannot determine the report templete. Trying to get the default template.");
+                
+            }
+
+            //try to get the report Id for the default report
+            foreach (var template in _reportExtensions.ReportTemplates)
+            {
+                foreach (var item in template.GetExtensionInformation())
+                {
+                    if (item.ReportType == ReportType.Barcode) { continue; }
+
+                    //look for a report with a name that contains 'Default'
+                    if (item.TemplateName.ToLower().Contains("default")) { return item.Index; }
+                }
+            }
+
+            throw new Exception("Cannot determine report template to use and, cannot find a template marked as default.");
         }
 
         private bool DecideToContinuePrinting(string cin)
@@ -1232,8 +1285,8 @@ namespace CD4.UI.View
     {
         public RowInfo(GridView view, int rowHandle)
         {
-            this.RowHandle = rowHandle;
-            this.View = view;
+            RowHandle = rowHandle;
+            View = view;
         }
         public GridView View;
         public int RowHandle;

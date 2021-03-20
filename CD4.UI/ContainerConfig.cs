@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using AutoMapper;
+using CD4.Entensibility.ReportingFramework;
 using CD4.UI.Helpers;
 using CD4.UI.Library.Helpers;
 using CD4.UI.Library.Model;
@@ -102,6 +103,8 @@ namespace CD4.UI
             builder.RegisterType<AuthorizeDetailEventArgs>()
                 .AsSelf()
                 .SingleInstance();
+
+            builder.RegisterType<LoadMultipleExtensions>().As<ILoadMultipleExtensions>().SingleInstance();
 
             builder.RegisterType<UserAuthEvaluator>().As<IUserAuthEvaluator>();
             builder.RegisterType<PrintingHelper>().As<IPrintingHelper>();

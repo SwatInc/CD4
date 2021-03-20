@@ -29,8 +29,8 @@ namespace CD4.Extensions.Reports.Medlab
         {
             return new List<InfoModel>()
             {
-                new InfoModel(){Index=0, TemplateName="Analysis Report [Default]", ReportType = ReportType.AnalysisRequest},
-                new InfoModel(){Index=1, TemplateName="Analysis Report [Without Seal]", ReportType = ReportType.AnalysisRequest },
+                new InfoModel(){Index=0, TemplateName="Analysis Report [ Default ]", ReportType = ReportType.AnalysisRequest},
+                new InfoModel(){Index=1, TemplateName="Analysis Report [ Without Seal ]", ReportType = ReportType.AnalysisRequest },
                 new InfoModel(){ Index=2, TemplateName = "Tube Label 75mm", ReportType = ReportType.Barcode}
             };
 

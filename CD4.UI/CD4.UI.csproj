@@ -244,6 +244,7 @@
     <Compile Include="ICd4Application.cs" />
     <Compile Include="IFormFactory.cs" />
     <Compile Include="IUserAuthEvaluator.cs" />
+    <Compile Include="LoadMultipleExtensions.cs" />
     <Compile Include="LogHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -252,20 +253,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Report\AnalysisReport.cs">
-      <SubType>Component</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="Report\AnalysisReport.designer.cs">
-      <DependentUpon>AnalysisReport.cs</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
     <Compile Include="Report\SeventyFiveMillimeterTubeLabel.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Report\SeventyFiveMillimeterTubeLabel.Designer.cs">
       <DependentUpon>SeventyFiveMillimeterTubeLabel.cs</DependentUpon>
     </Compile>
+    <Compile Include="UiSpecificModels\CinAndReportIdModel.cs" />
     <Compile Include="UiSpecificModels\DisciplineMenu.cs" />
     <Compile Include="UiSpecificModels\GridColumnModel.cs" />
     <Compile Include="UiSpecificModels\ResultAlertModelCollection.cs" />
@@ -427,10 +421,6 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Report\AnalysisReport.resx">
-      <DependentUpon>AnalysisReport.cs</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
     <EmbeddedResource Include="Report\SeventyFiveMillimeterTubeLabel.resx">
       <DependentUpon>SeventyFiveMillimeterTubeLabel.cs</DependentUpon>
     </EmbeddedResource>
@@ -539,6 +529,10 @@
     <ProjectReference Include="..\CD4.DataLibrary\CD4.DataLibrary.csproj">
       <Project>{66fb9baf-b529-4dfd-b0e9-e41b78f4ea76}</Project>
       <Name>CD4.DataLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CD4.Entensibility.ReportingFramework\CD4.Entensibility.ReportingFramework.csproj">
+      <Project>{6f8b712a-edd0-46be-b756-0604ff82ab34}</Project>
+      <Name>CD4.Entensibility.ReportingFramework</Name>
     </ProjectReference>
     <ProjectReference Include="..\CD4.UI.Library\CD4.UI.Library.csproj">
       <Project>{87A4ABE4-6121-4D2B-A9A1-D68D053AEAFD}</Project>

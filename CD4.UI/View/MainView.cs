@@ -1,4 +1,5 @@
 ﻿using CD4.DataLibrary.DataAccess;
+using CD4.Entensibility.ReportingFramework;
 using CD4.UI.Library.ViewModel;
 using CD4.UI.UiSpecificModels;
 using DevExpress.Skins;
@@ -17,12 +18,16 @@ namespace CD4.UI.View
     {
         private readonly IReportsDataAccess reportsDataAccess;
         private readonly IUserAuthEvaluator _authEvaluator;
+        private readonly ILoadMultipleExtensions _reportExtensions;
 
         public event EventHandler<int> SelectedDisciplineChanged;
 
         private IMainViewModel _viewModel { get; }
 
-        public MainView(IMainViewModel viewModel, IReportsDataAccess reportsDataAccess, IUserAuthEvaluator authEvaluator)
+        public MainView(IMainViewModel viewModel,
+            IReportsDataAccess reportsDataAccess,
+            IUserAuthEvaluator authEvaluator,
+            ILoadMultipleExtensions reportExtensions)
         {
             InitializeComponent();
             //this.popupMenu.AddItem(this.barButtonItemChangePassword);
@@ -32,6 +37,7 @@ namespace CD4.UI.View
             _viewModel = viewModel;
             this.reportsDataAccess = reportsDataAccess;
             _authEvaluator = authEvaluator;
+            _reportExtensions = reportExtensions;
 
             //load auth UI
             LoadAuthenticationUi();
@@ -323,12 +329,13 @@ namespace CD4.UI.View
             }
         }
 
-        private void ResultView_OnGenerateReportByCin(object sender, string cin)
+        private void ResultView_OnGenerateReportByCin(object sender, CinAndReportIdModel cinAndReportIdModel)
         {
             //open report view
             // this.OpenMdiForm<ReportView>(cin);
 
-            var reportView = new ReportView(reportsDataAccess, cin, _viewModel.GetloggedInUserId()) { MdiParent = this };
+            var reportView = new ReportView(reportsDataAccess, 
+                cinAndReportIdModel, _viewModel.GetloggedInUserId(), _reportExtensions) { MdiParent = this };
             reportView.Show();
         }
     }
