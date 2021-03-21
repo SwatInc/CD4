@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="DevExpress.XtraReports.v18.2">
       <HintPath>..\..\..\..\..\..\..\Program Files (x86)\DevExpress 18.2\Components\Bin\Framework\DevExpress.XtraReports.v18.2.dll</HintPath>
     </Reference>
