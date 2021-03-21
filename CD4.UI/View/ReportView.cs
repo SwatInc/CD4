@@ -125,6 +125,7 @@ namespace CD4.UI.View
 
             //add report to a list of reports to make it compatible as datasource
             var reports = new List<AnalysisRequestReportModel>();
+            report.SetPdf417String();
             reports.Add(report);
 
             //ReportTemplates[0] The ZERO need to be handled dynamically to be truly extensible

@@ -262,6 +262,7 @@
     <Compile Include="UiSpecificModels\CinAndReportIdModel.cs" />
     <Compile Include="UiSpecificModels\DisciplineMenu.cs" />
     <Compile Include="UiSpecificModels\GridColumnModel.cs" />
+    <Compile Include="UiSpecificModels\ReportActionModel.cs" />
     <Compile Include="UiSpecificModels\ResultAlertModelCollection.cs" />
     <Compile Include="UiSpecificModels\TestHistoryModel.cs" />
     <Compile Include="UserAuthEvaluator.cs" />

@@ -10,5 +10,6 @@ namespace CD4.UI.UiSpecificModels
     {
         public string Cin { get; set; }
         public int ReportIndex { get; set; }
+        public ReportActionModel Action { get; set; }
     }
 }

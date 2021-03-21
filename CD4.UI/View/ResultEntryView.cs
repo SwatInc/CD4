@@ -491,7 +491,15 @@ namespace CD4.UI.View
                         //check if the user is authorised
                         if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.PrintReport")) return;
 
-                        SimpleButtonReport_Click(this, EventArgs.Empty);
+                        SimpleButtonReport_Click(simpleButtonReport, EventArgs.Empty);
+                    }
+                    break;
+                case Keys.E:
+                    if (e.Modifiers == Keys.Control)
+                    {
+                        //check if the user is authorised
+                        if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.ExportReport")) return;
+                        SimpleButtonReport_Click(new DXMenuItem(), EventArgs.Empty);
                     }
                     break;
                 case Keys.Insert:
@@ -995,8 +1003,16 @@ namespace CD4.UI.View
 
             //get the instance of XtraReport to generate report with..
             var reportId = GetReportIndex(sender);
+
+            if (sender.GetType() == typeof(SimpleButton))
+            {
+                GenerateReportByCin?.Invoke(this, new CinAndReportIdModel() { Cin = cin, ReportIndex = reportId, Action = ReportActionModel.Print });
+            }
+            else
+            {
+                GenerateReportByCin?.Invoke(this, new CinAndReportIdModel() { Cin = cin, ReportIndex = reportId, Action = ReportActionModel.Export });
+            }
             //Raise an event indicating that a sample report is requested.
-            GenerateReportByCin?.Invoke(this, new CinAndReportIdModel() {Cin = cin, ReportIndex = reportId});
         }
 
         private int GetReportIndex(object sender)
@@ -1005,14 +1021,20 @@ namespace CD4.UI.View
             if (sender.GetType() == typeof(DXMenuItem))
             {
                 //if raised by menu, try to get the report Id
-                var reportId = ((DXMenuItem)sender).Tag.ToString();
+                var reportId = ((DXMenuItem)sender).Tag?.ToString();
                 var isInt = int.TryParse(reportId, out var parsedReportId);
 
                 //if the report ID is successfully identified, then return the Id....
                 if (isInt) { return parsedReportId; }
-                //show a message
-                XtraMessageBox.Show("Cannot determine the report templete. Trying to get the default template.");
                 
+                //proceed to return default
+                
+                
+            }
+
+            if (sender.GetType() == typeof(SimpleButton))
+            {
+                return 1;
             }
 
             //try to get the report Id for the default report
