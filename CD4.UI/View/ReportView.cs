@@ -1,16 +1,14 @@
 ﻿using CD4.DataLibrary.DataAccess;
 using CD4.Entensibility.ReportingFramework;
 using CD4.Entensibility.ReportingFramework.Models;
-using CD4.UI.Report;
 using CD4.UI.UiSpecificModels;
 using DevExpress.XtraEditors;
-using DevExpress.XtraPrinting;
 using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
-using System.Windows.Forms;
 
 namespace CD4.UI.View
 {
@@ -25,7 +23,7 @@ namespace CD4.UI.View
         public ReportView(IReportsDataAccess reportsData, CinAndReportIdModel cinAndReportId, int loggedInUserId, ILoadMultipleExtensions reportExtensions)
         {
             InitializeComponent();
-            
+
             //assign report data access library as a private field
             _reportsData = reportsData;
             _cinAndReportId = cinAndReportId;
@@ -66,7 +64,7 @@ namespace CD4.UI.View
 
             try
             {
-                var report = await _reportsData.GetAnalysisReportByCinAsync((string)this.Tag, _loggedInUserId).ConfigureAwait(true);
+                var report = await _reportsData.GetAnalysisReportByCinAsync((string)Tag, _loggedInUserId).ConfigureAwait(true);
                 MapDataToReport(report.FirstOrDefault());
             }
             catch (Exception ex)
@@ -85,7 +83,7 @@ namespace CD4.UI.View
 
                 return;
             }
-            
+
             //map AnalysisRequestReport
             var report = new AnalysisRequestReportModel()
             {
@@ -135,7 +133,7 @@ namespace CD4.UI.View
 
             //var xtraReport = new AnalysisReport() { DataSource = reports, RequestParameters = false};
 
-            xtraReport.DisplayName = $"{this.Tag}_{report.Patient.Fullname}({report.Patient.NidPp.Replace('/','-')})";
+            xtraReport.DisplayName = $"{this.Tag}_{report.Patient.Fullname} ({report.Patient.NidPp.Replace('/', '-')})";
             //ReportPrintTool tool = new ReportPrintTool(xtraReport);
 
             //hide unnecessary buttons
@@ -146,7 +144,7 @@ namespace CD4.UI.View
             //tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Open, CommandVisibility.None);
             //tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Watermark, CommandVisibility.None);
             //tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Save, CommandVisibility.None);
-            
+
             //hide the bar with icons
             //tool.PreviewForm.PrintBarManager.Bars[0].Visible = false;
             //tool.PreviewForm.PrintBarManager.MainMenu.Visible = false;
@@ -155,11 +153,35 @@ namespace CD4.UI.View
             //tool.PreviewForm.MdiParent = this.MdiParent;
             //Show the report
             //tool.ShowPreview();
-            xtraReport.ExportToPdf(Environment.GetFolderPath
-                (Environment.SpecialFolder.MyDocuments)+"\\"+xtraReport.DisplayName+".pdf");
-            xtraReport.PrinterName= "doPDF 10";
-            xtraReport.CreateDocument();
-            xtraReport.Print();
+
+
+
+            if (_cinAndReportId.Action == ReportActionModel.Export)
+            {
+                var exportDirPath = $"{Environment.ExpandEnvironmentVariables(@"%SystemDrive%")}\\CD4 PDF Report Exports\\{reportModel.SampleSite.Trim()}\\{DateTime.Today:yyyy-MM-dd}";
+
+                try
+                {
+                    // If directory does not exist, create it
+                    if (!Directory.Exists(exportDirPath))
+                    {
+                        Directory.CreateDirectory(exportDirPath);
+                    }
+                    xtraReport.ExportToPdf($"{exportDirPath}\\{xtraReport.DisplayName}.pdf");
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show($"Error exporting report. Please fing the details below.\n{ex.Message}\n{ex.StackTrace}\nExport path: {exportDirPath}");
+                }
+
+            }
+            if (_cinAndReportId.Action == ReportActionModel.Print)
+            {
+                xtraReport.PrinterName = "DocumentPrinter";
+                xtraReport.CreateDocument();
+                xtraReport.Print();
+            }
+
             //Close this form
             DisposeMe();
 
@@ -167,7 +189,7 @@ namespace CD4.UI.View
         }
 
         private void DisposeMe()
-        {            
+        {
             this.Close();
             this.Dispose();
         }
@@ -219,7 +241,7 @@ namespace CD4.UI.View
             var reports = new List<AnalysisRequestReportModel>();
             reports.Add(report);
 
-            
+
 
             var xreport = _reportExtensions.ReportTemplates[0].Execute(ReportTemplate.AnalysisReportDefault);
             xreport.DataSource = reports;
