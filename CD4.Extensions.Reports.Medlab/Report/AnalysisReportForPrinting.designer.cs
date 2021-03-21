@@ -33,6 +33,7 @@ namespace CD4.UI.Report
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AnalysisReportForPrinting));
             DevExpress.XtraPrinting.BarCode.PDF417Generator pdF417Generator1 = new DevExpress.XtraPrinting.BarCode.PDF417Generator();
+            DevExpress.XtraPrinting.BarCode.QRCodeGenerator qrCodeGenerator1 = new DevExpress.XtraPrinting.BarCode.QRCodeGenerator();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.xrPictureBoxLaboratorylogo = new DevExpress.XtraReports.UI.XRPictureBox();
             this.xrLabelAnalysisReport = new DevExpress.XtraReports.UI.XRLabel();
@@ -73,6 +74,8 @@ namespace CD4.UI.Report
             this.xrLabel29 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel6 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel28 = new DevExpress.XtraReports.UI.XRLabel();
+            this.SubBand1 = new DevExpress.XtraReports.UI.SubBand();
+            this.xrBarCode2 = new DevExpress.XtraReports.UI.XRBarCode();
             this.xrLabel14 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabelResultHeading = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabelUnitHeading = new DevExpress.XtraReports.UI.XRLabel();
@@ -500,8 +503,11 @@ namespace CD4.UI.Report
             this.xrLabel6,
             this.xrLabel28});
             this.ReportFooter.Dpi = 254F;
-            this.ReportFooter.HeightF = 775.5638F;
+            this.ReportFooter.HeightF = 354.6307F;
             this.ReportFooter.Name = "ReportFooter";
+            this.ReportFooter.PrintAtBottom = true;
+            this.ReportFooter.SubBands.AddRange(new DevExpress.XtraReports.UI.SubBand[] {
+            this.SubBand1});
             // 
             // xrLabel23
             // 
@@ -598,6 +604,32 @@ namespace CD4.UI.Report
             this.xrLabel28.Text = "*** END OF REPORT ***";
             this.xrLabel28.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             this.xrLabel28.WordWrap = false;
+            // 
+            // SubBand1
+            // 
+            this.SubBand1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrBarCode2});
+            this.SubBand1.Dpi = 254F;
+            this.SubBand1.HeightF = 392.9592F;
+            this.SubBand1.Name = "SubBand1";
+            // 
+            // xrBarCode2
+            // 
+            this.xrBarCode2.AutoModule = true;
+            this.xrBarCode2.Dpi = 254F;
+            this.xrBarCode2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Pdf417String]")});
+            this.xrBarCode2.LocationFloat = new DevExpress.Utils.PointFloat(56F, 0F);
+            this.xrBarCode2.Module = 5.08F;
+            this.xrBarCode2.Name = "xrBarCode2";
+            this.xrBarCode2.Padding = new DevExpress.XtraPrinting.PaddingInfo(25, 25, 0, 0, 254F);
+            this.xrBarCode2.ShowText = false;
+            this.xrBarCode2.SizeF = new System.Drawing.SizeF(452.732F, 392.9592F);
+            this.xrBarCode2.StylePriority.UseTextAlignment = false;
+            qrCodeGenerator1.CompactionMode = DevExpress.XtraPrinting.BarCode.QRCodeCompactionMode.Byte;
+            qrCodeGenerator1.ErrorCorrectionLevel = DevExpress.XtraPrinting.BarCode.QRCodeErrorCorrectionLevel.M;
+            qrCodeGenerator1.Logo = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("qrCodeGenerator1.Logo"));
+            this.xrBarCode2.Symbology = qrCodeGenerator1;
             // 
             // xrLabel14
             // 
@@ -876,5 +908,7 @@ namespace CD4.UI.Report
         private DevExpress.XtraReports.UI.XRLabel xrLabel23;
         private DevExpress.XtraReports.UI.XRLabel xrLabel22;
         private DevExpress.XtraReports.UI.XRLabel xrLabel24;
+        private DevExpress.XtraReports.UI.SubBand SubBand1;
+        private DevExpress.XtraReports.UI.XRBarCode xrBarCode2;
     }
 }

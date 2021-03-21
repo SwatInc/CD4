@@ -33,6 +33,7 @@ namespace CD4.UI.Report
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AnalysisReport));
             DevExpress.XtraPrinting.BarCode.PDF417Generator pdF417Generator1 = new DevExpress.XtraPrinting.BarCode.PDF417Generator();
+            DevExpress.XtraPrinting.BarCode.QRCodeGenerator qrCodeGenerator1 = new DevExpress.XtraPrinting.BarCode.QRCodeGenerator();
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.xrPictureBoxLaboratorylogo = new DevExpress.XtraReports.UI.XRPictureBox();
             this.xrLabelAnalysisReport = new DevExpress.XtraReports.UI.XRLabel();
@@ -67,13 +68,15 @@ namespace CD4.UI.Report
             this.xrLabel4 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel3 = new DevExpress.XtraReports.UI.XRLabel();
             this.ReportFooter = new DevExpress.XtraReports.UI.ReportFooterBand();
-            this.xrPictureBoxInstituteStamp = new DevExpress.XtraReports.UI.XRPictureBox();
             this.xrLabel23 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel21 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel30 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel29 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel6 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel28 = new DevExpress.XtraReports.UI.XRLabel();
+            this.SubBand1 = new DevExpress.XtraReports.UI.SubBand();
+            this.xrPictureBoxInstituteStamp = new DevExpress.XtraReports.UI.XRPictureBox();
+            this.xrBarCode2 = new DevExpress.XtraReports.UI.XRBarCode();
             this.xrLabel14 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabelResultHeading = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabelUnitHeading = new DevExpress.XtraReports.UI.XRLabel();
@@ -99,7 +102,7 @@ namespace CD4.UI.Report
             this.xrPictureBoxLaboratorylogo,
             this.xrLabelAnalysisReport});
             this.TopMargin.Dpi = 254F;
-            this.TopMargin.HeightF = 315.0657F;
+            this.TopMargin.HeightF = 315F;
             this.TopMargin.Name = "TopMargin";
             // 
             // xrPictureBoxLaboratorylogo
@@ -423,13 +426,13 @@ namespace CD4.UI.Report
             this.xrBarCode1.AutoModule = true;
             this.xrBarCode1.Dpi = 254F;
             this.xrBarCode1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Assays].[Cin]")});
-            this.xrBarCode1.LocationFloat = new DevExpress.Utils.PointFloat(1030.922F, 196.9558F);
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Concat([Patient].[NidPp],\'|\',[Assays].[Cin],\'|\',[Assays].[Result])")});
+            this.xrBarCode1.LocationFloat = new DevExpress.Utils.PointFloat(1033.569F, 179.705F);
             this.xrBarCode1.Module = 5.08F;
             this.xrBarCode1.Name = "xrBarCode1";
             this.xrBarCode1.Padding = new DevExpress.XtraPrinting.PaddingInfo(25, 25, 0, 0, 254F);
             this.xrBarCode1.ShowText = false;
-            this.xrBarCode1.SizeF = new System.Drawing.SizeF(547.6875F, 121.7083F);
+            this.xrBarCode1.SizeF = new System.Drawing.SizeF(592.4309F, 157.48F);
             this.xrBarCode1.StylePriority.UseTextAlignment = false;
             pdF417Generator1.Rows = 9;
             this.xrBarCode1.Symbology = pdF417Generator1;
@@ -438,7 +441,7 @@ namespace CD4.UI.Report
             // 
             this.xrLabel5.Dpi = 254F;
             this.xrLabel5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(91.44F, 196.9558F);
+            this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(91.44F, 179.705F);
             this.xrLabel5.Multiline = true;
             this.xrLabel5.Name = "xrLabel5";
             this.xrLabel5.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
@@ -494,7 +497,6 @@ namespace CD4.UI.Report
             // ReportFooter
             // 
             this.ReportFooter.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
-            this.xrPictureBoxInstituteStamp,
             this.xrLabel23,
             this.xrLabel21,
             this.xrLabel30,
@@ -502,17 +504,11 @@ namespace CD4.UI.Report
             this.xrLabel6,
             this.xrLabel28});
             this.ReportFooter.Dpi = 254F;
-            this.ReportFooter.HeightF = 775.5638F;
+            this.ReportFooter.HeightF = 354.6307F;
             this.ReportFooter.Name = "ReportFooter";
-            // 
-            // xrPictureBoxInstituteStamp
-            // 
-            this.xrPictureBoxInstituteStamp.Dpi = 254F;
-            this.xrPictureBoxInstituteStamp.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBoxInstituteStamp.ImageSource"));
-            this.xrPictureBoxInstituteStamp.LocationFloat = new DevExpress.Utils.PointFloat(1030.922F, 354.6308F);
-            this.xrPictureBoxInstituteStamp.Name = "xrPictureBoxInstituteStamp";
-            this.xrPictureBoxInstituteStamp.SizeF = new System.Drawing.SizeF(458.6996F, 420.933F);
-            this.xrPictureBoxInstituteStamp.Sizing = DevExpress.XtraPrinting.ImageSizeMode.ZoomImage;
+            this.ReportFooter.PrintAtBottom = true;
+            this.ReportFooter.SubBands.AddRange(new DevExpress.XtraReports.UI.SubBand[] {
+            this.SubBand1});
             // 
             // xrLabel23
             // 
@@ -609,6 +605,42 @@ namespace CD4.UI.Report
             this.xrLabel28.Text = "*** END OF REPORT ***";
             this.xrLabel28.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             this.xrLabel28.WordWrap = false;
+            // 
+            // SubBand1
+            // 
+            this.SubBand1.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrPictureBoxInstituteStamp,
+            this.xrBarCode2});
+            this.SubBand1.Dpi = 254F;
+            this.SubBand1.HeightF = 420.933F;
+            this.SubBand1.Name = "SubBand1";
+            // 
+            // xrPictureBoxInstituteStamp
+            // 
+            this.xrPictureBoxInstituteStamp.Dpi = 254F;
+            this.xrPictureBoxInstituteStamp.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBoxInstituteStamp.ImageSource"));
+            this.xrPictureBoxInstituteStamp.LocationFloat = new DevExpress.Utils.PointFloat(1012.401F, 0F);
+            this.xrPictureBoxInstituteStamp.Name = "xrPictureBoxInstituteStamp";
+            this.xrPictureBoxInstituteStamp.SizeF = new System.Drawing.SizeF(458.6996F, 420.933F);
+            this.xrPictureBoxInstituteStamp.Sizing = DevExpress.XtraPrinting.ImageSizeMode.ZoomImage;
+            // 
+            // xrBarCode2
+            // 
+            this.xrBarCode2.AutoModule = true;
+            this.xrBarCode2.Dpi = 254F;
+            this.xrBarCode2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Pdf417String]")});
+            this.xrBarCode2.LocationFloat = new DevExpress.Utils.PointFloat(56.43964F, 0F);
+            this.xrBarCode2.Module = 5.08F;
+            this.xrBarCode2.Name = "xrBarCode2";
+            this.xrBarCode2.Padding = new DevExpress.XtraPrinting.PaddingInfo(25, 25, 0, 0, 254F);
+            this.xrBarCode2.ShowText = false;
+            this.xrBarCode2.SizeF = new System.Drawing.SizeF(452.732F, 392.9592F);
+            this.xrBarCode2.StylePriority.UseTextAlignment = false;
+            qrCodeGenerator1.CompactionMode = DevExpress.XtraPrinting.BarCode.QRCodeCompactionMode.Byte;
+            qrCodeGenerator1.ErrorCorrectionLevel = DevExpress.XtraPrinting.BarCode.QRCodeErrorCorrectionLevel.M;
+            qrCodeGenerator1.Logo = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("qrCodeGenerator1.Logo"));
+            this.xrBarCode2.Symbology = qrCodeGenerator1;
             // 
             // xrLabel14
             // 
@@ -802,7 +834,7 @@ namespace CD4.UI.Report
             // 
             // bindingSource
             // 
-            this.bindingSource.DataSource = typeof(AnalysisRequestReportModel);
+            this.bindingSource.DataSource = typeof(CD4.Entensibility.ReportingFramework.Models.AnalysisRequestReportModel);
             // 
             // AnalysisReport
             // 
@@ -888,5 +920,7 @@ namespace CD4.UI.Report
         private DevExpress.XtraReports.UI.XRLabel xrLabel22;
         private DevExpress.XtraReports.UI.XRLabel xrLabel24;
         private DevExpress.XtraReports.UI.XRPictureBox xrPictureBoxInstituteStamp;
+        private DevExpress.XtraReports.UI.XRBarCode xrBarCode2;
+        private DevExpress.XtraReports.UI.SubBand SubBand1;
     }
 }
