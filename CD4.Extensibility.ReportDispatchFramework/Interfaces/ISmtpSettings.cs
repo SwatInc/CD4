@@ -1,7 +1,7 @@
-﻿using CD4.ReportDispatch.SDK.Models;
+﻿using CD4.Extensibility.ReportDispatchFramework.Models;
 using FluentEmail.Smtp;
 
-namespace CD4.ReportDispatch.SDK.Services
+namespace CD4.Extensibility.ReportDispatchFramework.Services
 {
     public interface ISmtpService
     {

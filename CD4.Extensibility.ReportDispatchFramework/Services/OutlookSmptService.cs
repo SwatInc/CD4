@@ -1,21 +1,20 @@
-﻿using CD4.ReportDispatch.SDK.Models;
+﻿using CD4.Extensibility.ReportDispatchFramework.Models;
 using FluentEmail.Smtp;
 
-namespace CD4.ReportDispatch.SDK.Services
+namespace CD4.Extensibility.ReportDispatchFramework.Services
 {
-    public class GmailSmptService : ISmtpService
+    public class OutlookSmptService : ISmtpService
     {
-        public GmailSmptService()
+        public OutlookSmptService()
         {
             SmtpSettings = new SmtpSettingsModel();
 
-            SmtpSettings.HostUrl = "smtp.gmail.com";
+            SmtpSettings.FromAddress = "ibrahim.hucyn@live.com";
+            SmtpSettings.HostUrl = "smtp.office365.com";
             SmtpSettings.Port = 587;
             SmtpSettings.EnableSsl = true;
             SmtpSettings.ApiKeyOrPassword = "";
-            SmtpSettings.FromAddress = "ibrahim.hucyn@gmail.com";
         }
-
         public SmtpSettingsModel SmtpSettings { get; set; }
 
         public SmtpSender GetSmtpSender()

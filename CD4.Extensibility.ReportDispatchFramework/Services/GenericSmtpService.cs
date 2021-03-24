@@ -1,10 +1,10 @@
-﻿using CD4.ReportDispatch.SDK.Models;
+﻿using CD4.Extensibility.ReportDispatchFramework.Models;
 using FluentEmail.Smtp;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace CD4.ReportDispatch.SDK.Services
+namespace CD4.Extensibility.ReportDispatchFramework.Services
 {
     /// <summary>
     /// This class allows the user to change SMTP variable values to send with different mail providers

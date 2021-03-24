@@ -1,5 +1,5 @@
 ﻿using CD4.ReportDispatch.GrpcMailService.Services;
-using CD4.ReportDispatch.SDK.Services;
+using CD4.Extensibility.ReportDispatchFramework.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;

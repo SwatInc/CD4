@@ -1,11 +1,11 @@
-﻿using CD4.ReportDispatch.SDK.Models;
+﻿using CD4.Extensibility.ReportDispatchFramework.Models;
 using FluentEmail.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace CD4.ReportDispatch.SDK.Services
+namespace CD4.Extensibility.ReportDispatchFramework.Services
 {
     public class AttachmentService
     {

@@ -1,5 +1,5 @@
-﻿using CD4.ReportDispatch.SDK.Models;
-using CD4.ReportDispatch.SDK.Services;
+﻿using CD4.Extensibility.ReportDispatchFramework.Models;
+using CD4.Extensibility.ReportDispatchFramework.Services;
 using FluentEmail.Core;
 using FluentEmail.Razor;
 using Grpc.Core;

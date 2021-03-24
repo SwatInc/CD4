@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CD4.ReportDispatch.SDK.Models
+namespace CD4.Extensibility.ReportDispatchFramework.Models
 {
     public class EmailModel
     {

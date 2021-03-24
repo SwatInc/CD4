@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\CD4.ReportDispatch.SDK\CD4.ReportDispatch.SDK.csproj" />
+    <ProjectReference Include="..\CD4.Extensibility.ReportDispatchFramework\CD4.Exensibility.ReportDispatchFramework.csproj" />
   </ItemGroup>
 
 </Project>
