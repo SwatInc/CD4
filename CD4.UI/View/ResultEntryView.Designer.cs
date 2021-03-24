@@ -53,7 +53,7 @@ namespace CD4.UI.View
             this.repositoryItemLookUpEditCodifiedPhrases = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.graphsUserControl = new CD4.UI.UserControls.GraphsUserControl();
             this.groupControlFunctions = new DevExpress.XtraEditors.GroupControl();
-            this.dropDownButton1 = new DevExpress.XtraEditors.DropDownButton();
+            this.exportReportOnDefaultTemplate = new DevExpress.XtraEditors.DropDownButton();
             this.simpleButtonNotes = new DevExpress.XtraEditors.SimpleButton();
             this.lookUpEditSampleStatusFilter = new DevExpress.XtraEditors.LookUpEdit();
             this.simpleButtonLoadWorksheet = new DevExpress.XtraEditors.SimpleButton();
@@ -341,7 +341,7 @@ namespace CD4.UI.View
             // 
             // groupControlFunctions
             // 
-            this.groupControlFunctions.Controls.Add(this.dropDownButton1);
+            this.groupControlFunctions.Controls.Add(this.exportReportOnDefaultTemplate);
             this.groupControlFunctions.Controls.Add(this.simpleButtonNotes);
             this.groupControlFunctions.Controls.Add(this.lookUpEditSampleStatusFilter);
             this.groupControlFunctions.Controls.Add(this.simpleButtonLoadWorksheet);
@@ -357,12 +357,12 @@ namespace CD4.UI.View
             // 
             // dropDownButton1
             // 
-            this.dropDownButton1.Location = new System.Drawing.Point(884, 43);
-            this.dropDownButton1.Name = "dropDownButton1";
-            this.dropDownButton1.Size = new System.Drawing.Size(135, 23);
-            this.dropDownButton1.TabIndex = 9;
-            this.dropDownButton1.Tag = "ResultEntry.ExportReport";
-            this.dropDownButton1.Text = "Export Rpt. [ Ctrl+E ]";
+            this.exportReportOnDefaultTemplate.Location = new System.Drawing.Point(884, 43);
+            this.exportReportOnDefaultTemplate.Name = "dropDownButton1";
+            this.exportReportOnDefaultTemplate.Size = new System.Drawing.Size(135, 23);
+            this.exportReportOnDefaultTemplate.TabIndex = 9;
+            this.exportReportOnDefaultTemplate.Tag = "ResultEntry.ExportReport";
+            this.exportReportOnDefaultTemplate.Text = "Export Rpt. [ Ctrl+E ]";
             // 
             // simpleButtonNotes
             // 
@@ -499,6 +499,6 @@ namespace CD4.UI.View
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelTests;
         private UserControls.GraphsUserControl graphsUserControl;
         private SimpleButton simpleButtonNotes;
-        private DropDownButton dropDownButton1;
+        private DropDownButton exportReportOnDefaultTemplate;
     }
 }

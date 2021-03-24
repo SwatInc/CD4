@@ -60,6 +60,7 @@ namespace CD4.UI.View
             simpleButtonReport.Click += SimpleButtonReport_Click;
             simpleButtonLoadWorksheet.Click += LoadWorkSheet;
             simpleButtonNotes.Click += ShowSampleNotesDialog;
+            exportReportOnDefaultTemplate.Click += exportReportOnDefaultTemplate_Click;
             _viewModel.RequestDataRefreshed += RefreshViewData;
             _viewModel.PushingMessages += _viewModel_PushingMessages;
             _viewModel.PropertyChanged += _viewModel_PropertyChanged;
@@ -72,6 +73,19 @@ namespace CD4.UI.View
 
             gridViewSamples.ColumnFilterChanged += OnSampleSearchComplete_RefreshPatientRibbonAndSelectedTests;
             DisableResultEntryReadWriteAccessForUnauthorizedUsers();
+        }
+
+        private void exportReportOnDefaultTemplate_Click(object sender, EventArgs e)
+        {
+
+            //check if the user is authorised
+            if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.ExportReport")) return;
+            SimulateMenuClick_DefaultReportExport();
+        }
+
+        private void SimulateMenuClick_DefaultReportExport() 
+        {
+            SimpleButtonReport_Click(new DXMenuItem(), EventArgs.Empty);
         }
 
         /// <summary>
@@ -88,17 +102,17 @@ namespace CD4.UI.View
                     menu.Items.Add(new DXMenuItem(item.TemplateName, SimpleButtonReport_Click) { Tag = item.Index });
                 }
             }
-            dropDownButton1.DropDownControl = menu;
+            exportReportOnDefaultTemplate.DropDownControl = menu;
         }
 
         private void DisableResultEntryReadWriteAccessForUnauthorizedUsers()
         {
-            if (!_authEvaluator.IsFunctionAuthorized("ResultEntryView.ReadWriteAccess")) 
+            if (!_authEvaluator.IsFunctionAuthorized("ResultEntryView.ReadWriteAccess"))
             {
                 gridViewTests.OptionsBehavior.Editable = false;
                 Text = "Result Entry View [Read Only]";
             };
-            
+
         }
 
         private void ShowSampleNotesDialog(object sender, EventArgs e)
@@ -499,7 +513,7 @@ namespace CD4.UI.View
                     {
                         //check if the user is authorised
                         if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.ExportReport")) return;
-                        SimpleButtonReport_Click(new DXMenuItem(), EventArgs.Empty);
+                        SimulateMenuClick_DefaultReportExport();
                     }
                     break;
                 case Keys.Insert:
@@ -623,12 +637,12 @@ namespace CD4.UI.View
         private async void OnAddTestsToSampleAsync(object sender, EventArgs e)
         {
             //check if the user is authorised
-            if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.ReflexTesting")) {return;}
+            if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.ReflexTesting")) { return; }
 
 
             var sample = GetSampleForMenu(sender, e);
             var resultData = _viewModel.GetResultData(sample.Cin);
-            var reflexTestDialog = new LateOrderEntryView(_lateOrderEntryViewModel, resultData) 
+            var reflexTestDialog = new LateOrderEntryView(_lateOrderEntryViewModel, resultData)
             {
                 StartPosition = FormStartPosition.CenterScreen
             };
@@ -1026,10 +1040,10 @@ namespace CD4.UI.View
 
                 //if the report ID is successfully identified, then return the Id....
                 if (isInt) { return parsedReportId; }
-                
+
                 //proceed to return default
-                
-                
+
+
             }
 
             if (sender.GetType() == typeof(SimpleButton))
@@ -1278,7 +1292,7 @@ namespace CD4.UI.View
 
             //bind the enable/disable functionality of "Load Worksheet" button
             simpleButtonLoadWorksheet.DataBindings.Add(new Binding("Enabled", _viewModel, nameof(_viewModel.IsloadWorkSheetButtonEnabled)));
-            
+
             simpleButtonNotes.DataBindings.Add
                 (new Binding("Text", _viewModel, nameof(_viewModel.NotesCountButtonLabel), false, DataSourceUpdateMode.OnPropertyChanged));
             #endregion

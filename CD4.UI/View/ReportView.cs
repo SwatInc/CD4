@@ -158,7 +158,8 @@ namespace CD4.UI.View
 
             if (_cinAndReportId.Action == ReportActionModel.Export)
             {
-                var exportDirPath = $"{Environment.ExpandEnvironmentVariables(@"%SystemDrive%")}\\CD4 PDF Report Exports\\{reportModel.SampleSite.Trim()}\\{DateTime.Today:yyyy-MM-dd}";
+                var settings = new Properties.Settings();
+                var exportDirPath = $"{settings.ReportExportBasePath}\\{DateTime.Today:yyyy}\\{DateTime.Today:MMMM}\\{DateTime.Today:dd}\\{reportModel.SampleSite.Trim()}";
 
                 try
                 {

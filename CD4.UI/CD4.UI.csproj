@@ -17,7 +17,7 @@
     <PublishUrl>C:\Users\ibrahimhucyn\OneDrive\CD4Publish\CD4\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
-    <UpdateEnabled>true</UpdateEnabled>
+    <UpdateEnabled>false</UpdateEnabled>
     <UpdateMode>Foreground</UpdateMode>
     <UpdateInterval>7</UpdateInterval>
     <UpdateIntervalUnits>Days</UpdateIntervalUnits>
@@ -26,7 +26,7 @@
     <MapFileExtensions>false</MapFileExtensions>
     <UpdateUrl>https://1drv.ms/u/s!AiA1ilAlI98lgsZu_QXROvvUexlSqQ%3fe=dvZZjy/</UpdateUrl>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>2</ApplicationRevision>
+    <ApplicationRevision>5</ApplicationRevision>
     <ApplicationVersion>0.1.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>

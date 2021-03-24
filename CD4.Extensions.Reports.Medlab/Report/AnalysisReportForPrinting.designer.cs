@@ -618,7 +618,8 @@ namespace CD4.UI.Report
             this.xrBarCode2.AutoModule = true;
             this.xrBarCode2.Dpi = 254F;
             this.xrBarCode2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Pdf417String]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Concat([Patient].[NidPp],\'|\',[Patient].[Fullname],\'|\',[CollectedDate],\'|\',[Assays" +
+                    "].[Cin],\'|\',[Assays].[Result])")});
             this.xrBarCode2.LocationFloat = new DevExpress.Utils.PointFloat(56F, 0F);
             this.xrBarCode2.Module = 5.08F;
             this.xrBarCode2.Name = "xrBarCode2";

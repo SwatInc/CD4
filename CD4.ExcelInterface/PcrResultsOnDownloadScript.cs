@@ -107,6 +107,7 @@ public class PcrResultsOnDownloadScript
         }
         else
         {
+            //if(!suc2IsInt){return GetInterpretationTestCode() + "|";}
             return GetInterpretationTestCode() + "|Negative";
         }
     }
