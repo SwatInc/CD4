@@ -69,6 +69,7 @@
             this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.repositoryItemRatingControl1 = new DevExpress.XtraEditors.Repository.RepositoryItemRatingControl();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
+            this.barHeaderItemCD4Version = new DevExpress.XtraBars.BarHeaderItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuDiscipline)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRatingControl1)).BeginInit();
@@ -100,9 +101,10 @@
             this.barButtonItemViewAllNotes,
             this.barButtonItemContacts,
             this.barButtonItem1,
-            this.barButtonItemUpdatePatientDetailsView});
+            this.barButtonItemUpdatePatientDetailsView,
+            this.barHeaderItemCD4Version});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 32;
+            this.ribbon.MaxItemId = 35;
             this.ribbon.Name = "ribbon";
             this.ribbon.PageCategories.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageCategory[] {
             this.ribbonPageCategoryDiscipline});
@@ -418,10 +420,17 @@
             // ribbonStatusBar
             // 
             this.ribbonStatusBar.ItemLinks.Add(this.barStaticItemUsernameAndRole);
+            this.ribbonStatusBar.ItemLinks.Add(this.barHeaderItemCD4Version);
             this.ribbonStatusBar.Location = new System.Drawing.Point(0, 510);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
             this.ribbonStatusBar.Size = new System.Drawing.Size(1110, 31);
+            // 
+            // barHeaderItemCD4Version
+            // 
+            this.barHeaderItemCD4Version.Caption = "barHeaderItemVersion";
+            this.barHeaderItemCD4Version.Id = 34;
+            this.barHeaderItemCD4Version.Name = "barHeaderItemCD4Version";
             // 
             // MainView
             // 
@@ -488,5 +497,6 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItemUpdatePatientDetailsView;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup6;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup7;
+        private DevExpress.XtraBars.BarHeaderItem barHeaderItemCD4Version;
     }
 }
