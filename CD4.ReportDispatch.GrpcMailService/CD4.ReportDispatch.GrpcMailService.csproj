@@ -18,13 +18,20 @@
   <ItemGroup>
     <PackageReference Include="FluentEmail.Razor" Version="3.0.0" />
     <PackageReference Include="FluentEmail.Smtp" Version="3.0.0" />
-    <PackageReference Include="Grpc.AspNetCore" Version="2.35.0" />
+    <PackageReference Include="Grpc.AspNetCore" Version="2.36.0" />
     <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="5.0.1" />
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CD4.Extensibility.ReportDispatchFramework\CD4.Exensibility.ReportDispatchFramework.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="medlab_reportdispatch_template.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -5,10 +5,11 @@ using FluentEmail.Razor;
 using Grpc.Core;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Threading.Tasks;
-
+    
 namespace CD4.ReportDispatch.GrpcMailService.Services
 {
     public class ReportDispatcherService : ReportDispatcher.ReportDispatcherBase
@@ -77,13 +78,12 @@ namespace CD4.ReportDispatch.GrpcMailService.Services
             {
                 try
                 {
-                    await Task.Delay(3000);
                     var email = await Email
                         .From(smtpService.SmtpSettings.FromAddress, "swatincadmin")
                         .To(emailModel.ToAddress, emailModel.ToDisplayName)
                         .Subject(emailModel.Subject)
                         .Attach(attachments.Attachments)
-                        .UsingTemplate(emailModel.Template, emailModel.TemplateModel, true)
+                        .UsingTemplate(emailModel.Template, emailModel.TemplateModel)
                         .SendAsync();
 
                     //close all filestreams
