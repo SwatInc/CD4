@@ -170,9 +170,7 @@ namespace CD4.ExcelInterface.ViewModels
             {
                 foreach (var file in _filesToProcess)
                 {
-
-                    FileStream fileStream = new FileStream(file, FileMode.Open, FileAccess.Read);
-
+                    var fileStream = MultipleTries(() => new FileStream(file, FileMode.Open, FileAccess.Read));
                     var results = ProcessExcelFile(fileStream);
 
                     //delete the file if it exists
@@ -198,6 +196,32 @@ namespace CD4.ExcelInterface.ViewModels
 
                 //return back the data
                 e.Result = processedResults;
+            }
+        }
+
+        public T MultipleTries<T>(Func<T> function)
+        {
+            // https://stackoverflow.com/questions/1563191/cleanest-way-to-write-retry-logic
+
+            var MaxTries = Configuration.FileReadMaxTries;
+            var tries = MaxTries;
+            var delay = Configuration.FileReadDelay;
+            while (true)
+            {
+                try
+                {
+                    return function();
+                }
+                catch (Exception ex)
+                {
+                    if (--tries <= 0)
+                    {
+                        Logs.Add(new LogModel() { Log = $"Cannot read the file after {MaxTries} tries. Error Message: {ex.Message}" });
+                        throw;
+                    }
+                    Logs.Add(new LogModel() { Log = $"Failed reading the file. Trying again in {delay} ms. Max tries is set as {MaxTries}" });
+                    System.Threading.Thread.Sleep(delay);
+                }
             }
         }
         private List<InterfaceResults> ProcessExcelFile(FileStream fileStream)
@@ -254,6 +278,10 @@ namespace CD4.ExcelInterface.ViewModels
             {
                 _backgroundWorker.ReportProgress(1, $"An Error occured {ex.Message}. Excel file not processed!");
                 return new List<InterfaceResults>();
+            }
+            finally 
+            {
+                fileStream.Close();
             }
 
         }
