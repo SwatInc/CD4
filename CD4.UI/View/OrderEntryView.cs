@@ -518,6 +518,11 @@ namespace CD4.UI.View
                 barcodeData = await _viewModel.GetBarcodeData();
                 return _barcodeHelper.PrintSingleSampleBarcode(barcodeData, _viewModel.Cin);
             }
+            catch (System.Drawing.Printing.InvalidPrinterException ex) 
+            {
+                XtraMessageBox.Show($"Cannot print the barcode. The sample will be marked as collected if status is registered. Please find the error(s) below\n{ex.Message}");
+                return true;
+            }
             catch (Exception ex)
             {
                 XtraMessageBox.Show(ex.Message);
