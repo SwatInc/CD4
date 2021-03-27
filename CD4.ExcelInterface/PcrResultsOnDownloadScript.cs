@@ -67,6 +67,8 @@ public class PcrResultsOnDownloadScript
         var ngenePresent = false;
         var sucPresent = false;
 
+        #region Set genes values received from parameters
+
         foreach (var item in measurements)
         {
             if (item.TestCode == "ORF1ab")
@@ -86,30 +88,84 @@ public class PcrResultsOnDownloadScript
             }
         }
 
+        #endregion
+
         //all genes are required for interpretation, if not return
-        if(!(orf1abPresent && ngenePresent && sucPresent)) return GetInterpretationTestCode() + "|";
+        if (!(orf1abPresent && ngenePresent && sucPresent)) return GetInterpretationTestCode() + "|";
 
         //parse gene values
+        #region TryParse Gene values to Numeric
         var ofr1abIsInt = decimal.TryParse(ofr1ab, out orf1abInt);
         var ngeneIsInt = decimal.TryParse(ngene, out ngeneInt);
         var suc2IsInt = decimal.TryParse(suc2, out suc2Int);
+        #endregion
 
-        if (ofr1abIsInt && ngeneIsInt && suc2IsInt)
+        #region Setting Gene Cutoffs
+        var orf1abCutoff = 37M;
+        var ngeneCutoff = 35M;
+        var suc2Cutoff = 34M;
+        var noAmpResult = "-";
+        #endregion
+
+        //set the non-numeric genes to an impossible value that would be evaluated as negative
+        //The only non-negative value received here would be a dash(-) incase of gentier or null incase of QS5
+
+        if (!ofr1abIsInt && ofr1ab == noAmpResult) { orf1abInt = 1000M; }
+        if (!ngeneIsInt && ngene == noAmpResult) { ngeneInt = 1000M; }
+        if (!suc2IsInt && suc2 == noAmpResult) { suc2Int = 1000M; }
+
+        // Run interpretation rules
+        #region All numeric Rules
+        //All numeric  and N gene and ORF1ab is NEGATIVE. SUC is Positive. Result is Negative
+        if (orf1abInt > orf1abCutoff && ngeneInt > ngeneCutoff && suc2Int <= suc2Cutoff)
         {
-            if (orf1abInt <= 37M && ngeneInt <= 35M && suc2Int <= 34M)
-            {
-                return GetInterpretationTestCode() + "|Positive";
-            }
-            else
-            {
-                return GetInterpretationTestCode() + "|Negative";
-            }
-        }
-        else
-        {
-            //if(!suc2IsInt){return GetInterpretationTestCode() + "|";}
             return GetInterpretationTestCode() + "|Negative";
         }
+
+        //All numeric. orf1ab negative. N gene and SUC2 Positive. Result is BLANK
+        if (orf1abInt > orf1abCutoff && ngeneInt <= ngeneCutoff && suc2Int <= suc2Cutoff)
+        {
+            return GetInterpretationTestCode() + "|";
+        }
+
+        //All numeric. N gene negative. orf1ab and SUC2 positive. Result is BLANK
+        if (orf1abInt <= orf1abCutoff && ngeneInt > ngeneCutoff && suc2Int <= suc2Cutoff)
+        {
+            return GetInterpretationTestCode() + "|";
+        }
+
+        //All numeric. All negative. Result is NEGATIVE
+        if (orf1abInt > orf1abCutoff && ngeneInt > ngeneCutoff && suc2Int > suc2Cutoff)
+        {
+            return GetInterpretationTestCode() + "|";
+        }
+
+        //All numeric. orf1ab and n gene are positive. SUC is negative. Result is Positive
+        if (orf1abInt <= orf1abCutoff && ngeneInt <= ngeneCutoff && suc2Int > suc2Cutoff)
+        {
+            return GetInterpretationTestCode() + "|Positive";
+        }
+
+        //All numeric and All genes positive. Result: Positive
+        if (orf1abInt <= orf1abCutoff && ngeneInt <= ngeneCutoff && suc2Int <= suc2Cutoff)
+        {
+            return GetInterpretationTestCode() + "|Positive";
+        }
+
+        //Only or1ab Amplified. Result is BLANK
+        if (orf1abInt <= orf1abCutoff && ngeneInt > ngeneCutoff && suc2Int > suc2Cutoff)
+        {
+            return GetInterpretationTestCode() + "|";
+        }
+        //Only ngene Amplified. Result is BLANK
+        if (orf1abInt > orf1abCutoff && ngeneInt <= ngeneCutoff && suc2Int > suc2Cutoff)
+        {
+            return GetInterpretationTestCode() + "|";
+        }
+
+        return "ERROR|No rules found for condition";
+        #endregion
+
     }
     private string LabGunResultInterPretation(dynamic measurements)
     {
@@ -146,7 +202,7 @@ public class PcrResultsOnDownloadScript
         }
 
         //If any genes are missing... return
-        if(!(rdrpPresent && ngenePresent && icPresent)) return GetInterpretationTestCode() + "|";
+        if (!(rdrpPresent && ngenePresent && icPresent)) return GetInterpretationTestCode() + "|";
 
         //try parsing the string ct values to decimal for comparision
         var rdrpIsDecimal = decimal.TryParse(rdrp, out rdrpDecimal);
@@ -156,11 +212,11 @@ public class PcrResultsOnDownloadScript
         //if all values are numeric
         if (rdrpIsDecimal && ngeneIsDecimal && icIsDecimal)
         {
-            if (rdrpDecimal <= 30 && ngeneDecimal <= 30 && icDecimal <= 30 )
+            if (rdrpDecimal <= 30 && ngeneDecimal <= 30 && icDecimal <= 30)
             {
                 return GetInterpretationTestCode() + "|Positive";
             }
-            
+
         }
         return GetInterpretationTestCode() + "|Negative";
 
@@ -199,7 +255,7 @@ public class PcrResultsOnDownloadScript
         }
 
         //All genes must be present, return otherwise
-        if(!(orf1abPresent && ngenePresent && cy5Present)) return GetInterpretationTestCode() + "|";
+        if (!(orf1abPresent && ngenePresent && cy5Present)) return GetInterpretationTestCode() + "|";
 
         //parse gene values
         var ofr1abIsDecimal = decimal.TryParse(orf1ab, out orf1abDecimal);
@@ -210,7 +266,7 @@ public class PcrResultsOnDownloadScript
         if (ofr1abIsDecimal && ngeneIsDecimal && cy5IsDecimal)
         {
             //positive
-            if (orf1abDecimal <= 37M && ngeneDecimal <=37M && cy5Decimal <= 37M)
+            if (orf1abDecimal <= 37M && ngeneDecimal <= 37M && cy5Decimal <= 37M)
             {
                 return GetInterpretationTestCode() + "|Positive";
             }

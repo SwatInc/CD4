@@ -64,6 +64,18 @@ namespace CD4.ExcelInterface.ViewModels
             Initialize?.Invoke(this, EventArgs.Empty);
         }
 
+        #endregion
+
+        #region Public Properties
+        public Config Configuration { get; set; }
+        public BindingList<LogModel> Logs { get; set; }
+        public BindingList<InterfaceResults> InterfaceResults { get; set; }
+        public dynamic KitNames { get { return _kitNames; } private set => _kitNames = value; }
+
+        #endregion
+
+        #region Private Methods
+
         private async void RunInitalze(object sender, EventArgs e)
         {
             await LoadAndInitializeScript();
@@ -140,17 +152,7 @@ namespace CD4.ExcelInterface.ViewModels
             //auto export to LIS
             ExportToUploader().GetAwaiter().GetResult();
         }
-        #endregion
 
-        #region Public Properties
-        public Config Configuration { get; set; }
-        public BindingList<LogModel> Logs { get; set; }
-        public BindingList<InterfaceResults> InterfaceResults { get; set; }
-        public dynamic KitNames { get { return _kitNames; } private set => _kitNames = value; }
-
-        #endregion
-
-        #region Private Methods
 
         private void ReportProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -389,7 +391,5 @@ namespace CD4.ExcelInterface.ViewModels
 
         }
         #endregion
-
-
     }
 }
