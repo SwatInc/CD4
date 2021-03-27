@@ -43,7 +43,7 @@ namespace CD4.UI.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\logs")]
         public string ReportExportBasePath {
             get {
                 return ((string)(this["ReportExportBasePath"]));

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace CD4.UI.View
 {
@@ -131,48 +132,31 @@ namespace CD4.UI.View
             xtraReport.DataSource = reports;
             xtraReport.RequestParameters = false;
 
-            //var xtraReport = new AnalysisReport() { DataSource = reports, RequestParameters = false};
-
-            xtraReport.DisplayName = $"{this.Tag}_{report.Patient.Fullname} ({report.Patient.NidPp.Replace('/', '-')})";
-            //ReportPrintTool tool = new ReportPrintTool(xtraReport);
-
-            //hide unnecessary buttons
-            //tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Customize,CommandVisibility.None);
-            //tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Background,CommandVisibility.None);
-            //tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.EditPageHF, CommandVisibility.None);
-            //tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.HighlightEditingFields, CommandVisibility.None);
-            //tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Open, CommandVisibility.None);
-            //tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Watermark, CommandVisibility.None);
-            //tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Save, CommandVisibility.None);
-
-            //hide the bar with icons
-            //tool.PreviewForm.PrintBarManager.Bars[0].Visible = false;
-            //tool.PreviewForm.PrintBarManager.MainMenu.Visible = false;
-
-            //Set Main view as mdi parent.
-            //tool.PreviewForm.MdiParent = this.MdiParent;
-            //Show the report
-            //tool.ShowPreview();
-
-
+            xtraReport.DisplayName = $"{Tag}_{report.Patient.Fullname} ({report.Patient.NidPp.Replace('/', '-')})";
 
             if (_cinAndReportId.Action == ReportActionModel.Export)
             {
                 var settings = new Properties.Settings();
-                var exportDirPath = $"{settings.ReportExportBasePath}\\{DateTime.Today:yyyy}\\{DateTime.Today:MMMM}\\{DateTime.Today:dd}\\{reportModel.SampleSite.Trim()}";
+                string exportDirectoryStructure = $"{DateTime.Today:yyyy}\\{DateTime.Today:MMMM}\\{DateTime.Today:dd}\\{reportModel.SampleSite.Trim()}";
+                var exportDirPath = $"{settings.ReportExportBasePath}\\{exportDirectoryStructure}";
 
                 try
                 {
-                    // If directory does not exist, create it
-                    if (!Directory.Exists(exportDirPath))
-                    {
-                        Directory.CreateDirectory(exportDirPath);
-                    }
-                    xtraReport.ExportToPdf($"{exportDirPath}\\{xtraReport.DisplayName}.pdf");
+                    ExportReport(xtraReport, exportDirPath);
                 }
                 catch (Exception ex)
                 {
                     XtraMessageBox.Show($"Error exporting report. Please fing the details below.\n{ex.Message}\n{ex.StackTrace}\nExport path: {exportDirPath}");
+                    
+                    //prompt for user to select a temp export path
+                    var folderBrowserDialog = new XtraFolderBrowserDialog();
+                    // Show the FolderBrowserDialog.
+                    DialogResult result = folderBrowserDialog.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        exportDirPath = $"{folderBrowserDialog.SelectedPath}\\{exportDirectoryStructure}";
+                        ExportReport(xtraReport, exportDirPath);
+                    }
                 }
 
             }
@@ -189,10 +173,20 @@ namespace CD4.UI.View
 
         }
 
+        private void ExportReport(XtraReport xtraReport, string exportDirPath)
+        {
+            // If directory does not exist, create it
+            if (!Directory.Exists(exportDirPath))
+            {
+                Directory.CreateDirectory(exportDirPath);
+            }
+            xtraReport.ExportToPdf($"{exportDirPath}\\{xtraReport.DisplayName}.pdf");
+        }
+
         private void DisposeMe()
         {
-            this.Close();
-            this.Dispose();
+            Close();
+            Dispose();
         }
 
         private void InitializeReport(string cin)
