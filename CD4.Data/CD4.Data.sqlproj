@@ -273,6 +273,10 @@
     <Build Include="dbo\StoredProcedures\usp_CollectMultipleSamples.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetTestStatusByTestIdAndCin.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetAllAssociatedTestIdsForSamples.sql" />
+    <Build Include="dbo\Tables\Contacts.sql" />
+    <Build Include="dbo\Tables\ContactDetails.sql" />
+    <Build Include="dbo\Tables\Contacts_Sites.sql" />
+    <Build Include="dbo\Tables\ContactType.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
