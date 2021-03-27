@@ -67,6 +67,8 @@ public class QuantStudio5OnDownloadScript
         var ngenePresent = false;
         var sucPresent = false;
 
+        #region Set genes values received from parameters
+
         foreach (var item in measurements)
         {
             if (item.TestCode == "ORF1ab")
@@ -86,29 +88,85 @@ public class QuantStudio5OnDownloadScript
             }
         }
 
+        #endregion
+
         //all genes are required for interpretation, if not return
-        if(!(orf1abPresent && ngenePresent && sucPresent)) return GetInterpretationTestCode() + "|";
+        if (!(orf1abPresent && ngenePresent && sucPresent)) return GetInterpretationTestCode() + "|";
 
         //parse gene values
+        #region TryParse Gene values to Numeric
         var ofr1abIsInt = decimal.TryParse(ofr1ab, out orf1abInt);
         var ngeneIsInt = decimal.TryParse(ngene, out ngeneInt);
         var suc2IsInt = decimal.TryParse(suc2, out suc2Int);
+        #endregion
 
-        if (ofr1abIsInt && ngeneIsInt && suc2IsInt)
-        {
-            if (orf1abInt <= 37M && ngeneInt <= 35M && suc2Int <= 34M)
-            {
-                return GetInterpretationTestCode() + "|Positive";
-            }
-            else
-            {
-                return GetInterpretationTestCode() + "|Negative";
-            }
-        }
-        else
+        #region Setting Gene Cutoffs
+        var orf1abCutoff = 37M;
+        var ngeneCutoff = 35M;
+        var suc2Cutoff = 34M;
+        var noAmpResult = "-";
+        #endregion
+
+        //set the non-numeric genes to an impossible value that would be evaluated as negative
+        //The only non-negative value received here would be a dash(-) incase of gentier or null incase of QS5
+
+        if (!ofr1abIsInt && ofr1ab == noAmpResult) { orf1abInt = 1000M; }
+        if (!ngeneIsInt && ngene == noAmpResult) { ngeneInt = 1000M; }
+        if (!suc2IsInt && suc2 == noAmpResult) { suc2Int = 1000M; }
+
+        // Run interpretation rules
+        #region All numeric Rules
+        //All numeric  and N gene and ORF1ab is NEGATIVE. SUC is Positive. Result is Negative
+        if (orf1abInt > orf1abCutoff && ngeneInt > ngeneCutoff && suc2Int <= suc2Cutoff)
         {
             return GetInterpretationTestCode() + "|Negative";
         }
+
+        //All numeric. orf1ab negative. N gene and SUC2 Positive. Result is BLANK
+        if (orf1abInt > orf1abCutoff && ngeneInt <= ngeneCutoff && suc2Int <= suc2Cutoff)
+        {
+            return GetInterpretationTestCode() + "|";
+        }
+
+        //All numeric. N gene negative. orf1ab and SUC2 positive. Result is BLANK
+        if (orf1abInt <= orf1abCutoff && ngeneInt > ngeneCutoff && suc2Int <= suc2Cutoff)
+        {
+            return GetInterpretationTestCode() + "|";
+        }
+
+        //All numeric. All negative. Result is NEGATIVE
+        if (orf1abInt > orf1abCutoff && ngeneInt > ngeneCutoff && suc2Int > suc2Cutoff)
+        {
+            return GetInterpretationTestCode() + "|";
+        }
+
+        //All numeric. orf1ab and n gene are positive. SUC is negative. Result is Positive
+        if (orf1abInt <= orf1abCutoff && ngeneInt <= ngeneCutoff && suc2Int > suc2Cutoff)
+        {
+            return GetInterpretationTestCode() + "|Positive";
+        }
+
+        //All numeric and All genes positive. Result: Positive
+        if (orf1abInt <= orf1abCutoff && ngeneInt <= ngeneCutoff && suc2Int <= suc2Cutoff)
+        {
+            return GetInterpretationTestCode() + "|Positive";
+        }
+
+        //Only or1ab Amplified. Result is BLANK
+        if (orf1abInt <= orf1abCutoff && ngeneInt > ngeneCutoff && suc2Int > suc2Cutoff)
+        {
+            return GetInterpretationTestCode() + "|";
+        }
+        //Only ngene Amplified. Result is BLANK
+        if (orf1abInt > orf1abCutoff && ngeneInt <= ngeneCutoff && suc2Int > suc2Cutoff)
+        {
+            return GetInterpretationTestCode() + "|";
+        }
+
+        return "ERROR|No rules found for condition";
+        #endregion
+
+
     }
     private string LabGunResultInterPretation(dynamic measurements)
     {

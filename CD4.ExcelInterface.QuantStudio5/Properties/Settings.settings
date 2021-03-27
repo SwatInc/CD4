@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="Config" Type="System.String" Scope="User">
-      <Value Profile="(Default)">{"MainFormTitle":"CD4 Interface (QuantStudio5)","AnalyserName":"QuantStudio5-01","ExcelFileDirectory":"C:\\Logs\\","ExportPath":"C:\\Export\\","DataExtension":"json","ControlFileExtension":"ok","LisExportExtension":"*.xlsx","FileReadMaxTries":10,"FileReadDelay":5000,"BatchId":{"ScanColumnIndex":0,"DataColumnIndex":1,"CsvKeyWords":"Experiment File Name, Experiment Name"},"DataRange":{"AutoDetectStartRow":{"Active":true,"Keyword":"Well","ColumnIndex":0},"StartRow":45,"EndRow":110},"SidColumn":3,"SamplePositionColumn":1,"ExcludeRows":[2],"PositiveControlSID":"","NegativeControlSID":"","Measurements":[{"TestCodeColumn":4,"MeasurementValueColumn":8,"Unit":""}]}</Value>
+      <Value Profile="(Default)">{"MainFormTitle":"CD4 Interface (QuantStudio5)","AnalyserName":"QS5-01","ExcelFileDirectory":"C:\\Logs\\","ExportPath":"C:\\Export\\","DataExtension":"json","ControlFileExtension":"ok","LisExportExtension":"*.xlsx","FileReadMaxTries":10,"FileReadDelay":5000,"BatchId":{"ScanColumnIndex":0,"DataColumnIndex":1,"CsvKeyWords":"Experiment File Name, Experiment Name"},"DataRange":{"AutoDetectStartRow":{"Active":true,"Keyword":"Well","ColumnIndex":0},"StartRow":45,"EndRow":110},"SidColumn":3,"SamplePositionColumn":1,"ExcludeRows":[2],"PositiveControlSID":"","NegativeControlSID":"","Measurements":[{"TestCodeColumn":4,"MeasurementValueColumn":8,"Unit":""}]}</Value>
     </Setting>
   </Settings>
 </SettingsFile>
