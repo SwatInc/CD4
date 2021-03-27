@@ -59,6 +59,10 @@ namespace CD4.UI.Helpers
 
             try
             {
+                var requestBarcode = barcodeData.FirstOrDefault();
+                requestBarcode.Discipline = "Analysis Request";
+                barcodeData.Add(requestBarcode);
+
                 GenerateLabelAndSendToPrinter(barcodeData);
                 return true;
             }
