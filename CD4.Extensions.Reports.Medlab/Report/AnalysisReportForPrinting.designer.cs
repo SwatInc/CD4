@@ -425,22 +425,25 @@ namespace CD4.UI.Report
             this.xrBarCode1.AutoModule = true;
             this.xrBarCode1.Dpi = 254F;
             this.xrBarCode1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Assays].[Cin]")});
-            this.xrBarCode1.LocationFloat = new DevExpress.Utils.PointFloat(1030.922F, 196.9558F);
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BinaryData", "[Pdf417Binary]")});
+            this.xrBarCode1.LocationFloat = new DevExpress.Utils.PointFloat(1030.922F, 179.705F);
             this.xrBarCode1.Module = 5.08F;
             this.xrBarCode1.Name = "xrBarCode1";
             this.xrBarCode1.Padding = new DevExpress.XtraPrinting.PaddingInfo(25, 25, 0, 0, 254F);
             this.xrBarCode1.ShowText = false;
-            this.xrBarCode1.SizeF = new System.Drawing.SizeF(547.6875F, 121.7083F);
+            this.xrBarCode1.SizeF = new System.Drawing.SizeF(594.6782F, 157.48F);
             this.xrBarCode1.StylePriority.UseTextAlignment = false;
-            pdF417Generator1.Rows = 9;
+            pdF417Generator1.CompactionMode = DevExpress.XtraPrinting.BarCode.PDF417CompactionMode.Binary;
+            pdF417Generator1.Rows = 10;
+            pdF417Generator1.YToXRatio = 5F;
             this.xrBarCode1.Symbology = pdF417Generator1;
+            this.xrBarCode1.Text = "Testing";
             // 
             // xrLabel5
             // 
             this.xrLabel5.Dpi = 254F;
             this.xrLabel5.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(91.44F, 196.9558F);
+            this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(91.43999F, 179.705F);
             this.xrLabel5.Multiline = true;
             this.xrLabel5.Name = "xrLabel5";
             this.xrLabel5.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);

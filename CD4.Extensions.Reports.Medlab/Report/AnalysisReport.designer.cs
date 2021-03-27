@@ -426,7 +426,7 @@ namespace CD4.UI.Report
             this.xrBarCode1.AutoModule = true;
             this.xrBarCode1.Dpi = 254F;
             this.xrBarCode1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Concat([Patient].[NidPp],\'|\',[Assays].[Cin],\'|\',[Assays].[Result])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "BinaryData", "[Pdf417Binary]")});
             this.xrBarCode1.LocationFloat = new DevExpress.Utils.PointFloat(1033.569F, 179.705F);
             this.xrBarCode1.Module = 5.08F;
             this.xrBarCode1.Name = "xrBarCode1";
@@ -434,7 +434,9 @@ namespace CD4.UI.Report
             this.xrBarCode1.ShowText = false;
             this.xrBarCode1.SizeF = new System.Drawing.SizeF(592.4309F, 157.48F);
             this.xrBarCode1.StylePriority.UseTextAlignment = false;
-            pdF417Generator1.Rows = 9;
+            pdF417Generator1.CompactionMode = DevExpress.XtraPrinting.BarCode.PDF417CompactionMode.Binary;
+            pdF417Generator1.Rows = 10;
+            pdF417Generator1.YToXRatio = 5F;
             this.xrBarCode1.Symbology = pdF417Generator1;
             // 
             // xrLabel5
