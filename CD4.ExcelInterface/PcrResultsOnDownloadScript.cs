@@ -119,7 +119,7 @@ public class PcrResultsOnDownloadScript
         //All numeric  and N gene and ORF1ab is NEGATIVE. SUC is Positive. Result is Negative
         if (orf1abInt > orf1abCutoff && ngeneInt > ngeneCutoff && suc2Int <= suc2Cutoff)
         {
-            return GetInterpretationTestCode() + "|Negative";
+            return GetInterpretationTestCode() + "|NEGATIVE";
         }
 
         //All numeric. orf1ab negative. N gene and SUC2 Positive. Result is BLANK
@@ -143,13 +143,13 @@ public class PcrResultsOnDownloadScript
         //All numeric. orf1ab and n gene are positive. SUC is negative. Result is Positive
         if (orf1abInt <= orf1abCutoff && ngeneInt <= ngeneCutoff && suc2Int > suc2Cutoff)
         {
-            return GetInterpretationTestCode() + "|Positive";
+            return GetInterpretationTestCode() + "|POSITIVE";
         }
 
         //All numeric and All genes positive. Result: Positive
         if (orf1abInt <= orf1abCutoff && ngeneInt <= ngeneCutoff && suc2Int <= suc2Cutoff)
         {
-            return GetInterpretationTestCode() + "|Positive";
+            return GetInterpretationTestCode() + "|POSITIVE";
         }
 
         //Only or1ab Amplified. Result is BLANK
@@ -214,11 +214,11 @@ public class PcrResultsOnDownloadScript
         {
             if (rdrpDecimal <= 30 && ngeneDecimal <= 30 && icDecimal <= 30)
             {
-                return GetInterpretationTestCode() + "|Positive";
+                return GetInterpretationTestCode() + "|POSITIVE";
             }
 
         }
-        return GetInterpretationTestCode() + "|Negative";
+        return GetInterpretationTestCode() + "|NEGATIVE";
 
     }
     private string PerkinElmerResultInterPretation(dynamic measurements)
@@ -268,17 +268,17 @@ public class PcrResultsOnDownloadScript
             //positive
             if (orf1abDecimal <= 37M && ngeneDecimal <= 37M && cy5Decimal <= 37M)
             {
-                return GetInterpretationTestCode() + "|Positive";
+                return GetInterpretationTestCode() + "|POSITIVE";
             }
             //repeat from extraction
             if (orf1abDecimal <= 37M && ngeneDecimal <= 37M && (cy5Decimal > 37M && cy5Decimal <= 42M))
             {
-                return GetInterpretationTestCode() + "|Rerun";
+                return GetInterpretationTestCode() + "|RERUN";
             }
             //negative
             if (orf1abDecimal > 37M || ngeneDecimal > 37M || cy5Decimal <= 37M)
             {
-                return GetInterpretationTestCode() + "|1Negative";
+                return GetInterpretationTestCode() + "|NEGATIVE";
             }
 
             //does not fit any condition specified.
@@ -289,11 +289,11 @@ public class PcrResultsOnDownloadScript
             //Case 2: Atleast one Ct is not numeric
             if (!cy5IsDecimal)
             {
-                return GetInterpretationTestCode() + "|IInvalid";
+                return GetInterpretationTestCode() + "|INVALID";
             }
             else
             {
-                return GetInterpretationTestCode() + "|2Negative";
+                return GetInterpretationTestCode() + "|NEGATIVE";
             }
         }
 

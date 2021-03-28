@@ -150,7 +150,12 @@ namespace CD4.ExcelInterface.ViewModels
             }
 
             //auto export to LIS
-            ExportToUploader().GetAwaiter().GetResult();
+            if (ExportToUploader().GetAwaiter().GetResult())
+            {
+                InterfaceResults.Clear();
+                Logs.Add(new LogModel() { Log = "Successfully exported to LIS and Cleared Queue to be exported to LIS.." });
+
+            };
         }
 
 
