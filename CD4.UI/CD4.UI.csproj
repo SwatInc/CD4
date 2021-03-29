@@ -314,6 +314,12 @@
     <Compile Include="View\CodifiedResultsView.Designer.cs">
       <DependentUpon>CodifiedResultsView.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\ContactsView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\ContactsView.Designer.cs">
+      <DependentUpon>ContactsView.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\CountriesView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -448,6 +454,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="View\CodifiedResultsView.resx">
       <DependentUpon>CodifiedResultsView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\ContactsView.resx">
+      <DependentUpon>ContactsView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\CountriesView.resx">
       <DependentUpon>CountriesView.cs</DependentUpon>
