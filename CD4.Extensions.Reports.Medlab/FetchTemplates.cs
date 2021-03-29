@@ -1,6 +1,6 @@
 ﻿using CD4.Entensibility.ReportingFramework;
 using CD4.Entensibility.ReportingFramework.Models;
-using CD4.UI.Report;
+using CD4.Extensions.Reports.Medlab.Report;
 using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
@@ -20,6 +20,8 @@ namespace CD4.Extensions.Reports.Medlab
                     return new AnalysisReportForPrinting();
                 case ReportTemplate.TubeLabel75mm:
                     return new SeventyFiveMillimeterTubeLabel();
+                case ReportTemplate.DoA:
+                    return new AnalysisReportDoA();
                 default:
                     throw new ArgumentOutOfRangeException("Cannot find the specified report enum value.");
             }
@@ -31,7 +33,8 @@ namespace CD4.Extensions.Reports.Medlab
             {
                 new InfoModel(){Index=0, TemplateName="Analysis Report [ Default ]", ReportType = ReportType.AnalysisRequest},
                 new InfoModel(){Index=1, TemplateName="Analysis Report [ Without Seal ]", ReportType = ReportType.AnalysisRequest },
-                new InfoModel(){ Index=2, TemplateName = "Tube Label 75mm", ReportType = ReportType.Barcode}
+                new InfoModel(){ Index=2, TemplateName = "Tube Label 75mm", ReportType = ReportType.Barcode},
+                new InfoModel(){Index=3, TemplateName="Analysis Report [ DoA ]", ReportType = ReportType.AnalysisRequest}
             };
 
         }

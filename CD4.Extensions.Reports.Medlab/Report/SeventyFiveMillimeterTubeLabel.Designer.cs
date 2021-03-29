@@ -1,4 +1,4 @@
-﻿namespace CD4.UI.Report
+﻿namespace CD4.Extensions.Reports.Medlab.Report
 {
     partial class SeventyFiveMillimeterTubeLabel
     {

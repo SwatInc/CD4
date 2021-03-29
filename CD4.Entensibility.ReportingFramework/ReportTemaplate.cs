@@ -4,6 +4,7 @@
     {
         AnalysisReportDefault,
         AnalysisReportForPrinting,
-        TubeLabel75mm
+        TubeLabel75mm,
+        DoA
     }
 }
