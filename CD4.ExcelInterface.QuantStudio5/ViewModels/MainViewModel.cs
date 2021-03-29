@@ -451,9 +451,18 @@ namespace CD4.ExcelInterface.QuantStudio5.ViewModels
                 return;
             }
 
-            fileSystemWatcher.Path = Configuration.ExcelFileDirectory;
-            fileSystemWatcher.EnableRaisingEvents = true;
-            Logs.Add(new LogModel() { Log = $"Listening for analyser exports on {Configuration.ExcelFileDirectory}" });
+
+            try
+            {
+                fileSystemWatcher.Path = Configuration.ExcelFileDirectory;
+                fileSystemWatcher.EnableRaisingEvents = true;
+                Logs.Add(new LogModel() { Log = $"Listening for analyser exports on {Configuration.ExcelFileDirectory}" });
+            }
+            catch (Exception ex)
+            {
+                Logs.Add(new LogModel() { Log = $"An error occured while setting up file system watcher. Please restart interface.\n{ex.Message}" });
+            }
+
         }
         private void OnFileDetectedInDirectory(object sender, FileSystemEventArgs e)
         {
