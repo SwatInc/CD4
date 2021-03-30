@@ -50,6 +50,7 @@ namespace CD4.DataLibrary.DataAccess
                     Fullname = databaseModel.Patient.Fullname,
                     NidPp = databaseModel.Patient.NidPp
                 },
+                EpisodeNumber = databaseModel.Patient.EpisodeNumber,
                 //Initialize sample collected date, received date and sample site.
                 CollectedDate = databaseModel.Patient.CollectedDate,
                 ReceivedDate = databaseModel.Patient.ReceivedDate,

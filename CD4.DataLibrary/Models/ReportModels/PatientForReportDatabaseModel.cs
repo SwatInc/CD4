@@ -18,6 +18,7 @@ namespace CD4.DataLibrary.Models.ReportModels
         public DateTimeOffset? ReceivedDate { get; set; }
         public string Cin { get; set; }
         public int StatusIconId { get; set; }
+        public string EpisodeNumber { get; set; }
 
     }
 }
