@@ -1,7 +1,7 @@
 ﻿-- validates the specified tests and return distinct testStatus of all the tests in the sample.
 CREATE PROCEDURE [dbo].[usp_ValidateTest]
 	@Cin varchar(50),
-	@TestDescription varchar(50),
+	@TestDescription nvarchar(100),
 	@TestStatus int,
 	@UserId int
 AS	

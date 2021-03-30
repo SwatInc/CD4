@@ -3,7 +3,7 @@
 	[Id] INT NOT NULL IDENTITY, 
     [Sample_Cin] VARCHAR(50) NOT NULL,
     [TestId] INT NOT NULL, 
-    [Result] VARCHAR(50) NULL, 
+    [Result] NVARCHAR(50) NULL, 
     [ReferenceCode] CHAR(2) NOT NULL DEFAULT 'NM', -- default set as normal(NM) because inital result on table will be null.
     [IsDeltaOk] BIT NOT NULL DEFAULT 1, -- default is NotFailed(1) because initial result is null delta failure cannot be determined unless a result is entered.
     CONSTRAINT [FK_Result_Test] FOREIGN KEY ([TestId]) REFERENCES [dbo].[Test]([Id]), 

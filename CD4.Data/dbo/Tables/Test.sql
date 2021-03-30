@@ -2,7 +2,7 @@
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [DisciplineId] INT NOT NULL,
-    [Description] VARCHAR(50) NOT NULL,
+    [Description] NVARCHAR(100) NOT NULL,
     [SampleTypeId] INT NOT NULL,
     [ResultDataTypeId] INT NOT NULL, 
     [Mask] VARCHAR(50) NOT NULL,
