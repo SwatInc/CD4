@@ -45,6 +45,7 @@ AS
 		,[R].[CollectionDate] AS [CollectedDate]
 		,[R].[ReceivedDate]
 		,[R].[Cin]
+		,[R].[EpisodeNumber]
 		FROM [dbo].[RequestsWithTestsWithResults] [R]
 		WHERE [R].[Cin] = @Cin;
 
