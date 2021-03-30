@@ -1167,6 +1167,8 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             // xrTableCell17
             // 
+            this.xrTableCell17.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[ReceivedDate]")});
             this.xrTableCell17.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrTableCell17.Multiline = true;
             this.xrTableCell17.Name = "xrTableCell17";
@@ -1174,6 +1176,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell17.StylePriority.UseTextAlignment = false;
             this.xrTableCell17.Text = "date";
             this.xrTableCell17.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell17.TextFormatString = "{0:yyyy-MM-dd}";
             this.xrTableCell17.Weight = 1D;
             // 
             // xrTableCell18
@@ -1191,6 +1194,8 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             // xrTableCell19
             // 
+            this.xrTableCell19.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[CollectedDate]")});
             this.xrTableCell19.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrTableCell19.Multiline = true;
             this.xrTableCell19.Name = "xrTableCell19";
@@ -1198,6 +1203,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell19.StylePriority.UseTextAlignment = false;
             this.xrTableCell19.Text = "date";
             this.xrTableCell19.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell19.TextFormatString = "{0:yyyy-MM-dd}";
             this.xrTableCell19.Weight = 1D;
             // 
             // xrTableCell20
@@ -1225,6 +1231,8 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             // xrTableCell21
             // 
+            this.xrTableCell21.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[ReceivedDate]")});
             this.xrTableCell21.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.xrTableCell21.Multiline = true;
             this.xrTableCell21.Name = "xrTableCell21";
@@ -1232,6 +1240,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell21.StylePriority.UseTextAlignment = false;
             this.xrTableCell21.Text = "time";
             this.xrTableCell21.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
+            this.xrTableCell21.TextFormatString = "{0:HH:mm:ss}";
             this.xrTableCell21.Weight = 1D;
             // 
             // xrTableCell22
@@ -1251,6 +1260,8 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             // xrTableCell23
             // 
+            this.xrTableCell23.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[CollectedDate]")});
             this.xrTableCell23.Font = new System.Drawing.Font("Segoe UI", 8.25F);
             this.xrTableCell23.Multiline = true;
             this.xrTableCell23.Name = "xrTableCell23";
@@ -1258,6 +1269,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell23.StylePriority.UseTextAlignment = false;
             this.xrTableCell23.Text = "time";
             this.xrTableCell23.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
+            this.xrTableCell23.TextFormatString = "{0:HH:mm:ss}";
             this.xrTableCell23.Weight = 1D;
             // 
             // xrTableCell24
@@ -1299,6 +1311,8 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             // xrTableCell4
             // 
+            this.xrTableCell4.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[EpisodeNumber]")});
             this.xrTableCell4.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrTableCell4.Multiline = true;
             this.xrTableCell4.Name = "xrTableCell4";
@@ -1514,7 +1528,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell12.Name = "xrTableCell12";
             this.xrTableCell12.StylePriority.UseFont = false;
             this.xrTableCell12.StylePriority.UseTextAlignment = false;
-            this.xrTableCell12.Text = "Sample accepted by:";
+            this.xrTableCell12.Text = "Sample received by:";
             this.xrTableCell12.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
             this.xrTableCell12.Weight = 1D;
             // 

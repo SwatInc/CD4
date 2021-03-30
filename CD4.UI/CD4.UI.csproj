@@ -512,7 +512,6 @@
     <None Include="App.config" />
     <None Include="CD4.UI_TemporaryKey.pfx" />
     <None Include="packages.config" />
-    <None Include="Properties\DataSources\CD4.UI.View.AnalysisRequestReport.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -556,6 +555,9 @@
     <Content Include="lymphocyte.ico" />
     <None Include="Resources\updateUser.svg" />
     <None Include="Resources\dispatchPlane.svg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Properties\DataSources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

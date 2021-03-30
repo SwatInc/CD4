@@ -139,8 +139,10 @@ namespace CD4.UI.View
             {
                 SampleSite = reportModel.SampleSite,
                 CollectedDate = reportModel.CollectedDate,
-                ReceivedDate = reportModel.ReceivedDate
+                ReceivedDate = reportModel.ReceivedDate,
+                EpisodeNumber = reportModel.EpisodeNumber
             };
+
             //Map patient
             var patient = new Patient()
             {

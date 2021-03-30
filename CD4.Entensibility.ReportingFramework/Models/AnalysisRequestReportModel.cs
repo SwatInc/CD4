@@ -13,7 +13,7 @@ namespace CD4.Entensibility.ReportingFramework.Models
         public string PrintedDate { get; set; }
         public Patient Patient { get; set; }
         public BindingList<Assays> Assays { get; set; }
-
+        public string EpisodeNumber { get; set; }
         public string Pdf417String { get; private set; }
         public Byte[] Pdf417Binary { get; private set; }
 

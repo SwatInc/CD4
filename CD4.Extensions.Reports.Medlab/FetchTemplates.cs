@@ -55,8 +55,7 @@ namespace CD4.Extensions.Reports.Medlab
                 Patient = data.Patient,
                 PrintedDate = data.PrintedDate,
                 ReceivedDate = data.ReceivedDate,
-                SampleSite = data.SampleSite,
-
+                SampleSite = data.SampleSite
             };
             doADatasource.AcetylMorphine = analysis.FirstOrDefault((x) => x.Assay.ToLower().Contains("morphine"))?.Result;
             doADatasource.Amphetamine = analysis.FirstOrDefault((x) => x.Assay.ToLower().Contains("amphetamine"))?.Result;
@@ -66,7 +65,7 @@ namespace CD4.Extensions.Reports.Medlab
             doADatasource.Cocaine = analysis.FirstOrDefault((x) => x.Assay.ToLower().Contains("cocaine"))?.Result;
             doADatasource.EthylGlucuronide = analysis.FirstOrDefault((x) => x.Assay.ToLower().Contains("glucuronide"))?.Result;
             doADatasource.Opiates = analysis.FirstOrDefault((x) => x.Assay.ToLower().Contains("opiates"))?.Result;
-
+            doADatasource.EpisodeNumber = data.EpisodeNumber;
             return new List<DoAAnalysisRequestReportModel>() { doADatasource };
         }
 

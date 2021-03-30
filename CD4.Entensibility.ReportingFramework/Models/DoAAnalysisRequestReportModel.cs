@@ -11,7 +11,7 @@ namespace CD4.Entensibility.ReportingFramework.Models
         public DateTimeOffset? ReceivedDate { get; set; }
         public string PrintedDate { get; set; }
         public Patient Patient { get; set; }
-
+        public string EpisodeNumber { get; set; }
         public string Opiates { get; set; }
         public string Benzodiazepine1 { get; set; }
         public string Benzodiazepine2 { get; set; }
