@@ -66,6 +66,8 @@ namespace CD4.UI.View
             try
             {
                 var report = await _reportsData.GetAnalysisReportByCinAsync((string)Tag, _loggedInUserId).ConfigureAwait(true);
+                //map OR automap this response to an object from reporting framework and pass to the report to allow the report to do what ever
+                //crazy mapping it needs to do.
                 MapDataToReport(report.FirstOrDefault());
             }
             catch (Exception ex)
@@ -85,6 +87,53 @@ namespace CD4.UI.View
                 return;
             }
 
+            //ReportTemplates[0] The ZERO need to be handled dynamically to be truly extensible
+            var xtraReport = _reportExtensions.ReportTemplates[0]
+                .Execute((ReportTemplate)_cinAndReportId.ReportIndex, GetReportDatasource(reportModel));
+            xtraReport.RequestParameters = false;
+            xtraReport.DisplayName = $"{Tag}_{reportModel.Patient.Fullname} ({reportModel.Patient.NidPp.Replace('/', '-')})";
+
+            if (_cinAndReportId.Action == ReportActionModel.Export)
+            {
+                var settings = new Properties.Settings();
+                string exportDirectoryStructure = $"{DateTime.Today:yyyy}\\{DateTime.Today:MMMM}\\{DateTime.Today:dd}\\{reportModel.SampleSite.Trim()}";
+                var exportDirPath = $"{settings.ReportExportBasePath}\\{exportDirectoryStructure}";
+
+                try
+                {
+                    ExportReport(xtraReport, exportDirPath);
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show($"Error exporting report. Please fing the details below.\n{ex.Message}\n{ex.StackTrace}\nExport path: {exportDirPath}");
+
+                    //prompt for user to select a temp export path
+                    var folderBrowserDialog = new XtraFolderBrowserDialog();
+                    // Show the FolderBrowserDialog.
+                    DialogResult result = folderBrowserDialog.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        exportDirPath = $"{folderBrowserDialog.SelectedPath}\\{exportDirectoryStructure}";
+                        ExportReport(xtraReport, exportDirPath);
+                    }
+                }
+
+            }
+            if (_cinAndReportId.Action == ReportActionModel.Print)
+            {
+                xtraReport.PrinterName = "DocumentPrinter";
+                xtraReport.CreateDocument();
+                xtraReport.Print();
+            }
+
+            //Close this form
+            DisposeMe();
+
+
+        }
+
+        private List<AnalysisRequestReportModel> GetReportDatasource(DataLibrary.Models.ReportModels.AnalysisRequestReportModel reportModel)
+        {
             //map AnalysisRequestReport
             var report = new AnalysisRequestReportModel()
             {
@@ -123,54 +172,10 @@ namespace CD4.UI.View
             report.PrintedDate = DateTime.Now.ToString("dd-MM-yyyy HH:mm");
 
             //add report to a list of reports to make it compatible as datasource
-            var reports = new List<AnalysisRequestReportModel>();
+            var reportDatasource = new List<AnalysisRequestReportModel>();
             report.SetPdf417String();
-            reports.Add(report);
-
-            //ReportTemplates[0] The ZERO need to be handled dynamically to be truly extensible
-            var xtraReport = _reportExtensions.ReportTemplates[0].Execute((ReportTemplate)_cinAndReportId.ReportIndex);
-            xtraReport.DataSource = reports;
-            xtraReport.RequestParameters = false;
-
-            xtraReport.DisplayName = $"{Tag}_{report.Patient.Fullname} ({report.Patient.NidPp.Replace('/', '-')})";
-
-            if (_cinAndReportId.Action == ReportActionModel.Export)
-            {
-                var settings = new Properties.Settings();
-                string exportDirectoryStructure = $"{DateTime.Today:yyyy}\\{DateTime.Today:MMMM}\\{DateTime.Today:dd}\\{reportModel.SampleSite.Trim()}";
-                var exportDirPath = $"{settings.ReportExportBasePath}\\{exportDirectoryStructure}";
-
-                try
-                {
-                    ExportReport(xtraReport, exportDirPath);
-                }
-                catch (Exception ex)
-                {
-                    XtraMessageBox.Show($"Error exporting report. Please fing the details below.\n{ex.Message}\n{ex.StackTrace}\nExport path: {exportDirPath}");
-                    
-                    //prompt for user to select a temp export path
-                    var folderBrowserDialog = new XtraFolderBrowserDialog();
-                    // Show the FolderBrowserDialog.
-                    DialogResult result = folderBrowserDialog.ShowDialog();
-                    if (result == DialogResult.OK)
-                    {
-                        exportDirPath = $"{folderBrowserDialog.SelectedPath}\\{exportDirectoryStructure}";
-                        ExportReport(xtraReport, exportDirPath);
-                    }
-                }
-
-            }
-            if (_cinAndReportId.Action == ReportActionModel.Print)
-            {
-                xtraReport.PrinterName = "DocumentPrinter";
-                xtraReport.CreateDocument();
-                xtraReport.Print();
-            }
-
-            //Close this form
-            DisposeMe();
-
-
+            reportDatasource.Add(report);
+            return reportDatasource;
         }
 
         private void ExportReport(XtraReport xtraReport, string exportDirPath)
@@ -180,7 +185,14 @@ namespace CD4.UI.View
             {
                 Directory.CreateDirectory(exportDirPath);
             }
-            xtraReport.ExportToPdf($"{exportDirPath}\\{xtraReport.DisplayName}.pdf");
+            xtraReport.ExportToHtml($"{exportDirPath}\\{xtraReport.DisplayName}.html",new DevExpress.XtraPrinting.HtmlExportOptions() 
+            {
+                EmbedImagesInHTML = true,
+                ExportMode = DevExpress.XtraPrinting.HtmlExportMode.SingleFile
+            });
+
+            // xtraReport.ExportToPdf($"{exportDirPath}\\{xtraReport.DisplayName}.pdf");
+            xtraReport.ExportToDocx($"{exportDirPath}\\{xtraReport.DisplayName}.docx");
         }
 
         private void DisposeMe()
