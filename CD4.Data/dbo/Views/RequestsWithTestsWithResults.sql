@@ -14,7 +14,12 @@
 	   [AtollIslandCountry],
        [Nationality],
 	   [EpisodeNumber],
-	   [Site]
+	   [Site],
+       [QcCalValidatedBy],
+       [ReportedAt],
+       [ReceivedBy],
+       [ReportedBy],
+       [InstituteAssignedPatientId]
 )
 AS
 ( 
@@ -32,7 +37,12 @@ SELECT [R].[Id],
 	   ISNULL(CONCAT([A].[Atoll],'. ',[A].[Island]),'')AS [AtollIslandCountry],
        ISNULL([C].[Country],'') AS [Nationality],
 	   [AR].[EpisodeNumber],
-	   [SI].[Name] AS [Site]
+	   [SI].[Name] AS [Site],
+       [NCCVD].[QcCalValidatedBy],
+       [NRRD].[ReportedAt],
+       [NSRD].[ReceivedBy],
+       [NATD].[ReportedBy],
+       [P].[InstituteAssignedPatientId]
 FROM [dbo].[Result] [R] 
 INNER JOIN [dbo].[Sample] [S] ON [R].[Sample_Cin] = [S].[Cin]
 INNER JOIN [dbo].[AnalysisRequest] [AR] ON [S].[AnalysisRequestId] = [AR].[Id]
@@ -43,6 +53,10 @@ INNER JOIN [dbo].[Country] [C] ON [P].[CountryId]  = [C].[Id]
 INNER JOIN [dbo].[Sites] [SI] ON [S].[SiteId] = [SI].[Id]
 LEFT JOIN [dbo].[SampleCollectionTimings] [SCT] ON [S].[Cin] = [SCT].[Cin]
 LEFT JOIN [dbo].[SampleReceivedTimings] [SRC] ON [S].[Cin] = [SRC].[Cin]
+LEFT JOIN [dbo].[NdaCalControlsValidatedDetails] [NCCVD] ON [S].[Cin] = [NCCVD].[Cin]
+LEFT JOIN [dbo].[NdaRequestsReportedDetails] [NRRD] ON [S].[Cin] = [NRRD].[Cin]
+LEFT JOIN [dbo].[NdaSampleReceivedDetails] [NSRD] ON [S].[Cin] = [NSRD].[Cin]
+LEFT JOIN [dbo].[NdaAssaysTestedDetails] [NATD] ON [S].[Cin] = [NATD].[Cin]
 WHERE [R].[Result] IS NOT NULL OR [R].[Result] <> ''
 )
 GO

@@ -46,6 +46,11 @@ AS
 		,[R].[ReceivedDate]
 		,[R].[Cin]
 		,[R].[EpisodeNumber]
+		,[R].[QcCalValidatedBy]
+		,[R].[ReportedAt]
+		,[R].[ReceivedBy]
+		,[R].[ReportedBy]
+		,[R].[InstituteAssignedPatientId]
 		FROM [dbo].[RequestsWithTestsWithResults] [R]
 		WHERE [R].[Cin] = @Cin;
 
