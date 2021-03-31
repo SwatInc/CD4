@@ -7,24 +7,34 @@ namespace CD4.DataLibrary.DataAccess
 {
     public class ReportsDataAccess : DataAccessBase, IReportsDataAccess
     {
-        public async Task<List<AnalysisRequestReportModel>> GetAnalysisReportByCinAsync(string cin, int loggedInUserId)
+        public async Task<List<AnalysisRequestReportModel>> GetAnalysisReportByCinAsync(string cin, int loggedInUserId, string procedureName = "")
         {
             //stored procedure name to call
             var storedProcedure = "[dbo].[usp_GetAnalysisReportByCin]";
+            if (!string.IsNullOrEmpty(procedureName)) { storedProcedure = procedureName; }
+
             //dynamic parameter with cin
             var parameters = new { Cin = cin, UserId = loggedInUserId };
-
-            //Execute the stored procedure by calling LoadAnalysisReportByCinAsync method
-            var output = await LoadAnalysisReportByCinAsync<dynamic>(storedProcedure, parameters);
-
-            //If query yeilded no results, return new list
-            if (output.Results.Count == 0)
+            try
             {
-                return new List<AnalysisRequestReportModel>();
+                //Execute the stored procedure by calling LoadAnalysisReportByCinAsync method
+                var output = await LoadAnalysisReportByCinAsync<dynamic>(storedProcedure, parameters);
+
+                //If query yeilded no results, return new list
+                if (output.Results.Count == 0)
+                {
+                    return new List<AnalysisRequestReportModel>();
+                }
+
+                //map the database model to output model and return
+                return MapFromDatabaseModelToReturnModel(output);
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
 
-            //map the database model to output model and return
-            return MapFromDatabaseModelToReturnModel(output);
         }
 
         /// <summary>
@@ -48,9 +58,14 @@ namespace CD4.DataLibrary.DataAccess
                     AgeSex = databaseModel.Patient.AgeSex,
                     Birthdate = databaseModel.Patient.Birthdate,
                     Fullname = databaseModel.Patient.Fullname,
-                    NidPp = databaseModel.Patient.NidPp
+                    NidPp = databaseModel.Patient.NidPp,
                 },
                 EpisodeNumber = databaseModel.Patient.EpisodeNumber,
+                QcCalValidatedBy = databaseModel.Patient.QcCalValidatedBy,
+                ReportedAt = databaseModel.Patient.ReportedAt,
+                ReceivedBy = databaseModel.Patient.ReceivedBy,
+                ReportedBy = databaseModel.Patient.ReportedBy,
+                InstituteAssignedPatientId = databaseModel.Patient.InstituteAssignedPatientId,
                 //Initialize sample collected date, received date and sample site.
                 CollectedDate = databaseModel.Patient.CollectedDate,
                 ReceivedDate = databaseModel.Patient.ReceivedDate,

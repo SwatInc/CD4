@@ -6,6 +6,6 @@ namespace CD4.DataLibrary.DataAccess
 {
     public interface IReportsDataAccess
     {
-        Task<List<AnalysisRequestReportModel>> GetAnalysisReportByCinAsync(string cin, int loggedInUserId);
+        Task<List<AnalysisRequestReportModel>> GetAnalysisReportByCinAsync(string cin, int loggedInUserId, string procedureName = "");
     }
 }
