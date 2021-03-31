@@ -9,5 +9,6 @@ namespace CD4.Entensibility.ReportingFramework.Models
         public int Index { get; set; }
         public string TemplateName { get; set; }
         public ReportType ReportType { get; set; }
+        public string ProcedureName { get; set; }
     }
 }

@@ -55,7 +55,12 @@ namespace CD4.Extensions.Reports.Medlab
                 Patient = data.Patient,
                 PrintedDate = data.PrintedDate,
                 ReceivedDate = data.ReceivedDate,
-                SampleSite = data.SampleSite
+                SampleSite = data.SampleSite,
+                QcCalValidatedBy = data.QcCalValidatedBy,
+                ReportedAt = data.ReportedAt,
+                ReceivedBy = data.ReceivedBy,
+                ReportedBy = data.ReportedBy,
+                InstituteAssignedPatientId = data.InstituteAssignedPatientId,
             };
             doADatasource.AcetylMorphine = analysis.FirstOrDefault((x) => x.Assay.ToLower().Contains("morphine"))?.Result;
             doADatasource.Amphetamine = analysis.FirstOrDefault((x) => x.Assay.ToLower().Contains("amphetamine"))?.Result;

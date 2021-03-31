@@ -93,6 +93,10 @@ namespace CD4.UI.View
             xtraReport.RequestParameters = false;
             xtraReport.DisplayName = $"{Tag}_{reportModel.Patient.Fullname} ({reportModel.Patient.NidPp.Replace('/', '-')})";
 
+#if DEBUG
+            xtraReport.DrawWatermark = true;
+#endif
+
             if (_cinAndReportId.Action == ReportActionModel.Export)
             {
                 var settings = new Properties.Settings();
@@ -140,7 +144,12 @@ namespace CD4.UI.View
                 SampleSite = reportModel.SampleSite,
                 CollectedDate = reportModel.CollectedDate,
                 ReceivedDate = reportModel.ReceivedDate,
-                EpisodeNumber = reportModel.EpisodeNumber
+                EpisodeNumber = reportModel.EpisodeNumber,
+                QcCalValidatedBy = reportModel.QcCalValidatedBy,
+                ReportedAt = reportModel.ReportedAt,
+                ReceivedBy = reportModel.ReceivedBy,
+                ReportedBy = reportModel.ReportedBy,
+                InstituteAssignedPatientId = reportModel.InstituteAssignedPatientId
             };
 
             //Map patient

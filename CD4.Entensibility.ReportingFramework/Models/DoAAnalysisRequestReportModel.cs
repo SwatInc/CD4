@@ -12,6 +12,12 @@ namespace CD4.Entensibility.ReportingFramework.Models
         public string PrintedDate { get; set; }
         public Patient Patient { get; set; }
         public string EpisodeNumber { get; set; }
+        public string QcCalValidatedBy { get; set; }
+        public DateTimeOffset? ReportedAt { get; set; }
+        public string ReceivedBy { get; set; }
+        public string ReportedBy { get; set; }
+        public long InstituteAssignedPatientId { get; set; }
+
         public string Opiates { get; set; }
         public string Benzodiazepine1 { get; set; }
         public string Benzodiazepine2 { get; set; }

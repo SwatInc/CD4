@@ -261,6 +261,8 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             // xrTableCell70
             // 
+            this.xrTableCell70.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[ReportedAt]")});
             this.xrTableCell70.Font = new System.Drawing.Font("Faruma", 8.25F);
             this.xrTableCell70.Multiline = true;
             this.xrTableCell70.Name = "xrTableCell70";
@@ -269,7 +271,8 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell70.StylePriority.UseFont = false;
             this.xrTableCell70.StylePriority.UseTextAlignment = false;
             this.xrTableCell70.Text = "date";
-            this.xrTableCell70.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleRight;
+            this.xrTableCell70.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell70.TextFormatString = "{0:yyyy-MM-dd}";
             this.xrTableCell70.Weight = 0.99999981219955458D;
             // 
             // xrTableCell74
@@ -353,10 +356,13 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             // xrTableCell67
             // 
+            this.xrTableCell67.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[ReportedBy]")});
             this.xrTableCell67.Font = new System.Drawing.Font("Faruma", 8.25F);
             this.xrTableCell67.Multiline = true;
             this.xrTableCell67.Name = "xrTableCell67";
             this.xrTableCell67.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
+            this.xrTableCell67.RowSpan = 2;
             this.xrTableCell67.StylePriority.UseFont = false;
             this.xrTableCell67.StylePriority.UseTextAlignment = false;
             this.xrTableCell67.Text = "ނަން";
@@ -408,7 +414,6 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell72.Name = "xrTableCell72";
             this.xrTableCell72.StylePriority.UseFont = false;
             this.xrTableCell72.StylePriority.UseTextAlignment = false;
-            this.xrTableCell72.Text = "Name";
             this.xrTableCell72.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             this.xrTableCell72.Weight = 1D;
             // 
@@ -474,13 +479,18 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell62.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
             | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrTableCell62.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[QcCalValidatedBy]")});
             this.xrTableCell62.Font = new System.Drawing.Font("Faruma", 9F);
             this.xrTableCell62.Multiline = true;
             this.xrTableCell62.Name = "xrTableCell62";
             this.xrTableCell62.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
+            this.xrTableCell62.RowSpan = 2;
             this.xrTableCell62.StylePriority.UseBorders = false;
             this.xrTableCell62.StylePriority.UseFont = false;
+            this.xrTableCell62.StylePriority.UseTextAlignment = false;
             this.xrTableCell62.Text = "ނަން";
+            this.xrTableCell62.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             this.xrTableCell62.Weight = 2D;
             // 
             // xrTableCell64
@@ -516,7 +526,6 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell66.StylePriority.UseBorders = false;
             this.xrTableCell66.StylePriority.UseFont = false;
             this.xrTableCell66.StylePriority.UseTextAlignment = false;
-            this.xrTableCell66.Text = "Name";
             this.xrTableCell66.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
             this.xrTableCell66.Weight = 2.0000001878004454D;
             // 
@@ -1425,13 +1434,14 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             // xrTableCell13
             // 
+            this.xrTableCell13.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[InstituteAssignedPatientId]")});
             this.xrTableCell13.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrTableCell13.Multiline = true;
             this.xrTableCell13.Name = "xrTableCell13";
             this.xrTableCell13.RowSpan = 2;
             this.xrTableCell13.StylePriority.UseFont = false;
             this.xrTableCell13.StylePriority.UseTextAlignment = false;
-            this.xrTableCell13.Text = "R123456";
             this.xrTableCell13.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell13.Weight = 1D;
             // 
@@ -1452,6 +1462,8 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             // xrTableCell15
             // 
+            this.xrTableCell15.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[ReceivedBy]")});
             this.xrTableCell15.Font = new System.Drawing.Font("Faruma", 8.25F);
             this.xrTableCell15.Multiline = true;
             this.xrTableCell15.Name = "xrTableCell15";
@@ -1459,7 +1471,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell15.RowSpan = 2;
             this.xrTableCell15.StylePriority.UseFont = false;
             this.xrTableCell15.StylePriority.UseTextAlignment = false;
-            this.xrTableCell15.Text = "Fakhira Adnaan\r\nފާޙިރާ އަދްނާން";
+            this.xrTableCell15.Text = "\r\n";
             this.xrTableCell15.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell15.Weight = 1D;
             // 
@@ -1561,6 +1573,9 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.Font = new System.Drawing.Font("Arial", 9.75F);
             this.Margins = new System.Drawing.Printing.Margins(100, 100, 124, 100);
             this.Version = "18.2";
+            this.Watermark.Font = new System.Drawing.Font("OCR A Extended", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Watermark.ForeColor = System.Drawing.Color.LightCoral;
+            this.Watermark.Text = "DEVELOPMENT SAMPLE";
             ((System.ComponentModel.ISupportInitialize)(this.xrTable6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable5)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable4)).EndInit();
