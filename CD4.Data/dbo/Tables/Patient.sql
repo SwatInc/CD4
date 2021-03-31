@@ -1,6 +1,7 @@
 ﻿CREATE TABLE [dbo].[Patient]
 (
-	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
+	[Id] INT NOT NULL PRIMARY KEY IDENTITY,
+    [InstituteAssignedPatientId] BIGINT NOT NULL DEFAULT -1,
     [FullName] NVARCHAR(100) NULL, 
     [NidPp] NVARCHAR(50) NULL, 
     [Birthdate] DATE NULL,  
