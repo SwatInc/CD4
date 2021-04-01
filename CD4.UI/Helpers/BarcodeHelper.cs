@@ -5,8 +5,6 @@ using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CD4.UI.Helpers
 {
@@ -60,8 +58,17 @@ namespace CD4.UI.Helpers
             try
             {
                 var requestBarcode = barcodeData.FirstOrDefault();
-                requestBarcode.Discipline = "Analysis Request";
-                barcodeData.Add(requestBarcode);
+                barcodeData.Add(new BarcodeDataModel()
+                {
+                    AccessionNumber = requestBarcode.AccessionNumber,
+                    Age = requestBarcode.Age,
+                    Birthdate = requestBarcode.Birthdate,
+                    CollectionDate = requestBarcode.CollectionDate,
+                    Discipline = "ANALYSIS REQUEST",
+                    FullName = requestBarcode.FullName,
+                    NidPp = requestBarcode.NidPp,
+                    Seq = requestBarcode.Seq,
+                });
 
                 GenerateLabelAndSendToPrinter(barcodeData);
                 return true;
@@ -92,8 +99,14 @@ namespace CD4.UI.Helpers
                 var autoprint = new ReportPrintTool(barcodeLabel);
                 try
                 {
+#if !DEBUG
                     barcodeLabel.ShowPrintMarginsWarning = false;
                     autoprint.Print(barcodeLabel.PrinterName);
+#endif
+
+#if DEBUG
+                    barcodeLabel.ExportToPdf($"C:\\Logs\\{barcode.Discipline}_{barcode.FullName}_{barcode.NidPp}.pdf");
+#endif
                 }
                 catch (Exception)
                 {
