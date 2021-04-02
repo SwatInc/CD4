@@ -49,7 +49,7 @@ AS
 		,[R].[QcCalValidatedBy]
 		,[R].[ReportedAt]
 		,[R].[ReceivedBy]
-		,[R].[ReportedBy]
+		,[R].[AnalysedBy]
 		,[R].[InstituteAssignedPatientId]
 		FROM [dbo].[RequestsWithTestsWithResults] [R]
 		WHERE [R].[Cin] = @Cin;

@@ -148,7 +148,7 @@ namespace CD4.UI.View
                 QcCalValidatedBy = reportModel.QcCalValidatedBy,
                 ReportedAt = reportModel.ReportedAt,
                 ReceivedBy = reportModel.ReceivedBy,
-                ReportedBy = reportModel.ReportedBy,
+                AnalysedBy = reportModel.AnalysedBy,
                 InstituteAssignedPatientId = reportModel.InstituteAssignedPatientId
             };
 

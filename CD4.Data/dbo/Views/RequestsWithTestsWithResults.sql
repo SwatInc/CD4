@@ -18,7 +18,7 @@
        [QcCalValidatedBy],
        [ReportedAt],
        [ReceivedBy],
-       [ReportedBy],
+       [AnalysedBy],
        [InstituteAssignedPatientId]
 )
 AS
@@ -41,7 +41,7 @@ SELECT [R].[Id],
        [NCCVD].[QcCalValidatedBy],
        [NRRD].[ReportedAt],
        [NSRD].[ReceivedBy],
-       [NATD].[ReportedBy],
+       [NATD].[AnalysedBy],
        [P].[InstituteAssignedPatientId]
 FROM [dbo].[Result] [R] 
 INNER JOIN [dbo].[Sample] [S] ON [R].[Sample_Cin] = [S].[Cin]

@@ -64,7 +64,7 @@ namespace CD4.DataLibrary.DataAccess
                 QcCalValidatedBy = databaseModel.Patient.QcCalValidatedBy,
                 ReportedAt = databaseModel.Patient.ReportedAt,
                 ReceivedBy = databaseModel.Patient.ReceivedBy,
-                ReportedBy = databaseModel.Patient.ReportedBy,
+                AnalysedBy = databaseModel.Patient.AnalysedBy,
                 InstituteAssignedPatientId = databaseModel.Patient.InstituteAssignedPatientId,
                 //Initialize sample collected date, received date and sample site.
                 CollectedDate = databaseModel.Patient.CollectedDate,

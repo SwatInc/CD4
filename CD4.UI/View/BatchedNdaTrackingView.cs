@@ -63,7 +63,7 @@ namespace CD4.UI.View
         private void InitializeBinding()
         {
             //NDA Tracking data grid control
-            gridControlNdaTracking.DataSource = _viewModel.NdaTracingData;
+            gridControlNdaTracking.DataSource = _viewModel.NdaTrackingData;
 
             #region Search Criteria
             //from date

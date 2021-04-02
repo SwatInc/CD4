@@ -59,7 +59,7 @@ namespace CD4.Extensions.Reports.Medlab
                 QcCalValidatedBy = data.QcCalValidatedBy,
                 ReportedAt = data.ReportedAt,
                 ReceivedBy = data.ReceivedBy,
-                ReportedBy = data.ReportedBy,
+                AnalysedBy = data.AnalysedBy,
                 InstituteAssignedPatientId = data.InstituteAssignedPatientId,
             };
             doADatasource.AcetylMorphine = analysis.FirstOrDefault((x) => x.Assay.ToLower().Contains("morphine"))?.Result;
