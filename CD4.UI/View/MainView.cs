@@ -69,6 +69,7 @@ namespace CD4.UI.View
             barButtonItemChangePassword.ItemClick += OpenChangePasswordView;
             barButtonItemUpdatePatientDetailsView.ItemClick += OpenPatientUpdateView;
             barHeaderItemCD4Version.ItemClick += BarHeaderItemCD4Version_ItemClick;
+            barButtonItemNdaTracking.ItemClick += OpenNdaTrackingView;
             //restricted tab buttons
 
             #endregion
@@ -135,6 +136,11 @@ namespace CD4.UI.View
         private void OpenLabNotesView(object sender, ItemClickEventArgs e)
         {
             //OpenMdiForm<LabNotesView>();
+        }
+
+        private void OpenNdaTrackingView(object sender, ItemClickEventArgs e)
+        {
+            OpenMdiForm<BatchedNdaTrackingView>();
         }
 
         private void OpenBulkOrdersView(object sender, ItemClickEventArgs e)

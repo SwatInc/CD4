@@ -108,6 +108,16 @@ namespace CD4.UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
+        /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage NDATrackingIcon {
+            get {
+                object obj = ResourceManager.GetObject("NDATrackingIcon", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [{&quot;Caption&quot;:&quot;All Disciplines&quot;,&quot;Image&quot;:&quot;Disciplines&quot;,&quot;Name&quot;:&quot;barButtonItemAllDisciplines&quot;,&quot;Tag&quot;:0},{&quot;Caption&quot;:&quot;Diagnostic Haematology&quot;,&quot;Image&quot;:&quot;Haematology&quot;,&quot;Name&quot;:&quot;barButtonItemHaematology&quot;,&quot;Tag&quot;:1},{&quot;Caption&quot;:&quot;ClinicalPathology&quot;,&quot;Image&quot;:&quot;ClinicalPathology&quot;,&quot;Name&quot;:&quot;barButtonItemClinicalPathology&quot;,&quot;Tag&quot;:4},{&quot;Caption&quot;:&quot;Microbiology&quot;,&quot;Image&quot;:&quot;Microbiology&quot;,&quot;Name&quot;:&quot;barButtonItemMicrobiology&quot;,&quot;Tag&quot;:3},{&quot;Caption&quot;:&quot;Molecular Biology&quot;,&quot;Image&quot;:&quot;Molecular&quot;,&quot;Name&quot;:&quot;barButtonItemMolecular&quot;,&quot;Tag&quot;:2},{&quot;Caption&quot;:&quot;Clinical [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string popupMenuDisciplines {

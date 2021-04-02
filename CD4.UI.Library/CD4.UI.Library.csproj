@@ -138,6 +138,7 @@
     <Compile Include="Model\BulkSchemaModel.cs" />
     <Compile Include="Model\CommentsSelectionModel.cs" />
     <Compile Include="Model\DemographicsConfirmationModel.cs" />
+    <Compile Include="Model\NdaTrackingModel.cs" />
     <Compile Include="Model\PatientUpdateModel.cs" />
     <Compile Include="Model\SampleNotesModel.cs" />
     <Compile Include="Model\PatientModel.cs" />
@@ -174,6 +175,7 @@
     <Compile Include="Validations\OrderEntryValidator.cs" />
     <Compile Include="ViewModel\AcceptSampleViewModel.cs" />
     <Compile Include="ViewModel\AuthenticationViewModel.cs" />
+    <Compile Include="ViewModel\BatchedNdaTrackingViewModel.cs" />
     <Compile Include="ViewModel\BulkOrdersImportViewModel.cs" />
     <Compile Include="ViewModel\ChangePasswordViewModel.cs" />
     <Compile Include="ViewModel\ClinicalDetailsViewModel.cs" />
@@ -182,6 +184,7 @@
     <Compile Include="ViewModel\GenderViewModel.cs" />
     <Compile Include="ViewModel\IAcceptSampleViewModel.cs" />
     <Compile Include="ViewModel\IAuthenticationViewModel.cs" />
+    <Compile Include="ViewModel\IBatchedNdaTrackingViewModel.cs" />
     <Compile Include="ViewModel\IBulkOrdersImportViewModel.cs" />
     <Compile Include="ViewModel\IChangePasswordViewModel.cs" />
     <Compile Include="ViewModel\IClinicalDetailsViewModel.cs" />

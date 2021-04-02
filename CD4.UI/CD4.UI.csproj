@@ -290,6 +290,12 @@
     <Compile Include="View\AuthenticationView.Designer.cs">
       <DependentUpon>AuthenticationView.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\BatchedNdaTrackingView.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\BatchedNdaTrackingView.Designer.cs">
+      <DependentUpon>BatchedNdaTrackingView.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\BulkOrdersImportView.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -443,6 +449,9 @@
     <EmbeddedResource Include="View\AuthenticationView.resx">
       <DependentUpon>AuthenticationView.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="View\BatchedNdaTrackingView.resx">
+      <DependentUpon>BatchedNdaTrackingView.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="View\BulkOrdersImportView.resx">
       <DependentUpon>BulkOrdersImportView.cs</DependentUpon>
     </EmbeddedResource>
@@ -553,6 +562,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="lymphocyte.ico" />
+    <Content Include="Resources\NDATrackingIcon.svg" />
     <None Include="Resources\updateUser.svg" />
     <None Include="Resources\dispatchPlane.svg" />
   </ItemGroup>
