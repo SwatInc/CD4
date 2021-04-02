@@ -1,4 +1,7 @@
-﻿using CD4.UI.Library.Model;
+﻿using AutoMapper;
+using CD4.DataLibrary.DataAccess;
+using CD4.UI.Library.Model;
+using DevExpress.XtraEditors;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -18,16 +21,44 @@ namespace CD4.UI.Library.ViewModel
         private ScientistModel calQcValidatedUser;
         private ScientistModel analysedUser;
         private StatusModel selectedStatus;
+        private readonly IStatusDataAccess _statusDataAccess;
+        private readonly IMapper _mapper;
+
         #endregion
 
+        private event EventHandler InitializeDatasources;
+
         #region Default Constructor
-        public BatchedNdaTrackingViewModel()
+        public BatchedNdaTrackingViewModel
+            (IStatusDataAccess statusDataAccess, IMapper mapper)
         {
             NdaTracingData = new BindingList<NdaTrackingModel>();
             Statuses = new List<StatusModel>();
             Scientists = new List<ScientistModel>();
+            _statusDataAccess = statusDataAccess;
+            _mapper = mapper;
 
-            InitializeDemo();
+            //InitializeDemo();
+            InitializeDatasources += OnInitaializeDatasources;
+            InitializeDatasources?.Invoke(this, EventArgs.Empty);
+        }
+
+        private async void OnInitaializeDatasources(object sender, EventArgs e)
+        {
+            try
+            {
+                await LoadAllStatus();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show($"Error loading datasources. Please see the details below.\n{ex.Message}");
+            }
+        }
+
+        private async Task LoadAllStatus()
+        {
+            var statuses = await _statusDataAccess.GetAllStatus();
+            Statuses.AddRange(_mapper.Map<List<StatusModel>>(statuses));
         }
 
         #endregion
