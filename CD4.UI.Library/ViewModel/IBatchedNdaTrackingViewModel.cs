@@ -11,7 +11,7 @@ namespace CD4.UI.Library.ViewModel
         ScientistModel AnalysedUser { get; set; }
         ScientistModel CalQcValidatedUser { get; set; }
         DateTime? FromDate { get; set; }
-        BindingList<NdaTrackingModel> NdaTracingData { get; set; }
+        BindingList<NdaTrackingModel> NdaTrackingData { get; set; }
         List<ScientistModel> Scientists { get; set; }
         DateTime? SelectedReportDate { get; set; }
         StatusModel SelectedStatus { get; set; }

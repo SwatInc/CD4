@@ -46,10 +46,10 @@ namespace CD4.UI.View
             this.xtraTabPageCalQcValidated = new DevExpress.XtraTab.XtraTabPage();
             this.simpleButtonSaveNdaTrackingQcCalValidatedUser = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
+            this.lookUpEditQcCalValidatedUser = new DevExpress.XtraEditors.LookUpEdit();
             this.xtraTabPageAnalysedBy = new DevExpress.XtraTab.XtraTabPage();
             this.simpleButtonSaveNdaTrackingAnalysedUser = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
-            this.lookUpEditQcCalValidatedUser = new DevExpress.XtraEditors.LookUpEdit();
             this.lookUpEditAnalysedUser = new DevExpress.XtraEditors.LookUpEdit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
             this.splitContainerControl.SuspendLayout();
@@ -70,8 +70,8 @@ namespace CD4.UI.View
             ((System.ComponentModel.ISupportInitialize)(this.dateEditReportDateForBatch.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditReportDateForBatch.Properties)).BeginInit();
             this.xtraTabPageCalQcValidated.SuspendLayout();
-            this.xtraTabPageAnalysedBy.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditQcCalValidatedUser.Properties)).BeginInit();
+            this.xtraTabPageAnalysedBy.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditAnalysedUser.Properties)).BeginInit();
             this.SuspendLayout();
             // 
@@ -105,6 +105,7 @@ namespace CD4.UI.View
             // 
             this.gridViewNdaTracking.GridControl = this.gridControlNdaTracking;
             this.gridViewNdaTracking.Name = "gridViewNdaTracking";
+            this.gridViewNdaTracking.OptionsView.RowAutoHeight = true;
             // 
             // splitContainerControl1
             // 
@@ -261,6 +262,16 @@ namespace CD4.UI.View
             this.labelControl2.TabIndex = 11;
             this.labelControl2.Text = "Please select the user who validated QC and calibrations for the current batch.";
             // 
+            // lookUpEditQcCalValidatedUser
+            // 
+            this.lookUpEditQcCalValidatedUser.Location = new System.Drawing.Point(14, 40);
+            this.lookUpEditQcCalValidatedUser.Name = "lookUpEditQcCalValidatedUser";
+            this.lookUpEditQcCalValidatedUser.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpEditQcCalValidatedUser.Properties.NullText = "Select user...";
+            this.lookUpEditQcCalValidatedUser.Size = new System.Drawing.Size(241, 20);
+            this.lookUpEditQcCalValidatedUser.TabIndex = 1;
+            // 
             // xtraTabPageAnalysedBy
             // 
             this.xtraTabPageAnalysedBy.Controls.Add(this.simpleButtonSaveNdaTrackingAnalysedUser);
@@ -285,16 +296,6 @@ namespace CD4.UI.View
             this.labelControl3.Size = new System.Drawing.Size(367, 13);
             this.labelControl3.TabIndex = 14;
             this.labelControl3.Text = "Please select the user who processed the samples for the current batch.";
-            // 
-            // lookUpEditQcCalValidatedUser
-            // 
-            this.lookUpEditQcCalValidatedUser.Location = new System.Drawing.Point(14, 40);
-            this.lookUpEditQcCalValidatedUser.Name = "lookUpEditQcCalValidatedUser";
-            this.lookUpEditQcCalValidatedUser.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.lookUpEditQcCalValidatedUser.Properties.NullText = "Select user...";
-            this.lookUpEditQcCalValidatedUser.Size = new System.Drawing.Size(241, 20);
-            this.lookUpEditQcCalValidatedUser.TabIndex = 1;
             // 
             // lookUpEditAnalysedUser
             // 
@@ -335,9 +336,9 @@ namespace CD4.UI.View
             ((System.ComponentModel.ISupportInitialize)(this.dateEditReportDateForBatch.Properties)).EndInit();
             this.xtraTabPageCalQcValidated.ResumeLayout(false);
             this.xtraTabPageCalQcValidated.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditQcCalValidatedUser.Properties)).EndInit();
             this.xtraTabPageAnalysedBy.ResumeLayout(false);
             this.xtraTabPageAnalysedBy.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.lookUpEditQcCalValidatedUser.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditAnalysedUser.Properties)).EndInit();
             this.ResumeLayout(false);
 

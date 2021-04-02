@@ -24,21 +24,25 @@ namespace CD4.UI.Library.ViewModel
         private readonly IStatusDataAccess _statusDataAccess;
         private readonly IMapper _mapper;
         private readonly IStaticDataDataAccess _staticDataDataAccess;
+        private readonly INdaTrackingDataAccess _ndaTrackingDataAccess;
 
         #endregion
 
         private event EventHandler InitializeDatasources;
 
         #region Default Constructor
-        public BatchedNdaTrackingViewModel
-            (IStatusDataAccess statusDataAccess, IMapper mapper, IStaticDataDataAccess staticDataDataAccess)
+        public BatchedNdaTrackingViewModel(IStatusDataAccess statusDataAccess,
+             IMapper mapper,
+             IStaticDataDataAccess staticDataDataAccess,
+             INdaTrackingDataAccess ndaTrackingDataAccess)
         {
-            NdaTracingData = new BindingList<NdaTrackingModel>();
+            NdaTrackingData = new BindingList<NdaTrackingModel>();
             Statuses = new List<StatusModel>();
             Scientists = new List<ScientistModel>();
             _statusDataAccess = statusDataAccess;
             _mapper = mapper;
             _staticDataDataAccess = staticDataDataAccess;
+            _ndaTrackingDataAccess = ndaTrackingDataAccess;
 
             //InitializeDemo();
             InitializeDatasources += OnInitaializeDatasources;
@@ -52,10 +56,21 @@ namespace CD4.UI.Library.ViewModel
                 //load all datasources
                 await LoadAllStatusAsync();
                 await LoadAllScientistsAsync();
+                await LoadSamplesWithDefaultConfigAsync();
             }
             catch (Exception ex)
             {
                 XtraMessageBox.Show($"Error loading datasources. Please see the details below.\n{ex.Message}");
+            }
+        }
+
+        private async Task LoadSamplesWithDefaultConfigAsync()
+        {
+            NdaTrackingData.Clear();
+            var results = await _ndaTrackingDataAccess.LoadSearchResults(DateTime.Today.AddDays(-5), DateTime.Today, 5);
+            foreach (var item in results)
+            {
+                NdaTrackingData.Add(_mapper.Map<NdaTrackingModel>(item));
             }
         }
 
@@ -77,7 +92,7 @@ namespace CD4.UI.Library.ViewModel
         #region Public Properties
 
         #region Datasources
-        public BindingList<NdaTrackingModel> NdaTracingData { get; set; }
+        public BindingList<NdaTrackingModel> NdaTrackingData { get; set; }
         public List<StatusModel> Statuses { get; set; }
         public List<ScientistModel> Scientists { get; set; }
         #endregion
@@ -150,16 +165,15 @@ namespace CD4.UI.Library.ViewModel
                 InstituteAssignedPatientId = 13215645,
                 Cin = "ML37645873",
                 Status = Properties.Resources.Validated,
-                TestedBy = "Ahmed Ibrahim",
+                AnalysedBy = "Ahmed Ibrahim",
                 CalQcValidatedBy = "Ibrahim Hussain",
                 CollectedDate = DateTime.Today,
                 ReceivedDate = DateTime.Today,
-                ProcessedDate = DateTime.Today,
                 ValidatedDateTime = DateTimeOffset.UtcNow,
                 ReportedDate = DateTime.Today
             };
 
-            NdaTracingData.Add(trackingData);
+            NdaTrackingData.Add(trackingData);
 
             //toggle from and to date to null between then to todays date
 
@@ -193,11 +207,11 @@ namespace CD4.UI.Library.ViewModel
         public async Task ExecuteSearchAsync()
         {
             InitializeDemo();
-            Debug.WriteLine($"Tracking Data count: {NdaTracingData.Count}");
+            Debug.WriteLine($"Tracking Data count: {NdaTrackingData.Count}");
 
             //check whether changing a property updates the databound grid
             var counter = 0;
-            foreach (var item in NdaTracingData)
+            foreach (var item in NdaTrackingData)
             {
                 item.Cin = $"{item.Cin}{counter}";
                 counter++;

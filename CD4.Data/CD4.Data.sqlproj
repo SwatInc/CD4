@@ -285,6 +285,8 @@
     <Build Include="dbo\Views\NdaRequestsReportedDetails.sql" />
     <Build Include="dbo\Views\NdaAssaysTestedDetails.sql" />
     <Build Include="dbo\StoredProcedures\GetAllScientistsForNda.sql" />
+    <Build Include="dbo\StoredProcedures\usp_LoadSampleDataForNda.sql" />
+    <Build Include="dbo\Views\SampleValidatedTimings.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
