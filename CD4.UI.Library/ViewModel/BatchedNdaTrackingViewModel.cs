@@ -23,6 +23,7 @@ namespace CD4.UI.Library.ViewModel
         private StatusModel selectedStatus;
         private readonly IStatusDataAccess _statusDataAccess;
         private readonly IMapper _mapper;
+        private readonly IStaticDataDataAccess _staticDataDataAccess;
 
         #endregion
 
@@ -30,13 +31,14 @@ namespace CD4.UI.Library.ViewModel
 
         #region Default Constructor
         public BatchedNdaTrackingViewModel
-            (IStatusDataAccess statusDataAccess, IMapper mapper)
+            (IStatusDataAccess statusDataAccess, IMapper mapper, IStaticDataDataAccess staticDataDataAccess)
         {
             NdaTracingData = new BindingList<NdaTrackingModel>();
             Statuses = new List<StatusModel>();
             Scientists = new List<ScientistModel>();
             _statusDataAccess = statusDataAccess;
             _mapper = mapper;
+            _staticDataDataAccess = staticDataDataAccess;
 
             //InitializeDemo();
             InitializeDatasources += OnInitaializeDatasources;
@@ -47,7 +49,9 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-                await LoadAllStatus();
+                //load all datasources
+                await LoadAllStatusAsync();
+                await LoadAllScientistsAsync();
             }
             catch (Exception ex)
             {
@@ -55,7 +59,13 @@ namespace CD4.UI.Library.ViewModel
             }
         }
 
-        private async Task LoadAllStatus()
+        private async Task LoadAllScientistsAsync()
+        {
+            var scientists = await _staticDataDataAccess.GetAllScientistsAsync();
+            Scientists.AddRange(_mapper.Map<List<ScientistModel>>(scientists));
+        }
+
+        private async Task LoadAllStatusAsync()
         {
             var statuses = await _statusDataAccess.GetAllStatus();
             Statuses.AddRange(_mapper.Map<List<StatusModel>>(statuses));

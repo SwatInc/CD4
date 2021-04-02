@@ -284,6 +284,7 @@
     <Build Include="dbo\Views\NdaCalControlsValidatedDetails.sql" />
     <Build Include="dbo\Views\NdaRequestsReportedDetails.sql" />
     <Build Include="dbo\Views\NdaAssaysTestedDetails.sql" />
+    <Build Include="dbo\StoredProcedures\GetAllScientistsForNda.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
