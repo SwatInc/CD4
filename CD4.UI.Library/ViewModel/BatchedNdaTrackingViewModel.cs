@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
@@ -25,6 +26,7 @@ namespace CD4.UI.Library.ViewModel
         private readonly IMapper _mapper;
         private readonly IStaticDataDataAccess _staticDataDataAccess;
         private readonly INdaTrackingDataAccess _ndaTrackingDataAccess;
+        private readonly AuthorizeDetailEventArgs _authorizeDetail;
 
         #endregion
 
@@ -34,7 +36,8 @@ namespace CD4.UI.Library.ViewModel
         public BatchedNdaTrackingViewModel(IStatusDataAccess statusDataAccess,
              IMapper mapper,
              IStaticDataDataAccess staticDataDataAccess,
-             INdaTrackingDataAccess ndaTrackingDataAccess)
+             INdaTrackingDataAccess ndaTrackingDataAccess,
+             AuthorizeDetailEventArgs authorizeDetail)
         {
             NdaTrackingData = new BindingList<NdaTrackingModel>();
             Statuses = new List<StatusModel>();
@@ -43,6 +46,7 @@ namespace CD4.UI.Library.ViewModel
             _mapper = mapper;
             _staticDataDataAccess = staticDataDataAccess;
             _ndaTrackingDataAccess = ndaTrackingDataAccess;
+            _authorizeDetail = authorizeDetail;
 
             //InitializeDemo();
             InitializeDatasources += OnInitaializeDatasources;
@@ -205,9 +209,17 @@ namespace CD4.UI.Library.ViewModel
         #region Pulic Method
         public async Task ExecuteSearchAsync()
         {
+            if (FromDate is null || ToDate is null || SelectedStatus is null)
+            {
+                XtraMessageBox.Show("Please provide the required data for search.");
+                return;
+            }
+
             try
             {
+                //clear the grid datasource
                 NdaTrackingData.Clear();
+                //proceed with data layer call
                 var results = await _ndaTrackingDataAccess.LoadSearchResults
                                         (FromDate.Value, ToDate.Value, SelectedStatus.Id);
                 foreach (var item in results)
@@ -220,6 +232,37 @@ namespace CD4.UI.Library.ViewModel
                 throw;
             }
 
+        }
+
+        public async Task<List<CinAndReportDateModel>> SaveReportDateAsync(List<NdaTrackingModel> selectedData)
+        {
+            if (selectedData is null) { throw new Exception("No samples selected to save the report date."); }
+            if (selectedData.Count == 0) { throw new Exception("No samples selected to save the report date."); }
+            if (SelectedReportDate is null) { throw new Exception("Report Date not selected. Please select report date and try again."); }
+
+            try
+            {
+                var cins = new List<string>();
+                foreach (var item in selectedData)
+                {
+                    cins.Add(item.Cin);
+                }
+                var output = await _ndaTrackingDataAccess.UpsertReportDateAsync(cins, SelectedReportDate.Value, _authorizeDetail.UserId);
+                return _mapper.Map<List<CinAndReportDateModel>>(output);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public void UpdateUiReportDate(List<CinAndReportDateModel> updatedData)
+        {
+            foreach (var item in updatedData)
+            {
+                 NdaTrackingData.FirstOrDefault((x) => x.Cin == item.Cin).ReportedDate = item.ReportDate.Value.DateTime;
+            }
         }
         #endregion
 

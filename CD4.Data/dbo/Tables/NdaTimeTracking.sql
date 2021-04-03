@@ -4,6 +4,6 @@
     [Cin] varchar(50) NOT NULL, 
     [TrackedTime] DATETIMEOFFSET NOT NULL,
     [NdaLookupId] INT NOT NULL, 
-    [CreatedAt] DATETIMEOFFSET NOT NULL,
-    [CreatedBy] INT NOT NULL
+    [CreatedBy] INT NOT NULL,
+    [CreatedAt] DATETIMEOFFSET NOT NULL DEFAULT SYSDATETIMEOFFSET()
 )

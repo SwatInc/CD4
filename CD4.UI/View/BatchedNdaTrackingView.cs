@@ -4,12 +4,7 @@ using DevExpress.XtraEditors;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CD4.UI.View
@@ -26,11 +21,37 @@ namespace CD4.UI.View
             InitializeBinding();
 
             simpleButtonLoadTrackingSearchData.Click += LoadNdaTrackingData;
+            simpleButtonSaveNdaTrackingReportDate.Click += SaveReportDateForBatch;
             lookUpEditSampleStatus.EditValueChanged += SampleStatusFilterChanged;
             lookUpEditQcCalValidatedUser.EditValueChanged += CalAndQcUserSelectionChanged;
             lookUpEditAnalysedUser.EditValueChanged += AnalysedUserSelectionChanged;
             lookUpEditSampleStatus.EditValueChanged += SampleStatusFilterChanged;
             _viewModel.PropertyChanged += DebugWithPropertyChanged;
+        }
+
+        private async void SaveReportDateForBatch(object sender, EventArgs e)
+        {
+            var selectedRowHandles = gridViewNdaTracking.GetSelectedRows();
+            if (selectedRowHandles.Length == 0)
+            {
+                XtraMessageBox.Show("Please select the samples to set Report Date.");
+                return;
+            }
+            var data = new List<NdaTrackingModel>();
+            foreach (var rowHandle in selectedRowHandles)
+            {
+                data.Add((NdaTrackingModel)gridViewNdaTracking.GetRow(rowHandle));
+            }
+
+            try
+            {
+                var output  = await _viewModel.SaveReportDateAsync(data);
+                _viewModel.UpdateUiReportDate(output);
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show($"An error occured while trying to save Report Date for the selected batch. Please see the details below\n{ex.Message}\n{ex.StackTrace}");
+            }
         }
 
         #region Setting viewModels selectedValues for LookUpEdits
@@ -74,10 +95,10 @@ namespace CD4.UI.View
 
             #region Search Criteria
             //from date
-            dateEditFromDate.DataBindings.Add(new Binding("EditValue", _viewModel, nameof(_viewModel.FromDate),true));
+            dateEditFromDate.DataBindings.Add(new Binding("EditValue", _viewModel, nameof(_viewModel.FromDate), true));
 
             //to date
-            dateEditToDate.DataBindings.Add(new Binding("EditValue", _viewModel, nameof(_viewModel.ToDate),true));
+            dateEditToDate.DataBindings.Add(new Binding("EditValue", _viewModel, nameof(_viewModel.ToDate), true));
 
             //Sample status
             lookUpEditSampleStatus.Properties.DataSource = _viewModel.Statuses;
@@ -88,7 +109,7 @@ namespace CD4.UI.View
             #region Tracking
             //Report
             dateEditReportDateForBatch.DataBindings.Add
-                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedReportDate),true, DataSourceUpdateMode.OnPropertyChanged));
+                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedReportDate), true, DataSourceUpdateMode.OnPropertyChanged));
             //analsyed user
             lookUpEditAnalysedUser.Properties.DataSource = _viewModel.Scientists;
             lookUpEditAnalysedUser.Properties.DisplayMember = nameof(ScientistModel.Scientist);

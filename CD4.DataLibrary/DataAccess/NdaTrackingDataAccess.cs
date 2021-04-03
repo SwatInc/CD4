@@ -36,5 +36,26 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
+
+        public async Task<List<CinAndReportDateModel>> UpsertReportDateAsync(List<string> cins, DateTime reportDate, int loggedInUserId)
+        {
+            var storedProcedure = "[dbo].[usp_UpsertReportDateForNdaTracking]";
+            var parameters = new
+            {
+                SampleCins = GetCinTable(cins),
+                ReportDate = reportDate.ToString("yyyyMMdd"),
+                LoggedInUserId = loggedInUserId
+            };
+
+            try
+            {
+                var data =  await LoadDataWithParameterAsync<CinAndReportDateModel, dynamic>(storedProcedure, parameters);
+                return data;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -8,5 +8,6 @@ namespace CD4.DataLibrary.DataAccess
     public interface INdaTrackingDataAccess
     {
         Task<List<NdaTrackingModel>> LoadSearchResults(DateTime fromDate, DateTime toDate, int sampleStatus);
+        Task<List<CinAndReportDateModel>> UpsertReportDateAsync(List<string> cins, DateTime reportDate, int loggedInUserId);
     }
 }

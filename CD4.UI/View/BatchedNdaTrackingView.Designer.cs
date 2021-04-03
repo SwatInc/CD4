@@ -105,6 +105,8 @@ namespace CD4.UI.View
             // 
             this.gridViewNdaTracking.GridControl = this.gridControlNdaTracking;
             this.gridViewNdaTracking.Name = "gridViewNdaTracking";
+            this.gridViewNdaTracking.OptionsSelection.MultiSelect = true;
+            this.gridViewNdaTracking.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
             this.gridViewNdaTracking.OptionsView.RowAutoHeight = true;
             // 
             // splitContainerControl1
@@ -244,7 +246,7 @@ namespace CD4.UI.View
             this.xtraTabPageCalQcValidated.Controls.Add(this.lookUpEditQcCalValidatedUser);
             this.xtraTabPageCalQcValidated.Name = "xtraTabPageCalQcValidated";
             this.xtraTabPageCalQcValidated.Size = new System.Drawing.Size(478, 109);
-            this.xtraTabPageCalQcValidated.Text = "Cal and QC By";
+            this.xtraTabPageCalQcValidated.Text = "Cal and QC Validated By";
             // 
             // simpleButtonSaveNdaTrackingQcCalValidatedUser
             // 
