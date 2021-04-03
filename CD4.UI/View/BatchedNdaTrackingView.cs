@@ -57,7 +57,14 @@ namespace CD4.UI.View
 
         private async void LoadNdaTrackingData(object sender, EventArgs e)
         {
-            await _viewModel.ExecuteSearchAsync();
+            try
+            {
+                await _viewModel.ExecuteSearchAsync();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show($"An error occured while loading sample data. Please see the details below.\n{ex.Message}");
+            }
         }
 
         private void InitializeBinding()

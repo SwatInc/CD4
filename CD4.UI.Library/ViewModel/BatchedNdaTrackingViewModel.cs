@@ -66,12 +66,11 @@ namespace CD4.UI.Library.ViewModel
 
         private async Task LoadSamplesWithDefaultConfigAsync()
         {
-            NdaTrackingData.Clear();
-            var results = await _ndaTrackingDataAccess.LoadSearchResults(DateTime.Today.AddDays(-5), DateTime.Today, 5);
-            foreach (var item in results)
-            {
-                NdaTrackingData.Add(_mapper.Map<NdaTrackingModel>(item));
-            }
+            FromDate = DateTime.Today;
+            ToDate = DateTime.Today;
+            SelectedStatus = Statuses.Find((x) => x.Status.ToLower().Trim().Contains("validat"));
+
+            await ExecuteSearchAsync();
         }
 
         private async Task LoadAllScientistsAsync()
@@ -206,16 +205,21 @@ namespace CD4.UI.Library.ViewModel
         #region Pulic Method
         public async Task ExecuteSearchAsync()
         {
-            InitializeDemo();
-            Debug.WriteLine($"Tracking Data count: {NdaTrackingData.Count}");
-
-            //check whether changing a property updates the databound grid
-            var counter = 0;
-            foreach (var item in NdaTrackingData)
+            try
             {
-                item.Cin = $"{item.Cin}{counter}";
-                counter++;
+                NdaTrackingData.Clear();
+                var results = await _ndaTrackingDataAccess.LoadSearchResults
+                                        (FromDate.Value, ToDate.Value, SelectedStatus.Id);
+                foreach (var item in results)
+                {
+                    NdaTrackingData.Add(_mapper.Map<NdaTrackingModel>(item));
+                }
             }
+            catch (Exception)
+            {
+                throw;
+            }
+
         }
         #endregion
 
