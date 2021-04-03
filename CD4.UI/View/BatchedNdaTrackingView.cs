@@ -23,11 +23,32 @@ namespace CD4.UI.View
             simpleButtonLoadTrackingSearchData.Click += LoadNdaTrackingData;
             simpleButtonSaveNdaTrackingReportDate.Click += SaveReportDateForBatch;
             simpleButtonSaveNdaTrackingQcCalValidatedUser.Click += SaveCalAndQcUser;
+            simpleButtonSaveNdaTrackingAnalysedUser.Click += SaveAnalysedUserForBatch;
             lookUpEditSampleStatus.EditValueChanged += SampleStatusFilterChanged;
             lookUpEditQcCalValidatedUser.EditValueChanged += CalAndQcUserSelectionChanged;
             lookUpEditAnalysedUser.EditValueChanged += AnalysedUserSelectionChanged;
             lookUpEditSampleStatus.EditValueChanged += SampleStatusFilterChanged;
             _viewModel.PropertyChanged += DebugWithPropertyChanged;
+        }
+
+        private async void SaveAnalysedUserForBatch(object sender, EventArgs e)
+        {
+            var data = GetSelectedSamples();
+            if (data is null)
+            {
+                XtraMessageBox.Show("Please select the samples to proceed.");
+                return;
+            }
+
+            try
+            {
+                var output = await _viewModel.SaveAnalysedUserAsync(data);
+                _viewModel.UpdateUiWithAnalysedUser(output);
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show($"Error setting analysed user. Please see more details below\n{ex.Message}");
+            }
         }
 
         private async void SaveCalAndQcUser(object sender, EventArgs e)

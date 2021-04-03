@@ -21,9 +21,11 @@ namespace CD4.UI.Library.ViewModel
         event PropertyChangedEventHandler PropertyChanged;
 
         Task ExecuteSearchAsync();
-        Task<List<CinAndQcCalValidatedUserModel>> SaveQcCalValidatedUserAsync(List<NdaTrackingModel> selectedData);
+        Task<List<CinAndFullnameModel>> SaveAnalysedUserAsync(List<NdaTrackingModel> selectedData);
+        Task<List<CinAndFullnameModel>> SaveQcCalValidatedUserAsync(List<NdaTrackingModel> selectedData);
         Task<List<CinAndReportDateModel>> SaveReportDateAsync(List<NdaTrackingModel> selectedData);
-        void UpdateUiQcCalValidatedUser(List<CinAndQcCalValidatedUserModel> updatedDate);
+        void UpdateUiQcCalValidatedUser(List<CinAndFullnameModel> updatedDate);
         void UpdateUiReportDate(List<CinAndReportDateModel> updatedData);
+        void UpdateUiWithAnalysedUser(List<CinAndFullnameModel> updatedData);
     }
 }

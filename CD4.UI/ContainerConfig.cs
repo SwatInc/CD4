@@ -52,7 +52,7 @@ namespace CD4.UI
                 config.CreateMap<DataLibrary.Models.ScientistModel, Library.Model.ScientistModel>().ReverseMap();
                 config.CreateMap<DataLibrary.Models.NdaTrackingModel, Library.Model.NdaTrackingModel>().ReverseMap();
                 config.CreateMap<DataLibrary.Models.CinAndReportDateModel, Library.Model.CinAndReportDateModel>().ReverseMap();
-                config.CreateMap<DataLibrary.Models.CinAndQcCalValidatedUserModel, Library.Model.CinAndQcCalValidatedUserModel>().ReverseMap();
+                config.CreateMap<DataLibrary.Models.CinAndFullnameModel, Library.Model.CinAndFullnameModel>().ReverseMap();
                 config.CreateMap<ResultModel, TestModel>()
                     .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                     .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Test))

@@ -49,7 +49,7 @@ namespace CD4.DataLibrary.DataAccess
 
             try
             {
-                var data =  await LoadDataWithParameterAsync<CinAndReportDateModel, dynamic>(storedProcedure, parameters);
+                var data = await LoadDataWithParameterAsync<CinAndReportDateModel, dynamic>(storedProcedure, parameters);
                 return data;
             }
             catch (Exception)
@@ -58,7 +58,7 @@ namespace CD4.DataLibrary.DataAccess
             }
         }
 
-        public async Task<List<CinAndQcCalValidatedUserModel>> UpsertQcCalValidatedUserAsync
+        public async Task<List<CinAndFullnameModel>> UpsertQcCalValidatedUserAsync
             (List<string> cins, int loggedInUserId, int actionUserId)
         {
             var storedProcedure = "[dbo].[usp_UpsertQcCalValidatedUser]";
@@ -72,7 +72,31 @@ namespace CD4.DataLibrary.DataAccess
             try
             {
                 return await LoadDataWithParameterAsync
-                    <CinAndQcCalValidatedUserModel, dynamic>(storedProcedure, parameter);
+                    <CinAndFullnameModel, dynamic>(storedProcedure, parameter);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+
+        }
+
+        public async Task<List<CinAndFullnameModel>> UpsertAnalysedUserAsync
+            (List<string> cins, int loggedInUserId, int actionUserId)
+        {
+            var storedProcedure = "[dbo].[usp_UpsertAnalyzedUser]";
+            var parameter = new
+            {
+                SampleCins = GetCinTable(cins),
+                UserId = actionUserId,
+                LoggedInUserId = loggedInUserId
+            };
+
+            try
+            {
+                return await LoadDataWithParameterAsync
+                    <CinAndFullnameModel, dynamic>(storedProcedure, parameter);
             }
             catch (Exception)
             {

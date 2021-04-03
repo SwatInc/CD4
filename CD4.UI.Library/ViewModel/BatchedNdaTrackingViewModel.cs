@@ -263,7 +263,7 @@ namespace CD4.UI.Library.ViewModel
             return cins;
         }
 
-        public async Task<List<CinAndQcCalValidatedUserModel>> SaveQcCalValidatedUserAsync(List<NdaTrackingModel> selectedData)
+        public async Task<List<CinAndFullnameModel>> SaveQcCalValidatedUserAsync(List<NdaTrackingModel> selectedData)
         {
             if (selectedData is null) { throw new Exception("No samples selected."); }
             if (selectedData.Count == 0) { throw new Exception("No samples selected."); }
@@ -271,8 +271,9 @@ namespace CD4.UI.Library.ViewModel
 
             try
             {
-                var output = await _ndaTrackingDataAccess.UpsertQcCalValidatedUserAsync(GetCinsFromNdaTrackingList(selectedData), _authorizeDetail.UserId, CalQcValidatedUser.Id);
-                return _mapper.Map<List<CinAndQcCalValidatedUserModel>>(output);
+                var output = await _ndaTrackingDataAccess.UpsertQcCalValidatedUserAsync
+                    (GetCinsFromNdaTrackingList(selectedData), _authorizeDetail.UserId, CalQcValidatedUser.Id);
+                return _mapper.Map<List<CinAndFullnameModel>>(output);
             }
             catch (Exception)
             {
@@ -280,11 +281,37 @@ namespace CD4.UI.Library.ViewModel
             }
         }
 
-        public void UpdateUiQcCalValidatedUser(List<CinAndQcCalValidatedUserModel> updatedDate)
+        public async Task<List<CinAndFullnameModel>> SaveAnalysedUserAsync(List<NdaTrackingModel> selectedData)
         {
-            foreach (var item in updatedDate)
+            if (selectedData is null) { throw new Exception("No samples selected."); }
+            if (selectedData.Count == 0) { throw new Exception("No samples selected."); }
+            if (AnalysedUser is null) { throw new Exception("Please select the user who analysed samples."); }
+
+            try
             {
-                NdaTrackingData.FirstOrDefault((x) => x.Cin == item.Cin).CalQcValidatedBy = item.CalQcValidatedUser;
+                var output = await _ndaTrackingDataAccess.UpsertAnalysedUserAsync
+                    (GetCinsFromNdaTrackingList(selectedData), _authorizeDetail.UserId, AnalysedUser.Id);
+                return _mapper.Map<List<CinAndFullnameModel>>(output);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void UpdateUiWithAnalysedUser(List<CinAndFullnameModel> updatedData)
+        {
+            foreach (var item in updatedData)
+            {
+                NdaTrackingData.FirstOrDefault((x) => x.Cin == item.Cin).AnalysedBy = item.Fullname;
+            }
+        }
+
+        public void UpdateUiQcCalValidatedUser(List<CinAndFullnameModel> updatedData)
+        {
+            foreach (var item in updatedData)
+            {
+                NdaTrackingData.FirstOrDefault((x) => x.Cin == item.Cin).CalQcValidatedBy = item.Fullname;
             }
         }
         public void UpdateUiReportDate(List<CinAndReportDateModel> updatedData)

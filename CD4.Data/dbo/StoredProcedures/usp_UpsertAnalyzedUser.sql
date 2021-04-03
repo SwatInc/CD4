@@ -1,29 +1,28 @@
-﻿CREATE PROCEDURE [dbo].[usp_UpsertQcCalValidatedUser]
+﻿CREATE PROCEDURE [dbo].[usp_UpsertAnalyzedUser]
 	@SampleCins  [dbo].[SampleCinsUDT] READONLY,
 	@UserId int,
 	@LoggedInUserId int
 AS
 BEGIN
-
 	DECLARE @ActionUsername varchar(50);
 	DECLARE @LoggedInUserName varchar(50);
 	DECLARE @SampleAuditTypeId INT;
-	DECLARE @QcCalValidateLookupId int;
+	DECLARE @TestedLookupId int;
 
-	--get QcCalValidated lookup Id
-	SELECT @QcCalValidateLookupId = [Id] 
+	--get Tested lookup Id
+	SELECT @TestedLookupId = [Id] 
 	FROM [dbo].[NdaLookup]
-	WHERE [Description] = 'QcAndCalValidated';
-	
+	WHERE [Description] = 'Tested';
+
 	--delete 
 	DELETE FROM [dbo].[NdaActionTracking]
 	WHERE 
-		[NdaLookupId] = @QcCalValidateLookupId AND
+		[NdaLookupId] = @TestedLookupId AND
 		[Cin] IN (SELECT [Cin] FROM @SampleCins);
 
 	--insert
 	INSERT INTO [dbo].[NdaActionTracking]([Cin],[NdaLookupId],[ActionUserId],[CreatedBy])
-	SELECT [Cin],@QcCalValidateLookupId,@UserId,@LoggedInUserId
+	SELECT [Cin],@TestedLookupId,@UserId,@LoggedInUserId
 	FROM @SampleCins;
 
 	--audit
@@ -39,7 +38,7 @@ BEGIN
 	SELECT @SampleAuditTypeId
 		  ,[SampleCin] AS [Cin]
 		  ,[StatusId]
-		  ,CONCAT(@ActionUsername, ' set as QC and Cal validated user by user: ',@LoggedInUserName)
+		  ,CONCAT(@ActionUsername,' has set ', @LoggedInUserName, ' as the user who processed NDA batch')
 	FROM [dbo].[SampleTracking]
 	WHERE [SampleCin] IN (SELECT [Cin] AS [SampleCin] FROM @SampleCins);	
 
@@ -47,7 +46,6 @@ BEGIN
 	SELECT [A].[Cin],[U].[Fullname]
 	FROM [dbo].[NdaActionTracking] [A]
 	INNER JOIN [dbo].[Users] [U] ON [U].[Id] = [A].[ActionUserId]
-	WHERE [NdaLookupId] = @QcCalValidateLookupId AND 
+	WHERE [NdaLookupId] = @TestedLookupId AND 
 			[Cin] IN (SELECT DISTINCT([Cin]) FROM @SampleCins)
-
 END

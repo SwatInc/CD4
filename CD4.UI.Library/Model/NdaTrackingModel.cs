@@ -12,17 +12,25 @@ namespace CD4.UI.Library.Model
     {
         private DateTimeOffset? reportedDate;
         private string calQcValidatedBy;
+        private string analysedBy;
 
         public long InstituteAssignedPatientId { get; set; }
         public string Cin { get; set; }
         public int StatusIconId { get; set; }
         public Image Status { get; set; }
-        public string AnalysedBy { get; set; }
+        public string AnalysedBy
+        {
+            get => analysedBy; set
+            {
+                analysedBy = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(AnalysedBy)));
+            }
+        }
         public string CalQcValidatedBy
         {
             get => calQcValidatedBy; set
             {
-                calQcValidatedBy = value; 
+                calQcValidatedBy = value;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(CalQcValidatedBy)));
 
             }

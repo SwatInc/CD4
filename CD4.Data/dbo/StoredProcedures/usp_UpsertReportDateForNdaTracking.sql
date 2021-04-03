@@ -6,7 +6,7 @@ AS
 BEGIN
 	WHILE (@ReportDate IS NOT NULL)
 		BEGIN
-			DECLARE @AnalysisReportDate DATETIMEOFFSET(7) = CAST('20210301' AS DATETIME) AT TIME ZONE 'Pakistan Standard Time';
+			DECLARE @AnalysisReportDate DATETIMEOFFSET(7) = CAST(@ReportDate AS DATETIME) AT TIME ZONE 'Pakistan Standard Time';
 			DECLARE @ReportedLookupId INT;
 			DECLARE @SampleAuditTypeId INT;
 			DECLARE @UserName varchar(50);

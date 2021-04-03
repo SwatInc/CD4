@@ -289,6 +289,7 @@
     <Build Include="dbo\Views\SampleValidatedTimings.sql" />
     <Build Include="dbo\StoredProcedures\usp_UpsertReportDateForNdaTracking.sql" />
     <Build Include="dbo\StoredProcedures\usp_UpsertQcCalValidatedUser.sql" />
+    <Build Include="dbo\StoredProcedures\usp_UpsertAnalyzedUser.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
