@@ -22,6 +22,7 @@ namespace CD4.UI.View
 
             simpleButtonLoadTrackingSearchData.Click += LoadNdaTrackingData;
             simpleButtonSaveNdaTrackingReportDate.Click += SaveReportDateForBatch;
+            simpleButtonSaveNdaTrackingQcCalValidatedUser.Click += SaveCalAndQcUser;
             lookUpEditSampleStatus.EditValueChanged += SampleStatusFilterChanged;
             lookUpEditQcCalValidatedUser.EditValueChanged += CalAndQcUserSelectionChanged;
             lookUpEditAnalysedUser.EditValueChanged += AnalysedUserSelectionChanged;
@@ -29,18 +30,34 @@ namespace CD4.UI.View
             _viewModel.PropertyChanged += DebugWithPropertyChanged;
         }
 
+        private async void SaveCalAndQcUser(object sender, EventArgs e)
+        {
+            var data = GetSelectedSamples();
+            if (data is null)
+            {
+                XtraMessageBox.Show("Please select the samples to set the user who validated QC and Calibrations.");
+                return;
+            }
+
+            try
+            {
+                var output = await _viewModel.SaveQcCalValidatedUserAsync(data);
+                _viewModel.UpdateUiQcCalValidatedUser(output);
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show($"Error setting QC and cal validated user. Please see more details below\n{ex.Message}");
+            }
+
+        }
+
         private async void SaveReportDateForBatch(object sender, EventArgs e)
         {
-            var selectedRowHandles = gridViewNdaTracking.GetSelectedRows();
-            if (selectedRowHandles.Length == 0)
+            var data = GetSelectedSamples();
+            if (data is null)
             {
                 XtraMessageBox.Show("Please select the samples to set Report Date.");
                 return;
-            }
-            var data = new List<NdaTrackingModel>();
-            foreach (var rowHandle in selectedRowHandles)
-            {
-                data.Add((NdaTrackingModel)gridViewNdaTracking.GetRow(rowHandle));
             }
 
             try
@@ -52,6 +69,21 @@ namespace CD4.UI.View
             {
                 XtraMessageBox.Show($"An error occured while trying to save Report Date for the selected batch. Please see the details below\n{ex.Message}\n{ex.StackTrace}");
             }
+        }
+
+        private List<NdaTrackingModel> GetSelectedSamples()
+        {
+            var selectedRowHandles = gridViewNdaTracking.GetSelectedRows();
+            if (selectedRowHandles.Length == 0)
+            {
+                return null;
+            }
+            var data = new List<NdaTrackingModel>();
+            foreach (var rowHandle in selectedRowHandles)
+            {
+                data.Add((NdaTrackingModel)gridViewNdaTracking.GetRow(rowHandle));
+            }
+            return data;
         }
 
         #region Setting viewModels selectedValues for LookUpEdits

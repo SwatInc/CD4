@@ -26,7 +26,7 @@ WHILE (@FromDate IS NOT NULL) AND (@ToDate <> '')
 			,[s].[Cin]
 			,[st].[StatusId] AS [StatusIconId]
 			,[natd].[AnalysedBy]
-			,[nccvd].[QcCalValidatedBy]
+			,[nccvd].[QcCalValidatedBy] AS [CalQcValidatedBy]
 			,[sct].[CollectedAt] AS [CollectedDate]
 			,[srt].[ReceivedAt] AS [ReceivedDate]
 			,[svt].[ValidatedAt] AS [ValdidatedDate]

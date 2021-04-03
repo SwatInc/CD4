@@ -20,13 +20,13 @@ BEGIN
 			WHERE [NdaLookupId] = @ReportedLookupId AND 
 				  [Cin] IN (SELECT [Cin] FROM @SampleCins);
 
-			-- Insert
+			-- INSERT
 			INSERT [dbo].[NdaTimeTracking] ([Cin],[TrackedTime],[NdaLookupId],[CreatedBy])
 			SELECT Cin,@AnalysisReportDate,@ReportedLookupId,@LoggedInUserId
 			FROM @SampleCins
 
 
-			--Audit Trail
+			--AUDIT TRAIL
 			SELECT @SampleAuditTypeId = [Id]
 			FROM [dbo].[AuditTypes]
 			WHERE [Description] = 'Sample';

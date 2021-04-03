@@ -233,7 +233,6 @@ namespace CD4.UI.Library.ViewModel
             }
 
         }
-
         public async Task<List<CinAndReportDateModel>> SaveReportDateAsync(List<NdaTrackingModel> selectedData)
         {
             if (selectedData is null) { throw new Exception("No samples selected to save the report date."); }
@@ -242,11 +241,7 @@ namespace CD4.UI.Library.ViewModel
 
             try
             {
-                var cins = new List<string>();
-                foreach (var item in selectedData)
-                {
-                    cins.Add(item.Cin);
-                }
+                var cins = GetCinsFromNdaTrackingList(selectedData);
                 var output = await _ndaTrackingDataAccess.UpsertReportDateAsync(cins, SelectedReportDate.Value, _authorizeDetail.UserId);
                 return _mapper.Map<List<CinAndReportDateModel>>(output);
             }
@@ -257,6 +252,41 @@ namespace CD4.UI.Library.ViewModel
             }
         }
 
+        private List<string> GetCinsFromNdaTrackingList(List<NdaTrackingModel> selectedData)
+        {
+            var cins  = new List<string>();
+            foreach (var item in selectedData)
+            {
+                cins.Add(item.Cin);
+            }
+
+            return cins;
+        }
+
+        public async Task<List<CinAndQcCalValidatedUserModel>> SaveQcCalValidatedUserAsync(List<NdaTrackingModel> selectedData)
+        {
+            if (selectedData is null) { throw new Exception("No samples selected."); }
+            if (selectedData.Count == 0) { throw new Exception("No samples selected."); }
+            if (CalQcValidatedUser is null) { throw new Exception("Please select QC and Cal validated"); }
+
+            try
+            {
+                var output = await _ndaTrackingDataAccess.UpsertQcCalValidatedUserAsync(GetCinsFromNdaTrackingList(selectedData), _authorizeDetail.UserId, CalQcValidatedUser.Id);
+                return _mapper.Map<List<CinAndQcCalValidatedUserModel>>(output);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void UpdateUiQcCalValidatedUser(List<CinAndQcCalValidatedUserModel> updatedDate)
+        {
+            foreach (var item in updatedDate)
+            {
+                NdaTrackingData.FirstOrDefault((x) => x.Cin == item.Cin).CalQcValidatedBy = item.CalQcValidatedUser;
+            }
+        }
         public void UpdateUiReportDate(List<CinAndReportDateModel> updatedData)
         {
             foreach (var item in updatedData)

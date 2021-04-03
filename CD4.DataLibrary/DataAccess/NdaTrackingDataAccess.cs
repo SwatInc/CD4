@@ -57,5 +57,27 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
+
+        public async Task<List<CinAndQcCalValidatedUserModel>> UpsertQcCalValidatedUserAsync
+            (List<string> cins, int loggedInUserId, int actionUserId)
+        {
+            var storedProcedure = "[dbo].[usp_UpsertQcCalValidatedUser]";
+            var parameter = new
+            {
+                SampleCins = GetCinTable(cins),
+                UserId = actionUserId,
+                LoggedInUserId = loggedInUserId
+            };
+
+            try
+            {
+                return await LoadDataWithParameterAsync
+                    <CinAndQcCalValidatedUserModel, dynamic>(storedProcedure, parameter);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

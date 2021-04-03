@@ -140,6 +140,7 @@
     <Compile Include="Models\BarcodeDataModel.cs" />
     <Compile Include="Models\BulkImportsStaticDataModel.cs" />
     <Compile Include="Models\ChannelMappingModel.cs" />
+    <Compile Include="Models\CinAndQcCalValidatedUserModel.cs" />
     <Compile Include="Models\CinAndReportDateModel.cs" />
     <Compile Include="Models\ClinicalDetailIdsModel.cs" />
     <Compile Include="Models\ClinicalDetailsDatabaseModel.cs" />

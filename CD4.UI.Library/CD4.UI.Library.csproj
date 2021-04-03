@@ -136,6 +136,7 @@
     <Compile Include="Model\AuthorizeDetailEventArgs.cs" />
     <Compile Include="Model\BarcodeDataModel.cs" />
     <Compile Include="Model\BulkSchemaModel.cs" />
+    <Compile Include="Model\CinAndQcCalValidatedUserModel.cs" />
     <Compile Include="Model\CinAndReportDateModel.cs" />
     <Compile Include="Model\CommentsSelectionModel.cs" />
     <Compile Include="Model\DemographicsConfirmationModel.cs" />
