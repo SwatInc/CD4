@@ -9,6 +9,8 @@ Public Class DataToSendState
     Public Event OnTimeOut As EventHandler(Of IAstmState) Implements IAstmState.OnTimeOut
     Public Event TransmitData As EventHandler(Of String) Implements IAstmState.TransmitData
     Public Event TransmitNextMessage As EventHandler Implements IAstmState.TransmitNextMessage
+    Public Event MessageverifiedForProcessing As EventHandler(Of String) Implements IAstmState.MessageverifiedForProcessing
+
     Private _logger As Logger
     Private _interval As Integer
     Public Sub New(logger As Logger, Optional interval As Integer = 0)

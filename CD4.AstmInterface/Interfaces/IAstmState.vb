@@ -3,6 +3,8 @@
     Event OnTimeOut As EventHandler(Of IAstmState)
     Event TransmitData As EventHandler(Of String)
     Event TransmitNextMessage As EventHandler
+    Event MessageverifiedForProcessing As EventHandler(Of String)
+
     Function SendENQ() As IAstmState
     Function ReceiveENQ() As IAstmState
     Function SendNAK() As IAstmState

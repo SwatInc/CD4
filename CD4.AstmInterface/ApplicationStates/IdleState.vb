@@ -23,6 +23,7 @@ Public Class IdleState
     Public Event OnTimeOut As EventHandler(Of IAstmState) Implements IAstmState.OnTimeOut
     Public Event TransmitData As EventHandler(Of String) Implements IAstmState.TransmitData
     Public Event TransmitNextMessage As EventHandler Implements IAstmState.TransmitNextMessage
+    Public Event MessageverifiedForProcessing As EventHandler(Of String) Implements IAstmState.MessageverifiedForProcessing
 
     Public Function SendENQ() As IAstmState Implements IAstmState.SendENQ
         _logger.Information("Sending ENQ.")

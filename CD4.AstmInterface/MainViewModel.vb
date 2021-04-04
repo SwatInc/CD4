@@ -1,13 +1,22 @@
 ﻿Imports System.IO
 Imports System.IO.Ports
 Imports System.Text
+Imports Essy.LIS.Connection
+Imports Essy.LIS.LIS02A2
 Imports Newtonsoft.Json
 Imports Serilog.Core
 Imports SimpleTcp
 
 Public Class MainViewModel
+    Implements ILisConnection
     Private ReadOnly _logger As Logger
+    Dim _parser As LISParser
     Private IsTerminateSeqTransmitted As Boolean = False
+
+    Public Event OnReceiveString As LISConnectionReceivedDataEventHandler Implements ILisConnection.OnReceiveString
+    Public Event OnLISConnectionClosed As EventHandler Implements ILisConnection.OnLISConnectionClosed
+    Public Event OnReceiveTimeOut As EventHandler Implements ILisConnection.OnReceiveTimeOut
+
     Private Property AstmState As IAstmState
         Get
             Return _astmState
@@ -17,8 +26,17 @@ Public Class MainViewModel
             AddHandler _astmState.OnTimeOut, AddressOf HandleOnAstmTimeOut
             AddHandler _astmState.TransmitData, AddressOf TransmitAstmData
             AddHandler _astmState.TransmitNextMessage, AddressOf TransmitNextMessage
+            AddHandler _astmState.MessageverifiedForProcessing, AddressOf OnMessageverified
         End Set
     End Property
+
+    ''' <summary>
+    ''' Runs the ASTM string through parser
+    ''' </summary>
+    ''' <param name="e">ASTM string</param>
+    Private Sub OnMessageverified(sender As Object, e As String)
+
+    End Sub
 
     Private _listener As SimpleTcpServer
     Private _client As SimpleTcpClient
@@ -87,6 +105,7 @@ Public Class MainViewModel
         InitializeSocketSettings()
         _partialMessageViaSerial = ""
         _serialPort = New SerialPort
+        _parser = New LISParser(Me)
 
         _logger.Information("Initialize ASTM State to Idle")
         AstmState = New IdleState(_logger)
@@ -260,7 +279,7 @@ Public Class MainViewModel
 
                     If data.Contains($"{ChrW(13)}{ChrW(10)}") Then
                         _partialMessageViaSerial += data
-                        _logger.Information($"[RX] : {ReplaceControlCharacters(_partialMessageViaSerial)}")
+                        '_logger.Information($"[RX] : {ReplaceControlCharacters(_partialMessageViaSerial)}")
                         AstmState = AstmState.ReceiveMessage(_partialMessageViaSerial)
                         _partialMessageViaSerial = ""
                     Else
@@ -314,6 +333,47 @@ Public Class MainViewModel
         _logger.Information($"Initializing TCP client to connect to {IpAddress}:{Port}")
         Return New SimpleTcpClient($"{IpAddress}:{Port}", False, "", "")
     End Function
+
+#Region "ESSY LIS"
+    Public Sub SendMessage(aMessage As String) Implements ILisConnection.SendMessage
+        Throw New NotImplementedException()
+    End Sub
+
+    Public Sub Connect() Implements ILisConnection.Connect
+        Throw New NotImplementedException()
+    End Sub
+
+    Public Sub DisConnect() Implements ILisConnection.DisConnect
+        Throw New NotImplementedException()
+    End Sub
+
+    Public Function EstablishSendMode() As Boolean Implements ILisConnection.EstablishSendMode
+        Throw New NotImplementedException()
+    End Function
+
+    Public Sub StopSendMode() Implements ILisConnection.StopSendMode
+        Throw New NotImplementedException()
+    End Sub
+
+    Public Sub StartReceiveTimeoutTimer() Implements ILisConnection.StartReceiveTimeoutTimer
+        Throw New NotImplementedException()
+    End Sub
+
+    Public Sub Dispose() Implements IDisposable.Dispose
+        Throw New NotImplementedException()
+    End Sub
+
+    Public Property Status As LisConnectionStatus Implements ILisConnection.Status
+        Get
+            Throw New NotImplementedException()
+        End Get
+        Set(value As LisConnectionStatus)
+            Throw New NotImplementedException()
+        End Set
+    End Property
+
+#End Region
+
 #End Region
 
     Private _ipAddress As String
@@ -397,6 +457,7 @@ Public Class MainViewModel
     End Property
 
     Private _comPort As String
+
     Public Property ComPort() As String
         Get
             Return _comPort
