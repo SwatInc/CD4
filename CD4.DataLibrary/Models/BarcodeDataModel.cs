@@ -14,6 +14,7 @@ namespace CD4.DataLibrary.Models
         public string FullName { get; set; }
         public DateTime Birthdate { get; set; }
         public string Age { get; set; }
+        public string SampleType { get; set; }
         public string Discipline { get; set; }
         public DateTimeOffset CollectionDate { get; set; }
     }

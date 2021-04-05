@@ -29,9 +29,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CD4.Extensions.Reports.Medl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CD4.Exensibility.ReportDispatchFramework", "CD4.Extensibility.ReportDispatchFramework\CD4.Exensibility.ReportDispatchFramework.csproj", "{D26271EB-1436-4838-85A6-95CFA04C2E1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CD4.AstmInterface", "CD4.AstmInterface\CD4.AstmInterface.csproj", "{79AE971C-CA22-4C63-9101-CCABD912EE36}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CD4.AstmInterface", "CD4.AstmInterface\CD4.AstmInterface.csproj", "{79AE971C-CA22-4C63-9101-CCABD912EE36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CD4.ResultsInterface.Common", "CD4.ResultsInterface.Common\CD4.ResultsInterface.Common.csproj", "{C4E7A140-0B19-4F2D-9F9C-73997FB8061F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CD4.ResultsInterface.Common", "CD4.ResultsInterface.Common\CD4.ResultsInterface.Common.csproj", "{C4E7A140-0B19-4F2D-9F9C-73997FB8061F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -323,8 +323,8 @@ Global
 		{79AE971C-CA22-4C63-9101-CCABD912EE36}.Debug|ARM.Build.0 = Debug|Any CPU
 		{79AE971C-CA22-4C63-9101-CCABD912EE36}.Debug|ARM64.ActiveCfg = Debug|Any CPU
 		{79AE971C-CA22-4C63-9101-CCABD912EE36}.Debug|ARM64.Build.0 = Debug|Any CPU
-		{79AE971C-CA22-4C63-9101-CCABD912EE36}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{79AE971C-CA22-4C63-9101-CCABD912EE36}.Debug|x64.Build.0 = Debug|Any CPU
+		{79AE971C-CA22-4C63-9101-CCABD912EE36}.Debug|x64.ActiveCfg = Debug|x64
+		{79AE971C-CA22-4C63-9101-CCABD912EE36}.Debug|x64.Build.0 = Debug|x64
 		{79AE971C-CA22-4C63-9101-CCABD912EE36}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{79AE971C-CA22-4C63-9101-CCABD912EE36}.Debug|x86.Build.0 = Debug|Any CPU
 		{79AE971C-CA22-4C63-9101-CCABD912EE36}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -343,8 +343,8 @@ Global
 		{C4E7A140-0B19-4F2D-9F9C-73997FB8061F}.Debug|ARM.Build.0 = Debug|Any CPU
 		{C4E7A140-0B19-4F2D-9F9C-73997FB8061F}.Debug|ARM64.ActiveCfg = Debug|Any CPU
 		{C4E7A140-0B19-4F2D-9F9C-73997FB8061F}.Debug|ARM64.Build.0 = Debug|Any CPU
-		{C4E7A140-0B19-4F2D-9F9C-73997FB8061F}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{C4E7A140-0B19-4F2D-9F9C-73997FB8061F}.Debug|x64.Build.0 = Debug|Any CPU
+		{C4E7A140-0B19-4F2D-9F9C-73997FB8061F}.Debug|x64.ActiveCfg = Debug|x64
+		{C4E7A140-0B19-4F2D-9F9C-73997FB8061F}.Debug|x64.Build.0 = Debug|x64
 		{C4E7A140-0B19-4F2D-9F9C-73997FB8061F}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{C4E7A140-0B19-4F2D-9F9C-73997FB8061F}.Debug|x86.Build.0 = Debug|Any CPU
 		{C4E7A140-0B19-4F2D-9F9C-73997FB8061F}.Release|Any CPU.ActiveCfg = Release|Any CPU

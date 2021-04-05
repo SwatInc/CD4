@@ -93,6 +93,7 @@ namespace CD4.UI.Helpers
                 barcodeLabel.Parameters["SampleCollectedDate"].Value = barcode.CollectionDate.LocalDateTime;
                 barcodeLabel.Parameters["Seq"].Value = barcode.Seq;
                 barcodeLabel.Parameters["Discipline"].Value = barcode.Discipline;
+                barcodeLabel.Parameters["SampleType"].Value = barcode.SampleType;
 
                 barcodeLabel.PrinterName = _printingHelper.BarcodePrinterName;
                 barcodeLabel.RequestParameters = false;

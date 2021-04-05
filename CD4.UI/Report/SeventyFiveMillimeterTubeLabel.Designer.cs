@@ -32,6 +32,7 @@
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.Detail = new DevExpress.XtraReports.UI.DetailBand();
+            this.xrLabelSampleType = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabelDiscipline = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabelSeq = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabelAccessionNumber = new DevExpress.XtraReports.UI.XRLabel();
@@ -50,7 +51,7 @@
             this.SampleCollectedDate = new DevExpress.XtraReports.Parameters.Parameter();
             this.Seq = new DevExpress.XtraReports.Parameters.Parameter();
             this.Discipline = new DevExpress.XtraReports.Parameters.Parameter();
-            this.xrLabelSampleType = new DevExpress.XtraReports.UI.XRLabel();
+            this.SampleType = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // TopMargin
@@ -81,6 +82,26 @@
             this.Detail.Name = "Detail";
             this.Detail.SnapLinePadding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
             this.Detail.StylePriority.UseBorderWidth = false;
+            // 
+            // xrLabelSampleType
+            // 
+            this.xrLabelSampleType.Angle = 90F;
+            this.xrLabelSampleType.AutoWidth = true;
+            this.xrLabelSampleType.CanGrow = false;
+            this.xrLabelSampleType.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "?SampleType")});
+            this.xrLabelSampleType.Font = new System.Drawing.Font("Sitka Small", 5F);
+            this.xrLabelSampleType.KeepTogether = true;
+            this.xrLabelSampleType.LocationFloat = new DevExpress.Utils.PointFloat(179.5932F, 0F);
+            this.xrLabelSampleType.Name = "xrLabelSampleType";
+            this.xrLabelSampleType.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
+            this.xrLabelSampleType.SizeF = new System.Drawing.SizeF(17.40675F, 98F);
+            this.xrLabelSampleType.StylePriority.UseFont = false;
+            this.xrLabelSampleType.StylePriority.UsePadding = false;
+            this.xrLabelSampleType.StylePriority.UseTextAlignment = false;
+            this.xrLabelSampleType.Text = "NASOPHARYNGEAL SWAB";
+            this.xrLabelSampleType.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrLabelSampleType.WordWrap = false;
             // 
             // xrLabelDiscipline
             // 
@@ -319,23 +340,10 @@
             this.Discipline.Description = "The department to which the sample belongs to";
             this.Discipline.Name = "Discipline";
             // 
-            // xrLabelSampleType
+            // SampleType
             // 
-            this.xrLabelSampleType.Angle = 90F;
-            this.xrLabelSampleType.AutoWidth = true;
-            this.xrLabelSampleType.CanGrow = false;
-            this.xrLabelSampleType.Font = new System.Drawing.Font("Sitka Small", 5F);
-            this.xrLabelSampleType.KeepTogether = true;
-            this.xrLabelSampleType.LocationFloat = new DevExpress.Utils.PointFloat(179.5932F, 0F);
-            this.xrLabelSampleType.Name = "xrLabelSampleType";
-            this.xrLabelSampleType.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
-            this.xrLabelSampleType.SizeF = new System.Drawing.SizeF(17.40675F, 98F);
-            this.xrLabelSampleType.StylePriority.UseFont = false;
-            this.xrLabelSampleType.StylePriority.UsePadding = false;
-            this.xrLabelSampleType.StylePriority.UseTextAlignment = false;
-            this.xrLabelSampleType.Text = "NASOPHARYNGEAL SWAB";
-            this.xrLabelSampleType.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrLabelSampleType.WordWrap = false;
+            this.SampleType.Description = "The type of sample. eg: urine";
+            this.SampleType.Name = "SampleType";
             // 
             // SeventyFiveMillimeterTubeLabel
             // 
@@ -357,7 +365,8 @@
             this.AccessionNumber,
             this.SampleCollectedDate,
             this.Seq,
-            this.Discipline});
+            this.Discipline,
+            this.SampleType});
             this.SnapGridSize = 9.84252F;
             this.Version = "18.2";
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
@@ -388,5 +397,6 @@
         private DevExpress.XtraReports.Parameters.Parameter Seq;
         private DevExpress.XtraReports.Parameters.Parameter Discipline;
         private DevExpress.XtraReports.UI.XRLabel xrLabelSampleType;
+        private DevExpress.XtraReports.Parameters.Parameter SampleType;
     }
 }
