@@ -9,7 +9,7 @@
       <Value Profile="(Default)">COM2</Value>
     </Setting>
     <Setting Name="BaudRate" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">9600</Value>
+      <Value Profile="(Default)">57600</Value>
     </Setting>
     <Setting Name="DataBits" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">8</Value>
@@ -31,6 +31,15 @@
     </Setting>
     <Setting Name="Port" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ExportBasepath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Export</Value>
+    </Setting>
+    <Setting Name="Extension" Type="System.String" Scope="User">
+      <Value Profile="(Default)">json</Value>
+    </Setting>
+    <Setting Name="ControlExtension" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ok</Value>
     </Setting>
   </Settings>
 </SettingsFile>

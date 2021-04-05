@@ -49,7 +49,7 @@ namespace CD4.AstmInterface.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("9600")]
+        [global::System.Configuration.DefaultSettingValueAttribute("57600")]
         public int BaudRate {
             get {
                 return ((int)(this["BaudRate"]));
@@ -140,6 +140,42 @@ namespace CD4.AstmInterface.Properties {
             }
             set {
                 this["Port"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Export")]
+        public string ExportBasepath {
+            get {
+                return ((string)(this["ExportBasepath"]));
+            }
+            set {
+                this["ExportBasepath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("json")]
+        public string Extension {
+            get {
+                return ((string)(this["Extension"]));
+            }
+            set {
+                this["Extension"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ok")]
+        public string ControlExtension {
+            get {
+                return ((string)(this["ControlExtension"]));
+            }
+            set {
+                this["ControlExtension"] = value;
             }
         }
     }

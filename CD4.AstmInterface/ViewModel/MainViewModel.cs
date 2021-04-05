@@ -1,8 +1,11 @@
 ﻿using CD4.AstmInterface.Model;
+using CD4.ResultsInterface.Common.Models;
+using CD4.ResultsInterface.Common.Services;
 using Essy.LIS.Connection;
 using Essy.LIS.LIS02A2;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
@@ -11,14 +14,39 @@ namespace CD4.AstmInterface.ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        private readonly IExportService exportService;
+        private List<InterfaceResultsModel> interfaceResults;
+        private InterfaceResultsModel tempResults;
+
         private ILis01A2Connection lowLevelConnection;
         private Lis01A2Connection lisConnection;
         private LISParser lisParser;
 
+        private EventHandler<List<InterfaceResultsModel>> ResultsReadyForExport;
         public MainViewModel()
         {
             Settings = new Settings();
+            interfaceResults = new List<InterfaceResultsModel>();
+            exportService = new ExportService();
+
             InitializeAstm();
+
+            ResultsReadyForExport += ExportResults;
+        }
+
+        /// <summary>
+        /// Event handler for ResultsReadyForExport
+        /// </summary>
+        private async void ExportResults(object sender, List<InterfaceResultsModel> e)
+        {
+            try
+            {
+                await exportService.ExportToUploader(interfaceResults, Settings.ExportBasepath, Settings.Extension, Settings.ControlExtension);
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         private void InitializeAstm()
@@ -47,7 +75,64 @@ namespace CD4.AstmInterface.ViewModel
 
         private void LISParser_OnReceivedRecord(object Sender, ReceiveRecordEventArgs e)
         {
-            Debug.WriteLine(JsonConvert.SerializeObject(e));
+            switch (e.RecordType)
+            {
+                case LisRecordType.Header:
+                    //var header = (HeaderRecord)e.ReceivedRecord;
+
+                    break;
+                case LisRecordType.Patient:
+                    var patient = (PatientRecord)e.ReceivedRecord;
+
+                    break;
+                case LisRecordType.Order:
+                    var order = (OrderRecord)e.ReceivedRecord;
+
+                    //check whether there is a temp results data
+                    if (tempResults != null )  { interfaceResults.Add(tempResults); }
+
+                    tempResults = new InterfaceResultsModel() {
+                        SampleId = order.SpecimenID,
+                        Measurements = new List<MeasurementValues>()
+                    };
+
+                    break;
+                case LisRecordType.Result:
+                    var result = (ResultRecord)e.ReceivedRecord;
+                    tempResults.Measurements.Add(new MeasurementValues() 
+                    {
+                         TestCode = result.UniversalTestID.ManufacturerCode,
+                         MeasurementValue = result.Data,
+                         Unit = result.Units,
+                    });
+
+                    break;
+                case LisRecordType.Comment:
+                    break;
+                case LisRecordType.Query:
+                    var query = (QueryRecord)e.ReceivedRecord;
+                    break;
+                case LisRecordType.Terminator:
+                    //add any temp results
+                    if (tempResults != null)
+                    {
+                        interfaceResults.Add(tempResults);
+                    }
+                    //export the results
+                    Debug.WriteLine(JsonConvert.SerializeObject(interfaceResults, Formatting.Indented));
+
+                    ResultsReadyForExport?.Invoke(this, interfaceResults);
+                    interfaceResults.Clear();
+                    //set temp results data to null
+                    tempResults = null;
+                    break;
+                case LisRecordType.Scientific:
+                    break;
+                case LisRecordType.Information:
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void LISParser_OnSendProgress(object sender, SendProgressEventArgs e)
