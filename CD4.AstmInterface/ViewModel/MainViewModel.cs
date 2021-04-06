@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
+using System.Windows.Forms;
 
 namespace CD4.AstmInterface.ViewModel
 {
@@ -64,8 +65,14 @@ namespace CD4.AstmInterface.ViewModel
                     
                     lisParser.OnSendProgress += LISParser_OnSendProgress; //Send data progress will trigger this event
                     lisParser.OnReceivedRecord += LISParser_OnReceivedRecord; //incoming LIS frames will trigger this event
-
-                    lisParser.Connection.Connect();
+                    try
+                    {
+                        lisParser.Connection.Connect();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
 
                     break;
                 default:

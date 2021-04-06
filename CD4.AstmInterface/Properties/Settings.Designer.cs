@@ -37,7 +37,7 @@ namespace CD4.AstmInterface.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("COM2")]
+        [global::System.Configuration.DefaultSettingValueAttribute("COM50")]
         public string ComPort {
             get {
                 return ((string)(this["ComPort"]));
@@ -49,7 +49,7 @@ namespace CD4.AstmInterface.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("57600")]
+        [global::System.Configuration.DefaultSettingValueAttribute("9600")]
         public int BaudRate {
             get {
                 return ((int)(this["BaudRate"]));

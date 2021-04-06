@@ -84,6 +84,7 @@ namespace CD4.UI.Helpers
         {
             foreach (var barcode in barcodeData)
             {
+                if(barcode.SampleType is null) { barcode.SampleType = ""; }
                 var barcodeLabel = new SeventyFiveMillimeterTubeLabel();
                 barcodeLabel.Parameters["Fullname"].Value = GetAbbreviatedName(barcode.FullName);
                 barcodeLabel.Parameters["NidPp"].Value = barcode.NidPp;
@@ -94,6 +95,7 @@ namespace CD4.UI.Helpers
                 barcodeLabel.Parameters["Seq"].Value = barcode.Seq;
                 barcodeLabel.Parameters["Discipline"].Value = barcode.Discipline;
                 barcodeLabel.Parameters["SampleType"].Value = barcode.SampleType;
+                barcodeLabel.DisplayName = $"{barcode.Discipline}_{barcode.SampleType}_{barcode.FullName}_{barcode.NidPp}.pdf";
 
                 barcodeLabel.PrinterName = _printingHelper.BarcodePrinterName;
                 barcodeLabel.RequestParameters = false;
@@ -106,7 +108,7 @@ namespace CD4.UI.Helpers
 #endif
 
 #if DEBUG
-                    barcodeLabel.ExportToPdf($"C:\\Logs\\{barcode.Discipline}_{barcode.FullName}_{barcode.NidPp}.pdf");
+                    barcodeLabel.ExportToPdf($"C:\\Logs\\{barcodeLabel.DisplayName}.pdf");
 #endif
                 }
                 catch (Exception)

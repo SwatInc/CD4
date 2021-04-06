@@ -6,10 +6,10 @@
       <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="ComPort" Type="System.String" Scope="User">
-      <Value Profile="(Default)">COM2</Value>
+      <Value Profile="(Default)">COM50</Value>
     </Setting>
     <Setting Name="BaudRate" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">57600</Value>
+      <Value Profile="(Default)">9600</Value>
     </Setting>
     <Setting Name="DataBits" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">8</Value>
