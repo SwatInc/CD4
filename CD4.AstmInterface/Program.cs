@@ -1,8 +1,9 @@
 using CD4.AstmInterface.View;
+using CD4.AstmInterface.ViewModel;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CD4.AstmInterface
@@ -15,10 +16,41 @@ namespace CD4.AstmInterface
         [STAThread]
         static void Main()
         {
-            Application.SetHighDpiMode(HighDpiMode.SystemAware);
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainView());
+
+            ///Generate Host Builder and Register the Services for DI
+            var builder = new HostBuilder()
+                           .ConfigureServices((hostContext, services) =>
+                           {
+                               //Register all your services here
+                               services.AddScoped<MainView>();
+                               services.AddScoped<MainViewModel>();
+
+                           }).ConfigureLogging(logBuilder =>
+                           {
+                               logBuilder.SetMinimumLevel(LogLevel.Trace);
+                               logBuilder.AddLog4Net("App.config");
+
+                           });
+
+            var host = builder.Build();
+            using (var serviceScope = host.Services.CreateScope())
+            {
+                var services = serviceScope.ServiceProvider;
+                try
+                {
+                    Application.SetHighDpiMode(HighDpiMode.SystemAware);
+                    Application.EnableVisualStyles();
+                    Application.SetCompatibleTextRenderingDefault(false);
+                    var mainview = services.GetRequiredService<MainView>();
+                    Application.Run(mainview);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+
         }
     }
 }

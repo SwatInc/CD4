@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using System;
+using System.ComponentModel;
 using System.IO.Ports;
 
 namespace CD4.AstmInterface.Model
@@ -6,68 +7,128 @@ namespace CD4.AstmInterface.Model
     public class Settings
     {
         private Properties.Settings settings;
+        private string driverPath;
+
         public Settings()
         {
             settings = new Properties.Settings();
 
-            ConnectionMode = (ConnectionMode)settings.ConnectionMode;
-            ComPort = settings.ComPort;
-            BaudRate = settings.BaudRate;
-            DataBits = settings.DataBits;
-            StopBits = (StopBits)settings.StopBits;
-            parity = (Parity)settings.Parity;
-            Handshake = (Handshake)settings.HandShake;
-            IsSever = settings.IsServer;
-            IpAddress = settings.IpAddress;
-            Port = settings.Port;
+            //ConnectionMode = (ConnectionMode)settings.ConnectionMode;
+            //ComPort = settings.ComPort;
+            //BaudRate = settings.BaudRate;
+            //DataBits = settings.DataBits;
+            //StopBits = (StopBits)settings.StopBits;
+            //parity = (Parity)settings.Parity;
+            //Handshake = (Handshake)settings.HandShake;
+            //IsSever = settings.IsServer;
+            //IpAddress = settings.IpAddress;
+            //Port = settings.Port;
 
             SerialPort = new SerialPort(ComPort);
 
-            ExportBasepath = settings.ExportBasepath;
-            Extension = settings.Extension;
-            ControlExtension = settings.ControlExtension;
+            //ExportBasepath = settings.ExportBasepath;
+            //Extension = settings.Extension;
+            //ControlExtension = settings.ControlExtension;
         }
 
 
         [Category("Operating Mode")]
-        public ConnectionMode ConnectionMode { get; set; }
+        public ConnectionMode ConnectionMode
+        {
+            get => (ConnectionMode)settings.ConnectionMode;
+            set => settings.ConnectionMode = Convert.ToInt32(value);
+        }
 
         #region Serial Settings
         [Browsable(false)]
         public SerialPort SerialPort { get; set; }
         [Category("Serial Settings")]
-        public string ComPort { get; set; }
+        public string ComPort
+        {
+            get => settings.ComPort;
+            set => settings.ComPort = value;
+        }
+
+        internal void Save()
+        {
+            settings.Save();
+        }
+
         [Category("Serial Settings")]
-        public int BaudRate { get; set; }
+        public int BaudRate
+        {
+            get => settings.BaudRate;
+            set => settings.BaudRate = value;
+        }
         [Category("Serial Settings")]
-        public int DataBits { get; set; }
+        public int DataBits
+        {
+            get => settings.DataBits;
+            set => settings.DataBits = value;
+        }
         [Category("Serial Settings")]
-        public StopBits StopBits { get; set; }
+        public StopBits StopBits
+        {
+            get => (StopBits)settings.StopBits;
+            set => settings.StopBits = Convert.ToInt32(value);
+        }
         [Category("Serial Settings")]
-        public Parity parity { get; set; }
+        public Parity Parity
+        {
+            get => (Parity)settings.Parity;
+            set => settings.Parity = Convert.ToInt32(value);
+        }
         [Category("Serial Settings")]
-        public Handshake Handshake { get; set; }
+        public Handshake Handshake
+        {
+            get => (Handshake)settings.HandShake;
+            set => settings.HandShake = Convert.ToInt32(value);
+        }
 
         #endregion
 
         #region Ethernet Settings
 
         [Category("Ethernet Settings")]
-        public bool IsSever { get; set; }
+        public bool IsSever
+        {
+            get => settings.IsServer;
+            set => settings.IsServer = value;
+        }
         [Category("Ethernet Settings")]
-        public string IpAddress { get; set; }
+        public string IpAddress
+        {
+            get => settings.IpAddress;
+            set => settings.IpAddress = value;
+        }
         [Category("Ethernet Settings")]
-        public int Port { get; set; }
+        public int Port
+        {
+            get => settings.Port;
+            set => settings.Port = value;
+        }
         #endregion
 
         #region Export Settings
 
         [Category("Export Settings")]
-        public string ExportBasepath { get; set; }
+        public string ExportBasepath
+        {
+            get => settings.ExportBasepath;
+            set => settings.ExportBasepath = value;
+        }
         [Category("Export Settings")]
-        public string Extension { get; set; }
+        public string Extension
+        {
+            get => settings.Extension;
+            set => settings.Extension = value;
+        }
         [Category("Export Settings")]
-        public string ControlExtension { get; set; }
+        public string ControlExtension
+        {
+            get => settings.ControlExtension;
+            set => settings.ControlExtension = value;
+        }
 
         #endregion
     }

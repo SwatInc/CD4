@@ -3,11 +3,16 @@ using CD4.ResultsInterface.Common.Models;
 using CD4.ResultsInterface.Common.Services;
 using Essy.LIS.Connection;
 using Essy.LIS.LIS02A2;
+using log4net.Core;
+using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
@@ -16,23 +21,26 @@ namespace CD4.AstmInterface.ViewModel
     public class MainViewModel : INotifyPropertyChanged
     {
         private readonly IExportService exportService;
+        private readonly ILogger<MainViewModel> logger;
         private List<InterfaceResultsModel> interfaceResults;
         private InterfaceResultsModel tempResults;
 
         private ILis01A2Connection lowLevelConnection;
-        private Lis01A2Connection lisConnection;
+        private ILisConnection lisConnection;
         private LISParser lisParser;
 
         private EventHandler<List<InterfaceResultsModel>> ResultsReadyForExport;
-        public MainViewModel()
+        public MainViewModel(ILogger<MainViewModel> logger)
         {
             Settings = new Settings();
             interfaceResults = new List<InterfaceResultsModel>();
             exportService = new ExportService();
+            logger.LogInformation("Application startup... loaded settings");
 
             InitializeAstm();
-
+            
             ResultsReadyForExport += ExportResults;
+            this.logger = logger;
         }
 
         /// <summary>
@@ -159,5 +167,30 @@ namespace CD4.AstmInterface.ViewModel
         }
 
         #endregion
+
+        private ILisConnection LoadAssembly(string assemblyPath)
+        {
+            try
+            {
+                string assembly = Path.GetFullPath(assemblyPath);
+                Assembly ptrAssembly = Assembly.LoadFile(assembly);
+                foreach (Type item in ptrAssembly.GetTypes())
+                {
+                    if (!item.IsClass) continue;
+                    if (item.GetInterfaces().Contains(typeof(ILisConnection)))
+                    {
+                        return (ILisConnection)Activator.CreateInstance(item,new Lis01A02RS232Connection(Settings.SerialPort));
+                    }
+                }
+
+                throw new Exception("Invalid driver file, entrypoint not found!");
+
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Failed to load the driver.\n{ex.Message}");
+            }
+
+        }
     }
 }

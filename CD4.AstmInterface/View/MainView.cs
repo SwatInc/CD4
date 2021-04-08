@@ -1,10 +1,14 @@
 ﻿using CD4.AstmInterface.ViewModel;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,11 +17,14 @@ namespace CD4.AstmInterface.View
 {
     public partial class MainView : Form
     {
+        private ILogger<MainView> _logger;
         private MainViewModel _viewModel;
-        public MainView()
+        public MainView(ILogger<MainView> logger, MainViewModel viewModel)
         {
             InitializeComponent();
-            _viewModel = new MainViewModel();
+            _logger = logger;
+            _viewModel = viewModel;
+            //_viewModel = new MainViewModel();
             DisplaySettingsOnUi();
         }
 
@@ -33,6 +40,15 @@ namespace CD4.AstmInterface.View
 
             this.Controls.Add(propertyGrid1);
             propertyGrid1.SelectedObject = _viewModel.Settings;
+
+            propertyGrid1.PropertyValueChanged += PropertyGrid1_PropertyValueChanged;
+
+            _logger.LogInformation("Startup complete");
+        }
+
+        private void PropertyGrid1_PropertyValueChanged(object s, PropertyValueChangedEventArgs e)
+        {
+            _viewModel.Settings.Save();
         }
     }
 }
