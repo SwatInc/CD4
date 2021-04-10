@@ -138,6 +138,7 @@
     <Compile Include="Models\AuditTrailModel.cs" />
     <Compile Include="Models\AuthorizeDetailModel.cs" />
     <Compile Include="Models\BarcodeDataModel.cs" />
+    <Compile Include="Models\BillingTestMappingModel.cs" />
     <Compile Include="Models\BulkImportsStaticDataModel.cs" />
     <Compile Include="Models\ChannelMappingModel.cs" />
     <Compile Include="Models\CinAndFullnameModel.cs" />

@@ -260,5 +260,18 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
+
+        public async Task<List<BillingTestMappingModel>> GetBillingTestCodeMappings()
+        {
+            var storedProcedure = "[dbo].[usp_GetAllBillingTestMappings]";
+            try
+            {
+                return await LoadDataAsync<BillingTestMappingModel>(storedProcedure);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }
