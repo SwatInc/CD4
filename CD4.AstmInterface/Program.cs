@@ -27,7 +27,6 @@ namespace CD4.AstmInterface
 
                            }).ConfigureLogging(logBuilder =>
                            {
-                               logBuilder.SetMinimumLevel(LogLevel.Trace);
                                logBuilder.AddLog4Net("App.config");
 
                            });
