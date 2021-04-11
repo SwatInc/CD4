@@ -372,5 +372,20 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
+
+        public async Task SetSampleAcceptedTimeReceivedFromBilling(string cin, string acceptedAt)
+        {
+            var storedProcedure = "usp_InsertAcceptedDateTimeForSampleFromBilling";
+            var parameters = new { @Cin = cin, @AcceptedAt = acceptedAt };
+
+            try
+            {
+                await SelectInsertOrUpdateAsync<dynamic, dynamic>(storedProcedure, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

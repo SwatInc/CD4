@@ -16,5 +16,6 @@ namespace CD4.DataLibrary.DataAccess
         Task<bool> MarkSampleCollectedAsync(string cin, int loggedInUserId);
         Task<StatusUpdatedSampleAndTestStatusModel> ValidateSample(string cin, int currentSampleStatus, int loggedInUserId);
         Task<bool> ValidateTest(string cin, string testDescription, int testStatus, string result, int loggedInUserId);
+        Task SetSampleAcceptedTimeReceivedFromBilling(string cin, string acceptedAt);
     }
 }
