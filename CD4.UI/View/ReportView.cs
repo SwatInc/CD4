@@ -203,7 +203,7 @@ namespace CD4.UI.View
             });
 
             // xtraReport.ExportToPdf($"{exportDirPath}\\{xtraReport.DisplayName}.pdf");
-            xtraReport.ExportToDocx($"{exportDirPath}\\{xtraReport.DisplayName}.docx");
+            xtraReport.ExportToPdf($"{exportDirPath}\\{xtraReport.DisplayName}.pdf");
         }
 
         private void DisposeMe()
