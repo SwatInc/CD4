@@ -14,19 +14,14 @@ namespace CD4.BillingInterface.GrpcService.Services
         private readonly IStaticDataDataAccess _staticDataDataAccess;
         private readonly ILogger _logger;
 
-        public event EventHandler InitializeBillingMap;
-
         public BillingCD4TestMapService(IStaticDataDataAccess staticDataDataAccess, ILogger<BillingCD4TestMapService> logger)
         {
             TestMap = new List<BillingTestMappingModel>();
             _staticDataDataAccess = staticDataDataAccess;
             _logger = logger;
-
-            InitializeBillingMap += InitializeMap;
-            InitializeBillingMap?.Invoke(this, EventArgs.Empty);
         }
 
-        private async void InitializeMap(object sender, EventArgs e)
+        private async Task InitializeMap(object sender, EventArgs e)
         {
             _logger.LogDebug("Initializing Test map");
             try
@@ -41,6 +36,14 @@ namespace CD4.BillingInterface.GrpcService.Services
             }
         }
 
-        public List<BillingTestMappingModel> TestMap { get; set; }
+        private List<BillingTestMappingModel> TestMap { get; set; }
+
+        public List<BillingTestMappingModel> GetTestMap()
+        {
+            if (TestMap.Count > 0) {return TestMap;}
+
+            InitializeMap(this, EventArgs.Empty).GetAwaiter().GetResult();
+            return TestMap;
+        }
     }
 }

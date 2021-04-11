@@ -6,8 +6,6 @@ namespace CD4.BillingInterface.GrpcService.Services
 {
     public interface IBillingCD4TestMapService
     {
-        List<BillingTestMappingModel> TestMap { get; set; }
-
-        event EventHandler InitializeBillingMap;
+        List<BillingTestMappingModel> GetTestMap();
     }
 }
