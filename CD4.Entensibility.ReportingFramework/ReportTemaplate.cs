@@ -5,6 +5,7 @@
         AnalysisReportDefault,
         AnalysisReportForPrinting,
         TubeLabel75mm,
-        DoA
+        DoA,
+        AnalyserGeneratedReport
     }
 }

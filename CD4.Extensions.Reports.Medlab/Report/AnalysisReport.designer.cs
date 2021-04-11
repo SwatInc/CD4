@@ -178,6 +178,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // Detail
             // 
             this.Detail.Dpi = 254F;
+            this.Detail.Expanded = false;
             this.Detail.HeightF = 2.857383F;
             this.Detail.Name = "Detail";
             // 

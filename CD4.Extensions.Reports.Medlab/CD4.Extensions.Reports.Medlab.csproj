@@ -104,6 +104,12 @@
   <ItemGroup>
     <Compile Include="FetchTemplates.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\AnalyserGeneratedReport.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Report\AnalyserGeneratedReport.Designer.cs">
+      <DependentUpon>AnalyserGeneratedReport.cs</DependentUpon>
+    </Compile>
     <Compile Include="Report\AnalysisReportDoA.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -131,6 +137,9 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\licenses.licx" />
+    <EmbeddedResource Include="Report\AnalyserGeneratedReport.resx">
+      <DependentUpon>AnalyserGeneratedReport.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Report\AnalysisReportDoA.resx">
       <DependentUpon>AnalysisReportDoA.cs</DependentUpon>
       <SubType>Designer</SubType>
