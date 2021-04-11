@@ -292,6 +292,7 @@
     <Build Include="dbo\StoredProcedures\usp_UpsertAnalyzedUser.sql" />
     <Build Include="dbo\Tables\BillingTestCodeMap.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetAllBillingTestMappings.sql" />
+    <Build Include="dbo\StoredProcedures\usp_InsertAcceptedDateTimeForSampleFromBilling.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
@@ -303,6 +304,6 @@
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\Scripts\Script.PostDeployment.sql" />
-    <None Include="dbo\Scripts\StaticDataSeed.PostDeployment1.sql" />
+    <None Include="dbo\Scripts\Script.PostDeploymentClinicalLab.sql" />
   </ItemGroup>
 </Project>
