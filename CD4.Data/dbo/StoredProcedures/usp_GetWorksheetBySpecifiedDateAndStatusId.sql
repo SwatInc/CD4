@@ -57,6 +57,7 @@ BEGIN
                [RW].[PhoneNumber],
                [RW].[Address],
                [RW].[AtollIslandCountry],
+               [RW].[InstituteAssignedPatientId],
                [RW].[EpisodeNumber],
                [RW].[Site],
                [RW].[SampleStatusId] AS [StatusIconId],

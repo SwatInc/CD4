@@ -2,7 +2,7 @@
 	AS
 SELECT 
 	[S].[Cin],[S].[SiteId], [SCT].[CollectedAt] AS [CollectionDate],[SRT].[ReceivedAt] AS [ReceivedDate],
-	[P].[NidPp],[P].[FullName],[P].[GenderId],[P].[PhoneNumber],[P].[Birthdate],[P].[Address],
+	[P].[NidPp],[P].[FullName],[P].[GenderId],[P].[PhoneNumber],[P].[Birthdate],[P].[Address],[P].[InstituteAssignedPatientId],
 	[A].[Atoll],[A].[Island], [P].[CountryId],
 	[AR].[EpisodeNumber]
 FROM [dbo].[Sample] [S]

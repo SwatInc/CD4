@@ -15,6 +15,7 @@
        [PhoneNumber],
        [Address],
 	   [AtollIslandCountry],
+       [InstituteAssignedPatientId],
 	   [EpisodeNumber],
 	   [Site]
 )
@@ -35,6 +36,7 @@ SELECT [R].[Id],
        [P].[PhoneNumber],
        [P].[Address],
 	   ISNULL(CONCAT([A].[Atoll],'. ',[A].[Island],', ',[C].[Country]),'')AS [AtollIslandCountry],
+       [P].[InstituteAssignedPatientId],
 	   [AR].[EpisodeNumber],
 	   [SI].[Name] AS [Site]
 FROM [dbo].[Result] [R] 
