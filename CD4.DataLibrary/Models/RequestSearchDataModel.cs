@@ -23,6 +23,6 @@ namespace CD4.DataLibrary.Models
         public string Atoll { get; set; }
         public string Island { get; set; }
         public int CountryId { get; set; }
-
+        public long  InstituteAssignedPatientId { get; set; }
     }
 }

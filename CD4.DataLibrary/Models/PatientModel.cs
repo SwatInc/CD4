@@ -22,6 +22,7 @@ namespace CD4.DataLibrary.Models
         private string country;
         private string address;
         private string phoneNumber;
+        private long instituteAssignedPatientId;
 
         #endregion
 
@@ -117,6 +118,15 @@ namespace CD4.DataLibrary.Models
             }
         }
 
+        public long InstituteAssignedPatientId
+        {
+            get => instituteAssignedPatientId; set
+            {
+                instituteAssignedPatientId = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region INotifyPropertyChanged Hookup
@@ -141,6 +151,7 @@ namespace CD4.DataLibrary.Models
             if (dataToCompare.Country != this.Country) return false;
             if (dataToCompare.Address != this.Address) return false;
             if (dataToCompare.PhoneNumber != this.phoneNumber) return false;
+            if (dataToCompare.InstituteAssignedPatientId != this.InstituteAssignedPatientId) return false;
 
             return true;
         }

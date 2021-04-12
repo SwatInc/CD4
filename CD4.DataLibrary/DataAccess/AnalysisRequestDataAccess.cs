@@ -125,7 +125,8 @@ namespace CD4.DataLibrary.DataAccess
                     AtollId = request.AtollId,
                     CountryId = request.CountryId,
                     Address = request.Address,
-                    PhoneNumber = request.PhoneNumber
+                    PhoneNumber = request.PhoneNumber,
+                    InstituteAssignedPatientId = request.InstituteAssignedPatientId
                 };
                 var isPatientUpdated = await patientData.UpdatePatientById(patientToUpdate);
                 if (!isPatientUpdated) { throw new Exception("Cannot update patient data!"); }
@@ -142,7 +143,8 @@ namespace CD4.DataLibrary.DataAccess
                     AtollId = request.AtollId,
                     CountryId = request.CountryId,
                     Address = request.Address,
-                    PhoneNumber = request.PhoneNumber
+                    PhoneNumber = request.PhoneNumber,
+                    InstituteAssignedPatientId = request.InstituteAssignedPatientId
                 };
                 InsertedPatientId = await patientData.InsertPatient(patientToInsert);
 
