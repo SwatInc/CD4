@@ -40,6 +40,7 @@ namespace CD4.BillingInterface.WebApiService
             services.AddTransient<IStaticDataDataAccess, StaticDataDataAccess>();
             services.AddSingleton<IBillingCD4AnalysesMapService, BillingCD4AnalysesMapService>();
             services.AddTransient<IAnalysisRequestService, AnalysisRequestService>();
+            services.AddTransient<INdaTrackingDataAccess, NdaTrackingDataAccess>();
 
             services.AddSwaggerGen(c =>
             {

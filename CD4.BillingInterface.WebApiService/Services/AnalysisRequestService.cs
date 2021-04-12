@@ -16,22 +16,31 @@ namespace CD4.BillingInterface.WebApiService.Services
         private readonly IAnalysisRequestDataAccess _analysisRequestDataAccess;
         private readonly IBillingCD4AnalysesMapService _billingCD4AnalysesMapService;
         private readonly IStatusDataAccess _statusDataAccess;
+        private readonly INdaTrackingDataAccess _ndaTrackingDataAccess;
 
         public AnalysisRequestService(ILogger<AnalysisRequestService> logger,
             IAnalysisRequestDataAccess analysisRequestDataAccess,
             IBillingCD4AnalysesMapService billingCD4AnalysesMapService,
-            IStatusDataAccess statusDataAccess)
+            IStatusDataAccess statusDataAccess,
+            INdaTrackingDataAccess ndaTrackingDataAccess)
         {
             _logger = logger;
             _analysisRequestDataAccess = analysisRequestDataAccess;
             _billingCD4AnalysesMapService = billingCD4AnalysesMapService;
             _statusDataAccess = statusDataAccess;
+            _ndaTrackingDataAccess = ndaTrackingDataAccess;
         }
 
         public async Task<Response> Save(AnalysisRequestModel request)
         {
 
             _logger.LogDebug($"Analysis Request received from Billing.\n{JsonConvert.SerializeObject(request, Formatting.Indented)}");
+
+            //check for the presence of userid of the user who accepted the sample
+            if (request.Request.SampleReceivedBy == 0)
+            {
+                return new Response() { Status = 304, Message = "Required parameter not provided or invalid. [SampleReceivedBy:int]" };
+            }
 
             _logger.LogDebug("Building Analysis Request");
             var insertAR = new AnalysisRequestDataModel()
@@ -90,7 +99,8 @@ namespace CD4.BillingInterface.WebApiService.Services
                 _logger.LogDebug("Calling datalayer for inserting/updating analysis request");
                 await _analysisRequestDataAccess.ConfirmRequestAsync(insertAR, 1);
 
-                //ToDo: insert the person who received / accepted the sample AND PatientID
+                //ToDo: insert the person who received / accepted the sample
+                await _ndaTrackingDataAccess.UpsertSampleReceivedUserId(insertAR.Cin, request.Request.SampleReceivedBy, 1);
 
                 //insert the sample accepted date and time if required.
                 if (DecideToMarkSampleAsAccepted(insertAR))
