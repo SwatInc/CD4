@@ -7,7 +7,7 @@ namespace CD4.UI.Library.Model
 {
     public class RequestSampleModel : INotifyPropertyChanged
     {
-        
+
         #region Private properties
         private int id;
         private int analysisRequestId;
@@ -27,6 +27,7 @@ namespace CD4.UI.Library.Model
         private int statusIconId;
         private string birthDateString;
         private string _completeAddress;
+        private long instituteAssignedPatientId;
 
         #endregion
 
@@ -158,6 +159,14 @@ namespace CD4.UI.Library.Model
             get => _completeAddress; set
             {
                 _completeAddress = value;
+                OnPropertyChanged();
+            }
+        }
+        public long InstituteAssignedPatientId
+        {
+            get => instituteAssignedPatientId; set
+            {
+                instituteAssignedPatientId = value;
                 OnPropertyChanged();
             }
         }

@@ -66,6 +66,7 @@
             this.simpleButtonGetNextCin = new DevExpress.XtraEditors.SimpleButton();
             this.panelControlOE = new DevExpress.XtraEditors.PanelControl();
             this.simpleButtonViewNotes = new DevExpress.XtraEditors.SimpleButton();
+            this.textEditInstituteAssignedPatientId = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlRequestData)).BeginInit();
             this.groupControlRequestData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditCollectedDate.Properties.CalendarTimeProperties)).BeginInit();
@@ -101,6 +102,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTests.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControlOE)).BeginInit();
             this.panelControlOE.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditInstituteAssignedPatientId.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // groupControlRequestData
@@ -123,9 +125,9 @@
             this.progressPanelRequest.BarAnimationElementThickness = 2;
             this.progressPanelRequest.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.progressPanelRequest.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.progressPanelRequest.Location = new System.Drawing.Point(2, 20);
+            this.progressPanelRequest.Location = new System.Drawing.Point(2, 27);
             this.progressPanelRequest.Name = "progressPanelRequest";
-            this.progressPanelRequest.Size = new System.Drawing.Size(192, 119);
+            this.progressPanelRequest.Size = new System.Drawing.Size(192, 112);
             this.progressPanelRequest.TabIndex = 0;
             this.progressPanelRequest.TabStop = false;
             this.progressPanelRequest.Text = "Request data";
@@ -220,6 +222,7 @@
             // groupControlPatientData
             // 
             this.groupControlPatientData.Controls.Add(this.progressPanelPatientData);
+            this.groupControlPatientData.Controls.Add(this.textEditInstituteAssignedPatientId);
             this.groupControlPatientData.Controls.Add(this.textEditPhoneNumber);
             this.groupControlPatientData.Controls.Add(this.textEditAge);
             this.groupControlPatientData.Controls.Add(this.textEditAddress);
@@ -243,9 +246,9 @@
             this.progressPanelPatientData.BarAnimationElementThickness = 2;
             this.progressPanelPatientData.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.progressPanelPatientData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.progressPanelPatientData.Location = new System.Drawing.Point(2, 20);
+            this.progressPanelPatientData.Location = new System.Drawing.Point(2, 27);
             this.progressPanelPatientData.Name = "progressPanelPatientData";
-            this.progressPanelPatientData.Size = new System.Drawing.Size(546, 119);
+            this.progressPanelPatientData.Size = new System.Drawing.Size(546, 112);
             this.progressPanelPatientData.TabIndex = 0;
             this.progressPanelPatientData.TabStop = false;
             this.progressPanelPatientData.Text = "Request data";
@@ -437,10 +440,10 @@
             // gridControlClinicalDetails
             // 
             this.gridControlClinicalDetails.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControlClinicalDetails.Location = new System.Drawing.Point(2, 20);
+            this.gridControlClinicalDetails.Location = new System.Drawing.Point(2, 27);
             this.gridControlClinicalDetails.MainView = this.gridViewClinicalDetails;
             this.gridControlClinicalDetails.Name = "gridControlClinicalDetails";
-            this.gridControlClinicalDetails.Size = new System.Drawing.Size(192, 171);
+            this.gridControlClinicalDetails.Size = new System.Drawing.Size(192, 164);
             this.gridControlClinicalDetails.TabIndex = 1;
             this.gridControlClinicalDetails.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewClinicalDetails});
@@ -486,10 +489,10 @@
             // gridControlRequestedTests
             // 
             this.gridControlRequestedTests.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.gridControlRequestedTests.Location = new System.Drawing.Point(2, 20);
+            this.gridControlRequestedTests.Location = new System.Drawing.Point(2, 27);
             this.gridControlRequestedTests.MainView = this.gridViewRequestedTests;
             this.gridControlRequestedTests.Name = "gridControlRequestedTests";
-            this.gridControlRequestedTests.Size = new System.Drawing.Size(346, 171);
+            this.gridControlRequestedTests.Size = new System.Drawing.Size(346, 164);
             this.gridControlRequestedTests.TabIndex = 0;
             this.gridControlRequestedTests.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewRequestedTests});
@@ -539,9 +542,9 @@
             this.progressPanelTestData.BarAnimationElementThickness = 2;
             this.progressPanelTestData.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.progressPanelTestData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.progressPanelTestData.Location = new System.Drawing.Point(2, 20);
+            this.progressPanelTestData.Location = new System.Drawing.Point(2, 27);
             this.progressPanelTestData.Name = "progressPanelTestData";
-            this.progressPanelTestData.Size = new System.Drawing.Size(192, 171);
+            this.progressPanelTestData.Size = new System.Drawing.Size(192, 164);
             this.progressPanelTestData.TabIndex = 0;
             this.progressPanelTestData.TabStop = false;
             this.progressPanelTestData.Text = "Request data";
@@ -627,6 +630,20 @@
             this.simpleButtonViewNotes.Tag = "OrderEntry.Remove";
             this.simpleButtonViewNotes.Text = "Add Note [ Ctrl+N ]";
             // 
+            // textEditInstituteAssignedPatientId
+            // 
+            this.textEditInstituteAssignedPatientId.EditValue = "Institute Assigned Patient Id";
+            this.textEditInstituteAssignedPatientId.EnterMoveNextControl = true;
+            this.textEditInstituteAssignedPatientId.Location = new System.Drawing.Point(185, 108);
+            this.textEditInstituteAssignedPatientId.Name = "textEditInstituteAssignedPatientId";
+            this.textEditInstituteAssignedPatientId.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.textEditInstituteAssignedPatientId.Properties.NullText = "Institute Assigned Patient Id";
+            this.textEditInstituteAssignedPatientId.Properties.NullValuePrompt = "Institute Assigned Patient Id";
+            this.textEditInstituteAssignedPatientId.Properties.NullValuePromptShowForEmptyValue = true;
+            this.textEditInstituteAssignedPatientId.Properties.ValidateOnEnterKey = true;
+            this.textEditInstituteAssignedPatientId.Size = new System.Drawing.Size(167, 20);
+            this.textEditInstituteAssignedPatientId.TabIndex = 15;
+            // 
             // OrderEntryView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -674,6 +691,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTests.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControlOE)).EndInit();
             this.panelControlOE.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.textEditInstituteAssignedPatientId.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -718,5 +736,6 @@
         private DevExpress.XtraEditors.SimpleButton simpleButtonGetNextCin;
         private DevExpress.XtraEditors.PanelControl panelControlOE;
         private DevExpress.XtraEditors.SimpleButton simpleButtonViewNotes;
+        private DevExpress.XtraEditors.TextEdit textEditInstituteAssignedPatientId;
     }
 }

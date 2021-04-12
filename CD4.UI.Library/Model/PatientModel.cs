@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace CD4.UI.Library.Model
 {
-    public class PatientModel: INotifyPropertyChanged
+    public class PatientModel : INotifyPropertyChanged
     {
         #region Private Properties
         private int id;
@@ -21,6 +21,7 @@ namespace CD4.UI.Library.Model
         private string country;
         private string address;
         private string phoneNumber;
+        private long instituteAssignedPatientId;
 
         #endregion
 
@@ -115,7 +116,15 @@ namespace CD4.UI.Library.Model
                 OnPropertyChanged();
             }
         }
-
+        public long InstituteAssignedPatientId
+        {
+            get => instituteAssignedPatientId; set
+            {
+                if (instituteAssignedPatientId == value) { return; }
+                instituteAssignedPatientId = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         #region INotifyPropertyChanged Hookup

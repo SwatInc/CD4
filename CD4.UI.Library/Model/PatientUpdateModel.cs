@@ -17,5 +17,6 @@ namespace CD4.UI.Library.Model
 		public int CountryId { get; set; }
 		public string Address { get; set; }
 		public string PhoneNumber { get; set; }
-	}
+        public long InstituteAssignedPatientId { get; set; }
+    }
 }

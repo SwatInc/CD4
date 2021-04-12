@@ -39,6 +39,7 @@ namespace CD4.UI.Library.ViewModel
         Task SearchDataExperimentation();
         string TestToAdd { get; set; }
         IPrintingHelper PrintingHelper { get; }
+        long? InstituteAssignedPatientId { get; set; }
 
         Task ManageAddTestToRequestAsync();
         void RemoveTestModelFromAddedTests(TestModel testModel);

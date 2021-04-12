@@ -110,6 +110,10 @@ namespace CD4.UI.View
             lookUpEditCountry.Properties.ValueMember = nameof(CountryModel.Id);
             lookUpEditCountry.DataBindings.Add
                 (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedNationalityId)));
+
+            //institute assigned patient Id
+            textEditInstituteAssignedPatientId.DataBindings.Add(new Binding("EditValue", _viewModel, nameof(_viewModel.InstituteAssignedPatientId)
+                , true, DataSourceUpdateMode.OnPropertyChanged));
             #endregion
         }
     }

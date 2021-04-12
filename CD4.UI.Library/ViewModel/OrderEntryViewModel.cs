@@ -47,6 +47,7 @@ namespace CD4.UI.Library.ViewModel
         private readonly AuthorizeDetailEventArgs _authorizeDetail;
         private readonly IGlobalSettingsDataAccess _globalSettingsDataAccess;
         private bool loadingStaticData;
+        private long? instituteAssignedPatientId;
         #endregion
 
         public event EventHandler<string> PushingLogs;
@@ -55,10 +56,10 @@ namespace CD4.UI.Library.ViewModel
 
         #region Default Constructor
         public OrderEntryViewModel(IMapper mapper,
-            IStaticDataDataAccess staticData, 
-            IAnalysisRequestDataAccess requestDataAccess, 
-            IStatusDataAccess statusDataAccess, 
-            AuthorizeDetailEventArgs authorizeDetail, 
+            IStaticDataDataAccess staticData,
+            IAnalysisRequestDataAccess requestDataAccess,
+            IStatusDataAccess statusDataAccess,
+            AuthorizeDetailEventArgs authorizeDetail,
             IGlobalSettingsDataAccess globalSettingsDataAccess,
             IPrintingHelper printingHelper)
         {
@@ -246,6 +247,16 @@ namespace CD4.UI.Library.ViewModel
             }
         }
 
+        public long? InstituteAssignedPatientId
+        {
+            get => instituteAssignedPatientId; set
+            {
+                if (instituteAssignedPatientId == value) { return; }
+                instituteAssignedPatientId = value;
+                OnPropertyChanged();
+            }
+        }
+
         private async Task RepopulateIslandDatasource(string atoll)
         {
             if (string.IsNullOrEmpty(atoll)) return;
@@ -379,9 +390,10 @@ namespace CD4.UI.Library.ViewModel
                     Birthdate = DateTime.Parse(Birthdate.ToString()),
                     Gender = Gender.Find(x => x.Id == SelectedGenderId).Gender,
                     PhoneNumber = this.PhoneNumber,
-                    NidPp = this.nidPp
+                    NidPp = this.nidPp,
+                    InstituteAssignedPatientId = (long)this.InstituteAssignedPatientId
                 },
-                IsConfirmationRequired  = IsconfirmationRequired,
+                IsConfirmationRequired = IsconfirmationRequired,
                 Age = this.Age
             };
         }
@@ -390,7 +402,7 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-               Cin = await _requestDataAccess.GetNextCinSeed();
+                Cin = await _requestDataAccess.GetNextCinSeed();
             }
             catch (Exception)
             {
@@ -428,6 +440,7 @@ namespace CD4.UI.Library.ViewModel
             this.Birthdate = result.RequestPatientSampleData.Birthdate;
             this.Address = result.RequestPatientSampleData.Address;
             this.SelectedAtoll = result.RequestPatientSampleData.Atoll;
+            this.InstituteAssignedPatientId = result.RequestPatientSampleData.InstituteAssignedPatientId;
             await RepopulateIslandDatasource(SelectedAtoll); //filter the islands by selected atoll
 
             this.SelectedIsland = result.RequestPatientSampleData.Island;
@@ -485,6 +498,7 @@ namespace CD4.UI.Library.ViewModel
             SelectedAtoll = null;
             SelectedIsland = null;
             SelectedCountryId = 0;
+            InstituteAssignedPatientId = null;
 
             //Clear all clinical details
             foreach (var item in ClinicalDetails)
@@ -512,7 +526,7 @@ namespace CD4.UI.Library.ViewModel
                 var atollIslandData = GetAtollModelByAtollAndIslandName(mappedRequest.Atoll, mappedRequest.Island);
                 mappedRequest.AtollId = atollIslandData.Id;
 
-                if(!validateAnalysisRequest(mappedRequest))
+                if (!validateAnalysisRequest(mappedRequest))
                 {
 
                 }
@@ -533,7 +547,7 @@ namespace CD4.UI.Library.ViewModel
         private bool validateAnalysisRequest(DataLibrary.Models.AnalysisRequestDataModel mappedRequest)
         {
             string valdationFailMessage = "";
-            if(mappedRequest.SiteId == 0)
+            if (mappedRequest.SiteId == 0)
             {
                 valdationFailMessage += "Sample collection site needs to be specified to save the Analysis Request.\n";
             }
@@ -543,7 +557,7 @@ namespace CD4.UI.Library.ViewModel
                 valdationFailMessage += "Please specify receipt number.\n";
             }
 
-            if(string.IsNullOrEmpty(valdationFailMessage))
+            if (string.IsNullOrEmpty(valdationFailMessage))
             {
                 return true;
             }
@@ -597,6 +611,7 @@ namespace CD4.UI.Library.ViewModel
                 SelectedIsland = "";
                 SelectedCountryId = -1;
                 PhoneNumber = null;
+                InstituteAssignedPatientId = null;
 
                 return;
             }
@@ -606,6 +621,7 @@ namespace CD4.UI.Library.ViewModel
             Birthdate = results.Birthdate;
             PhoneNumber = results.PhoneNumber;
             Address = results.Address;
+            InstituteAssignedPatientId = results.InstituteAssignedPatientId;
 
             await SetSelectedItemsForLookups(results);
         }
@@ -615,7 +631,7 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-                _ = await _statusDataAccess.MarkSampleCollectedAsync(this.Cin,_authorizeDetail.UserId);
+                _ = await _statusDataAccess.MarkSampleCollectedAsync(this.Cin, _authorizeDetail.UserId);
             }
             catch (Exception ex)
             {
@@ -854,6 +870,7 @@ namespace CD4.UI.Library.ViewModel
 
             this.NidPp = "A348756";
             this.Fullname = "Ahmed Ahmed";
+            this.instituteAssignedPatientId = 1234;
             this.SelectedGenderId = 1;
             this.PhoneNumber = "937645734";
             this.Birthdate = DateTime.Parse("2019-01-01");

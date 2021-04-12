@@ -416,6 +416,10 @@ namespace CD4.UI.View
             lookUpEditCountry.Properties.ValueMember = nameof(CountryModel.Id);
             lookUpEditCountry.DataBindings.Add
                 (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedCountryId)));
+
+            //Institute Assigned Patient ID
+            textEditInstituteAssignedPatientId.DataBindings.Add(new Binding("EditValue", _viewModel, nameof(_viewModel.InstituteAssignedPatientId), true,
+                DataSourceUpdateMode.OnPropertyChanged));
             #endregion
 
             #region Clinical Details

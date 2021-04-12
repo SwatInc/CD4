@@ -22,6 +22,7 @@ namespace CD4.UI.Library.ViewModel
         int SelectedGenderId { get; set; }
         string SelectedIsland { get; set; }
         int SelectedNationalityId { get; set; }
+        long InstituteAssignedPatientId { get; set; }
 
         event PropertyChangedEventHandler PropertyChanged;
 
