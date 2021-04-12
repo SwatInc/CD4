@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CD4.DataLibrary.DataAccess;
 using CD4.DataLibrary.Models;
+using CD4.UI.Library.Helpers;
 using CD4.UI.Library.Model;
 using System;
 using System.Collections.Generic;

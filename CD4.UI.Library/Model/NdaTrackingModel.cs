@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CD4.UI.Library.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
@@ -13,10 +14,24 @@ namespace CD4.UI.Library.Model
         private DateTimeOffset? reportedDate;
         private string calQcValidatedBy;
         private string analysedBy;
+        private int statusIconId;
 
         public long InstituteAssignedPatientId { get; set; }
         public string Cin { get; set; }
-        public int StatusIconId { get; set; }
+        public int StatusIconId
+        {
+            get => statusIconId; set
+            {
+                statusIconId = value;
+                SetIcon(value);
+            }
+        }
+
+        private void SetIcon(int value)
+        {
+            Status = StatusIconHelper.GetIcon(value);
+        }
+
         public Image Status { get; set; }
         public string AnalysedBy
         {

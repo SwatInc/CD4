@@ -126,6 +126,7 @@
     <Compile Include="Helpers\IPrintingHelper.cs" />
     <Compile Include="Helpers\NamesAbbreviator.cs" />
     <Compile Include="Helpers\PrintingHelper.cs" />
+    <Compile Include="Helpers\StatusIconHelper.cs" />
     <Compile Include="Helpers\ValidationHelper.cs" />
     <Compile Include="Model\AnalysisRequestDataModel.cs" />
     <Compile Include="Model\AtollIslandModel.cs" />
@@ -313,6 +314,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\valid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\undefined.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

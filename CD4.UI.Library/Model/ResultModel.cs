@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using CD4.UI.Library.Helpers;
 
 namespace CD4.UI.Library.Model
 {
@@ -74,34 +75,9 @@ namespace CD4.UI.Library.Model
             }
         }
 
-        private void SetIcon(int statusIconId)
+        private void SetIcon(int value)
         {
-            switch (statusIconId)
-            {
-                case 1:
-                    StatusIcon = Properties.Resources.Requested;
-                    break;
-                case 2:
-                    StatusIcon = Properties.Resources.Sampled;
-                    break;
-                case 3:
-                    StatusIcon = Properties.Resources.Received;
-                    break;
-                case 4:
-                    StatusIcon = Properties.Resources.ToValidate;
-                    break;
-                case 5:
-                    StatusIcon = Properties.Resources.Validated;
-                    break;
-                case 6:
-                    StatusIcon = Properties.Resources.Processing;
-                    break;
-                case 7:
-                    StatusIcon = Properties.Resources.Rejected;
-                    break;
-                default:
-                    break;
-            }
+            StatusIcon = StatusIconHelper.GetIcon(value);
         }
 
         public string Result
