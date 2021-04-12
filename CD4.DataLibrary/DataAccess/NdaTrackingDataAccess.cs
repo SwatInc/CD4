@@ -103,5 +103,21 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
+
+
+        public Task UpsertSampleReceivedUserId(string cin, int sampleReceivedUserId, int loggedInUser)
+        {
+            var storedProcedure = "[dbo].[usp_UpsertSampleReceivedUser]";
+            var parameters = new {SampleCin = cin,  SampleReceivedUserId = sampleReceivedUserId, LoggedInUserId = loggedInUser };
+            try
+            {
+                throw new NotImplementedException();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }
