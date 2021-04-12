@@ -54,6 +54,15 @@ namespace CD4.BillingInterface.WebApiService.Services
                 ClinicalDetails = new List<ClinicalDetailsSelectionModel>()
             };
 
+            //try parsing patient Id
+            var isPatientIdLong = long.TryParse(request.Patient.PatientId, out var longPatientId);
+            if (isPatientIdLong) 
+            { 
+                insertAR.InstituteAssignedPatientId = longPatientId;
+                _logger.LogInformation($"Patient Id successfully parsed as long. Patient Id: {longPatientId}");
+            }
+            if (!isPatientIdLong) { _logger.LogError($"Invalid patient Id. Expected to be numeric long. Actual: {request.Patient.PatientId}"); }
+
             var UnmappedTestCodesExist = false;
             _logger.LogDebug("Mapping analyses");
             foreach (var item in request.Analyses.RequestedTests)
@@ -80,6 +89,8 @@ namespace CD4.BillingInterface.WebApiService.Services
             {
                 _logger.LogDebug("Calling datalayer for inserting/updating analysis request");
                 await _analysisRequestDataAccess.ConfirmRequestAsync(insertAR, 1);
+
+                //ToDo: insert the person who received / accepted the sample AND PatientID
 
                 //insert the sample accepted date and time if required.
                 if (DecideToMarkSampleAsAccepted(insertAR))
