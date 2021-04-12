@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[usp_GetSpecifiedHighReferenceLimitValue]
-	@HighLimitValue DECIMAL(10,8) output,
+	@HighLimitValue DECIMAL(10,3) output,
 	@TestId int,
 	@GenderId int,
     @AgeInDays int,

@@ -293,6 +293,7 @@
     <Build Include="dbo\Tables\BillingTestCodeMap.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetAllBillingTestMappings.sql" />
     <Build Include="dbo\StoredProcedures\usp_InsertAcceptedDateTimeForSampleFromBilling.sql" />
+    <Build Include="dbo\StoredProcedures\usp_UpsertSampleReceivedUser.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
