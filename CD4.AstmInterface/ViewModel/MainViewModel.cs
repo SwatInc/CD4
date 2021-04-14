@@ -3,7 +3,6 @@ using CD4.ResultsInterface.Common.Models;
 using CD4.ResultsInterface.Common.Services;
 using Essy.LIS.Connection;
 using Essy.LIS.LIS02A2;
-using log4net.Core;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using System;
@@ -38,7 +37,7 @@ namespace CD4.AstmInterface.ViewModel
             logger.LogInformation("Application startup... loaded settings");
 
             InitializeAstm();
-            
+
             ResultsReadyForExport += ExportResults;
             this.logger = logger;
         }
@@ -63,28 +62,39 @@ namespace CD4.AstmInterface.ViewModel
             switch (Settings.ConnectionMode)
             {
                 case ConnectionMode.Ethernet:
-                    //Not implemented yet
-                    throw new NotImplementedException("Ethernet connection not implemented!");
+                    var isPortValid = ushort.TryParse(Settings.Port.ToString(), out var uShortPort);
+                    if (!isPortValid) { logger.LogError($"Invalid port defined: {Settings.Port}. Max value allowed for port is 65535"); return; }
+
+                    lowLevelConnection = new Lis01A02TCPConnection(Settings.IpAddress, uShortPort);
+                    lisConnection = new Lis01A2Connection(lowLevelConnection);
+                    Connect();
+
                     break;
                 case ConnectionMode.Serial:
                     lowLevelConnection = new Lis01A02RS232Connection(Settings.SerialPort);
                     lisConnection = new Lis01A2Connection(lowLevelConnection);
-                    lisParser = new LISParser(lisConnection);
-                    
-                    lisParser.OnSendProgress += LISParser_OnSendProgress; //Send data progress will trigger this event
-                    lisParser.OnReceivedRecord += LISParser_OnReceivedRecord; //incoming LIS frames will trigger this event
-                    try
-                    {
-                        lisParser.Connection.Connect();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
+                    Connect();
 
                     break;
                 default:
                     break;
+            }
+        }
+
+        private void Connect()
+        {
+            lisParser = new LISParser(lisConnection);
+
+            lisParser.OnSendProgress += LISParser_OnSendProgress; //Send data progress will trigger this event
+            lisParser.OnReceivedRecord += LISParser_OnReceivedRecord; //incoming LIS frames will trigger this event
+            try
+            {
+                lisParser.Connection.Connect();
+            }
+            catch (Exception ex)
+            {
+                logger.LogError($"Error connecting: {ex.Message}");
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -104,9 +114,10 @@ namespace CD4.AstmInterface.ViewModel
                     var order = (OrderRecord)e.ReceivedRecord;
 
                     //check whether there is a temp results data
-                    if (tempResults != null )  { interfaceResults.Add(tempResults); }
+                    if (tempResults != null) { interfaceResults.Add(tempResults); }
 
-                    tempResults = new InterfaceResultsModel() {
+                    tempResults = new InterfaceResultsModel()
+                    {
                         SampleId = order.SpecimenID,
                         Measurements = new List<MeasurementValues>()
                     };
@@ -114,11 +125,11 @@ namespace CD4.AstmInterface.ViewModel
                     break;
                 case LisRecordType.Result:
                     var result = (ResultRecord)e.ReceivedRecord;
-                    tempResults.Measurements.Add(new MeasurementValues() 
+                    tempResults.Measurements.Add(new MeasurementValues()
                     {
-                         TestCode = result.UniversalTestID.ManufacturerCode,
-                         MeasurementValue = result.Data,
-                         Unit = result.Units,
+                        TestCode = result.UniversalTestID.ManufacturerCode,
+                        MeasurementValue = result.Data,
+                        Unit = result.Units,
                     });
 
                     break;
@@ -179,7 +190,7 @@ namespace CD4.AstmInterface.ViewModel
                     if (!item.IsClass) continue;
                     if (item.GetInterfaces().Contains(typeof(ILisConnection)))
                     {
-                        return (ILisConnection)Activator.CreateInstance(item,new Lis01A02RS232Connection(Settings.SerialPort));
+                        return (ILisConnection)Activator.CreateInstance(item, new Lis01A02RS232Connection(Settings.SerialPort));
                     }
                 }
 
