@@ -589,6 +589,7 @@ VALUES
 (@DoAId,N'Amphetamine_I',@UrineId,@ResultDataTypeId,CONCAT(@CodifiedPosId,'|',@CodifiedNegId),@ResultUnit_blank_Id,1,0),
 (@DoAId,N'Ethyl Glucuronide_I',@UrineId,@ResultDataTypeId,CONCAT(@CodifiedPosId,'|',@CodifiedNegId),@ResultUnit_blank_Id,1,0),
 (@DoAId,N'Acetyl morphine_I',@UrineId,@ResultDataTypeId,CONCAT(@CodifiedPosId,'|',@CodifiedNegId),@ResultUnit_blank_Id,1,0),
+
 (@DoAId,N'Opiates',@UrineId,@ResultDataTypeNumericId,'###.##',@ResultUnit_ngml_Id,1,0),
 (@DoAId,N'Benzodiazepine-1',@UrineId,@ResultDataTypeNumericId,'###.##',@ResultUnit_ngml_Id,1,0),
 (@DoAId,N'Benzodiazepine-2',@UrineId,@ResultDataTypeNumericId,'###.##',@ResultUnit_ngml_Id,1,0),
@@ -673,22 +674,22 @@ INSERT INTO [dbo].[ReferenceRange]([TestId],[GenderId],[FromAgeDays],[ToAgeDays]
 SELECT @AmphetamineId,4,0,73000,0,0,'NEGATIVE <50'+ CHAR(13)+CHAR(10)+'POSITIVE >50';
 
 INSERT INTO [dbo].[ReferenceRange]([TestId],[GenderId],[FromAgeDays],[ToAgeDays],[DeltaValidityIntervalDays],[BiasFactor],[DisplayNormalRange])
-SELECT @EthylGlucuronideId,1,0,73000,0,0,'NEGATIVE <50'+ CHAR(13)+CHAR(10)+'POSITIVE >50';
+SELECT @EthylGlucuronideId,1,0,73000,0,0,'NEGATIVE <5'+ CHAR(13)+CHAR(10)+'POSITIVE >5';
 INSERT INTO [dbo].[ReferenceRange]([TestId],[GenderId],[FromAgeDays],[ToAgeDays],[DeltaValidityIntervalDays],[BiasFactor],[DisplayNormalRange])
-SELECT @EthylGlucuronideId,2,0,73000,0,0,'NEGATIVE <50'+ CHAR(13)+CHAR(10)+'POSITIVE >50';
+SELECT @EthylGlucuronideId,2,0,73000,0,0,'NEGATIVE <5'+ CHAR(13)+CHAR(10)+'POSITIVE >5';
 INSERT INTO [dbo].[ReferenceRange]([TestId],[GenderId],[FromAgeDays],[ToAgeDays],[DeltaValidityIntervalDays],[BiasFactor],[DisplayNormalRange])
-SELECT @EthylGlucuronideId,3,0,73000,0,0,'NEGATIVE <50'+ CHAR(13)+CHAR(10)+'POSITIVE >50';
+SELECT @EthylGlucuronideId,3,0,73000,0,0,'NEGATIVE <5'+ CHAR(13)+CHAR(10)+'POSITIVE >5';
 INSERT INTO [dbo].[ReferenceRange]([TestId],[GenderId],[FromAgeDays],[ToAgeDays],[DeltaValidityIntervalDays],[BiasFactor],[DisplayNormalRange])
-SELECT @EthylGlucuronideId,4,0,73000,0,0,'NEGATIVE <50'+ CHAR(13)+CHAR(10)+'POSITIVE >50';
+SELECT @EthylGlucuronideId,4,0,73000,0,0,'NEGATIVE <5'+ CHAR(13)+CHAR(10)+'POSITIVE >5';
 
 INSERT INTO [dbo].[ReferenceRange]([TestId],[GenderId],[FromAgeDays],[ToAgeDays],[DeltaValidityIntervalDays],[BiasFactor],[DisplayNormalRange])
-SELECT @AcetylMorphineId,1,0,73000,0,0,'NEGATIVE <50'+ CHAR(13)+CHAR(10)+'POSITIVE >50';
+SELECT @AcetylMorphineId,1,0,73000,0,0,'NEGATIVE <10'+ CHAR(13)+CHAR(10)+'POSITIVE >10';
 INSERT INTO [dbo].[ReferenceRange]([TestId],[GenderId],[FromAgeDays],[ToAgeDays],[DeltaValidityIntervalDays],[BiasFactor],[DisplayNormalRange])
-SELECT @AcetylMorphineId,2,0,73000,0,0,'NEGATIVE <50'+ CHAR(13)+CHAR(10)+'POSITIVE >50';
+SELECT @AcetylMorphineId,2,0,73000,0,0,'NEGATIVE <10'+ CHAR(13)+CHAR(10)+'POSITIVE >10';
 INSERT INTO [dbo].[ReferenceRange]([TestId],[GenderId],[FromAgeDays],[ToAgeDays],[DeltaValidityIntervalDays],[BiasFactor],[DisplayNormalRange])
-SELECT @AcetylMorphineId,3,0,73000,0,0,'NEGATIVE <50'+ CHAR(13)+CHAR(10)+'POSITIVE >50';
+SELECT @AcetylMorphineId,3,0,73000,0,0,'NEGATIVE <10'+ CHAR(13)+CHAR(10)+'POSITIVE >10';
 INSERT INTO [dbo].[ReferenceRange]([TestId],[GenderId],[FromAgeDays],[ToAgeDays],[DeltaValidityIntervalDays],[BiasFactor],[DisplayNormalRange])
-SELECT @AcetylMorphineId,4,0,73000,0,0,'NEGATIVE <50'+ CHAR(13)+CHAR(10)+'POSITIVE >50';
+SELECT @AcetylMorphineId,4,0,73000,0,0,'NEGATIVE <10'+ CHAR(13)+CHAR(10)+'POSITIVE >10';
 
 
 -- INSERT USERS
