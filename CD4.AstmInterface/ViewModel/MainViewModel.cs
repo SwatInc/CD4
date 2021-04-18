@@ -1,10 +1,11 @@
 ﻿using CD4.AstmInterface.Model;
 using CD4.ResultsInterface.Common.Models;
 using CD4.ResultsInterface.Common.Services;
-using Essy.LIS.Connection;
-using Essy.LIS.LIS02A2;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
+using SwatInc.Lis.Lis01A2.Interfaces;
+using SwatInc.Lis.Lis01A2.Services;
+using SwatInc.Lis.Lis02A2;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -31,6 +32,7 @@ namespace CD4.AstmInterface.ViewModel
         private EventHandler<List<InterfaceResultsModel>> ResultsReadyForExport;
         public MainViewModel(ILogger<MainViewModel> logger)
         {
+            this.logger = logger;
             Settings = new Settings();
             interfaceResults = new List<InterfaceResultsModel>();
             exportService = new ExportService();
@@ -39,7 +41,6 @@ namespace CD4.AstmInterface.ViewModel
             InitializeAstm();
 
             ResultsReadyForExport += ExportResults;
-            this.logger = logger;
         }
 
         /// <summary>
@@ -125,12 +126,25 @@ namespace CD4.AstmInterface.ViewModel
                     break;
                 case LisRecordType.Result:
                     var result = (ResultRecord)e.ReceivedRecord;
+                    var testIds = result.UniversalTestID.TestID.Split('^');
+
+                    string testCode = null;
+                    if (testIds.Length == 4){testCode = testIds[3]; }
+
                     tempResults.Measurements.Add(new MeasurementValues()
                     {
-                        TestCode = result.UniversalTestID.ManufacturerCode,
+                        TestCode = testCode,
                         MeasurementValue = result.Data,
                         Unit = result.Units,
                     });
+                    //Analyser name
+                    tempResults.InstrumentId.InstrumentCode = "EI-01";
+                    //completed date and time
+                    if (result.TestCompletedDateTime.HasValue)
+                    {
+                        tempResults.CompletedDateTime = result.TestCompletedDateTime
+                            .Value.ToString("yyyyMMddHHmmssfff");
+                    }
 
                     break;
                 case LisRecordType.Comment:

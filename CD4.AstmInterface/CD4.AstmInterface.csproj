@@ -9,16 +9,26 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ESSY.LIS.LIS01-A2" Version="4.4.0" />
     <PackageReference Include="log4net" Version="2.0.12" />
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Log4Net.AspNetCore" Version="5.0.1" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="slf4net" Version="1.1.0" />
     <PackageReference Include="slf4net.log4net" Version="1.1.0" />
+    <PackageReference Include="System.IO.Ports" Version="5.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CD4.ResultsInterface.Common\CD4.ResultsInterface.Common.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SwatInc.Lis.Lis01A2">
+      <HintPath>..\..\..\SwatInc.Lis.Lis01A2\SwatInc.Lis.Lis01A2\bin\Debug\netcoreapp3.1\SwatInc.Lis.Lis01A2.dll</HintPath>
+    </Reference>
+    <Reference Include="SwatInc.Lis.Lis02A2">
+      <HintPath>..\..\..\SwatInc.Lis.Lis01A2\SwatInc.Lis.Lis02A2\bin\Debug\netcoreapp3.1\SwatInc.Lis.Lis02A2.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>
