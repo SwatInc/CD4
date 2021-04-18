@@ -100,7 +100,7 @@ namespace CD4.BillingInterface.WebApiService.Services
                 await _analysisRequestDataAccess.ConfirmRequestAsync(insertAR, 1);
 
                 //ToDo: insert the person who received / accepted the sample
-                await _ndaTrackingDataAccess.UpsertSampleReceivedUserId(insertAR.Cin, request.Request.SampleReceivedBy, 1);
+                await _ndaTrackingDataAccess.UpsertSampleReceivedUserIdAsync(insertAR.Cin, request.Request.SampleReceivedBy, 1);
 
                 //insert the sample accepted date and time if required.
                 if (DecideToMarkSampleAsAccepted(insertAR))
