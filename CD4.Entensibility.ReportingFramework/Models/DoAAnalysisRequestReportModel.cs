@@ -24,8 +24,8 @@ namespace CD4.Entensibility.ReportingFramework.Models
         public string Cocaine { get; set; }
         public string Cannabinoids { get; set; }
         public string Amphetamine { get; set; }
-        public string EthylGlucuronide { get; set; }
-        public string AcetylMorphine { get; set; }
+        public string Ethanol { get; set; }
+        public string Methadone { get; set; }
 
     }
 }

@@ -66,13 +66,13 @@ namespace CD4.Extensions.Reports.Medlab
                 AnalysedBy = data.AnalysedBy,
                 InstituteAssignedPatientId = data.InstituteAssignedPatientId,
             };
-            doADatasource.AcetylMorphine = analysis.FirstOrDefault((x) => x.Assay.ToLower().Contains("morphine") && x.Assay.EndsWith("_I"))?.Result;
+            doADatasource.Methadone = analysis.FirstOrDefault((x) => x.Assay.ToLower().Contains("methadone") && x.Assay.EndsWith("_I"))?.Result;
             doADatasource.Amphetamine = analysis.FirstOrDefault((x) => x.Assay.ToLower().Contains("amphetamine") && x.Assay.EndsWith("_I"))?.Result;
             doADatasource.Benzodiazepine1 = analysis.FirstOrDefault((x) => x.Assay.ToLower().Contains("benzodiazepine-1") && x.Assay.EndsWith("_I"))?.Result;
             doADatasource.Benzodiazepine2 = analysis.FirstOrDefault((x) => x.Assay.ToLower().Contains("benzodiazepine-2") && x.Assay.EndsWith("_I"))?.Result;
             doADatasource.Cannabinoids = analysis.FirstOrDefault((x) => x.Assay.ToLower().Contains("cannabinoids") && x.Assay.EndsWith("_I"))?.Result;
             doADatasource.Cocaine = analysis.FirstOrDefault((x) => x.Assay.ToLower().Contains("cocaine") && x.Assay.EndsWith("_I"))?.Result;
-            doADatasource.EthylGlucuronide = analysis.FirstOrDefault((x) => x.Assay.ToLower().Contains("glucuronide") && x.Assay.EndsWith("_I"))?.Result;
+            doADatasource.Ethanol = analysis.FirstOrDefault((x) => x.Assay.ToLower().Contains("ethanol") && x.Assay.EndsWith("_I"))?.Result;
             doADatasource.Opiates = analysis.FirstOrDefault((x) => x.Assay.ToLower().Contains("opiates") && x.Assay.EndsWith("_I"))?.Result;
             doADatasource.EpisodeNumber = data.EpisodeNumber;
             return new List<DoAAnalysisRequestReportModel>() { doADatasource };

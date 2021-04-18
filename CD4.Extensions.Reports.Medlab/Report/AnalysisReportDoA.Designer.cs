@@ -1087,7 +1087,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // xrTableCell37
             // 
             this.xrTableCell37.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[EthylGlucuronide]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Ethanol]")});
             this.xrTableCell37.Font = new System.Drawing.Font("Faruma", 8.25F);
             this.xrTableCell37.Multiline = true;
             this.xrTableCell37.Name = "xrTableCell37";
@@ -1156,7 +1156,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // xrTableCell29
             // 
             this.xrTableCell29.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[AcetylMorphine]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Methadone]")});
             this.xrTableCell29.Font = new System.Drawing.Font("Faruma", 8.25F);
             this.xrTableCell29.Multiline = true;
             this.xrTableCell29.Name = "xrTableCell29";
@@ -1183,7 +1183,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell30.StylePriority.UseFont = false;
             this.xrTableCell30.StylePriority.UsePadding = false;
             this.xrTableCell30.StylePriority.UseTextAlignment = false;
-            this.xrTableCell30.Text = "އެސިޓައިލް މޯފިން (Acetyl morphine)";
+            this.xrTableCell30.Text = "މެތަޑޯން (Methadone)";
             this.xrTableCell30.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             this.xrTableCell30.Weight = 1.6495730075170882D;
             // 
@@ -1194,7 +1194,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell31.Name = "xrTableCell31";
             this.xrTableCell31.StylePriority.UseFont = false;
             this.xrTableCell31.StylePriority.UseTextAlignment = false;
-            this.xrTableCell31.Text = "AM";
+            this.xrTableCell31.Text = "MDONE\r\n";
             this.xrTableCell31.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell31.Weight = 0.51282047911274065D;
             // 
