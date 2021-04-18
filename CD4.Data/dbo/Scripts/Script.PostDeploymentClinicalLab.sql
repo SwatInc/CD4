@@ -516,6 +516,7 @@ DECLARE @ResultDataTypeNumericId int;
 DECLARE @ResultUnit_blank_Id int;
 DECLARE @ResultUnit_ngml_Id int;
 DECLARE @ResultUnit_ugml_Id int;
+DECLARE @ResultUnit_mgdL_Id int;
 
 DECLARE @CodifiedResultPos nvarchar(50) = N'ދައްކާ POSITIVE';
 DECLARE @CodifiedResultNeg nvarchar(50) = N'ނުދައްކާ NEGATIVE';
@@ -1002,3 +1003,27 @@ INSERT INTO dbo.NdaLookup([Description]) VALUES
 ('Tested'),
 ('Reported'),
 ('QcAndCalValidated');
+
+DELETE FROM dbo.ChannelMap;
+DELETE FROM dbo.Analyser;
+
+INSERT INTO dbo.Analyser([Description],[Serial],[DisciplineId]) VALUES
+('EvidenceInvestigator01','1234',3);
+
+DECLARE @AnalyserId int  = SCOPE_IDENTITY();
+
+INSERT INTO dbo.ChannelMap([TestId],[Download],[Upload],[Unit],[AnalyserId])
+SELECT [Id],'MMM',[Description],'', @AnalyserId
+FROM dbo.Test;
+
+UPDATE dbo.ChannelMap SET [Upload] = 'AMPH' WHERE [Upload] = 'Amphetamine';
+UPDATE dbo.ChannelMap SET [Upload] = 'BENZ1' WHERE [Upload] = 'Benzodiazepine-1';
+UPDATE dbo.ChannelMap SET [Upload] = 'BENZ2' WHERE [Upload] = 'Benzodiazepine-2';
+UPDATE dbo.ChannelMap SET [Upload] = 'THC' WHERE [Upload] = 'Cannabinoids';
+UPDATE dbo.ChannelMap SET [Upload] = 'BZG' WHERE [Upload] = 'Cocaine';
+UPDATE dbo.ChannelMap SET [Upload] = 'ETHANOL' WHERE [Upload] = 'Ethanol';
+UPDATE dbo.ChannelMap SET [Upload] = 'MDONE' WHERE [Upload] = 'Methadone';
+UPDATE dbo.ChannelMap SET [Upload] = 'OPIAT' WHERE [Upload] = 'Opiates';
+
+
+INSERT INTO [dbo].[GlobalSettings]([VerifyNidPpOnOrder]) VALUES (0);
