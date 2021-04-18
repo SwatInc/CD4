@@ -9,8 +9,7 @@
     <ProjectGuid>{e7d9dd5b-1699-47f8-818c-f5b0b67085b6}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
-    <RootPath>
-    </RootPath>
+    <RootPath />
     <RootNamespace>CD4.Data</RootNamespace>
     <AssemblyName>CD4.Data</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
@@ -48,7 +47,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
-    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
     <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
     <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
   </PropertyGroup>
@@ -294,6 +292,8 @@
     <Build Include="dbo\StoredProcedures\usp_GetAllBillingTestMappings.sql" />
     <Build Include="dbo\StoredProcedures\usp_InsertAcceptedDateTimeForSampleFromBilling.sql" />
     <Build Include="dbo\StoredProcedures\usp_UpsertSampleReceivedUser.sql" />
+    <Build Include="dbo\StoredProcedures\DecideAndExecInsertOrUpdateSampleAcceptedDatetime.sql" />
+    <Build Include="dbo\StoredProcedures\usp_UpdateAcceptedDateTimeForSampleFromBilling.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
