@@ -105,13 +105,13 @@ namespace CD4.DataLibrary.DataAccess
         }
 
 
-        public Task UpsertSampleReceivedUserId(string cin, int sampleReceivedUserId, int loggedInUser)
+        public async Task UpsertSampleReceivedUserIdAsync(string cin, int sampleReceivedUserId, int loggedInUser)
         {
             var storedProcedure = "[dbo].[usp_UpsertSampleReceivedUser]";
             var parameters = new {SampleCin = cin,  SampleReceivedUserId = sampleReceivedUserId, LoggedInUserId = loggedInUser };
             try
             {
-                throw new NotImplementedException();
+                _ = await SelectInsertOrUpdateAsync<dynamic, dynamic>(storedProcedure, parameters);
             }
             catch (Exception)
             {

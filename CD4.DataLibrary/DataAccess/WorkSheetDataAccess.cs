@@ -65,7 +65,7 @@ namespace CD4.DataLibrary.DataAccess
             }
 
             //if date is supplied, return in the format yyyyMMdd
-            return DateHelper.GetCD4FormatDate(startDate);
+            return DateHelper.GetCD4FormatDateTime(startDate);
         }
     }
 }

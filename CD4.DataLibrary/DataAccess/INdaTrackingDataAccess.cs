@@ -11,6 +11,6 @@ namespace CD4.DataLibrary.DataAccess
         Task<List<CinAndFullnameModel>> UpsertAnalysedUserAsync(List<string> cins, int loggedInUserId, int actionUserId);
         Task<List<CinAndFullnameModel>> UpsertQcCalValidatedUserAsync(List<string> cins, int loggedInUserId, int actionUserId);
         Task<List<CinAndReportDateModel>> UpsertReportDateAsync(List<string> cins, DateTime reportDate, int loggedInUserId);
-        Task UpsertSampleReceivedUserId(string cin, int sampleReceivedUserId, int loggedInUser);
+        Task UpsertSampleReceivedUserIdAsync(string cin, int sampleReceivedUserId, int loggedInUser);
     }
 }

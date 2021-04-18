@@ -375,7 +375,7 @@ namespace CD4.DataLibrary.DataAccess
 
         public async Task SetSampleAcceptedTimeReceivedFromBilling(string cin, string acceptedAt)
         {
-            var storedProcedure = "usp_InsertAcceptedDateTimeForSampleFromBilling";
+            var storedProcedure = "[dbo].[DecideAndExecInsertOrUpdateSampleAcceptedDatetime]";
             var parameters = new { @Cin = cin, @AcceptedAt = acceptedAt };
 
             try
