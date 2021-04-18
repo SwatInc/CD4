@@ -22,8 +22,8 @@ namespace CD4.DataLibrary.Models
             if (Age != request.Age) return false;
             if (Cin != request.Cin) return false;
             if (SiteId != request.SiteId) return false;
-            if (DateHelper.GetCD4FormatDate(CollectionDate) != DateHelper.GetCD4FormatDate(request.SampleCollectionDate)) return false;
-            if (DateHelper.GetCD4FormatDate(ReceivedDate) != DateHelper.GetCD4FormatDate(request.SampleReceivedDate)) return false;
+            if (DateHelper.GetCD4FormatDateTime(CollectionDate) != DateHelper.GetCD4FormatDateTime(request.SampleCollectionDate)) return false;
+            if (DateHelper.GetCD4FormatDateTime(ReceivedDate) != DateHelper.GetCD4FormatDateTime(request.SampleReceivedDate)) return false;
             if (EpisodeNumber != request.EpisodeNumber) return false;
             return true;
         }

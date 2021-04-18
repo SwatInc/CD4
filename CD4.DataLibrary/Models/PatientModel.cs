@@ -144,7 +144,7 @@ namespace CD4.DataLibrary.Models
         {
             if (dataToCompare.Fullname != this.fullname) return false;
             if (dataToCompare.NationalIdPassport != this.NidPp) return false;
-            if (DateHelper.GetCD4FormatDate(dataToCompare.Birthdate) != DateHelper.GetCD4FormatDate(this.Birthdate)) return false;
+            if (DateHelper.GetCD4FormatJustDateNoTime(dataToCompare.Birthdate) != DateHelper.GetCD4FormatJustDateNoTime(this.Birthdate)) return false;
             if (dataToCompare.Gender != this.Gender) return false;
             if (dataToCompare.Atoll != this.Atoll) return false;
             if (dataToCompare.Island != this.Island) return false;

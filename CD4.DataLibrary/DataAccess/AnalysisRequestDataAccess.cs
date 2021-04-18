@@ -120,7 +120,7 @@ namespace CD4.DataLibrary.DataAccess
                     Id = patient.Id,
                     Fullname = request.Fullname,
                     NidPp = request.NationalIdPassport,
-                    Birthdate = DateHelper.GetCD4FormatDate(request.Birthdate),
+                    Birthdate = DateHelper.GetCD4FormatJustDateNoTime(request.Birthdate),
                     GenderId = request.GenderId,
                     AtollId = request.AtollId,
                     CountryId = request.CountryId,
@@ -138,7 +138,7 @@ namespace CD4.DataLibrary.DataAccess
                 {
                     Fullname = request.Fullname,
                     NidPp = request.NationalIdPassport,
-                    Birthdate = DateHelper.GetCD4FormatDate(request.Birthdate),
+                    Birthdate = DateHelper.GetCD4FormatJustDateNoTime(request.Birthdate),
                     GenderId = request.GenderId,
                     AtollId = request.AtollId,
                     CountryId = request.CountryId,
