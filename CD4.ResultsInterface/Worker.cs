@@ -110,7 +110,7 @@ namespace CD4.ResultsInterface
                 _logger.LogInformation($"Processing File: {dataFilePath}");
                 try
                 {
-                    using (StreamReader reader = new StreamReader(dataFilePath))
+                    using (StreamReader reader = new StreamReader(dataFilePath,true))
                     {
                         var json = await reader.ReadToEndAsync();
                         _logger.LogInformation($"Results data to process.\n\n{json}");
