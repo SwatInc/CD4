@@ -985,7 +985,7 @@ namespace CD4.UI.View
         {
             try
             {
-                await _viewModel.GetWorkSheet();
+                await _viewModel.GetWorkSheetAsync();
                 RefreshPatientPanelAndSelectedSampleTestsManually();
             }
             catch (Exception ex)
@@ -1046,10 +1046,10 @@ namespace CD4.UI.View
 
             }
 
-            if (sender.GetType() == typeof(SimpleButton))
-            {
-                return 1;
-            }
+            //if (sender.GetType() == typeof(SimpleButton))
+            //{
+            //    return 1;
+            //}
 
             //try to get the report Id for the default report
             foreach (var template in _reportExtensions.ReportTemplates)
