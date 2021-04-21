@@ -13,7 +13,7 @@ namespace CD4.UI.Library.ViewModel
         RequestSampleModel SelectedRequestData { get; set; }
         Task SetSelectedSampleAsync(RequestSampleModel requestSampleData);
         Task SetTestCodifiedPhrasesAsync(ResultModel selectedTest);
-        Task GetWorkSheet();
+        Task GetWorkSheetAsync();
         Task ValidateTest(ResultModel resultModel);
         Task ValidateSample(RequestSampleModel requestSampleModel);
 

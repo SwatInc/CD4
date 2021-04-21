@@ -87,7 +87,7 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-                await GetWorkSheet();
+                await GetWorkSheetAsync();
             }
             catch (Exception ex)
             {
@@ -138,7 +138,7 @@ namespace CD4.UI.Library.ViewModel
                 if (_selectedDisciplineId == value) return;
                 _selectedDisciplineId = value;
                 //no need to raise npc, load worksheet instead
-                GetWorkSheet();
+                GetWorkSheetAsync().GetAwaiter().GetResult();
             }
         }
         public string NotesCountButtonLabel
@@ -332,7 +332,7 @@ namespace CD4.UI.Library.ViewModel
             }
         }
 
-        public async Task GetWorkSheet()
+        public async Task GetWorkSheetAsync()
         {
             if (GetSelectedStatusIdOrDefault() == 0)
             {

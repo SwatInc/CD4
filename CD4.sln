@@ -35,7 +35,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CD4.ResultsInterface.Common
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CD4.BillingInterface.GrpcService", "CD4.BillingInterface.GrpcService\CD4.BillingInterface.GrpcService.csproj", "{F9976F2E-C1C8-410E-9BCB-C1FD4F9E9D9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CD4.BillingInterface.WebApiService", "CD4.BillingInterface.WebApiService\CD4.BillingInterface.WebApiService.csproj", "{DEA1FD98-08A7-4C95-B97D-98C47A740FD2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CD4.BillingInterface.WebApiService", "CD4.BillingInterface.WebApiService\CD4.BillingInterface.WebApiService.csproj", "{DEA1FD98-08A7-4C95-B97D-98C47A740FD2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -397,8 +397,8 @@ Global
 		{DEA1FD98-08A7-4C95-B97D-98C47A740FD2}.Release|ARM.Build.0 = Release|Any CPU
 		{DEA1FD98-08A7-4C95-B97D-98C47A740FD2}.Release|ARM64.ActiveCfg = Release|Any CPU
 		{DEA1FD98-08A7-4C95-B97D-98C47A740FD2}.Release|ARM64.Build.0 = Release|Any CPU
-		{DEA1FD98-08A7-4C95-B97D-98C47A740FD2}.Release|x64.ActiveCfg = Release|Any CPU
-		{DEA1FD98-08A7-4C95-B97D-98C47A740FD2}.Release|x64.Build.0 = Release|Any CPU
+		{DEA1FD98-08A7-4C95-B97D-98C47A740FD2}.Release|x64.ActiveCfg = Release|x64
+		{DEA1FD98-08A7-4C95-B97D-98C47A740FD2}.Release|x64.Build.0 = Release|x64
 		{DEA1FD98-08A7-4C95-B97D-98C47A740FD2}.Release|x86.ActiveCfg = Release|Any CPU
 		{DEA1FD98-08A7-4C95-B97D-98C47A740FD2}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
