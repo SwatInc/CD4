@@ -1,5 +1,6 @@
 using CD4.AstmInterface.View;
 using CD4.AstmInterface.ViewModel;
+using CD4.DataLibrary.DataAccess;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
@@ -24,7 +25,7 @@ namespace CD4.AstmInterface
                                //Register all your services here
                                services.AddScoped<MainView>();
                                services.AddScoped<MainViewModel>();
-
+                               services.AddTransient<IScriptDataAccess, ScriptDataAccess>();
                            }).ConfigureLogging(logBuilder =>
                            {
                                logBuilder.AddLog4Net("App.config");

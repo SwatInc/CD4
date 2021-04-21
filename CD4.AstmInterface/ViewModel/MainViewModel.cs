@@ -1,8 +1,10 @@
 ﻿using CD4.AstmInterface.Model;
+using CD4.DataLibrary.DataAccess;
 using CD4.ResultsInterface.Common.Models;
 using CD4.ResultsInterface.Common.Services;
-using Microsoft.Extensions.Logging;
+using CSScriptLib;
 using Newtonsoft.Json;
+using slf4net;
 using SwatInc.Lis.Lis01A2.Interfaces;
 using SwatInc.Lis.Lis01A2.Services;
 using SwatInc.Lis.Lis02A2;
@@ -14,14 +16,18 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace CD4.AstmInterface.ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
+        dynamic _script;
+        private bool _isScriptLoaded;
         private readonly IExportService exportService;
-        private readonly ILogger<MainViewModel> logger;
+        private readonly ILogger logger;
+        private readonly IScriptDataAccess _scriptDataAccess;
         private List<InterfaceResultsModel> interfaceResults;
         private InterfaceResultsModel tempResults;
 
@@ -30,17 +36,99 @@ namespace CD4.AstmInterface.ViewModel
         private LISParser lisParser;
 
         private EventHandler<List<InterfaceResultsModel>> ResultsReadyForExport;
-        public MainViewModel(ILogger<MainViewModel> logger)
+        private event EventHandler Initialize;
+        private event EventHandler<InterfaceResultsModel> OnRequireInterpretation;
+
+        public MainViewModel(IScriptDataAccess scriptDataAccess)
         {
-            this.logger = logger;
-            Settings = new Settings();
+            this.logger = LoggerFactory.GetLogger(typeof(MainViewModel));
+            this._scriptDataAccess = scriptDataAccess;
+            Settings = new Model.Settings();
             interfaceResults = new List<InterfaceResultsModel>();
             exportService = new ExportService();
-            logger.LogInformation("Application startup... loaded settings");
+            logger.Info("Application startup... loaded settings");
 
-            InitializeAstm();
-
+            Initialize += RunInitalze;
             ResultsReadyForExport += ExportResults;
+            OnRequireInterpretation += MainViewModel_OnRequireInterpretation;
+
+            //invoke events
+            Initialize?.Invoke(this, EventArgs.Empty);
+
+        }
+
+        private void MainViewModel_OnRequireInterpretation(object sender, InterfaceResultsModel e)
+        {
+            if (e is null) return;
+            if (e.Measurements is null) return;
+
+            var testCodeIndex = 0;
+            var resultIndex = 1;
+            var unitIndex = 2;
+            foreach (var item in e.Measurements)
+            {
+                logger.Info($"Running interpretation for {item.TestCode} with result: {item.MeasurementValue} {item.Unit}");
+                var resultArray = ((string)_script.GetInterpretation(item)).Split('|');
+                var testCode = resultArray[testCodeIndex];
+                var result = resultArray[resultIndex];
+                var unit = resultArray[unitIndex];
+
+                logger.Info($"Interpretation: Test Code: {testCode} Result: {result} {unit}");
+
+                var tempInterpretations = new InterfaceResultsModel()
+                {
+                    SampleId = e.SampleId,
+                    Measurements = new List<MeasurementValues>()
+                    {
+                        new MeasurementValues(){TestCode = testCode, MeasurementValue = result, Unit = unit}
+                    },
+                };
+
+                tempInterpretations.InstrumentId.InstrumentCode = Settings.AnalyserName;
+
+                var tempInterpretationResults = new List<InterfaceResultsModel>() { tempInterpretations };
+                ResultsReadyForExport?.Invoke(this, tempInterpretationResults);
+            }
+
+        }
+
+        private async void RunInitalze(object sender, EventArgs e)
+        {
+            await LoadAndInitializeScript();
+            InitializeAstm();
+        }
+
+        private async Task LoadAndInitializeScript()
+        {
+            logger.Info("Trying to load analyser specific scripts");
+
+            try
+            {
+                var script = await _scriptDataAccess.LoadScriptByName(Settings.AnalyserName);
+                if (string.IsNullOrEmpty(script))
+                {
+                    logger.Info($"Failed to load the script. Script name: {Settings.AnalyserName}. Please make sure that a script exists with the name.");
+                    _isScriptLoaded = false;
+                    return;
+                }
+                logger.Info("Script fetched successfully. Trying to initialize scripting engine.");
+
+
+                //load script to execution engine
+              _script = CSScript.Evaluator.LoadCode(script);
+
+
+                //check the script
+                if (_script.IsScriptLoaded())
+                {
+                    _isScriptLoaded = true;
+                    logger.Info($"Script Loaded Successfully. Script name: {Settings.AnalyserName}");
+                }
+            }
+            catch (Exception ex)
+            {
+                logger.Info($"Failed to initialize scripting engine. {ex.Message}");
+            }
         }
 
         /// <summary>
@@ -50,7 +138,8 @@ namespace CD4.AstmInterface.ViewModel
         {
             try
             {
-                await exportService.ExportToUploader(interfaceResults, Settings.ExportBasepath, Settings.Extension, Settings.ControlExtension);
+                logger.Debug(JsonConvert.SerializeObject(e));
+                await exportService.ExportToUploader(e, Settings.ExportBasepath, Settings.Extension, Settings.ControlExtension);
             }
             catch (Exception ex)
             {
@@ -64,7 +153,7 @@ namespace CD4.AstmInterface.ViewModel
             {
                 case ConnectionMode.Ethernet:
                     var isPortValid = ushort.TryParse(Settings.Port.ToString(), out var uShortPort);
-                    if (!isPortValid) { logger.LogError($"Invalid port defined: {Settings.Port}. Max value allowed for port is 65535"); return; }
+                    if (!isPortValid) { logger.Error($"Invalid port defined: {Settings.Port}. Max value allowed for port is 65535"); return; }
 
                     lowLevelConnection = new Lis01A02TCPConnection(Settings.IpAddress, uShortPort);
                     lisConnection = new Lis01A2Connection(lowLevelConnection);
@@ -94,7 +183,7 @@ namespace CD4.AstmInterface.ViewModel
             }
             catch (Exception ex)
             {
-                logger.LogError($"Error connecting: {ex.Message}");
+                logger.Error($"Error connecting: {ex.Message}");
                 MessageBox.Show(ex.Message);
             }
         }
@@ -129,7 +218,7 @@ namespace CD4.AstmInterface.ViewModel
                     var testIds = result.UniversalTestID.TestID.Split('^');
 
                     string testCode = null;
-                    if (testIds.Length == 4){testCode = testIds[3]; }
+                    if (testIds.Length == 4) { testCode = testIds[3]; }
 
                     tempResults.Measurements.Add(new MeasurementValues()
                     {
@@ -137,14 +226,17 @@ namespace CD4.AstmInterface.ViewModel
                         MeasurementValue = result.Data,
                         Unit = result.Units,
                     });
+
                     //Analyser name
-                    tempResults.InstrumentId.InstrumentCode = "EI-01";
+                    tempResults.InstrumentId.InstrumentCode = Settings.AnalyserName;
                     //completed date and time
                     if (result.TestCompletedDateTime.HasValue)
                     {
                         tempResults.CompletedDateTime = result.TestCompletedDateTime
                             .Value.ToString("yyyyMMddHHmmssfff");
                     }
+
+                    OnRequireInterpretation?.Invoke(this, tempResults);
 
                     break;
                 case LisRecordType.Comment:
@@ -180,7 +272,7 @@ namespace CD4.AstmInterface.ViewModel
             Debug.WriteLine("Send Progress: " + e.Progress);
         }
 
-        public Settings Settings { get; set; }
+        public Model.Settings Settings { get; set; }
 
         #region INotifyPropertyChanged Hookup
 

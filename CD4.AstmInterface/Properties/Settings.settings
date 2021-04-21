@@ -3,7 +3,7 @@
   <Profiles />
   <Settings>
     <Setting Name="ConnectionMode" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="ComPort" Type="System.String" Scope="User">
       <Value Profile="(Default)">COM50</Value>
@@ -40,6 +40,9 @@
     </Setting>
     <Setting Name="ControlExtension" Type="System.String" Scope="User">
       <Value Profile="(Default)">ok</Value>
+    </Setting>
+    <Setting Name="AnalyserName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">EvidenceInvestigator01</Value>
     </Setting>
   </Settings>
 </SettingsFile>

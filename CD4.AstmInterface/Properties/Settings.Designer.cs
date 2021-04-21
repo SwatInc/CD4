@@ -25,7 +25,7 @@ namespace CD4.AstmInterface.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public int ConnectionMode {
             get {
                 return ((int)(this["ConnectionMode"]));
@@ -176,6 +176,18 @@ namespace CD4.AstmInterface.Properties {
             }
             set {
                 this["ControlExtension"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("EvidenceInvestigator01")]
+        public string AnalyserName {
+            get {
+                return ((string)(this["AnalyserName"]));
+            }
+            set {
+                this["AnalyserName"] = value;
             }
         }
     }

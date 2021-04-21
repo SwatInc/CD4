@@ -12,23 +12,7 @@ namespace CD4.AstmInterface.Model
         public Settings()
         {
             settings = new Properties.Settings();
-
-            //ConnectionMode = (ConnectionMode)settings.ConnectionMode;
-            //ComPort = settings.ComPort;
-            //BaudRate = settings.BaudRate;
-            //DataBits = settings.DataBits;
-            //StopBits = (StopBits)settings.StopBits;
-            //parity = (Parity)settings.Parity;
-            //Handshake = (Handshake)settings.HandShake;
-            //IsSever = settings.IsServer;
-            //IpAddress = settings.IpAddress;
-            //Port = settings.Port;
-
             SerialPort = new SerialPort(ComPort);
-
-            //ExportBasepath = settings.ExportBasepath;
-            //Extension = settings.Extension;
-            //ControlExtension = settings.ControlExtension;
         }
 
 
@@ -130,6 +114,15 @@ namespace CD4.AstmInterface.Model
             set => settings.ControlExtension = value;
         }
 
+        #endregion
+
+        #region Rules Engine
+        [Category("Rules Engine")]
+        public string AnalyserName 
+        {
+            get => settings.AnalyserName;
+            set => settings.AnalyserName = value;
+        }
         #endregion
     }
 }
