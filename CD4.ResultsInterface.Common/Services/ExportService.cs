@@ -18,10 +18,8 @@ namespace CD4.ResultsInterface.Common.Services
             }
 
             var exportData = JsonConvert.SerializeObject(interfaceResults);
-            var asciiencoding = new ASCIIEncoding();
-            var filenameWithoutExtension = $"{basepath}\\{DateTime.Now.ToString("yyyyMMdd_HHmmss_fffffff")}";
-
-            byte[] result = asciiencoding.GetBytes(exportData);
+            var filenameWithoutExtension = $"{basepath}\\{DateTime.Now:yyyyMMdd_HHmmss_fffffff}";
+            byte[] result = Encoding.UTF8.GetBytes(exportData);
             try
             {
                 using (FileStream SourceStream = File.Open($"{filenameWithoutExtension}.{extension}", FileMode.OpenOrCreate))
