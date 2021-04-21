@@ -120,10 +120,10 @@ namespace CD4.Extensions.Reports.Medlab
         {
             return new List<InfoModel>()
             {
-                new InfoModel(){Index=0, TemplateName="Analysis Report [ Default ]", ReportType = ReportType.AnalysisRequest},
+                new InfoModel(){Index=0, TemplateName="Analysis Report [ Clinical ]", ReportType = ReportType.AnalysisRequest},
                 new InfoModel(){Index=1, TemplateName="Analysis Report [ Without Seal ]", ReportType = ReportType.AnalysisRequest },
                 new InfoModel(){ Index=2, TemplateName = "Tube Label 75mm", ReportType = ReportType.Barcode},
-                new InfoModel(){Index=3, TemplateName="Analysis Report [ DoA ]", ReportType = ReportType.AnalysisRequest},
+                new InfoModel(){Index=3, TemplateName="Analysis Report [ Default DoA ]", ReportType = ReportType.AnalysisRequest},
                 new InfoModel(){Index=4, TemplateName="Machine Generated Report [ DoA ]", ReportType = ReportType.AnalysisRequest}
             };
 
