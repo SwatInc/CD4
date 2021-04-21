@@ -1025,5 +1025,14 @@ UPDATE dbo.ChannelMap SET [Upload] = 'ETHANOL' WHERE [Upload] = 'Ethanol';
 UPDATE dbo.ChannelMap SET [Upload] = 'MDONE' WHERE [Upload] = 'Methadone';
 UPDATE dbo.ChannelMap SET [Upload] = 'OPIAT' WHERE [Upload] = 'Opiates';
 
+UPDATE dbo.ChannelMap SET [Upload] = 'AMPH_I' WHERE [Upload] = 'Amphetamine_I';
+UPDATE dbo.ChannelMap SET [Upload] = 'BENZ1_I' WHERE [Upload] = 'Benzodiazepine-1_I';
+UPDATE dbo.ChannelMap SET [Upload] = 'BENZ2_I' WHERE [Upload] = 'Benzodiazepine-2_I';
+UPDATE dbo.ChannelMap SET [Upload] = 'THC_I' WHERE [Upload] = 'Cannabinoids_I';
+UPDATE dbo.ChannelMap SET [Upload] = 'BZG_I' WHERE [Upload] = 'Cocaine_I';
+UPDATE dbo.ChannelMap SET [Upload] = 'ETHANOL_I' WHERE [Upload] = 'Ethanol_I';
+UPDATE dbo.ChannelMap SET [Upload] = 'MDONE_I' WHERE [Upload] = 'Methadone_I';
+UPDATE dbo.ChannelMap SET [Upload] = 'OPIAT_I' WHERE [Upload] = 'Opiates_I';
+
 
 INSERT INTO [dbo].[GlobalSettings]([VerifyNidPpOnOrder]) VALUES (0);

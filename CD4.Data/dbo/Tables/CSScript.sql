@@ -1,5 +1,5 @@
 ﻿CREATE TABLE [dbo].[CSScript]
 (
-	[Name] varchar(10) NOT NULL PRIMARY KEY,
-	[Script] varchar(MAX) NOT NULL
+	[Name] varchar(50) NOT NULL PRIMARY KEY,
+	[Script] nvarchar(MAX) NOT NULL
 )
