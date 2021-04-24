@@ -290,7 +290,7 @@ namespace CD4.UI.Library.ViewModel
                 //map-out the result returned.
                 var mappedData = _mapper.Map<SampleAndResultStatusAndResultModel>(output);
                 //updateUI
-                UpdateUiOnSampleRejectionOrRejectionCancellation(mappedData);
+                UpdateUiOnSampleColectionRejectionOrRejectionCancellation(mappedData);
             }
             catch (Exception)
             {
@@ -335,7 +335,7 @@ namespace CD4.UI.Library.ViewModel
                 //map-out the result returned.
                 var mappedData = _mapper.Map<SampleAndResultStatusAndResultModel>(output);
                 //updateUI
-                UpdateUiOnSampleRejectionOrRejectionCancellation(mappedData);
+                UpdateUiOnSampleColectionRejectionOrRejectionCancellation(mappedData);
             }
             catch (Exception)
             {
@@ -677,7 +677,7 @@ namespace CD4.UI.Library.ViewModel
         /// updates UI after sample is rejected.
         /// </summary>
         /// <param name="statusUpdateData">model returned by datalayer on rejecting sample.</param>
-        private void UpdateUiOnSampleRejectionOrRejectionCancellation(SampleAndResultStatusAndResultModel statusUpdateData)
+        private void UpdateUiOnSampleColectionRejectionOrRejectionCancellation(SampleAndResultStatusAndResultModel statusUpdateData)
         {
             //find the sample rejected.
             var sample = RequestData.Find(x => x.Cin == statusUpdateData.SampleData.Cin);
@@ -957,7 +957,7 @@ namespace CD4.UI.Library.ViewModel
 
                 var mappedData = _mapper.Map<SampleAndResultStatusAndResultModel>(output);
                 //updateUI
-                UpdateUiOnSampleRejectionOrRejectionCancellation(mappedData);
+                UpdateUiOnSampleColectionRejectionOrRejectionCancellation(mappedData);
             }
             catch (Exception)
             {
@@ -973,7 +973,7 @@ namespace CD4.UI.Library.ViewModel
                 var output = await _resultDataAccess.CancelTestRejectionByResultId(testData.Id, 1);
                 var mappedData = _mapper.Map<SampleAndResultStatusAndResultModel>(output);
                 //updateUI
-                UpdateUiOnSampleRejectionOrRejectionCancellation(mappedData);
+                UpdateUiOnSampleColectionRejectionOrRejectionCancellation(mappedData);
             }
             catch (Exception)
             {
@@ -1051,7 +1051,7 @@ namespace CD4.UI.Library.ViewModel
                 var result = await _resultDataAccess.CancelResultValidation(testData.Id, testData.Cin, _authorizeDetail.UserId);
                 var mappedData = _mapper.Map<SampleAndResultStatusAndResultModel>(result);
                 //updateUI, the following method can be used to Update UI after cancelling test rejection. Refactoring required
-                UpdateUiOnSampleRejectionOrRejectionCancellation(mappedData);
+                UpdateUiOnSampleColectionRejectionOrRejectionCancellation(mappedData);
             }
             catch (Exception)
             {
@@ -1063,6 +1063,21 @@ namespace CD4.UI.Library.ViewModel
         public List<ResultModel> GetResultData(string cin)
         {
             return AllResultData.FindAll((x) => x.Cin == cin).ToList();
+        }
+
+        public async Task UpdateUiAsync()
+        {
+            try
+            {
+                var output = await _statusDataAccess.GetSampleAndTestStatusForUpdatingUiAsync(SelectedRequestData.Cin);
+                UpdateUiOnSampleColectionRejectionOrRejectionCancellation(output);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
 
         #endregion

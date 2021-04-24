@@ -294,6 +294,7 @@
     <Build Include="dbo\StoredProcedures\usp_UpsertSampleReceivedUser.sql" />
     <Build Include="dbo\StoredProcedures\DecideAndExecInsertOrUpdateSampleAcceptedDatetime.sql" />
     <Build Include="dbo\StoredProcedures\usp_UpdateAcceptedDateTimeForSampleFromBilling.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetSampleAndTestStatusByCinForUpdatingUI.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />

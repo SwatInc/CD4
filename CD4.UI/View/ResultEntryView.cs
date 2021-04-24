@@ -654,12 +654,16 @@ namespace CD4.UI.View
             try
             {
                 await _viewModel.MarkSampleCollectedAsync();
+
+                //update Ui after calling for barcode printing
+                await _viewModel.UpdateUiAsync();
             }
             catch (Exception ex)
             {
                 XtraMessageBox.Show($"An error occured while marking the sample as collected\n\n{ex.Message}",
                     "Mark Sample as collected", MessageBoxButtons.OK);
             }
+
         }
 
         /// <summary>

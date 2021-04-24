@@ -388,6 +388,33 @@ namespace CD4.DataLibrary.DataAccess
             }
         }
 
+
+        public async Task<SampleAndResultStatusAndResultModel> GetSampleAndTestStatusForUpdatingUiAsync(string cin)
+        {
+
+            var storedProcedure = "[dbo].[usp_GetSampleAndTestStatusByCinForUpdatingUI]";
+            var parameters = new { Cin = cin };
+
+            try
+            {
+                var output = await QueryMultiple_GetModelAndListWithParameterAsync
+                    <StatusUpdatedSampleModel, UpdatedResultAndStatusModel, dynamic>(storedProcedure, parameters);
+
+                return new SampleAndResultStatusAndResultModel()
+                {
+                    SampleData = output.T1,
+                    ResultStatus = output.U1
+                };
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        //this is to send status to billing 
         public async Task<string> DetermineSampleStatus(string sampleNumber)
         {
             throw new NotImplementedException();

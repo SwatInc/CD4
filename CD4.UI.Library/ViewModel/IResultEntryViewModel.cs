@@ -54,5 +54,6 @@ namespace CD4.UI.Library.ViewModel
         void SetNotesCountManually(string notesCount);
         Task<List<BarcodeDataModel>> GetBarcodeDataAsync();
         Task MarkSampleCollectedAsync();
+        Task UpdateUiAsync();
     }
 }
