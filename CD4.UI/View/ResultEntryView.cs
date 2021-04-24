@@ -30,6 +30,7 @@ namespace CD4.UI.View
         System.Windows.Forms.Timer dataRefreshTimer = new System.Windows.Forms.Timer() { Enabled = true, Interval = 1000 };
 
         public event EventHandler<CinAndReportIdModel> GenerateReportByCin;
+        public event EventHandler PrintBarcodeClick;
 
         public ResultEntryView(IResultEntryViewModel viewModel,
             IRejectionCommentViewModel rejectionCommentViewModel,
@@ -64,6 +65,7 @@ namespace CD4.UI.View
             simpleButtonReport.Click += SimpleButtonReport_Click;
             simpleButtonLoadWorksheet.Click += LoadWorkSheet;
             simpleButtonNotes.Click += ShowSampleNotesDialog;
+            simpleButtonPrintBothResultEntryReport.Click += PrintBothDoAReports;
             exportReportOnDefaultTemplate.Click += exportReportOnDefaultTemplate_Click;
             _viewModel.RequestDataRefreshed += RefreshViewData;
             _viewModel.PushingMessages += _viewModel_PushingMessages;
@@ -74,6 +76,7 @@ namespace CD4.UI.View
             lookUpEditSampleStatusFilter.EditValueChanged += LookUpEditSampleStatusFilter_EditValueChanged;
 
             ParentChanged += ResultEntryView_ParentChanged;
+            PrintBarcodeClick += OnPrintBarcodeClick;
 
             gridViewSamples.ColumnFilterChanged += OnSampleSearchComplete_RefreshPatientRibbonAndSelectedTests;
             DisableResultEntryReadWriteAccessForUnauthorizedUsers();
@@ -87,7 +90,7 @@ namespace CD4.UI.View
             SimulateMenuClick_DefaultReportExport();
         }
 
-        private void SimulateMenuClick_DefaultReportExport() 
+        private void SimulateMenuClick_DefaultReportExport()
         {
             SimpleButtonReport_Click(new DXMenuItem(), EventArgs.Empty);
         }
@@ -386,6 +389,7 @@ namespace CD4.UI.View
                 case Keys.F2:
                     break;
                 case Keys.F3:
+                    PrintBarcodeClick?.Invoke(this, EventArgs.Empty);
                     break;
                 case Keys.F4:
                     break;
@@ -639,6 +643,27 @@ namespace CD4.UI.View
             return menuItems;
         }
 
+        private async void PrintBothDoAReports(object sender, EventArgs e)
+        {
+
+            //Get the Cin of the selected record.
+            var cin = GetSelectedCin();
+            //Ask to select a record, if no record is selected.
+            if (cin is null)
+            {
+                XtraMessageBox.Show("Please select a sample to view the report!");
+            }
+
+            //check if the user is authorised
+            if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.PrintReport")) return;
+
+            if (!DecideToContinuePrinting(cin)) return;
+
+            GenerateReportByCin?.Invoke(this, new CinAndReportIdModel() { Cin = cin, ReportIndex = 3, Action = ReportActionModel.Print });
+            GenerateReportByCin?.Invoke(this, new CinAndReportIdModel() { Cin = cin, ReportIndex = 4, Action = ReportActionModel.Print });
+
+        }
+
         /// <summary>
         /// Collects sample if not collected.
         /// Prints required barcodes either way
@@ -646,7 +671,6 @@ namespace CD4.UI.View
         private async void OnPrintBarcodeClick(object sender, EventArgs e)
         {
             if (!_authEvaluator.IsFunctionAuthorized("OrderEntry.PrintBarcode")) { return; }
-            var sample = GetSampleForMenu(sender, e);
 
             //If the print barcode function returns false then don't try marking the sample as collected.
             if (!await PrintBarcodeAsync()) { return; }

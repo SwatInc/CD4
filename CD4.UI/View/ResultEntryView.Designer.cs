@@ -53,6 +53,7 @@ namespace CD4.UI.View
             this.repositoryItemLookUpEditCodifiedPhrases = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.graphsUserControl = new CD4.UI.UserControls.GraphsUserControl();
             this.groupControlFunctions = new DevExpress.XtraEditors.GroupControl();
+            this.simpleButtonPrintBothResultEntryReport = new DevExpress.XtraEditors.SimpleButton();
             this.exportReportOnDefaultTemplate = new DevExpress.XtraEditors.DropDownButton();
             this.simpleButtonNotes = new DevExpress.XtraEditors.SimpleButton();
             this.lookUpEditSampleStatusFilter = new DevExpress.XtraEditors.LookUpEdit();
@@ -61,7 +62,7 @@ namespace CD4.UI.View
             this.dateEditLoadWorksheetFrom = new DevExpress.XtraEditors.DateEdit();
             this.simpleButtonReport = new DevExpress.XtraEditors.SimpleButton();
             this.gridColumnSampleStatus = new DevExpress.XtraGrid.Columns.GridColumn();
-            labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
+            this.labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).BeginInit();
             this.splitContainerControlPatient.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlSelectedPatientRequestClinicalDetailsArea)).BeginInit();
@@ -189,7 +190,7 @@ namespace CD4.UI.View
             this.splitContainerControlPatient.Panel1.Text = "Panel1";
             this.splitContainerControlPatient.Panel2.Controls.Add(this.splitContainerControlFunctions);
             this.splitContainerControlPatient.Panel2.Text = "Panel2";
-            this.splitContainerControlPatient.Size = new System.Drawing.Size(1086, 528);
+            this.splitContainerControlPatient.Size = new System.Drawing.Size(1294, 528);
             this.splitContainerControlPatient.SplitterPosition = 90;
             this.splitContainerControlPatient.TabIndex = 0;
             // 
@@ -209,7 +210,7 @@ namespace CD4.UI.View
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Location = new System.Drawing.Point(0, 0);
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Name = "groupControlSelectedPatientRequestClinicalDetailsArea";
-            this.groupControlSelectedPatientRequestClinicalDetailsArea.Size = new System.Drawing.Size(1086, 90);
+            this.groupControlSelectedPatientRequestClinicalDetailsArea.Size = new System.Drawing.Size(1294, 90);
             this.groupControlSelectedPatientRequestClinicalDetailsArea.TabIndex = 0;
             this.groupControlSelectedPatientRequestClinicalDetailsArea.Text = "Selected Patient, Request and Clinical Details Information";
             // 
@@ -219,7 +220,7 @@ namespace CD4.UI.View
             this.listBoxControlClinicalDetails.Appearance.BackColor = System.Drawing.SystemColors.Control;
             this.listBoxControlClinicalDetails.Appearance.Options.UseBackColor = true;
             this.listBoxControlClinicalDetails.HorizontalScrollbar = true;
-            this.listBoxControlClinicalDetails.Location = new System.Drawing.Point(860, 21);
+            this.listBoxControlClinicalDetails.Location = new System.Drawing.Point(1068, 21);
             this.listBoxControlClinicalDetails.Name = "listBoxControlClinicalDetails";
             this.listBoxControlClinicalDetails.Size = new System.Drawing.Size(223, 66);
             this.listBoxControlClinicalDetails.TabIndex = 9;
@@ -234,7 +235,7 @@ namespace CD4.UI.View
             this.splitContainerControlFunctions.Panel1.Text = "Panel1";
             this.splitContainerControlFunctions.Panel2.Controls.Add(this.groupControlFunctions);
             this.splitContainerControlFunctions.Panel2.Text = "Panel2";
-            this.splitContainerControlFunctions.Size = new System.Drawing.Size(1086, 433);
+            this.splitContainerControlFunctions.Size = new System.Drawing.Size(1294, 428);
             this.splitContainerControlFunctions.SplitterPosition = 337;
             this.splitContainerControlFunctions.TabIndex = 0;
             // 
@@ -250,7 +251,7 @@ namespace CD4.UI.View
             this.splitContainerControlSamplesAndTest.Panel2.Controls.Add(this.gridControlTests);
             this.splitContainerControlSamplesAndTest.Panel2.Controls.Add(this.graphsUserControl);
             this.splitContainerControlSamplesAndTest.Panel2.Text = "Panel2";
-            this.splitContainerControlSamplesAndTest.Size = new System.Drawing.Size(1086, 337);
+            this.splitContainerControlSamplesAndTest.Size = new System.Drawing.Size(1294, 337);
             this.splitContainerControlSamplesAndTest.SplitterPosition = 400;
             this.splitContainerControlSamplesAndTest.TabIndex = 0;
             // 
@@ -296,7 +297,7 @@ namespace CD4.UI.View
             this.progressPanelTests.Dock = System.Windows.Forms.DockStyle.Fill;
             this.progressPanelTests.Location = new System.Drawing.Point(0, 0);
             this.progressPanelTests.Name = "progressPanelTests";
-            this.progressPanelTests.Size = new System.Drawing.Size(681, 337);
+            this.progressPanelTests.Size = new System.Drawing.Size(884, 337);
             this.progressPanelTests.TabIndex = 3;
             // 
             // gridControlTests
@@ -307,7 +308,7 @@ namespace CD4.UI.View
             this.gridControlTests.Name = "gridControlTests";
             this.gridControlTests.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemLookUpEditCodifiedPhrases});
-            this.gridControlTests.Size = new System.Drawing.Size(681, 337);
+            this.gridControlTests.Size = new System.Drawing.Size(884, 337);
             this.gridControlTests.TabIndex = 0;
             this.gridControlTests.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewTests});
@@ -336,11 +337,12 @@ namespace CD4.UI.View
             this.graphsUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.graphsUserControl.Location = new System.Drawing.Point(0, 0);
             this.graphsUserControl.Name = "graphsUserControl";
-            this.graphsUserControl.Size = new System.Drawing.Size(681, 337);
+            this.graphsUserControl.Size = new System.Drawing.Size(884, 337);
             this.graphsUserControl.TabIndex = 4;
             // 
             // groupControlFunctions
             // 
+            this.groupControlFunctions.Controls.Add(this.simpleButtonPrintBothResultEntryReport);
             this.groupControlFunctions.Controls.Add(this.exportReportOnDefaultTemplate);
             this.groupControlFunctions.Controls.Add(this.simpleButtonNotes);
             this.groupControlFunctions.Controls.Add(this.lookUpEditSampleStatusFilter);
@@ -351,14 +353,23 @@ namespace CD4.UI.View
             this.groupControlFunctions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControlFunctions.Location = new System.Drawing.Point(0, 0);
             this.groupControlFunctions.Name = "groupControlFunctions";
-            this.groupControlFunctions.Size = new System.Drawing.Size(1086, 91);
+            this.groupControlFunctions.Size = new System.Drawing.Size(1294, 81);
             this.groupControlFunctions.TabIndex = 1;
             this.groupControlFunctions.Text = "Functions";
             // 
-            // dropDownButton1
+            // simpleButtonPrintBothResultEntryReport
+            // 
+            this.simpleButtonPrintBothResultEntryReport.Location = new System.Drawing.Point(1025, 43);
+            this.simpleButtonPrintBothResultEntryReport.Name = "simpleButtonPrintBothResultEntryReport";
+            this.simpleButtonPrintBothResultEntryReport.Size = new System.Drawing.Size(159, 23);
+            this.simpleButtonPrintBothResultEntryReport.TabIndex = 10;
+            this.simpleButtonPrintBothResultEntryReport.Tag = "ResultEntryView.Report";
+            this.simpleButtonPrintBothResultEntryReport.Text = "Report Both DoA Report";
+            // 
+            // exportReportOnDefaultTemplate
             // 
             this.exportReportOnDefaultTemplate.Location = new System.Drawing.Point(884, 43);
-            this.exportReportOnDefaultTemplate.Name = "dropDownButton1";
+            this.exportReportOnDefaultTemplate.Name = "exportReportOnDefaultTemplate";
             this.exportReportOnDefaultTemplate.Size = new System.Drawing.Size(135, 23);
             this.exportReportOnDefaultTemplate.TabIndex = 9;
             this.exportReportOnDefaultTemplate.Tag = "ResultEntry.ExportReport";
@@ -435,7 +446,7 @@ namespace CD4.UI.View
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1086, 528);
+            this.ClientSize = new System.Drawing.Size(1294, 528);
             this.Controls.Add(this.splitContainerControlPatient);
             this.KeyPreview = true;
             this.Name = "ResultEntryView";
@@ -500,5 +511,6 @@ namespace CD4.UI.View
         private UserControls.GraphsUserControl graphsUserControl;
         private SimpleButton simpleButtonNotes;
         private DropDownButton exportReportOnDefaultTemplate;
+        private SimpleButton simpleButtonPrintBothResultEntryReport;
     }
 }

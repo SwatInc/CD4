@@ -32,6 +32,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AnalysisReportDoA));
             this.TopMargin = new DevExpress.XtraReports.UI.TopMarginBand();
+            this.xrLabel3 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrPictureBoxLaboratorylogo = new DevExpress.XtraReports.UI.XRPictureBox();
             this.BottomMargin = new DevExpress.XtraReports.UI.BottomMarginBand();
             this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
@@ -142,7 +143,6 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell10 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell11 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell12 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrLabel3 = new DevExpress.XtraReports.UI.XRLabel();
             this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.xrTable6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable5)).BeginInit();
@@ -158,13 +158,26 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.TopMargin.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrLabel3,
             this.xrPictureBoxLaboratorylogo});
-            this.TopMargin.HeightF = 97.99995F;
+            this.TopMargin.HeightF = 125.0833F;
             this.TopMargin.Name = "TopMargin";
+            // 
+            // xrLabel3
+            // 
+            this.xrLabel3.Font = new System.Drawing.Font("Faruma", 15F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))));
+            this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(0F, 84.14348F);
+            this.xrLabel3.Multiline = true;
+            this.xrLabel3.Name = "xrLabel3";
+            this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
+            this.xrLabel3.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
+            this.xrLabel3.SizeF = new System.Drawing.SizeF(650F, 40.93981F);
+            this.xrLabel3.StylePriority.UseFont = false;
+            this.xrLabel3.Text = "ކުޑަކަމުދާ ތަކެތީގެ ތަޙުލީލް ރިޕޯރޓް";
+            this.xrLabel3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             // 
             // xrPictureBoxLaboratorylogo
             // 
             this.xrPictureBoxLaboratorylogo.ImageSource = new DevExpress.XtraPrinting.Drawing.ImageSource("img", resources.GetString("xrPictureBoxLaboratorylogo.ImageSource"));
-            this.xrPictureBoxLaboratorylogo.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
+            this.xrPictureBoxLaboratorylogo.LocationFloat = new DevExpress.Utils.PointFloat(0F, 27.08335F);
             this.xrPictureBoxLaboratorylogo.Name = "xrPictureBoxLaboratorylogo";
             this.xrPictureBoxLaboratorylogo.SizeF = new System.Drawing.SizeF(129.0153F, 97.99994F);
             this.xrPictureBoxLaboratorylogo.Sizing = DevExpress.XtraPrinting.ImageSizeMode.ZoomImage;
@@ -1749,19 +1762,6 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell12.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopRight;
             this.xrTableCell12.Weight = 1D;
             // 
-            // xrLabel3
-            // 
-            this.xrLabel3.Font = new System.Drawing.Font("Faruma", 15F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))));
-            this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(0F, 57.06015F);
-            this.xrLabel3.Multiline = true;
-            this.xrLabel3.Name = "xrLabel3";
-            this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel3.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
-            this.xrLabel3.SizeF = new System.Drawing.SizeF(650F, 40.93981F);
-            this.xrLabel3.StylePriority.UseFont = false;
-            this.xrLabel3.Text = "ކުޑަކަމުދާ ތަކެތީގެ ތަޙުލީލް ރިޕޯރޓް";
-            this.xrLabel3.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
-            // 
             // bindingSource
             // 
             this.bindingSource.DataSource = typeof(CD4.Entensibility.ReportingFramework.Models.DoAAnalysisRequestReportModel);
@@ -1776,7 +1776,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.bindingSource});
             this.DataSource = this.bindingSource;
             this.Font = new System.Drawing.Font("Arial", 9.75F);
-            this.Margins = new System.Drawing.Printing.Margins(100, 100, 98, 100);
+            this.Margins = new System.Drawing.Printing.Margins(100, 100, 125, 100);
             this.Version = "18.2";
             ((System.ComponentModel.ISupportInitialize)(this.xrTable6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable5)).EndInit();
