@@ -55,7 +55,9 @@ namespace CD4.ResultsInterface
                         Download = item.Download,
                         TestId = item.TestId,
                         Unit = item.Unit,
-                        Upload = item.Upload
+                        Upload = item.Upload,
+                        Mask = item.Mask,
+                        DataType = item.DataType
                     });
                 }
             }
@@ -186,6 +188,15 @@ namespace CD4.ResultsInterface
                             //if test does not exist on sample... and if AddTests is true... Add the test
                             await _resultDataAccess.ManageReflexTests(new List<DataLibrary.Models.TestsModel>()
                                 {new DataLibrary.Models.TestsModel(){Id = mapping.TestId}}, sample.SampleId, interfaceUserId);
+                        }
+
+
+                        //if numeric result, format the uploaded result
+                        if (mapping.DataType.ToLower().Contains("numeric"))
+                        {
+                            //try to convert value to decimal
+                            var isDecimal = decimal.TryParse(test.MeasurementValue, out var decimalResult);
+                            if (isDecimal) { test.MeasurementValue = decimalResult.ToString(mapping.Mask); }
                         }
 
                         //call data layer to upload result.
