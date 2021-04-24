@@ -7,6 +7,7 @@ namespace CD4.DataLibrary.DataAccess
     public interface IStatusDataAccess
     {
         Task<int> DetermineSampleStatus(int resultId);
+        Task<string> DetermineSampleStatus(string sampleNumber);
         Task<List<StatusModel>> GetAllStatus();
         int GetRegisteredStatusId();
         Task<int> GetTestStatusByTestIdAndCin(int testId, string cin);

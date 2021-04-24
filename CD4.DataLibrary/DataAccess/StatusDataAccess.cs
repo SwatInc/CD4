@@ -387,5 +387,10 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
+
+        public async Task<string> DetermineSampleStatus(string sampleNumber)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
