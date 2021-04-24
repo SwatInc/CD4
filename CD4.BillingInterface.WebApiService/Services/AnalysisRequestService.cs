@@ -36,17 +36,18 @@ namespace CD4.BillingInterface.WebApiService.Services
 
             _logger.LogDebug($"Analysis Request received from Billing.\n{JsonConvert.SerializeObject(request, Formatting.Indented)}");
 
-            //check for the presence of userid of the user who accepted the sample
-            if (request.Request.SampleReceivedBy == 0)
+            //check for the presence of VALID userid of the user who accepted the sample
+            if (request.Request.SampleReceivedBy == 0 || request.Request.SampleReceivedBy == 1 || request.Request.SampleReceivedBy == 2 || request.Request.SampleReceivedBy == 3)
             {
                 return new Response() { Status = 304, Message = "Required parameter not provided or invalid. [SampleReceivedBy:int]" };
             }
+
 
             _logger.LogDebug("Building Analysis Request");
             var insertAR = new AnalysisRequestDataModel()
             {
                 EpisodeNumber = request.Request.MemoNumber,
-                Cin = request.Request.SampleId,
+                Cin = DeriveSampleNo(request.Patient),
                 SiteId = request.Request.SiteId,
                 SampleCollectionDate = GetDatetimeFromTicks(request.Request.SampleCollectedAt),
                 SampleReceivedDate = GetDatetimeFromTicks(request.Request.SampleReceivedAt),
@@ -100,7 +101,7 @@ namespace CD4.BillingInterface.WebApiService.Services
                 await _analysisRequestDataAccess.ConfirmRequestAsync(insertAR, 1);
 
                 //ToDo: insert the person who received / accepted the sample
-                await _ndaTrackingDataAccess.UpsertSampleReceivedUserIdAsync(insertAR.Cin, request.Request.SampleReceivedBy, 1);
+                await _ndaTrackingDataAccess.UpsertSampleReceivedUserIdAsync(insertAR.Cin, request.Request.SampleReceivedBy, 2);
 
                 //insert the sample accepted date and time if required.
                 if (DecideToMarkSampleAsAccepted(insertAR))
@@ -125,6 +126,25 @@ namespace CD4.BillingInterface.WebApiService.Services
                 _logger.LogDebug($"Response code 500 with message {ex.Message}.");
                 return new Response() { Status = 500, Message = ex.Message };
             }
+        }
+
+        private string DeriveSampleNo(Models.PatientModel patient)
+        {
+            var tempSampleId = patient.Fullname;
+            var yy = DateTime.Today.Year.ToString("yy");
+            var yyyy = DateTime.Today.Year.ToString("yyyy");
+
+            return tempSampleId
+                .Replace($"US/{20}","")
+                .Replace($"us/{20}","")
+                .Replace($"Us/{20}","")
+                .Replace($"uS/{20}","")
+                .Replace(" ", "")
+                .Replace("/", "")
+                .Replace("-", "")
+                .Replace("_", "")
+                .Replace("\\", "")
+                .Trim();
         }
 
         /// <summary>
