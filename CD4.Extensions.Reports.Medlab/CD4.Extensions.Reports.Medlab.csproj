@@ -116,12 +116,6 @@
     <Compile Include="Report\AnalysisReportDoA.Designer.cs">
       <DependentUpon>AnalysisReportDoA.cs</DependentUpon>
     </Compile>
-    <Compile Include="Report\AnalysisReportDoARevised.cs">
-      <SubType>Component</SubType>
-    </Compile>
-    <Compile Include="Report\AnalysisReportDoARevised.Designer.cs">
-      <DependentUpon>AnalysisReportDoARevised.cs</DependentUpon>
-    </Compile>
     <Compile Include="Report\AnalysisReportForPrinting.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -149,9 +143,6 @@
     <EmbeddedResource Include="Report\AnalysisReportDoA.resx">
       <DependentUpon>AnalysisReportDoA.cs</DependentUpon>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Report\AnalysisReportDoARevised.resx">
-      <DependentUpon>AnalysisReportDoARevised.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Report\AnalysisReportForPrinting.resx">
       <DependentUpon>AnalysisReportForPrinting.cs</DependentUpon>
