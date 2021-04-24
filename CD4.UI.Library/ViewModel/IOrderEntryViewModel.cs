@@ -52,7 +52,7 @@ namespace CD4.UI.Library.ViewModel
         event EventHandler<string> PushingLogs;
         event EventHandler<string> PushingMessages;
 
-        Task<List<BarcodeDataModel>> GetBarcodeData();
+        Task<List<BarcodeDataModel>> GetBarcodeDataAsync();
         Task<DemographicsConfirmationModel> OrderRequiresNidPpConfirmationAsync();
     }
 }

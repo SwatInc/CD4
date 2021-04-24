@@ -52,5 +52,7 @@ namespace CD4.UI.Library.ViewModel
         Task RefreshResultDataOnUiAsync(string cin);
         Task GetNotesCountAsync(string cin);
         void SetNotesCountManually(string notesCount);
+        Task<List<BarcodeDataModel>> GetBarcodeDataAsync();
+        Task MarkSampleCollectedAsync();
     }
 }

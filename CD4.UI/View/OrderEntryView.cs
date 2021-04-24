@@ -84,6 +84,7 @@ namespace CD4.UI.View
             }
         }
 
+        //**************** DUBLICATED CODE ON RESULT ENTRY VIEW *************************
         private async void SimpleButtonPrintBarcode_Click(object sender, EventArgs e)
         {
             //If the print barcode function returns false then don't try marking the sample as collected.
@@ -512,6 +513,7 @@ namespace CD4.UI.View
 
         /// <summary>
         /// loads barcode data from database and tries to print the barcodes
+        /// NOTE: *********************************************  DUBLICATE CODE EXISTS ON RESULT ENTRY VIEW ************************
         /// </summary>
         /// <returns>True if able to load barcode data from database, even if the printing step fails.</returns>
         private async Task<bool> PrintBarcodeAsync()
@@ -519,7 +521,7 @@ namespace CD4.UI.View
             List<BarcodeDataModel> barcodeData;
             try
             {
-                barcodeData = await _viewModel.GetBarcodeData();
+                barcodeData = await _viewModel.GetBarcodeDataAsync();
                 return _barcodeHelper.PrintSingleSampleBarcode(barcodeData, _viewModel.Cin);
             }
             catch (System.Drawing.Printing.InvalidPrinterException ex) 

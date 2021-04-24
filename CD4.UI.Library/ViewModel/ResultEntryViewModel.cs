@@ -30,6 +30,7 @@ namespace CD4.UI.Library.ViewModel
         private readonly ISampleDataAccess _sampleDataAccess;
         private readonly IStaticDataDataAccess _staticDataDataAccess;
         private readonly AuthorizeDetailEventArgs _authorizeDetail;
+        private readonly IAnalysisRequestDataAccess requestDataAccess;
         #endregion
 
         #region Events
@@ -46,7 +47,7 @@ namespace CD4.UI.Library.ViewModel
         #region Default Constructor
         public ResultEntryViewModel
             (IWorkSheetDataAccess workSheetDataAccess, IMapper mapper, IResultDataAccess resultDataAccess, IStatusDataAccess statusDataAccess,
-            ISampleDataAccess sampleDataAccess, IStaticDataDataAccess staticDataDataAccess, AuthorizeDetailEventArgs authorizeDetail)
+            ISampleDataAccess sampleDataAccess, IStaticDataDataAccess staticDataDataAccess, AuthorizeDetailEventArgs authorizeDetail, IAnalysisRequestDataAccess requestDataAccess)
         {
             GridTestActiveDatasource = GridControlTestActiveDatasource.Tests;
             GridSampleActiveDatasource = GridControlSampleActiveDatasource.Sample;
@@ -72,6 +73,7 @@ namespace CD4.UI.Library.ViewModel
             _sampleDataAccess = sampleDataAccess;
             _staticDataDataAccess = staticDataDataAccess;
             _authorizeDetail = authorizeDetail;
+            this.requestDataAccess = requestDataAccess;
             SelectedResultData.ListChanged += UpdateDatabaseResults;
             LoadAllStatusDataAndCodifiedValues += GetAllStatusData;
             LoadAllStatusDataAndCodifiedValues += FetchAllCodifiedData;
@@ -203,6 +205,36 @@ namespace CD4.UI.Library.ViewModel
         #endregion
 
         #region Public Methods
+
+        //This method is dublicated on OrderEntryViewModel. Implement DRY later
+        public async Task<List<Model.BarcodeDataModel>> GetBarcodeDataAsync()
+        {
+            
+            try
+            {
+                var data = await requestDataAccess.GetBarcodeDataAsync(SelectedRequestData.Cin);
+                return _mapper.Map<List<Model.BarcodeDataModel>>(data);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        //********************* This method is dublicated on OrderEntryViewModel. Implement DRY later *********************************
+        public async Task MarkSampleCollectedAsync()
+        {
+            try
+            {
+                _ = await _statusDataAccess.MarkSampleCollectedAsync(SelectedRequestData.Cin, _authorizeDetail.UserId);
+            }
+            catch (Exception ex)
+            {
+                PushingMessages?.Invoke(this, ex.Message);
+            }
+
+        }
+
 
         /// <summary>
         /// Sets notes count button without a database call. Uses the passed in string value as count of notes

@@ -1091,7 +1091,9 @@ namespace CD4.UI.Library.ViewModel
             return (AllAtollsWithCorrespondingIsland.Where((a) => a.Atoll == atollName && a.Island == IslandName)).FirstOrDefault();
         }
 
-        public async Task<List<BarcodeDataModel>> GetBarcodeData()
+
+        //this code is dublicated on ResultEntry View Model. Handle this a bit more gracefully later
+        public async Task<List<BarcodeDataModel>> GetBarcodeDataAsync()
         {
             try
             {

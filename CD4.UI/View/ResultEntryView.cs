@@ -1,4 +1,5 @@
 ﻿using CD4.Entensibility.ReportingFramework;
+using CD4.UI.Helpers;
 using CD4.UI.Library.Model;
 using CD4.UI.Library.ViewModel;
 using CD4.UI.UiSpecificModels;
@@ -22,6 +23,7 @@ namespace CD4.UI.View
         private readonly IResultEntryViewModel _viewModel;
         private readonly IRejectionCommentViewModel _rejectionCommentViewModel;
         private readonly IUserAuthEvaluator _authEvaluator;
+        private readonly IBarcodeHelper _barcodeHelper;
         private readonly ILateOrderEntryViewModel _lateOrderEntryViewModel;
         private readonly ILabNotesViewModel _labNotesViewModel;
         private readonly ILoadMultipleExtensions _reportExtensions;
@@ -32,6 +34,7 @@ namespace CD4.UI.View
         public ResultEntryView(IResultEntryViewModel viewModel,
             IRejectionCommentViewModel rejectionCommentViewModel,
             IUserAuthEvaluator authEvaluator,
+            IBarcodeHelper barcodeHelper,
             ILateOrderEntryViewModel lateOrderEntryViewModel,
             ILabNotesViewModel labNotesViewModel, ILoadMultipleExtensions reportExtensions)
         {
@@ -45,6 +48,7 @@ namespace CD4.UI.View
             _viewModel.TestHistoryData = new List<TestHistoryModel>();
             _rejectionCommentViewModel = rejectionCommentViewModel;
             _authEvaluator = authEvaluator;
+            _barcodeHelper = barcodeHelper;
             _lateOrderEntryViewModel = lateOrderEntryViewModel;
             _labNotesViewModel = labNotesViewModel;
             _reportExtensions = reportExtensions;
@@ -631,7 +635,57 @@ namespace CD4.UI.View
             menuItems.Add(new DXMenuItem("Cancel Sample Rejection [ Ctlr+Shift+F11 ]", new EventHandler(OnCancelRejectSampleClickAsync)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Sample Audit Trail [ F12 ]", new EventHandler(OnSampleAuditTrailClick)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Add Test(s) [ Insert ]", new EventHandler(OnAddTestsToSampleAsync)) { Tag = new RowInfo(view, rowHandle) });
+            menuItems.Add(new DXMenuItem("Print Barcode [ F3 ]", new EventHandler(OnPrintBarcodeClick)) { Tag = new RowInfo(view, rowHandle) });
             return menuItems;
+        }
+
+        /// <summary>
+        /// Collects sample if not collected.
+        /// Prints required barcodes either way
+        /// </summary>
+        private async void OnPrintBarcodeClick(object sender, EventArgs e)
+        {
+            if (!_authEvaluator.IsFunctionAuthorized("OrderEntry.PrintBarcode")) { return; }
+            var sample = GetSampleForMenu(sender, e);
+
+            //If the print barcode function returns false then don't try marking the sample as collected.
+            if (!await PrintBarcodeAsync()) { return; }
+
+            try
+            {
+                await _viewModel.MarkSampleCollectedAsync();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show($"An error occured while marking the sample as collected\n\n{ex.Message}",
+                    "Mark Sample as collected", MessageBoxButtons.OK);
+            }
+        }
+
+        /// <summary>
+        /// loads barcode data from database and tries to print the barcodes
+        /// NOTE: *********************************************  DUBLICATE CODE EXISTS ON ORDER ENTRY VIEW ************************
+        /// </summary>
+        /// <returns>True if able to load barcode data from database, even if the printing step fails.</returns>
+        private async Task<bool> PrintBarcodeAsync()
+        {
+            List<BarcodeDataModel> barcodeData;
+            try
+            {
+                barcodeData = await _viewModel.GetBarcodeDataAsync();
+                return _barcodeHelper.PrintSingleSampleBarcode(barcodeData, _viewModel.SelectedRequestData.Cin);
+            }
+            catch (System.Drawing.Printing.InvalidPrinterException ex)
+            {
+                XtraMessageBox.Show($"Cannot print the barcode. The sample will be marked as collected if status is registered. Please find the error(s) below\n{ex.Message}");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+                return false;
+            }
+
         }
 
         private async void OnAddTestsToSampleAsync(object sender, EventArgs e)
