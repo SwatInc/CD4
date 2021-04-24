@@ -120,7 +120,8 @@ namespace CD4.UI.Helpers
 
         private string GetAbbreviatedName(string fullname)
         {
-            return _namesAbbreviator.Execute(fullname, _fullnameCriticalLength);
+            //return _namesAbbreviator.Execute(fullname, _fullnameCriticalLength);
+            return fullname;
         }
     }
 }
