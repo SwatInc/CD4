@@ -98,8 +98,8 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             this.xrLabel15.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Upper([Patient].[NidPp])")});
-            this.xrLabel15.Font = new System.Drawing.Font("Courier New", 8F);
-            this.xrLabel15.LocationFloat = new DevExpress.Utils.PointFloat(100F, 23F);
+            this.xrLabel15.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrLabel15.LocationFloat = new DevExpress.Utils.PointFloat(134.25F, 23F);
             this.xrLabel15.Multiline = true;
             this.xrLabel15.Name = "xrLabel15";
             this.xrLabel15.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -113,12 +113,12 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             this.xrLabel14.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[CollectedDate]")});
-            this.xrLabel14.Font = new System.Drawing.Font("Courier New", 8F);
-            this.xrLabel14.LocationFloat = new DevExpress.Utils.PointFloat(391.8333F, 0F);
+            this.xrLabel14.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrLabel14.LocationFloat = new DevExpress.Utils.PointFloat(580.6249F, 0F);
             this.xrLabel14.Multiline = true;
             this.xrLabel14.Name = "xrLabel14";
             this.xrLabel14.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel14.SizeF = new System.Drawing.SizeF(91.16675F, 23F);
+            this.xrLabel14.SizeF = new System.Drawing.SizeF(146.3751F, 23F);
             this.xrLabel14.StylePriority.UseFont = false;
             this.xrLabel14.StylePriority.UseTextAlignment = false;
             this.xrLabel14.Text = "xrLabel14";
@@ -129,8 +129,8 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             this.xrLabel13.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Assays].[Cin]")});
-            this.xrLabel13.Font = new System.Drawing.Font("Courier New", 8F);
-            this.xrLabel13.LocationFloat = new DevExpress.Utils.PointFloat(100F, 0F);
+            this.xrLabel13.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrLabel13.LocationFloat = new DevExpress.Utils.PointFloat(134.25F, 0F);
             this.xrLabel13.Multiline = true;
             this.xrLabel13.Name = "xrLabel13";
             this.xrLabel13.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -144,8 +144,8 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             this.xrLabel12.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Upper([Patient].[Address])")});
-            this.xrLabel12.Font = new System.Drawing.Font("Courier New", 8F);
-            this.xrLabel12.LocationFloat = new DevExpress.Utils.PointFloat(100F, 76.99998F);
+            this.xrLabel12.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrLabel12.LocationFloat = new DevExpress.Utils.PointFloat(134.25F, 76.99998F);
             this.xrLabel12.Multiline = true;
             this.xrLabel12.Name = "xrLabel12";
             this.xrLabel12.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -160,16 +160,16 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrLine1.LineWidth = 4F;
             this.xrLine1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 100F);
             this.xrLine1.Name = "xrLine1";
-            this.xrLine1.SizeF = new System.Drawing.SizeF(483.0001F, 5.291687F);
+            this.xrLine1.SizeF = new System.Drawing.SizeF(727F, 5.291687F);
             // 
             // xrLabel4
             // 
-            this.xrLabel4.Font = new System.Drawing.Font("Courier New", 8F);
+            this.xrLabel4.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrLabel4.LocationFloat = new DevExpress.Utils.PointFloat(0F, 76.99998F);
             this.xrLabel4.Multiline = true;
             this.xrLabel4.Name = "xrLabel4";
             this.xrLabel4.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel4.SizeF = new System.Drawing.SizeF(100F, 23F);
+            this.xrLabel4.SizeF = new System.Drawing.SizeF(134.25F, 23F);
             this.xrLabel4.StylePriority.UseFont = false;
             this.xrLabel4.StylePriority.UseTextAlignment = false;
             this.xrLabel4.Text = "Address: ";
@@ -177,12 +177,12 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             // xrLabel3
             // 
-            this.xrLabel3.Font = new System.Drawing.Font("Courier New", 8F);
+            this.xrLabel3.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrLabel3.LocationFloat = new DevExpress.Utils.PointFloat(0F, 23F);
             this.xrLabel3.Multiline = true;
             this.xrLabel3.Name = "xrLabel3";
             this.xrLabel3.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel3.SizeF = new System.Drawing.SizeF(100F, 23F);
+            this.xrLabel3.SizeF = new System.Drawing.SizeF(134.25F, 23F);
             this.xrLabel3.StylePriority.UseFont = false;
             this.xrLabel3.StylePriority.UseTextAlignment = false;
             this.xrLabel3.Text = "Reference No:";
@@ -190,12 +190,12 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             // xrLabel2
             // 
-            this.xrLabel2.Font = new System.Drawing.Font("Courier New", 8F);
-            this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(301.2083F, 0F);
+            this.xrLabel2.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrLabel2.LocationFloat = new DevExpress.Utils.PointFloat(454.5832F, 0F);
             this.xrLabel2.Multiline = true;
             this.xrLabel2.Name = "xrLabel2";
             this.xrLabel2.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel2.SizeF = new System.Drawing.SizeF(90.625F, 23F);
+            this.xrLabel2.SizeF = new System.Drawing.SizeF(126.0417F, 23F);
             this.xrLabel2.StylePriority.UseFont = false;
             this.xrLabel2.StylePriority.UseTextAlignment = false;
             this.xrLabel2.Text = "Sample Date:";
@@ -203,12 +203,12 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             // xrLabel1
             // 
-            this.xrLabel1.Font = new System.Drawing.Font("Courier New", 8F);
+            this.xrLabel1.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrLabel1.Multiline = true;
             this.xrLabel1.Name = "xrLabel1";
             this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel1.SizeF = new System.Drawing.SizeF(100F, 23F);
+            this.xrLabel1.SizeF = new System.Drawing.SizeF(134.25F, 23F);
             this.xrLabel1.StylePriority.UseFont = false;
             this.xrLabel1.StylePriority.UseTextAlignment = false;
             this.xrLabel1.Text = "Sample No:";
@@ -238,12 +238,12 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             this.xrLabel19.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Assays].[DisplayNormalRange]")});
-            this.xrLabel19.Font = new System.Drawing.Font("Courier New", 8F);
-            this.xrLabel19.LocationFloat = new DevExpress.Utils.PointFloat(352.7917F, 0.7916451F);
+            this.xrLabel19.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrLabel19.LocationFloat = new DevExpress.Utils.PointFloat(554.5833F, 0.7916451F);
             this.xrLabel19.Multiline = true;
             this.xrLabel19.Name = "xrLabel19";
             this.xrLabel19.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel19.SizeF = new System.Drawing.SizeF(130.2083F, 23F);
+            this.xrLabel19.SizeF = new System.Drawing.SizeF(156.2499F, 23F);
             this.xrLabel19.StylePriority.UseFont = false;
             this.xrLabel19.StylePriority.UseTextAlignment = false;
             this.xrLabel19.Text = "xrLabel19";
@@ -253,8 +253,8 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             this.xrLabel18.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Assays].[Unit]")});
-            this.xrLabel18.Font = new System.Drawing.Font("Courier New", 8F);
-            this.xrLabel18.LocationFloat = new DevExpress.Utils.PointFloat(271.5417F, 0.7916451F);
+            this.xrLabel18.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrLabel18.LocationFloat = new DevExpress.Utils.PointFloat(473.3333F, 0.7916451F);
             this.xrLabel18.Multiline = true;
             this.xrLabel18.Name = "xrLabel18";
             this.xrLabel18.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -268,12 +268,12 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             this.xrLabel17.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Assays].[Result]")});
-            this.xrLabel17.Font = new System.Drawing.Font("Courier New", 8F);
-            this.xrLabel17.LocationFloat = new DevExpress.Utils.PointFloat(141.3334F, 0F);
+            this.xrLabel17.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrLabel17.LocationFloat = new DevExpress.Utils.PointFloat(261.1251F, 0F);
             this.xrLabel17.Multiline = true;
             this.xrLabel17.Name = "xrLabel17";
             this.xrLabel17.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel17.SizeF = new System.Drawing.SizeF(130.2083F, 23F);
+            this.xrLabel17.SizeF = new System.Drawing.SizeF(212.2083F, 23F);
             this.xrLabel17.StylePriority.UseFont = false;
             this.xrLabel17.StylePriority.UseTextAlignment = false;
             this.xrLabel17.Text = "xrLabel17";
@@ -283,12 +283,12 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             this.xrLabel16.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Assays].[Assay]")});
-            this.xrLabel16.Font = new System.Drawing.Font("Courier New", 8F);
+            this.xrLabel16.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrLabel16.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0.7916451F);
             this.xrLabel16.Multiline = true;
             this.xrLabel16.Name = "xrLabel16";
             this.xrLabel16.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel16.SizeF = new System.Drawing.SizeF(141.3334F, 23F);
+            this.xrLabel16.SizeF = new System.Drawing.SizeF(261.1251F, 23F);
             this.xrLabel16.StylePriority.UseFont = false;
             this.xrLabel16.StylePriority.UseTextAlignment = false;
             this.xrLabel16.Text = "xrLabel16";
@@ -301,17 +301,17 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrLabel7,
             this.xrLabel6,
             this.xrLabel5});
-            this.GroupHeader1.HeightF = 23.00003F;
+            this.GroupHeader1.HeightF = 23.00006F;
             this.GroupHeader1.Name = "GroupHeader1";
             // 
             // xrLabel8
             // 
-            this.xrLabel8.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Bold);
-            this.xrLabel8.LocationFloat = new DevExpress.Utils.PointFloat(352.7917F, 0F);
+            this.xrLabel8.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold);
+            this.xrLabel8.LocationFloat = new DevExpress.Utils.PointFloat(554.5833F, 0F);
             this.xrLabel8.Multiline = true;
             this.xrLabel8.Name = "xrLabel8";
             this.xrLabel8.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel8.SizeF = new System.Drawing.SizeF(130.2083F, 23F);
+            this.xrLabel8.SizeF = new System.Drawing.SizeF(156.2499F, 23F);
             this.xrLabel8.StylePriority.UseFont = false;
             this.xrLabel8.StylePriority.UseTextAlignment = false;
             this.xrLabel8.Text = "Reference Range";
@@ -319,8 +319,8 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             // xrLabel7
             // 
-            this.xrLabel7.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Bold);
-            this.xrLabel7.LocationFloat = new DevExpress.Utils.PointFloat(271.5417F, 0F);
+            this.xrLabel7.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold);
+            this.xrLabel7.LocationFloat = new DevExpress.Utils.PointFloat(473.3333F, 0F);
             this.xrLabel7.Multiline = true;
             this.xrLabel7.Name = "xrLabel7";
             this.xrLabel7.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
@@ -332,12 +332,12 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             // xrLabel6
             // 
-            this.xrLabel6.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Bold);
-            this.xrLabel6.LocationFloat = new DevExpress.Utils.PointFloat(141.3334F, 0F);
+            this.xrLabel6.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold);
+            this.xrLabel6.LocationFloat = new DevExpress.Utils.PointFloat(261.1251F, 0F);
             this.xrLabel6.Multiline = true;
             this.xrLabel6.Name = "xrLabel6";
             this.xrLabel6.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel6.SizeF = new System.Drawing.SizeF(130.2083F, 23F);
+            this.xrLabel6.SizeF = new System.Drawing.SizeF(212.2083F, 23F);
             this.xrLabel6.StylePriority.UseFont = false;
             this.xrLabel6.StylePriority.UseTextAlignment = false;
             this.xrLabel6.Text = "Result";
@@ -345,12 +345,12 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             // xrLabel5
             // 
-            this.xrLabel5.Font = new System.Drawing.Font("Courier New", 9F, System.Drawing.FontStyle.Bold);
-            this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(0F, 3.178914E-05F);
+            this.xrLabel5.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Bold);
+            this.xrLabel5.LocationFloat = new DevExpress.Utils.PointFloat(0F, 6.357829E-05F);
             this.xrLabel5.Multiline = true;
             this.xrLabel5.Name = "xrLabel5";
             this.xrLabel5.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel5.SizeF = new System.Drawing.SizeF(141.3334F, 23F);
+            this.xrLabel5.SizeF = new System.Drawing.SizeF(261.1251F, 23F);
             this.xrLabel5.StylePriority.UseFont = false;
             this.xrLabel5.StylePriority.UseTextAlignment = false;
             this.xrLabel5.Text = "Test";
@@ -377,18 +377,18 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrLine2.LineWidth = 4F;
             this.xrLine2.LocationFloat = new DevExpress.Utils.PointFloat(0F, 0F);
             this.xrLine2.Name = "xrLine2";
-            this.xrLine2.SizeF = new System.Drawing.SizeF(483.0001F, 5.291687F);
+            this.xrLine2.SizeF = new System.Drawing.SizeF(727F, 5.291687F);
             // 
             // xrLabel20
             // 
             this.xrLabel20.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[PrintedDate]")});
-            this.xrLabel20.Font = new System.Drawing.Font("Courier New", 8F);
-            this.xrLabel20.LocationFloat = new DevExpress.Utils.PointFloat(78.00001F, 5.291687F);
+            this.xrLabel20.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrLabel20.LocationFloat = new DevExpress.Utils.PointFloat(115.5F, 5.291685F);
             this.xrLabel20.Multiline = true;
             this.xrLabel20.Name = "xrLabel20";
             this.xrLabel20.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel20.SizeF = new System.Drawing.SizeF(125.5417F, 23F);
+            this.xrLabel20.SizeF = new System.Drawing.SizeF(164.5833F, 23F);
             this.xrLabel20.StylePriority.UseFont = false;
             this.xrLabel20.StylePriority.UseTextAlignment = false;
             this.xrLabel20.Text = "xrLabel20";
@@ -396,12 +396,12 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             // xrLabel11
             // 
-            this.xrLabel11.Font = new System.Drawing.Font("Courier New", 8F);
-            this.xrLabel11.LocationFloat = new DevExpress.Utils.PointFloat(403.8333F, 5.291687F);
+            this.xrLabel11.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrLabel11.LocationFloat = new DevExpress.Utils.PointFloat(596.7916F, 5.291685F);
             this.xrLabel11.Multiline = true;
             this.xrLabel11.Name = "xrLabel11";
             this.xrLabel11.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel11.SizeF = new System.Drawing.SizeF(79.16669F, 23F);
+            this.xrLabel11.SizeF = new System.Drawing.SizeF(130.2084F, 23F);
             this.xrLabel11.StylePriority.UseFont = false;
             this.xrLabel11.StylePriority.UseTextAlignment = false;
             this.xrLabel11.Text = "Page 1 of 1";
@@ -409,12 +409,12 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             // xrLabel10
             // 
-            this.xrLabel10.Font = new System.Drawing.Font("Courier New", 8F);
-            this.xrLabel10.LocationFloat = new DevExpress.Utils.PointFloat(226.9583F, 5.291687F);
+            this.xrLabel10.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrLabel10.LocationFloat = new DevExpress.Utils.PointFloat(280.0832F, 5.291685F);
             this.xrLabel10.Multiline = true;
             this.xrLabel10.Name = "xrLabel10";
             this.xrLabel10.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel10.SizeF = new System.Drawing.SizeF(164.875F, 23F);
+            this.xrLabel10.SizeF = new System.Drawing.SizeF(274.5001F, 23F);
             this.xrLabel10.StylePriority.UseFont = false;
             this.xrLabel10.StylePriority.UseTextAlignment = false;
             this.xrLabel10.Text = "Machine generated report";
@@ -422,12 +422,12 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             // xrLabel9
             // 
-            this.xrLabel9.Font = new System.Drawing.Font("Courier New", 8F);
-            this.xrLabel9.LocationFloat = new DevExpress.Utils.PointFloat(0F, 5.291687F);
+            this.xrLabel9.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.xrLabel9.LocationFloat = new DevExpress.Utils.PointFloat(0F, 5.291685F);
             this.xrLabel9.Multiline = true;
             this.xrLabel9.Name = "xrLabel9";
             this.xrLabel9.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 100F);
-            this.xrLabel9.SizeF = new System.Drawing.SizeF(78F, 23F);
+            this.xrLabel9.SizeF = new System.Drawing.SizeF(115.5F, 23F);
             this.xrLabel9.StylePriority.UseFont = false;
             this.xrLabel9.StylePriority.UseTextAlignment = false;
             this.xrLabel9.Text = "Printed At: ";
@@ -445,11 +445,11 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.ComponentStorage.AddRange(new System.ComponentModel.IComponent[] {
             this.bindingSource});
             this.DataSource = this.bindingSource;
-            this.Font = new System.Drawing.Font("Courier New", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Font = new System.Drawing.Font("Courier New", 11F);
             this.Margins = new System.Drawing.Printing.Margins(50, 50, 50, 50);
-            this.PageHeight = 827;
-            this.PageWidth = 583;
-            this.PaperKind = System.Drawing.Printing.PaperKind.A5;
+            this.PageHeight = 1169;
+            this.PageWidth = 827;
+            this.PaperKind = System.Drawing.Printing.PaperKind.A4;
             this.Version = "18.2";
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();

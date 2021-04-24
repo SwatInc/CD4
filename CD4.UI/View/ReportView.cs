@@ -128,12 +128,6 @@ namespace CD4.UI.View
                 xtraReport.PrinterName = "DocumentPrinter";
                 xtraReport.CreateDocument();
 
-                //scale A5 reports to A4 size
-                if (xtraReport.PaperKind == System.Drawing.Printing.PaperKind.A5)
-                {
-                    xtraReport.PrintingSystem.Document.ScaleFactor = 2;
-                }
-
                 xtraReport.Print();
             }
 
