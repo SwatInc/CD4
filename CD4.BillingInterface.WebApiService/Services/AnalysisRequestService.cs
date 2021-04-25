@@ -98,7 +98,7 @@ namespace CD4.BillingInterface.WebApiService.Services
             try
             {
                 _logger.LogDebug("Calling datalayer for inserting/updating analysis request");
-                await _analysisRequestDataAccess.ConfirmRequestAsync(insertAR, 1);
+                await _analysisRequestDataAccess.ConfirmRequestAsync(insertAR, 2);
 
                 //ToDo: insert the person who received / accepted the sample
                 await _ndaTrackingDataAccess.UpsertSampleReceivedUserIdAsync(insertAR.Cin, request.Request.SampleReceivedBy, 2);
