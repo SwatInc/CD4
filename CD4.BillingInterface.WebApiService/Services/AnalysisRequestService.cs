@@ -141,6 +141,8 @@ namespace CD4.BillingInterface.WebApiService.Services
                 .Replace($"uS/{20}","")
                 .Replace(" ", "")
                 .Replace("/", "")
+                .Replace("(", "")
+                .Replace(")", "")
                 .Replace("-", "")
                 .Replace("_", "")
                 .Replace("\\", "")
