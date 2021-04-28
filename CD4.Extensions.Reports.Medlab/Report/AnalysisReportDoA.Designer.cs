@@ -773,7 +773,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell36.Name = "xrTableCell36";
             this.xrTableCell36.Padding = new DevExpress.XtraPrinting.PaddingInfo(4, 2, 2, 2, 100F);
             this.xrTableCell36.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
-            this.xrTableCell36.RowSpan = 8;
+            this.xrTableCell36.RowSpan = 7;
             this.xrTableCell36.StylePriority.UseBorderColor = false;
             this.xrTableCell36.StylePriority.UseBorders = false;
             this.xrTableCell36.StylePriority.UseFont = false;
@@ -1172,7 +1172,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             this.xrTableCell37.BorderColor = System.Drawing.Color.Gray;
             this.xrTableCell37.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Ethanol]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Methadone]")});
             this.xrTableCell37.Font = new System.Drawing.Font("Faruma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrTableCell37.Multiline = true;
             this.xrTableCell37.Name = "xrTableCell37";
@@ -1202,7 +1202,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell38.StylePriority.UseFont = false;
             this.xrTableCell38.StylePriority.UsePadding = false;
             this.xrTableCell38.StylePriority.UseTextAlignment = false;
-            this.xrTableCell38.Text = "ބަނގު އާވި (Ethyl Glucuronide)";
+            this.xrTableCell38.Text = "މެތަޑޯން (Methadone";
             this.xrTableCell38.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             this.xrTableCell38.Weight = 1.5073420584168309D;
             // 
@@ -1215,7 +1215,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell39.StylePriority.UseBorderColor = false;
             this.xrTableCell39.StylePriority.UseFont = false;
             this.xrTableCell39.StylePriority.UseTextAlignment = false;
-            this.xrTableCell39.Text = "ETG";
+            this.xrTableCell39.Text = "MDONE\r\n";
             this.xrTableCell39.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell39.Weight = 0.51282047911274065D;
             // 
@@ -1246,8 +1246,6 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // xrTableCell29
             // 
             this.xrTableCell29.BorderColor = System.Drawing.Color.Gray;
-            this.xrTableCell29.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Methadone]")});
             this.xrTableCell29.Font = new System.Drawing.Font("Faruma", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrTableCell29.Multiline = true;
             this.xrTableCell29.Name = "xrTableCell29";
@@ -1259,6 +1257,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell29.StylePriority.UseTextAlignment = false;
             this.xrTableCell29.Text = "ނުދައްކާ NEGATIVE";
             this.xrTableCell29.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell29.Visible = false;
             this.xrTableCell29.Weight = 0.97983746247042847D;
             // 
             // xrTableCell30
@@ -1277,8 +1276,9 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell30.StylePriority.UseFont = false;
             this.xrTableCell30.StylePriority.UsePadding = false;
             this.xrTableCell30.StylePriority.UseTextAlignment = false;
-            this.xrTableCell30.Text = "މެތަޑޯން (Methadone)";
+            this.xrTableCell30.Text = "ބަނގު އާވި (Ethyl Glucuronide)";
             this.xrTableCell30.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
+            this.xrTableCell30.Visible = false;
             this.xrTableCell30.Weight = 1.5073420584168309D;
             // 
             // xrTableCell31
@@ -1290,8 +1290,9 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell31.StylePriority.UseBorderColor = false;
             this.xrTableCell31.StylePriority.UseFont = false;
             this.xrTableCell31.StylePriority.UseTextAlignment = false;
-            this.xrTableCell31.Text = "MDONE\r\n";
+            this.xrTableCell31.Text = "ETG";
             this.xrTableCell31.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
+            this.xrTableCell31.Visible = false;
             this.xrTableCell31.Weight = 0.51282047911274065D;
             // 
             // xrTableCell32
@@ -1306,6 +1307,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell32.StylePriority.UseFont = false;
             this.xrTableCell32.StylePriority.UseTextAlignment = false;
             this.xrTableCell32.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
+            this.xrTableCell32.Visible = false;
             this.xrTableCell32.Weight = 1D;
             // 
             // xrTable2
