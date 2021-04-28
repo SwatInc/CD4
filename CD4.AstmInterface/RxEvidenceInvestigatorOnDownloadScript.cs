@@ -1,5 +1,4 @@
-﻿
-using System;
+﻿using System;
 
 public class RxEvidenceInvestigatorOnDownloadScript
 {
@@ -19,7 +18,7 @@ public class RxEvidenceInvestigatorOnDownloadScript
         var Cutoff50 = 50M;
 
         var uploadCode = (UploadCodes)Enum.Parse(typeof(UploadCodes), measurement.TestCode);
-        var isMeasurementNumeric = decimal.TryParse(measurement.MeasurementValue, out decimal decimalResult);
+        var isMeasurementNumeric = decimal.TryParse(measurement.MeasurementValue.Replace(">",""), out decimal decimalResult);
 
         //return empty result if not numeric
         if (!isMeasurementNumeric) { return GetEmptyReturnResult(); }
