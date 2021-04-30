@@ -150,7 +150,8 @@ namespace CD4.UI.View
                 ReportedAt = reportModel.ReportedAt,
                 ReceivedBy = reportModel.ReceivedBy,
                 AnalysedBy = reportModel.AnalysedBy,
-                InstituteAssignedPatientId = reportModel.InstituteAssignedPatientId
+                InstituteAssignedPatientId = reportModel.InstituteAssignedPatientId,
+                SampleProcessedAt = reportModel.SampleProcessedAt
             };
 
             //Map patient

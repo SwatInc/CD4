@@ -18,6 +18,7 @@ namespace CD4.DataLibrary.Models.ReportModels
         public string ReceivedBy { get; set; }
         public string AnalysedBy { get; set; }
         public long InstituteAssignedPatientId { get; set; }
+        public DateTimeOffset? SampleProcessedAt { get; set; }
         public PatientModel Patient { get; set; }
         public List<AssaysModel> Assays { get; set; }
 

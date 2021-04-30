@@ -17,7 +17,7 @@ namespace CD4.Entensibility.ReportingFramework.Models
         public string ReceivedBy { get; set; }
         public string AnalysedBy { get; set; }
         public long InstituteAssignedPatientId { get; set; }
-
+        public DateTimeOffset? SampleProcessedAt { get; set; }
         public string Opiates { get; set; }
         public string Benzodiazepine1 { get; set; }
         public string Benzodiazepine2 { get; set; }

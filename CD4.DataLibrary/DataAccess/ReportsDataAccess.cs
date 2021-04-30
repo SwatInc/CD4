@@ -66,6 +66,7 @@ namespace CD4.DataLibrary.DataAccess
                 ReceivedBy = databaseModel.Patient.ReceivedBy,
                 AnalysedBy = databaseModel.Patient.AnalysedBy,
                 InstituteAssignedPatientId = databaseModel.Patient.InstituteAssignedPatientId,
+                SampleProcessedAt = databaseModel.Patient.SampleProcessedAt,
                 //Initialize sample collected date, received date and sample site.
                 CollectedDate = databaseModel.Patient.CollectedDate,
                 ReceivedDate = databaseModel.Patient.ReceivedDate,

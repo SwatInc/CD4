@@ -19,6 +19,7 @@ namespace CD4.Entensibility.ReportingFramework.Models
         public string ReceivedBy { get; set; }
         public string AnalysedBy { get; set; }
         public long InstituteAssignedPatientId { get; set; }
+        public DateTimeOffset? SampleProcessedAt { get; set; }
         public string Pdf417String { get; private set; }
         public Byte[] Pdf417Binary { get; private set; }
 
