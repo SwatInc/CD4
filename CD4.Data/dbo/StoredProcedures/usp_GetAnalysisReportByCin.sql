@@ -51,7 +51,9 @@ AS
 		,[R].[ReceivedBy]
 		,[R].[AnalysedBy]
 		,[R].[InstituteAssignedPatientId]
+		,[SPT].[SampleProcessedDateTime] AS [SampleProcessedAt]
 		FROM [dbo].[RequestsWithTestsWithResults] [R]
+		LEFT JOIN [dbo].[SampleProcessedTimings] [SPT] ON [R].[Cin] = [SPT].[Sample_Cin]
 		WHERE [R].[Cin] = @Cin;
 
 		--get logged in user
