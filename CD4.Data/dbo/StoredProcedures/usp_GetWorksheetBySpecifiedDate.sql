@@ -61,7 +61,8 @@ BEGIN
                [Mask],
                [Unit],
                [ReferenceCode],
-               [IsDeltaOk]
+               [IsDeltaOk],
+               [SampleProcessedAt]
 	           FROM [dbo].[WorkSheetResultData]
 	           WHERE [Cin] IN (SELECT [Cin] FROM @TempCins);
 
