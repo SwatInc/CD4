@@ -12,6 +12,7 @@ BEGIN
 			,[ST].[Description] AS [SampleType]
 			,[D].[Description] AS [Discipline]
 			,[TH].[TimeStamp] AS [CollectionDate]
+			,[AR].[EpisodeNumber]
 		FROM dbo.[Sample] [S]
 		INNER JOIN [dbo].[AnalysisRequest] [AR] ON [S].[AnalysisRequestId] = [AR].[Id]
 		INNER JOIN [dbo].[Patient] [P] ON [P].[Id] = [AR].[PatientId]

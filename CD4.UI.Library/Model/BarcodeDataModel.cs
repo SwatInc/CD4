@@ -17,5 +17,6 @@ namespace CD4.UI.Library.Model
         public string SampleType { get; set; }
         public string Discipline { get; set; }
         public DateTimeOffset CollectionDate { get; set; }
+        public string EpisodeNumber { get; set; }
     }
 }

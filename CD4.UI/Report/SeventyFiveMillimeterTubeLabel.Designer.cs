@@ -52,6 +52,8 @@
             this.Seq = new DevExpress.XtraReports.Parameters.Parameter();
             this.Discipline = new DevExpress.XtraReports.Parameters.Parameter();
             this.SampleType = new DevExpress.XtraReports.Parameters.Parameter();
+            this.xrLabel1 = new DevExpress.XtraReports.UI.XRLabel();
+            this.EpisodeNumber = new DevExpress.XtraReports.Parameters.Parameter();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
             // TopMargin
@@ -68,6 +70,7 @@
             // 
             this.Detail.BorderWidth = 0F;
             this.Detail.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrLabel1,
             this.xrLabelSampleType,
             this.xrLabelDiscipline,
             this.xrLabelSeq,
@@ -130,11 +133,11 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "?Seq")});
             this.xrLabelSeq.Font = new System.Drawing.Font("Microsoft Himalaya", 11F);
             this.xrLabelSeq.KeepTogether = true;
-            this.xrLabelSeq.LocationFloat = new DevExpress.Utils.PointFloat(145.6064F, 76F);
+            this.xrLabelSeq.LocationFloat = new DevExpress.Utils.PointFloat(149.0131F, 76F);
             this.xrLabelSeq.Multiline = true;
             this.xrLabelSeq.Name = "xrLabelSeq";
             this.xrLabelSeq.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
-            this.xrLabelSeq.SizeF = new System.Drawing.SizeF(33.98685F, 11F);
+            this.xrLabelSeq.SizeF = new System.Drawing.SizeF(30.58F, 11F);
             this.xrLabelSeq.StylePriority.UseBorderWidth = false;
             this.xrLabelSeq.StylePriority.UseFont = false;
             this.xrLabelSeq.StylePriority.UsePadding = false;
@@ -211,7 +214,7 @@
             this.xrLabelCollectedDate.Multiline = true;
             this.xrLabelCollectedDate.Name = "xrLabelCollectedDate";
             this.xrLabelCollectedDate.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
-            this.xrLabelCollectedDate.SizeF = new System.Drawing.SizeF(122.8009F, 11F);
+            this.xrLabelCollectedDate.SizeF = new System.Drawing.SizeF(80.91964F, 11F);
             this.xrLabelCollectedDate.StylePriority.UseBorderWidth = false;
             this.xrLabelCollectedDate.StylePriority.UseFont = false;
             this.xrLabelCollectedDate.StylePriority.UsePadding = false;
@@ -345,6 +348,31 @@
             this.SampleType.Description = "The type of sample. eg: urine";
             this.SampleType.Name = "SampleType";
             // 
+            // xrLabel1
+            // 
+            this.xrLabel1.BorderWidth = 0F;
+            this.xrLabel1.CanGrow = false;
+            this.xrLabel1.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "?EpisodeNumber")});
+            this.xrLabel1.Font = new System.Drawing.Font("Microsoft Himalaya", 11F);
+            this.xrLabel1.KeepTogether = true;
+            this.xrLabel1.LocationFloat = new DevExpress.Utils.PointFloat(103.7251F, 75.99999F);
+            this.xrLabel1.Multiline = true;
+            this.xrLabel1.Name = "xrLabel1";
+            this.xrLabel1.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
+            this.xrLabel1.SizeF = new System.Drawing.SizeF(45.28801F, 11F);
+            this.xrLabel1.StylePriority.UseBorderWidth = false;
+            this.xrLabel1.StylePriority.UseFont = false;
+            this.xrLabel1.StylePriority.UsePadding = false;
+            this.xrLabel1.StylePriority.UseTextAlignment = false;
+            this.xrLabel1.Text = "xrLabelSeq";
+            this.xrLabel1.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
+            // 
+            // EpisodeNumber
+            // 
+            this.EpisodeNumber.Description = "The is the equivalent to memo number";
+            this.EpisodeNumber.Name = "EpisodeNumber";
+            // 
             // SeventyFiveMillimeterTubeLabel
             // 
             this.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
@@ -366,7 +394,8 @@
             this.SampleCollectedDate,
             this.Seq,
             this.Discipline,
-            this.SampleType});
+            this.SampleType,
+            this.EpisodeNumber});
             this.SnapGridSize = 9.84252F;
             this.Version = "18.2";
             ((System.ComponentModel.ISupportInitialize)(this)).EndInit();
@@ -398,5 +427,7 @@
         private DevExpress.XtraReports.Parameters.Parameter Discipline;
         private DevExpress.XtraReports.UI.XRLabel xrLabelSampleType;
         private DevExpress.XtraReports.Parameters.Parameter SampleType;
+        private DevExpress.XtraReports.UI.XRLabel xrLabel1;
+        private DevExpress.XtraReports.Parameters.Parameter EpisodeNumber;
     }
 }
