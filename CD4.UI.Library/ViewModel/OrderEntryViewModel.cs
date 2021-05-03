@@ -45,7 +45,7 @@ namespace CD4.UI.Library.ViewModel
         private readonly IAnalysisRequestDataAccess _requestDataAccess;
         private readonly IStatusDataAccess _statusDataAccess;
         private readonly AuthorizeDetailEventArgs _authorizeDetail;
-        private readonly IGlobalSettingsDataAccess _globalSettingsDataAccess;
+        private readonly IGlobalSettingsHelper _globalSettingsHelper;
         private bool loadingStaticData;
         private long? instituteAssignedPatientId;
         #endregion
@@ -60,7 +60,7 @@ namespace CD4.UI.Library.ViewModel
             IAnalysisRequestDataAccess requestDataAccess,
             IStatusDataAccess statusDataAccess,
             AuthorizeDetailEventArgs authorizeDetail,
-            IGlobalSettingsDataAccess globalSettingsDataAccess,
+            IGlobalSettingsHelper globalSettingsHelper,
             IPrintingHelper printingHelper)
         {
             Sites = new List<SitesModel>();
@@ -79,7 +79,7 @@ namespace CD4.UI.Library.ViewModel
             this._requestDataAccess = requestDataAccess;
             this._statusDataAccess = statusDataAccess;
             _authorizeDetail = authorizeDetail;
-            _globalSettingsDataAccess = globalSettingsDataAccess;
+            _globalSettingsHelper = globalSettingsHelper;
             PrintingHelper = printingHelper;
             PropertyChanged += OrderEntryViewModel_PropertyChanged;
             InitializeStaticData += OnInitializeStaticDataAsync;
@@ -355,13 +355,15 @@ namespace CD4.UI.Library.ViewModel
 
         /// <summary>
         /// reads global settings and checks whether NidPp verification is required on order confirmation.
+        /// NO AWAIT HERE ************************************* CORRECT THIS
         /// </summary>
         public async Task<DemographicsConfirmationModel> OrderRequiresNidPpConfirmationAsync()
         {
             bool IsconfirmationRequired = true;
             try
             {
-                var result = await _globalSettingsDataAccess.ReadAllGlobalSettingsAsync();
+                var result = _globalSettingsHelper.Settings;
+
                 if (result is null)
                 {
                     PushingMessages.Invoke(this, "Cannot load global settings data, assuming defaults");

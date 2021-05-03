@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CD4.DataLibrary.Models
+namespace CD4.UI.Library.Model
 {
     public class GlobalSettingsModel
     {
