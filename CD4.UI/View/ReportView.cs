@@ -157,8 +157,8 @@ namespace CD4.UI.View
             //Map patient
             var patient = new Patient()
             {
-                NidPp = reportModel.Patient.NidPp.ToUpper().Trim(),
-                Fullname = reportModel.Patient.Fullname.ToUpper().Trim(),
+                NidPp = reportModel.Patient.NidPp.Trim(),
+                Fullname = reportModel.Patient.Fullname.Trim(),
                 AgeSex = reportModel.Patient.AgeSex,
                 Birthdate = reportModel.Patient.Birthdate,
                 Address = reportModel.Patient.Address,
