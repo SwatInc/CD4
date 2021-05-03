@@ -9,6 +9,12 @@
 --              SELECT * FROM [$(TableName)]					
 ----------------------------------------------------------------------------------------
 --*/
+
+
+
+--Global settings json
+--{"VerifyNidPpOnOrder":true,"IsAnalysisRequestBarcodeRequired":true,"ReportExportBasePath":"C:\\Logs\\","IsFullnameAbbreviated":false}
+
 --INSERT INTO [dbo].[Sites] ([Name])
 --  VALUES ('NATIONAL DRUG AGENCY'), ('MEDLAB DIAGNOSTICS');
 

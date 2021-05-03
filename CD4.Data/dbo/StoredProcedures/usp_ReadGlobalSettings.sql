@@ -1,7 +1,6 @@
 ﻿CREATE PROCEDURE [dbo].[usp_ReadGlobalSettings]
 AS
 BEGIN
-	SELECT [Id]
-		  ,[VerifyNidPpOnOrder] 
+	SELECT [JsonSettings] 
 	FROM [dbo].[GlobalSettings];
 END
