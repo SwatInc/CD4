@@ -97,7 +97,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // xrLabel15
             // 
             this.xrLabel15.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "Upper([Patient].[NidPp])")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Patient].[NidPp]")});
             this.xrLabel15.Font = new System.Drawing.Font("Courier New", 11F);
             this.xrLabel15.LocationFloat = new DevExpress.Utils.PointFloat(99.99998F, 23F);
             this.xrLabel15.Multiline = true;

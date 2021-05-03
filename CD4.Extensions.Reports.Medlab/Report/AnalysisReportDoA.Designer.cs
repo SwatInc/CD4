@@ -158,7 +158,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.TopMargin.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
             this.xrLabel3,
             this.xrPictureBoxLaboratorylogo});
-            this.TopMargin.HeightF = 125F;
+            this.TopMargin.HeightF = 125.0833F;
             this.TopMargin.Name = "TopMargin";
             // 
             // xrLabel3
@@ -1539,7 +1539,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             this.xrTableCell2.BorderColor = System.Drawing.Color.Gray;
             this.xrTableCell2.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Patient].[Fullname]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Patient].[NidPp]")});
             this.xrTableCell2.Font = new System.Drawing.Font("Faruma", 10F);
             this.xrTableCell2.Multiline = true;
             this.xrTableCell2.Name = "xrTableCell2";
@@ -1778,7 +1778,10 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.bindingSource});
             this.DataSource = this.bindingSource;
             this.Font = new System.Drawing.Font("Arial", 9.75F);
-            this.Margins = new System.Drawing.Printing.Margins(100, 100, 125, 100);
+            this.Margins = new System.Drawing.Printing.Margins(86, 90, 125, 100);
+            this.PageHeight = 1169;
+            this.PageWidth = 827;
+            this.PaperKind = System.Drawing.Printing.PaperKind.A4;
             this.Version = "18.2";
             ((System.ComponentModel.ISupportInitialize)(this.xrTable6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.xrTable5)).EndInit();
