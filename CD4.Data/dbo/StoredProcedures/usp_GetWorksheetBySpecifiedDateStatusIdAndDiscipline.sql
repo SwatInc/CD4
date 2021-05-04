@@ -1,12 +1,14 @@
 ﻿CREATE PROCEDURE [dbo].[usp_GetWorksheetBySpecifiedDateStatusIdAndDiscipline]
 	@StartDate VARCHAR(8),
+	@EndDate VARCHAR(8),
 	@StatusId int,
     @DisciplineId int
 AS
 BEGIN
-	WHILE (@StartDate IS NOT NULL) AND (@StartDate <> '')
+	WHILE ((@StartDate IS NOT NULL) AND (@StartDate <> '') AND (@EndDate IS NOT NULL) AND (@EndDate <> ''))
 	BEGIN
 		DECLARE @StartDateInUse DATE = CAST(@StartDate AS DATE);
+		DECLARE @EndDateInUse DATE = CAST(@EndDate AS DATE);
         DECLARE @AcceptedStatusId int = 3;
 
         DECLARE @TempCins TABLE ([Cin] VARCHAR(20) PRIMARY KEY, [AnalysisRequestId] INT NOT NULL);
@@ -25,7 +27,8 @@ BEGIN
         INNER JOIN [dbo].[Test] [T] ON [R].[TestId] = [T].[Id]
 		INNER JOIN [dbo].[ResultTracking] [RT] ON [R].[Id] = [RT].[ResultId]
 		INNER JOIN [dbo].[TrackingHistory] [TH] ON [TH].[SampleCin] = [S].[Cin]
-		WHERE [TH].[TimeStamp] >= @StartDateInUse AND 
+		WHERE [TH].[TimeStamp] >= @StartDateInUse AND
+              [TH].[TimeStamp] <= @EndDateInUse AND 
               [TH].[TrackingType] = 2 AND 
               [TH].[StatusId] = @AcceptedStatusId AND
               [RT].[StatusId] = @StatusId AND --Tracking type [2] = sample | StatusId 2 = Collected
@@ -59,7 +62,11 @@ BEGIN
                ISNULL([C].[Detail],'') AS [ClinicalDetails]
 		FROM [dbo].[RequestsWithTestsAndResults] [RW] 
         INNER JOIN @TempClinicalDetails [C] ON [RW].[AnalysisRequestId] = [C].[AnalysisRequestId]
-		WHERE [RW].[RequestedDate] >= @StartDateInUse AND [RW].[TestStatusId] = @StatusId AND [Cin] IN (SELECT [Cin] FROM @TempCins);
+		WHERE 
+            [RW].[RequestedDate] >= @StartDateInUse AND
+            [RW].[RequestedDate] <= @EndDateInUse AND
+            [RW].[TestStatusId] = @StatusId AND 
+            [Cin] IN (SELECT [Cin] FROM @TempCins);
 		--NOTE: Need to keep this date as requested date
 
 		-- fetch results data

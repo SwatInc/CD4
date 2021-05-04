@@ -1,23 +1,28 @@
 ﻿CREATE PROCEDURE [dbo].[usp_GetWorksheetBySpecifiedDate]
-	@StartDate VARCHAR(8)
+	@StartDate VARCHAR(8),
+	@EndDate VARCHAR(8)
 	-- Format: yyyyMMdd
 AS
 BEGIN
-	WHILE (@StartDate IS NOT NULL) AND (@StartDate <> '')
+	WHILE ((@StartDate IS NOT NULL) AND (@StartDate <> '') AND (@EndDate IS NOT NULL) AND (@EndDate <> ''))
 	BEGIN
 		DECLARE @StartDateInUse DATE = CAST(@StartDate AS DATE);
+		DECLARE @EndDateInUse DATE = CAST(@EndDate AS DATE);
 
         DECLARE @TempCins TABLE ([Cin] VARCHAR(20) PRIMARY KEY, [AnalysisRequestId] INT NOT NULL);
 		DECLARE @TempClinicalDetails TABLE([AnalysisRequestId] INT PRIMARY KEY, [Detail] VARCHAR(100) NULL);
         
-        -- get distinct Cins that have current status as specified in @StatusId and are Collected[Status: 2] on Specified date or later
+        -- get distinct Cins that  are Collected[Status: 2] on Specified date or later
 		INSERT INTO @TempCins
 		SELECT DISTINCT([S].[Cin]),[S].[AnalysisRequestId] 
 		FROM [dbo].[Sample] [S]
 		INNER JOIN [dbo].[Result] [R] ON [R].[Sample_Cin] = [S].[Cin]
 		INNER JOIN [dbo].[ResultTracking] [RT] ON [R].[Id] = [RT].[ResultId]
 		INNER JOIN [dbo].[TrackingHistory] [TH] ON [TH].[SampleCin] = [S].[Cin]
-		WHERE [TH].[TimeStamp] >= @StartDateInUse AND [TH].[TrackingType] = 2;		--Tracking type [2] = sample | StatusId 2 = Collected
+		WHERE 
+            [TH].[TimeStamp] >= @StartDateInUse AND 
+            [TH].[TimeStamp] <= @EndDateInUse AND 
+            [TH].[TrackingType] = 2;		--Tracking type [2] = sample
 
         -- Get Clinical details
         INSERT INTO @TempClinicalDetails
@@ -47,7 +52,10 @@ BEGIN
                ISNULL([C].[Detail],'') AS [ClinicalDetails]
 		FROM [dbo].[RequestsWithTestsAndResults] [RW] 
         INNER JOIN @TempClinicalDetails [C] ON [RW].[AnalysisRequestId] = [C].[AnalysisRequestId]
-		WHERE [RW].[RequestedDate] >= @StartDateInUse AND [RW].[Cin] IN (SELECT [Cin] FROM @TempCins);
+		WHERE 
+            [RW].[RequestedDate] >= @StartDateInUse AND
+            [RW].[RequestedDate] <= @EndDateInUse AND
+            [RW].[Cin] IN (SELECT [Cin] FROM @TempCins);
 		--NOTE: Need to keep this date as requested date
 
 		-- fetch results data

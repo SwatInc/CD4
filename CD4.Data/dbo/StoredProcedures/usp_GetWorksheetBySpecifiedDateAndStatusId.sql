@@ -8,15 +8,18 @@ Data returned will be filtered form date and Test Status
 */
  CREATE PROCEDURE [dbo].[usp_GetWorksheetBySpecifiedDateAndStatusId]
 	@StartDate VARCHAR(8),
+	@EndDate VARCHAR(8),
 	--If status is 1 , date searched is registered date. If status is 2, date searched is collected date
 	-- if status is grater than 3 or more , date searched is accepted.
 	-- Format: yyyyMMdd
     @StatusId int -- Look for tests with this status Id
 AS
 BEGIN
-	WHILE (@StartDate IS NOT NULL) AND (@StartDate <> '')
+	WHILE ((@StartDate IS NOT NULL) AND (@StartDate <> '') AND (@EndDate IS NOT NULL) AND (@EndDate <> ''))
 	BEGIN
 		DECLARE @StartDateInUse DATE = CAST(@StartDate AS DATE);
+		DECLARE @EndDateInUse DATE = CAST(@EndDate AS DATE);
+
         DECLARE @AcceptedStatusId int = 3;
 
         DECLARE @TempCins TABLE ([Cin] VARCHAR(20) PRIMARY KEY, [AnalysisRequestId] INT NOT NULL);
@@ -34,7 +37,12 @@ BEGIN
 		INNER JOIN [dbo].[Result] [R] ON [R].[Sample_Cin] = [S].[Cin]
 		INNER JOIN [dbo].[ResultTracking] [RT] ON [R].[Id] = [RT].[ResultId]
 		INNER JOIN [dbo].[TrackingHistory] [TH] ON [TH].[SampleCin] = [S].[Cin]
-		WHERE [TH].[TimeStamp] >= @StartDateInUse AND [TH].[TrackingType] = 2 AND [TH].[StatusId] = @AcceptedStatusId AND [RT].[StatusId] = @StatusId;		--Tracking type [2] = sample | StatusId 2 = Collected
+		WHERE 
+            [TH].[TimeStamp] >= @StartDateInUse AND
+            [TH].[TimeStamp] <= @EndDateInUse AND
+            [TH].[TrackingType] = 2 AND
+            [TH].[StatusId] = @AcceptedStatusId AND
+            [RT].[StatusId] = @StatusId;		--Tracking type [2] = sample | StatusId 2 = Collected
 
         -- Get Clinical details
         INSERT INTO @TempClinicalDetails
@@ -64,7 +72,11 @@ BEGIN
                ISNULL([C].[Detail],'') AS [ClinicalDetails]
 		FROM [dbo].[RequestsWithTestsAndResults] [RW] 
         INNER JOIN @TempClinicalDetails [C] ON [RW].[AnalysisRequestId] = [C].[AnalysisRequestId]
-		WHERE [RW].[RequestedDate] >= @StartDateInUse AND [RW].[TestStatusId] = @StatusId AND [RW].[Cin] IN (SELECT [Cin] FROM @TempCins);
+		WHERE 
+            [RW].[RequestedDate] >= @StartDateInUse AND
+            [RW].[RequestedDate] <= @EndDateInUse AND
+            [RW].[TestStatusId] = @StatusId AND
+            [RW].[Cin] IN (SELECT [Cin] FROM @TempCins);
 		--NOTE: Need to keep this date as requested date
 
 		-- fetch results data
