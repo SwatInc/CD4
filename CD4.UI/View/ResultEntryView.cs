@@ -1366,6 +1366,7 @@ namespace CD4.UI.View
             #region FiltersAndFunctions
 
             dateEditLoadWorksheetFrom.DataBindings.Add(new Binding("EditValue", _viewModel, nameof(_viewModel.LoadWorksheetFromDate)));
+            dateEditLoadWorksheetTo.DataBindings.Add(new Binding("EditValue", _viewModel, nameof(_viewModel.LoadWorksheetToDate)));
 
             //Wire up the datasource for lookUpEditSampleStatusFilter
             lookUpEditSampleStatusFilter.Properties.DataSource = _viewModel.AllStatus;
@@ -1392,7 +1393,7 @@ namespace CD4.UI.View
 
             //set splitter for adjusting functions panel
             var height = this.splitContainerControlFunctions.Size.Height;
-            splitContainerControlFunctions.SplitterPosition = (int)(height - 90m);
+            splitContainerControlFunctions.SplitterPosition = (int)(height - 120m);
 
             //set splitter for sample and test functions panel
             splitContainerControlSamplesAndTest.SplitterPosition = (int)(0.5 * Width);
