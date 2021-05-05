@@ -30,6 +30,7 @@ namespace CD4.UI.Library.ViewModel
         dynamic TestHistoryData { get; set; }
         int SelectedDisciplineId { get; set; }
         string NotesCountButtonLabel { get; set; }
+        DateTime LoadWorksheetToDate { get; set; }
 
         event PropertyChangedEventHandler PropertyChanged;
         event EventHandler RequestDataRefreshed;

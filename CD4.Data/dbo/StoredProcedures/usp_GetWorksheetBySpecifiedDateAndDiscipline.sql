@@ -6,8 +6,8 @@ AS
 BEGIN
 	WHILE ((@StartDate IS NOT NULL) AND (@StartDate <> '') AND (@EndDate IS NOT NULL) AND (@EndDate <> ''))
 	BEGIN
-		DECLARE @StartDateInUse DATE = CAST(@StartDate AS DATE);
-		DECLARE @EndDateInUse DATE = CAST(@EndDate AS DATE);
+		DECLARE @StartDateInUse DATETIME = CAST(CONCAT(@StartDate,' 00:00:00.000') AS DATETIME);
+		DECLARE @EndDateInUse DATETIME = CAST(CONCAT(@EndDate,' 23:59:59.999') AS DATETIME);
 
         DECLARE @TempCins TABLE ([Cin] VARCHAR(20) PRIMARY KEY, [AnalysisRequestId] INT NOT NULL);
 		DECLARE @TempClinicalDetails TABLE([AnalysisRequestId] INT PRIMARY KEY, [Detail] VARCHAR(100) NULL);
@@ -20,8 +20,7 @@ BEGIN
         INNER JOIN [dbo].[Test] [T] ON [R].[TestId] = [T].[Id]
 		INNER JOIN [dbo].[ResultTracking] [RT] ON [R].[Id] = [RT].[ResultId]
 		INNER JOIN [dbo].[TrackingHistory] [TH] ON [TH].[SampleCin] = [S].[Cin]
-		WHERE [TH].[TimeStamp] >= @StartDateInUse AND
-              [TH].[TimeStamp] <= @EndDateInUse AND 
+		WHERE ([TH].[TimeStamp]  BETWEEN @StartDateInUse AND @EndDateInUse) AND 
               [TH].[TrackingType] = 2 AND		--Tracking type [2] = sample | StatusId 2 = Collected
               [T].[DisciplineId]  = @DisciplineId;
 
@@ -54,10 +53,9 @@ BEGIN
 		FROM [dbo].[RequestsWithTestsAndResults] [RW] 
         INNER JOIN @TempClinicalDetails [C] ON [RW].[AnalysisRequestId] = [C].[AnalysisRequestId]
 		WHERE 
-            [RW].[RequestedDate] >= @StartDateInUse AND
-            [RW].[RequestedDate] <= @EndDateInUse AND
-            [RW].[Cin] IN (SELECT [Cin] FROM @TempCins);;
-		--NOTE: Need to keep this date as requested date
+            --([RW].[RequestedDate]  BETWEEN @StartDateInUse AND @EndDateInUse) AND
+            [RW].[Cin] IN (SELECT [Cin] FROM @TempCins)
+			ORDER BY [Id];
 
 		-- fetch results data
         SELECT [Id],
@@ -72,7 +70,8 @@ BEGIN
                [ReferenceCode],
                [IsDeltaOk]
 	           FROM [dbo].[WorkSheetResultData]
-	           WHERE [DisciplineId] = @DisciplineId AND  [Cin] IN (SELECT [Cin] FROM @TempCins);
+	           WHERE [DisciplineId] = @DisciplineId AND  [Cin] IN (SELECT [Cin] FROM @TempCins)
+			   ORDER BY [Test];
 
         --get reference ranges
         SELECT [ResultId],

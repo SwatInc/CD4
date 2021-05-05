@@ -7,20 +7,20 @@ namespace CD4.DataLibrary.DataAccess
 {
     public class WorkSheetDataAccess : DataAccessBase, IWorkSheetDataAccess
     {
-        public async Task<WorklistModel> GetWorklistBySpecifiedDateAndStatusIdAsync(int selectedStatusId, int worksheetId, DateTime? startDate = null)
+        public async Task<WorklistModel> GetWorklistBySpecifiedDateAndStatusIdAsync(int selectedStatusId, int worksheetId, DateTime? startDate, DateTime? toDate)
         {
             var storedProcedure = "";
             dynamic parameter;
 
-            switch (worksheetId)
+            switch (worksheetId) //@EndDate
             {
                 case 0:
                     storedProcedure = "[dbo].[usp_GetWorksheetBySpecifiedDateAndStatusId]";
-                    parameter = new { StartDate = GetStartDate(startDate), StatusId = selectedStatusId };
+                    parameter = new { StartDate = GetStartDate(startDate), EndDate = GetStartDate(toDate), StatusId = selectedStatusId };
                     break;
                 default:
                     storedProcedure = "[dbo].[usp_GetWorksheetBySpecifiedDateStatusIdAndDiscipline]";
-                    parameter = new { StartDate = GetStartDate(startDate), StatusId = selectedStatusId, DisciplineId = worksheetId };
+                    parameter = new { StartDate = GetStartDate(startDate), EndDate = GetStartDate(toDate), StatusId = selectedStatusId, DisciplineId = worksheetId };
                     break;
             }
 
@@ -29,7 +29,7 @@ namespace CD4.DataLibrary.DataAccess
 
         }
 
-        public async Task<WorklistModel> GetWorklistBySpecifiedDateAndAllStatusAsync(int worksheetId, DateTime? startDate = null)
+        public async Task<WorklistModel> GetWorklistBySpecifiedDateAndAllStatusAsync(int worksheetId, DateTime? startDate, DateTime? toDate)
         {
             var storedProcedure = "";
             dynamic parameter;
@@ -38,11 +38,11 @@ namespace CD4.DataLibrary.DataAccess
             {
                 case 0:
                     storedProcedure = "[dbo].[usp_GetWorksheetBySpecifiedDate]";
-                    parameter = new { StartDate = GetStartDate(startDate) };
+                    parameter = new { StartDate = GetStartDate(startDate), EndDate = GetStartDate(toDate) };
                     break;
                 default:
                     storedProcedure = "[dbo].[usp_GetWorksheetBySpecifiedDateAndDiscipline]";
-                    parameter = new { StartDate = GetStartDate(startDate), DisciplineId = worksheetId };
+                    parameter = new { StartDate = GetStartDate(startDate), EndDate = GetStartDate(toDate), DisciplineId = worksheetId };
                     break;
             }
 

@@ -23,6 +23,7 @@ namespace CD4.UI.Library.ViewModel
         private GridControlSampleActiveDatasource _gridSampleActiveDatasource;
         private int _selectedDisciplineId;
         private string notesCountButtonLabel;
+        private DateTime loadWorksheetToDate;
         private readonly IWorkSheetDataAccess _workSheetDataAccess;
         private readonly IMapper _mapper;
         private readonly IResultDataAccess _resultDataAccess;
@@ -30,7 +31,7 @@ namespace CD4.UI.Library.ViewModel
         private readonly ISampleDataAccess _sampleDataAccess;
         private readonly IStaticDataDataAccess _staticDataDataAccess;
         private readonly AuthorizeDetailEventArgs _authorizeDetail;
-        private readonly IAnalysisRequestDataAccess requestDataAccess;
+        private readonly IAnalysisRequestDataAccess _requestDataAccess;
         #endregion
 
         #region Events
@@ -64,16 +65,17 @@ namespace CD4.UI.Library.ViewModel
             NotesCountButtonLabel = "View Notes [ Ctrl+N ]";
             //set the date to load worksheet from
             LoadWorksheetFromDate = DateTime.Today;
+            LoadWorksheetToDate = DateTime.Today;
 
             //GenerateDemoData();
-            this._workSheetDataAccess = workSheetDataAccess;
-            this._mapper = mapper;
-            this._resultDataAccess = resultDataAccess;
-            this._statusDataAccess = statusDataAccess;
+            _workSheetDataAccess = workSheetDataAccess;
+            _mapper = mapper;
+            _resultDataAccess = resultDataAccess;
+            _statusDataAccess = statusDataAccess;
             _sampleDataAccess = sampleDataAccess;
             _staticDataDataAccess = staticDataDataAccess;
             _authorizeDetail = authorizeDetail;
-            this.requestDataAccess = requestDataAccess;
+            _requestDataAccess = requestDataAccess;
             SelectedResultData.ListChanged += UpdateDatabaseResults;
             LoadAllStatusDataAndCodifiedValues += GetAllStatusData;
             LoadAllStatusDataAndCodifiedValues += FetchAllCodifiedData;
@@ -120,6 +122,15 @@ namespace CD4.UI.Library.ViewModel
                 _loadWorksheetFromDate = value;
                 OnPropertyChanged();
 
+            }
+        }
+        public DateTime LoadWorksheetToDate
+        {
+            get => loadWorksheetToDate; set
+            {
+                if (loadWorksheetToDate == value) { return; }
+                loadWorksheetToDate = value;
+                OnPropertyChanged();
             }
         }
         public List<RequestSampleModel> RequestData { get; set; }
@@ -209,10 +220,10 @@ namespace CD4.UI.Library.ViewModel
         //This method is dublicated on OrderEntryViewModel. Implement DRY later
         public async Task<List<Model.BarcodeDataModel>> GetBarcodeDataAsync()
         {
-            
+
             try
             {
-                var data = await requestDataAccess.GetBarcodeDataAsync(SelectedRequestData.Cin);
+                var data = await _requestDataAccess.GetBarcodeDataAsync(SelectedRequestData.Cin);
                 return _mapper.Map<List<Model.BarcodeDataModel>>(data);
             }
             catch (Exception)
@@ -377,7 +388,7 @@ namespace CD4.UI.Library.ViewModel
                 //Disable the load worksheet button to avoid multiple clicks
                 IsloadWorkSheetButtonEnabled = false;
                 var worksheet = await _workSheetDataAccess.GetWorklistBySpecifiedDateAndStatusIdAsync
-                    (GetSelectedStatusIdOrDefault(), SelectedDisciplineId, LoadWorksheetFromDate);
+                    (GetSelectedStatusIdOrDefault(), SelectedDisciplineId, LoadWorksheetFromDate, LoadWorksheetToDate);
                 await DisplayWorksheet(worksheet);
             }
             finally
@@ -393,7 +404,7 @@ namespace CD4.UI.Library.ViewModel
             {
                 //Disable the load worksheet button to avoid multiple clicks
                 IsloadWorkSheetButtonEnabled = false;
-                var worksheet = await _workSheetDataAccess.GetWorklistBySpecifiedDateAndAllStatusAsync(SelectedDisciplineId, LoadWorksheetFromDate);
+                var worksheet = await _workSheetDataAccess.GetWorklistBySpecifiedDateAndAllStatusAsync(SelectedDisciplineId, LoadWorksheetFromDate, LoadWorksheetToDate);
                 await DisplayWorksheet(worksheet);
             }
             finally
