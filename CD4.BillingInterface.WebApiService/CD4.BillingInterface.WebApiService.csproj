@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <Platforms>AnyCPU;x64</Platforms>
+    <Platforms>AnyCPU;x64;x86</Platforms>
     <SignAssembly>false</SignAssembly>
     <UserSecretsId>a8190750-73b2-4b4e-9ef0-2c8e907142f2</UserSecretsId>
   </PropertyGroup>
