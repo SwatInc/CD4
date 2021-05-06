@@ -22,7 +22,8 @@ WHILE (@FromDate IS NOT NULL) AND (@ToDate <> '')
 		DECLARE @To DATE = CAST(@ToDate AS DATE);
 
 		SELECT 
-			 [p].[InstituteAssignedPatientId]
+			 [ar].[EpisodeNumber] AS [MemoNumber]
+			,[p].[InstituteAssignedPatientId]
 			,[s].[Cin]
 			,[st].[StatusId] AS [StatusIconId]
 			,[natd].[AnalysedBy]
@@ -42,8 +43,7 @@ WHILE (@FromDate IS NOT NULL) AND (@ToDate <> '')
 		LEFT JOIN [dbo].[NdaRequestsReportedDetails] [nrrd] ON [nrrd].[Cin] = [s].[Cin]
 		LEFT JOIN [dbo].[SampleReceivedTimings] [srt] ON [srt].[Cin] = [s].[Cin]
 		LEFT JOIN [dbo].[SampleCollectionTimings] [sct] ON [sct].[Cin] = [s].[Cin]
-		WHERE ([sreqt].[RequestedAt] BETWEEN @From AND @To) AND [st].[StatusId] = @SampleStatusId
-		ORDER BY [s].[Id];
+		WHERE ([sreqt].[RequestedAt] BETWEEN @From AND @To) AND [st].[StatusId] = @SampleStatusId;
 BREAK;
 	END
 END

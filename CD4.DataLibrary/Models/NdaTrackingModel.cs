@@ -8,6 +8,7 @@ namespace CD4.DataLibrary.Models
 {
     public class NdaTrackingModel
     {
+        public string MemoNumber { get; set; }
         public long InstituteAssignedPatientId { get; set; }
         public string Cin { get; set; }
         public int StatusIconId { get; set; }

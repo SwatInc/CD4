@@ -16,6 +16,7 @@ namespace CD4.UI.Library.Model
         private string analysedBy;
         private int statusIconId;
 
+        public string MemoNumber { get; set; }
         public long InstituteAssignedPatientId { get; set; }
         public string Cin { get; set; }
         public int StatusIconId
