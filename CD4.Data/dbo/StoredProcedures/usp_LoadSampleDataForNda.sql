@@ -33,6 +33,7 @@ WHILE (@FromDate IS NOT NULL) AND (@ToDate <> '')
 			,[nrrd].[ReportedAt] AS [ReportedDate]
 		FROM [dbo].[Sample] [s]
 		INNER JOIN [dbo].[AnalysisRequest] [ar] ON [s].[AnalysisRequestId] = [ar].[Id]
+		INNER JOIN [dbo].[SampleRequestedTimings] [sreqt] ON [ar].[Id] = [sreqt].[AnalysisRequestId]
 		INNER JOIN [dbo].[Patient] [p] ON [ar].[PatientId] = [p].[Id]
 		INNER JOIN [dbo].[SampleTracking] [st] ON [s].[Cin] = [st].[SampleCin]
 		LEFT JOIN [dbo].[NdaAssaysTestedDetails] [natd] ON [s].[Cin] = [natd].[Cin]
@@ -41,7 +42,8 @@ WHILE (@FromDate IS NOT NULL) AND (@ToDate <> '')
 		LEFT JOIN [dbo].[NdaRequestsReportedDetails] [nrrd] ON [nrrd].[Cin] = [s].[Cin]
 		LEFT JOIN [dbo].[SampleReceivedTimings] [srt] ON [srt].[Cin] = [s].[Cin]
 		LEFT JOIN [dbo].[SampleCollectionTimings] [sct] ON [sct].[Cin] = [s].[Cin]
-		WHERE ([srt].[ReceivedAt] BETWEEN @From AND @To) AND [st].[StatusId] = @SampleStatusId;
+		WHERE ([sreqt].[RequestedAt] BETWEEN @From AND @To) AND [st].[StatusId] = @SampleStatusId
+		ORDER BY [s].[Id];
 BREAK;
 	END
 END
