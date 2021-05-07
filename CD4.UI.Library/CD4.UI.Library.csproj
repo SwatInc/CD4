@@ -122,6 +122,8 @@
   <ItemGroup>
     <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="DiskIO.cs" />
+    <Compile Include="Helpers\GlobalSettingsHelper.cs" />
+    <Compile Include="Helpers\IGlobalSettingsHelper.cs" />
     <Compile Include="Helpers\INamesAbbreviator.cs" />
     <Compile Include="Helpers\IPrintingHelper.cs" />
     <Compile Include="Helpers\NamesAbbreviator.cs" />
@@ -141,6 +143,7 @@
     <Compile Include="Model\CinAndReportDateModel.cs" />
     <Compile Include="Model\CommentsSelectionModel.cs" />
     <Compile Include="Model\DemographicsConfirmationModel.cs" />
+    <Compile Include="Model\GlobalSettingsModel.cs" />
     <Compile Include="Model\NdaTrackingModel.cs" />
     <Compile Include="Model\PatientUpdateModel.cs" />
     <Compile Include="Model\SampleNotesModel.cs" />
