@@ -14,7 +14,7 @@
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <LangVersion>8.0</LangVersion>
-    <PublishUrl>C:\Users\ibrahimhucyn\OneDrive\CD4Publish\CD4\</PublishUrl>
+    <PublishUrl>C:\Users\ibrahimhucyn\CD4Publish\CD4\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -26,8 +26,8 @@
     <MapFileExtensions>false</MapFileExtensions>
     <UpdateUrl>https://1drv.ms/u/s!AiA1ilAlI98lgsZu_QXROvvUexlSqQ%3fe=dvZZjy/</UpdateUrl>
     <WebPage>publish.htm</WebPage>
-    <ApplicationRevision>10</ApplicationRevision>
-    <ApplicationVersion>0.3.1.%2a</ApplicationVersion>
+    <ApplicationRevision>11</ApplicationRevision>
+    <ApplicationVersion>0.5.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>

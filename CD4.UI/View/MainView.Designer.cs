@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.barButtonItemCodifiedResults = new DevExpress.XtraBars.BarButtonItem();
@@ -47,7 +48,7 @@
             this.barStaticItemUsernameAndRole = new DevExpress.XtraBars.BarStaticItem();
             this.barButtonItemAcceptSamples = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemDisciplineSelector = new DevExpress.XtraBars.BarButtonItem();
-            this.popupMenuDiscipline = new DevExpress.XtraBars.PopupMenu();
+            this.popupMenuDiscipline = new DevExpress.XtraBars.PopupMenu(this.components);
             this.barButtonItemBulkImportOrders = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemViewAllNotes = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemContacts = new DevExpress.XtraBars.BarButtonItem();
@@ -323,6 +324,7 @@
             this.barButtonItemNdaTracking.ImageOptions.SvgImage = global::CD4.UI.Properties.Resources.NDATrackingIcon;
             this.barButtonItemNdaTracking.Name = "barButtonItemNdaTracking";
             this.barButtonItemNdaTracking.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.barButtonItemNdaTracking.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
             // 
             // ribbonPageCategoryDiscipline
             // 
@@ -438,10 +440,10 @@
             // 
             this.ribbonStatusBar.ItemLinks.Add(this.barStaticItemUsernameAndRole);
             this.ribbonStatusBar.ItemLinks.Add(this.barHeaderItemCD4Version);
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 522);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 516);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(1120, 20);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(1120, 26);
             // 
             // MainView
             // 

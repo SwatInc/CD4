@@ -53,6 +53,7 @@ namespace CD4.UI.View
             this.repositoryItemLookUpEditCodifiedPhrases = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.graphsUserControl = new CD4.UI.UserControls.GraphsUserControl();
             this.groupControlFunctions = new DevExpress.XtraEditors.GroupControl();
+            this.separatorControl1 = new DevExpress.XtraEditors.SeparatorControl();
             this.dateEditLoadWorksheetTo = new DevExpress.XtraEditors.DateEdit();
             this.simpleButtonPrintBothResultEntryReport = new DevExpress.XtraEditors.SimpleButton();
             this.exportReportOnDefaultTemplate = new DevExpress.XtraEditors.DropDownButton();
@@ -62,7 +63,6 @@ namespace CD4.UI.View
             this.dateEditLoadWorksheetFrom = new DevExpress.XtraEditors.DateEdit();
             this.simpleButtonReport = new DevExpress.XtraEditors.SimpleButton();
             this.gridColumnSampleStatus = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.separatorControl1 = new DevExpress.XtraEditors.SeparatorControl();
             labelControlPatientName = new DevExpress.XtraEditors.LabelControl();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControlPatient)).BeginInit();
             this.splitContainerControlPatient.SuspendLayout();
@@ -80,12 +80,12 @@ namespace CD4.UI.View
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditCodifiedPhrases)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlFunctions)).BeginInit();
             this.groupControlFunctions.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.separatorControl1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditLoadWorksheetTo.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditLoadWorksheetTo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditSampleStatusFilter.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditLoadWorksheetFrom.Properties.CalendarTimeProperties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditLoadWorksheetFrom.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.separatorControl1)).BeginInit();
             this.SuspendLayout();
             // 
             // labelControlNationalId
@@ -362,11 +362,19 @@ namespace CD4.UI.View
             this.groupControlFunctions.TabIndex = 1;
             this.groupControlFunctions.Text = "Functions";
             // 
-            // dateEditEndDate
+            // separatorControl1
+            // 
+            this.separatorControl1.LineOrientation = System.Windows.Forms.Orientation.Vertical;
+            this.separatorControl1.Location = new System.Drawing.Point(389, 30);
+            this.separatorControl1.Name = "separatorControl1";
+            this.separatorControl1.Size = new System.Drawing.Size(21, 75);
+            this.separatorControl1.TabIndex = 12;
+            // 
+            // dateEditLoadWorksheetTo
             // 
             this.dateEditLoadWorksheetTo.EditValue = null;
             this.dateEditLoadWorksheetTo.Location = new System.Drawing.Point(12, 74);
-            this.dateEditLoadWorksheetTo.Name = "dateEditEndDate";
+            this.dateEditLoadWorksheetTo.Name = "dateEditLoadWorksheetTo";
             this.dateEditLoadWorksheetTo.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
             this.dateEditLoadWorksheetTo.Properties.CalendarTimeProperties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
@@ -383,8 +391,9 @@ namespace CD4.UI.View
             this.simpleButtonPrintBothResultEntryReport.Name = "simpleButtonPrintBothResultEntryReport";
             this.simpleButtonPrintBothResultEntryReport.Size = new System.Drawing.Size(159, 23);
             this.simpleButtonPrintBothResultEntryReport.TabIndex = 10;
-            this.simpleButtonPrintBothResultEntryReport.Tag = "ResultEntryView.Report";
+            this.simpleButtonPrintBothResultEntryReport.Tag = "ResultEntryView.DoAReport";
             this.simpleButtonPrintBothResultEntryReport.Text = "Report Both DoA Report";
+            this.simpleButtonPrintBothResultEntryReport.Visible = false;
             // 
             // exportReportOnDefaultTemplate
             // 
@@ -453,14 +462,6 @@ namespace CD4.UI.View
             // 
             this.gridColumnSampleStatus.Name = "gridColumnSampleStatus";
             // 
-            // separatorControl1
-            // 
-            this.separatorControl1.LineOrientation = System.Windows.Forms.Orientation.Vertical;
-            this.separatorControl1.Location = new System.Drawing.Point(389, 30);
-            this.separatorControl1.Name = "separatorControl1";
-            this.separatorControl1.Size = new System.Drawing.Size(21, 75);
-            this.separatorControl1.TabIndex = 12;
-            // 
             // ResultEntryView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -488,12 +489,12 @@ namespace CD4.UI.View
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemLookUpEditCodifiedPhrases)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlFunctions)).EndInit();
             this.groupControlFunctions.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.separatorControl1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditLoadWorksheetTo.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditLoadWorksheetTo.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditSampleStatusFilter.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditLoadWorksheetFrom.Properties.CalendarTimeProperties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditLoadWorksheetFrom.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.separatorControl1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -517,9 +518,9 @@ namespace CD4.UI.View
         private DevExpress.XtraEditors.LabelControl labelControlAddress;
         private DevExpress.XtraEditors.LabelControl labelControlAtollIslandCountry;
         private DevExpress.XtraEditors.LabelControl labelControlEpisodeNumber;
+        private DevExpress.XtraEditors.LabelControl labelControlPatientName;
         private DevExpress.XtraEditors.LabelControl labelControlCin;
         private DevExpress.XtraEditors.LabelControl labelControlSite;
-        private DevExpress.XtraEditors.LabelControl labelControlPatientName;
         private DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit repositoryItemLookUpEditCodifiedPhrases;
         private SimpleButton simpleButtonReport;
         private DateEdit dateEditLoadWorksheetFrom;

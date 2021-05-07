@@ -32,6 +32,16 @@ namespace CD4.UI.View
             this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
             this.gridControlNdaTracking = new DevExpress.XtraGrid.GridControl();
             this.gridViewNdaTracking = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridColumnMemoNumber = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnPatientId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnSid = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnStatusIconId = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnStatus = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnAnalysedBy = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnQcCalvalidatedBy = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnCollectedDate = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnValidatedDateTime = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnReportedDate = new DevExpress.XtraGrid.Columns.GridColumn();
             this.splitContainerControl1 = new DevExpress.XtraEditors.SplitContainerControl();
             this.groupControlSearchCriteria = new DevExpress.XtraEditors.GroupControl();
             this.dateEditFromDate = new DevExpress.XtraEditors.DateEdit();
@@ -51,15 +61,6 @@ namespace CD4.UI.View
             this.simpleButtonSaveNdaTrackingAnalysedUser = new DevExpress.XtraEditors.SimpleButton();
             this.labelControl3 = new DevExpress.XtraEditors.LabelControl();
             this.lookUpEditAnalysedUser = new DevExpress.XtraEditors.LookUpEdit();
-            this.gridColumnPatientId = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnSid = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnStatusIconId = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnStatus = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnAnalysedBy = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnQcCalvalidatedBy = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnCollectedDate = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnValidatedDateTime = new DevExpress.XtraGrid.Columns.GridColumn();
-            this.gridColumnReportedDate = new DevExpress.XtraGrid.Columns.GridColumn();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
             this.splitContainerControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlNdaTracking)).BeginInit();
@@ -113,6 +114,7 @@ namespace CD4.UI.View
             // gridViewNdaTracking
             // 
             this.gridViewNdaTracking.Columns.AddRange(new DevExpress.XtraGrid.Columns.GridColumn[] {
+            this.gridColumnMemoNumber,
             this.gridColumnPatientId,
             this.gridColumnSid,
             this.gridColumnStatusIconId,
@@ -127,6 +129,85 @@ namespace CD4.UI.View
             this.gridViewNdaTracking.OptionsSelection.MultiSelect = true;
             this.gridViewNdaTracking.OptionsSelection.MultiSelectMode = DevExpress.XtraGrid.Views.Grid.GridMultiSelectMode.CheckBoxRowSelect;
             this.gridViewNdaTracking.OptionsView.RowAutoHeight = true;
+            this.gridViewNdaTracking.SortInfo.AddRange(new DevExpress.XtraGrid.Columns.GridColumnSortInfo[] {
+            new DevExpress.XtraGrid.Columns.GridColumnSortInfo(this.gridColumnMemoNumber, DevExpress.Data.ColumnSortOrder.Ascending)});
+            // 
+            // gridColumnMemoNumber
+            // 
+            this.gridColumnMemoNumber.Caption = "Memo No.";
+            this.gridColumnMemoNumber.FieldName = "MemoNumber";
+            this.gridColumnMemoNumber.Name = "gridColumnMemoNumber";
+            this.gridColumnMemoNumber.Visible = true;
+            this.gridColumnMemoNumber.VisibleIndex = 1;
+            // 
+            // gridColumnPatientId
+            // 
+            this.gridColumnPatientId.Caption = "Patient ID";
+            this.gridColumnPatientId.FieldName = "InstituteAssignedPatientId";
+            this.gridColumnPatientId.Name = "gridColumnPatientId";
+            this.gridColumnPatientId.Visible = true;
+            this.gridColumnPatientId.VisibleIndex = 2;
+            // 
+            // gridColumnSid
+            // 
+            this.gridColumnSid.Caption = "Sample ID";
+            this.gridColumnSid.FieldName = "Cin";
+            this.gridColumnSid.Name = "gridColumnSid";
+            this.gridColumnSid.Visible = true;
+            this.gridColumnSid.VisibleIndex = 3;
+            // 
+            // gridColumnStatusIconId
+            // 
+            this.gridColumnStatusIconId.FieldName = "StatusIconId";
+            this.gridColumnStatusIconId.Name = "gridColumnStatusIconId";
+            // 
+            // gridColumnStatus
+            // 
+            this.gridColumnStatus.Caption = "Status";
+            this.gridColumnStatus.FieldName = "Status";
+            this.gridColumnStatus.Name = "gridColumnStatus";
+            this.gridColumnStatus.Visible = true;
+            this.gridColumnStatus.VisibleIndex = 4;
+            // 
+            // gridColumnAnalysedBy
+            // 
+            this.gridColumnAnalysedBy.Caption = "Analysed By";
+            this.gridColumnAnalysedBy.FieldName = "AnalysedBy";
+            this.gridColumnAnalysedBy.Name = "gridColumnAnalysedBy";
+            this.gridColumnAnalysedBy.Visible = true;
+            this.gridColumnAnalysedBy.VisibleIndex = 5;
+            // 
+            // gridColumnQcCalvalidatedBy
+            // 
+            this.gridColumnQcCalvalidatedBy.Caption = "QC & Cal Val. user";
+            this.gridColumnQcCalvalidatedBy.FieldName = "CalQcValidatedBy";
+            this.gridColumnQcCalvalidatedBy.Name = "gridColumnQcCalvalidatedBy";
+            this.gridColumnQcCalvalidatedBy.Visible = true;
+            this.gridColumnQcCalvalidatedBy.VisibleIndex = 6;
+            // 
+            // gridColumnCollectedDate
+            // 
+            this.gridColumnCollectedDate.Caption = "Collected Date";
+            this.gridColumnCollectedDate.FieldName = "CollectedDate";
+            this.gridColumnCollectedDate.Name = "gridColumnCollectedDate";
+            this.gridColumnCollectedDate.Visible = true;
+            this.gridColumnCollectedDate.VisibleIndex = 7;
+            // 
+            // gridColumnValidatedDateTime
+            // 
+            this.gridColumnValidatedDateTime.Caption = "Validated Date";
+            this.gridColumnValidatedDateTime.FieldName = "ValidatedDateTime";
+            this.gridColumnValidatedDateTime.Name = "gridColumnValidatedDateTime";
+            this.gridColumnValidatedDateTime.Visible = true;
+            this.gridColumnValidatedDateTime.VisibleIndex = 8;
+            // 
+            // gridColumnReportedDate
+            // 
+            this.gridColumnReportedDate.Caption = "Reported Date";
+            this.gridColumnReportedDate.FieldName = "ReportedDate";
+            this.gridColumnReportedDate.Name = "gridColumnReportedDate";
+            this.gridColumnReportedDate.Visible = true;
+            this.gridColumnReportedDate.VisibleIndex = 9;
             // 
             // splitContainerControl1
             // 
@@ -328,75 +409,6 @@ namespace CD4.UI.View
             this.lookUpEditAnalysedUser.Size = new System.Drawing.Size(241, 20);
             this.lookUpEditAnalysedUser.TabIndex = 13;
             // 
-            // gridColumnPatientId
-            // 
-            this.gridColumnPatientId.Caption = "Patient ID";
-            this.gridColumnPatientId.FieldName = "InstituteAssignedPatientId";
-            this.gridColumnPatientId.Name = "gridColumnPatientId";
-            this.gridColumnPatientId.Visible = true;
-            this.gridColumnPatientId.VisibleIndex = 1;
-            // 
-            // gridColumnSid
-            // 
-            this.gridColumnSid.Caption = "Sample ID";
-            this.gridColumnSid.FieldName = "Cin";
-            this.gridColumnSid.Name = "gridColumnSid";
-            this.gridColumnSid.Visible = true;
-            this.gridColumnSid.VisibleIndex = 2;
-            // 
-            // gridColumnStatusIconId
-            // 
-            this.gridColumnStatusIconId.FieldName = "StatusIconId";
-            this.gridColumnStatusIconId.Name = "gridColumnStatusIconId";
-            // 
-            // gridColumnStatus
-            // 
-            this.gridColumnStatus.Caption = "Status";
-            this.gridColumnStatus.FieldName = "Status";
-            this.gridColumnStatus.Name = "gridColumnStatus";
-            this.gridColumnStatus.Visible = true;
-            this.gridColumnStatus.VisibleIndex = 3;
-            // 
-            // gridColumnAnalysedBy
-            // 
-            this.gridColumnAnalysedBy.Caption = "Analysed By";
-            this.gridColumnAnalysedBy.FieldName = "AnalysedBy";
-            this.gridColumnAnalysedBy.Name = "gridColumnAnalysedBy";
-            this.gridColumnAnalysedBy.Visible = true;
-            this.gridColumnAnalysedBy.VisibleIndex = 4;
-            // 
-            // gridColumnQcCalvalidatedBy
-            // 
-            this.gridColumnQcCalvalidatedBy.Caption = "QC & Cal Val. user";
-            this.gridColumnQcCalvalidatedBy.FieldName = "CalQcValidatedBy";
-            this.gridColumnQcCalvalidatedBy.Name = "gridColumnQcCalvalidatedBy";
-            this.gridColumnQcCalvalidatedBy.Visible = true;
-            this.gridColumnQcCalvalidatedBy.VisibleIndex = 5;
-            // 
-            // gridColumnCollectedDate
-            // 
-            this.gridColumnCollectedDate.Caption = "Collected Date";
-            this.gridColumnCollectedDate.FieldName = "CollectedDate";
-            this.gridColumnCollectedDate.Name = "gridColumnCollectedDate";
-            this.gridColumnCollectedDate.Visible = true;
-            this.gridColumnCollectedDate.VisibleIndex = 6;
-            // 
-            // gridColumnValidatedDateTime
-            // 
-            this.gridColumnValidatedDateTime.Caption = "Validated Date";
-            this.gridColumnValidatedDateTime.FieldName = "ValidatedDateTime";
-            this.gridColumnValidatedDateTime.Name = "gridColumnValidatedDateTime";
-            this.gridColumnValidatedDateTime.Visible = true;
-            this.gridColumnValidatedDateTime.VisibleIndex = 7;
-            // 
-            // gridColumnReportedDate
-            // 
-            this.gridColumnReportedDate.Caption = "Reported Date";
-            this.gridColumnReportedDate.FieldName = "ReportedDate";
-            this.gridColumnReportedDate.Name = "gridColumnReportedDate";
-            this.gridColumnReportedDate.Visible = true;
-            this.gridColumnReportedDate.VisibleIndex = 8;
-            // 
             // BatchedNdaTrackingView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -467,5 +479,6 @@ namespace CD4.UI.View
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnCollectedDate;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnValidatedDateTime;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnReportedDate;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnMemoNumber;
     }
 }
