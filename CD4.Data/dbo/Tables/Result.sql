@@ -6,6 +6,7 @@
     [Result] NVARCHAR(50) NULL, 
     [ReferenceCode] CHAR(2) NOT NULL DEFAULT 'NM', -- default set as normal(NM) because inital result on table will be null.
     [IsDeltaOk] BIT NOT NULL DEFAULT 1, -- default is NotFailed(1) because initial result is null delta failure cannot be determined unless a result is entered.
+    [IsStat] BIT NOT NULL DEFAULT 0,
     CONSTRAINT [FK_Result_Test] FOREIGN KEY ([TestId]) REFERENCES [dbo].[Test]([Id]), 
     CONSTRAINT [FK_Result_Sample] FOREIGN KEY ([Sample_Cin]) REFERENCES [dbo].[Sample]([Cin]), 
     CONSTRAINT [AK_Result_CinAndTestId] UNIQUE ([Sample_Cin],[TestId]), 

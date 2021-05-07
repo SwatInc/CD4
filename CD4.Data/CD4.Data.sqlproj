@@ -297,6 +297,7 @@
     <Build Include="dbo\StoredProcedures\usp_GetSampleAndTestStatusByCinForUpdatingUI.sql" />
     <Build Include="dbo\Views\SampleProcessedTimings.sql" />
     <Build Include="dbo\Views\ResultProcessedTimings.sql" />
+    <Build Include="dbo\StoredProcedures\usp_UpdateSamplePriorityByCin.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
