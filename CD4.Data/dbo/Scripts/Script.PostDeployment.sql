@@ -13,6 +13,8 @@
 
 
 --Global settings json
+DELETE FROM [dbo].[GlobalSettings];
+INSERT INTO [dbo].[GlobalSettings]([JsonSettings]) VALUES ('{"VerifyNidPpOnOrder":true,"IsAnalysisRequestBarcodeRequired":true,"ReportExportBasePath":"C:\\Logs\\","IsFullnameAbbreviated":false}')
 --{"VerifyNidPpOnOrder":true,"IsAnalysisRequestBarcodeRequired":true,"ReportExportBasePath":"C:\\Logs\\","IsFullnameAbbreviated":false}
 
 --INSERT INTO [dbo].[Sites] ([Name])
