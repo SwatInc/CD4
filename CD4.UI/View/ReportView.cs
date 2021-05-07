@@ -1,6 +1,7 @@
 ﻿using CD4.DataLibrary.DataAccess;
 using CD4.Entensibility.ReportingFramework;
 using CD4.Entensibility.ReportingFramework.Models;
+using CD4.UI.Library.Helpers;
 using CD4.UI.UiSpecificModels;
 using DevExpress.XtraEditors;
 using DevExpress.XtraReports.UI;
@@ -21,7 +22,10 @@ namespace CD4.UI.View
         private readonly ILoadMultipleExtensions _reportExtensions;
 
         public event EventHandler OnSearchByCin;
-        public ReportView(IReportsDataAccess reportsData, CinAndReportIdModel cinAndReportId, int loggedInUserId, ILoadMultipleExtensions reportExtensions)
+        public ReportView(IReportsDataAccess reportsData,
+            CinAndReportIdModel cinAndReportId,
+            int loggedInUserId,
+            ILoadMultipleExtensions reportExtensions)
         {
             InitializeComponent();
 
@@ -91,7 +95,7 @@ namespace CD4.UI.View
             var xtraReport = _reportExtensions.ReportTemplates[0]
                 .Execute((ReportTemplate)_cinAndReportId.ReportIndex, GetReportDatasource(reportModel));
             xtraReport.RequestParameters = false;
-            xtraReport.DisplayName = $"{Tag}_{reportModel.Patient.Fullname} ({reportModel.Patient.NidPp.Replace('/', '-')})";
+            xtraReport.DisplayName = $"{Tag}_{RemoveInvalidCharactersForExport(reportModel.Patient.Fullname)} ({RemoveInvalidCharactersForExport(reportModel.Patient.NidPp)}";
 
 #if DEBUG
             xtraReport.DrawWatermark = true;
@@ -135,6 +139,19 @@ namespace CD4.UI.View
             DisposeMe();
 
 
+        }
+
+        /// <summary>
+        /// Replaces invalid characters for a windows file name
+        /// </summary>
+        /// <returns></returns>
+        private string RemoveInvalidCharactersForExport(string value)
+        {
+            return value
+                .Replace('\\', '-')
+                .Replace('/', '-')
+                .Replace('(', '-')
+                .Replace(')', '-');
         }
 
         private List<AnalysisRequestReportModel> GetReportDatasource(DataLibrary.Models.ReportModels.AnalysisRequestReportModel reportModel)
@@ -198,11 +215,12 @@ namespace CD4.UI.View
             {
                 Directory.CreateDirectory(exportDirPath);
             }
-            xtraReport.ExportToHtml($"{exportDirPath}\\{xtraReport.DisplayName}.html",new DevExpress.XtraPrinting.HtmlExportOptions() 
-            {
-                EmbedImagesInHTML = true,
-                ExportMode = DevExpress.XtraPrinting.HtmlExportMode.SingleFile
-            });
+
+            //xtraReport.ExportToHtml($"{exportDirPath}\\{xtraReport.DisplayName}.html",new DevExpress.XtraPrinting.HtmlExportOptions() 
+            //{
+            //    EmbedImagesInHTML = true,
+            //    ExportMode = DevExpress.XtraPrinting.HtmlExportMode.SingleFile
+            //});
 
             // xtraReport.ExportToPdf($"{exportDirPath}\\{xtraReport.DisplayName}.pdf");
             xtraReport.ExportToPdf($"{exportDirPath}\\{xtraReport.DisplayName}.pdf");
