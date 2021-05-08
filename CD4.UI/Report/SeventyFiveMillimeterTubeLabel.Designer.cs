@@ -117,7 +117,7 @@
             this.xrLabelSampleType.CanGrow = false;
             this.xrLabelSampleType.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "?SampleType")});
-            this.xrLabelSampleType.Font = new System.Drawing.Font("Sitka Small", 5F);
+            this.xrLabelSampleType.Font = new System.Drawing.Font("Sitka Small", 5F, System.Drawing.FontStyle.Bold);
             this.xrLabelSampleType.KeepTogether = true;
             this.xrLabelSampleType.LocationFloat = new DevExpress.Utils.PointFloat(179.5932F, 5.999979F);
             this.xrLabelSampleType.Name = "xrLabelSampleType";
@@ -250,7 +250,7 @@
             // xrBarCodeAccessionNumber
             // 
             this.xrBarCodeAccessionNumber.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "?SamplePriority")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "?AccessionNumber")});
             this.xrBarCodeAccessionNumber.LocationFloat = new DevExpress.Utils.PointFloat(14.17583F, 27.99998F);
             this.xrBarCodeAccessionNumber.Module = 0.7874016F;
             this.xrBarCodeAccessionNumber.Name = "xrBarCodeAccessionNumber";
