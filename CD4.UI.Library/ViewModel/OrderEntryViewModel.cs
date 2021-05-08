@@ -453,6 +453,7 @@ namespace CD4.UI.Library.ViewModel
             this.Address = result.RequestPatientSampleData.Address;
             this.SelectedAtoll = result.RequestPatientSampleData.Atoll;
             this.InstituteAssignedPatientId = result.RequestPatientSampleData.InstituteAssignedPatientId;
+            this.IsSamplePriority = result.RequestPatientSampleData.SamplePriority;
             await RepopulateIslandDatasource(SelectedAtoll); //filter the islands by selected atoll
 
             this.SelectedIsland = result.RequestPatientSampleData.Island;
