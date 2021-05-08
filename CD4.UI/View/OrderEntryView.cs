@@ -132,15 +132,15 @@ namespace CD4.UI.View
                 var demographicsConfirmRequired = await _viewModel.OrderRequiresNidPpConfirmationAsync();
                 if (demographicsConfirmRequired.IsConfirmationRequired)
                 {
-                    this._viewModel.LoadingStaticDataStatus = true;
+                    _viewModel.LoadingStaticDataStatus = true;
                     var dialog = new PatientDetailsConfirmationView(demographicsConfirmRequired);
                     dialog.ShowDialog();
                     if (dialog.DialogResult == DialogResult.Cancel)
                     {
-                        this._viewModel.LoadingStaticDataStatus = false;
+                        _viewModel.LoadingStaticDataStatus = false;
                         return;
                     }
-                    this._viewModel.LoadingStaticDataStatus = false;
+                    _viewModel.LoadingStaticDataStatus = false;
 
                 }
             }
@@ -356,6 +356,11 @@ namespace CD4.UI.View
             dateEditSampleReceived.DataBindings.Add
                 ("EditValue", _viewModel, nameof(_viewModel.SampleReceivedDate), true,
                 DataSourceUpdateMode.OnPropertyChanged);
+
+            //sample priority
+            toggleSwitchSamplePriority.DataBindings.Add(new Binding("IsOn", _viewModel, nameof(_viewModel.IsSamplePriority), true,
+                DataSourceUpdateMode.OnPropertyChanged));
+
             #endregion
 
             #region Patient Data

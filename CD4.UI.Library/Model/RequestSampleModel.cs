@@ -29,6 +29,7 @@ namespace CD4.UI.Library.Model
         private string birthDateString;
         private string _completeAddress;
         private long instituteAssignedPatientId;
+        private bool samplePriority;
 
         #endregion
 
@@ -171,6 +172,20 @@ namespace CD4.UI.Library.Model
                 OnPropertyChanged();
             }
         }
+
+        public bool SamplePriority
+        {
+            get => samplePriority; set
+            {
+                samplePriority = value;
+
+                //set priority icon
+                if (samplePriority) { SamplePriorityIcon = StatusIconHelper.GetIcon(8); }
+                if (!samplePriority) { SamplePriorityIcon = StatusIconHelper.GetIcon(9); }
+                OnPropertyChanged(nameof(SamplePriorityIcon));
+            }
+        }
+        public Image SamplePriorityIcon { get; set; }
 
         public string EpisodeNumber
         {

@@ -27,6 +27,10 @@ namespace CD4.UI.Library.Helpers
                     return Properties.Resources.Processing;
                 case 7:
                     return Properties.Resources.Rejected;
+                case 8:
+                    return Properties.Resources.Urgent;
+                case 9://used as routine
+                    return Properties.Resources.blank;
                 default:
                     return Properties.Resources.Undefined;
             }

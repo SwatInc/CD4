@@ -57,6 +57,7 @@ BEGIN
                [RW].[Address],
                [RW].[AtollIslandCountry],
                [RW].[InstituteAssignedPatientId],
+               [RW].[SamplePriority],
                [RW].[EpisodeNumber],
                [RW].[Site],
                [RW].[SampleStatusId] AS [StatusIconId],

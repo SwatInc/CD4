@@ -72,6 +72,7 @@ namespace CD4.UI.Helpers
                         FullName = requestBarcode.FullName,
                         NidPp = requestBarcode.NidPp,
                         Seq = requestBarcode.Seq,
+                        SamplePriority = requestBarcode.SamplePriority
                     });
                 }
 
@@ -102,6 +103,7 @@ namespace CD4.UI.Helpers
                 barcodeLabel.Parameters["Discipline"].Value = barcode.Discipline;
                 barcodeLabel.Parameters["SampleType"].Value = barcode.SampleType;
                 barcodeLabel.Parameters["EpisodeNumber"].Value = barcode.EpisodeNumber;
+                barcodeLabel.Parameters["SamplePriority"].Value = barcode.SamplePriority.ToString();
                 barcodeLabel.DisplayName = $"{barcode.Discipline}_{barcode.SampleType}_{barcode.FullName}_{barcode.NidPp}.pdf";
 
                 barcodeLabel.PrinterName = _printingHelper.BarcodePrinterName;

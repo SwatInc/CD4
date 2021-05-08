@@ -33,7 +33,7 @@ namespace CD4.DataLibrary.DataAccess
             this.statusDataAccess = statusDataAccess;
         }
 
-        public async Task<bool> ConfirmRequestAsync(AnalysisRequestDataModel request, int loggedInUserId)
+        public async Task<bool> ConfirmRequestAsync(AnalysisRequestDataModel request, int loggedInUserId, bool isSamplePriority = false)
         {
             RequestDataStatus requestSampleStatus = RequestDataStatus.New;
             RequestDataStatus patientStatus = RequestDataStatus.New;
@@ -242,6 +242,9 @@ namespace CD4.DataLibrary.DataAccess
             }
             #endregion
 
+            #region Update Sample and Test Priority
+            await InsertUpdateSamplePriorityAsync(request.Cin, isSamplePriority, loggedInUserId);
+            #endregion
 
             #endregion
 
@@ -249,6 +252,21 @@ namespace CD4.DataLibrary.DataAccess
             #endregion
 
             return true;
+        }
+
+        private async Task InsertUpdateSamplePriorityAsync(string cin, bool isSamplePriority, int loggedInUserId)
+        {
+            var storedProcedure = "[dbo].[usp_UpdateSamplePriorityByCin]";
+            var parameters = new { Cin = cin, Priority = isSamplePriority, UserId = loggedInUserId };
+            try
+            {
+                _ = await SelectInsertOrUpdateAsync<dynamic, dynamic>(storedProcedure, parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         /// <summary>

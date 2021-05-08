@@ -48,6 +48,7 @@ namespace CD4.UI.Library.ViewModel
         private readonly IGlobalSettingsHelper _globalSettingsHelper;
         private bool loadingStaticData;
         private long? instituteAssignedPatientId;
+        private bool isSamplePriority;
         #endregion
 
         public event EventHandler<string> PushingLogs;
@@ -74,10 +75,10 @@ namespace CD4.UI.Library.ViewModel
             ClinicalDetails = new BindingList<ClinicalDetailsOrderEntryModel>();
 
             //InitializeDemoData();
-            this._mapper = mapper;
-            this._staticData = staticData;
-            this._requestDataAccess = requestDataAccess;
-            this._statusDataAccess = statusDataAccess;
+            _mapper = mapper;
+            _staticData = staticData;
+            _requestDataAccess = requestDataAccess;
+            _statusDataAccess = statusDataAccess;
             _authorizeDetail = authorizeDetail;
             _globalSettingsHelper = globalSettingsHelper;
             PrintingHelper = printingHelper;
@@ -158,6 +159,15 @@ namespace CD4.UI.Library.ViewModel
             {
                 if (sampleReceivedDate == value) return;
                 sampleReceivedDate = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool IsSamplePriority
+        {
+            get => isSamplePriority; set
+            {
+                if(isSamplePriority == value) { return; }
+                isSamplePriority = value;
                 OnPropertyChanged();
             }
         }
@@ -534,7 +544,7 @@ namespace CD4.UI.Library.ViewModel
                 }
 
                 var result = await _requestDataAccess.ConfirmRequestAsync
-                    (mappedRequest, _authorizeDetail.UserId);
+                    (mappedRequest, _authorizeDetail.UserId, IsSamplePriority);
 
                 return result;
             }

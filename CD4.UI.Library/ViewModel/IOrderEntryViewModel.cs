@@ -40,6 +40,7 @@ namespace CD4.UI.Library.ViewModel
         string TestToAdd { get; set; }
         IPrintingHelper PrintingHelper { get; }
         long? InstituteAssignedPatientId { get; set; }
+        bool IsSamplePriority { get; set; }
 
         Task ManageAddTestToRequestAsync();
         void RemoveTestModelFromAddedTests(TestModel testModel);

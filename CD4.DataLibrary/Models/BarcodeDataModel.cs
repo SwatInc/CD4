@@ -18,5 +18,6 @@ namespace CD4.DataLibrary.Models
         public string Discipline { get; set; }
         public DateTimeOffset CollectionDate { get; set; }
         public string EpisodeNumber { get; set; }
+        public bool SamplePriority { get; set; }
     }
 }
