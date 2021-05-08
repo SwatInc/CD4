@@ -119,10 +119,10 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "?SampleType")});
             this.xrLabelSampleType.Font = new System.Drawing.Font("Sitka Small", 5F);
             this.xrLabelSampleType.KeepTogether = true;
-            this.xrLabelSampleType.LocationFloat = new DevExpress.Utils.PointFloat(179.5932F, 0F);
+            this.xrLabelSampleType.LocationFloat = new DevExpress.Utils.PointFloat(179.5932F, 5.999979F);
             this.xrLabelSampleType.Name = "xrLabelSampleType";
             this.xrLabelSampleType.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
-            this.xrLabelSampleType.SizeF = new System.Drawing.SizeF(17.40675F, 98F);
+            this.xrLabelSampleType.SizeF = new System.Drawing.SizeF(17.40674F, 92.00002F);
             this.xrLabelSampleType.StyleName = "xrControlStyleUrgent";
             this.xrLabelSampleType.StylePriority.UseFont = false;
             this.xrLabelSampleType.StylePriority.UsePadding = false;
@@ -251,12 +251,12 @@
             // 
             this.xrBarCodeAccessionNumber.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "?SamplePriority")});
-            this.xrBarCodeAccessionNumber.LocationFloat = new DevExpress.Utils.PointFloat(14.17583F, 22F);
+            this.xrBarCodeAccessionNumber.LocationFloat = new DevExpress.Utils.PointFloat(14.17583F, 27.99998F);
             this.xrBarCodeAccessionNumber.Module = 0.7874016F;
             this.xrBarCodeAccessionNumber.Name = "xrBarCodeAccessionNumber";
             this.xrBarCodeAccessionNumber.Padding = new DevExpress.XtraPrinting.PaddingInfo(10, 10, 0, 0, 100F);
             this.xrBarCodeAccessionNumber.ShowText = false;
-            this.xrBarCodeAccessionNumber.SizeF = new System.Drawing.SizeF(161.4173F, 42.99998F);
+            this.xrBarCodeAccessionNumber.SizeF = new System.Drawing.SizeF(161.4173F, 37F);
             this.xrBarCodeAccessionNumber.StylePriority.UseTextAlignment = false;
             code128Generator1.CharacterSet = DevExpress.XtraPrinting.BarCode.Code128Charset.CharsetAuto;
             this.xrBarCodeAccessionNumber.Symbology = code128Generator1;
@@ -270,7 +270,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "?Birthdate")});
             this.xrLabelBirthdate.Font = new System.Drawing.Font("Microsoft Himalaya", 11F);
             this.xrLabelBirthdate.KeepTogether = true;
-            this.xrLabelBirthdate.LocationFloat = new DevExpress.Utils.PointFloat(103.7251F, 11F);
+            this.xrLabelBirthdate.LocationFloat = new DevExpress.Utils.PointFloat(103.7251F, 16.99998F);
             this.xrLabelBirthdate.Multiline = true;
             this.xrLabelBirthdate.Name = "xrLabelBirthdate";
             this.xrLabelBirthdate.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
@@ -291,7 +291,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "?NidPp")});
             this.xrLabelNidpp.Font = new System.Drawing.Font("Microsoft Himalaya", 11F);
             this.xrLabelNidpp.KeepTogether = true;
-            this.xrLabelNidpp.LocationFloat = new DevExpress.Utils.PointFloat(4.286941F, 11F);
+            this.xrLabelNidpp.LocationFloat = new DevExpress.Utils.PointFloat(4.286941F, 16.99998F);
             this.xrLabelNidpp.Multiline = true;
             this.xrLabelNidpp.Name = "xrLabelNidpp";
             this.xrLabelNidpp.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);
@@ -311,7 +311,7 @@
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "?Fullname")});
             this.xrLabelFullName.Font = new System.Drawing.Font("Microsoft Himalaya", 11F);
             this.xrLabelFullName.KeepTogether = true;
-            this.xrLabelFullName.LocationFloat = new DevExpress.Utils.PointFloat(4.28694F, 0F);
+            this.xrLabelFullName.LocationFloat = new DevExpress.Utils.PointFloat(4.28694F, 5.999977F);
             this.xrLabelFullName.Multiline = true;
             this.xrLabelFullName.Name = "xrLabelFullName";
             this.xrLabelFullName.Padding = new DevExpress.XtraPrinting.PaddingInfo(0, 0, 0, 0, 100F);

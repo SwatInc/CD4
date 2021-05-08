@@ -60,6 +60,7 @@
             this.simpleButtonConfirm = new DevExpress.XtraEditors.SimpleButton();
             this.groupControlTestSelection = new DevExpress.XtraEditors.GroupControl();
             this.progressPanelTestData = new DevExpress.XtraWaitForm.ProgressPanel();
+            this.toggleSwitchSamplePriority = new DevExpress.XtraEditors.ToggleSwitch();
             this.lookUpEditTests = new DevExpress.XtraEditors.LookUpEdit();
             this.simpleButtonRemoveTest = new DevExpress.XtraEditors.SimpleButton();
             this.simpleButtonSearchRequest = new DevExpress.XtraEditors.SimpleButton();
@@ -67,7 +68,6 @@
             this.simpleButtonGetNextCin = new DevExpress.XtraEditors.SimpleButton();
             this.panelControlOE = new DevExpress.XtraEditors.PanelControl();
             this.simpleButtonViewNotes = new DevExpress.XtraEditors.SimpleButton();
-            this.toggleSwitchSamplePriority = new DevExpress.XtraEditors.ToggleSwitch();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlRequestData)).BeginInit();
             this.groupControlRequestData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditCollectedDate.Properties.CalendarTimeProperties)).BeginInit();
@@ -101,10 +101,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridViewRequestedTests)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlTestSelection)).BeginInit();
             this.groupControlTestSelection.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.toggleSwitchSamplePriority.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTests.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControlOE)).BeginInit();
             this.panelControlOE.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.toggleSwitchSamplePriority.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // groupControlRequestData
@@ -268,6 +268,8 @@
             this.textEditInstituteAssignedPatientId.Properties.ValidateOnEnterKey = true;
             this.textEditInstituteAssignedPatientId.Size = new System.Drawing.Size(167, 20);
             this.textEditInstituteAssignedPatientId.TabIndex = 15;
+            this.textEditInstituteAssignedPatientId.Tag = "";
+            this.textEditInstituteAssignedPatientId.Visible = false;
             // 
             // textEditPhoneNumber
             // 
@@ -566,6 +568,15 @@
             this.progressPanelTestData.TabStop = false;
             this.progressPanelTestData.Text = "Request data";
             // 
+            // toggleSwitchSamplePriority
+            // 
+            this.toggleSwitchSamplePriority.Location = new System.Drawing.Point(16, 87);
+            this.toggleSwitchSamplePriority.Name = "toggleSwitchSamplePriority";
+            this.toggleSwitchSamplePriority.Properties.OffText = "Routine";
+            this.toggleSwitchSamplePriority.Properties.OnText = "Stat";
+            this.toggleSwitchSamplePriority.Size = new System.Drawing.Size(167, 25);
+            this.toggleSwitchSamplePriority.TabIndex = 16;
+            // 
             // lookUpEditTests
             // 
             this.lookUpEditTests.Location = new System.Drawing.Point(16, 35);
@@ -647,15 +658,6 @@
             this.simpleButtonViewNotes.Tag = "OrderEntry.Remove";
             this.simpleButtonViewNotes.Text = "Add Note [ Ctrl+N ]";
             // 
-            // toggleSwitchSamplePriority
-            // 
-            this.toggleSwitchSamplePriority.Location = new System.Drawing.Point(16, 87);
-            this.toggleSwitchSamplePriority.Name = "toggleSwitchSamplePriority";
-            this.toggleSwitchSamplePriority.Properties.OffText = "Routine";
-            this.toggleSwitchSamplePriority.Properties.OnText = "Stat";
-            this.toggleSwitchSamplePriority.Size = new System.Drawing.Size(167, 25);
-            this.toggleSwitchSamplePriority.TabIndex = 16;
-            // 
             // OrderEntryView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -701,10 +703,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridViewRequestedTests)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlTestSelection)).EndInit();
             this.groupControlTestSelection.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.toggleSwitchSamplePriority.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTests.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControlOE)).EndInit();
             this.panelControlOE.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.toggleSwitchSamplePriority.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
