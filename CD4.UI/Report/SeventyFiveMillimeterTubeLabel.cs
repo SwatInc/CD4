@@ -19,12 +19,12 @@ namespace CD4.UI.Report
 
         private void Detail_BeforePrint(object sender, PrintEventArgs e)
         {
-            if (SamplePriority.Value == "True")
+            if (SamplePriority.Value.ToString() == "True")
             {
                 xrLabelSampleType.StyleName = "xrControlStyleUrgent";
             }
 
-            if (SamplePriority.Value == "False")
+            if (SamplePriority.Value.ToString() == "False")
             {
                 xrLabelSampleType.StyleName = "xrControlStyleRoutine";
             }
