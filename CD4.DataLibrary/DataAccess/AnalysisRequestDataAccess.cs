@@ -163,7 +163,9 @@ namespace CD4.DataLibrary.DataAccess
             {
                 //IF REQUEST IS NEW:: CLINICAL DETAILS, SAMPLE AND REQUESTED TESTS
                 //WILL BE NEW FOR SURE. SO HANDLE THEM ALL AT THE SAME TIME
-                return await InsertNewCompleteRequest(GetPatientId(patient, InsertedPatientId), request, loggedInUserId);
+                var output =  await InsertNewCompleteRequest(GetPatientId(patient, InsertedPatientId), request, loggedInUserId);
+                await InsertUpdateSamplePriorityAsync(request.Cin, isSamplePriority, loggedInUserId);
+                return output;
 
             }
 
