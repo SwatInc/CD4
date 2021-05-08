@@ -144,9 +144,9 @@ namespace CD4.UI.View
 
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                //ignore
+                XtraMessageBox.Show($"{ex.Message}\n\n{ex.StackTrace}");
             }
 
             try

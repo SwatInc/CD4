@@ -3,6 +3,7 @@ using CD4.DataLibrary.DataAccess;
 using CD4.UI.Library.Helpers;
 using CD4.UI.Library.Model;
 using CD4.UI.Library.Validations;
+using DevExpress.XtraEditors;
 using FluentValidation.Results;
 using Newtonsoft.Json;
 using System;
@@ -372,7 +373,11 @@ namespace CD4.UI.Library.ViewModel
             bool IsconfirmationRequired = true;
             try
             {
+                //if (_globalSettingsHelper is null) { XtraMessageBox.Show("Global settings helper is null"); }
+                //if (_globalSettingsHelper.Settings is null) { XtraMessageBox.Show("GlobalSettingsHelper.Settings is null"); }
                 var result = _globalSettingsHelper.Settings;
+
+                //PushingLogs?.Invoke(this, JsonConvert.SerializeObject(result, Formatting.Indented));
 
                 if (result is null)
                 {
@@ -385,6 +390,7 @@ namespace CD4.UI.Library.ViewModel
             }
             catch (Exception ex)
             {
+                XtraMessageBox.Show($"{ex.Message}\n\n{ex.StackTrace}");
                 PushingMessages.Invoke(this, ex.Message);
                 PushingLogs?.Invoke(this, $"{ex.Message}\n{ex.StackTrace}");
             }
@@ -403,7 +409,6 @@ namespace CD4.UI.Library.ViewModel
                     Gender = Gender.Find(x => x.Id == SelectedGenderId).Gender,
                     PhoneNumber = this.PhoneNumber,
                     NidPp = this.nidPp,
-                    InstituteAssignedPatientId = (long)this.InstituteAssignedPatientId
                 },
                 IsConfirmationRequired = IsconfirmationRequired,
                 Age = this.Age
