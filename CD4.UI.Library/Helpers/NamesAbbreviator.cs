@@ -11,6 +11,7 @@ namespace CD4.UI.Library.Helpers
     {
         public string Execute(string fullname, int maxLength)
         {
+            
             string abbreviatedFullname = "";
             //check whether abbreviation is necessary
             if (fullname.Length < maxLength) return fullname;

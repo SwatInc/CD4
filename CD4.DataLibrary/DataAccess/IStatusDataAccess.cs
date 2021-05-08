@@ -7,6 +7,7 @@ namespace CD4.DataLibrary.DataAccess
     public interface IStatusDataAccess
     {
         Task<int> DetermineSampleStatus(int resultId);
+        Task<string> DetermineSampleStatus(string sampleNumber);
         Task<List<StatusModel>> GetAllStatus();
         int GetRegisteredStatusId();
         Task<int> GetTestStatusByTestIdAndCin(int testId, string cin);
@@ -16,5 +17,7 @@ namespace CD4.DataLibrary.DataAccess
         Task<bool> MarkSampleCollectedAsync(string cin, int loggedInUserId);
         Task<StatusUpdatedSampleAndTestStatusModel> ValidateSample(string cin, int currentSampleStatus, int loggedInUserId);
         Task<bool> ValidateTest(string cin, string testDescription, int testStatus, string result, int loggedInUserId);
+        Task SetSampleAcceptedTimeReceivedFromBilling(string cin, string acceptedAt);
+        Task<SampleAndResultStatusAndResultModel> GetSampleAndTestStatusForUpdatingUiAsync(string cin);
     }
 }

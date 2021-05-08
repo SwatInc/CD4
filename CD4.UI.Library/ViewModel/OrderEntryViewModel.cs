@@ -45,8 +45,10 @@ namespace CD4.UI.Library.ViewModel
         private readonly IAnalysisRequestDataAccess _requestDataAccess;
         private readonly IStatusDataAccess _statusDataAccess;
         private readonly AuthorizeDetailEventArgs _authorizeDetail;
-        private readonly IGlobalSettingsDataAccess _globalSettingsDataAccess;
+        private readonly IGlobalSettingsHelper _globalSettingsHelper;
         private bool loadingStaticData;
+        private long? instituteAssignedPatientId;
+        private bool isSamplePriority;
         #endregion
 
         public event EventHandler<string> PushingLogs;
@@ -55,11 +57,11 @@ namespace CD4.UI.Library.ViewModel
 
         #region Default Constructor
         public OrderEntryViewModel(IMapper mapper,
-            IStaticDataDataAccess staticData, 
-            IAnalysisRequestDataAccess requestDataAccess, 
-            IStatusDataAccess statusDataAccess, 
-            AuthorizeDetailEventArgs authorizeDetail, 
-            IGlobalSettingsDataAccess globalSettingsDataAccess,
+            IStaticDataDataAccess staticData,
+            IAnalysisRequestDataAccess requestDataAccess,
+            IStatusDataAccess statusDataAccess,
+            AuthorizeDetailEventArgs authorizeDetail,
+            IGlobalSettingsHelper globalSettingsHelper,
             IPrintingHelper printingHelper)
         {
             Sites = new List<SitesModel>();
@@ -73,12 +75,12 @@ namespace CD4.UI.Library.ViewModel
             ClinicalDetails = new BindingList<ClinicalDetailsOrderEntryModel>();
 
             //InitializeDemoData();
-            this._mapper = mapper;
-            this._staticData = staticData;
-            this._requestDataAccess = requestDataAccess;
-            this._statusDataAccess = statusDataAccess;
+            _mapper = mapper;
+            _staticData = staticData;
+            _requestDataAccess = requestDataAccess;
+            _statusDataAccess = statusDataAccess;
             _authorizeDetail = authorizeDetail;
-            _globalSettingsDataAccess = globalSettingsDataAccess;
+            _globalSettingsHelper = globalSettingsHelper;
             PrintingHelper = printingHelper;
             PropertyChanged += OrderEntryViewModel_PropertyChanged;
             InitializeStaticData += OnInitializeStaticDataAsync;
@@ -157,6 +159,15 @@ namespace CD4.UI.Library.ViewModel
             {
                 if (sampleReceivedDate == value) return;
                 sampleReceivedDate = value;
+                OnPropertyChanged();
+            }
+        }
+        public bool IsSamplePriority
+        {
+            get => isSamplePriority; set
+            {
+                if(isSamplePriority == value) { return; }
+                isSamplePriority = value;
                 OnPropertyChanged();
             }
         }
@@ -242,6 +253,16 @@ namespace CD4.UI.Library.ViewModel
                 if (selectedAtoll == value) return;
                 selectedAtoll = value;
                 RepopulateIslandDatasource(value).ConfigureAwait(true);
+                OnPropertyChanged();
+            }
+        }
+
+        public long? InstituteAssignedPatientId
+        {
+            get => instituteAssignedPatientId; set
+            {
+                if (instituteAssignedPatientId == value) { return; }
+                instituteAssignedPatientId = value;
                 OnPropertyChanged();
             }
         }
@@ -344,13 +365,15 @@ namespace CD4.UI.Library.ViewModel
 
         /// <summary>
         /// reads global settings and checks whether NidPp verification is required on order confirmation.
+        /// NO AWAIT HERE ************************************* CORRECT THIS
         /// </summary>
         public async Task<DemographicsConfirmationModel> OrderRequiresNidPpConfirmationAsync()
         {
             bool IsconfirmationRequired = true;
             try
             {
-                var result = await _globalSettingsDataAccess.ReadAllGlobalSettingsAsync();
+                var result = _globalSettingsHelper.Settings;
+
                 if (result is null)
                 {
                     PushingMessages.Invoke(this, "Cannot load global settings data, assuming defaults");
@@ -379,9 +402,10 @@ namespace CD4.UI.Library.ViewModel
                     Birthdate = DateTime.Parse(Birthdate.ToString()),
                     Gender = Gender.Find(x => x.Id == SelectedGenderId).Gender,
                     PhoneNumber = this.PhoneNumber,
-                    NidPp = this.nidPp
+                    NidPp = this.nidPp,
+                    InstituteAssignedPatientId = (long)this.InstituteAssignedPatientId
                 },
-                IsConfirmationRequired  = IsconfirmationRequired,
+                IsConfirmationRequired = IsconfirmationRequired,
                 Age = this.Age
             };
         }
@@ -390,7 +414,7 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-               Cin = await _requestDataAccess.GetNextCinSeed();
+                Cin = await _requestDataAccess.GetNextCinSeed();
             }
             catch (Exception)
             {
@@ -428,6 +452,8 @@ namespace CD4.UI.Library.ViewModel
             this.Birthdate = result.RequestPatientSampleData.Birthdate;
             this.Address = result.RequestPatientSampleData.Address;
             this.SelectedAtoll = result.RequestPatientSampleData.Atoll;
+            this.InstituteAssignedPatientId = result.RequestPatientSampleData.InstituteAssignedPatientId;
+            this.IsSamplePriority = result.RequestPatientSampleData.SamplePriority;
             await RepopulateIslandDatasource(SelectedAtoll); //filter the islands by selected atoll
 
             this.SelectedIsland = result.RequestPatientSampleData.Island;
@@ -485,6 +511,7 @@ namespace CD4.UI.Library.ViewModel
             SelectedAtoll = null;
             SelectedIsland = null;
             SelectedCountryId = 0;
+            InstituteAssignedPatientId = null;
 
             //Clear all clinical details
             foreach (var item in ClinicalDetails)
@@ -512,13 +539,13 @@ namespace CD4.UI.Library.ViewModel
                 var atollIslandData = GetAtollModelByAtollAndIslandName(mappedRequest.Atoll, mappedRequest.Island);
                 mappedRequest.AtollId = atollIslandData.Id;
 
-                if(!validateAnalysisRequest(mappedRequest))
+                if (!validateAnalysisRequest(mappedRequest))
                 {
 
                 }
 
                 var result = await _requestDataAccess.ConfirmRequestAsync
-                    (mappedRequest, _authorizeDetail.UserId);
+                    (mappedRequest, _authorizeDetail.UserId, IsSamplePriority);
 
                 return result;
             }
@@ -533,7 +560,7 @@ namespace CD4.UI.Library.ViewModel
         private bool validateAnalysisRequest(DataLibrary.Models.AnalysisRequestDataModel mappedRequest)
         {
             string valdationFailMessage = "";
-            if(mappedRequest.SiteId == 0)
+            if (mappedRequest.SiteId == 0)
             {
                 valdationFailMessage += "Sample collection site needs to be specified to save the Analysis Request.\n";
             }
@@ -543,7 +570,7 @@ namespace CD4.UI.Library.ViewModel
                 valdationFailMessage += "Please specify receipt number.\n";
             }
 
-            if(string.IsNullOrEmpty(valdationFailMessage))
+            if (string.IsNullOrEmpty(valdationFailMessage))
             {
                 return true;
             }
@@ -597,6 +624,7 @@ namespace CD4.UI.Library.ViewModel
                 SelectedIsland = "";
                 SelectedCountryId = -1;
                 PhoneNumber = null;
+                InstituteAssignedPatientId = null;
 
                 return;
             }
@@ -606,6 +634,7 @@ namespace CD4.UI.Library.ViewModel
             Birthdate = results.Birthdate;
             PhoneNumber = results.PhoneNumber;
             Address = results.Address;
+            InstituteAssignedPatientId = results.InstituteAssignedPatientId;
 
             await SetSelectedItemsForLookups(results);
         }
@@ -615,7 +644,7 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-                _ = await _statusDataAccess.MarkSampleCollectedAsync(this.Cin,_authorizeDetail.UserId);
+                _ = await _statusDataAccess.MarkSampleCollectedAsync(this.Cin, _authorizeDetail.UserId);
             }
             catch (Exception ex)
             {
@@ -854,6 +883,7 @@ namespace CD4.UI.Library.ViewModel
 
             this.NidPp = "A348756";
             this.Fullname = "Ahmed Ahmed";
+            this.instituteAssignedPatientId = 1234;
             this.SelectedGenderId = 1;
             this.PhoneNumber = "937645734";
             this.Birthdate = DateTime.Parse("2019-01-01");
@@ -1074,7 +1104,9 @@ namespace CD4.UI.Library.ViewModel
             return (AllAtollsWithCorrespondingIsland.Where((a) => a.Atoll == atollName && a.Island == IslandName)).FirstOrDefault();
         }
 
-        public async Task<List<BarcodeDataModel>> GetBarcodeData()
+
+        //this code is dublicated on ResultEntry View Model. Handle this a bit more gracefully later
+        public async Task<List<BarcodeDataModel>> GetBarcodeDataAsync()
         {
             try
             {

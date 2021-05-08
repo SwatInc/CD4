@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+option csharp_namespace = "CD4.BillingInterface.GrpcService.Protos";
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+package BillingOrderEntry;
+
+service AnalysisRequest{
+	rpc Save(AnalysisRequestModel) returns (Response);
+}
+
+
+message AnalysisRequestModel{
+	RequestModel Request = 1;
+	PatientModel Patient = 2;
+	Analysis Tests = 3;
+}
+
+message RequestModel{
+	string MemoNumber = 1;
+	string SampleId = 2;
+	int32 SiteId = 3;
+	google.protobuf.Timestamp SampleCollectedDateTime = 4;
+	google.protobuf.Timestamp SampleReceivedDateTime = 5;
+}
+
+message PatientModel{
+	string NidPp = 1;
+	int32 PateintId = 2;
+	string Fullname  = 3;
+	int32 GenderId = 4;
+	google.protobuf.Timestamp Birthdate = 5;
+	string PhoneNumber = 6;
+	string Age = 7;
+	int32 Nationality = 8;
+	string Address = 9;
+	int32 AtollId = 10;
+}
+
+message Analysis{
+	repeated string AnalysisId = 1;
+}
+
+message Response{
+	int32 Status = 1;
+	string message = 2;
+}

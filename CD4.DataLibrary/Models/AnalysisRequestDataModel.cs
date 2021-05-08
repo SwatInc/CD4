@@ -35,6 +35,7 @@ namespace CD4.DataLibrary.Models
         public int AtollId { get; set; }
         public string Country { get; set; }
         public int CountryId { get; set; }
+        public long InstituteAssignedPatientId { get; set; }
 
         #endregion
 

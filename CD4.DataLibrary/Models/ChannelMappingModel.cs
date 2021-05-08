@@ -13,5 +13,7 @@ namespace CD4.DataLibrary.Models
         public string Upload { get; set; }
         public string Unit { get; set; }
         public string AnalyserName { get; set; }
+        public string Mask { get; set; }
+        public string DataType { get; set; }
     }
 }

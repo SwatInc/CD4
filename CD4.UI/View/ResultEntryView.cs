@@ -1,4 +1,6 @@
-﻿using CD4.UI.Library.Model;
+﻿using CD4.Entensibility.ReportingFramework;
+using CD4.UI.Helpers;
+using CD4.UI.Library.Model;
 using CD4.UI.Library.ViewModel;
 using CD4.UI.UiSpecificModels;
 using DevExpress.Utils.Menu;
@@ -21,17 +23,21 @@ namespace CD4.UI.View
         private readonly IResultEntryViewModel _viewModel;
         private readonly IRejectionCommentViewModel _rejectionCommentViewModel;
         private readonly IUserAuthEvaluator _authEvaluator;
+        private readonly IBarcodeHelper _barcodeHelper;
         private readonly ILateOrderEntryViewModel _lateOrderEntryViewModel;
         private readonly ILabNotesViewModel _labNotesViewModel;
+        private readonly ILoadMultipleExtensions _reportExtensions;
         System.Windows.Forms.Timer dataRefreshTimer = new System.Windows.Forms.Timer() { Enabled = true, Interval = 1000 };
 
-        public event EventHandler<string> GenerateReportByCin;
+        public event EventHandler<CinAndReportIdModel> GenerateReportByCin;
+        public event EventHandler PrintBarcodeClick;
 
         public ResultEntryView(IResultEntryViewModel viewModel,
             IRejectionCommentViewModel rejectionCommentViewModel,
             IUserAuthEvaluator authEvaluator,
+            IBarcodeHelper barcodeHelper,
             ILateOrderEntryViewModel lateOrderEntryViewModel,
-            ILabNotesViewModel labNotesViewModel)
+            ILabNotesViewModel labNotesViewModel, ILoadMultipleExtensions reportExtensions)
         {
             InitializeComponent();
             //Initialize grid columns
@@ -43,10 +49,12 @@ namespace CD4.UI.View
             _viewModel.TestHistoryData = new List<TestHistoryModel>();
             _rejectionCommentViewModel = rejectionCommentViewModel;
             _authEvaluator = authEvaluator;
+            _barcodeHelper = barcodeHelper;
             _lateOrderEntryViewModel = lateOrderEntryViewModel;
             _labNotesViewModel = labNotesViewModel;
+            _reportExtensions = reportExtensions;
             InitializeBinding();
-
+            InitializePrintMenu();
 
             SizeChanged += OnSizeChangedAdjustSplitContainers;
             labelControlCin.DoubleClick += CopyCinToClipBoard;
@@ -57,6 +65,8 @@ namespace CD4.UI.View
             simpleButtonReport.Click += SimpleButtonReport_Click;
             simpleButtonLoadWorksheet.Click += LoadWorkSheet;
             simpleButtonNotes.Click += ShowSampleNotesDialog;
+            simpleButtonPrintBothResultEntryReport.Click += PrintBothDoAReports;
+            exportReportOnDefaultTemplate.Click += exportReportOnDefaultTemplate_Click;
             _viewModel.RequestDataRefreshed += RefreshViewData;
             _viewModel.PushingMessages += _viewModel_PushingMessages;
             _viewModel.PropertyChanged += _viewModel_PropertyChanged;
@@ -66,19 +76,50 @@ namespace CD4.UI.View
             lookUpEditSampleStatusFilter.EditValueChanged += LookUpEditSampleStatusFilter_EditValueChanged;
 
             ParentChanged += ResultEntryView_ParentChanged;
+            PrintBarcodeClick += OnPrintBarcodeClick;
 
             gridViewSamples.ColumnFilterChanged += OnSampleSearchComplete_RefreshPatientRibbonAndSelectedTests;
             DisableResultEntryReadWriteAccessForUnauthorizedUsers();
         }
 
+        private void exportReportOnDefaultTemplate_Click(object sender, EventArgs e)
+        {
+
+            //check if the user is authorised
+            if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.ExportReport")) return;
+            SimulateMenuClick_DefaultReportExport();
+        }
+
+        private void SimulateMenuClick_DefaultReportExport()
+        {
+            SimpleButtonReport_Click(new DXMenuItem(), EventArgs.Empty);
+        }
+
+        /// <summary>
+        /// Initializes print menu depending on the templates avalilable from plug-ins / AR template extensions installed on system
+        /// </summary>
+        private void InitializePrintMenu()
+        {
+            var menu = new DXPopupMenu();
+            foreach (var template in _reportExtensions.ReportTemplates)
+            {
+                foreach (var item in template.GetExtensionInformation())
+                {
+                    if (item.ReportType == ReportType.Barcode) continue;
+                    menu.Items.Add(new DXMenuItem(item.TemplateName, SimpleButtonReport_Click) { Tag = item.Index });
+                }
+            }
+            exportReportOnDefaultTemplate.DropDownControl = menu;
+        }
+
         private void DisableResultEntryReadWriteAccessForUnauthorizedUsers()
         {
-            if (!_authEvaluator.IsFunctionAuthorized("ResultEntryView.ReadWriteAccess")) 
+            if (!_authEvaluator.IsFunctionAuthorized("ResultEntryView.ReadWriteAccess"))
             {
                 gridViewTests.OptionsBehavior.Editable = false;
                 Text = "Result Entry View [Read Only]";
             };
-            
+
         }
 
         private void ShowSampleNotesDialog(object sender, EventArgs e)
@@ -348,6 +389,7 @@ namespace CD4.UI.View
                 case Keys.F2:
                     break;
                 case Keys.F3:
+                    PrintBarcodeClick?.Invoke(this, EventArgs.Empty);
                     break;
                 case Keys.F4:
                     break;
@@ -471,7 +513,15 @@ namespace CD4.UI.View
                         //check if the user is authorised
                         if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.PrintReport")) return;
 
-                        SimpleButtonReport_Click(this, EventArgs.Empty);
+                        SimpleButtonReport_Click(simpleButtonReport, EventArgs.Empty);
+                    }
+                    break;
+                case Keys.E:
+                    if (e.Modifiers == Keys.Control)
+                    {
+                        //check if the user is authorised
+                        if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.ExportReport")) return;
+                        SimulateMenuClick_DefaultReportExport();
                     }
                     break;
                 case Keys.Insert:
@@ -589,18 +639,92 @@ namespace CD4.UI.View
             menuItems.Add(new DXMenuItem("Cancel Sample Rejection [ Ctlr+Shift+F11 ]", new EventHandler(OnCancelRejectSampleClickAsync)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Sample Audit Trail [ F12 ]", new EventHandler(OnSampleAuditTrailClick)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Add Test(s) [ Insert ]", new EventHandler(OnAddTestsToSampleAsync)) { Tag = new RowInfo(view, rowHandle) });
+            menuItems.Add(new DXMenuItem("Print Barcode [ F3 ]", new EventHandler(OnPrintBarcodeClick)) { Tag = new RowInfo(view, rowHandle) });
             return menuItems;
+        }
+
+        private async void PrintBothDoAReports(object sender, EventArgs e)
+        {
+
+            //Get the Cin of the selected record.
+            var cin = GetSelectedCin();
+            //Ask to select a record, if no record is selected.
+            if (cin is null)
+            {
+                XtraMessageBox.Show("Please select a sample to view the report!");
+            }
+
+            //check if the user is authorised
+            if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.PrintReport")) return;
+
+            if (!DecideToContinuePrinting(cin)) return;
+
+            GenerateReportByCin?.Invoke(this, new CinAndReportIdModel() { Cin = cin, ReportIndex = 3, Action = ReportActionModel.Print });
+            GenerateReportByCin?.Invoke(this, new CinAndReportIdModel() { Cin = cin, ReportIndex = 4, Action = ReportActionModel.Print });
+
+        }
+
+        /// <summary>
+        /// Collects sample if not collected.
+        /// Prints required barcodes either way
+        /// </summary>
+        private async void OnPrintBarcodeClick(object sender, EventArgs e)
+        {
+            if (!_authEvaluator.IsFunctionAuthorized("OrderEntry.PrintBarcode")) { return; }
+
+            //If the print barcode function returns false then don't try marking the sample as collected.
+            if (!await PrintBarcodeAsync()) { return; }
+
+            try
+            {
+                await _viewModel.MarkSampleCollectedAsync();
+
+                //update Ui after calling for barcode printing
+                await _viewModel.UpdateUiAsync();
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show($"An error occured while marking the sample as collected\n\n{ex.Message}",
+                    "Mark Sample as collected", MessageBoxButtons.OK);
+            }
+
+        }
+
+        /// <summary>
+        /// loads barcode data from database and tries to print the barcodes
+        /// NOTE: *********************************************  DUBLICATE CODE EXISTS ON ORDER ENTRY VIEW ************************
+        /// </summary>
+        /// <returns>True if able to load barcode data from database, even if the printing step fails.</returns>
+        private async Task<bool> PrintBarcodeAsync()
+        {
+            List<BarcodeDataModel> barcodeData;
+            try
+            {
+                barcodeData = await _viewModel.GetBarcodeDataAsync();
+                return _barcodeHelper.PrintSingleSampleBarcode(barcodeData, _viewModel.SelectedRequestData.Cin);
+            }
+            catch (System.Drawing.Printing.InvalidPrinterException ex)
+            {
+                XtraMessageBox.Show($"Cannot print the barcode. The sample will be marked as collected if status is registered. Please find the error(s) below\n{ex.Message}");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                XtraMessageBox.Show(ex.Message);
+                return false;
+            }
+
         }
 
         private async void OnAddTestsToSampleAsync(object sender, EventArgs e)
         {
             //check if the user is authorised
-            if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.ReflexTesting")) {return;}
+            if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.ReflexTesting")) { return; }
 
 
             var sample = GetSampleForMenu(sender, e);
             var resultData = _viewModel.GetResultData(sample.Cin);
-            var reflexTestDialog = new LateOrderEntryView(_lateOrderEntryViewModel, resultData) 
+            var reflexTestDialog = new LateOrderEntryView(_lateOrderEntryViewModel, resultData)
             {
                 StartPosition = FormStartPosition.CenterScreen
             };
@@ -943,7 +1067,7 @@ namespace CD4.UI.View
         {
             try
             {
-                await _viewModel.GetWorkSheet();
+                await _viewModel.GetWorkSheetAsync();
                 RefreshPatientPanelAndSelectedSampleTestsManually();
             }
             catch (Exception ex)
@@ -973,8 +1097,55 @@ namespace CD4.UI.View
 
             if (!DecideToContinuePrinting(cin)) return;
 
+            //get the instance of XtraReport to generate report with..
+            var reportId = GetReportIndex(sender);
+
+            if (sender.GetType() == typeof(SimpleButton))
+            {
+                GenerateReportByCin?.Invoke(this, new CinAndReportIdModel() { Cin = cin, ReportIndex = reportId, Action = ReportActionModel.Print });
+            }
+            else
+            {
+                GenerateReportByCin?.Invoke(this, new CinAndReportIdModel() { Cin = cin, ReportIndex = reportId, Action = ReportActionModel.Export });
+            }
             //Raise an event indicating that a sample report is requested.
-            GenerateReportByCin?.Invoke(this, cin);
+        }
+
+        private int GetReportIndex(object sender)
+        {
+            // determine whether the initial event is raised by a menu item...
+            if (sender.GetType() == typeof(DXMenuItem))
+            {
+                //if raised by menu, try to get the report Id
+                var reportId = ((DXMenuItem)sender).Tag?.ToString();
+                var isInt = int.TryParse(reportId, out var parsedReportId);
+
+                //if the report ID is successfully identified, then return the Id....
+                if (isInt) { return parsedReportId; }
+
+                //proceed to return default
+
+
+            }
+
+            //if (sender.GetType() == typeof(SimpleButton))
+            //{
+            //    return 1;
+            //}
+
+            //try to get the report Id for the default report
+            foreach (var template in _reportExtensions.ReportTemplates)
+            {
+                foreach (var item in template.GetExtensionInformation())
+                {
+                    if (item.ReportType == ReportType.Barcode) { continue; }
+
+                    //look for a report with a name that contains 'Default'
+                    if (item.TemplateName.ToLower().Contains("default")) { return item.Index; }
+                }
+            }
+
+            throw new Exception("Cannot determine report template to use and, cannot find a template marked as default.");
         }
 
         private bool DecideToContinuePrinting(string cin)
@@ -1195,6 +1366,7 @@ namespace CD4.UI.View
             #region FiltersAndFunctions
 
             dateEditLoadWorksheetFrom.DataBindings.Add(new Binding("EditValue", _viewModel, nameof(_viewModel.LoadWorksheetFromDate)));
+            dateEditLoadWorksheetTo.DataBindings.Add(new Binding("EditValue", _viewModel, nameof(_viewModel.LoadWorksheetToDate)));
 
             //Wire up the datasource for lookUpEditSampleStatusFilter
             lookUpEditSampleStatusFilter.Properties.DataSource = _viewModel.AllStatus;
@@ -1203,7 +1375,7 @@ namespace CD4.UI.View
 
             //bind the enable/disable functionality of "Load Worksheet" button
             simpleButtonLoadWorksheet.DataBindings.Add(new Binding("Enabled", _viewModel, nameof(_viewModel.IsloadWorkSheetButtonEnabled)));
-            
+
             simpleButtonNotes.DataBindings.Add
                 (new Binding("Text", _viewModel, nameof(_viewModel.NotesCountButtonLabel), false, DataSourceUpdateMode.OnPropertyChanged));
             #endregion
@@ -1221,7 +1393,7 @@ namespace CD4.UI.View
 
             //set splitter for adjusting functions panel
             var height = this.splitContainerControlFunctions.Size.Height;
-            splitContainerControlFunctions.SplitterPosition = (int)(height - 90m);
+            splitContainerControlFunctions.SplitterPosition = (int)(height - 120m);
 
             //set splitter for sample and test functions panel
             splitContainerControlSamplesAndTest.SplitterPosition = (int)(0.5 * Width);
@@ -1232,8 +1404,8 @@ namespace CD4.UI.View
     {
         public RowInfo(GridView view, int rowHandle)
         {
-            this.RowHandle = rowHandle;
-            this.View = view;
+            RowHandle = rowHandle;
+            View = view;
         }
         public GridView View;
         public int RowHandle;

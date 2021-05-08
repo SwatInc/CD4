@@ -7,7 +7,8 @@
 	@AtollId int,
 	@CountryId int,
 	@Address varchar(100),
-	@PhoneNumber varchar(20)
+	@PhoneNumber varchar(20),
+	@InstituteAssignedPatientId bigint
 AS
 BEGIN
 SET NOCOUNT ON;
@@ -19,7 +20,8 @@ SET NOCOUNT ON;
 		[AtollId] = @AtollId,
 		[CountryId] = @CountryId,
 		[Address] = @Address,
-		[PhoneNumber] = @PhoneNumber
+		[PhoneNumber] = @PhoneNumber,
+		[InstituteAssignedPatientId] = @InstituteAssignedPatientId
 	WHERE [Id] = @Id;
 
 	SELECT [Id]
@@ -31,6 +33,7 @@ SET NOCOUNT ON;
 		  ,[CountryId]
 		  ,[Address]
 		  ,[PhoneNumber]
+		  ,[InstituteAssignedPatientId]
 	FROM [dbo].[Patient]
 	WHERE [Id] = @Id;
 END

@@ -3,6 +3,7 @@ using System.Drawing;
 using System.Collections;
 using System.ComponentModel;
 using DevExpress.XtraReports.UI;
+using System.Drawing.Printing;
 
 namespace CD4.UI.Report
 {
@@ -16,5 +17,17 @@ namespace CD4.UI.Report
             InitializeComponent();
         }
 
+        private void Detail_BeforePrint(object sender, PrintEventArgs e)
+        {
+            if (SamplePriority.Value.ToString() == "True")
+            {
+                xrLabelSampleType.StyleName = "xrControlStyleUrgent";
+            }
+
+            if (SamplePriority.Value.ToString() == "False")
+            {
+                xrLabelSampleType.StyleName = "xrControlStyleRoutine";
+            }
+        }
     }
 }

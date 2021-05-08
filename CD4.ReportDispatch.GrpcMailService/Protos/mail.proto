@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+option csharp_namespace = "CD4.ReportDispatch.GrpcMailService";
+
+package mail;
+
+service ReportDispatcher{
+	rpc Dispatch(DispatchRequestModel) returns (Response);
+}
+
+message DispatchRequestModel{
+	repeated string SampleIds = 1;
+	string TemplateName = 2;
+	string ToEmail = 3;
+}
+
+message Response{
+	int32 Status = 1;
+	string message = 2;
+}
+

@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[usp_UpdateResultByResultId]
-	@Result VARCHAR(50),
+	@Result NVARCHAR(50),
 	@ResultId int,
 	@StatusId int,
 	@ReferenceCode char(2),
@@ -12,8 +12,8 @@ SET XACT_ABORT ON;
 		BEGIN TRY
 
 		DECLARE @ResultDate DATETIME2;
-		DECLARE @PreviousData varchar(100);
-		DECLARE @CurrentData varchar(100);
+		DECLARE @PreviousData nvarchar(100);
+		DECLARE @CurrentData nvarchar(100);
 		DECLARE @Cin varchar(50);
 		DECLARE @AuditTypeIdTest int;
 		DECLARE @Username varchar(256);

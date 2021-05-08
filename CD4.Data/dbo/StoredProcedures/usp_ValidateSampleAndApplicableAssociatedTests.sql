@@ -6,7 +6,7 @@ BEGIN
 SET NOCOUNT ON;
 	DECLARE @NotValidatedNotRejectedCount int = 0;
 	DECLARE @ValidatedTestsWithResults varchar(500);
-	DECLARE @ResultDataToValidate TABLE([ResultId] int not null PRIMARY KEY, [TestDesc] varchar(50),[Result] varchar(50));
+	DECLARE @ResultDataToValidate TABLE([ResultId] int not null PRIMARY KEY, [TestDesc] nvarchar(100),[Result] nvarchar(50));
 	DECLARE @AuditTypeIdTest int;
 	DECLARE @StatusText varchar(50);
 	DECLARE @Username varchar(256);

@@ -3,6 +3,7 @@
 	[UserName] [nvarchar](256) NULL,
 	[Fullname] [nvarchar](256) NULL,
 	[NormalizedUserName] [nvarchar](256) NULL,
+	[FullNameLocal] nvarchar(256) NULL, -- localization
 	[Email] [nvarchar](256) NULL,
 	[NormalizedEmail] [nvarchar](256) NULL,
 	[EmailConfirmed] [bit] NOT NULL,

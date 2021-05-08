@@ -177,7 +177,6 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
-
         public async Task<List<CodifiedResultsModel>> GetAllCodifiedValuesAsync()
         {
             var storedProcedure = "[dbo].[usp_GetAllCodifiedValues]";
@@ -191,7 +190,6 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
-
         public async Task<SitesModel> AddSite(string siteName)
         {
             var storedProcedure = "[dbo].[usp_ConfigAddSite]";
@@ -245,6 +243,33 @@ namespace CD4.DataLibrary.DataAccess
             catch (Exception)
             {
 
+                throw;
+            }
+        }
+
+        public async Task<List<ScientistModel>> GetAllScientistsAsync()
+        {
+            var storedProcedure = "[dbo].[usp_GetAllScientistsForNda]";
+            try
+            {
+                return await LoadDataAsync<ScientistModel>(storedProcedure);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public async Task<List<BillingTestMappingModel>> GetBillingTestCodeMappings()
+        {
+            var storedProcedure = "[dbo].[usp_GetAllBillingTestMappings]";
+            try
+            {
+                return await LoadDataAsync<BillingTestMappingModel>(storedProcedure);
+            }
+            catch (Exception)
+            {
                 throw;
             }
         }

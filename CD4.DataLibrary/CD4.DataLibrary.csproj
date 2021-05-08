@@ -74,8 +74,8 @@
     <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Dapper.2.0.78\lib\net461\Dapper.dll</HintPath>
     </Reference>
-    <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="SwatIncCrypto">
       <HintPath>..\..\..\..\SwatInc\SwatIncCrypto.dll</HintPath>
@@ -107,6 +107,7 @@
     <Compile Include="DataAccess\IClinicalDetailsDataAccess.cs" />
     <Compile Include="DataAccess\ICommentsDataAccess.cs" />
     <Compile Include="DataAccess\IGlobalSettingsDataAccess.cs" />
+    <Compile Include="DataAccess\INdaTrackingDataAccess.cs" />
     <Compile Include="DataAccess\IPatientDataAccess.cs" />
     <Compile Include="DataAccess\IReferenceRangeDataAccess.cs" />
     <Compile Include="DataAccess\IReportsDataAccess.cs" />
@@ -116,6 +117,7 @@
     <Compile Include="DataAccess\IStaticDataDataAccess.cs" />
     <Compile Include="DataAccess\IStatusDataAccess.cs" />
     <Compile Include="DataAccess\IWorkSheetDataAccess.cs" />
+    <Compile Include="DataAccess\NdaTrackingDataAccess.cs" />
     <Compile Include="DataAccess\PatientDataAccess.cs" />
     <Compile Include="DataAccess\ReferenceRangeDataAccess.cs" />
     <Compile Include="DataAccess\ReportsDataAccess.cs" />
@@ -136,8 +138,11 @@
     <Compile Include="Models\AuditTrailModel.cs" />
     <Compile Include="Models\AuthorizeDetailModel.cs" />
     <Compile Include="Models\BarcodeDataModel.cs" />
+    <Compile Include="Models\BillingTestMappingModel.cs" />
     <Compile Include="Models\BulkImportsStaticDataModel.cs" />
     <Compile Include="Models\ChannelMappingModel.cs" />
+    <Compile Include="Models\CinAndFullnameModel.cs" />
+    <Compile Include="Models\CinAndReportDateModel.cs" />
     <Compile Include="Models\ClinicalDetailIdsModel.cs" />
     <Compile Include="Models\ClinicalDetailsDatabaseModel.cs" />
     <Compile Include="Models\ClinicalDetailsModel.cs" />
@@ -147,6 +152,8 @@
     <Compile Include="Models\CompleteRequestSearchResultsModel.cs" />
     <Compile Include="Models\GenericModelAndListModel.cs" />
     <Compile Include="Models\GlobalSettingsModel.cs" />
+    <Compile Include="Models\NdaTrackingModel.cs" />
+    <Compile Include="Models\ScientistModel.cs" />
     <Compile Include="Models\ResultAlertModel.cs" />
     <Compile Include="Models\ResultHistoryModel.cs" />
     <Compile Include="Models\ResultReferenceRangeModel.cs" />

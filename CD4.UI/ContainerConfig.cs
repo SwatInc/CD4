@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using AutoMapper;
+using CD4.Entensibility.ReportingFramework;
 using CD4.UI.Helpers;
 using CD4.UI.Library.Helpers;
 using CD4.UI.Library.Model;
@@ -48,6 +49,11 @@ namespace CD4.UI
                 config.CreateMap<DataLibrary.Models.ResultAlertModel, Library.Model.ResultAlertModel>();
                 config.CreateMap<DataLibrary.Models.SampleNotesModel, Library.Model.SampleNotesModel>().ReverseMap();
                 config.CreateMap<DataLibrary.Models.PatientUpdateDatabaseModel, Library.Model.PatientUpdateModel>().ReverseMap();
+                config.CreateMap<DataLibrary.Models.ScientistModel, Library.Model.ScientistModel>().ReverseMap();
+                config.CreateMap<DataLibrary.Models.NdaTrackingModel, Library.Model.NdaTrackingModel>().ReverseMap();
+                config.CreateMap<DataLibrary.Models.CinAndReportDateModel, Library.Model.CinAndReportDateModel>().ReverseMap();
+                config.CreateMap<DataLibrary.Models.CinAndFullnameModel, Library.Model.CinAndFullnameModel>().ReverseMap();
+                config.CreateMap<DataLibrary.Models.GlobalSettingsModel, Library.Model.GlobalSettingsModel>().ReverseMap();
                 config.CreateMap<ResultModel, TestModel>()
                     .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                     .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Test))
@@ -103,10 +109,14 @@ namespace CD4.UI
                 .AsSelf()
                 .SingleInstance();
 
+            builder.RegisterType<LoadMultipleExtensions>().As<ILoadMultipleExtensions>().SingleInstance();
+
             builder.RegisterType<UserAuthEvaluator>().As<IUserAuthEvaluator>();
             builder.RegisterType<PrintingHelper>().As<IPrintingHelper>();
             builder.RegisterType<NamesAbbreviator>().As<INamesAbbreviator>();
             builder.RegisterType<BarcodeHelper>().As<IBarcodeHelper>();
+
+            builder.RegisterType<GlobalSettingsHelper>().As<IGlobalSettingsHelper>().SingleInstance();
 
             return builder.Build();
         }

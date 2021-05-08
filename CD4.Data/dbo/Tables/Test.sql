@@ -2,12 +2,13 @@
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
     [DisciplineId] INT NOT NULL,
-    [Description] VARCHAR(50) NOT NULL,
+    [Description] NVARCHAR(100) NOT NULL,
     [SampleTypeId] INT NOT NULL,
     [ResultDataTypeId] INT NOT NULL, 
     [Mask] VARCHAR(50) NOT NULL,
     [UnitId] INT NOT NULL,
-    [Reportable] BIT NOT NULL DEFAULT 1, 
+    [Reportable] BIT NOT NULL DEFAULT 1,
+    [Code] VARCHAR(3) NOT NULL DEFAULT '', -- this will be suffix like P, F P1
     [DeafultCommented] BIT NOT NULL,
     CONSTRAINT [FK_Test_ResultDataType] FOREIGN KEY ([ResultDataTypeId]) REFERENCES [dbo].[ResultDataType]([Id]), 
     CONSTRAINT [AK_Test_Description] UNIQUE ([Description]), 

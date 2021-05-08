@@ -8,4 +8,5 @@
         public string TubePositionInRack { get; set; }
         public string RackLocation { get; set; }
     }
+
 }

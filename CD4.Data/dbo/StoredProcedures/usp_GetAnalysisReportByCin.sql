@@ -11,8 +11,8 @@ AS
 		(
 			[Cin] VARCHAR(50) NOT NULL,
 			[Discipline] VARCHAR(50) NOT NULL,
-			[Assay] VARCHAR(50) NOT NULL,
-			[Result] VARCHAR(50)NULL,
+			[Assay] NVARCHAR(100) NOT NULL,
+			[Result] NVARCHAR(50)NULL,
 			[Unit] varchar(10) null,
 			[DisplayNormalRange] varchar(100)
 		);
@@ -45,7 +45,15 @@ AS
 		,[R].[CollectionDate] AS [CollectedDate]
 		,[R].[ReceivedDate]
 		,[R].[Cin]
+		,[R].[EpisodeNumber]
+		,[R].[QcCalValidatedBy]
+		,[R].[ReportedAt]
+		,[R].[ReceivedBy]
+		,[R].[AnalysedBy]
+		,[R].[InstituteAssignedPatientId]
+		,[SPT].[SampleProcessedDateTime] AS [SampleProcessedAt]
 		FROM [dbo].[RequestsWithTestsWithResults] [R]
+		LEFT JOIN [dbo].[SampleProcessedTimings] [SPT] ON [R].[Cin] = [SPT].[Sample_Cin]
 		WHERE [R].[Cin] = @Cin;
 
 		--get logged in user

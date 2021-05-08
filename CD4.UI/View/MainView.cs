@@ -1,4 +1,5 @@
 ﻿using CD4.DataLibrary.DataAccess;
+using CD4.Entensibility.ReportingFramework;
 using CD4.UI.Library.ViewModel;
 using CD4.UI.UiSpecificModels;
 using DevExpress.Skins;
@@ -8,6 +9,9 @@ using DevExpress.XtraEditors;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -17,12 +21,16 @@ namespace CD4.UI.View
     {
         private readonly IReportsDataAccess reportsDataAccess;
         private readonly IUserAuthEvaluator _authEvaluator;
-
+        private readonly ILoadMultipleExtensions _reportExtensions;
+        private string LoadedLibraryVersions;
         public event EventHandler<int> SelectedDisciplineChanged;
 
         private IMainViewModel _viewModel { get; }
 
-        public MainView(IMainViewModel viewModel, IReportsDataAccess reportsDataAccess, IUserAuthEvaluator authEvaluator)
+        public MainView(IMainViewModel viewModel,
+            IReportsDataAccess reportsDataAccess,
+            IUserAuthEvaluator authEvaluator,
+            ILoadMultipleExtensions reportExtensions)
         {
             InitializeComponent();
             //this.popupMenu.AddItem(this.barButtonItemChangePassword);
@@ -32,6 +40,7 @@ namespace CD4.UI.View
             _viewModel = viewModel;
             this.reportsDataAccess = reportsDataAccess;
             _authEvaluator = authEvaluator;
+            _reportExtensions = reportExtensions;
 
             //load auth UI
             LoadAuthenticationUi();
@@ -59,6 +68,8 @@ namespace CD4.UI.View
             //profile Tab Buttons
             barButtonItemChangePassword.ItemClick += OpenChangePasswordView;
             barButtonItemUpdatePatientDetailsView.ItemClick += OpenPatientUpdateView;
+            barHeaderItemCD4Version.ItemClick += BarHeaderItemCD4Version_ItemClick;
+            barButtonItemNdaTracking.ItemClick += OpenNdaTrackingView;
             //restricted tab buttons
 
             #endregion
@@ -70,6 +81,50 @@ namespace CD4.UI.View
             this.MdiChildActivate += MainView_MdiChildActivate;
 
             SetDisciplineRibbonOptions();
+
+            GetVersionData();
+        }
+
+        private void BarHeaderItemCD4Version_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            XtraMessageBox.Show(LoadedLibraryVersions,"Loaded Library Versions");
+        }
+
+        private void GetVersionData()
+        {
+            Assembly currentAssembly = typeof(MainView).Assembly;
+            var versionData = new List<string>();
+
+            //Get all referenced assemblies for version data
+            foreach (AssemblyName an in currentAssembly.GetReferencedAssemblies())
+            {
+                if (!an.Name.Contains("CD4.")) continue;
+                versionData.Add($"Name={an.Name}, Version={an.Version}");
+            }
+
+            //Get all extensions for version data. These will are not referenced and hence not included in the above data
+            var extensions = Directory.EnumerateFiles(Environment.CurrentDirectory)
+                .Where(filename => filename.Contains("CD4.Extensions") && filename.Contains(".dll"))
+                .Select(filepath => AssemblyName.GetAssemblyName(filepath));
+
+            foreach (var item in extensions)
+            {
+                versionData.Add($"Name={item.Name}, Version={item.Version}");
+            }
+
+            //executing assembly
+            var cd4 = currentAssembly.GetName();
+            versionData.Add($"Name={cd4.Name}, Version={cd4.Version}");
+
+            barHeaderItemCD4Version.Caption = $"|  {cd4.Name} v{cd4.Version}-beta";
+
+            LoadedLibraryVersions = JsonConvert.SerializeObject(versionData, Formatting.Indented)
+                .Replace("[", null)
+                .Replace("]", null)
+                .Replace("\"", null)
+                .Replace("{", null)
+                .Replace("}", null)
+                .Replace(",", null);
         }
 
         private void OpenPatientUpdateView(object sender, ItemClickEventArgs e)
@@ -81,6 +136,11 @@ namespace CD4.UI.View
         private void OpenLabNotesView(object sender, ItemClickEventArgs e)
         {
             //OpenMdiForm<LabNotesView>();
+        }
+
+        private void OpenNdaTrackingView(object sender, ItemClickEventArgs e)
+        {
+            OpenMdiForm<BatchedNdaTrackingView>();
         }
 
         private void OpenBulkOrdersView(object sender, ItemClickEventArgs e)
@@ -323,12 +383,13 @@ namespace CD4.UI.View
             }
         }
 
-        private void ResultView_OnGenerateReportByCin(object sender, string cin)
+        private void ResultView_OnGenerateReportByCin(object sender, CinAndReportIdModel cinAndReportIdModel)
         {
             //open report view
             // this.OpenMdiForm<ReportView>(cin);
 
-            var reportView = new ReportView(reportsDataAccess, cin, _viewModel.GetloggedInUserId()) { MdiParent = this };
+            var reportView = new ReportView(reportsDataAccess, 
+                cinAndReportIdModel, _viewModel.GetloggedInUserId(), _reportExtensions) { MdiParent = this };
             reportView.Show();
         }
     }

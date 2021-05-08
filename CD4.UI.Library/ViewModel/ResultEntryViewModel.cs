@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CD4.DataLibrary.DataAccess;
 using CD4.DataLibrary.Models;
+using CD4.UI.Library.Helpers;
 using CD4.UI.Library.Model;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace CD4.UI.Library.ViewModel
         private GridControlSampleActiveDatasource _gridSampleActiveDatasource;
         private int _selectedDisciplineId;
         private string notesCountButtonLabel;
+        private DateTime loadWorksheetToDate;
         private readonly IWorkSheetDataAccess _workSheetDataAccess;
         private readonly IMapper _mapper;
         private readonly IResultDataAccess _resultDataAccess;
@@ -29,6 +31,7 @@ namespace CD4.UI.Library.ViewModel
         private readonly ISampleDataAccess _sampleDataAccess;
         private readonly IStaticDataDataAccess _staticDataDataAccess;
         private readonly AuthorizeDetailEventArgs _authorizeDetail;
+        private readonly IAnalysisRequestDataAccess _requestDataAccess;
         #endregion
 
         #region Events
@@ -45,7 +48,7 @@ namespace CD4.UI.Library.ViewModel
         #region Default Constructor
         public ResultEntryViewModel
             (IWorkSheetDataAccess workSheetDataAccess, IMapper mapper, IResultDataAccess resultDataAccess, IStatusDataAccess statusDataAccess,
-            ISampleDataAccess sampleDataAccess, IStaticDataDataAccess staticDataDataAccess, AuthorizeDetailEventArgs authorizeDetail)
+            ISampleDataAccess sampleDataAccess, IStaticDataDataAccess staticDataDataAccess, AuthorizeDetailEventArgs authorizeDetail, IAnalysisRequestDataAccess requestDataAccess)
         {
             GridTestActiveDatasource = GridControlTestActiveDatasource.Tests;
             GridSampleActiveDatasource = GridControlSampleActiveDatasource.Sample;
@@ -62,15 +65,17 @@ namespace CD4.UI.Library.ViewModel
             NotesCountButtonLabel = "View Notes [ Ctrl+N ]";
             //set the date to load worksheet from
             LoadWorksheetFromDate = DateTime.Today;
+            LoadWorksheetToDate = DateTime.Today;
 
             //GenerateDemoData();
-            this._workSheetDataAccess = workSheetDataAccess;
-            this._mapper = mapper;
-            this._resultDataAccess = resultDataAccess;
-            this._statusDataAccess = statusDataAccess;
+            _workSheetDataAccess = workSheetDataAccess;
+            _mapper = mapper;
+            _resultDataAccess = resultDataAccess;
+            _statusDataAccess = statusDataAccess;
             _sampleDataAccess = sampleDataAccess;
             _staticDataDataAccess = staticDataDataAccess;
             _authorizeDetail = authorizeDetail;
+            _requestDataAccess = requestDataAccess;
             SelectedResultData.ListChanged += UpdateDatabaseResults;
             LoadAllStatusDataAndCodifiedValues += GetAllStatusData;
             LoadAllStatusDataAndCodifiedValues += FetchAllCodifiedData;
@@ -86,7 +91,7 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
-                await GetWorkSheet();
+                await GetWorkSheetAsync();
             }
             catch (Exception ex)
             {
@@ -119,6 +124,15 @@ namespace CD4.UI.Library.ViewModel
 
             }
         }
+        public DateTime LoadWorksheetToDate
+        {
+            get => loadWorksheetToDate; set
+            {
+                if (loadWorksheetToDate == value) { return; }
+                loadWorksheetToDate = value;
+                OnPropertyChanged();
+            }
+        }
         public List<RequestSampleModel> RequestData { get; set; }
         public dynamic TestHistoryData { get; set; }
         public BindingList<ResultModel> SelectedResultData { get; set; }
@@ -137,7 +151,7 @@ namespace CD4.UI.Library.ViewModel
                 if (_selectedDisciplineId == value) return;
                 _selectedDisciplineId = value;
                 //no need to raise npc, load worksheet instead
-                GetWorkSheet();
+                GetWorkSheetAsync().GetAwaiter().GetResult();
             }
         }
         public string NotesCountButtonLabel
@@ -203,6 +217,36 @@ namespace CD4.UI.Library.ViewModel
 
         #region Public Methods
 
+        //This method is dublicated on OrderEntryViewModel. Implement DRY later
+        public async Task<List<Model.BarcodeDataModel>> GetBarcodeDataAsync()
+        {
+
+            try
+            {
+                var data = await _requestDataAccess.GetBarcodeDataAsync(SelectedRequestData.Cin);
+                return _mapper.Map<List<Model.BarcodeDataModel>>(data);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        //********************* This method is dublicated on OrderEntryViewModel. Implement DRY later *********************************
+        public async Task MarkSampleCollectedAsync()
+        {
+            try
+            {
+                _ = await _statusDataAccess.MarkSampleCollectedAsync(SelectedRequestData.Cin, _authorizeDetail.UserId);
+            }
+            catch (Exception ex)
+            {
+                PushingMessages?.Invoke(this, ex.Message);
+            }
+
+        }
+
+
         /// <summary>
         /// Sets notes count button without a database call. Uses the passed in string value as count of notes
         /// </summary>
@@ -257,7 +301,7 @@ namespace CD4.UI.Library.ViewModel
                 //map-out the result returned.
                 var mappedData = _mapper.Map<SampleAndResultStatusAndResultModel>(output);
                 //updateUI
-                UpdateUiOnSampleRejectionOrRejectionCancellation(mappedData);
+                UpdateUiOnSampleColectionRejectionOrRejectionCancellation(mappedData);
             }
             catch (Exception)
             {
@@ -302,7 +346,7 @@ namespace CD4.UI.Library.ViewModel
                 //map-out the result returned.
                 var mappedData = _mapper.Map<SampleAndResultStatusAndResultModel>(output);
                 //updateUI
-                UpdateUiOnSampleRejectionOrRejectionCancellation(mappedData);
+                UpdateUiOnSampleColectionRejectionOrRejectionCancellation(mappedData);
             }
             catch (Exception)
             {
@@ -331,7 +375,7 @@ namespace CD4.UI.Library.ViewModel
             }
         }
 
-        public async Task GetWorkSheet()
+        public async Task GetWorkSheetAsync()
         {
             if (GetSelectedStatusIdOrDefault() == 0)
             {
@@ -344,7 +388,7 @@ namespace CD4.UI.Library.ViewModel
                 //Disable the load worksheet button to avoid multiple clicks
                 IsloadWorkSheetButtonEnabled = false;
                 var worksheet = await _workSheetDataAccess.GetWorklistBySpecifiedDateAndStatusIdAsync
-                    (GetSelectedStatusIdOrDefault(), SelectedDisciplineId, LoadWorksheetFromDate);
+                    (GetSelectedStatusIdOrDefault(), SelectedDisciplineId, LoadWorksheetFromDate, LoadWorksheetToDate);
                 await DisplayWorksheet(worksheet);
             }
             finally
@@ -360,7 +404,7 @@ namespace CD4.UI.Library.ViewModel
             {
                 //Disable the load worksheet button to avoid multiple clicks
                 IsloadWorkSheetButtonEnabled = false;
-                var worksheet = await _workSheetDataAccess.GetWorklistBySpecifiedDateAndAllStatusAsync(SelectedDisciplineId, LoadWorksheetFromDate);
+                var worksheet = await _workSheetDataAccess.GetWorklistBySpecifiedDateAndAllStatusAsync(SelectedDisciplineId, LoadWorksheetFromDate, LoadWorksheetToDate);
                 await DisplayWorksheet(worksheet);
             }
             finally
@@ -644,7 +688,7 @@ namespace CD4.UI.Library.ViewModel
         /// updates UI after sample is rejected.
         /// </summary>
         /// <param name="statusUpdateData">model returned by datalayer on rejecting sample.</param>
-        private void UpdateUiOnSampleRejectionOrRejectionCancellation(SampleAndResultStatusAndResultModel statusUpdateData)
+        private void UpdateUiOnSampleColectionRejectionOrRejectionCancellation(SampleAndResultStatusAndResultModel statusUpdateData)
         {
             //find the sample rejected.
             var sample = RequestData.Find(x => x.Cin == statusUpdateData.SampleData.Cin);
@@ -924,7 +968,7 @@ namespace CD4.UI.Library.ViewModel
 
                 var mappedData = _mapper.Map<SampleAndResultStatusAndResultModel>(output);
                 //updateUI
-                UpdateUiOnSampleRejectionOrRejectionCancellation(mappedData);
+                UpdateUiOnSampleColectionRejectionOrRejectionCancellation(mappedData);
             }
             catch (Exception)
             {
@@ -940,7 +984,7 @@ namespace CD4.UI.Library.ViewModel
                 var output = await _resultDataAccess.CancelTestRejectionByResultId(testData.Id, 1);
                 var mappedData = _mapper.Map<SampleAndResultStatusAndResultModel>(output);
                 //updateUI
-                UpdateUiOnSampleRejectionOrRejectionCancellation(mappedData);
+                UpdateUiOnSampleColectionRejectionOrRejectionCancellation(mappedData);
             }
             catch (Exception)
             {
@@ -1018,7 +1062,7 @@ namespace CD4.UI.Library.ViewModel
                 var result = await _resultDataAccess.CancelResultValidation(testData.Id, testData.Cin, _authorizeDetail.UserId);
                 var mappedData = _mapper.Map<SampleAndResultStatusAndResultModel>(result);
                 //updateUI, the following method can be used to Update UI after cancelling test rejection. Refactoring required
-                UpdateUiOnSampleRejectionOrRejectionCancellation(mappedData);
+                UpdateUiOnSampleColectionRejectionOrRejectionCancellation(mappedData);
             }
             catch (Exception)
             {
@@ -1030,6 +1074,21 @@ namespace CD4.UI.Library.ViewModel
         public List<ResultModel> GetResultData(string cin)
         {
             return AllResultData.FindAll((x) => x.Cin == cin).ToList();
+        }
+
+        public async Task UpdateUiAsync()
+        {
+            try
+            {
+                var output = await _statusDataAccess.GetSampleAndTestStatusForUpdatingUiAsync(SelectedRequestData.Cin);
+                UpdateUiOnSampleColectionRejectionOrRejectionCancellation(output);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
 
         #endregion

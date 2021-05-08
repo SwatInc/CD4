@@ -33,7 +33,7 @@ namespace CD4.DataLibrary.DataAccess
             this.statusDataAccess = statusDataAccess;
         }
 
-        public async Task<bool> ConfirmRequestAsync(AnalysisRequestDataModel request, int loggedInUserId)
+        public async Task<bool> ConfirmRequestAsync(AnalysisRequestDataModel request, int loggedInUserId, bool isSamplePriority = false)
         {
             RequestDataStatus requestSampleStatus = RequestDataStatus.New;
             RequestDataStatus patientStatus = RequestDataStatus.New;
@@ -120,12 +120,13 @@ namespace CD4.DataLibrary.DataAccess
                     Id = patient.Id,
                     Fullname = request.Fullname,
                     NidPp = request.NationalIdPassport,
-                    Birthdate = DateHelper.GetCD4FormatDate(request.Birthdate),
+                    Birthdate = DateHelper.GetCD4FormatJustDateNoTime(request.Birthdate),
                     GenderId = request.GenderId,
                     AtollId = request.AtollId,
                     CountryId = request.CountryId,
                     Address = request.Address,
-                    PhoneNumber = request.PhoneNumber
+                    PhoneNumber = request.PhoneNumber,
+                    InstituteAssignedPatientId = request.InstituteAssignedPatientId
                 };
                 var isPatientUpdated = await patientData.UpdatePatientById(patientToUpdate);
                 if (!isPatientUpdated) { throw new Exception("Cannot update patient data!"); }
@@ -137,12 +138,13 @@ namespace CD4.DataLibrary.DataAccess
                 {
                     Fullname = request.Fullname,
                     NidPp = request.NationalIdPassport,
-                    Birthdate = DateHelper.GetCD4FormatDate(request.Birthdate),
+                    Birthdate = DateHelper.GetCD4FormatJustDateNoTime(request.Birthdate),
                     GenderId = request.GenderId,
                     AtollId = request.AtollId,
                     CountryId = request.CountryId,
                     Address = request.Address,
-                    PhoneNumber = request.PhoneNumber
+                    PhoneNumber = request.PhoneNumber,
+                    InstituteAssignedPatientId = request.InstituteAssignedPatientId
                 };
                 InsertedPatientId = await patientData.InsertPatient(patientToInsert);
 
@@ -161,7 +163,9 @@ namespace CD4.DataLibrary.DataAccess
             {
                 //IF REQUEST IS NEW:: CLINICAL DETAILS, SAMPLE AND REQUESTED TESTS
                 //WILL BE NEW FOR SURE. SO HANDLE THEM ALL AT THE SAME TIME
-                return await InsertNewCompleteRequest(GetPatientId(patient, InsertedPatientId), request, loggedInUserId);
+                var output =  await InsertNewCompleteRequest(GetPatientId(patient, InsertedPatientId), request, loggedInUserId);
+                await InsertUpdateSamplePriorityAsync(request.Cin, isSamplePriority, loggedInUserId);
+                return output;
 
             }
 
@@ -240,6 +244,9 @@ namespace CD4.DataLibrary.DataAccess
             }
             #endregion
 
+            #region Update Sample and Test Priority
+            await InsertUpdateSamplePriorityAsync(request.Cin, isSamplePriority, loggedInUserId);
+            #endregion
 
             #endregion
 
@@ -247,6 +254,21 @@ namespace CD4.DataLibrary.DataAccess
             #endregion
 
             return true;
+        }
+
+        private async Task InsertUpdateSamplePriorityAsync(string cin, bool isSamplePriority, int loggedInUserId)
+        {
+            var storedProcedure = "[dbo].[usp_UpdateSamplePriorityByCin]";
+            var parameters = new { Cin = cin, Priority = isSamplePriority, UserId = loggedInUserId };
+            try
+            {
+                _ = await SelectInsertOrUpdateAsync<dynamic, dynamic>(storedProcedure, parameters);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
 
         /// <summary>

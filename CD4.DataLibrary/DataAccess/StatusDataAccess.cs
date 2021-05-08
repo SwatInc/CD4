@@ -372,5 +372,52 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
+
+        public async Task SetSampleAcceptedTimeReceivedFromBilling(string cin, string acceptedAt)
+        {
+            var storedProcedure = "[dbo].[DecideAndExecInsertOrUpdateSampleAcceptedDatetime]";
+            var parameters = new { @Cin = cin, @AcceptedAt = acceptedAt };
+
+            try
+            {
+                await SelectInsertOrUpdateAsync<dynamic, dynamic>(storedProcedure, parameters);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+
+        public async Task<SampleAndResultStatusAndResultModel> GetSampleAndTestStatusForUpdatingUiAsync(string cin)
+        {
+
+            var storedProcedure = "[dbo].[usp_GetSampleAndTestStatusByCinForUpdatingUI]";
+            var parameters = new { Cin = cin };
+
+            try
+            {
+                var output = await QueryMultiple_GetModelAndListWithParameterAsync
+                    <StatusUpdatedSampleModel, UpdatedResultAndStatusModel, dynamic>(storedProcedure, parameters);
+
+                return new SampleAndResultStatusAndResultModel()
+                {
+                    SampleData = output.T1,
+                    ResultStatus = output.U1
+                };
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        //this is to send status to billing 
+        public async Task<string> DetermineSampleStatus(string sampleNumber)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

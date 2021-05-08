@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Timers;
@@ -63,6 +64,18 @@ namespace CD4.ExcelInterface.QuantStudio5.ViewModels
             //invoke events
             Initialize?.Invoke(this, EventArgs.Empty);
         }
+
+        #endregion
+
+        #region Public Properties
+        public Config Configuration { get; set; }
+        public BindingList<LogModel> Logs { get; set; }
+        public BindingList<InterfaceResults> InterfaceResults { get; set; }
+        public dynamic KitNames { get { return _kitNames; } private set => _kitNames = value; }
+
+        #endregion
+
+        #region Private Methods
 
         private async void RunInitalze(object sender, EventArgs e)
         {
@@ -122,6 +135,15 @@ namespace CD4.ExcelInterface.QuantStudio5.ViewModels
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(KitNames)));
 
+            //replace targets with blank values with a dash(-)
+            foreach (var interfaceResults in InterfaceResults)
+            {
+                foreach (var measurement in interfaceResults.Measurements)
+                {
+                    if(string.IsNullOrEmpty(measurement.MeasurementValue)) { measurement.MeasurementValue = "-"; }
+                }
+            }
+
             //run interpretations if analyser is QuantStudio
             if (batchId.ToLower().Contains("perkinelmer"))
             {
@@ -143,19 +165,6 @@ namespace CD4.ExcelInterface.QuantStudio5.ViewModels
             ExportToUploader().GetAwaiter().GetResult();
         }
 
-
-        #endregion
-
-        #region Public Properties
-        public Config Configuration { get; set; }
-        public BindingList<LogModel> Logs { get; set; }
-        public BindingList<InterfaceResults> InterfaceResults { get; set; }
-        public dynamic KitNames { get { return _kitNames; } private set => _kitNames = value; }
-
-        #endregion
-
-        #region Private Methods
-
         private void ReportProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             try
@@ -174,9 +183,7 @@ namespace CD4.ExcelInterface.QuantStudio5.ViewModels
             {
                 foreach (var file in _filesToProcess)
                 {
-
-                    FileStream fileStream = new FileStream(file, FileMode.Open, FileAccess.Read);
-
+                    var fileStream = MultipleTries(() => new FileStream(file, FileMode.Open, FileAccess.Read));
                     var results = ProcessExcelFile(fileStream);
 
                     //delete the file if it exists
@@ -205,6 +212,34 @@ namespace CD4.ExcelInterface.QuantStudio5.ViewModels
                 e.Result = processedResults;
             }
         }
+
+
+        public T MultipleTries<T>(Func<T> function)
+        {
+            // https://stackoverflow.com/questions/1563191/cleanest-way-to-write-retry-logic
+
+            var MaxTries = Configuration.FileReadMaxTries;
+            var tries = MaxTries;
+            var delay = Configuration.FileReadDelay;
+            while (true)
+            {
+                try
+                {
+                    return function();
+                }
+                catch (Exception ex)
+                {
+                    if (--tries <= 0)
+                    {
+                        Logs.Add(new LogModel() { Log = $"Cannot read the file after {MaxTries} tries. Error Message: {ex.Message}" });
+                        throw;
+                    }
+                    Logs.Add(new LogModel() { Log = $"Failed reading the file. Trying again in {delay} ms. Max tries is set as {MaxTries}" });
+                    System.Threading.Thread.Sleep(delay);
+                }
+            }
+        }
+
         private List<InterfaceResults> ProcessExcelFile(FileStream fileStream)
         {
             List<InterfaceResults> processedInterfaceResults = new List<InterfaceResults>();
@@ -249,15 +284,35 @@ namespace CD4.ExcelInterface.QuantStudio5.ViewModels
                             var testcode = dataRow.GetCell(item.TestCodeColumn)?.StringCellValue;
                             if (string.IsNullOrEmpty(testcode)) { continue; }
 
-                            //if sample number is already present in previous rows
                             var sample = processedInterfaceResults.Find((x) => x.SampleId == result.SampleId);
+
+                            //if sample number is already present in previous rows
                             if (!(sample is null))
                             {
-                                sample.Measurements.Add(new MeasurementValues()
+                                //Check whether the specific test code is present in the sample.
+                                var measurement = sample.Measurements.FirstOrDefault((x) => x.TestCode == testcode);
+
+                                //if testcode is already present...
+                                if (measurement != null)
                                 {
-                                    TestCode = testcode,
-                                    MeasurementValue = dataRow.GetCell(item.MeasurementValueColumn)?.ToString()
-                                });
+                                    //overwrite the result.
+                                    var testResult = dataRow.GetCell(item.MeasurementValueColumn)?.ToString();
+                                    Logs.Add(new LogModel() 
+                                    { 
+                                        Log = $"{testcode} is already present for sample number. Test result: {measurement.MeasurementValue} "+
+                                                $"replaced by Test Result: {testResult}"
+                                    });
+                                    measurement.MeasurementValue = testResult;
+                                }
+                                else
+                                {
+                                    //if testcode is not present for sample..., add it.
+                                    sample.Measurements.Add(new MeasurementValues()
+                                    {
+                                        TestCode = testcode,
+                                        MeasurementValue = dataRow.GetCell(item.MeasurementValueColumn)?.ToString()
+                                    });
+                                }
                                 skipResult = true;
                             }
                             else
@@ -286,6 +341,10 @@ namespace CD4.ExcelInterface.QuantStudio5.ViewModels
                 _backgroundWorker.ReportProgress(1, $"An Error occured {ex.Message}. Excel file not processed!");
                 return new List<InterfaceResults>();
             }
+            finally
+            {
+                fileStream.Close();
+            }
 
         }
 
@@ -310,13 +369,13 @@ namespace CD4.ExcelInterface.QuantStudio5.ViewModels
 
                         if (dataValue.Contains("\\"))
                         {
-                            var data = dataValue.Substring(dataValue.LastIndexOf('\\')+1);
+                            var data = dataValue.Substring(dataValue.LastIndexOf('\\') + 1);
                             experimentName = $"{experimentName} {data}";
                             continue;
                         }
 
                         if (!(experimentName.Contains(dataValue.Trim()))) { experimentName = $"{experimentName} {dataValue}"; }
-                        
+
                     }
                 }
 
@@ -365,11 +424,19 @@ namespace CD4.ExcelInterface.QuantStudio5.ViewModels
 
         private void DeleteIfExists(FileInfo fileInfo)
         {
-            if (fileInfo.Exists)
+            try
             {
-                fileInfo.Delete();
-                Logs.Add(new LogModel() { Log = "Job completed" });
+                if (fileInfo.Exists)
+                {
+                    fileInfo.Delete();
+                    Logs.Add(new LogModel() { Log = "Job completed" });
+                }
             }
+            catch (Exception ex)
+            {
+                Logs.Add(new LogModel() { Log = $"An error while trying to delete the file {fileInfo.Name}: {ex.Message}" });
+            }
+
         }
         private void OnInitiateJob(object sender, ElapsedEventArgs e)
         {
@@ -384,9 +451,18 @@ namespace CD4.ExcelInterface.QuantStudio5.ViewModels
                 return;
             }
 
-            fileSystemWatcher.Path = Configuration.ExcelFileDirectory;
-            fileSystemWatcher.EnableRaisingEvents = true;
-            Logs.Add(new LogModel() { Log = $"Listening for analyser exports on {Configuration.ExcelFileDirectory}" });
+
+            try
+            {
+                fileSystemWatcher.Path = Configuration.ExcelFileDirectory;
+                fileSystemWatcher.EnableRaisingEvents = true;
+                Logs.Add(new LogModel() { Log = $"Listening for analyser exports on {Configuration.ExcelFileDirectory}" });
+            }
+            catch (Exception ex)
+            {
+                Logs.Add(new LogModel() { Log = $"An error occured while setting up file system watcher. Please restart interface.\n{ex.Message}" });
+            }
+
         }
         private void OnFileDetectedInDirectory(object sender, FileSystemEventArgs e)
         {
@@ -401,10 +477,10 @@ namespace CD4.ExcelInterface.QuantStudio5.ViewModels
         public void InterpretData(int selectedKitId)
         {
             //check whether the script is loaded... return otherwise
-            if (!_isScriptLoaded) 
+            if (!_isScriptLoaded)
             {
                 Logs.Add(new LogModel() { Log = $"Cannot interpret data. Script [ {Configuration.AnalyserName} ] not loaded" });
-                return; 
+                return;
             }
 
             if (InterfaceResults.Count == 0)

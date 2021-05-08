@@ -55,7 +55,9 @@ namespace CD4.ResultsInterface
                         Download = item.Download,
                         TestId = item.TestId,
                         Unit = item.Unit,
-                        Upload = item.Upload
+                        Upload = item.Upload,
+                        Mask = item.Mask,
+                        DataType = item.DataType
                     });
                 }
             }
@@ -110,7 +112,7 @@ namespace CD4.ResultsInterface
                 _logger.LogInformation($"Processing File: {dataFilePath}");
                 try
                 {
-                    using (StreamReader reader = new StreamReader(dataFilePath))
+                    using (StreamReader reader = new StreamReader(dataFilePath,true))
                     {
                         var json = await reader.ReadToEndAsync();
                         _logger.LogInformation($"Results data to process.\n\n{json}");
@@ -186,6 +188,15 @@ namespace CD4.ResultsInterface
                             //if test does not exist on sample... and if AddTests is true... Add the test
                             await _resultDataAccess.ManageReflexTests(new List<DataLibrary.Models.TestsModel>()
                                 {new DataLibrary.Models.TestsModel(){Id = mapping.TestId}}, sample.SampleId, interfaceUserId);
+                        }
+
+
+                        //if numeric result, format the uploaded result
+                        if (mapping.DataType.ToLower().Contains("numeric"))
+                        {
+                            //try to convert value to decimal
+                            var isDecimal = decimal.TryParse(test.MeasurementValue, out var decimalResult);
+                            if (isDecimal) { test.MeasurementValue = decimalResult.ToString(mapping.Mask); }
                         }
 
                         //call data layer to upload result.

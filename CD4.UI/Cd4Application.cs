@@ -1,4 +1,5 @@
 ﻿using CD4.DataLibrary.DataAccess;
+using CD4.Entensibility.ReportingFramework;
 using CD4.UI.Library.ViewModel;
 using CD4.UI.View;
 using DevExpress.UserSkins;
@@ -11,14 +12,16 @@ namespace CD4.UI
     public class Cd4Application : ICd4Application
     {
         private static readonly log4net.ILog _log = LogHelper.GetLogger();
-        private readonly IReportsDataAccess reportsDataAccess;
+        private readonly IReportsDataAccess _reportsDataAccess;
         private readonly IUserAuthEvaluator _userAuthEvaluator;
+        private readonly ILoadMultipleExtensions _reportExtensions;
 
-        public Cd4Application(IMainViewModel mainViewModel, IReportsDataAccess reportsDataAccess, IUserAuthEvaluator userAuthEvaluator)
+        public Cd4Application(IMainViewModel mainViewModel, IReportsDataAccess reportsDataAccess, IUserAuthEvaluator userAuthEvaluator, ILoadMultipleExtensions reportExtensions)
         {
             _mainViewModel = mainViewModel;
-            this.reportsDataAccess = reportsDataAccess;
+            _reportsDataAccess = reportsDataAccess;
             _userAuthEvaluator = userAuthEvaluator;
+            _reportExtensions = reportExtensions;
         }
 
         private IMainViewModel _mainViewModel { get; }
@@ -32,8 +35,7 @@ namespace CD4.UI
             try
             {
                 BonusSkins.Register();
-                Application.Run(new MainView(_mainViewModel, reportsDataAccess, _userAuthEvaluator) { Tag = "MainView" });
-
+                Application.Run(new MainView(_mainViewModel, _reportsDataAccess, _userAuthEvaluator, _reportExtensions) { Tag = "MainView" });
             }
             catch (Exception ex)
             {

@@ -5,8 +5,6 @@ using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CD4.UI.Helpers
 {
@@ -14,11 +12,13 @@ namespace CD4.UI.Helpers
     {
         private readonly IPrintingHelper _printingHelper;
         private readonly INamesAbbreviator _namesAbbreviator;
+        private readonly IGlobalSettingsHelper _globalSettingsHelper;
         private readonly int _fullnameCriticalLength = 25;
-        public BarcodeHelper(IPrintingHelper printingHelper, INamesAbbreviator namesAbbreviator)
+        public BarcodeHelper(IPrintingHelper printingHelper, INamesAbbreviator namesAbbreviator, IGlobalSettingsHelper globalSettingsHelper)
         {
             _printingHelper = printingHelper;
             _namesAbbreviator = namesAbbreviator;
+            _globalSettingsHelper = globalSettingsHelper;
         }
 
         public bool PrintMultipleSampleBarcode(List<BarcodeDataModel> barcodeData)
@@ -59,6 +59,24 @@ namespace CD4.UI.Helpers
 
             try
             {
+                if (_globalSettingsHelper.Settings.IsAnalysisRequestBarcodeRequired)
+                {
+                    var requestBarcode = barcodeData.FirstOrDefault();
+                    barcodeData.Add(new BarcodeDataModel()
+                    {
+                        AccessionNumber = requestBarcode.AccessionNumber,
+                        Age = requestBarcode.Age,
+                        Birthdate = requestBarcode.Birthdate,
+                        CollectionDate = requestBarcode.CollectionDate,
+                        Discipline = "ANALYSIS REQUEST",
+                        FullName = requestBarcode.FullName,
+                        NidPp = requestBarcode.NidPp,
+                        Seq = requestBarcode.Seq,
+                        SamplePriority = requestBarcode.SamplePriority
+                    });
+                }
+
+
                 GenerateLabelAndSendToPrinter(barcodeData);
                 return true;
             }
@@ -73,6 +91,7 @@ namespace CD4.UI.Helpers
         {
             foreach (var barcode in barcodeData)
             {
+                if (barcode.SampleType is null) { barcode.SampleType = ""; }
                 var barcodeLabel = new SeventyFiveMillimeterTubeLabel();
                 barcodeLabel.Parameters["Fullname"].Value = GetAbbreviatedName(barcode.FullName);
                 barcodeLabel.Parameters["NidPp"].Value = barcode.NidPp;
@@ -82,14 +101,25 @@ namespace CD4.UI.Helpers
                 barcodeLabel.Parameters["SampleCollectedDate"].Value = barcode.CollectionDate.LocalDateTime;
                 barcodeLabel.Parameters["Seq"].Value = barcode.Seq;
                 barcodeLabel.Parameters["Discipline"].Value = barcode.Discipline;
+                barcodeLabel.Parameters["SampleType"].Value = barcode.SampleType;
+                barcodeLabel.Parameters["EpisodeNumber"].Value = barcode.EpisodeNumber;
+                barcodeLabel.Parameters["SamplePriority"].Value = barcode.SamplePriority.ToString();
+                barcodeLabel.DisplayName = $"{barcode.Discipline}_{barcode.SampleType}_{barcode.FullName}_{barcode.NidPp}.pdf";
 
                 barcodeLabel.PrinterName = _printingHelper.BarcodePrinterName;
                 barcodeLabel.RequestParameters = false;
                 var autoprint = new ReportPrintTool(barcodeLabel);
                 try
                 {
+#if !DEBUG
                     barcodeLabel.ShowPrintMarginsWarning = false;
                     autoprint.Print(barcodeLabel.PrinterName);
+#endif
+
+#if DEBUG
+                    // barcodeLabel.ExportToPdf($"C:\\Logs\\{barcodeLabel.DisplayName}.pdf");
+                    barcodeLabel.ExportToPdf($"C:\\Logs\\1.pdf");
+#endif
                 }
                 catch (Exception)
                 {
@@ -100,7 +130,11 @@ namespace CD4.UI.Helpers
 
         private string GetAbbreviatedName(string fullname)
         {
-            return _namesAbbreviator.Execute(fullname, _fullnameCriticalLength);
+            if(_globalSettingsHelper.Settings.IsFullnameAbbreviated)
+            {
+                return _namesAbbreviator.Execute(fullname, _fullnameCriticalLength);
+            }
+            return fullname;
         }
     }
 }

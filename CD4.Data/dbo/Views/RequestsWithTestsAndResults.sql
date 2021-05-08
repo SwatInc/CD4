@@ -15,8 +15,10 @@
        [PhoneNumber],
        [Address],
 	   [AtollIslandCountry],
+       [InstituteAssignedPatientId],
 	   [EpisodeNumber],
-	   [Site]
+	   [Site],
+       [SamplePriority]
 )
 AS
 ( 
@@ -35,8 +37,10 @@ SELECT [R].[Id],
        [P].[PhoneNumber],
        [P].[Address],
 	   ISNULL(CONCAT([A].[Atoll],'. ',[A].[Island],', ',[C].[Country]),'')AS [AtollIslandCountry],
+       [P].[InstituteAssignedPatientId],
 	   [AR].[EpisodeNumber],
-	   [SI].[Name] AS [Site]
+	   [SI].[Name] AS [Site],
+       [S].[IsStat] AS [SamplePriority]
 FROM [dbo].[Result] [R] 
 INNER JOIN [dbo].[Sample] [S] ON [R].[Sample_Cin] = [S].[Cin]
 INNER JOIN [dbo].[AnalysisRequest] [AR] ON [S].[AnalysisRequestId] = [AR].[Id]

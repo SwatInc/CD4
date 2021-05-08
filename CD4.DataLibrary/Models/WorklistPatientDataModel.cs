@@ -20,7 +20,7 @@ namespace CD4.DataLibrary.Models
         public string Site { get; set; }
         public string ClinicalDetails { get; set; }
         public int StatusIconId { get; set; }
-
-
+        public long InstituteAssignedPatientId { get; set; }
+        public bool SamplePriority { get; set; }
     }
 }

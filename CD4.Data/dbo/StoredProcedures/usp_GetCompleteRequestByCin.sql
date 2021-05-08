@@ -19,7 +19,9 @@ SET NOCOUNT ON;
 	[Address],
 	[Atoll],
 	[Island],
-	[CountryId]
+	[CountryId],
+	[InstituteAssignedPatientId],
+	[SamplePriority]
 	FROM [dbo].[RequestSearchData] 
 	WHERE [Cin] = @Cin;
 

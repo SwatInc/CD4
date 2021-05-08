@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE [dbo].[usp_InterfaceResultByTestCodeAndCin]
-	@Result VARCHAR(50),
+	@Result NVARCHAR(50),
 	@TestId int,
 	@Cin varchar(50),
 	@BatchId varchar(50),

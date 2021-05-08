@@ -63,6 +63,16 @@ namespace CD4.UI.Library.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap blank {
+            get {
+                object obj = ResourceManager.GetObject("blank", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ClinicalPathology {
             get {
                 object obj = ResourceManager.GetObject("ClinicalPathology", resourceCulture);
@@ -186,6 +196,16 @@ namespace CD4.UI.Library.Properties {
         internal static System.Drawing.Bitmap ToValidate {
             get {
                 object obj = ResourceManager.GetObject("ToValidate", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Undefined {
+            get {
+                object obj = ResourceManager.GetObject("Undefined", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

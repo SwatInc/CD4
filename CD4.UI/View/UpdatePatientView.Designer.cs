@@ -40,6 +40,7 @@ namespace CD4.UI.View
             this.lookUpEditCountry = new DevExpress.XtraEditors.LookUpEdit();
             this.lookUpEditIsland = new DevExpress.XtraEditors.LookUpEdit();
             this.lookUpEditAtoll = new DevExpress.XtraEditors.LookUpEdit();
+            this.textEditInstituteAssignedPatientId = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditPhoneNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditAddress.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditFullname.Properties)).BeginInit();
@@ -50,6 +51,7 @@ namespace CD4.UI.View
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditCountry.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditIsland.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditAtoll.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditInstituteAssignedPatientId.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // simpleButtonSave
@@ -67,7 +69,7 @@ namespace CD4.UI.View
             this.progressPanelPatientData.Appearance.Options.UseBackColor = true;
             this.progressPanelPatientData.BarAnimationElementThickness = 2;
             this.progressPanelPatientData.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.progressPanelPatientData.Location = new System.Drawing.Point(202, 93);
+            this.progressPanelPatientData.Location = new System.Drawing.Point(352, 99);
             this.progressPanelPatientData.Name = "progressPanelPatientData";
             this.progressPanelPatientData.Size = new System.Drawing.Size(32, 17);
             this.progressPanelPatientData.TabIndex = 17;
@@ -234,11 +236,26 @@ namespace CD4.UI.View
             this.lookUpEditAtoll.Size = new System.Drawing.Size(167, 20);
             this.lookUpEditAtoll.TabIndex = 26;
             // 
+            // textEditInstituteAssignedPatientId
+            // 
+            this.textEditInstituteAssignedPatientId.EditValue = "Institute Assigned Patient Id";
+            this.textEditInstituteAssignedPatientId.EnterMoveNextControl = true;
+            this.textEditInstituteAssignedPatientId.Location = new System.Drawing.Point(12, 90);
+            this.textEditInstituteAssignedPatientId.Name = "textEditInstituteAssignedPatientId";
+            this.textEditInstituteAssignedPatientId.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.textEditInstituteAssignedPatientId.Properties.NullText = "Institute Assigned Patient Id";
+            this.textEditInstituteAssignedPatientId.Properties.NullValuePrompt = "Institute Assigned Patient Id";
+            this.textEditInstituteAssignedPatientId.Properties.NullValuePromptShowForEmptyValue = true;
+            this.textEditInstituteAssignedPatientId.Properties.ValidateOnEnterKey = true;
+            this.textEditInstituteAssignedPatientId.Size = new System.Drawing.Size(167, 20);
+            this.textEditInstituteAssignedPatientId.TabIndex = 29;
+            // 
             // UpdatePatientView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(554, 127);
+            this.Controls.Add(this.textEditInstituteAssignedPatientId);
             this.Controls.Add(this.simpleButtonSave);
             this.Controls.Add(this.progressPanelPatientData);
             this.Controls.Add(this.textEditPhoneNumber);
@@ -253,7 +270,7 @@ namespace CD4.UI.View
             this.MaximizeBox = false;
             this.Name = "UpdatePatientView";
             this.Tag = "UpdatePatientViewAccess";
-            this.Text = "UpdatePatientView";
+            this.Text = "Update Patient";
             ((System.ComponentModel.ISupportInitialize)(this.textEditPhoneNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditAddress.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditFullname.Properties)).EndInit();
@@ -264,6 +281,7 @@ namespace CD4.UI.View
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditCountry.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditIsland.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditAtoll.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditInstituteAssignedPatientId.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -281,5 +299,6 @@ namespace CD4.UI.View
         private DevExpress.XtraEditors.LookUpEdit lookUpEditCountry;
         private DevExpress.XtraEditors.LookUpEdit lookUpEditIsland;
         private DevExpress.XtraEditors.LookUpEdit lookUpEditAtoll;
+        private DevExpress.XtraEditors.TextEdit textEditInstituteAssignedPatientId;
     }
 }

@@ -29,6 +29,8 @@ namespace CD4.ExcelInterface.QuantStudio5.Models
         public string DataExtension { get; set; }
         public string ControlFileExtension { get; set; }
         public string LisExportExtension { get; set; }
+        public int FileReadMaxTries { get; set; }
+        public int FileReadDelay { get; set; }
         public BatchId BatchId { get; set; }
         public DataRange DataRange { get; set; }
         public int SidColumn { get; set; }

@@ -37,6 +37,7 @@
             this.dateEditSampleReceived = new DevExpress.XtraEditors.DateEdit();
             this.groupControlPatientData = new DevExpress.XtraEditors.GroupControl();
             this.progressPanelPatientData = new DevExpress.XtraWaitForm.ProgressPanel();
+            this.textEditInstituteAssignedPatientId = new DevExpress.XtraEditors.TextEdit();
             this.textEditPhoneNumber = new DevExpress.XtraEditors.TextEdit();
             this.textEditAge = new DevExpress.XtraEditors.TextEdit();
             this.textEditAddress = new DevExpress.XtraEditors.TextEdit();
@@ -66,6 +67,7 @@
             this.simpleButtonGetNextCin = new DevExpress.XtraEditors.SimpleButton();
             this.panelControlOE = new DevExpress.XtraEditors.PanelControl();
             this.simpleButtonViewNotes = new DevExpress.XtraEditors.SimpleButton();
+            this.toggleSwitchSamplePriority = new DevExpress.XtraEditors.ToggleSwitch();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlRequestData)).BeginInit();
             this.groupControlRequestData.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dateEditCollectedDate.Properties.CalendarTimeProperties)).BeginInit();
@@ -77,6 +79,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateEditSampleReceived.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlPatientData)).BeginInit();
             this.groupControlPatientData.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditInstituteAssignedPatientId.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditPhoneNumber.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditAge.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditAddress.Properties)).BeginInit();
@@ -101,6 +104,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTests.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControlOE)).BeginInit();
             this.panelControlOE.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.toggleSwitchSamplePriority.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // groupControlRequestData
@@ -220,6 +224,7 @@
             // groupControlPatientData
             // 
             this.groupControlPatientData.Controls.Add(this.progressPanelPatientData);
+            this.groupControlPatientData.Controls.Add(this.textEditInstituteAssignedPatientId);
             this.groupControlPatientData.Controls.Add(this.textEditPhoneNumber);
             this.groupControlPatientData.Controls.Add(this.textEditAge);
             this.groupControlPatientData.Controls.Add(this.textEditAddress);
@@ -249,6 +254,20 @@
             this.progressPanelPatientData.TabIndex = 0;
             this.progressPanelPatientData.TabStop = false;
             this.progressPanelPatientData.Text = "Request data";
+            // 
+            // textEditInstituteAssignedPatientId
+            // 
+            this.textEditInstituteAssignedPatientId.EditValue = "Institute Assigned Patient Id";
+            this.textEditInstituteAssignedPatientId.EnterMoveNextControl = true;
+            this.textEditInstituteAssignedPatientId.Location = new System.Drawing.Point(185, 108);
+            this.textEditInstituteAssignedPatientId.Name = "textEditInstituteAssignedPatientId";
+            this.textEditInstituteAssignedPatientId.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
+            this.textEditInstituteAssignedPatientId.Properties.NullText = "Institute Assigned Patient Id";
+            this.textEditInstituteAssignedPatientId.Properties.NullValuePrompt = "Institute Assigned Patient Id";
+            this.textEditInstituteAssignedPatientId.Properties.NullValuePromptShowForEmptyValue = true;
+            this.textEditInstituteAssignedPatientId.Properties.ValidateOnEnterKey = true;
+            this.textEditInstituteAssignedPatientId.Size = new System.Drawing.Size(167, 20);
+            this.textEditInstituteAssignedPatientId.TabIndex = 15;
             // 
             // textEditPhoneNumber
             // 
@@ -524,6 +543,7 @@
             // groupControlTestSelection
             // 
             this.groupControlTestSelection.Controls.Add(this.progressPanelTestData);
+            this.groupControlTestSelection.Controls.Add(this.toggleSwitchSamplePriority);
             this.groupControlTestSelection.Controls.Add(this.dateEditSampleReceived);
             this.groupControlTestSelection.Controls.Add(this.lookUpEditTests);
             this.groupControlTestSelection.Location = new System.Drawing.Point(561, 153);
@@ -627,6 +647,15 @@
             this.simpleButtonViewNotes.Tag = "OrderEntry.Remove";
             this.simpleButtonViewNotes.Text = "Add Note [ Ctrl+N ]";
             // 
+            // toggleSwitchSamplePriority
+            // 
+            this.toggleSwitchSamplePriority.Location = new System.Drawing.Point(16, 87);
+            this.toggleSwitchSamplePriority.Name = "toggleSwitchSamplePriority";
+            this.toggleSwitchSamplePriority.Properties.OffText = "Routine";
+            this.toggleSwitchSamplePriority.Properties.OnText = "Stat";
+            this.toggleSwitchSamplePriority.Size = new System.Drawing.Size(167, 25);
+            this.toggleSwitchSamplePriority.TabIndex = 16;
+            // 
             // OrderEntryView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -650,6 +679,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dateEditSampleReceived.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlPatientData)).EndInit();
             this.groupControlPatientData.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.textEditInstituteAssignedPatientId.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditPhoneNumber.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditAge.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditAddress.Properties)).EndInit();
@@ -674,6 +704,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTests.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.panelControlOE)).EndInit();
             this.panelControlOE.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.toggleSwitchSamplePriority.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -718,5 +749,7 @@
         private DevExpress.XtraEditors.SimpleButton simpleButtonGetNextCin;
         private DevExpress.XtraEditors.PanelControl panelControlOE;
         private DevExpress.XtraEditors.SimpleButton simpleButtonViewNotes;
+        private DevExpress.XtraEditors.TextEdit textEditInstituteAssignedPatientId;
+        private DevExpress.XtraEditors.ToggleSwitch toggleSwitchSamplePriority;
     }
 }

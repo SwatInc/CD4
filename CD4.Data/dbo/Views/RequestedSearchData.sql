@@ -2,9 +2,10 @@
 	AS
 SELECT 
 	[S].[Cin],[S].[SiteId], [SCT].[CollectedAt] AS [CollectionDate],[SRT].[ReceivedAt] AS [ReceivedDate],
-	[P].[NidPp],[P].[FullName],[P].[GenderId],[P].[PhoneNumber],[P].[Birthdate],[P].[Address],
+	[P].[NidPp],[P].[FullName],[P].[GenderId],[P].[PhoneNumber],[P].[Birthdate],[P].[Address],[P].[InstituteAssignedPatientId],
 	[A].[Atoll],[A].[Island], [P].[CountryId],
-	[AR].[EpisodeNumber]
+	[AR].[EpisodeNumber],
+	[S].[IsStat] AS [SamplePriority]
 FROM [dbo].[Sample] [S]
 INNER JOIN [dbo].[AnalysisRequest] [AR] ON [S].[AnalysisRequestId] = [AR].[Id]
 INNER JOIN [dbo].[Patient] [P] ON [AR].[PatientId] = [P].[Id]

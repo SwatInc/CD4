@@ -64,6 +64,18 @@ namespace CD4.ExcelInterface.ViewModels
             Initialize?.Invoke(this, EventArgs.Empty);
         }
 
+        #endregion
+
+        #region Public Properties
+        public Config Configuration { get; set; }
+        public BindingList<LogModel> Logs { get; set; }
+        public BindingList<InterfaceResults> InterfaceResults { get; set; }
+        public dynamic KitNames { get { return _kitNames; } private set => _kitNames = value; }
+
+        #endregion
+
+        #region Private Methods
+
         private async void RunInitalze(object sender, EventArgs e)
         {
             await LoadAndInitializeScript();
@@ -138,19 +150,14 @@ namespace CD4.ExcelInterface.ViewModels
             }
 
             //auto export to LIS
-            ExportToUploader().GetAwaiter().GetResult();
+            if (ExportToUploader().GetAwaiter().GetResult())
+            {
+                InterfaceResults.Clear();
+                Logs.Add(new LogModel() { Log = "Successfully exported to LIS and Cleared Queue to be exported to LIS.." });
+
+            };
         }
-        #endregion
 
-        #region Public Properties
-        public Config Configuration { get; set; }
-        public BindingList<LogModel> Logs { get; set; }
-        public BindingList<InterfaceResults> InterfaceResults { get; set; }
-        public dynamic KitNames { get { return _kitNames; } private set => _kitNames = value; }
-
-        #endregion
-
-        #region Private Methods
 
         private void ReportProgressChanged(object sender, ProgressChangedEventArgs e)
         {
@@ -170,9 +177,7 @@ namespace CD4.ExcelInterface.ViewModels
             {
                 foreach (var file in _filesToProcess)
                 {
-
-                    FileStream fileStream = new FileStream(file, FileMode.Open, FileAccess.Read);
-
+                    var fileStream = MultipleTries(() => new FileStream(file, FileMode.Open, FileAccess.Read));
                     var results = ProcessExcelFile(fileStream);
 
                     //delete the file if it exists
@@ -198,6 +203,32 @@ namespace CD4.ExcelInterface.ViewModels
 
                 //return back the data
                 e.Result = processedResults;
+            }
+        }
+
+        public T MultipleTries<T>(Func<T> function)
+        {
+            // https://stackoverflow.com/questions/1563191/cleanest-way-to-write-retry-logic
+
+            var MaxTries = Configuration.FileReadMaxTries;
+            var tries = MaxTries;
+            var delay = Configuration.FileReadDelay;
+            while (true)
+            {
+                try
+                {
+                    return function();
+                }
+                catch (Exception ex)
+                {
+                    if (--tries <= 0)
+                    {
+                        Logs.Add(new LogModel() { Log = $"Cannot read the file after {MaxTries} tries. Error Message: {ex.Message}" });
+                        throw;
+                    }
+                    Logs.Add(new LogModel() { Log = $"Failed reading the file. Trying again in {delay} ms. Max tries is set as {MaxTries}" });
+                    System.Threading.Thread.Sleep(delay);
+                }
             }
         }
         private List<InterfaceResults> ProcessExcelFile(FileStream fileStream)
@@ -255,6 +286,10 @@ namespace CD4.ExcelInterface.ViewModels
                 _backgroundWorker.ReportProgress(1, $"An Error occured {ex.Message}. Excel file not processed!");
                 return new List<InterfaceResults>();
             }
+            finally 
+            {
+                fileStream.Close();
+            }
 
         }
         private void DeleteIfExists(FileInfo fileInfo)
@@ -277,10 +312,17 @@ namespace CD4.ExcelInterface.ViewModels
                 Logs.Add(new LogModel() { Log = "Analyser export directory is not set. Please exit interface and configure LIS export path." });
                 return;
             }
-
-            fileSystemWatcher.Path = Configuration.ExcelFileDirectory;
-            fileSystemWatcher.EnableRaisingEvents = true;
-            Logs.Add(new LogModel() { Log = $"Listening for analyser exports on {Configuration.ExcelFileDirectory}" });
+            
+            try
+            {
+                fileSystemWatcher.Path = Configuration.ExcelFileDirectory;
+                fileSystemWatcher.EnableRaisingEvents = true;
+                Logs.Add(new LogModel() { Log = $"Listening for analyser exports on {Configuration.ExcelFileDirectory}" });
+            }
+            catch (Exception ex)
+            {
+                Logs.Add(new LogModel() { Log = $"An error occured while setting up file system watcher. Please restart interface.\n{ex.Message}" });
+            }
         }
         private void OnFileDetectedInDirectory(object sender, FileSystemEventArgs e)
         {
@@ -361,7 +403,5 @@ namespace CD4.ExcelInterface.ViewModels
 
         }
         #endregion
-
-
     }
 }

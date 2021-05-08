@@ -1,11 +1,14 @@
 ﻿using CD4.DataLibrary.DataAccess;
-using CD4.UI.Report;
+using CD4.Entensibility.ReportingFramework;
+using CD4.Entensibility.ReportingFramework.Models;
+using CD4.UI.Library.Helpers;
+using CD4.UI.UiSpecificModels;
 using DevExpress.XtraEditors;
-using DevExpress.XtraPrinting;
 using DevExpress.XtraReports.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -13,19 +16,27 @@ namespace CD4.UI.View
 {
     public partial class ReportView : DevExpress.XtraEditors.XtraForm
     {
-        private readonly IReportsDataAccess reportsData;
+        private readonly IReportsDataAccess _reportsData;
+        private readonly CinAndReportIdModel _cinAndReportId;
         private readonly int _loggedInUserId;
+        private readonly ILoadMultipleExtensions _reportExtensions;
 
         public event EventHandler OnSearchByCin;
-        public ReportView(IReportsDataAccess reportsData, string cin, int loggedInUserId)
+        public ReportView(IReportsDataAccess reportsData,
+            CinAndReportIdModel cinAndReportId,
+            int loggedInUserId,
+            ILoadMultipleExtensions reportExtensions)
         {
             InitializeComponent();
 
             //assign report data access library as a private field
-            this.reportsData = reportsData;
+            _reportsData = reportsData;
+            _cinAndReportId = cinAndReportId;
             _loggedInUserId = loggedInUserId;
+            _reportExtensions = reportExtensions;
+
             //Write cin to form Tag
-            this.Tag = cin;
+            Tag = cinAndReportId.Cin;
             StartReportGenerationSequence();
 
         }
@@ -58,7 +69,9 @@ namespace CD4.UI.View
 
             try
             {
-                var report = await reportsData.GetAnalysisReportByCinAsync((string)this.Tag, _loggedInUserId).ConfigureAwait(true);
+                var report = await _reportsData.GetAnalysisReportByCinAsync((string)Tag, _loggedInUserId).ConfigureAwait(true);
+                //map OR automap this response to an object from reporting framework and pass to the report to allow the report to do what ever
+                //crazy mapping it needs to do.
                 MapDataToReport(report.FirstOrDefault());
             }
             catch (Exception ex)
@@ -77,19 +90,92 @@ namespace CD4.UI.View
 
                 return;
             }
-            
+
+            //ReportTemplates[0] The ZERO need to be handled dynamically to be truly extensible
+            var xtraReport = _reportExtensions.ReportTemplates[0]
+                .Execute((ReportTemplate)_cinAndReportId.ReportIndex, GetReportDatasource(reportModel));
+            xtraReport.RequestParameters = false;
+            xtraReport.DisplayName = $"{Tag}_{RemoveInvalidCharactersForExport(reportModel.Patient.Fullname)} ({RemoveInvalidCharactersForExport(reportModel.Patient.NidPp)}";
+
+#if DEBUG
+            xtraReport.DrawWatermark = true;
+#endif
+
+            if (_cinAndReportId.Action == ReportActionModel.Export)
+            {
+                var settings = new Properties.Settings();
+                string exportDirectoryStructure = $"{DateTime.Today:yyyy}\\{DateTime.Today:MMMM}\\{DateTime.Today:dd}\\{reportModel.SampleSite.Trim()}";
+                var exportDirPath = $"{settings.ReportExportBasePath}\\{exportDirectoryStructure}";
+
+                try
+                {
+                    ExportReport(xtraReport, exportDirPath);
+                }
+                catch (Exception ex)
+                {
+                    XtraMessageBox.Show($"Error exporting report. Please fing the details below.\n{ex.Message}\n{ex.StackTrace}\nExport path: {exportDirPath}");
+
+                    //prompt for user to select a temp export path
+                    var folderBrowserDialog = new XtraFolderBrowserDialog();
+                    // Show the FolderBrowserDialog.
+                    DialogResult result = folderBrowserDialog.ShowDialog();
+                    if (result == DialogResult.OK)
+                    {
+                        exportDirPath = $"{folderBrowserDialog.SelectedPath}\\{exportDirectoryStructure}";
+                        ExportReport(xtraReport, exportDirPath);
+                    }
+                }
+
+            }
+            if (_cinAndReportId.Action == ReportActionModel.Print)
+            {
+                xtraReport.PrinterName = "DocumentPrinter";
+                xtraReport.CreateDocument();
+
+                xtraReport.Print();
+            }
+
+            //Close this form
+            DisposeMe();
+
+
+        }
+
+        /// <summary>
+        /// Replaces invalid characters for a windows file name
+        /// </summary>
+        /// <returns></returns>
+        private string RemoveInvalidCharactersForExport(string value)
+        {
+            return value
+                .Replace('\\', '-')
+                .Replace('/', '-')
+                .Replace('(', '-')
+                .Replace(')', '-');
+        }
+
+        private List<AnalysisRequestReportModel> GetReportDatasource(DataLibrary.Models.ReportModels.AnalysisRequestReportModel reportModel)
+        {
             //map AnalysisRequestReport
-            var report = new AnalysisRequestReport()
+            var report = new AnalysisRequestReportModel()
             {
                 SampleSite = reportModel.SampleSite,
                 CollectedDate = reportModel.CollectedDate,
-                ReceivedDate = reportModel.ReceivedDate
+                ReceivedDate = reportModel.ReceivedDate,
+                EpisodeNumber = reportModel.EpisodeNumber,
+                QcCalValidatedBy = reportModel.QcCalValidatedBy,
+                ReportedAt = reportModel.ReportedAt,
+                ReceivedBy = reportModel.ReceivedBy,
+                AnalysedBy = reportModel.AnalysedBy,
+                InstituteAssignedPatientId = reportModel.InstituteAssignedPatientId,
+                SampleProcessedAt = reportModel.SampleProcessedAt
             };
+
             //Map patient
             var patient = new Patient()
             {
-                NidPp = reportModel.Patient.NidPp.ToUpper().Trim(),
-                Fullname = reportModel.Patient.Fullname.ToUpper().Trim(),
+                NidPp = reportModel.Patient.NidPp.Trim(),
+                Fullname = reportModel.Patient.Fullname.Trim(),
                 AgeSex = reportModel.Patient.AgeSex,
                 Birthdate = reportModel.Patient.Birthdate,
                 Address = reportModel.Patient.Address,
@@ -116,43 +202,40 @@ namespace CD4.UI.View
             report.PrintedDate = DateTime.Now.ToString("dd-MM-yyyy HH:mm");
 
             //add report to a list of reports to make it compatible as datasource
-            var reports = new List<AnalysisRequestReport>();
-            reports.Add(report);
+            var reportDatasource = new List<AnalysisRequestReportModel>();
+            report.SetPdf417String();
+            reportDatasource.Add(report);
+            return reportDatasource;
+        }
 
-            var xtraReport = new AnalysisReport() { DataSource = reports, RequestParameters = false};
+        private void ExportReport(XtraReport xtraReport, string exportDirPath)
+        {
+            // If directory does not exist, create it
+            if (!Directory.Exists(exportDirPath))
+            {
+                Directory.CreateDirectory(exportDirPath);
+            }
 
-            xtraReport.DisplayName = $"{this.Tag}_{report.Patient.Fullname}({report.Patient.NidPp.Replace('/','-')})";
-            ReportPrintTool tool = new ReportPrintTool(xtraReport);
+            //xtraReport.ExportToHtml($"{exportDirPath}\\{xtraReport.DisplayName}.html",new DevExpress.XtraPrinting.HtmlExportOptions() 
+            //{
+            //    EmbedImagesInHTML = true,
+            //    ExportMode = DevExpress.XtraPrinting.HtmlExportMode.SingleFile
+            //});
 
-            //hide unnecessary buttons
-            tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Customize,CommandVisibility.None);
-            tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Background,CommandVisibility.None);
-            tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.EditPageHF, CommandVisibility.None);
-            tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.HighlightEditingFields, CommandVisibility.None);
-            tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Open, CommandVisibility.None);
-            tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Watermark, CommandVisibility.None);
-            tool.PreviewForm.PrintingSystem.SetCommandVisibility(PrintingSystemCommand.Save, CommandVisibility.None);
-
-            //Set Main view as mdi parent.
-            tool.PreviewForm.MdiParent = this.MdiParent;
-            //Show the report
-            tool.ShowPreview();
-            //Close this form
-            DisposeMe();
-
-
+            // xtraReport.ExportToPdf($"{exportDirPath}\\{xtraReport.DisplayName}.pdf");
+            xtraReport.ExportToPdf($"{exportDirPath}\\{xtraReport.DisplayName}.pdf");
         }
 
         private void DisposeMe()
-        {            
-            this.Close();
-            this.Dispose();
+        {
+            Close();
+            Dispose();
         }
 
         private void InitializeReport(string cin)
         {
 
-            var report = new AnalysisRequestReport()
+            var report = new AnalysisRequestReportModel()
             {
                 SampleSite = "Flu Clinic",
                 CollectedDate = DateTime.Today,
@@ -193,46 +276,16 @@ namespace CD4.UI.View
             report.Patient = patient;
             report.Assays = Assays;
 
-            var reports = new List<AnalysisRequestReport>();
+            var reports = new List<AnalysisRequestReportModel>();
             reports.Add(report);
 
-            
 
-            var xreport = new AnalysisReport() { DataSource = reports };
 
+            var xreport = _reportExtensions.ReportTemplates[0].Execute(ReportTemplate.AnalysisReportDefault);
+            xreport.DataSource = reports;
             ReportPrintTool tool = new ReportPrintTool(xreport);
             tool.ShowPreview();
         }
     }
 
-    public class AnalysisRequestReport
-    {
-        public string SampleSite { get; set; }
-        public DateTimeOffset? CollectedDate { get; set; }
-        public DateTimeOffset? ReceivedDate { get; set; }
-        public string PrintedDate { get; set; }
-        public Patient Patient { get; set; }
-        public BindingList<Assays> Assays { get; set; }
-
-    }
-
-    public class Assays
-    {
-        public string Cin { get; set; }
-        public string Discipline { get; set; }
-        public string Assay { get; set; }
-        public string Result { get; set; }
-        public string Unit { get; set; }
-        public string DisplayNormalRange { get; set; }
-    }
-
-    public class Patient
-    {
-        public string NidPp { get; set; }
-        public string Fullname { get; set; }
-        public string AgeSex { get; set; }
-        public DateTime Birthdate { get; set; }
-        public string Address { get; set; }
-        public string Nationality { get; set; }
-    }
 }

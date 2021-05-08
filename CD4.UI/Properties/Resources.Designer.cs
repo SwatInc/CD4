@@ -108,6 +108,16 @@ namespace CD4.UI.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type DevExpress.Utils.Svg.SvgImage.
+        /// </summary>
+        internal static DevExpress.Utils.Svg.SvgImage NDATrackingIcon {
+            get {
+                object obj = ResourceManager.GetObject("NDATrackingIcon", resourceCulture);
+                return ((DevExpress.Utils.Svg.SvgImage)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [{&quot;Caption&quot;:&quot;All Disciplines&quot;,&quot;Image&quot;:&quot;Disciplines&quot;,&quot;Name&quot;:&quot;barButtonItemAllDisciplines&quot;,&quot;Tag&quot;:0},{&quot;Caption&quot;:&quot;Diagnostic Haematology&quot;,&quot;Image&quot;:&quot;Haematology&quot;,&quot;Name&quot;:&quot;barButtonItemHaematology&quot;,&quot;Tag&quot;:1},{&quot;Caption&quot;:&quot;ClinicalPathology&quot;,&quot;Image&quot;:&quot;ClinicalPathology&quot;,&quot;Name&quot;:&quot;barButtonItemClinicalPathology&quot;,&quot;Tag&quot;:4},{&quot;Caption&quot;:&quot;Microbiology&quot;,&quot;Image&quot;:&quot;Microbiology&quot;,&quot;Name&quot;:&quot;barButtonItemMicrobiology&quot;,&quot;Tag&quot;:3},{&quot;Caption&quot;:&quot;Molecular Biology&quot;,&quot;Image&quot;:&quot;Molecular&quot;,&quot;Name&quot;:&quot;barButtonItemMolecular&quot;,&quot;Tag&quot;:2},{&quot;Caption&quot;:&quot;Clinical [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string popupMenuDisciplines {
@@ -117,7 +127,7 @@ namespace CD4.UI.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to [{&quot;Caption&quot;:&quot;Seq.&quot;,&quot;FieldName&quot;:&quot;Id&quot;,&quot;AllowEdit&quot;:false,&quot;Name&quot;:&quot;gridColumnSequence&quot;,&quot;Visible&quot;:true,&quot;VisibleIndex&quot;:0,&quot;Width&quot;:40},{&quot;Caption&quot;:&quot; &quot;,&quot;FieldName&quot;:&quot;StatusIcon&quot;,&quot;AllowEdit&quot;:false,&quot;Name&quot;:&quot;gridColumnSampleStatus&quot;,&quot;Visible&quot;:true,&quot;VisibleIndex&quot;:1,&quot;Width&quot;:32},{&quot;Caption&quot;:&quot;CIN&quot;,&quot;FieldName&quot;:&quot;Cin&quot;,&quot;AllowEdit&quot;:false,&quot;Name&quot;:&quot;gridColumnCin&quot;,&quot;Visible&quot;:true,&quot;VisibleIndex&quot;:2,&quot;Width&quot;:100},{&quot;Caption&quot;:&quot;Nid \/ PP&quot;,&quot;FieldName&quot;:&quot;NationalId&quot;,&quot;AllowEdit&quot;:false,&quot;Name&quot;:&quot;gridColumnNationalId&quot;,&quot;Visible&quot;:true,&quot;VisibleIndex&quot;:3,&quot;Wi [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to [{&quot;Caption&quot;:&quot;Seq.&quot;,&quot;FieldName&quot;:&quot;Id&quot;,&quot;AllowEdit&quot;:false,&quot;Name&quot;:&quot;gridColumnSequence&quot;,&quot;Visible&quot;:true,&quot;VisibleIndex&quot;:0,&quot;Width&quot;:40},{&quot;Caption&quot;:&quot;Memo No.&quot;,&quot;FieldName&quot;:&quot;EpisodeNumber&quot;,&quot;AllowEdit&quot;:false,&quot;Name&quot;:&quot;gridColumnEpisodeNumber&quot;,&quot;Visible&quot;:true,&quot;VisibleIndex&quot;:1,&quot;Width&quot;:100},{&quot;Caption&quot;:&quot; &quot;,&quot;FieldName&quot;:&quot;SamplePriorityIcon&quot;,&quot;AllowEdit&quot;:false,&quot;Name&quot;:&quot;gridColumnSamplePriorityIcon&quot;,&quot;Visible&quot;:true,&quot;VisibleIndex&quot;:2,&quot;Width&quot;:32},{&quot;Caption&quot;:&quot; &quot;,&quot;FieldName&quot;:&quot;StatusIcon&quot;,&quot;AllowEdit&quot;:false,&quot;Name&quot;:&quot;gridColumnSampleStatus&quot;,&quot;V [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string SampleColumns {
             get {

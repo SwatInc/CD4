@@ -54,6 +54,8 @@
             this.barButtonItemContacts = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItem1 = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemUpdatePatientDetailsView = new DevExpress.XtraBars.BarButtonItem();
+            this.barHeaderItemCD4Version = new DevExpress.XtraBars.BarHeaderItem();
+            this.barButtonItemNdaTracking = new DevExpress.XtraBars.BarButtonItem();
             this.ribbonPageCategoryDiscipline = new DevExpress.XtraBars.Ribbon.RibbonPageCategory();
             this.ribbonPageDiscipline = new DevExpress.XtraBars.Ribbon.RibbonPage();
             this.ribbonPageGroup4 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
@@ -100,9 +102,11 @@
             this.barButtonItemViewAllNotes,
             this.barButtonItemContacts,
             this.barButtonItem1,
-            this.barButtonItemUpdatePatientDetailsView});
+            this.barButtonItemUpdatePatientDetailsView,
+            this.barHeaderItemCD4Version,
+            this.barButtonItemNdaTracking});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 32;
+            this.ribbon.MaxItemId = 36;
             this.ribbon.Name = "ribbon";
             this.ribbon.PageCategories.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageCategory[] {
             this.ribbonPageCategoryDiscipline});
@@ -117,7 +121,7 @@
             this.ribbon.ShowDisplayOptionsMenuButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbon.ShowMoreCommandsButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbon.ShowToolbarCustomizeItem = false;
-            this.ribbon.Size = new System.Drawing.Size(1110, 143);
+            this.ribbon.Size = new System.Drawing.Size(1120, 162);
             this.ribbon.StatusBar = this.ribbonStatusBar;
             this.ribbon.Tag = "ribbon";
             this.ribbon.Toolbar.ShowCustomizeItem = false;
@@ -211,6 +215,7 @@
             this.barButtonItemResultEntry.Id = 12;
             this.barButtonItemResultEntry.ImageOptions.SvgImage = global::CD4.UI.Properties.Resources.marker;
             this.barButtonItemResultEntry.Name = "barButtonItemResultEntry";
+            this.barButtonItemResultEntry.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
             // barButtonItemStatistics
             // 
@@ -306,6 +311,21 @@
             this.barButtonItemUpdatePatientDetailsView.Name = "barButtonItemUpdatePatientDetailsView";
             this.barButtonItemUpdatePatientDetailsView.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
             // 
+            // barHeaderItemCD4Version
+            // 
+            this.barHeaderItemCD4Version.Caption = "barHeaderItemVersion";
+            this.barHeaderItemCD4Version.Id = 34;
+            this.barHeaderItemCD4Version.Name = "barHeaderItemCD4Version";
+            // 
+            // barButtonItemNdaTracking
+            // 
+            this.barButtonItemNdaTracking.Caption = "NDA Tracking";
+            this.barButtonItemNdaTracking.Id = 35;
+            this.barButtonItemNdaTracking.ImageOptions.SvgImage = global::CD4.UI.Properties.Resources.NDATrackingIcon;
+            this.barButtonItemNdaTracking.Name = "barButtonItemNdaTracking";
+            this.barButtonItemNdaTracking.RibbonStyle = DevExpress.XtraBars.Ribbon.RibbonItemStyles.Large;
+            this.barButtonItemNdaTracking.Visibility = DevExpress.XtraBars.BarItemVisibility.Never;
+            // 
             // ribbonPageCategoryDiscipline
             // 
             this.ribbonPageCategoryDiscipline.Name = "ribbonPageCategoryDiscipline";
@@ -352,6 +372,7 @@
             // 
             // ribbonPageGroup7
             // 
+            this.ribbonPageGroup7.ItemLinks.Add(this.barButtonItemNdaTracking);
             this.ribbonPageGroup7.ItemLinks.Add(this.barButtonItem1);
             this.ribbonPageGroup7.ItemLinks.Add(this.barButtonItemStatistics);
             this.ribbonPageGroup7.ItemLinks.Add(this.barButtonItemViewAllNotes);
@@ -418,10 +439,11 @@
             // ribbonStatusBar
             // 
             this.ribbonStatusBar.ItemLinks.Add(this.barStaticItemUsernameAndRole);
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 510);
+            this.ribbonStatusBar.ItemLinks.Add(this.barHeaderItemCD4Version);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 516);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(1110, 31);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(1120, 26);
             // 
             // MainView
             // 
@@ -429,7 +451,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackgroundImageLayoutStore = System.Windows.Forms.ImageLayout.Tile;
             this.BackgroundImageStore = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImageStore")));
-            this.ClientSize = new System.Drawing.Size(1110, 541);
+            this.ClientSize = new System.Drawing.Size(1120, 542);
             this.Controls.Add(this.ribbonStatusBar);
             this.Controls.Add(this.ribbon);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -488,5 +510,7 @@
         private DevExpress.XtraBars.BarButtonItem barButtonItemUpdatePatientDetailsView;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup6;
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup7;
+        private DevExpress.XtraBars.BarHeaderItem barHeaderItemCD4Version;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemNdaTracking;
     }
 }

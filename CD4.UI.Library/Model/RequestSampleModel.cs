@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CD4.UI.Library.Helpers;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Runtime.CompilerServices;
@@ -7,7 +8,7 @@ namespace CD4.UI.Library.Model
 {
     public class RequestSampleModel : INotifyPropertyChanged
     {
-        
+
         #region Private properties
         private int id;
         private int analysisRequestId;
@@ -27,6 +28,8 @@ namespace CD4.UI.Library.Model
         private int statusIconId;
         private string birthDateString;
         private string _completeAddress;
+        private long instituteAssignedPatientId;
+        private bool samplePriority;
 
         #endregion
 
@@ -161,6 +164,28 @@ namespace CD4.UI.Library.Model
                 OnPropertyChanged();
             }
         }
+        public long InstituteAssignedPatientId
+        {
+            get => instituteAssignedPatientId; set
+            {
+                instituteAssignedPatientId = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool SamplePriority
+        {
+            get => samplePriority; set
+            {
+                samplePriority = value;
+
+                //set priority icon
+                if (samplePriority) { SamplePriorityIcon = StatusIconHelper.GetIcon(8); }
+                if (!samplePriority) { SamplePriorityIcon = StatusIconHelper.GetIcon(9); }
+                OnPropertyChanged(nameof(SamplePriorityIcon));
+            }
+        }
+        public Image SamplePriorityIcon { get; set; }
 
         public string EpisodeNumber
         {
@@ -208,39 +233,12 @@ namespace CD4.UI.Library.Model
             }
         }
 
-
-        #endregion
-
-        #region Private Methods
-        private void SetIcon(int statusIconId)
+        private void SetIcon(int value)
         {
-            switch (statusIconId)
-            {
-                case 1:
-                    StatusIcon = Properties.Resources.Requested;
-                    break;
-                case 2:
-                    StatusIcon = Properties.Resources.Sampled;
-                    break;
-                case 3:
-                    StatusIcon = Properties.Resources.Received;
-                    break;
-                case 4:
-                    StatusIcon = Properties.Resources.ToValidate;
-                    break;
-                case 5:
-                    StatusIcon = Properties.Resources.Validated;
-                    break;
-                case 6:
-                    StatusIcon = Properties.Resources.Processing;
-                    break;
-                case 7:
-                    StatusIcon = Properties.Resources.Rejected;
-                    break;
-                default:
-                    break;
-            }
+            StatusIcon = StatusIconHelper.GetIcon(value);
         }
+
+
         #endregion
 
         #region INotifyPropertyChanged Hookup

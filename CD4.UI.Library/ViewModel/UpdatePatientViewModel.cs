@@ -25,6 +25,7 @@ namespace CD4.UI.Library.ViewModel
         private string selectedAtoll;
         private string selectedIsland;
         private int selectedNationalityId;
+        private long instituteAssignedPatientId;
         private readonly IMapper _mapper;
         private readonly IStaticDataDataAccess _staticDataAccess;
         private readonly IPatientDataAccess _patientDataAccess;
@@ -143,6 +144,14 @@ namespace CD4.UI.Library.ViewModel
                 OnPropertyChanged();
             }
         }
+        public long InstituteAssignedPatientId
+        {
+            get => instituteAssignedPatientId; set
+            {
+                instituteAssignedPatientId = value;
+                OnPropertyChanged();
+            }
+        }
 
         #region Lookup Lists
         public List<GenderModel> Gender { get; set; }
@@ -162,7 +171,7 @@ namespace CD4.UI.Library.ViewModel
                 _isLoading = true;
                 //call db to load patient
                 var patient = (await _patientDataAccess.GetPatientByNidPp(NidPp)).FirstOrDefault();
-                var mappedPatient =  _mapper.Map<PatientModel>(patient);
+                var mappedPatient = _mapper.Map<PatientModel>(patient);
                 //reset form data
                 ResetViewData();
                 //display daya
@@ -193,10 +202,11 @@ namespace CD4.UI.Library.ViewModel
                     NidPp = nidPp,
                     Birthdate = Birthdate.GetValueOrDefault().ToString("yyyyMMdd"),
                     GenderId = selectedGenderId,
-                    AtollId = (AllAtollsWithCorrespondingIsland.Find((x)=> x.Atoll == SelectedAtoll && x.Island == SelectedIsland)).Id,
+                    AtollId = (AllAtollsWithCorrespondingIsland.Find((x) => x.Atoll == SelectedAtoll && x.Island == SelectedIsland)).Id,
                     CountryId = SelectedNationalityId,
                     Address = Address,
-                    PhoneNumber = PhoneNumber
+                    PhoneNumber = PhoneNumber,
+                    InstituteAssignedPatientId = -1001
                 };
                 var mappedPatient = _mapper.Map<DataLibrary.Models.PatientUpdateDatabaseModel>(patient);
                 var updated = await _patientDataAccess.UpdatePatientByIdReturnInserted(mappedPatient);
@@ -224,7 +234,7 @@ namespace CD4.UI.Library.ViewModel
         #region Private Methods
         private async Task DisplayDataOnViewAsync(PatientModel patientModel)
         {
-            if(patientModel is null) { return; }
+            if (patientModel is null) { return; }
             Id = patientModel.Id;
             NidPp = patientModel.NidPp;
             Fullname = patientModel.Fullname;
@@ -249,7 +259,7 @@ namespace CD4.UI.Library.ViewModel
             Birthdate = DateTime.Parse(patientUpdateModel.Birthdate);
 
             var atollData = AllAtollsWithCorrespondingIsland.Find((x) => x.Id == patientUpdateModel.AtollId);
-            
+
             SelectedAtoll = (atollData).Atoll;
             await RepopulateIslandDatasource(SelectedAtoll);
             SelectedIsland = atollData.Island;
@@ -265,7 +275,7 @@ namespace CD4.UI.Library.ViewModel
             Address = string.Empty;
             SelectedGenderId = -1;
             Birthdate = null;
-            SelectedAtoll = string.Empty; 
+            SelectedAtoll = string.Empty;
             PhoneNumber = string.Empty;
             SelectedNationalityId = -1;
             SelectedIsland = string.Empty;

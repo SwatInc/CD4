@@ -13,7 +13,7 @@ namespace CD4.UI.Library.ViewModel
         RequestSampleModel SelectedRequestData { get; set; }
         Task SetSelectedSampleAsync(RequestSampleModel requestSampleData);
         Task SetTestCodifiedPhrasesAsync(ResultModel selectedTest);
-        Task GetWorkSheet();
+        Task GetWorkSheetAsync();
         Task ValidateTest(ResultModel resultModel);
         Task ValidateSample(RequestSampleModel requestSampleModel);
 
@@ -30,6 +30,7 @@ namespace CD4.UI.Library.ViewModel
         dynamic TestHistoryData { get; set; }
         int SelectedDisciplineId { get; set; }
         string NotesCountButtonLabel { get; set; }
+        DateTime LoadWorksheetToDate { get; set; }
 
         event PropertyChangedEventHandler PropertyChanged;
         event EventHandler RequestDataRefreshed;
@@ -52,5 +53,8 @@ namespace CD4.UI.Library.ViewModel
         Task RefreshResultDataOnUiAsync(string cin);
         Task GetNotesCountAsync(string cin);
         void SetNotesCountManually(string notesCount);
+        Task<List<BarcodeDataModel>> GetBarcodeDataAsync();
+        Task MarkSampleCollectedAsync();
+        Task UpdateUiAsync();
     }
 }

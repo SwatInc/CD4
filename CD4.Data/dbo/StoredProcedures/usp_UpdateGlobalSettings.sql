@@ -1,9 +1,9 @@
 ﻿CREATE PROCEDURE [dbo].[usp_UpdateGlobalSettings]
-	@VerifyNidPpOnOrder bit,
-	@Id int
+	@JsonSettings varchar(max)
 AS
 BEGIN
+	DELETE FROM [dbo].[GlobalSettings];
+
 	UPDATE [dbo].[GlobalSettings]
-	SET [VerifyNidPpOnOrder] = @VerifyNidPpOnOrder
-	WHERE [Id] = @Id;
+	SET [JsonSettings] = @JsonSettings
 END

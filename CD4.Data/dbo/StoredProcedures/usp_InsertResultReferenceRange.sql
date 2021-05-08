@@ -14,26 +14,26 @@ BEGIN
     DECLARE @PanicId INT;
     DECLARE @NotAcceptableId INT;
 
-    DECLARE @NormalHighLimit DECIMAL(10, 8); 
-    DECLARE @NormalLowLimit DECIMAL(10, 8);
-    DECLARE @AttentionHighLimit DECIMAL(10, 8); 
-    DECLARE @AttentionLowLimit DECIMAL(10, 8);
-    DECLARE @PathologyHighLimit DECIMAL(10, 8); 
-    DECLARE @PathologyLowLimit DECIMAL(10, 8);
-    DECLARE @HighPathologyHighLimit DECIMAL(10, 8); 
-    DECLARE @HighPathologyLowLimit DECIMAL(10, 8);
-    DECLARE @AbsoluteDeltaLowLimit DECIMAL(10, 8);
-    DECLARE @AbsoluteDeltaHighLimit DECIMAL(10, 8);
-    DECLARE @RelativeDeltaLowLimit DECIMAL(10, 8);
-    DECLARE @RelativeDeltaHighLimit DECIMAL(10, 8);
-    DECLARE @OutOfNormalityAbsoluteLow_DeltaLowLimit DECIMAL(10, 8);
-    DECLARE @OutOfNormalityAbsoluteLow_DeltaHighLimit DECIMAL(10, 8);
-    DECLARE @OutOfNormalityAbsoluteHigh_DeltaLowLimt DECIMAL(10, 8);
-    DECLARE @OutOfNormalityAbsoluteHigh_DeltaHighLimit DECIMAL(10, 8);
-    DECLARE @OutOfNormalityRelativeLow_DeltaLowLimit DECIMAL(10, 8);
-    DECLARE @OutOfNormalityRelativeLow_DeltaHighLimit DECIMAL(10, 8);
-    DECLARE @OutOfNormalityRelativeHigh_DeltaLowlimit DECIMAL(10, 8);
-    DECLARE @OutOfNormalityRelativeHigh_DeltaHighLimit DECIMAL(10, 8); 
+    DECLARE @NormalHighLimit DECIMAL(10, 3); 
+    DECLARE @NormalLowLimit DECIMAL(10, 3);
+    DECLARE @AttentionHighLimit DECIMAL(10, 3); 
+    DECLARE @AttentionLowLimit DECIMAL(10, 3);
+    DECLARE @PathologyHighLimit DECIMAL(10, 3); 
+    DECLARE @PathologyLowLimit DECIMAL(10, 3);
+    DECLARE @HighPathologyHighLimit DECIMAL(10, 3); 
+    DECLARE @HighPathologyLowLimit DECIMAL(10, 3);
+    DECLARE @AbsoluteDeltaLowLimit DECIMAL(10, 3);
+    DECLARE @AbsoluteDeltaHighLimit DECIMAL(10, 3);
+    DECLARE @RelativeDeltaLowLimit DECIMAL(10, 3);
+    DECLARE @RelativeDeltaHighLimit DECIMAL(10, 3);
+    DECLARE @OutOfNormalityAbsoluteLow_DeltaLowLimit DECIMAL(10, 3);
+    DECLARE @OutOfNormalityAbsoluteLow_DeltaHighLimit DECIMAL(10, 3);
+    DECLARE @OutOfNormalityAbsoluteHigh_DeltaLowLimt DECIMAL(10, 3);
+    DECLARE @OutOfNormalityAbsoluteHigh_DeltaHighLimit DECIMAL(10, 3);
+    DECLARE @OutOfNormalityRelativeLow_DeltaLowLimit DECIMAL(10, 3);
+    DECLARE @OutOfNormalityRelativeLow_DeltaHighLimit DECIMAL(10, 3);
+    DECLARE @OutOfNormalityRelativeHigh_DeltaLowlimit DECIMAL(10, 3);
+    DECLARE @OutOfNormalityRelativeHigh_DeltaHighLimit DECIMAL(10, 3); 
     DECLARE @DisplayNormalRange VARCHAR(100);
 
     --get patient specific data

@@ -8,7 +8,10 @@ namespace CD4.DataLibrary.Models
 {
     public class GlobalSettingsModel
     {
-        public int Id { get; set; }
         public bool VerifyNidPpOnOrder { get; set; }
+        public bool IsAnalysisRequestBarcodeRequired { get; set; }
+        public string ReportExportBasePath { get; set; }
+        public bool IsFullnameAbbreviated { get; set; }
+
     }
 }

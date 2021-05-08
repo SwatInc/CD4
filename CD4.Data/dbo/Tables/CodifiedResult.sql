@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[CodifiedResult]
 (
 	[Id] INT NOT NULL PRIMARY KEY IDENTITY, 
-    [Code] VARCHAR(50) NOT NULL, 
+    [Code] NVARCHAR(50) NOT NULL, 
     [ReferenceCode] CHAR(2) NOT NULL DEFAULT 'NM', 
     CONSTRAINT [AK_CodifiedResult_Code] UNIQUE ([Code])
 

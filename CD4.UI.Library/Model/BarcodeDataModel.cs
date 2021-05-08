@@ -14,7 +14,10 @@ namespace CD4.UI.Library.Model
         public string FullName { get; set; }
         public DateTime Birthdate { get; set; }
         public string Age { get; set; }
+        public string SampleType { get; set; }
         public string Discipline { get; set; }
         public DateTimeOffset CollectionDate { get; set; }
+        public string EpisodeNumber { get; set; }
+        public bool SamplePriority { get; set; }
     }
 }

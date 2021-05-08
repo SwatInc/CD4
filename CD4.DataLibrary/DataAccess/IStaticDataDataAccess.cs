@@ -13,8 +13,10 @@ namespace CD4.DataLibrary.DataAccess
         Task<List<CountryModel>> GetAllCountriesAsync();
         Task<List<GenderModel>> GetAllGenderAsync();
         Task<List<ProfilesAndTestModelOeModel>> GetAllProfileTestsAsync();
+        Task<List<ScientistModel>> GetAllScientistsAsync();
         Task<List<SitesModel>> GetAllSitesAsync();
         Task<List<ProfilesAndTestModelOeModel>> GetAllTestsAsync();
+        Task<List<BillingTestMappingModel>> GetBillingTestCodeMappings();
         Task<List<ChannelMappingModel>> GetChannelMappingData();
         Task<List<ResultAlertModel>> GetResultAlertData();
         Task<List<WorkstationPrintersInfoModel>> GetWorkStationPrintersAsync(string workstationName);

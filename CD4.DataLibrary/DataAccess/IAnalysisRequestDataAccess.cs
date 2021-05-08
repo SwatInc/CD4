@@ -6,7 +6,7 @@ namespace CD4.DataLibrary.DataAccess
 {
     public interface IAnalysisRequestDataAccess
     {
-        Task<bool> ConfirmRequestAsync(AnalysisRequestDataModel request, int loggedInUserId);
+        Task<bool> ConfirmRequestAsync(AnalysisRequestDataModel request, int loggedInUserId, bool isSamplePriority = false);
         Task<List<BarcodeDataModel>> GetBarcodeDataAsync(string cin);
         Task<List<BarcodeDataModel>> GetBarcodeDataForMultipleSamplesAsync(List<string> sampleCins);
         Task<string> GetNextCinSeed();

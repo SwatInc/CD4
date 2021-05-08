@@ -9,8 +9,7 @@
     <ProjectGuid>{e7d9dd5b-1699-47f8-818c-f5b0b67085b6}</ProjectGuid>
     <DSP>Microsoft.Data.Tools.Schema.Sql.SqlAzureV12DatabaseSchemaProvider</DSP>
     <OutputType>Database</OutputType>
-    <RootPath>
-    </RootPath>
+    <RootPath />
     <RootNamespace>CD4.Data</RootNamespace>
     <AssemblyName>CD4.Data</AssemblyName>
     <ModelCollation>1033, CI</ModelCollation>
@@ -48,7 +47,6 @@
   </PropertyGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
-    <!-- Default to the v11.0 targets path if the targets file for the current VS version is not found -->
     <SSDTExists Condition="Exists('$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets')">True</SSDTExists>
     <VisualStudioVersion Condition="'$(SSDTExists)' == ''">11.0</VisualStudioVersion>
   </PropertyGroup>
@@ -273,6 +271,33 @@
     <Build Include="dbo\StoredProcedures\usp_CollectMultipleSamples.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetTestStatusByTestIdAndCin.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetAllAssociatedTestIdsForSamples.sql" />
+    <Build Include="dbo\Tables\Contacts.sql" />
+    <Build Include="dbo\Tables\ContactDetails.sql" />
+    <Build Include="dbo\Tables\Contacts_Sites.sql" />
+    <Build Include="dbo\Tables\ContactType.sql" />
+    <Build Include="dbo\Tables\NdaActionTracking.sql" />
+    <Build Include="dbo\Tables\NdaTimeTracking.sql" />
+    <Build Include="dbo\Tables\NdaLookup.sql" />
+    <Build Include="dbo\Views\NdaSampleReceivedDetails.sql" />
+    <Build Include="dbo\Views\NdaCalControlsValidatedDetails.sql" />
+    <Build Include="dbo\Views\NdaRequestsReportedDetails.sql" />
+    <Build Include="dbo\Views\NdaAssaysTestedDetails.sql" />
+    <Build Include="dbo\StoredProcedures\GetAllScientistsForNda.sql" />
+    <Build Include="dbo\StoredProcedures\usp_LoadSampleDataForNda.sql" />
+    <Build Include="dbo\Views\SampleValidatedTimings.sql" />
+    <Build Include="dbo\StoredProcedures\usp_UpsertReportDateForNdaTracking.sql" />
+    <Build Include="dbo\StoredProcedures\usp_UpsertQcCalValidatedUser.sql" />
+    <Build Include="dbo\StoredProcedures\usp_UpsertAnalyzedUser.sql" />
+    <Build Include="dbo\Tables\BillingTestCodeMap.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetAllBillingTestMappings.sql" />
+    <Build Include="dbo\StoredProcedures\usp_InsertAcceptedDateTimeForSampleFromBilling.sql" />
+    <Build Include="dbo\StoredProcedures\usp_UpsertSampleReceivedUser.sql" />
+    <Build Include="dbo\StoredProcedures\DecideAndExecInsertOrUpdateSampleAcceptedDatetime.sql" />
+    <Build Include="dbo\StoredProcedures\usp_UpdateAcceptedDateTimeForSampleFromBilling.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetSampleAndTestStatusByCinForUpdatingUI.sql" />
+    <Build Include="dbo\Views\SampleProcessedTimings.sql" />
+    <Build Include="dbo\Views\ResultProcessedTimings.sql" />
+    <Build Include="dbo\StoredProcedures\usp_UpdateSamplePriorityByCin.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
@@ -284,6 +309,6 @@
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="dbo\Scripts\Script.PostDeployment.sql" />
-    <None Include="dbo\Scripts\StaticDataSeed.PostDeployment1.sql" />
+    <None Include="dbo\Scripts\Script.PostDeploymentClinicalLab.sql" />
   </ItemGroup>
 </Project>

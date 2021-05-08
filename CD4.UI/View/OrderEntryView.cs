@@ -84,6 +84,7 @@ namespace CD4.UI.View
             }
         }
 
+        //**************** DUBLICATED CODE ON RESULT ENTRY VIEW *************************
         private async void SimpleButtonPrintBarcode_Click(object sender, EventArgs e)
         {
             //If the print barcode function returns false then don't try marking the sample as collected.
@@ -131,15 +132,15 @@ namespace CD4.UI.View
                 var demographicsConfirmRequired = await _viewModel.OrderRequiresNidPpConfirmationAsync();
                 if (demographicsConfirmRequired.IsConfirmationRequired)
                 {
-                    this._viewModel.LoadingStaticDataStatus = true;
+                    _viewModel.LoadingStaticDataStatus = true;
                     var dialog = new PatientDetailsConfirmationView(demographicsConfirmRequired);
                     dialog.ShowDialog();
                     if (dialog.DialogResult == DialogResult.Cancel)
                     {
-                        this._viewModel.LoadingStaticDataStatus = false;
+                        _viewModel.LoadingStaticDataStatus = false;
                         return;
                     }
-                    this._viewModel.LoadingStaticDataStatus = false;
+                    _viewModel.LoadingStaticDataStatus = false;
 
                 }
             }
@@ -355,6 +356,11 @@ namespace CD4.UI.View
             dateEditSampleReceived.DataBindings.Add
                 ("EditValue", _viewModel, nameof(_viewModel.SampleReceivedDate), true,
                 DataSourceUpdateMode.OnPropertyChanged);
+
+            //sample priority
+            toggleSwitchSamplePriority.DataBindings.Add(new Binding("IsOn", _viewModel, nameof(_viewModel.IsSamplePriority), true,
+                DataSourceUpdateMode.OnPropertyChanged));
+
             #endregion
 
             #region Patient Data
@@ -416,6 +422,10 @@ namespace CD4.UI.View
             lookUpEditCountry.Properties.ValueMember = nameof(CountryModel.Id);
             lookUpEditCountry.DataBindings.Add
                 (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedCountryId)));
+
+            //Institute Assigned Patient ID
+            textEditInstituteAssignedPatientId.DataBindings.Add(new Binding("EditValue", _viewModel, nameof(_viewModel.InstituteAssignedPatientId), true,
+                DataSourceUpdateMode.OnPropertyChanged));
             #endregion
 
             #region Clinical Details
@@ -508,6 +518,7 @@ namespace CD4.UI.View
 
         /// <summary>
         /// loads barcode data from database and tries to print the barcodes
+        /// NOTE: *********************************************  DUBLICATE CODE EXISTS ON RESULT ENTRY VIEW ************************
         /// </summary>
         /// <returns>True if able to load barcode data from database, even if the printing step fails.</returns>
         private async Task<bool> PrintBarcodeAsync()
@@ -515,8 +526,13 @@ namespace CD4.UI.View
             List<BarcodeDataModel> barcodeData;
             try
             {
-                barcodeData = await _viewModel.GetBarcodeData();
+                barcodeData = await _viewModel.GetBarcodeDataAsync();
                 return _barcodeHelper.PrintSingleSampleBarcode(barcodeData, _viewModel.Cin);
+            }
+            catch (System.Drawing.Printing.InvalidPrinterException ex) 
+            {
+                XtraMessageBox.Show($"Cannot print the barcode. The sample will be marked as collected if status is registered. Please find the error(s) below\n{ex.Message}");
+                return true;
             }
             catch (Exception ex)
             {
