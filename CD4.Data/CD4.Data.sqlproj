@@ -310,5 +310,6 @@
   <ItemGroup>
     <PostDeploy Include="dbo\Scripts\Script.PostDeployment.sql" />
     <None Include="dbo\Scripts\Script.PostDeploymentClinicalLab.sql" />
+    <None Include="dbo\Scripts\Script.PostDeployment.ASMH.sql" />
   </ItemGroup>
 </Project>
