@@ -1128,10 +1128,14 @@ namespace CD4.UI.View
 
             }
 
-            //if (sender.GetType() == typeof(SimpleButton))
-            //{
-            //    return 1;
-            //}
+            #region Molecular Only... I think
+            if (sender.GetType() == typeof(SimpleButton))
+            {
+                return 1;
+            }
+            #endregion
+
+
 
             //try to get the report Id for the default report
             foreach (var template in _reportExtensions.ReportTemplates)
