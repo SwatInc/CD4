@@ -161,6 +161,12 @@ namespace CD4.ExcelInterface.QuantStudio5.ViewModels
                 InterpretData(2);
             }
 
+            if (batchId.ToLower().Contains("genedania"))
+            {
+                Logs.Add(new LogModel() { Date = DateTime.Now, Log = "Auto selected GENEdania kit." });
+                InterpretData(4);
+            }
+
             //auto export to LIS
             ExportToUploader().GetAwaiter().GetResult();
         }

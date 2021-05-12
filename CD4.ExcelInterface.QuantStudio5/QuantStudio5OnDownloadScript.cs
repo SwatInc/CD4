@@ -11,6 +11,7 @@ public class QuantStudio5OnDownloadScript
         Kits.Add(new { Id = 1, Kit = "Zeesan" });
         Kits.Add(new { Id = 2, Kit = "LabGun" });
         Kits.Add(new { Id = 3, Kit = "PerkinElmer" });
+        Kits.Add(new { Id = 4, Kit = "GENEdania" });
     }
     public bool IsScriptLoaded()
     {
@@ -41,6 +42,10 @@ public class QuantStudio5OnDownloadScript
                 if (item.Kit == "LabGun")
                 {
                     return LabGunResultInterPretation(measurements);
+                }
+                if (item.Kit == "GENEdania")
+                {
+                    return GENEdaniaResultInterPretation(measurements);
                 }
             }
         }
@@ -300,4 +305,171 @@ public class QuantStudio5OnDownloadScript
 
     }
 
+    private string GENEdaniaResultInterPretation(dynamic measurements)
+    {
+        decimal orf1abDecimal;
+        decimal ngeneDecimal;
+        decimal egeneDecimal;
+        decimal icDecimal;
+
+        string orf1ab = "";
+        string ngene = "";
+        string egene = "";
+        string ic = "";
+
+        var orf1abPresent = false;
+        var ngenePresent = false;
+        var egenePresent = false;
+        var icPresent = false;
+
+        foreach (var item in measurements)
+        {
+            if (item.TestCode == "ORF1ab")
+            {
+                orf1ab = item.MeasurementValue.ToString();
+                orf1abPresent = true;
+            }
+            if (item.TestCode == "N Gene")
+            {
+                ngene = item.MeasurementValue.ToString();
+                ngenePresent = true;
+            }
+            if (item.TestCode == "E Gene")
+            {
+                egene = item.MeasurementValue.ToString();
+                egenePresent = true;
+            }
+            if (item.TestCode == "IC")
+            {
+                ic = item.MeasurementValue.ToString();
+                icPresent = true;
+            }
+        }
+
+        //All genes must be present, return otherwise
+        if (!(orf1abPresent && ngenePresent && egenePresent && icPresent)) return GetInterpretationTestCode() + "|";
+
+        //parse gene values
+        var ofr1abIsDecimal = decimal.TryParse(orf1ab, out orf1abDecimal);
+        var ngeneIsDecimal = decimal.TryParse(ngene, out ngeneDecimal);
+        var egeneIsDecimal = decimal.TryParse(egene, out egeneDecimal);
+        var icIsDecimal = decimal.TryParse(ic, out icDecimal);
+
+        //replace all undetermined values with 2000 (technically anything above 40 should do)
+        if (!ofr1abIsDecimal) { orf1abDecimal = 2000M; }
+        if (!ngeneIsDecimal) { ngeneDecimal = 2000M; }
+        if (!egeneIsDecimal) { egeneDecimal = 2000M; }
+        if (!icIsDecimal) { icDecimal = 2000M; }
+
+        /*
+            CASE 1: NEGATIVE
+            ORF1ab Gene	| Negative |	N/A or > 40
+            N gene	    | Negative |	N/A or > 40
+            E gene	    | Negative |	N/A or > 40
+            IC			| Positive |	≤ 35
+         */
+        if (orf1abDecimal > 40 && ngeneDecimal > 40 && egeneDecimal > 40 && icDecimal <= 35)
+        {
+            return GetInterpretationTestCode() + "|NEGATIVE";
+        }
+
+        /*
+            CASE 2: NEGATIVE
+            ORF1ab Gene	| Negative |	N/A or > 40
+            N gene	    | Negative |	N/A or > 40
+            E gene	    | Positive |	≤ 40
+            IC			| Positive |	≤ 35
+         */
+        if (orf1abDecimal > 40 && ngeneDecimal > 40 && egeneDecimal <= 40 && icDecimal <= 35)
+        {
+            return GetInterpretationTestCode() + "|NEGATIVE";
+        }
+
+        /*
+            CASE 3: POSITIVE
+            ORF1ab Gene	| Positive |	≤ 40
+            N gene	    | Positive |	≤ 40
+            E gene	    | Positive |	≤ 40
+            IC			| Positive |	≤ 35
+         */
+        if (orf1abDecimal <= 40 && ngeneDecimal <= 40 && egeneDecimal <= 40 && icDecimal <= 35)
+        {
+            return GetInterpretationTestCode() + "|POSITIVE";
+        }
+
+        /*
+            CASE 4: BLANK
+            ORF1ab Gene	| Positive |	≤ 40
+            N gene	    | Positive |	≤ 40
+            E gene	    | Negative |	> 40
+            IC			| Positive |	≤ 35
+         */
+        if (orf1abDecimal <= 40 && ngeneDecimal <= 40 && egeneDecimal > 40 && icDecimal <= 35)
+        {
+            return GetInterpretationTestCode() + "|";
+        }
+
+        /*
+            CASE 5: BLANK
+            ORF1ab Gene	| Positive |	≤ 40
+            N gene	    | Negative |	> 40
+            E gene	    | Positive |	≤ 40
+            IC			| Positive |	≤ 35
+         */
+        if (orf1abDecimal <= 40 && ngeneDecimal > 40 && egeneDecimal <= 40 && icDecimal <= 35)
+        {
+            return GetInterpretationTestCode() + "|";
+        }
+
+        /*
+            CASE 6: BLANK
+            ORF1ab Gene	| Negative |	> 40
+            N gene	    | Positive |	≤ 40
+            E gene	    | Positive |	≤ 40
+            IC			| Positive |	≤ 35
+         */
+        if (orf1abDecimal > 40 && ngeneDecimal <= 40 && egeneDecimal <= 40 && icDecimal <= 35)
+        {
+            return GetInterpretationTestCode() + "|";
+        }
+
+        /*
+            CASE 7: BLANK
+            ORF1ab Gene	| Positive |	≤ 40
+            N gene	    | Negative |	> 40
+            E gene	    | Negative |	> 40
+            IC			| Positive |	≤ 35
+         */
+        if (orf1abDecimal <= 40 && ngeneDecimal > 40 && egeneDecimal > 40 && icDecimal <= 35)
+        {
+            return GetInterpretationTestCode() + "|";
+        }
+
+
+        /*
+            CASE 8: BLANK
+            ORF1ab Gene	| Negative |	> 40
+            N gene	    | Positive |	≤ 40
+            E gene	    | Negative |	> 40
+            IC			| Positive |	≤ 35
+         */
+        if (orf1abDecimal > 40 && ngeneDecimal <= 40 && egeneDecimal > 40 && icDecimal <= 35)
+        {
+            return GetInterpretationTestCode() + "|";
+        }
+
+        /*
+            CASE 9: BLANK
+            ORF1ab Gene	| Negative |	> 40
+            N gene	    | Negative |	> 40
+            E gene	    | Negative |	> 40
+            IC			| Negative |	> 35
+         */
+        if (orf1abDecimal > 40 && ngeneDecimal <= 40 && egeneDecimal > 40 && icDecimal <= 35)
+        {
+            return GetInterpretationTestCode() + "|";
+        }
+
+        return GetInterpretationTestCode() + "|";
+    }
 }
