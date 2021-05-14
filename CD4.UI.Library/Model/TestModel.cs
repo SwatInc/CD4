@@ -11,6 +11,11 @@ namespace CD4.UI.Library.Model
         private string resultDataType;
         private string mask;
         private bool isReportable;
+        private string discipline;
+        private string sampleType;
+        private string unit;
+        private string code;
+        private bool defaultCommented;
 
         public int Id
         {
@@ -21,12 +26,28 @@ namespace CD4.UI.Library.Model
                 OnPropertyChanged();
             }
         }
+        public string Discipline
+        {
+            get => discipline; set
+            {
+                discipline = value;
+                OnPropertyChanged();
+            }
+        }
         public string Description
         {
             get => description; set
             {
                 if (description == value) return;
                 description = value;
+                OnPropertyChanged();
+            }
+        }
+        public string SampleType
+        {
+            get => sampleType; set
+            {
+                sampleType = value;
                 OnPropertyChanged();
             }
         }
@@ -52,6 +73,22 @@ namespace CD4.UI.Library.Model
                 OnPropertyChanged();
             }
         }
+        public string Unit
+        {
+            get => unit; set
+            {
+                unit = value;
+                OnPropertyChanged();
+            }
+        }
+        public string Code
+        {
+            get => code; set
+            {
+                code = value;
+                OnPropertyChanged();
+            }
+        }
         public bool IsReportable
         {
             get => isReportable; set
@@ -61,6 +98,15 @@ namespace CD4.UI.Library.Model
                 OnPropertyChanged();
             }
         }
+        public bool DefaultCommented
+        {
+            get => defaultCommented; set
+            {
+                defaultCommented = value;
+                OnPropertyChanged();
+            }
+        }
+
 
 
         #region INotifyPropertyChanged Hookup

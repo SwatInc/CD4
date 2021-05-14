@@ -26,13 +26,9 @@ namespace CD4.UI.View
             InitializeBinding();
 
             _viewModel.PushingMessages += _viewModel_PushingMessages;
-            simpleButtonSave.Click += _viewModel.SaveTest;
-            simpleButtonSave.Click += SimpleButtonSave_Click;
-            this.gridViewTests.FocusedRowChanged += GridViewTests_FocusedRowChanged;
-        }
-
-        private void SimpleButtonSave_Click(object sender, EventArgs e)
-        {
+            barButtonItemSave.ItemClick += _viewModel.SaveTest;
+            barButtonItemNewTest.ItemClick += _viewModel.NewTest;
+            gridViewTests.FocusedRowChanged += GridViewTests_FocusedRowChanged;
         }
 
         private void InitializeBinding()
@@ -43,16 +39,32 @@ namespace CD4.UI.View
             //Id
             this.textEditId.DataBindings.Add
                 (new Binding("EditValue", _viewModel.SelectedTest, nameof(_viewModel.SelectedTest.Id)));
-            
+
+            //Discipline datasource 
+            this.lookUpEditDiscipline.Properties.DataSource = _viewModel.DisciplineList;
+            this.lookUpEditDiscipline.Properties.ValueMember = nameof(DisciplineModel.Id);
+            this.lookUpEditDiscipline.Properties.DisplayMember = nameof(DisciplineModel.Discipline);
+            //selected discipline
+            this.lookUpEditDiscipline.DataBindings.Add
+                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedDiscipline)));
+
+
             //description
             this.textEditDescription.DataBindings.Add
                 (new Binding("EditValue", _viewModel.SelectedTest, nameof(_viewModel.SelectedTest.Description)));
-            
+
+            //selected sample type
+            this.lookUpEditSampleType.Properties.DataSource = _viewModel.SampleTypesList;
+            this.lookUpEditSampleType.Properties.ValueMember = nameof(SampleTypeModel.Id);
+            this.lookUpEditSampleType.Properties.DisplayMember = nameof(SampleTypeModel.Description);
+            //sample type datasource
+            lookUpEditSampleType.DataBindings.Add
+                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedSampleType)));
+
             //LookUpEdit TestDataType Datasource
             this.lookUpEditTestDataType.Properties.DataSource = _viewModel.ResultDataTypes;
             this.lookUpEditTestDataType.Properties.ValueMember = nameof(ResultDataTypeModel.Id);
             this.lookUpEditTestDataType.Properties.DisplayMember = nameof(ResultDataTypeModel.DataType);
-
 
             //LookUpEdit Selected Item
             this.lookUpEditTestDataType.DataBindings.Add
@@ -61,10 +73,26 @@ namespace CD4.UI.View
             //Result Mask
             this.textEditResultMask.DataBindings.Add
                 (new Binding("EditValue", _viewModel.SelectedTest, nameof(_viewModel.SelectedTest.Mask)));
-            
+
+            //unit
+            this.lookUpEditUnit.Properties.DataSource = _viewModel.UnitList;
+            this.lookUpEditUnit.Properties.ValueMember = nameof(UnitModel.Id);
+            this.lookUpEditUnit.Properties.DisplayMember = nameof(UnitModel.Unit);
+            //selected unit
+            this.lookUpEditUnit.DataBindings.Add
+                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedUnit)));
+
+            //code
+            this.textEditCode.DataBindings.Add
+                (new Binding("EditValue", _viewModel.SelectedTest, nameof(_viewModel.SelectedTest.Code)));
+
             //Is Reportable?
             this.checkEditIsReportable.DataBindings.Add
                 (new Binding("Checked", _viewModel.SelectedTest, nameof(_viewModel.SelectedTest.IsReportable)));
+
+            //Default Commented?
+            this.checkEdit1.DataBindings.Add
+                (new Binding("Checked", _viewModel.SelectedTest, nameof(_viewModel.SelectedTest.DefaultCommented)));
 
         }
 

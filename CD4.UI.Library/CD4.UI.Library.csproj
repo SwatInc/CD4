@@ -143,6 +143,7 @@
     <Compile Include="Model\CinAndReportDateModel.cs" />
     <Compile Include="Model\CommentsSelectionModel.cs" />
     <Compile Include="Model\DemographicsConfirmationModel.cs" />
+    <Compile Include="Model\DisciplineModel.cs" />
     <Compile Include="Model\GlobalSettingsModel.cs" />
     <Compile Include="Model\NdaTrackingModel.cs" />
     <Compile Include="Model\PatientUpdateModel.cs" />
@@ -152,7 +153,9 @@
     <Compile Include="Model\ResultAlertModel.cs" />
     <Compile Include="Model\ResultModel.cs" />
     <Compile Include="Model\RequestSampleModel.cs" />
+    <Compile Include="Model\SampleTypeModel.cs" />
     <Compile Include="Model\StatusModel.cs" />
+    <Compile Include="Model\UnitModel.cs" />
     <Compile Include="Model\ValidationDataModel.cs" />
     <Compile Include="Model\ClinicalDetailsModel.cs" />
     <Compile Include="Model\ClinicalDetailsOrderEntryModel.cs" />
