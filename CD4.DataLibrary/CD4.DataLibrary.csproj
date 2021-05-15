@@ -95,6 +95,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataAccess\AnalysisRequestDataAccess.cs" />
+    <Compile Include="DataAccess\AssayDataAccess.cs" />
     <Compile Include="DataAccess\AuthenticationDataAccess.cs" />
     <Compile Include="DataAccess\BulkOrdersImportDataAccess.cs" />
     <Compile Include="DataAccess\ClinicalDetailsDataAccess.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="DataAccess\DataAccessBase.cs" />
     <Compile Include="DataAccess\GlobalSettingsDataAccess.cs" />
     <Compile Include="DataAccess\IAnalysisRequestDataAccess.cs" />
+    <Compile Include="DataAccess\IAssayDataAccess.cs" />
     <Compile Include="DataAccess\IAuthenticationDataAccess.cs" />
     <Compile Include="DataAccess\IBulkOrdersImportDataAccess.cs" />
     <Compile Include="DataAccess\IClinicalDetailsDataAccess.cs" />
