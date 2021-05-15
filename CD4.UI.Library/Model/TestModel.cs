@@ -123,8 +123,13 @@ namespace CD4.UI.Library.Model
         internal static bool HaveNulls(TestModel selectedTest)
         {
             if (selectedTest.Id == 0) return true;
+            if (string.IsNullOrEmpty(selectedTest.Discipline)) return true;
             if (string.IsNullOrEmpty(selectedTest.Description)) return true;
+            if (string.IsNullOrEmpty(selectedTest.SampleType)) return true;
+            if (string.IsNullOrEmpty(selectedTest.ResultDataType)) return true;
             if (string.IsNullOrEmpty(selectedTest.Mask)) return true;
+            if (string.IsNullOrEmpty(selectedTest.Unit)) return true;
+            //if (string.IsNullOrEmpty(selectedTest.Code)) return true;
 
             return false;
         }
@@ -132,10 +137,16 @@ namespace CD4.UI.Library.Model
         public override bool Equals(object obj)
         {
             var test = (TestModel)obj;
-            if (test.Id != this.Id) return false;
-            if (test.Description != this.Description) return false;
-            if (test.mask != this.Mask) return false;
-            if (test.isReportable != this.isReportable) return false;
+            if (test.Id != this.Id) { return false; }
+            if (test.Discipline != this.Discipline) { return false; }
+            if (test.Description != this.Description) { return false; }
+            if (test.SampleType != this.SampleType) { return false; }
+            if (test.ResultDataType != this.ResultDataType) { return false; }
+            if (test.Mask != this.Mask) { return false; }
+            if (test.Unit != this.Unit) { return false; }
+            if (test.Code != this.Code) { return false; }
+            if (test.IsReportable != this.IsReportable) return false;
+            if (test.DefaultCommented != this.DefaultCommented) return false;
             return true;
         }
 

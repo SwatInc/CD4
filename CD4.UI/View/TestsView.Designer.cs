@@ -54,13 +54,13 @@
             this.textEditId = new DevExpress.XtraEditors.TextEdit();
             this.textEditDescription = new DevExpress.XtraEditors.TextEdit();
             this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.bar = new DevExpress.XtraBars.Bar();
+            this.barButtonItemNewTest = new DevExpress.XtraBars.BarButtonItem();
+            this.barButtonItemSave = new DevExpress.XtraBars.BarButtonItem();
             this.barDockControlTop = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.bar = new DevExpress.XtraBars.Bar();
-            this.barButtonItemNewTest = new DevExpress.XtraBars.BarButtonItem();
-            this.barButtonItemSave = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlCodifiedValues)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewTests)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
@@ -104,6 +104,8 @@
             this.gridColumnDefaultCommented});
             this.gridViewTests.GridControl = this.gridControlCodifiedValues;
             this.gridViewTests.Name = "gridViewTests";
+            this.gridViewTests.OptionsBehavior.AutoSelectAllInEditor = false;
+            this.gridViewTests.OptionsBehavior.Editable = false;
             // 
             // gridColumnId
             // 
@@ -355,6 +357,32 @@
             this.barButtonItemSave});
             this.barManager1.MaxItemId = 3;
             // 
+            // bar
+            // 
+            this.bar.BarName = "Tools";
+            this.bar.DockCol = 0;
+            this.bar.DockRow = 0;
+            this.bar.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
+            this.bar.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemNewTest),
+            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSave)});
+            this.bar.Offset = 1119;
+            this.bar.Text = "Tools";
+            // 
+            // barButtonItemNewTest
+            // 
+            this.barButtonItemNewTest.Caption = "New Test";
+            this.barButtonItemNewTest.Id = 1;
+            this.barButtonItemNewTest.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemNewTest.ImageOptions.SvgImage")));
+            this.barButtonItemNewTest.Name = "barButtonItemNewTest";
+            // 
+            // barButtonItemSave
+            // 
+            this.barButtonItemSave.Caption = "Save";
+            this.barButtonItemSave.Id = 2;
+            this.barButtonItemSave.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItemSave.ImageOptions.SvgImage")));
+            this.barButtonItemSave.Name = "barButtonItemSave";
+            // 
             // barDockControlTop
             // 
             this.barDockControlTop.CausesValidation = false;
@@ -386,32 +414,6 @@
             this.barDockControlRight.Location = new System.Drawing.Point(1229, 31);
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 430);
-            // 
-            // bar
-            // 
-            this.bar.BarName = "Tools";
-            this.bar.DockCol = 0;
-            this.bar.DockRow = 0;
-            this.bar.DockStyle = DevExpress.XtraBars.BarDockStyle.Top;
-            this.bar.LinksPersistInfo.AddRange(new DevExpress.XtraBars.LinkPersistInfo[] {
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemNewTest),
-            new DevExpress.XtraBars.LinkPersistInfo(this.barButtonItemSave)});
-            this.bar.Offset = 1119;
-            this.bar.Text = "Tools";
-            // 
-            // barButtonItemNewTest
-            // 
-            this.barButtonItemNewTest.Caption = "New Test";
-            this.barButtonItemNewTest.Id = 1;
-            this.barButtonItemNewTest.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem1.ImageOptions.SvgImage")));
-            this.barButtonItemNewTest.Name = "barButtonItemNewTest";
-            // 
-            // barButtonItemSave
-            // 
-            this.barButtonItemSave.Caption = "Save";
-            this.barButtonItemSave.Id = 2;
-            this.barButtonItemSave.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem2.ImageOptions.SvgImage")));
-            this.barButtonItemSave.Name = "barButtonItemSave";
             // 
             // TestsView
             // 

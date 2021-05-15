@@ -27,7 +27,7 @@ namespace CD4.UI.View
 
             _viewModel.PushingMessages += _viewModel_PushingMessages;
             barButtonItemSave.ItemClick += _viewModel.SaveTest;
-            barButtonItemNewTest.ItemClick += _viewModel.NewTest;
+            barButtonItemNewTest.ItemClick += _viewModel.PrepareForNewTestEntry;
             gridViewTests.FocusedRowChanged += GridViewTests_FocusedRowChanged;
         }
 
@@ -68,7 +68,8 @@ namespace CD4.UI.View
 
             //LookUpEdit Selected Item
             this.lookUpEditTestDataType.DataBindings.Add
-                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedDataType)));
+                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedDataType),
+                        false, DataSourceUpdateMode.OnPropertyChanged));
 
             //Result Mask
             this.textEditResultMask.DataBindings.Add
