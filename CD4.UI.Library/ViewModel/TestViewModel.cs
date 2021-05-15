@@ -55,9 +55,9 @@ namespace CD4.UI.Library.ViewModel
 
             SampleTypesList.Add(new SampleTypeModel() { Id = 1, Description = "SERUM" });
             SampleTypesList.Add(new SampleTypeModel() { Id = 2, Description = "EDTA WHOLE BLOOD" });
-            SampleTypesList.Add(new SampleTypeModel() { Id = 2, Description = "SWAB" });
+            SampleTypesList.Add(new SampleTypeModel() { Id = 3, Description = "SWAB" });
 
-            UnitList.Add(new UnitModel() { Id = 1, Unit = " " });
+            UnitList.Add(new UnitModel() { Id = 1, Unit = "NA" });
             UnitList.Add(new UnitModel() { Id = 2, Unit = "%" });
             UnitList.Add(new UnitModel() { Id = 3, Unit = "mg/dL" });
 
@@ -97,8 +97,8 @@ namespace CD4.UI.Library.ViewModel
         {
             get => selectedDataType; set
             {
-                if (selectedDataType == value) return;
                 selectedDataType = value;
+                SelectedTest.ResultDataType = ResultDataTypes.Find((r) => r.Id == value)?.DataType;
                 OnPropertyChanged();
             }
         }
@@ -107,6 +107,7 @@ namespace CD4.UI.Library.ViewModel
             get => selectedDiscipline; set
             {
                 selectedDiscipline = value;
+                SelectedTest.Discipline = DisciplineList.Find((d) => d.Id == value)?.Discipline;
                 OnPropertyChanged();
             }
         }
@@ -115,6 +116,7 @@ namespace CD4.UI.Library.ViewModel
             get => sampleType; set
             {
                 sampleType = value;
+                SelectedTest.SampleType = SampleTypesList.Find((s) => s.Id == value)?.Description;
                 OnPropertyChanged();
             }
         }
@@ -123,6 +125,7 @@ namespace CD4.UI.Library.ViewModel
             get => selectedUnit; set
             {
                 selectedUnit = value;
+                SelectedTest.Unit = UnitList.Find((u) => u.Id == value)?.Unit;
                 OnPropertyChanged();
             }
         }
@@ -144,7 +147,7 @@ namespace CD4.UI.Library.ViewModel
             SelectedSampleType = selectedSampleType.Id;
             SelectedDataType = selectedRowTestDataType.Id;
             SelectedTest.Mask = selectedRow.Mask;
-            SelectedUnit = selectedUnit.Id;
+            if (selectedUnit != null) { SelectedUnit = selectedUnit.Id; }
             SelectedTest.Code = selectedRow.Code;
             SelectedTest.IsReportable = selectedRow.IsReportable;
             SelectedTest.DefaultCommented = selectedRow.DefaultCommented;
@@ -153,7 +156,8 @@ namespace CD4.UI.Library.ViewModel
         public void SaveTest(object sender, EventArgs e)
         {
             var TestDatabaseCopy = TestList.SingleOrDefault(t => t.Description == SelectedTest.Description);
-            var selectedRowTestDataType = ResultDataTypes.SingleOrDefault(r => r.DataType == TestDatabaseCopy.ResultDataType);
+
+            var a = SelectedDataType;
 
             //checking whether all fields are provided
             if (TestModel.HaveNulls(SelectedTest) && SelectedDataType != 0)
@@ -172,7 +176,7 @@ namespace CD4.UI.Library.ViewModel
             }
 
             //udpate test
-            if (SelectedTest.Equals(TestDatabaseCopy) & selectedDataType == selectedRowTestDataType.Id)
+            if (SelectedTest.Equals(TestDatabaseCopy))
             {
                 PushingMessages?.Invoke(this, $"The test {SelectedTest.Description} is already present on system!");
                 PushingLogs?.Invoke(this, $"Save reqested for the exact same copy as database. Abort save. \n {JsonConvert.SerializeObject(SelectedTest)}");
@@ -187,8 +191,24 @@ namespace CD4.UI.Library.ViewModel
 
 
         }
-        public void NewTest(object sender, EventArgs e)
+
+        /// <summary>
+        /// Clears the data entry fields to allow the user to enter desired values for saving
+        /// </summary>
+        public void PrepareForNewTestEntry(object sender, EventArgs e)
         {
+            //NOTE: for UI combo boxes, set the selected Id to -1 to make them select nothing/clear selected.
+
+            SelectedTest.Id = -1;
+            SelectedDiscipline = -1;
+            SelectedTest.Description = "";
+            SelectedSampleType = -1;
+            SelectedDataType = -1;
+            SelectedTest.Mask = "";
+            SelectedUnit = -1;
+            SelectedTest.Code = "";
+            SelectedTest.IsReportable = false;
+            SelectedTest.DefaultCommented = false;
 
         }
         #endregion

@@ -23,7 +23,7 @@ namespace CD4.UI.Library.ViewModel
         event EventHandler<string> PushingMessages;
 
         void DisplaySelectedTest(int selectedId);
-        void NewTest(object sender, EventArgs e);
+        void PrepareForNewTestEntry(object sender, EventArgs e);
         void SaveTest(object sender, EventArgs e);
     }
 }
