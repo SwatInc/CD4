@@ -112,4 +112,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="NdaLookupId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="12e80b8d-4e7d-4ba7-8d86-c5a7be9f59e7" ChangeDateTime="05/16/2021 22:40:51">
+    <Property Name="ElementName" Value="[dbo].[Test].[DeafultCommented]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[Test]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="DefaultCommented" />
+  </Operation>
 </Operations>

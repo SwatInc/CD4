@@ -298,6 +298,7 @@
     <Build Include="dbo\Views\SampleProcessedTimings.sql" />
     <Build Include="dbo\Views\ResultProcessedTimings.sql" />
     <Build Include="dbo\StoredProcedures\usp_UpdateSamplePriorityByCin.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetAllTestsForConfiguration.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />

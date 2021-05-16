@@ -1,5 +1,6 @@
 ﻿using CD4.DataLibrary.Models;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace CD4.DataLibrary.DataAccess
@@ -10,9 +11,18 @@ namespace CD4.DataLibrary.DataAccess
     /// </summary>
     public class AssayDataAccess : DataAccessBase, IAssayDataAccess
     {
-        public async Task<TestsModel> GetAllAssays()
+        public async Task<List<TestsModel>> GetAllAssays()
         {
-            throw new NotImplementedException();
+            var storedProcedure = "usp_GetAllTestsForConfiguration";
+            try
+            {
+                var assays = await LoadDataAsync<TestsModel>(storedProcedure);
+                return assays;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
         }
     }
 }
