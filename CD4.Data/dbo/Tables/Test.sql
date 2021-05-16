@@ -9,7 +9,7 @@
     [UnitId] INT NOT NULL,
     [Reportable] BIT NOT NULL DEFAULT 1,
     [Code] VARCHAR(3) NOT NULL DEFAULT '', -- this will be suffix like P, F P1
-    [DeafultCommented] BIT NOT NULL,
+    [DefaultCommented] BIT NOT NULL,
     CONSTRAINT [FK_Test_ResultDataType] FOREIGN KEY ([ResultDataTypeId]) REFERENCES [dbo].[ResultDataType]([Id]), 
     CONSTRAINT [AK_Test_Description] UNIQUE ([Description]), 
     CONSTRAINT [FK_Test_SampleType] FOREIGN KEY ([SampleTypeId]) REFERENCES [SampleType]([Id]), 
