@@ -100,7 +100,7 @@ namespace CD4.UI.View
         private void GridViewTests_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)
         {
             //if row handle is -1, no row is focused.
-            if (e.FocusedRowHandle == -1) return;
+            if (e.FocusedRowHandle < 0) return;
 
             _log.Info($"{nameof(gridViewTests)} row clicked.");
             var SelectedId = (int)gridViewTests.GetRowCellValue(e.FocusedRowHandle, "Id");

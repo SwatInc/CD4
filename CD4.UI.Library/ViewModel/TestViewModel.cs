@@ -1,4 +1,6 @@
-﻿using CD4.UI.Library.Model;
+﻿using AutoMapper;
+using CD4.DataLibrary.DataAccess;
+using CD4.UI.Library.Model;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -6,6 +8,7 @@ using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 
 namespace CD4.UI.Library.ViewModel
 {
@@ -17,16 +20,19 @@ namespace CD4.UI.Library.ViewModel
         private int selectedDiscipline;
         private int sampleType;
         private int selectedUnit;
+        private readonly IAssayDataAccess _assayDataAccess;
+        private readonly IMapper _mapper;
 
         #endregion
 
         #region Events
         public event EventHandler<string> PushingLogs;
         public event EventHandler<string> PushingMessages;
+        public event EventHandler OnInitialize;
         #endregion
 
 
-        public TestViewModel()
+        public TestViewModel(IAssayDataAccess assayDataAccess, IMapper mapper)
         {
             this.TestList = new BindingList<TestModel>();
             DisciplineList = new List<DisciplineModel>();
@@ -35,8 +41,30 @@ namespace CD4.UI.Library.ViewModel
             this.SelectedTest = new TestModel();
             this.ResultDataTypes = new List<ResultDataTypeModel>();
             //this.SelectedDataType = new ResultDataTypeModel();
-            InitializeDemoData();
+            //InitializeDemoData();
             this.PropertyChanged += TestViewModel_PropertyChanged;
+            this._assayDataAccess = assayDataAccess;
+            this._mapper = mapper;
+
+            OnInitialize += TestViewModel_OnInitialize;
+            OnInitialize?.Invoke(this, EventArgs.Empty);
+        }
+
+        private async void TestViewModel_OnInitialize(object sender, EventArgs e)
+        {
+            await LoadAllAssaysAsync();
+        }
+
+        private async Task LoadAllAssaysAsync()
+        {
+            var assays = await _assayDataAccess.GetAllAssays();
+            var mappedAssays = _mapper.Map<List<TestModel>>(assays);
+            TestList.Clear();
+
+            foreach (var item in mappedAssays)
+            {
+                TestList.Add(item);
+            }
         }
 
         private void TestViewModel_PropertyChanged(object sender, PropertyChangedEventArgs e)
@@ -142,10 +170,32 @@ namespace CD4.UI.Library.ViewModel
             var selectedUnit = UnitList.Find(u => u.Unit == selectedRow.Unit);
 
             SelectedTest.Id = selectedRow.Id;
-            SelectedDiscipline = selectedDiscipline.Id;
+            if (selectedDiscipline != null) 
+            {
+                SelectedDiscipline = selectedDiscipline.Id; 
+            }
+            else { SelectedDiscipline = -1; }
+            
             SelectedTest.Description = selectedRow.Description;
-            SelectedSampleType = selectedSampleType.Id;
-            SelectedDataType = selectedRowTestDataType.Id;
+
+            if (selectedSampleType != null)
+            {
+                SelectedSampleType = selectedSampleType.Id;
+            }
+            else { SelectedSampleType = -1; }
+
+            if (selectedSampleType != null)
+            {
+                SelectedSampleType = selectedSampleType.Id;
+            }
+            else { SelectedSampleType = -1; }
+
+            if (selectedRowTestDataType != null)
+            {
+                SelectedDataType = selectedRowTestDataType.Id;
+            }
+            else {SelectedDataType = -1;}
+            
             SelectedTest.Mask = selectedRow.Mask;
             if (selectedUnit != null) { SelectedUnit = selectedUnit.Id; }
             SelectedTest.Code = selectedRow.Code;
