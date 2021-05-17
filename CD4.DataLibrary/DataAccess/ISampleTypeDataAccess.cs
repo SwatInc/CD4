@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 
 namespace CD4.DataLibrary.DataAccess
 {
-    public interface IAssayDataAccess
+    public interface ISampleTypeDataAccess
     {
-        Task<List<TestsModel>> GetAllAssaysAsync();
+        Task<List<SampleTypeModel>> GetAllDSampleTypesAsync();
     }
 }

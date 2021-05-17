@@ -54,6 +54,10 @@ namespace CD4.UI
                 config.CreateMap<DataLibrary.Models.CinAndReportDateModel, Library.Model.CinAndReportDateModel>().ReverseMap();
                 config.CreateMap<DataLibrary.Models.CinAndFullnameModel, Library.Model.CinAndFullnameModel>().ReverseMap();
                 config.CreateMap<DataLibrary.Models.GlobalSettingsModel, Library.Model.GlobalSettingsModel>().ReverseMap();
+                config.CreateMap<DataLibrary.Models.DisciplineModel, Library.Model.DisciplineModel>().ReverseMap();
+                config.CreateMap<DataLibrary.Models.ResultDataTypeModel, Library.Model.ResultDataTypeModel>().ReverseMap();
+                config.CreateMap<DataLibrary.Models.SampleTypeModel, Library.Model.SampleTypeModel>().ReverseMap();
+                config.CreateMap<DataLibrary.Models.UnitModel, Library.Model.UnitModel>().ReverseMap();
                 config.CreateMap<ResultModel, TestModel>()
                     .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                     .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Test))

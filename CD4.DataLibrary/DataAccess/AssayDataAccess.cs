@@ -11,7 +11,7 @@ namespace CD4.DataLibrary.DataAccess
     /// </summary>
     public class AssayDataAccess : DataAccessBase, IAssayDataAccess
     {
-        public async Task<List<TestsModel>> GetAllAssays()
+        public async Task<List<TestsModel>> GetAllAssaysAsync()
         {
             var storedProcedure = "usp_GetAllTestsForConfiguration";
             try

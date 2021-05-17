@@ -21,6 +21,10 @@ namespace CD4.UI.Library.ViewModel
         private int sampleType;
         private int selectedUnit;
         private readonly IAssayDataAccess _assayDataAccess;
+        private readonly IDisciplineDataAccess _disciplineDataAccess;
+        private readonly ISampleTypeDataAccess _sampleTypeDataAccess;
+        private readonly IUnitDataAccess _unitDataAccess;
+        private readonly IResultDataTypeDataAccess _resultDataTypeDataAccess;
         private readonly IMapper _mapper;
 
         #endregion
@@ -32,7 +36,12 @@ namespace CD4.UI.Library.ViewModel
         #endregion
 
 
-        public TestViewModel(IAssayDataAccess assayDataAccess, IMapper mapper)
+        public TestViewModel(IAssayDataAccess assayDataAccess
+            , IDisciplineDataAccess disciplineDataAccess
+            , ISampleTypeDataAccess sampleTypeDataAccess
+            , IUnitDataAccess unitDataAccess
+            , IResultDataTypeDataAccess resultDataTypeDataAccess
+            , IMapper mapper)
         {
             this.TestList = new BindingList<TestModel>();
             DisciplineList = new List<DisciplineModel>();
@@ -44,6 +53,10 @@ namespace CD4.UI.Library.ViewModel
             //InitializeDemoData();
             this.PropertyChanged += TestViewModel_PropertyChanged;
             this._assayDataAccess = assayDataAccess;
+            this._disciplineDataAccess = disciplineDataAccess;
+            this._sampleTypeDataAccess = sampleTypeDataAccess;
+            this._unitDataAccess = unitDataAccess;
+            this._resultDataTypeDataAccess = resultDataTypeDataAccess;
             this._mapper = mapper;
 
             OnInitialize += TestViewModel_OnInitialize;
@@ -52,18 +65,89 @@ namespace CD4.UI.Library.ViewModel
 
         private async void TestViewModel_OnInitialize(object sender, EventArgs e)
         {
+            //load disciplines, sample types, units, result data types
+            await LoadAllDisciplinesAsync();
+            await LoadAllSampleTypesAsync();
+            await LoadAllUnitsAsync();
+            await LoadAllResultDataTypesAsync();
             await LoadAllAssaysAsync();
         }
 
+        private async Task LoadAllDisciplinesAsync()
+        {
+            try
+            {
+                var disciplines = await _disciplineDataAccess.GetAllDisciplinesAsync();
+                var mapped = _mapper.Map<List<DisciplineModel>>(disciplines);
+                DisciplineList.AddRange(mapped);
+            }
+            catch (Exception ex)
+            {
+                PushingMessages?.Invoke(this, ex.Message);
+                PushingLogs?.Invoke(this, $"{ex.Message}\n{ex.StackTrace}");
+            }
+        }
+
+        private async Task LoadAllSampleTypesAsync()
+        {
+            try
+            {
+                var sampleTypes = await _sampleTypeDataAccess.GetAllDSampleTypesAsync();
+                var mapped = _mapper.Map<List<SampleTypeModel>>(sampleTypes);
+                SampleTypesList.AddRange(mapped);
+            }
+            catch (Exception ex)
+            {
+                PushingMessages?.Invoke(this, ex.Message);
+                PushingLogs?.Invoke(this, $"{ex.Message}\n{ex.StackTrace}");
+            }
+        }
+
+        private async Task LoadAllUnitsAsync()
+        {
+            try
+            {
+                var units = await _unitDataAccess.GetAllUnitsAsync();
+                var mappedUnits = _mapper.Map<List<UnitModel>>(units);
+                UnitList.AddRange(mappedUnits);
+            }
+            catch (Exception ex)
+            {
+                PushingMessages?.Invoke(this, ex.Message);
+                PushingLogs?.Invoke(this, $"{ex.Message}\n{ex.StackTrace}");
+            }
+        }
+        private async Task LoadAllResultDataTypesAsync()
+        {
+            try
+            {
+                var dataTypes = await _resultDataTypeDataAccess.GetAllResultDataTypesAsync();
+                var mappedDataTypes = _mapper.Map<List<ResultDataTypeModel>>(dataTypes);
+                ResultDataTypes.AddRange(mappedDataTypes);
+            }
+            catch (Exception ex)
+            {
+                PushingMessages?.Invoke(this, ex.Message);
+                PushingLogs?.Invoke(this, $"{ex.Message}\n{ex.StackTrace}");
+            }
+        }
         private async Task LoadAllAssaysAsync()
         {
-            var assays = await _assayDataAccess.GetAllAssays();
-            var mappedAssays = _mapper.Map<List<TestModel>>(assays);
-            TestList.Clear();
-
-            foreach (var item in mappedAssays)
+            try
             {
-                TestList.Add(item);
+                var assays = await _assayDataAccess.GetAllAssaysAsync();
+                var mappedAssays = _mapper.Map<List<TestModel>>(assays);
+                TestList.Clear();
+
+                foreach (var item in mappedAssays)
+                {
+                    TestList.Add(item);
+                }
+            }
+            catch (Exception ex)
+            {
+                PushingMessages?.Invoke(this, ex.Message);
+                PushingLogs?.Invoke(this, $"{ex.Message}\n{ex.StackTrace}");
             }
         }
 
