@@ -11,7 +11,7 @@ namespace CD4.DataLibrary.DataAccess
         {
             try
             {
-                var storedProcedure = "usp_GetAllSampleTypes";
+                var storedProcedure = "[dbo].[usp_GetAllUnits]";
                 var units = await LoadDataAsync<UnitModel>(storedProcedure);
                 return units;
             }

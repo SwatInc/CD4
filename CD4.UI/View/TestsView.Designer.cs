@@ -227,6 +227,8 @@
             this.lookUpEditUnit.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.False;
             this.lookUpEditUnit.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
             new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.lookUpEditUnit.Properties.Columns.AddRange(new DevExpress.XtraEditors.Controls.LookUpColumnInfo[] {
+            new DevExpress.XtraEditors.Controls.LookUpColumnInfo("Unit", "Unit")});
             this.lookUpEditUnit.Properties.DropDownRows = 3;
             this.lookUpEditUnit.Properties.NullText = "Unit";
             this.lookUpEditUnit.Properties.NullValuePrompt = "Unit";
@@ -236,10 +238,10 @@
             this.lookUpEditUnit.Size = new System.Drawing.Size(173, 20);
             this.lookUpEditUnit.TabIndex = 12;
             // 
-            // checkEdit1
+            // checkEditDefaultCommented
             // 
             this.checkEditDefaultCommented.Location = new System.Drawing.Point(17, 311);
-            this.checkEditDefaultCommented.Name = "checkEdit1";
+            this.checkEditDefaultCommented.Name = "checkEditDefaultCommented";
             this.checkEditDefaultCommented.Properties.Caption = "Default Commented ?";
             this.checkEditDefaultCommented.Size = new System.Drawing.Size(173, 19);
             this.checkEditDefaultCommented.TabIndex = 11;
