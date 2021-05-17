@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
 namespace CD4.UI.Library.Model
@@ -103,6 +104,7 @@ namespace CD4.UI.Library.Model
             get => defaultCommented; set
             {
                 defaultCommented = value;
+                Debug.WriteLine("Is default commented: " + value);
                 OnPropertyChanged();
             }
         }
@@ -128,7 +130,7 @@ namespace CD4.UI.Library.Model
             if (string.IsNullOrEmpty(selectedTest.SampleType)) return true;
             if (string.IsNullOrEmpty(selectedTest.ResultDataType)) return true;
             if (string.IsNullOrEmpty(selectedTest.Mask)) return true;
-            if (string.IsNullOrEmpty(selectedTest.Unit)) return true;
+            //if (string.IsNullOrEmpty(selectedTest.Unit)) return true;
             //if (string.IsNullOrEmpty(selectedTest.Code)) return true;
 
             return false;

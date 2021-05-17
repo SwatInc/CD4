@@ -44,7 +44,7 @@
             this.gridColumnDefaultCommented = new DevExpress.XtraGrid.Columns.GridColumn();
             this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
             this.lookUpEditUnit = new DevExpress.XtraEditors.LookUpEdit();
-            this.checkEdit1 = new DevExpress.XtraEditors.CheckEdit();
+            this.checkEditDefaultCommented = new DevExpress.XtraEditors.CheckEdit();
             this.textEditCode = new DevExpress.XtraEditors.TextEdit();
             this.lookUpEditSampleType = new DevExpress.XtraEditors.LookUpEdit();
             this.lookUpEditDiscipline = new DevExpress.XtraEditors.LookUpEdit();
@@ -66,7 +66,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
             this.splitContainerControl.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditUnit.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditDefaultCommented.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditCode.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditSampleType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditDiscipline.Properties)).BeginInit();
@@ -206,7 +206,7 @@
             this.splitContainerControl.Panel1.Controls.Add(this.gridControlCodifiedValues);
             this.splitContainerControl.Panel1.Text = "Panel1";
             this.splitContainerControl.Panel2.Controls.Add(this.lookUpEditUnit);
-            this.splitContainerControl.Panel2.Controls.Add(this.checkEdit1);
+            this.splitContainerControl.Panel2.Controls.Add(this.checkEditDefaultCommented);
             this.splitContainerControl.Panel2.Controls.Add(this.textEditCode);
             this.splitContainerControl.Panel2.Controls.Add(this.lookUpEditSampleType);
             this.splitContainerControl.Panel2.Controls.Add(this.lookUpEditDiscipline);
@@ -238,11 +238,11 @@
             // 
             // checkEdit1
             // 
-            this.checkEdit1.Location = new System.Drawing.Point(17, 311);
-            this.checkEdit1.Name = "checkEdit1";
-            this.checkEdit1.Properties.Caption = "Default Commented ?";
-            this.checkEdit1.Size = new System.Drawing.Size(173, 19);
-            this.checkEdit1.TabIndex = 11;
+            this.checkEditDefaultCommented.Location = new System.Drawing.Point(17, 311);
+            this.checkEditDefaultCommented.Name = "checkEdit1";
+            this.checkEditDefaultCommented.Properties.Caption = "Default Commented ?";
+            this.checkEditDefaultCommented.Size = new System.Drawing.Size(173, 19);
+            this.checkEditDefaultCommented.TabIndex = 11;
             // 
             // textEditCode
             // 
@@ -432,7 +432,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).EndInit();
             this.splitContainerControl.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditUnit.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.checkEdit1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.checkEditDefaultCommented.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditCode.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditSampleType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditDiscipline.Properties)).EndInit();
@@ -469,7 +469,7 @@
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnDefaultCommented;
         private DevExpress.XtraEditors.LookUpEdit lookUpEditSampleType;
         private DevExpress.XtraEditors.LookUpEdit lookUpEditDiscipline;
-        private DevExpress.XtraEditors.CheckEdit checkEdit1;
+        private DevExpress.XtraEditors.CheckEdit checkEditDefaultCommented;
         private DevExpress.XtraEditors.TextEdit textEditCode;
         private DevExpress.XtraEditors.LookUpEdit lookUpEditUnit;
         private DevExpress.XtraBars.BarManager barManager1;

@@ -26,7 +26,7 @@ namespace CD4.UI.View
             InitializeBinding();
 
             _viewModel.PushingMessages += _viewModel_PushingMessages;
-            barButtonItemSave.ItemClick += _viewModel.SaveTest;
+            barButtonItemSave.ItemClick += _viewModel.ProcessSaveTest;
             barButtonItemNewTest.ItemClick += _viewModel.PrepareForNewTestEntry;
             gridViewTests.FocusedRowChanged += GridViewTests_FocusedRowChanged;
         }
@@ -92,8 +92,9 @@ namespace CD4.UI.View
                 (new Binding("Checked", _viewModel.SelectedTest, nameof(_viewModel.SelectedTest.IsReportable)));
 
             //Default Commented?
-            this.checkEdit1.DataBindings.Add
-                (new Binding("Checked", _viewModel.SelectedTest, nameof(_viewModel.SelectedTest.DefaultCommented)));
+            this.checkEditDefaultCommented.DataBindings.Add
+                (new Binding("Checked", _viewModel.SelectedTest, nameof(_viewModel.SelectedTest.DefaultCommented),
+                        false, DataSourceUpdateMode.OnPropertyChanged));
 
         }
 

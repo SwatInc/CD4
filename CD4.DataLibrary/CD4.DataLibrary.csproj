@@ -173,6 +173,7 @@
     <Compile Include="Models\SampleAndResultStatusAndResultModel.cs" />
     <Compile Include="Models\SampleNotesModel.cs" />
     <Compile Include="Models\SampleWithTestIdModel.cs" />
+    <Compile Include="Models\TestsInsertModel.cs" />
     <Compile Include="Models\TypesModel.cs" />
     <Compile Include="Models\UnitModel.cs" />
     <Compile Include="Models\UpdatedResultAndStatusModel.cs" />

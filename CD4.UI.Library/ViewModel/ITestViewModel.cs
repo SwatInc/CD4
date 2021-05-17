@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading.Tasks;
 
 namespace CD4.UI.Library.ViewModel
 {
@@ -24,6 +25,6 @@ namespace CD4.UI.Library.ViewModel
 
         void DisplaySelectedTest(int selectedId);
         void PrepareForNewTestEntry(object sender, EventArgs e);
-        void SaveTest(object sender, EventArgs e);
+        void ProcessSaveTest(object sender, EventArgs e);
     }
 }

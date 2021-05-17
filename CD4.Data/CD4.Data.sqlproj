@@ -303,6 +303,7 @@
     <Build Include="dbo\StoredProcedures\usp_GetAllSampleTypes.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetAllUnits.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetAllResultDataTypes.sql" />
+    <Build Include="dbo\StoredProcedures\usp_InsertTest.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />

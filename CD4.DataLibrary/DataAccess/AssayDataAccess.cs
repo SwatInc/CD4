@@ -24,5 +24,19 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
+
+        public async Task<TestsModel> InsertTestAsync(TestsInsertModel assayToInsert)
+        {
+            try
+            {
+                var storedProcedure = "[dbo].[usp_InsertTest]";
+                var output = await SelectInsertOrUpdateAsync<TestsModel, TestsInsertModel>(storedProcedure, assayToInsert);
+                return output;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

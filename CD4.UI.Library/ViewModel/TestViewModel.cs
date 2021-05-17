@@ -33,6 +33,7 @@ namespace CD4.UI.Library.ViewModel
         public event EventHandler<string> PushingLogs;
         public event EventHandler<string> PushingMessages;
         public event EventHandler OnInitialize;
+        public event EventHandler<TestsInsertModel> OnInitiateTestInsert;
         #endregion
 
 
@@ -60,7 +61,50 @@ namespace CD4.UI.Library.ViewModel
             this._mapper = mapper;
 
             OnInitialize += TestViewModel_OnInitialize;
+            OnInitiateTestInsert += TestViewModel_OnInitiateTestInsert;
             OnInitialize?.Invoke(this, EventArgs.Empty);
+        }
+
+        private async void TestViewModel_OnInitiateTestInsert(object sender, TestsInsertModel e)
+        {
+            if (e is null)
+            {
+                throw new ArgumentNullException(nameof(TestsInsertModel),
+                    "The model passed in for test insery is null.");
+            }
+
+            //map the model to data layer model
+            var mappedInsertModel = _mapper.Map<DataLibrary.Models.TestsInsertModel>(e);
+            try
+            {
+                //call data layer to insert the assay
+                var insertedTest = await _assayDataAccess.InsertTestAsync(mappedInsertModel);
+                //map the inserted model to UI library model
+                var mappedInsertedTest = _mapper.Map<TestModel>(insertedTest);
+                //Display inserted or updated test on UI
+                DisplayInsertedUpdatedTestOnUI(mappedInsertedTest);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private void DisplayInsertedUpdatedTestOnUI(TestModel mappedInsertedModel)
+        {
+            //look for the test Id loaded tests list
+            var test = TestList.FirstOrDefault((x) => x.Id == mappedInsertedModel.Id);
+
+            //remove the test if exists... and add the mappedInsertedModel
+            //This will effectively update the UI
+            if (test != null)
+            {
+                TestList.Remove(test);
+            }
+
+            TestList.Add(mappedInsertedModel);
+
         }
 
         private async void TestViewModel_OnInitialize(object sender, EventArgs e)
@@ -254,12 +298,12 @@ namespace CD4.UI.Library.ViewModel
             var selectedUnit = UnitList.Find(u => u.Unit == selectedRow.Unit);
 
             SelectedTest.Id = selectedRow.Id;
-            if (selectedDiscipline != null) 
+            if (selectedDiscipline != null)
             {
-                SelectedDiscipline = selectedDiscipline.Id; 
+                SelectedDiscipline = selectedDiscipline.Id;
             }
             else { SelectedDiscipline = -1; }
-            
+
             SelectedTest.Description = selectedRow.Description;
 
             if (selectedSampleType != null)
@@ -278,8 +322,8 @@ namespace CD4.UI.Library.ViewModel
             {
                 SelectedDataType = selectedRowTestDataType.Id;
             }
-            else {SelectedDataType = -1;}
-            
+            else { SelectedDataType = -1; }
+
             SelectedTest.Mask = selectedRow.Mask;
             if (selectedUnit != null) { SelectedUnit = selectedUnit.Id; }
             SelectedTest.Code = selectedRow.Code;
@@ -287,7 +331,7 @@ namespace CD4.UI.Library.ViewModel
             SelectedTest.DefaultCommented = selectedRow.DefaultCommented;
         }
 
-        public void SaveTest(object sender, EventArgs e)
+        public void ProcessSaveTest(object sender, EventArgs e)
         {
             var TestDatabaseCopy = TestList.SingleOrDefault(t => t.Description == SelectedTest.Description);
 
@@ -304,8 +348,9 @@ namespace CD4.UI.Library.ViewModel
             if (TestDatabaseCopy is null)
             {
                 PushingLogs?.Invoke(this, $"Saving test {SelectedTest.Description}\n{JsonConvert.SerializeObject(SelectedTest)}");
-
                 PushingMessages(this, $"Saved test {SelectedTest.Description}");
+
+                ProcessTestInsert();
                 return;
             }
 
@@ -324,6 +369,36 @@ namespace CD4.UI.Library.ViewModel
             }
 
 
+        }
+
+        private void ProcessTestInsert()
+        {
+            try
+            {
+                //build the insert model
+                var insertModel = new TestsInsertModel()
+                {
+                    DisciplineId = SelectedDiscipline,
+                    Description = SelectedTest.Description,
+                    SampleTypeId = SelectedSampleType,
+                    ResultDataTypeId = SelectedDataType,
+                    Mask = SelectedTest.Mask,
+                    UnitId = SelectedUnit,
+                    Reportable = SelectedTest.IsReportable,
+                    Code = SelectedTest.Code,
+                    DefaultCommented = SelectedTest.DefaultCommented
+                };
+
+                //raise event to save
+                OnInitiateTestInsert?.Invoke(this, insertModel);
+                //clear the test entry fields
+                PrepareForNewTestEntry(this, EventArgs.Empty);
+            }
+            catch (Exception ex)
+            {
+                PushingMessages?.Invoke(this, ex.Message);
+                PushingLogs?.Invoke(this, $"{ex.Message}\n{ex.StackTrace}");
+            }
         }
 
         /// <summary>

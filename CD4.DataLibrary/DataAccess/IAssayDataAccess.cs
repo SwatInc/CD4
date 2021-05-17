@@ -7,5 +7,6 @@ namespace CD4.DataLibrary.DataAccess
     public interface IAssayDataAccess
     {
         Task<List<TestsModel>> GetAllAssaysAsync();
+        Task<TestsModel> InsertTestAsync(TestsInsertModel assayToInsert);
     }
 }
