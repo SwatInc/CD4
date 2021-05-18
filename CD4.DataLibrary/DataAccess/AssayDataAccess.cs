@@ -38,5 +38,33 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
+
+        public async Task<TestsModel> AssayUpdateAsync(TestUpdateModel assayToUpdate)
+        {
+            try
+            {
+                var storedProcedure = "[dbo].[usp_UpdateTestById]";
+                var parameters = new 
+                {
+                    Id = assayToUpdate.Id,
+                    DisciplineId = assayToUpdate.DisciplineId,
+                    Description = assayToUpdate.Description,
+                    SampleTypeId = assayToUpdate.SampleTypeId,
+                    ResultDataTypeId = assayToUpdate.ResultDataTypeId,
+                    Mask = assayToUpdate.Mask,
+                    UnitId = assayToUpdate.UnitId,
+                    Reportable = assayToUpdate.Reportable,
+                    Code = assayToUpdate.Code,
+                    DefaultCommented = assayToUpdate.DefaultCommented
+                };
+
+                var output = await SelectInsertOrUpdateAsync<TestsModel, dynamic>(storedProcedure, parameters);
+                return output;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -34,6 +34,8 @@ namespace CD4.UI.Library.ViewModel
         public event EventHandler<string> PushingMessages;
         public event EventHandler OnInitialize;
         public event EventHandler<TestsInsertModel> OnInitiateTestInsert;
+        public event EventHandler<TestUpdateModel> OnInitiateTestUpdate;
+
         #endregion
 
 
@@ -62,7 +64,37 @@ namespace CD4.UI.Library.ViewModel
 
             OnInitialize += TestViewModel_OnInitialize;
             OnInitiateTestInsert += TestViewModel_OnInitiateTestInsert;
+            OnInitiateTestUpdate += TestViewModel_OnInitiateTestUpdate;
+
             OnInitialize?.Invoke(this, EventArgs.Empty);
+
+        }
+
+        private async void TestViewModel_OnInitiateTestUpdate(object sender, TestUpdateModel e)
+        {
+            if (e is null)
+            {
+                throw new ArgumentNullException(nameof(TestsInsertModel),
+                    "The model passed in for test update is null.");
+            }
+
+            //map the model to data layer model
+            var mappedUpdateModel = _mapper.Map<DataLibrary.Models.TestUpdateModel>(e);
+            try
+            {
+                //call data layer to insert the assay
+                var updatedTest = await _assayDataAccess.AssayUpdateAsync(mappedUpdateModel);
+                //map the updated model to UI library model
+                var mappedUpdateddTest = _mapper.Map<TestModel>(updatedTest);
+                //Display inserted or updated test on UI
+                DisplayInsertedUpdatedTestOnUI(mappedUpdateddTest);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
         }
 
         private async void TestViewModel_OnInitiateTestInsert(object sender, TestsInsertModel e)
@@ -70,7 +102,7 @@ namespace CD4.UI.Library.ViewModel
             if (e is null)
             {
                 throw new ArgumentNullException(nameof(TestsInsertModel),
-                    "The model passed in for test insery is null.");
+                    "The model passed in for test insert is null.");
             }
 
             //map the model to data layer model
@@ -348,8 +380,6 @@ namespace CD4.UI.Library.ViewModel
             if (TestDatabaseCopy is null)
             {
                 PushingLogs?.Invoke(this, $"Saving test {SelectedTest.Description}\n{JsonConvert.SerializeObject(SelectedTest)}");
-                PushingMessages(this, $"Saved test {SelectedTest.Description}");
-
                 ProcessTestInsert();
                 return;
             }
@@ -364,10 +394,43 @@ namespace CD4.UI.Library.ViewModel
             else
             {
                 PushingMessages?.Invoke(this, $"Updated test {SelectedTest.Description}");
-                //update
-
+                //update... make sure that the selected tests Id is grater than 0 
+                if (SelectedTest.Id < 1) { return; }
+                ProcessTestUpdate();
             }
 
+
+        }
+
+        private void ProcessTestUpdate()
+        {
+            try
+            {
+                //build the insert model
+                var updateModel = new TestUpdateModel()
+                {
+                    Id = SelectedTest.Id,
+                    DisciplineId = SelectedDiscipline,
+                    Description = SelectedTest.Description,
+                    SampleTypeId = SelectedSampleType,
+                    ResultDataTypeId = SelectedDataType,
+                    Mask = SelectedTest.Mask,
+                    UnitId = SelectedUnit,
+                    Reportable = SelectedTest.IsReportable,
+                    Code = SelectedTest.Code,
+                    DefaultCommented = SelectedTest.DefaultCommented
+                };
+
+                OnInitiateTestUpdate?.Invoke(this, updateModel);
+
+                //clear the test entry fields
+                PrepareForNewTestEntry(this, EventArgs.Empty);
+            }
+            catch (Exception ex)
+            {
+                PushingMessages?.Invoke(this, ex.Message);
+                PushingLogs?.Invoke(this, $"{ex.Message}\n{ex.StackTrace}");
+            }
 
         }
 

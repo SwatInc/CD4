@@ -156,6 +156,7 @@
     <Compile Include="Model\SampleTypeModel.cs" />
     <Compile Include="Model\StatusModel.cs" />
     <Compile Include="Model\TestsInsertModel.cs" />
+    <Compile Include="Model\TestUpdateModel.cs" />
     <Compile Include="Model\UnitModel.cs" />
     <Compile Include="Model\ValidationDataModel.cs" />
     <Compile Include="Model\ClinicalDetailsModel.cs" />

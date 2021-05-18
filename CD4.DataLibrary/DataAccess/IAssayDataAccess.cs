@@ -8,5 +8,6 @@ namespace CD4.DataLibrary.DataAccess
     {
         Task<List<TestsModel>> GetAllAssaysAsync();
         Task<TestsModel> InsertTestAsync(TestsInsertModel assayToInsert);
+        Task<TestsModel> AssayUpdateAsync(TestUpdateModel assayToUpdate);
     }
 }
