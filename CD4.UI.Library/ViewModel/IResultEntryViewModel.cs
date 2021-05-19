@@ -56,5 +56,6 @@ namespace CD4.UI.Library.ViewModel
         Task<List<BarcodeDataModel>> GetBarcodeDataAsync();
         Task MarkSampleCollectedAsync();
         Task UpdateUiAsync();
+        void Dispose();
     }
 }

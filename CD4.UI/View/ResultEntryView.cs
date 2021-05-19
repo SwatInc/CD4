@@ -18,9 +18,9 @@ using System.Windows.Forms;
 
 namespace CD4.UI.View
 {
-    public partial class ResultEntryView : XtraForm
+    public partial class ResultEntryView : XtraForm, IDisposable
     {
-        private readonly IResultEntryViewModel _viewModel;
+        private IResultEntryViewModel _viewModel;
         private readonly IRejectionCommentViewModel _rejectionCommentViewModel;
         private readonly IUserAuthEvaluator _authEvaluator;
         private readonly IBarcodeHelper _barcodeHelper;
@@ -80,6 +80,15 @@ namespace CD4.UI.View
 
             gridViewSamples.ColumnFilterChanged += OnSampleSearchComplete_RefreshPatientRibbonAndSelectedTests;
             DisableResultEntryReadWriteAccessForUnauthorizedUsers();
+        }
+
+        public void Dispose()
+        {
+            _viewModel.Dispose();
+            gridControlSamples.DataSource = null;
+            gridControlTests.DataSource = null;
+            _viewModel = null;
+            Dispose(true);
         }
 
         private void exportReportOnDefaultTemplate_Click(object sender, EventArgs e)

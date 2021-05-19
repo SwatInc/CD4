@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace CD4.UI.Library.ViewModel
 {
-    public class ResultEntryViewModel : INotifyPropertyChanged, IResultEntryViewModel
+    public class ResultEntryViewModel : INotifyPropertyChanged, IResultEntryViewModel, IDisposable
     {
         #region Private Properties
         private List<Model.CodifiedResultsModel> TempCodifiedPhrasesList;
@@ -1089,6 +1089,32 @@ namespace CD4.UI.Library.ViewModel
                 throw;
             }
 
+        }
+
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(true);
+        }
+        protected virtual void Dispose(bool isDisposing)
+        {
+            if (isDisposing)
+            {
+                //Dispose managed resources
+            }
+            DisposeUnmanagedResources();
+        }
+
+        private void DisposeUnmanagedResources()
+        {
+            RequestData = null;
+            SampleAuditTrail = null;
+            SelectedRequestData = null;
+            SelectedResultData = null;
+            AllResultData = null;
+            AllCodifiedPhrases = null;
+            AllStatus = null;
+            TestHistoryData = null;
         }
 
         #endregion
