@@ -16,12 +16,14 @@ SELECT [R].[Id],
 	   [RT].[StatusId],
 	   [R].[ReferenceCode],
 	   [R].[IsDeltaOk],
-	   [T].[Reportable]
+	   [T].[Reportable],
+	   [RC].[Comment]
 FROM [dbo].[Result] [R]
 INNER JOIN [dbo].[Sample] [S] ON [R].[Sample_Cin] = [S].[Cin]
 INNER JOIN [dbo].[Test] [T] ON [R].[TestId] = [T].[Id]
 INNER JOIN [dbo].[ResultDataType] [DT] ON [T].[ResultDataTypeId] = [DT].[Id]
 INNER JOIN [dbo].[Discipline] [D] ON [D].[Id] = [T].[DisciplineId]
 INNER JOIN [dbo].[Unit] [U] ON [U].[Id] = [T].[UnitId]
-LEFT JOIN [dbo].[ResultTracking] [RT] ON [RT].[ResultId] = [R].[Id]; --tracking current result status.
+LEFT JOIN [dbo].[ResultTracking] [RT] ON [RT].[ResultId] = [R].[Id] --tracking current result status.
+LEFT JOIN [dbo].[ResultComments] [RC] WITH (NOEXPAND) ON [R].[Id] = [RC].[ResultId];
 GO

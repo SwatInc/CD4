@@ -305,6 +305,7 @@
     <Build Include="dbo\StoredProcedures\usp_GetAllResultDataTypes.sql" />
     <Build Include="dbo\StoredProcedures\usp_InsertTest.sql" />
     <Build Include="dbo\StoredProcedures\usp_UpdateTestById.sql" />
+    <Build Include="dbo\Views\ResultComments.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />
