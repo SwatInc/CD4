@@ -192,7 +192,8 @@ namespace CD4.UI.View
                     Assay = assay.Assay,
                     Result = assay.Result,
                     Unit = assay.Unit,
-                    DisplayNormalRange = assay.DisplayNormalRange
+                    DisplayNormalRange = assay.DisplayNormalRange,
+                    Comment = assay.Comment
                 });
             }
 

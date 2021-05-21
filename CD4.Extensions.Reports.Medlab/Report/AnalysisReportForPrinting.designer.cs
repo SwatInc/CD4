@@ -30,6 +30,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AnalysisReportForPrinting));
             DevExpress.XtraPrinting.BarCode.PDF417Generator pdF417Generator1 = new DevExpress.XtraPrinting.BarCode.PDF417Generator();
             DevExpress.XtraPrinting.BarCode.QRCodeGenerator qrCodeGenerator1 = new DevExpress.XtraPrinting.BarCode.QRCodeGenerator();
@@ -74,6 +75,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrLabel6 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel28 = new DevExpress.XtraReports.UI.XRLabel();
             this.SubBand1 = new DevExpress.XtraReports.UI.SubBand();
+            this.xrLabel20 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrBarCode2 = new DevExpress.XtraReports.UI.XRBarCode();
             this.xrLabel14 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabelResultHeading = new DevExpress.XtraReports.UI.XRLabel();
@@ -90,8 +92,8 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.DetailReport = new DevExpress.XtraReports.UI.DetailReportBand();
             this.GroupHeaderDiscipline = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.xrLabel18 = new DevExpress.XtraReports.UI.XRLabel();
-            this.bindingSource = new System.Windows.Forms.BindingSource();
-            this.xrLabel20 = new DevExpress.XtraReports.UI.XRLabel();
+            this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.xrLabel25 = new DevExpress.XtraReports.UI.XRLabel();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
@@ -617,6 +619,24 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.SubBand1.HeightF = 484.5391F;
             this.SubBand1.Name = "SubBand1";
             // 
+            // xrLabel20
+            // 
+            this.xrLabel20.AutoWidth = true;
+            this.xrLabel20.Dpi = 254F;
+            this.xrLabel20.Font = new System.Drawing.Font("Segoe UI", 9F);
+            this.xrLabel20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(133)))), ((int)(((byte)(133)))));
+            this.xrLabel20.LocationFloat = new DevExpress.Utils.PointFloat(73.99997F, 392.9592F);
+            this.xrLabel20.Multiline = true;
+            this.xrLabel20.Name = "xrLabel20";
+            this.xrLabel20.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
+            this.xrLabel20.SizeF = new System.Drawing.SizeF(1503.649F, 91.57986F);
+            this.xrLabel20.StylePriority.UseFont = false;
+            this.xrLabel20.StylePriority.UseForeColor = false;
+            this.xrLabel20.StylePriority.UseTextAlignment = false;
+            this.xrLabel20.Text = "Please scan the QR code to verify the report from Health Protection Agency portal" +
+    ". The HPA verification link is valid for 72 hours from sample collection date.";
+            this.xrLabel20.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
+            // 
             // xrBarCode2
             // 
             this.xrBarCode2.AutoModule = true;
@@ -750,12 +770,13 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // DetailResults
             // 
             this.DetailResults.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrLabel25,
             this.xrLabel19,
             this.xrLabel17,
             this.xrLabel16,
             this.xrLabel15});
             this.DetailResults.Dpi = 254F;
-            this.DetailResults.HeightF = 58.42F;
+            this.DetailResults.HeightF = 116.84F;
             this.DetailResults.KeepTogether = true;
             this.DetailResults.Name = "DetailResults";
             // 
@@ -827,23 +848,19 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             this.bindingSource.DataSource = typeof(CD4.Entensibility.ReportingFramework.Models.AnalysisRequestReportModel);
             // 
-            // xrLabel20
+            // xrLabel25
             // 
-            this.xrLabel20.AutoWidth = true;
-            this.xrLabel20.Dpi = 254F;
-            this.xrLabel20.Font = new System.Drawing.Font("Segoe UI", 9F);
-            this.xrLabel20.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(133)))), ((int)(((byte)(133)))), ((int)(((byte)(133)))));
-            this.xrLabel20.LocationFloat = new DevExpress.Utils.PointFloat(73.99997F, 392.9592F);
-            this.xrLabel20.Multiline = true;
-            this.xrLabel20.Name = "xrLabel20";
-            this.xrLabel20.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
-            this.xrLabel20.SizeF = new System.Drawing.SizeF(1503.649F, 91.57986F);
-            this.xrLabel20.StylePriority.UseFont = false;
-            this.xrLabel20.StylePriority.UseForeColor = false;
-            this.xrLabel20.StylePriority.UseTextAlignment = false;
-            this.xrLabel20.Text = "Please scan the QR code to verify the report from Health Protection Agency portal" +
-    ". The HPA verification link is valid for 72 hours from sample collection date.";
-            this.xrLabel20.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopLeft;
+            this.xrLabel25.AutoWidth = true;
+            this.xrLabel25.CanShrink = true;
+            this.xrLabel25.Dpi = 254F;
+            this.xrLabel25.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Comment]")});
+            this.xrLabel25.LocationFloat = new DevExpress.Utils.PointFloat(126.9998F, 58.42004F);
+            this.xrLabel25.Multiline = true;
+            this.xrLabel25.Name = "xrLabel25";
+            this.xrLabel25.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
+            this.xrLabel25.SizeF = new System.Drawing.SizeF(1451.611F, 58.42F);
+            this.xrLabel25.Text = "xrLabelResultComment";
             // 
             // AnalysisReportForPrinting
             // 
@@ -931,5 +948,6 @@ namespace CD4.Extensions.Reports.Medlab.Report
         private DevExpress.XtraReports.UI.SubBand SubBand1;
         private DevExpress.XtraReports.UI.XRBarCode xrBarCode2;
         private DevExpress.XtraReports.UI.XRLabel xrLabel20;
+        private DevExpress.XtraReports.UI.XRLabel xrLabel25;
     }
 }
