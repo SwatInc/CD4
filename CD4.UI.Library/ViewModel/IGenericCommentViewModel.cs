@@ -1,18 +1,21 @@
-﻿using CD4.UI.Library.Model;
+﻿using CD4.UI.Library.Helpers;
+using CD4.UI.Library.Model;
 using System.ComponentModel;
 
 namespace CD4.UI.Library.ViewModel
 {
-    public interface IRejectionCommentViewModel
+    public interface IGenericCommentViewModel
     {
-        BindingList<CommentsSelectionModel> RejectionReasons { get; set; }
+        BindingList<CommentsSelectionModel> Reasons { get; set; }
         CommentsSelectionModel SelectedReason { get; set; }
         bool IsLoading { get; set; }
         bool IsOkEnabled { get; set; }
         int ReasonsCountDisplayed { get; set; }
         bool IsReasonsListEnabled { get; set; }
-        RejectionReasonType ReasonType { get; set; }
+        string ViewTitle { get; set; }
 
         event PropertyChangedEventHandler PropertyChanged;
+
+        void InitializeFetchReasons(ICommentHelper commentHelper);
     }
 }

@@ -101,6 +101,7 @@ namespace CD4.UI
 
             //register viewModels
             builder.RegisterAssemblyTypes(Assembly.Load("CD4.UI.Library"))
+                .Where(t =>t.Namespace != null)
                 .Where(t => t.Namespace.Contains("ViewModel"))
                 .As(t => t.GetInterfaces().FirstOrDefault(i => i.Name == $"I{t.Name}"));
 
@@ -114,13 +115,14 @@ namespace CD4.UI
             builder.RegisterType<AuthorizeDetailEventArgs>()
                 .AsSelf()
                 .SingleInstance();
-
+            
             builder.RegisterType<LoadMultipleExtensions>().As<ILoadMultipleExtensions>().SingleInstance();
 
             builder.RegisterType<UserAuthEvaluator>().As<IUserAuthEvaluator>();
             builder.RegisterType<PrintingHelper>().As<IPrintingHelper>();
             builder.RegisterType<NamesAbbreviator>().As<INamesAbbreviator>();
             builder.RegisterType<BarcodeHelper>().As<IBarcodeHelper>();
+            builder.RegisterType<CommentHelper>().As<ICommentHelper>();
 
             builder.RegisterType<GlobalSettingsHelper>().As<IGlobalSettingsHelper>().SingleInstance();
 

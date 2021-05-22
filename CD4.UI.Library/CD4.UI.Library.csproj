@@ -122,7 +122,10 @@
   <ItemGroup>
     <Compile Include="DateTimeExtensions.cs" />
     <Compile Include="DiskIO.cs" />
+    <Compile Include="Helpers\CommentHelper.cs" />
+    <Compile Include="Helpers\CommentType.cs" />
     <Compile Include="Helpers\GlobalSettingsHelper.cs" />
+    <Compile Include="Helpers\ICommentHelper.cs" />
     <Compile Include="Helpers\IGlobalSettingsHelper.cs" />
     <Compile Include="Helpers\INamesAbbreviator.cs" />
     <Compile Include="Helpers\IPrintingHelper.cs" />
@@ -149,7 +152,6 @@
     <Compile Include="Model\PatientUpdateModel.cs" />
     <Compile Include="Model\SampleNotesModel.cs" />
     <Compile Include="Model\PatientModel.cs" />
-    <Compile Include="Model\RejectionReasonType.cs" />
     <Compile Include="Model\ResultAlertModel.cs" />
     <Compile Include="Model\ResultModel.cs" />
     <Compile Include="Model\RequestSampleModel.cs" />
@@ -209,7 +211,7 @@
     <Compile Include="ViewModel\IPatientSearchResultsViewModel.cs" />
     <Compile Include="ViewModel\IPrinterSettingsViewModel.cs" />
     <Compile Include="ViewModel\IProfilesViewModel.cs" />
-    <Compile Include="ViewModel\IRejectionCommentViewModel.cs" />
+    <Compile Include="ViewModel\IGenericCommentViewModel.cs" />
     <Compile Include="ViewModel\IResultEntryViewModel.cs" />
     <Compile Include="ViewModel\IScientistViewModel.cs" />
     <Compile Include="ViewModel\ISitesViewModel.cs" />
@@ -222,7 +224,7 @@
     <Compile Include="ViewModel\PatientSearchResultsViewModel.cs" />
     <Compile Include="ViewModel\PrinterSettingsViewModel.cs" />
     <Compile Include="ViewModel\ProfilesViewModel.cs" />
-    <Compile Include="ViewModel\RejectionCommentViewModel.cs" />
+    <Compile Include="ViewModel\GenericCommentViewModel.cs" />
     <Compile Include="ViewModel\ResultEntryViewModel.cs" />
     <Compile Include="ViewModel\ScientistViewModel.cs" />
     <Compile Include="ViewModel\SitesViewModel.cs" />

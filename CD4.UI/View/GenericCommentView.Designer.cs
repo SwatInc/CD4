@@ -1,6 +1,6 @@
 ﻿namespace CD4.UI.View
 {
-    partial class RejectionCommentView
+    partial class GenericCommentView
     {
         /// <summary>
         /// Required designer variable.

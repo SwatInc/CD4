@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using CD4.DataLibrary.DataAccess;
+using CD4.UI.Library.Helpers;
 using CD4.UI.Library.Model;
 using System;
 using System.Collections.Generic;
@@ -11,80 +12,74 @@ using System.Threading.Tasks;
 
 namespace CD4.UI.Library.ViewModel
 {
-    public class RejectionCommentViewModel : INotifyPropertyChanged, IRejectionCommentViewModel
+    public class GenericCommentViewModel : INotifyPropertyChanged, IGenericCommentViewModel
     {
         private Model.CommentsSelectionModel _selectedReason;
         private bool _isLoading;
         private bool _isOkEnabled;
         private int _reasonsCountDisplayed;
         private bool _isReasonsListEnabled;
-        private RejectionReasonType _reasonType;
         private readonly ICommentsDataAccess _commentsDataAccess;
         private readonly IMapper _mapper;
 
-        public event EventHandler FetchReasons;
-        public RejectionCommentViewModel(ICommentsDataAccess commentsDataAccess, IMapper mapper)
+        public event EventHandler<int> FetchReasons;
+        public GenericCommentViewModel(ICommentsDataAccess commentsDataAccess, IMapper mapper)
         {
             _commentsDataAccess = commentsDataAccess;
             _mapper = mapper;
-            RejectionReasons = new BindingList<Model.CommentsSelectionModel>();
-            SampleRejectionCommentsList = new List<CommentsSelectionModel>();
-            TestRejectionCommentsList = new List<CommentsSelectionModel>();
+            Reasons = new BindingList<Model.CommentsSelectionModel>();
             IsLoading = true;
             IsOkEnabled = false;
             FetchReasons += OnFetchReasons;
-            InitializeFetchReasons();
 
         }
 
-        private void InitializeFetchReasons()
+        public void InitializeFetchReasons(ICommentHelper commentHelper)
         {
-            FetchReasons?.Invoke(this, EventArgs.Empty);
+            GenerateViewTitle(commentHelper);
+            FetchReasons?.Invoke(this, (int)commentHelper.SelectedCommentType);
         }
 
-        public async void OnFetchReasons(object sender, EventArgs e)
+        private void GenerateViewTitle(ICommentHelper commentHelper)
         {
-            //sample rejection CommentTypeId is 4
-            var reasons = await _commentsDataAccess.GetAllCommentsByTypeId(4);
-            SampleRejectionCommentsList = _mapper.Map<List<Model.CommentsSelectionModel>>(reasons);
+            ViewTitle = "";
+            switch (commentHelper.SelectedCommentType)
+            {
+                case CommentType.Patient:
+                    ViewTitle = "Select Patient Comment";
+                    break;
+                case CommentType.Sample:
+                    ViewTitle = "Select Sample Comment";
+                    break;
+                case CommentType.Result:
+                    ViewTitle = "Select Test / Result Comment";
+                    break;
+                case CommentType.SampleRejection:
+                    ViewTitle = "Select Sample Rejection Reason";
+                    break;
+                case CommentType.TestRejection:
+                    ViewTitle = "Select Test Rejection Reason";
+                    break;
+                default:
+                    ViewTitle = "Select Reason";
+                    break;
+            }
+        }
 
-            //test rejection CommentTypeId is 5
-            reasons = await _commentsDataAccess.GetAllCommentsByTypeId(5);
-            TestRejectionCommentsList = _mapper.Map<List<Model.CommentsSelectionModel>>(reasons);
+        public async void OnFetchReasons(object sender, int e)
+        {
+            Reasons.Clear();
+            var reasons = await _commentsDataAccess.GetAllCommentsByTypeId(e);
+            var mappedReasons = _mapper.Map<List<Model.CommentsSelectionModel>>(reasons);
+
+            foreach (var item in mappedReasons)
+            {
+                Reasons.Add(item);
+            }
 
             IsLoading = false;
         }
 
-        /// <summary>
-        /// Assign display comments
-        /// </summary>
-        /// <param name="rejectionCommentType"></param>
-        private void AssignComments(RejectionReasonType rejectionCommentType)
-        {
-            RejectionReasons.Clear();
-
-            switch (rejectionCommentType)
-            {
-                case RejectionReasonType.Sample:
-
-                    foreach (var reason in SampleRejectionCommentsList)
-                    {
-                        RejectionReasons.Add(reason);
-                    }
-
-                    break;
-                case RejectionReasonType.Test:
-
-                    foreach (var reason in TestRejectionCommentsList)
-                    {
-                        RejectionReasons.Add(reason);
-                    }
-                    break;
-
-                default:
-                    break;
-            }
-        }
 
         #region INotifyPropertyChanged Hookup
 
@@ -97,9 +92,7 @@ namespace CD4.UI.Library.ViewModel
 
         #endregion
 
-        public BindingList<Model.CommentsSelectionModel> RejectionReasons { get; set; }
-        public List<Model.CommentsSelectionModel> SampleRejectionCommentsList { get; set; }
-        public List<Model.CommentsSelectionModel> TestRejectionCommentsList { get; set; }
+        public BindingList<Model.CommentsSelectionModel> Reasons { get; set; }
 
         public Model.CommentsSelectionModel SelectedReason
         {
@@ -120,6 +113,8 @@ namespace CD4.UI.Library.ViewModel
         {
             IsOkEnabled = SelectedReason != null ? SelectedReason.Id > 0 : false;
         }
+
+        public string ViewTitle { get; set; }
 
         public bool IsLoading
         {
@@ -156,17 +151,6 @@ namespace CD4.UI.Library.ViewModel
                 if (_isReasonsListEnabled == value) return;
                 _isReasonsListEnabled = value;
                 OnPropertyChanged();
-            }
-        }
-
-        public RejectionReasonType ReasonType
-        {
-            get => _reasonType; set
-            {
-                if (_reasonType == value) return;
-                _reasonType = value;
-                //when reason type changes assign appropriate comments
-                AssignComments(_reasonType);
             }
         }
     }
