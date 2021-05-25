@@ -128,6 +128,7 @@
     <Compile Include="DataAccess\PatientDataAccess.cs" />
     <Compile Include="DataAccess\ReferenceRangeDataAccess.cs" />
     <Compile Include="DataAccess\ReportsDataAccess.cs" />
+    <Compile Include="DataAccess\ResultCommentModel.cs" />
     <Compile Include="DataAccess\ResultDataAccess.cs" />
     <Compile Include="DataAccess\ResultDataTypeDataAccess.cs" />
     <Compile Include="DataAccess\SampleDataAccess.cs" />
@@ -159,6 +160,7 @@
     <Compile Include="Models\ClinicalDetailsSelectionModel.cs" />
     <Compile Include="Models\CodifiedResultsModel.cs" />
     <Compile Include="Models\CommentsSelectionModel.cs" />
+    <Compile Include="Models\CommentType.cs" />
     <Compile Include="Models\CompleteRequestSearchResultsModel.cs" />
     <Compile Include="Models\DisciplineModel.cs" />
     <Compile Include="Models\GenericModelAndListModel.cs" />
