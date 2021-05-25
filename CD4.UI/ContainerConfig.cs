@@ -60,6 +60,7 @@ namespace CD4.UI
                 config.CreateMap<DataLibrary.Models.UnitModel, Library.Model.UnitModel>().ReverseMap();
                 config.CreateMap<DataLibrary.Models.TestsInsertModel, Library.Model.TestsInsertModel>().ReverseMap();
                 config.CreateMap<DataLibrary.Models.TestUpdateModel, Library.Model.TestUpdateModel>().ReverseMap();
+                config.CreateMap<DataLibrary.Models.ResultCommentModel, Library.Model.ResultCommentModel>().ReverseMap();
                 config.CreateMap<ResultModel, TestModel>()
                     .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                     .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Test))

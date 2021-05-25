@@ -5,10 +5,7 @@ using CD4.UI.Library.Model;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CD4.UI.Library.ViewModel
 {
@@ -19,25 +16,91 @@ namespace CD4.UI.Library.ViewModel
         private bool _isOkEnabled;
         private int _reasonsCountDisplayed;
         private bool _isReasonsListEnabled;
+        private IEnumerable<object> mappedResultComments;
+        private bool isExistingSampleAndTestCommentsVisible;
+
+        private int _selectedResultId { get; set; }
         private readonly ICommentsDataAccess _commentsDataAccess;
         private readonly IMapper _mapper;
 
         public event EventHandler<int> FetchReasons;
+        public event EventHandler<CommentType> LoadExistingTestOrSamlpleOrPatientComments;
         public GenericCommentViewModel(ICommentsDataAccess commentsDataAccess, IMapper mapper)
         {
             _commentsDataAccess = commentsDataAccess;
             _mapper = mapper;
             Reasons = new BindingList<Model.CommentsSelectionModel>();
+            ExistingResultComments = new BindingList<ResultCommentModel>();
             IsLoading = true;
             IsOkEnabled = false;
             FetchReasons += OnFetchReasons;
-
+            LoadExistingTestOrSamlpleOrPatientComments += GenericCommentViewModel_LoadExistingTestOrSamlpleOrPatientComments;
         }
 
-        public void InitializeFetchReasons(ICommentHelper commentHelper)
+        private async void
+            GenericCommentViewModel_LoadExistingTestOrSamlpleOrPatientComments
+            (object sender, CommentType e)
         {
+            //load result comment for the test/result
+            if (e == CommentType.Result)
+            {
+                try
+                {
+                    var resultComments = await _commentsDataAccess.GetExistingResultComments(_selectedResultId);
+                    var mappedResultComments = _mapper.Map<List<ResultCommentModel>>(resultComments);
+
+                    DisplayExistingComments(mappedResultComments);
+                }
+                catch (Exception)
+                {
+
+                    throw;
+                }
+            }
+        }
+
+        private void DisplayExistingComments(List<ResultCommentModel> mappedResultComments)
+        {
+            ExistingResultComments.Clear();
+            if (mappedResultComments is null) { return; }
+            foreach (var item in mappedResultComments)
+            {
+                ExistingResultComments.Add(item);
+            }
+        }
+
+        public void InitializeFetchReasonsAndComments(ICommentHelper commentHelper, int selectedResultId = -1)
+        {
+            _selectedResultId = selectedResultId;
             GenerateViewTitle(commentHelper);
+            ShowSampleAndTestExistingComments(commentHelper);
             FetchReasons?.Invoke(this, (int)commentHelper.SelectedCommentType);
+        }
+
+        private void ShowSampleAndTestExistingComments(ICommentHelper commentHelper)
+        {
+            IsExistingSampleAndTestCommentsVisible = false;
+            switch (commentHelper.SelectedCommentType)
+            {
+                case CommentType.Patient:
+                    LoadExistingTestOrSamlpleOrPatientComments?.Invoke(this, CommentType.Patient);
+                    break;
+                case CommentType.Sample:
+                    LoadExistingTestOrSamlpleOrPatientComments?.Invoke(this, CommentType.Sample);
+                    break;
+                case CommentType.Result:
+                    IsExistingSampleAndTestCommentsVisible = true;
+                    LoadExistingTestOrSamlpleOrPatientComments?.Invoke(this, CommentType.Result);
+                    break;
+                case CommentType.SampleRejection:
+                    LoadExistingTestOrSamlpleOrPatientComments?.Invoke(this, CommentType.SampleRejection);
+                    break;
+                case CommentType.TestRejection:
+                    LoadExistingTestOrSamlpleOrPatientComments?.Invoke(this, CommentType.TestRejection);
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void GenerateViewTitle(ICommentHelper commentHelper)
@@ -47,18 +110,23 @@ namespace CD4.UI.Library.ViewModel
             {
                 case CommentType.Patient:
                     ViewTitle = "Select Patient Comment";
+                    UserInstruction = "Please select the patient comment";
                     break;
                 case CommentType.Sample:
                     ViewTitle = "Select Sample Comment";
+                    UserInstruction = "Please select the sample comment";
                     break;
                 case CommentType.Result:
                     ViewTitle = "Select Test / Result Comment";
+                    UserInstruction = "Please select the test / result comment";
                     break;
                 case CommentType.SampleRejection:
                     ViewTitle = "Select Sample Rejection Reason";
+                    UserInstruction = "Please select a reason for sample rejection";
                     break;
                 case CommentType.TestRejection:
                     ViewTitle = "Select Test Rejection Reason";
+                    UserInstruction = "Please select a reason for test rejection";
                     break;
                 default:
                     ViewTitle = "Select Reason";
@@ -93,6 +161,15 @@ namespace CD4.UI.Library.ViewModel
         #endregion
 
         public BindingList<Model.CommentsSelectionModel> Reasons { get; set; }
+        public BindingList<ResultCommentModel> ExistingResultComments { get; set; }
+        public bool IsExistingSampleAndTestCommentsVisible
+        {
+            get => isExistingSampleAndTestCommentsVisible; set
+            {
+                isExistingSampleAndTestCommentsVisible = value;
+                OnPropertyChanged();
+            }
+        }
 
         public Model.CommentsSelectionModel SelectedReason
         {
@@ -115,7 +192,7 @@ namespace CD4.UI.Library.ViewModel
         }
 
         public string ViewTitle { get; set; }
-
+        public string UserInstruction { get; set; }
         public bool IsLoading
         {
             get => _isLoading; set

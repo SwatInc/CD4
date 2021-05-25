@@ -13,9 +13,12 @@ namespace CD4.UI.Library.ViewModel
         int ReasonsCountDisplayed { get; set; }
         bool IsReasonsListEnabled { get; set; }
         string ViewTitle { get; set; }
+        string UserInstruction { get; set; }
+        bool IsExistingSampleAndTestCommentsVisible { get; set; }
+        BindingList<ResultCommentModel> ExistingResultComments { get; set; }
 
         event PropertyChangedEventHandler PropertyChanged;
 
-        void InitializeFetchReasons(ICommentHelper commentHelper);
+        void InitializeFetchReasonsAndComments(ICommentHelper commentHelper, int selectedResultId);
     }
 }

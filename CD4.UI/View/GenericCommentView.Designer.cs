@@ -28,63 +28,57 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listBoxControlRejectionReasons = new DevExpress.XtraEditors.ListBoxControl();
-            this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
-            this.simpleButtonOk = new DevExpress.XtraEditors.SimpleButton();
-            this.simpleButtonCancel = new DevExpress.XtraEditors.SimpleButton();
+            this.xtraTabControlComments = new DevExpress.XtraTab.XtraTabControl();
+            this.xtraTabPageSelectReason = new DevExpress.XtraTab.XtraTabPage();
+            this.xtraTabPageComments = new DevExpress.XtraTab.XtraTabPage();
             this.progressPanelLoadingReasons = new DevExpress.XtraWaitForm.ProgressPanel();
-            ((System.ComponentModel.ISupportInitialize)(this.listBoxControlRejectionReasons)).BeginInit();
+            this.simpleButtonCancel = new DevExpress.XtraEditors.SimpleButton();
+            this.simpleButtonOk = new DevExpress.XtraEditors.SimpleButton();
+            this.labelControlUserInstruction = new DevExpress.XtraEditors.LabelControl();
+            this.searchControl1 = new DevExpress.XtraEditors.SearchControl();
+            this.listBoxControlRejectionReasons = new DevExpress.XtraEditors.ListBoxControl();
+            this.gridControlExistingComments = new DevExpress.XtraGrid.GridControl();
+            this.gridViewExistingComments = new DevExpress.XtraGrid.Views.Grid.GridView();
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControlComments)).BeginInit();
+            this.xtraTabControlComments.SuspendLayout();
+            this.xtraTabPageSelectReason.SuspendLayout();
+            this.xtraTabPageComments.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listBoxControlRejectionReasons)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlExistingComments)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewExistingComments)).BeginInit();
             this.SuspendLayout();
             // 
-            // listBoxControlRejectionReasons
+            // xtraTabControlComments
             // 
-            this.listBoxControlRejectionReasons.Location = new System.Drawing.Point(12, 65);
-            this.listBoxControlRejectionReasons.Name = "listBoxControlRejectionReasons";
-            this.listBoxControlRejectionReasons.Size = new System.Drawing.Size(467, 138);
-            this.listBoxControlRejectionReasons.TabIndex = 0;
+            this.xtraTabControlComments.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.xtraTabControlComments.Location = new System.Drawing.Point(0, 0);
+            this.xtraTabControlComments.Name = "xtraTabControlComments";
+            this.xtraTabControlComments.SelectedTabPage = this.xtraTabPageSelectReason;
+            this.xtraTabControlComments.Size = new System.Drawing.Size(527, 248);
+            this.xtraTabControlComments.TabIndex = 6;
+            this.xtraTabControlComments.TabPages.AddRange(new DevExpress.XtraTab.XtraTabPage[] {
+            this.xtraTabPageSelectReason,
+            this.xtraTabPageComments});
             // 
-            // searchControl1
+            // xtraTabPageSelectReason
             // 
-            this.searchControl1.Client = this.listBoxControlRejectionReasons;
-            this.searchControl1.Location = new System.Drawing.Point(12, 38);
-            this.searchControl1.Name = "searchControl1";
-            this.searchControl1.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
-            this.searchControl1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Repository.ClearButton(),
-            new DevExpress.XtraEditors.Repository.SearchButton()});
-            this.searchControl1.Properties.Client = this.listBoxControlRejectionReasons;
-            this.searchControl1.Properties.NullValuePrompt = "Search for comments ...";
-            this.searchControl1.Size = new System.Drawing.Size(253, 20);
-            this.searchControl1.TabIndex = 1;
+            this.xtraTabPageSelectReason.Controls.Add(this.progressPanelLoadingReasons);
+            this.xtraTabPageSelectReason.Controls.Add(this.simpleButtonCancel);
+            this.xtraTabPageSelectReason.Controls.Add(this.simpleButtonOk);
+            this.xtraTabPageSelectReason.Controls.Add(this.labelControlUserInstruction);
+            this.xtraTabPageSelectReason.Controls.Add(this.searchControl1);
+            this.xtraTabPageSelectReason.Controls.Add(this.listBoxControlRejectionReasons);
+            this.xtraTabPageSelectReason.Name = "xtraTabPageSelectReason";
+            this.xtraTabPageSelectReason.Size = new System.Drawing.Size(521, 220);
+            this.xtraTabPageSelectReason.Text = "Select Reason";
             // 
-            // labelControl1
+            // xtraTabPageComments
             // 
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(12, 12);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(253, 20);
-            this.labelControl1.TabIndex = 2;
-            this.labelControl1.Text = "Please select the reason for rejection.";
-            // 
-            // simpleButtonOk
-            // 
-            this.simpleButtonOk.Location = new System.Drawing.Point(323, 36);
-            this.simpleButtonOk.Name = "simpleButtonOk";
-            this.simpleButtonOk.Size = new System.Drawing.Size(75, 23);
-            this.simpleButtonOk.TabIndex = 3;
-            this.simpleButtonOk.Text = "Ok";
-            // 
-            // simpleButtonCancel
-            // 
-            this.simpleButtonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
-            this.simpleButtonCancel.Location = new System.Drawing.Point(404, 36);
-            this.simpleButtonCancel.Name = "simpleButtonCancel";
-            this.simpleButtonCancel.Size = new System.Drawing.Size(75, 23);
-            this.simpleButtonCancel.TabIndex = 4;
-            this.simpleButtonCancel.Text = "Cancel";
+            this.xtraTabPageComments.Controls.Add(this.gridControlExistingComments);
+            this.xtraTabPageComments.Name = "xtraTabPageComments";
+            this.xtraTabPageComments.Size = new System.Drawing.Size(521, 220);
+            this.xtraTabPageComments.Text = "Comments";
             // 
             // progressPanelLoadingReasons
             // 
@@ -100,44 +94,112 @@
             this.progressPanelLoadingReasons.Caption = "Please Wait";
             this.progressPanelLoadingReasons.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
             this.progressPanelLoadingReasons.Description = "Loading rejection reasons ...";
-            this.progressPanelLoadingReasons.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.progressPanelLoadingReasons.Location = new System.Drawing.Point(0, 0);
+            this.progressPanelLoadingReasons.Location = new System.Drawing.Point(136, 103);
             this.progressPanelLoadingReasons.Name = "progressPanelLoadingReasons";
-            this.progressPanelLoadingReasons.Size = new System.Drawing.Size(493, 216);
-            this.progressPanelLoadingReasons.TabIndex = 5;
+            this.progressPanelLoadingReasons.Size = new System.Drawing.Size(224, 75);
+            this.progressPanelLoadingReasons.TabIndex = 11;
             // 
-            // RejectionCommentView
+            // simpleButtonCancel
             // 
-            this.AcceptButton = this.simpleButtonOk;
+            this.simpleButtonCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.simpleButtonCancel.Location = new System.Drawing.Point(439, 26);
+            this.simpleButtonCancel.Name = "simpleButtonCancel";
+            this.simpleButtonCancel.Size = new System.Drawing.Size(75, 23);
+            this.simpleButtonCancel.TabIndex = 10;
+            this.simpleButtonCancel.Text = "Cancel";
+            // 
+            // simpleButtonOk
+            // 
+            this.simpleButtonOk.Location = new System.Drawing.Point(358, 26);
+            this.simpleButtonOk.Name = "simpleButtonOk";
+            this.simpleButtonOk.Size = new System.Drawing.Size(75, 23);
+            this.simpleButtonOk.TabIndex = 9;
+            this.simpleButtonOk.Text = "Ok";
+            // 
+            // labelControlUserInstruction
+            // 
+            this.labelControlUserInstruction.Appearance.Font = new System.Drawing.Font("Segoe UI Semibold", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelControlUserInstruction.Appearance.Options.UseFont = true;
+            this.labelControlUserInstruction.Location = new System.Drawing.Point(6, 3);
+            this.labelControlUserInstruction.Name = "labelControlUserInstruction";
+            this.labelControlUserInstruction.Size = new System.Drawing.Size(145, 20);
+            this.labelControlUserInstruction.TabIndex = 8;
+            this.labelControlUserInstruction.Text = "label User Instruction";
+            // 
+            // searchControl1
+            // 
+            this.searchControl1.Client = this.listBoxControlRejectionReasons;
+            this.searchControl1.Location = new System.Drawing.Point(6, 29);
+            this.searchControl1.Name = "searchControl1";
+            this.searchControl1.Properties.AllowNullInput = DevExpress.Utils.DefaultBoolean.True;
+            this.searchControl1.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Repository.ClearButton(),
+            new DevExpress.XtraEditors.Repository.SearchButton()});
+            this.searchControl1.Properties.Client = this.listBoxControlRejectionReasons;
+            this.searchControl1.Properties.NullValuePrompt = "Search for comments ...";
+            this.searchControl1.Size = new System.Drawing.Size(253, 20);
+            this.searchControl1.TabIndex = 7;
+            // 
+            // listBoxControlRejectionReasons
+            // 
+            this.listBoxControlRejectionReasons.Location = new System.Drawing.Point(0, 56);
+            this.listBoxControlRejectionReasons.Name = "listBoxControlRejectionReasons";
+            this.listBoxControlRejectionReasons.Size = new System.Drawing.Size(521, 164);
+            this.listBoxControlRejectionReasons.TabIndex = 6;
+            // 
+            // gridControlExistingComments
+            // 
+            this.gridControlExistingComments.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.gridControlExistingComments.Location = new System.Drawing.Point(0, 0);
+            this.gridControlExistingComments.MainView = this.gridViewExistingComments;
+            this.gridControlExistingComments.Name = "gridControlExistingComments";
+            this.gridControlExistingComments.Size = new System.Drawing.Size(521, 220);
+            this.gridControlExistingComments.TabIndex = 0;
+            this.gridControlExistingComments.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
+            this.gridViewExistingComments});
+            // 
+            // gridViewExistingComments
+            // 
+            this.gridViewExistingComments.GridControl = this.gridControlExistingComments;
+            this.gridViewExistingComments.Name = "gridViewExistingComments";
+            this.gridViewExistingComments.OptionsView.ShowGroupPanel = false;
+            // 
+            // GenericCommentView
+            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.CancelButton = this.simpleButtonCancel;
-            this.ClientSize = new System.Drawing.Size(493, 216);
+            this.ClientSize = new System.Drawing.Size(527, 248);
             this.ControlBox = false;
-            this.Controls.Add(this.progressPanelLoadingReasons);
-            this.Controls.Add(this.simpleButtonCancel);
-            this.Controls.Add(this.simpleButtonOk);
-            this.Controls.Add(this.labelControl1);
-            this.Controls.Add(this.searchControl1);
-            this.Controls.Add(this.listBoxControlRejectionReasons);
+            this.Controls.Add(this.xtraTabControlComments);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.Name = "RejectionCommentView";
+            this.Name = "GenericCommentView";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Cause for rejection";
-            ((System.ComponentModel.ISupportInitialize)(this.listBoxControlRejectionReasons)).EndInit();
+            this.Text = "View Title";
+            ((System.ComponentModel.ISupportInitialize)(this.xtraTabControlComments)).EndInit();
+            this.xtraTabControlComments.ResumeLayout(false);
+            this.xtraTabPageSelectReason.ResumeLayout(false);
+            this.xtraTabPageSelectReason.PerformLayout();
+            this.xtraTabPageComments.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.searchControl1.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.listBoxControlRejectionReasons)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridControlExistingComments)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.gridViewExistingComments)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private DevExpress.XtraEditors.ListBoxControl listBoxControlRejectionReasons;
-        private DevExpress.XtraEditors.SearchControl searchControl1;
-        private DevExpress.XtraEditors.LabelControl labelControl1;
-        private DevExpress.XtraEditors.SimpleButton simpleButtonOk;
-        private DevExpress.XtraEditors.SimpleButton simpleButtonCancel;
+        private DevExpress.XtraTab.XtraTabControl xtraTabControlComments;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPageSelectReason;
         private DevExpress.XtraWaitForm.ProgressPanel progressPanelLoadingReasons;
+        private DevExpress.XtraEditors.SimpleButton simpleButtonCancel;
+        private DevExpress.XtraEditors.SimpleButton simpleButtonOk;
+        private DevExpress.XtraEditors.LabelControl labelControlUserInstruction;
+        private DevExpress.XtraEditors.SearchControl searchControl1;
+        private DevExpress.XtraEditors.ListBoxControl listBoxControlRejectionReasons;
+        private DevExpress.XtraTab.XtraTabPage xtraTabPageComments;
+        private DevExpress.XtraGrid.GridControl gridControlExistingComments;
+        private DevExpress.XtraGrid.Views.Grid.GridView gridViewExistingComments;
     }
 }

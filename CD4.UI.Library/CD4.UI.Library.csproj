@@ -150,6 +150,7 @@
     <Compile Include="Model\GlobalSettingsModel.cs" />
     <Compile Include="Model\NdaTrackingModel.cs" />
     <Compile Include="Model\PatientUpdateModel.cs" />
+    <Compile Include="Model\ResultCommentModel.cs" />
     <Compile Include="Model\SampleNotesModel.cs" />
     <Compile Include="Model\PatientModel.cs" />
     <Compile Include="Model\ResultAlertModel.cs" />

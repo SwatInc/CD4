@@ -21,7 +21,7 @@ namespace CD4.UI.View
         private readonly ICommentHelper _commentTypeHelper;
 
         [Browsable(false)] public new int? DialogResult { get; set; }
-        public GenericCommentView(IGenericCommentViewModel viewModel, ICommentHelper commentTypeHelper )
+        public GenericCommentView(IGenericCommentViewModel viewModel, ICommentHelper commentTypeHelper, int resultId = -1 )
         {
             InitializeComponent();
             _viewModel = viewModel;
@@ -30,7 +30,14 @@ namespace CD4.UI.View
 
             simpleButtonOk.Click += SimpleButtonOk_Click;
             listBoxControlRejectionReasons.Paint += VerifyDisplayedItemsCount;
-            _viewModel.InitializeFetchReasons(_commentTypeHelper);
+            _viewModel.InitializeFetchReasonsAndComments(_commentTypeHelper, resultId);
+
+            ManageCommentsPageVisibility();
+        }
+
+        private void ManageCommentsPageVisibility()
+        {
+            xtraTabPageComments.PageVisible = _viewModel.IsExistingSampleAndTestCommentsVisible;
         }
 
         private void VerifyDisplayedItemsCount(object sender, EventArgs e)
@@ -42,6 +49,10 @@ namespace CD4.UI.View
         private void SimpleButtonOk_Click(object sender, EventArgs e)
         {
             DialogResult = _viewModel.SelectedReason.Id;
+            _viewModel.Reasons.Clear();
+            _viewModel.ExistingResultComments.Clear(); ;
+            listBoxControlRejectionReasons.DataSource = null;
+            gridControlExistingComments.DataSource = null;
             Close();
         }
 
@@ -61,6 +72,13 @@ namespace CD4.UI.View
 
             //bind view title
             DataBindings.Add(new Binding("Text", _viewModel, nameof(_viewModel.ViewTitle)));
+
+            //user instruction
+            labelControlUserInstruction.DataBindings.Add(new Binding("Text", _viewModel, nameof(_viewModel.UserInstruction)));
+
+            //existing comments
+            gridControlExistingComments.DataSource = _viewModel.ExistingResultComments;
+
         }
     }
 }

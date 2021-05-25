@@ -564,7 +564,8 @@ namespace CD4.UI.View
                 case Keys.K:
                     if (e.Modifiers == Keys.Control)
                     {
-                        await AddTestCommentAsync(this, EventArgs.Empty);
+                        var testSender = new DXMenuItem() { Tag = new RowInfo(gridViewTests, gridViewTests.FocusedRowHandle) };
+                        AddTestCommentClickAsync(testSender, EventArgs.Empty);
                     }
                     break;
                 default:
@@ -829,6 +830,7 @@ namespace CD4.UI.View
             menuItems.Add(new DXMenuItem("Cancel Test Rejection [ Shift+F11 ]", new EventHandler(OnTestRejectionCancellationClickAsync)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Show test history [  ]", new EventHandler(OnShowTestHistoryClickAsync)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Show reruns [ F6 ]", new EventHandler(OnShowRerunsClick)) { Tag = new RowInfo(view, rowHandle) });
+            menuItems.Add(new DXMenuItem("Result Comment [ Ctrl + K ]", new EventHandler(AddTestCommentClickAsync)) { Tag = new RowInfo(view, rowHandle) });
             return menuItems;
         }
 
@@ -976,16 +978,27 @@ namespace CD4.UI.View
 
         }
 
-        public async Task AddTestCommentAsync(object sender, EventArgs e)
+        public async void AddTestCommentClickAsync(object sender, EventArgs e)
         {
+            //check if the user is authorised
+            if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.UpsertResultComment")) return;
+
+            var testData = GetTestForMenu(sender, e);
             _commentHelper.SelectedCommentType = CommentType.Result;
-            var dialog = new GenericCommentView(_rejectionCommentViewModel, _commentHelper);
+            var dialog = new GenericCommentView(_rejectionCommentViewModel, _commentHelper, testData.Id);
             dialog.ShowDialog();
             if (dialog.DialogResult != null)
             {
                 if (dialog.DialogResult > 0)
                 {
-                    //add test comment
+                    try
+                    {
+                        await _viewModel.InsertOrUpdateResultComment((int)dialog.DialogResult, testData.Id);
+                    }
+                    catch (Exception)
+                    {
+                        XtraMessageBox.Show("An error occured while inserting the selected comment.");
+                    }
                 }
             }
             dialog.Close();
