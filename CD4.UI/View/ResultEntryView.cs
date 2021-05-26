@@ -1,5 +1,6 @@
 ﻿using CD4.Entensibility.ReportingFramework;
 using CD4.UI.Helpers;
+using CD4.UI.Library.Helpers;
 using CD4.UI.Library.Model;
 using CD4.UI.Library.ViewModel;
 using CD4.UI.UiSpecificModels;
@@ -21,9 +22,10 @@ namespace CD4.UI.View
     public partial class ResultEntryView : XtraForm, IDisposable
     {
         private IResultEntryViewModel _viewModel;
-        private readonly IRejectionCommentViewModel _rejectionCommentViewModel;
+        private readonly IGenericCommentViewModel _rejectionCommentViewModel;
         private readonly IUserAuthEvaluator _authEvaluator;
         private readonly IBarcodeHelper _barcodeHelper;
+        private readonly ICommentHelper _commentHelper;
         private readonly ILateOrderEntryViewModel _lateOrderEntryViewModel;
         private readonly ILabNotesViewModel _labNotesViewModel;
         private readonly ILoadMultipleExtensions _reportExtensions;
@@ -33,11 +35,13 @@ namespace CD4.UI.View
         public event EventHandler PrintBarcodeClick;
 
         public ResultEntryView(IResultEntryViewModel viewModel,
-            IRejectionCommentViewModel rejectionCommentViewModel,
+            IGenericCommentViewModel rejectionCommentViewModel,
             IUserAuthEvaluator authEvaluator,
             IBarcodeHelper barcodeHelper,
+            ICommentHelper commentHelper,
             ILateOrderEntryViewModel lateOrderEntryViewModel,
-            ILabNotesViewModel labNotesViewModel, ILoadMultipleExtensions reportExtensions)
+            ILabNotesViewModel labNotesViewModel,
+            ILoadMultipleExtensions reportExtensions)
         {
             InitializeComponent();
             //Initialize grid columns
@@ -50,6 +54,7 @@ namespace CD4.UI.View
             _rejectionCommentViewModel = rejectionCommentViewModel;
             _authEvaluator = authEvaluator;
             _barcodeHelper = barcodeHelper;
+            _commentHelper = commentHelper;
             _lateOrderEntryViewModel = lateOrderEntryViewModel;
             _labNotesViewModel = labNotesViewModel;
             _reportExtensions = reportExtensions;
@@ -556,6 +561,13 @@ namespace CD4.UI.View
                         LoadWorkSheet(simpleButtonLoadWorksheet, EventArgs.Empty);
                     }
                     break;
+                case Keys.K:
+                    if (e.Modifiers == Keys.Control)
+                    {
+                        var testSender = new DXMenuItem() { Tag = new RowInfo(gridViewTests, gridViewTests.FocusedRowHandle) };
+                        AddTestCommentClickAsync(testSender, EventArgs.Empty);
+                    }
+                    break;
                 default:
                     break;
             }
@@ -818,6 +830,7 @@ namespace CD4.UI.View
             menuItems.Add(new DXMenuItem("Cancel Test Rejection [ Shift+F11 ]", new EventHandler(OnTestRejectionCancellationClickAsync)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Show test history [  ]", new EventHandler(OnShowTestHistoryClickAsync)) { Tag = new RowInfo(view, rowHandle) });
             menuItems.Add(new DXMenuItem("Show reruns [ F6 ]", new EventHandler(OnShowRerunsClick)) { Tag = new RowInfo(view, rowHandle) });
+            menuItems.Add(new DXMenuItem("Result Comment [ Ctrl + K ]", new EventHandler(AddTestCommentClickAsync)) { Tag = new RowInfo(view, rowHandle) });
             return menuItems;
         }
 
@@ -946,8 +959,8 @@ namespace CD4.UI.View
             }
             try
             {
-                _rejectionCommentViewModel.ReasonType = RejectionReasonType.Test; //assign test rejection reasons from list
-                var dialog = new RejectionCommentView(_rejectionCommentViewModel);
+                _commentHelper.SelectedCommentType = CommentType.TestRejection;
+                var dialog = new GenericCommentView(_rejectionCommentViewModel, _commentHelper);
                 dialog.ShowDialog();
                 if (dialog.DialogResult != null)
                 {
@@ -962,6 +975,33 @@ namespace CD4.UI.View
             {
                 XtraMessageBox.Show(ex.Message);
             }
+
+        }
+
+        public async void AddTestCommentClickAsync(object sender, EventArgs e)
+        {
+            //check if the user is authorised
+            if (!_authEvaluator.IsFunctionAuthorized("ResultEntry.UpsertResultComment")) return;
+
+            var testData = GetTestForMenu(sender, e);
+            _commentHelper.SelectedCommentType = CommentType.Result;
+            var dialog = new GenericCommentView(_rejectionCommentViewModel, _commentHelper, testData.Id);
+            dialog.ShowDialog();
+            if (dialog.DialogResult != null)
+            {
+                if (dialog.DialogResult > 0)
+                {
+                    try
+                    {
+                        await _viewModel.InsertOrUpdateResultComment((int)dialog.DialogResult, testData.Id);
+                    }
+                    catch (Exception)
+                    {
+                        XtraMessageBox.Show("An error occured while inserting the selected comment.");
+                    }
+                }
+            }
+            dialog.Close();
 
         }
 
@@ -1012,8 +1052,8 @@ namespace CD4.UI.View
             }
             try
             {
-                _rejectionCommentViewModel.ReasonType = RejectionReasonType.Sample;
-                var dialog = new RejectionCommentView(_rejectionCommentViewModel);
+                _commentHelper.SelectedCommentType = CommentType.SampleRejection;
+                var dialog = new GenericCommentView(_rejectionCommentViewModel, _commentHelper);
                 dialog.ShowDialog();
                 if (dialog.DialogResult != null)
                 {

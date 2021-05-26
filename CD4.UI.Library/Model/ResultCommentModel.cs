@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace CD4.UI.Library.Model
 {
-    public enum RejectionReasonType
+    public class ResultCommentModel
     {
-        Sample = 4,
-        Test = 5
+        public int ResultId { get; set; }
+        public string Comment { get; set; }
     }
 }

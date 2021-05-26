@@ -31,6 +31,7 @@ namespace CD4.UI.Library.ViewModel
         private readonly ISampleDataAccess _sampleDataAccess;
         private readonly IStaticDataDataAccess _staticDataDataAccess;
         private readonly AuthorizeDetailEventArgs _authorizeDetail;
+        private readonly ICommentsDataAccess _commentsDataAccess;
         private readonly IAnalysisRequestDataAccess _requestDataAccess;
         #endregion
 
@@ -47,8 +48,15 @@ namespace CD4.UI.Library.ViewModel
 
         #region Default Constructor
         public ResultEntryViewModel
-            (IWorkSheetDataAccess workSheetDataAccess, IMapper mapper, IResultDataAccess resultDataAccess, IStatusDataAccess statusDataAccess,
-            ISampleDataAccess sampleDataAccess, IStaticDataDataAccess staticDataDataAccess, AuthorizeDetailEventArgs authorizeDetail, IAnalysisRequestDataAccess requestDataAccess)
+            (IWorkSheetDataAccess workSheetDataAccess,
+            IMapper mapper,
+            IResultDataAccess resultDataAccess,
+            IStatusDataAccess statusDataAccess,
+            ISampleDataAccess sampleDataAccess,
+            IStaticDataDataAccess staticDataDataAccess,
+            AuthorizeDetailEventArgs authorizeDetail,
+            ICommentsDataAccess commentsDataAccess,
+            IAnalysisRequestDataAccess requestDataAccess)
         {
             GridTestActiveDatasource = GridControlTestActiveDatasource.Tests;
             GridSampleActiveDatasource = GridControlSampleActiveDatasource.Sample;
@@ -75,6 +83,7 @@ namespace CD4.UI.Library.ViewModel
             _sampleDataAccess = sampleDataAccess;
             _staticDataDataAccess = staticDataDataAccess;
             _authorizeDetail = authorizeDetail;
+            _commentsDataAccess = commentsDataAccess;
             _requestDataAccess = requestDataAccess;
             SelectedResultData.ListChanged += UpdateDatabaseResults;
             LoadAllStatusDataAndCodifiedValues += GetAllStatusData;
@@ -246,6 +255,19 @@ namespace CD4.UI.Library.ViewModel
 
         }
 
+        public async Task InsertOrUpdateResultComment(int commentListId, int resultId)
+        {
+            try
+            {
+                await _commentsDataAccess.InsertUpdateResultComment
+                    (commentListId, resultId, _authorizeDetail.UserId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
 
         /// <summary>
         /// Sets notes count button without a database call. Uses the passed in string value as count of notes

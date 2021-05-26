@@ -57,5 +57,6 @@ namespace CD4.UI.Library.ViewModel
         Task MarkSampleCollectedAsync();
         Task UpdateUiAsync();
         void Dispose();
+        Task InsertOrUpdateResultComment(int commentListId, int resultId);
     }
 }

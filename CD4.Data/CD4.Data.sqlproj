@@ -305,6 +305,11 @@
     <Build Include="dbo\StoredProcedures\usp_GetAllResultDataTypes.sql" />
     <Build Include="dbo\StoredProcedures\usp_InsertTest.sql" />
     <Build Include="dbo\StoredProcedures\usp_UpdateTestById.sql" />
+    <Build Include="dbo\Views\ResultComments.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetResultCommentsByResultId.sql" />
+    <Build Include="dbo\StoredProcedures\usp_DecideUpsertResultComment.sql" />
+    <Build Include="dbo\StoredProcedures\usp_UpdateResultComment.sql" />
+    <Build Include="dbo\StoredProcedures\usp_InsertResultComment.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />

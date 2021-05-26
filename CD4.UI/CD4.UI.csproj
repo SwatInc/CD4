@@ -386,11 +386,11 @@
     <Compile Include="View\ProfilesView.Designer.cs">
       <DependentUpon>ProfilesView.cs</DependentUpon>
     </Compile>
-    <Compile Include="View\RejectionCommentView.cs">
+    <Compile Include="View\GenericCommentView.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="View\RejectionCommentView.Designer.cs">
-      <DependentUpon>RejectionCommentView.cs</DependentUpon>
+    <Compile Include="View\GenericCommentView.Designer.cs">
+      <DependentUpon>GenericCommentView.cs</DependentUpon>
     </Compile>
     <Compile Include="View\ReportView.cs">
       <SubType>Form</SubType>
@@ -497,8 +497,8 @@
     <EmbeddedResource Include="View\ProfilesView.resx">
       <DependentUpon>ProfilesView.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="View\RejectionCommentView.resx">
-      <DependentUpon>RejectionCommentView.cs</DependentUpon>
+    <EmbeddedResource Include="View\GenericCommentView.resx">
+      <DependentUpon>GenericCommentView.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="View\ReportView.resx">
       <DependentUpon>ReportView.cs</DependentUpon>
