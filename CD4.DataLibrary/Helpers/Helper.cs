@@ -21,15 +21,12 @@ namespace CD4.DataLibrary.Helpers
         {
             var reader = new Reader();
             var config = JsonConvert.DeserializeObject<Config>(reader.ReadConfigFile());
-            if (config.ConnectionName.Name == name)
-            {
-                return config.ConnectionName.ConnectionString;
-            }
-            else
-            {
-                throw new ArgumentException($"Cannot find connection string by the name: {name}");
-            }
+            if (config is null) { throw new Exception("Cannot read config file."); }
 
+            var configData = config.ConnectionName.Where((x) => x.Name == name).FirstOrDefault();
+            if (configData is null) { throw new Exception($"Cannot find the specified connection [{name}]"); }
+
+            return configData.ConnectionString;
         }
     }
 }
