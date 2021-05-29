@@ -10,6 +10,7 @@ namespace CD4.DataLibrary.DataAccess
         Task<List<BarcodeDataModel>> GetBarcodeDataAsync(string cin);
         Task<List<BarcodeDataModel>> GetBarcodeDataForMultipleSamplesAsync(List<string> sampleCins);
         Task<string> GetNextCinSeed();
+        Task<string> GetNextCinSeedWithoutPrefix();
         Task<CompleteRequestSearchResultsModel> SearchRequestByCinAsync(string cin);
     }
 }
