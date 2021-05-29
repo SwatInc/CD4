@@ -103,6 +103,9 @@
     <Compile Include="DataAccess\DataAccessBase.cs" />
     <Compile Include="DataAccess\DisciplineDataAccess.cs" />
     <Compile Include="DataAccess\GlobalSettingsDataAccess.cs" />
+    <Compile Include="DataAccess\HmsLinkDataAccess.cs" />
+    <Compile Include="DataAccess\IHmsLinkDataAccess.cs" />
+    <Compile Include="Models\HmsLinkDataModel.cs" />
     <Compile Include="DataAccess\IAnalysisRequestDataAccess.cs" />
     <Compile Include="DataAccess\IAssayDataAccess.cs" />
     <Compile Include="DataAccess\IAuthenticationDataAccess.cs" />
