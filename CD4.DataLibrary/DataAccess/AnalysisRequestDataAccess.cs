@@ -611,14 +611,34 @@ namespace CD4.DataLibrary.DataAccess
 
         }
 
-        private string FormatCinSeed(int nextCinSeed)
+        public async Task<string> GetNextCinSeedWithoutPrefix()
+        {
+            var storedProcedure = "[dbo].[usp_GetNextSampleNumber]";
+            try
+            {
+                var data = await LoadDataAsync<int>(storedProcedure);
+                return FormatCinSeed(data.FirstOrDefault(), false);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+
+        private string FormatCinSeed(int nextCinSeed, bool prefixed = true)
         {
             var totalLength = 7;
             var padCharacter = '0';
             var prefix = "ML";
 
             var paddedNextSeed = nextCinSeed.ToString().PadLeft(totalLength, padCharacter);
-            return $"{prefix}{paddedNextSeed}";
+            if (prefixed) { return $"{prefix}{paddedNextSeed}"; }
+            return $"{paddedNextSeed}";
         }
+
+
     }
 }
