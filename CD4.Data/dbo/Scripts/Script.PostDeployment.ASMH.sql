@@ -245,218 +245,464 @@ INSERT INTO [dbo].[Gender] ([Gender])
   ('UNKNOWN'),
   ('NOT AVAILABLE');
 
+SET IDENTITY_INSERT [dbo].[Atoll] ON;
 -- INSERT ATOLLS
-INSERT INTO [dbo].[Atoll] ([Atoll], [Island])
-  VALUES ('AA', 'BODUFOLHUDHOO')
-  , ('AA', 'FERIDHOO')
-  , ('AA', 'HIMANDHOO')
-  , ('AA', 'MAALHOS')
-  , ('AA', 'MATHIVERI')
-  , ('AA', 'RASDHOO')
-  , ('AA', 'THODDOO')
-  , ('AA', 'UKULHAS')
-  , ('AA', 'FESDHOO')
-  , ('ADH', 'DHANGETHI')
-  , ('ADH', 'DHIDDHOO')
-  , ('ADH', 'DHIGURAH')
-  , ('ADH', 'FENFUSHI')
-  , ('ADH', 'HAGGNAAMEEDHOO')
-  , ('ADH', 'KUNBURUDHOO')
-  , ('ADH', 'MAAMIGILI')
-  , ('ADH', 'MAHIBADHOO')
-  , ('ADH', 'MANDHOO')
-  , ('ADH', 'OMADHOO')
-  , ('B', 'DHARAVANDHOO')
-  , ('B', 'DHONFANU')
-  , ('B', 'EYDHAFUSHI')
-  , ('B', 'FEHENDHOO')
-  , ('B', 'FULHADHOO')
-  , ('B', 'GOIDHOO')
-  , ('B', 'HITHAADHOO')
-  , ('B', 'KIHAADHOO')
-  , ('B', 'KAMADHOO')
-  , ('B', 'KENDHOO')
-  , ('B', 'KIHAADHOO')
-  , ('B', 'KUDARIKILU')
-  , ('B', 'MAALHOS')
-  , ('B', 'THULHAADHOO')
-  , ('DH', 'BANDIDHOO')
-  , ('DH', 'GEMENDHOO')
-  , ('DH', 'HULHUDHELI')
-  , ('DH', 'KUDAHUVADHOO')
-  , ('DH', 'MAAENBOODHOO')
-  , ('DH', 'MEEDHOO')
-  , ('DH', 'RINBUDHOO')
-  , ('DH', 'VAANEE')
-  , ('F', 'BILEDDHOO')
-  , ('F', 'DHARANBOODHOO')
-  , ('F', 'FEEALI')
-  , ('F', 'FILITHEYO')
-  , ('F', 'MAGOODHOO')
-  , ('F', 'NILANDHOO')
-  , ('GA', 'DHAANDHOO')
-  , ('GA', 'DHEWADHOO')
-  , ('GA', 'DHIYADHOO')
-  , ('GA', 'GEMANAFUSHI')
-  , ('GA', 'KANDUHULHUDHOOO')
-  , ('GA', 'KOLAMAAFUSHI')
-  , ('GA', 'KONDEY')
-  , ('GA', 'MAAMENDHOO')
-  , ('GA', 'NILANDHOO')
-  , ('GA', 'VILINGILI')
-  , ('GDH', 'FARES MAATHODAA')
-  , ('GDH', 'FIYOAREE')
-  , ('GDH', 'GADDHOO')
-  , ('GDH', 'HOANDEDDHOO')
-  , ('GDH', 'MAATHODAA')
-  , ('GDH', 'MADAVELI')
-  , ('GDH', 'NADELLA')
-  , ('GDH', 'RATHAFANDHOO')
-  , ('GDH', 'THINADHOO')
-  , ('GDH', 'VAADHOO')
-  , ('GN', 'FUVAHMULAH')
-  , ('HA', 'BAARAH')
-  , ('HA', 'BERINMADHOO')
-  , ('HA', 'DHIDDHOO')
-  , ('HA', 'FILLADHOO')
-  , ('HA', 'HATHIFUSHI')
-  , ('HA', 'HOARAFUSHI')
-  , ('HA', 'IHAVANDHOO')
-  , ('HA', 'KELAA')
-  , ('HA', 'MAARANDHOO')
-  , ('HA', 'MULHADHOO')
-  , ('HA', 'MURAIDHOO')
-  , ('HA', 'THAKANDHOO')
-  , ('HA', 'THURAAKUNU')
-  , ('HA', 'ULIGAMU')
-  , ('HA', 'UTHEEMU')
-  , ('HA', 'VASHAFARU')
-  , ('HDH', 'FARIDHOO')
-  , ('HDH', 'FINEY')
-  , ('HDH', 'HANIMAADHOO')
-  , ('HDH', 'HIRIMARADHOO')
-  , ('HDH', 'KULHUDHUFFUSHI')
-  , ('HDH', 'KUMUNDHOO')
-  , ('HDH', 'KUNBURUDHOO')
-  , ('HDH', 'KUNBURUDHOO')
-  , ('HDH', 'MAAVAIDHOO')
-  , ('HDH', 'MAKUNUDHOO')
-  , ('HDH', 'NAIVAADHOO')
-  , ('HDH', 'NELLAIDHOO')
-  , ('HDH', 'NEYKURENDHOO')
-  , ('HDH', 'NOLHIVARAM')
-  , ('HDH', 'NOLHIVARANFARU')
-  , ('HDH', 'VAIKARADHOO')
-  , ('HDH', 'KURINBI')
-  , ('K', 'DHIFFUSHI')
-  , ('K', 'GAAFARU')
-  , ('K', 'GULHI')
-  , ('K', 'GURAIDHOO')
-  , ('K', 'HULHUMALÉ')
-  , ('K', 'HIMMAFUSHI')
-  , ('K', 'HURAA')
-  , ('K', 'KAASHIDHOO')
-  , ('K', 'MALE')
-  , ('K', 'MAAFUSHI')
-  , ('K', 'THULUSDHOO')
-  , ('K', 'VILLIGINLI')
-  , ('L', 'DHANBIDHOO')
-  , ('L', 'FONADHOO')
-  , ('L', 'GAADHOO')
-  , ('L', 'GAN')
-  , ('L', 'HITHADHOO')
-  , ('L', 'ISDHOO')
-  , ('L', 'KALHAIDHOO')
-  , ('L', 'KUNAHANDHOO')
-  , ('L', 'MAABAIDHOO')
-  , ('L', 'MAAMENDHOO')
-  , ('L', 'MAAVAH')
-  , ('L', 'MUNDOO')
-  , ('L', 'KALAIDHOO')
-  , ('LH', 'HINNAVARU')
-  , ('LH', 'KURENDHOO')
-  , ('LH', 'MAAFILAAFUSHI')
-  , ('LH', 'NAIFARU')
-  , ('LH', 'OLHIVELIFUSHI')
-  , ('M', 'BOLI MULAH')
-  , ('M', 'DHIGGARU')
-  , ('M', 'KOLHUFUSHI')
-  , ('M', 'MADIFUSHI')
-  , ('M', 'MADUVVARI')
-  , ('M', 'MULAH')
-  , ('M', 'NAALAAFUSHI')
-  , ('M', 'RAIMMANDHOO')
-  , ('M', 'VEYVAH')
-  , ('M', 'MULI')
-  , ('N', 'FODHDHOO')
-  , ('N', 'HENBANDHOO')
-  , ('N', 'HOLHUDHOO')
-  , ('N', 'KENDHIKOLHUDHOO')
-  , ('N', 'KUDAFAREE')
-  , ('N', 'LANDHOO')
-  , ('N', 'LHOHI')
-  , ('N', 'MAAFARU')
-  , ('N', 'MAALHENDHOO')
-  , ('N', 'MAGOODHOO')
-  , ('N', 'MANADHOO')
-  , ('N', 'MILADHOO')
-  , ('N', 'VELIDHOO')
-  , ('R', 'ALIFUSHI')
-  , ('R', 'ANGOLHITHEEMU')
-  , ('R', 'FAINU')
-  , ('R', 'HULHUDHUFFAARU')
-  , ('R', 'INGURAIDHOO')
-  , ('R', 'INNAMAADHOO')
-  , ('R', 'DHUVAAFARU')
-  , ('R', 'KINOLHAS')
-  , ('R', 'MAAKURATHU')
-  , ('R', 'MADUVVARI')
-  , ('R', 'MEEDHOO')
-  , ('R', 'RASGETHEEMU')
-  , ('R', 'RASMAADHOO')
-  , ('R', 'UNGOOFAARU')
-  , ('R', 'VAADHOO')
-  , ('R', 'KANDHOLHUDHOO')
-  , ('S', 'FEYDHOO')
-  , ('S', 'HITHADHOO')
-  , ('S', 'HULHUDHOO')
-  , ('S', 'MARADHOO')
-  , ('S', 'MEEDHOO')
-  , ('S', 'MARADHOO-FEYDHOO')
-  , ('SH', 'BILEFFAHI')
-  , ('SH', 'FEEVAH')
-  , ('SH', 'FEYDHOO')
-  , ('SH', 'FIRUNBAIDHOO')
-  , ('SH', 'FOAKAIDHOO')
-  , ('SH', 'FUNADHOO')
-  , ('SH', 'GOIDHOO')
-  , ('SH', 'KANDITHEEMU')
-  , ('SH', 'KOMANDOO')
-  , ('SH', 'LHAIMAGU')
-  , ('SH', 'MAAKANDOODHOO')
-  , ('SH', 'MAAUNGOODHOO')
-  , ('SH', 'MAROSHI')
-  , ('SH', 'MILANDHOO')
-  , ('SH', 'NARUDHOO')
-  , ('SH', 'NOOMARAA')
-  , ('TH', 'BURUNEE')
-  , ('TH', 'DHIYAMINGILI')
-  , ('TH', 'GAADHIFFUSHI')
-  , ('TH', 'GURAIDHOO')
-  , ('TH', 'HIRILANDHOO')
-  , ('TH', 'KANDOODHOO')
-  , ('TH', 'KINBIDHOO')
-  , ('TH', 'MADIFUSHI')
-  , ('TH', 'OMADHOO')
-  , ('TH', 'THIMARAFUSHI')
-  , ('TH', 'VANDHOO')
-  , ('TH', 'VEYMANDOO')
-  , ('TH', 'VILUFUSHI')
-  , ('V', 'FELIDHOO')
-  , ('V', 'FULIDHOO')
-  , ('V', 'KEYODHOO')
-  , ('V', 'RAKEEDHOO')
-  , ('V', 'THINADHOO');
+INSERT INTO [dbo].[Atoll] ([Id],[Atoll], [Island])
+  VALUES 
+  (10011,'HA','Thuraakunu'),
+(10012,'HA','Uligamu'),
+(10013,'HA','Berinmadhoo'),
+(10014,'HA','Hathifushi'),
+(10015,'HA','Mulhadhoo'),
+(10016,'HA','Hoarafushi'),
+(10017,'HA','Ihavandhoo'),
+(10018,'HA','Kelaa'),
+(10019,'HA','Vashafaru'),
+(100110,'HA','Dhidhdhoo'),
+(100111,'HA','Filladhoo'),
+(100112,'HA','Maarandhoo'),
+(100113,'HA','Thakandhoo'),
+(100114,'HA','Utheemu'),
+(100115,'HA','Muraidhoo'),
+(100116,'HA','Baarah'),
+(100217,'HDH','Faridhoo'),
+(100218,'HDH','Hodaidhoo'),
+(100219,'HDH','Hanimaadhoo'),
+(100220,'HDH','Finey'),
+(100221,'HDH','Naivaadhoo'),
+(100222,'HDH','Hirimaradhoo'),
+(100223,'HDH','Nolhivaranfaru'),
+(100224,'HDH','Nellaidhoo'),
+(100225,'HDH','Nolhivaram'),
+(100226,'HDH','Kuribi'),
+(100227,'HDH','Kunburudhoo'),
+(100228,'HDH','Kulhudhuffushi'),
+(100229,'HDH','Kumundhoo'),
+(100230,'HDH','Neykurendhoo'),
+(100231,'HDH','Vaikaradhoo'),
+(100232,'HDH','Maavaidhoo'),
+(100233,'HDH','Makunudhoo'),
+(100334,'SH','Kanditheemu'),
+(100335,'SH','Noomaraa'),
+(100336,'SH','Goidhoo'),
+(100337,'SH','Feydhoo'),
+(100338,'SH','Feevah'),
+(100339,'SH','Billefahi'),
+(100340,'SH','Fokaidhoo'),
+(100341,'SH','Narudhoo'),
+(100342,'SH','Maakandoodhoo'),
+(100343,'SH','Maroshi'),
+(100344,'SH','Lhaimagu'),
+(100345,'SH','Firubaidhoo'),
+(100346,'SH','Komandoo'),
+(100347,'SH','Maaugoodhoo'),
+(100348,'SH','Funadhoo'),
+(100449,'N','Hembadhoo'),
+(100450,'N','Kendhikulhudhoo'),
+(100451,'N','Maalhendhoo'),
+(100452,'N','Kudafari'),
+(100453,'N','Landhoo'),
+(100454,'N','Maafaru'),
+(100455,'N','Lhohi'),
+(100456,'N','Miladhoo'),
+(100457,'N','Magoodhoo'),
+(100458,'N','Manadhoo'),
+(100459,'N','Holhudhoo'),
+(100460,'N','Fohdhoo'),
+(100461,'N','Velidhoo'),
+(100562,'R','Alifushi'),
+(100563,'R','Vaadhoo'),
+(100564,'R','Rasgatheem'),
+(100565,'R','Angolhitheem'),
+(100566,'R','Hulhudhufaaru'),
+(100567,'R','Ungoofaaru'),
+(100568,'R','Kandholhudhoo'),
+(100569,'R','Maakurath'),
+(100570,'R','Rasmaadhoo'),
+(100571,'R','Innamaadhoo'),
+(100572,'R','Maduvari'),
+(100573,'R','Inguraidhoo'),
+(100574,'R','Fainu'),
+(100575,'R','Kinolhas'),
+(100576,'R','Meedhoo'),
+(100677,'B','Kudarikilu'),
+(100678,'B','Kamadhoo'),
+(100679,'B','Kendhoo'),
+(100680,'B','Kihaadhoo'),
+(100681,'B','Dhonfanu'),
+(100682,'B','Dharavandhoo'),
+(100683,'B','Maalhos'),
+(100684,'B','Eydhafushi'),
+(100685,'B','Thulhaadhoo'),
+(100686,'B','Hithaadhoo'),
+(100687,'B','Fulhadhoo'),
+(100688,'B','Fehendhoo'),
+(100689,'B','Goidhoo'),
+(100790,'LH','Hinnavaru'),
+(100791,'LH','Naifaru'),
+(100792,'LH','Kurendhoo'),
+(100793,'LH','Olhuvelifushi'),
+(100894,'K','Kaashidhoo'),
+(100895,'K','Gaafaru'),
+(100896,'K','Dhiffushi'),
+(100897,'K','Thulusdhoo'),
+(100898,'K','Huraa'),
+(100899,'K','Himmafushi'),
+(1008100,'K','Gulhi'),
+(1008101,'K','Maafushi'),
+(1008102,'K','Guraidhoo'),
+(1009103,'Male','Male'),
+(1010104,'AU','Thoddoo'),
+(1010105,'AU','Rasdhoo'),
+(1010106,'AU','Ukulhas'),
+(1010107,'AU','Mathiveri'),
+(1010108,'AU','Bodufolhudhoo'),
+(1010109,'AU','Feridhoo'),
+(1010110,'AU','Maalhos'),
+(1010111,'AU','Himendhoo'),
+(1011112,'AD','Hangnaameedhoo'),
+(1011113,'AD','Omadhoo'),
+(1011114,'AD','Kunburudhoo'),
+(1011115,'AD','Mandhoo'),
+(1011116,'AD','Mahibadhoo'),
+(1011117,'AD','Dhangethi'),
+(1011118,'AD','Dhigurah'),
+(1011119,'AD','Dhidhdhoo'),
+(1011120,'AD','Fenfushi'),
+(1011121,'AD','Maamigili'),
+(1012122,'V','Fulidhoo'),
+(1012123,'V','Thinadhoo'),
+(1012124,'V','Felidhoo'),
+(1012125,'V','Keyodhoo'),
+(1012126,'V','Rakeedhoo'),
+(1013127,'M','Raiymandhoo'),
+(1013128,'M','Madifushi'),
+(1013129,'M','Veyvah'),
+(1013130,'M','Mulah'),
+(1013131,'M','Muli'),
+(1013132,'M','Naalaafushi'),
+(1013133,'M','Kolhufushi'),
+(1013134,'M','Dhiggaru'),
+(1013135,'M','Maduvvari'),
+(1014136,'F','Feeali'),
+(1014137,'F','Biledhdhoo'),
+(1014138,'F','Magoodhoo'),
+(1014139,'F','Dharanboodhoo'),
+(1014140,'F','Nilandhoo'),
+(1015141,'DH','Meedhoo'),
+(1015142,'DH','Bandidhoo'),
+(1015143,'DH','Rinbudhoo'),
+(1015144,'DH','Hulhudheli'),
+(1015145,'DH','Gemendhoo'),
+(1015146,'DH','Vaani'),
+(1015147,'DH','Maaenboodhoo'),
+(1015148,'DH','Kudahuvadhoo'),
+(1016149,'TH','Buruni'),
+(1016150,'TH','Vilifushi'),
+(1016151,'TH','Madifushi'),
+(1016152,'TH','Dhiyamigili'),
+(1016153,'TH','Guraidhoo'),
+(1016154,'TH','Kandoodhoo'),
+(1016155,'TH','Vandhoo'),
+(1016156,'TH','Hirilandhoo'),
+(1016157,'TH','Gaadhiffushi'),
+(1016158,'TH','Thimarafushi'),
+(1016159,'TH','Veymandoo'),
+(1016160,'TH','Kinbidhoo'),
+(1016161,'TH','Omadhoo'),
+(1017162,'L','Isdhoo'),
+(1017163,'L','Dhanbidhoo'),
+(1017164,'L','Maabaidhoo'),
+(1017165,'L','Mundoo'),
+(1017166,'L','Kalhaidhoo'),
+(1017167,'L','Gan'),
+(1017168,'L','Maavah'),
+(1017169,'L','Fonadhoo'),
+(1017170,'L','Gaadhoo'),
+(1017171,'L','Maamendhoo'),
+(1017172,'L','Hithadhoo'),
+(1017173,'L','Kunahandhoo'),
+(1018174,'GA','Kolamaafushi'),
+(1018175,'GA','Vilingili'),
+(1018176,'GA','Maamendhoo'),
+(1018177,'GA','Nilandhoo'),
+(1018178,'GA','Dhaandhoo'),
+(1018179,'GA','Dhevvadhoo'),
+(1018180,'GA','Kondey'),
+(1018181,'GA','Dhiyadhoo'),
+(1018182,'GA','Gemanafushi'),
+(1018183,'GA','Kanduhulhudhoo'),
+(1019184,'GDH','Madaveli'),
+(1019185,'GDH','Hoandehdhoo'),
+(1019186,'GDH','Nadalla'),
+(1019187,'GDH','Gadhdhoo'),
+(1019188,'GDH','Rathafandhoo'),
+(1019189,'GDH','Vaadhoo'),
+(1019190,'GDH','Fiyoari'),
+(1019191,'GDH','Maathodaa'),
+(1019192,'GDH','Fares'),
+(1019193,'GDH','Thinadhoo'),
+(1020194,'GN','Fuvahmulah'),
+(1021195,'S','Meedhoo'),
+(1021196,'S','Hithadhoo'),
+(1021197,'S','Maradhoo'),
+(1021198,'S','Feydhoo'),
+(1021199,'S','Maradhoo Feydhoo'),
+(1021200,'S','Hulhudhoo'),
+(1003213,'SH','Milandhoo'),
+(1017220,'L','Mathimaradhoo'),
+(1025299,'Resorts','Resorts'),
+(1023302,'FOREIGN','Foriegners'),
+(1023400,'FOREIGN','Abroad'),
+(1009901,'Male','Hulhumale'''),
+(1009902,'Male','Villingili'),
+(1009903,'Male','Maafannu'),
+(1009904,'Male','Machchangoalhi'),
+(1009905,'Male','Henveyru'),
+(1009906,'Male','Galolhu'),
+(1023999,'FOREIGN','Nothers'),
+(10071000,'LH','Maafilaafushi'),
+(10231001,'FOREIGN','Afghanistan'),
+(10231002,'FOREIGN','Albania'),
+(10231003,'FOREIGN','Algeria'),
+(10231004,'FOREIGN','American Samoa'),
+(10231005,'FOREIGN','Andorra'),
+(10231006,'FOREIGN','Angola'),
+(10231007,'FOREIGN','Anguilla'),
+(10231008,'FOREIGN','Antarctica'),
+(10231009,'FOREIGN','Antigua And Barbuda'),
+(10231010,'FOREIGN','Argentina'),
+(10231011,'FOREIGN','Armenia'),
+(10231012,'FOREIGN','Aruba'),
+(10231013,'FOREIGN','Australia'),
+(10231014,'FOREIGN','Austria'),
+(10231015,'FOREIGN','Azerbaijan'),
+(10231016,'FOREIGN','Bahamas, The'),
+(10231017,'FOREIGN','Bahrain'),
+(10231018,'FOREIGN','Bangladesh'),
+(10231019,'FOREIGN','Barbados'),
+(10231020,'FOREIGN','Belarus'),
+(10231021,'FOREIGN','Belgium'),
+(10231022,'FOREIGN','Belize'),
+(10231023,'FOREIGN','Benin'),
+(10231024,'FOREIGN','Bermuda'),
+(10231025,'FOREIGN','Bhutan'),
+(10231026,'FOREIGN','Bolivia'),
+(10231027,'FOREIGN','Bosnia and Herzegovina'),
+(10231028,'FOREIGN','Botswana'),
+(10231029,'FOREIGN','Bouvet Island'),
+(10231030,'FOREIGN','Brazil'),
+(10231031,'FOREIGN','British Indian Ocean Territory'),
+(10231032,'FOREIGN','Brunei'),
+(10231033,'FOREIGN','Bulgaria'),
+(10231034,'FOREIGN','Burkina Faso'),
+(10231035,'FOREIGN','Burundi'),
+(10231036,'FOREIGN','Cambodia'),
+(10231037,'FOREIGN','Cameroon'),
+(10231038,'FOREIGN','Canada'),
+(10231039,'FOREIGN','Cape Verde'),
+(10231040,'FOREIGN','Cayman Islands'),
+(10231041,'FOREIGN','Central African Republic'),
+(10231042,'FOREIGN','Chad'),
+(10231043,'FOREIGN','Chile'),
+(10231044,'FOREIGN','China'),
+(10231045,'FOREIGN','China (Hong Kong S.A.R.)'),
+(10231046,'FOREIGN','China (Macau S.A.R.)'),
+(10231047,'FOREIGN','Christmas Island'),
+(10231048,'FOREIGN','Cocos (Keeling) Islands'),
+(10231049,'FOREIGN','Colombia'),
+(10231050,'FOREIGN','Comoros'),
+(10231051,'FOREIGN','Congo'),
+(10231052,'FOREIGN','Congo, Democractic Republic of the  '),
+(10231053,'FOREIGN','Cook Islands'),
+(10231054,'FOREIGN','Costa Rica'),
+(10231055,'FOREIGN','Cote D''Ivoire (Ivory Coast)'),
+(10231056,'FOREIGN','Croatia (Hrvatska)'),
+(10231057,'FOREIGN','Cuba'),
+(10231058,'FOREIGN','Cyprus'),
+(10231059,'FOREIGN','Czech Republic'),
+(10231060,'FOREIGN','Denmark'),
+(10231061,'FOREIGN','Djibouti'),
+(10231062,'FOREIGN','Dominica'),
+(10231063,'FOREIGN','Dominican Republic'),
+(10231064,'FOREIGN','East Timor'),
+(10231065,'FOREIGN','Ecuador'),
+(10231066,'FOREIGN','Egypt'),
+(10231067,'FOREIGN','El Salvador'),
+(10231068,'FOREIGN','Equatorial Guinea'),
+(10231069,'FOREIGN','Eritrea'),
+(10231070,'FOREIGN','Estonia'),
+(10231071,'FOREIGN','Ethiopia'),
+(10231072,'FOREIGN','Falkland Islands (Islas Malvinas)'),
+(10231073,'FOREIGN','Faroe Islands'),
+(10231074,'FOREIGN','Fiji Islands'),
+(10231075,'FOREIGN','Finland'),
+(10231076,'FOREIGN','France'),
+(10231077,'FOREIGN','French Guiana'),
+(10231078,'FOREIGN','French Polynesia'),
+(10231079,'FOREIGN','French Southern Territories'),
+(10231080,'FOREIGN','Gabon'),
+(10231081,'FOREIGN','Gambia, The'),
+(10231082,'FOREIGN','Georgia'),
+(10231083,'FOREIGN','Germany'),
+(10231084,'FOREIGN','Ghana'),
+(10231085,'FOREIGN','Gibraltar'),
+(10231086,'FOREIGN','Greece'),
+(10231087,'FOREIGN','Greenland'),
+(10231088,'FOREIGN','Grenada'),
+(10231089,'FOREIGN','Guadeloupe'),
+(10231090,'FOREIGN','Guam'),
+(10231091,'FOREIGN','Guatemala'),
+(10231092,'FOREIGN','Guinea'),
+(10231093,'FOREIGN','Guinea-Bissau'),
+(10231094,'FOREIGN','Guyana'),
+(10231095,'FOREIGN','Haiti'),
+(10231096,'FOREIGN','Heard and McDonald Islands'),
+(10231097,'FOREIGN','Honduras'),
+(10231098,'FOREIGN','Hungary'),
+(10231099,'FOREIGN','Iceland'),
+(10231100,'FOREIGN','India'),
+(10231101,'FOREIGN','Indonesia'),
+(10231102,'FOREIGN','Iran'),
+(10231103,'FOREIGN','Iraq'),
+(10231104,'FOREIGN','Ireland'),
+(10231105,'FOREIGN','Israel'),
+(10231106,'FOREIGN','Italy'),
+(10231107,'FOREIGN','Jamaica'),
+(10231108,'FOREIGN','Japan'),
+(10231109,'FOREIGN','Jordan'),
+(10231110,'FOREIGN','Kazakhstan'),
+(10231111,'FOREIGN','Kenya'),
+(10231112,'FOREIGN','Kiribati'),
+(10231113,'FOREIGN','Korea'),
+(10231114,'FOREIGN','Korea, North '),
+(10231115,'FOREIGN','Kuwait'),
+(10231116,'FOREIGN','Kyrgyzstan'),
+(10231117,'FOREIGN','Laos'),
+(10231118,'FOREIGN','Latvia'),
+(10231119,'FOREIGN','Lebanon'),
+(10231120,'FOREIGN','Lesotho'),
+(10231121,'FOREIGN','Liberia'),
+(10231122,'FOREIGN','Libya'),
+(10231123,'FOREIGN','Liechtenstein'),
+(10231124,'FOREIGN','Lithuania'),
+(10231125,'FOREIGN','Luxembourg'),
+(10231126,'FOREIGN','Macedonia, Former Yugoslav Republic of'),
+(10231127,'FOREIGN','Madagascar'),
+(10231128,'FOREIGN','Malawi'),
+(10231129,'FOREIGN','Malaysia'),
+(10231130,'FOREIGN','Maldives'),
+(10231131,'FOREIGN','Mali'),
+(10231132,'FOREIGN','Malta'),
+(10231133,'FOREIGN','Marshall Islands'),
+(10231134,'FOREIGN','Martinique'),
+(10231135,'FOREIGN','Mauritania'),
+(10231136,'FOREIGN','Mauritius'),
+(10231137,'FOREIGN','Mayotte'),
+(10231138,'FOREIGN','Mexico'),
+(10231139,'FOREIGN','Micronesia'),
+(10231140,'FOREIGN','Moldova'),
+(10231141,'FOREIGN','Monaco'),
+(10231142,'FOREIGN','Mongolia'),
+(10231143,'FOREIGN','Montserrat'),
+(10231144,'FOREIGN','Morocco'),
+(10231145,'FOREIGN','Mozambique'),
+(10231146,'FOREIGN','Myanmar'),
+(10231147,'FOREIGN','Namibia'),
+(10231148,'FOREIGN','Nauru'),
+(10231149,'FOREIGN','Nepal'),
+(10231150,'FOREIGN','Netherlands Antilles'),
+(10231151,'FOREIGN','Netherlands, The'),
+(10231152,'FOREIGN','New Caledonia'),
+(10231153,'FOREIGN','New Zealand'),
+(10231154,'FOREIGN','Nicaragua'),
+(10231155,'FOREIGN','Niger'),
+(10231156,'FOREIGN','Nigeria'),
+(10231157,'FOREIGN','Niue'),
+(10231158,'FOREIGN','Norfolk Island'),
+(10231159,'FOREIGN','Northern Mariana Islands'),
+(10231160,'FOREIGN','Norway'),
+(10231161,'FOREIGN','Oman'),
+(10231162,'FOREIGN','Pakistan'),
+(10231163,'FOREIGN','Palau'),
+(10231164,'FOREIGN','Panama'),
+(10231165,'FOREIGN','Papua new Guinea'),
+(10231166,'FOREIGN','Paraguay'),
+(10231167,'FOREIGN','Peru'),
+(10231168,'FOREIGN','Philippines'),
+(10231169,'FOREIGN','Pitcairn Island'),
+(10231170,'FOREIGN','Poland'),
+(10231171,'FOREIGN','Portugal'),
+(10231172,'FOREIGN','Puerto Rico'),
+(10231173,'FOREIGN','Qatar'),
+(10231174,'FOREIGN','Reunion'),
+(10231175,'FOREIGN','Romania'),
+(10231176,'FOREIGN','Russia'),
+(10231177,'FOREIGN','Rwanda'),
+(10231178,'FOREIGN','Saint Helena'),
+(10231179,'FOREIGN','Saint Kitts And Nevis'),
+(10231180,'FOREIGN','Saint Lucia'),
+(10231181,'FOREIGN','Saint Pierre and Miquelon'),
+(10231182,'FOREIGN','Saint Vincent And The Grenadines'),
+(10231183,'FOREIGN','Samoa'),
+(10231184,'FOREIGN','San Marino'),
+(10231185,'FOREIGN','Sao Tome and Principe'),
+(10231186,'FOREIGN','Saudi Arabia'),
+(10231187,'FOREIGN','Senegal'),
+(10231188,'FOREIGN','Seychelles'),
+(10231189,'FOREIGN','Sierra Leone'),
+(10231190,'FOREIGN','Singapore'),
+(10231191,'FOREIGN','Slovakia'),
+(10231192,'FOREIGN','Slovenia'),
+(10231193,'FOREIGN','Solomon Islands'),
+(10231194,'FOREIGN','Somalia'),
+(10231195,'FOREIGN','South Africa'),
+(10231196,'FOREIGN','South Georgia And The South Sandwich Islands'),
+(10231197,'FOREIGN','Spain'),
+(10231198,'FOREIGN','Sri Lanka'),
+(10231199,'FOREIGN','Sudan'),
+(10231200,'FOREIGN','Suriname'),
+(10231201,'FOREIGN','Svalbard And Jan Mayen Islands'),
+(10231202,'FOREIGN','Swaziland'),
+(10231203,'FOREIGN','Sweden'),
+(10231204,'FOREIGN','Switzerland'),
+(10231205,'FOREIGN','Syria'),
+(10231206,'FOREIGN','Taiwan'),
+(10231207,'FOREIGN','Tajikistan'),
+(10231208,'FOREIGN','Tanzania'),
+(10231209,'FOREIGN','Thailand'),
+(10231210,'FOREIGN','Togo'),
+(10231211,'FOREIGN','Tokelau'),
+(10231212,'FOREIGN','Tonga'),
+(10231213,'FOREIGN','Trinidad And Tobago'),
+(10231214,'FOREIGN','Tunisia'),
+(10231215,'FOREIGN','Turkey'),
+(10231216,'FOREIGN','Turkmenistan'),
+(10231217,'FOREIGN','Turks And Caicos Islands'),
+(10231218,'FOREIGN','Tuvalu'),
+(10231219,'FOREIGN','Uganda'),
+(10231220,'FOREIGN','Ukraine'),
+(10231221,'FOREIGN','United Arab Emirates'),
+(10231222,'FOREIGN','United Kingdom'),
+(10231223,'FOREIGN','United States'),
+(10231224,'FOREIGN','United States Minor Outlying Islands'),
+(10231225,'FOREIGN','Uruguay'),
+(10231226,'FOREIGN','Uzbekistan'),
+(10231227,'FOREIGN','Vanuatu'),
+(10231228,'FOREIGN','Vatican City State (Holy See)'),
+(10231229,'FOREIGN','Venezuela'),
+(10231230,'FOREIGN','Vietnam'),
+(10231231,'FOREIGN','Virgin Islands (British)'),
+(10231232,'FOREIGN','Virgin Islands (US)'),
+(10231233,'FOREIGN','Wallis And Futuna Islands'),
+(10231234,'FOREIGN','Western Sahara'),
+(10231235,'FOREIGN','Yemen'),
+(10231236,'FOREIGN','Yugoslavia'),
+(10231237,'FOREIGN','Zambia'),
+(10231238,'FOREIGN','Zimbabwe');
+
+  
+SET IDENTITY_INSERT [dbo].[Atoll] OFF;
 
 -- INSERT CLINICAL DETAILS
 INSERT INTO [dbo].[ClinicalDetail] ([Detail])
