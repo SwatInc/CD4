@@ -4,16 +4,8 @@ using CD4.Entensibility.ReportingFramework;
 using CD4.UI.Helpers;
 using CD4.UI.Library.Helpers;
 using CD4.UI.Library.Model;
-using CD4.UI.Library.ViewModel;
-using CD4.UI.View;
-using log4net;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.UI.WebControls;
 
 namespace CD4.UI
 {
@@ -61,6 +53,9 @@ namespace CD4.UI
                 config.CreateMap<DataLibrary.Models.TestsInsertModel, Library.Model.TestsInsertModel>().ReverseMap();
                 config.CreateMap<DataLibrary.Models.TestUpdateModel, Library.Model.TestUpdateModel>().ReverseMap();
                 config.CreateMap<DataLibrary.Models.ResultCommentModel, Library.Model.ResultCommentModel>().ReverseMap();
+                config.CreateMap<DataLibrary.Models.HmsLinkDataModel, Library.Model.HmsLinkDataModel>().ReverseMap();
+                config.CreateMap<DataLibrary.Models.BillingTestMappingModel, Library.Model.BillingTestMappingModel>().ReverseMap();
+                config.CreateMap<DataLibrary.Models.AnalysisRequestDataModel, Library.Model.AnalysisRequestDataModel>().ReverseMap();
                 config.CreateMap<ResultModel, TestModel>()
                     .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                     .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Test))
@@ -102,21 +97,21 @@ namespace CD4.UI
 
             //register viewModels
             builder.RegisterAssemblyTypes(Assembly.Load("CD4.UI.Library"))
-                .Where(t =>t.Namespace != null)
+                .Where(t => t.Namespace != null)
                 .Where(t => t.Namespace.Contains("ViewModel"))
                 .As(t => t.GetInterfaces().FirstOrDefault(i => i.Name == $"I{t.Name}"));
 
             //Register Data Access Library interfaces
             builder.RegisterAssemblyTypes(Assembly.Load("CD4.DataLibrary"))
                 .Where(t => t.Namespace.Contains("DataAccess"))
-                .Where(t => t.FullName.Contains("Base") != true )
+                .Where(t => t.FullName.Contains("Base") != true)
                 .As(t => t.GetInterfaces().FirstOrDefault(i => i.Name == $"I{t.Name}"));
 
             //register auth event args
             builder.RegisterType<AuthorizeDetailEventArgs>()
                 .AsSelf()
                 .SingleInstance();
-            
+
             builder.RegisterType<LoadMultipleExtensions>().As<ILoadMultipleExtensions>().SingleInstance();
 
             builder.RegisterType<UserAuthEvaluator>().As<IUserAuthEvaluator>();
@@ -128,6 +123,7 @@ namespace CD4.UI
             builder.RegisterType<GlobalSettingsHelper>().As<IGlobalSettingsHelper>().SingleInstance();
 
             return builder.Build();
+
         }
     }
 }

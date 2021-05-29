@@ -64,6 +64,7 @@ namespace CD4.UI.View
             barButtonItemAcceptSamples.ItemClick += OpenAcceptSampleView;
             barButtonItemBulkImportOrders.ItemClick += OpenBulkOrdersView;
             barButtonItemViewAllNotes.ItemClick += OpenLabNotesView;
+            barButtonItemHmsLink.ItemClick += openHmsLinkView;
 
             //profile Tab Buttons
             barButtonItemChangePassword.ItemClick += OpenChangePasswordView;
@@ -83,6 +84,11 @@ namespace CD4.UI.View
             SetDisciplineRibbonOptions();
 
             GetVersionData();
+        }
+
+        private void openHmsLinkView(object sender, ItemClickEventArgs e)
+        {
+            OpenMdiForm<HmsLinkView>();
         }
 
         private void BarHeaderItemCD4Version_ItemClick(object sender, ItemClickEventArgs e)

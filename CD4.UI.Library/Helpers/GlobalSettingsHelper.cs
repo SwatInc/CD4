@@ -33,7 +33,8 @@ namespace CD4.UI.Library.Helpers
                     VerifyNidPpOnOrder = settings.VerifyNidPpOnOrder,
                     IsAnalysisRequestBarcodeRequired = settings.IsAnalysisRequestBarcodeRequired,
                     ReportExportBasePath = settings.ReportExportBasePath,
-                    IsFullnameAbbreviated = settings.IsFullnameAbbreviated
+                    IsFullnameAbbreviated = settings.IsFullnameAbbreviated,
+                    HmsLinkQuery = settings.HmsLinkQuery
                 };
             }
             catch (Exception)

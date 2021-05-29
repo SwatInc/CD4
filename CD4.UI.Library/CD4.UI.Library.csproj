@@ -133,6 +133,7 @@
     <Compile Include="Helpers\PrintingHelper.cs" />
     <Compile Include="Helpers\StatusIconHelper.cs" />
     <Compile Include="Helpers\ValidationHelper.cs" />
+    <Compile Include="Helpers\ViewModelBase.cs" />
     <Compile Include="Model\AnalysisRequestDataModel.cs" />
     <Compile Include="Model\AtollIslandModel.cs" />
     <Compile Include="Model\AtollModel.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="Model\Authority.cs" />
     <Compile Include="Model\AuthorizeDetailEventArgs.cs" />
     <Compile Include="Model\BarcodeDataModel.cs" />
+    <Compile Include="Model\BillingTestMappingModel.cs" />
     <Compile Include="Model\BulkSchemaModel.cs" />
     <Compile Include="Model\CinAndFullnameModel.cs" />
     <Compile Include="Model\CinAndReportDateModel.cs" />
@@ -148,6 +150,7 @@
     <Compile Include="Model\DemographicsConfirmationModel.cs" />
     <Compile Include="Model\DisciplineModel.cs" />
     <Compile Include="Model\GlobalSettingsModel.cs" />
+    <Compile Include="Model\HmsLinkDataModel.cs" />
     <Compile Include="Model\NdaTrackingModel.cs" />
     <Compile Include="Model\PatientUpdateModel.cs" />
     <Compile Include="Model\ResultCommentModel.cs" />
@@ -157,6 +160,7 @@
     <Compile Include="Model\ResultModel.cs" />
     <Compile Include="Model\RequestSampleModel.cs" />
     <Compile Include="Model\SampleTypeModel.cs" />
+    <Compile Include="Model\SampleWithTestsModel.cs" />
     <Compile Include="Model\StatusModel.cs" />
     <Compile Include="Model\TestsInsertModel.cs" />
     <Compile Include="Model\TestUpdateModel.cs" />
@@ -196,6 +200,7 @@
     <Compile Include="ViewModel\CodifiedValuesViewModel.cs" />
     <Compile Include="ViewModel\CountryViewModel.cs" />
     <Compile Include="ViewModel\GenderViewModel.cs" />
+    <Compile Include="ViewModel\HmsLinkViewModel.cs" />
     <Compile Include="ViewModel\IAcceptSampleViewModel.cs" />
     <Compile Include="ViewModel\IAuthenticationViewModel.cs" />
     <Compile Include="ViewModel\IBatchedNdaTrackingViewModel.cs" />
@@ -205,6 +210,7 @@
     <Compile Include="ViewModel\ICodifiedValuesViewModel.cs" />
     <Compile Include="ViewModel\ICountryViewModel.cs" />
     <Compile Include="ViewModel\IGenderViewModel.cs" />
+    <Compile Include="ViewModel\IHmsLinkViewModel.cs" />
     <Compile Include="ViewModel\ILabNotesViewModel.cs" />
     <Compile Include="ViewModel\ILateOrderEntryViewModel.cs" />
     <Compile Include="ViewModel\IMainViewModel.cs" />

@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace CD4.UI.Library.ViewModel
 {
-    public class OrderEntryViewModel : INotifyPropertyChanged, IOrderEntryViewModel
+    public class OrderEntryViewModel : ViewModelBase, IOrderEntryViewModel
     {
 
         #region Private Properties
@@ -86,17 +86,6 @@ namespace CD4.UI.Library.ViewModel
             PropertyChanged += OrderEntryViewModel_PropertyChanged;
             InitializeStaticData += OnInitializeStaticDataAsync;
             InitializeStaticData(this, EventArgs.Empty);
-        }
-
-        #endregion
-
-        #region INotifyPropertyChanged Hookup
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion
@@ -556,7 +545,6 @@ namespace CD4.UI.Library.ViewModel
             }
             catch (Exception)
             {
-
                 throw;
             }
 
