@@ -6,8 +6,10 @@ Post deployment script for Abdul Samadh Memorial Hospital
 */
 
 -- INSERT SITES
-INSERT INTO [dbo].[Sites] ([Name])
-  VALUES ('PHELBOTOMY');
+SET IDENTITY_INSERT [dbo].[Sites] ON;
+INSERT INTO [dbo].[Sites] ([Id],[Name])
+  VALUES (1,'PHELBOTOMY');
+SET IDENTITY_INSERT [dbo].[Sites] OFF;
 
 -- INSERT NATIONALITIES
 INSERT INTO [dbo].[Country] ([Country])
@@ -238,12 +240,15 @@ INSERT INTO [dbo].[Country] ([Country])
 ('Zambian'),
 ('Zimbabwean');
 
+SET IDENTITY_INSERT [dbo].[Gender] ON;
 -- INSERT GENDERS
-INSERT INTO [dbo].[Gender] ([Gender])
-  VALUES ('MALE'),
-  ('FEMALE'),
-  ('UNKNOWN'),
-  ('NOT AVAILABLE');
+INSERT INTO [dbo].[Gender] ([Id],[Gender])
+  VALUES (1,'MALE'),
+  (2, 'FEMALE'),
+  (3, 'UNKNOWN'),
+  (4, 'NOT AVAILABLE');
+SET IDENTITY_INSERT [dbo].[Gender] OFF;
+
 
 SET IDENTITY_INSERT [dbo].[Atoll] ON;
 -- INSERT ATOLLS
@@ -701,7 +706,6 @@ INSERT INTO [dbo].[Atoll] ([Id],[Atoll], [Island])
 (10231237,'FOREIGN','Zambia'),
 (10231238,'FOREIGN','Zimbabwe');
 
-  
 SET IDENTITY_INSERT [dbo].[Atoll] OFF;
 
 -- INSERT CLINICAL DETAILS
@@ -713,35 +717,98 @@ INSERT INTO [dbo].[ClinicalDetail] ([Detail])
   , ('Travel History');
 
 -- DATA TYPES
-INSERT INTO [dbo].[ResultDataType] ([Name])
-  VALUES ('NUMERIC'),
-  ('CODIFIED'),
-  ('TEXTUAL');
+SET IDENTITY_INSERT [dbo].[ResultDataTypes] ON;
+INSERT INTO [dbo].[ResultDataType] ([Id],[Name])
+  VALUES (1, 'NUMERIC'),
+  (2, 'CODIFIED'),
+  (3, 'TEXTUAL');
+SET IDENTITY_INSERT [dbo].[ResultDataTypes] OFF;
 
+SET IDENTITY_INSERT [dbo].[CodifiedResult] ON;
 -- CODIFIED RESULTS
-INSERT INTO [dbo].[CodifiedResult] ([Code], [ReferenceCode])
-  VALUES ('POSITIVE', 'PA'),
-  ('NEGATIVE', 'NM'),
-  ('REACTIVE', 'PA'),
-  ('NON-REACTIVE', 'NM'),
-  ('INCONCLUSIVE', 'NM');
+INSERT INTO [dbo].[CodifiedResult] ([Id],[Code], [ReferenceCode])
+  VALUES (1,'POSITIVE','PA'),
+(2,'DETECTED','PA'),
+(3,'SENSITIVE','NM'),
+(4,'REACTIVE','PA'),
+(5,'NEGATIVE','NM'),
+(6,'NOT DETECTED','NM'),
+(7,'RESISTANT','PA'),
+(8,'NON-REACTIVE','NM'),
+(9,'TRACE','AT'),
+(10,'1+','PA'),
+(11,'2+','PA'),
+(12,'3+','PA'),
+(13,'4+','PA'),
+(14,'+','PA'),
+(15,'++','PA'),
+(16,'+++','PA'),
+(17,'++++','PA'),
+(18,'Borderline','PA'),
+(19,'Retest','PA'),
+(20,'Insufficient','PA'),
+(21,'Sufficient','NM'),
+(22,'Deficient','PA'),
+(23,'Potential Toxicity','PA'),
+(24,'Normal','NM'),
+(25,'Intermediate','PA'),
+(26,'Inconclusive','PA');
+SET IDENTITY_INSERT [dbo].[CodifiedResult] OFF;
+
 
 --INSERT SAMPLE TYPES
-INSERT INTO [dbo].[SampleType] ([Description], [Colour])
-  VALUES ('SERUM', 'Red'),
-   ('URINE', 'White'),
-  ('WHOLE BLOOD', 'Lavender');
+INSERT INTO [dbo].[SampleType] ([Id],[Description], [Colour],[Code])
+  VALUES (1,'EDTA WHOLE BLOOD', 'Lavender','W'),
+  (2,'SERUM', 'Red','S'),
+   (3,'CITRATE PLASMA', 'Blue','P'),
+   (4,'FLUORIDE PLASMA', 'Gray','P'),
+   (5,'SPOT URINE', 'White','U'),
+	(6,'STOOL','Brown','ST'),
+	(7,'CSF','White','CS'),
+	(8,'SEMEN','Gray','SN'),
+	(9,'PLURAL FLUID','Gray','PL'),
+	(10,'PERITONEAL FLUID','Gray','PE'),
+	(11,'SYNOVIAL FLUID','Gray','SY'),
+	(12,'MID-STREAM URINE','Gray','MU'),
+	(13,'HVS SWAB','Gray','H'),
+	(14,'PUS SWAB','Gray','PU'),
+	(15,'SPUTUM','Gray','ST'),
+	(16,'EXUDATE','Gray','EX'),
+	(17,'MISC SWAB','Gray','SW'),
+	(18,'BLOOD','Gray','BL'),
+	(19,'MISC SMEAR','Gray','SM'),
+	(20,'SKIN','Gray','SK'),
+	(21,'NASOPHARYNGEAL SWAB','Gray','NS');
 
 --INSERT DISCIPLINES
-INSERT INTO [dbo].[Discipline] ([Description])
-  VALUES ('DIAGNOSTIC HAEMATOLOGY'),
-  ('MOLECULAR BIOLOGY'),
-  ('FORENSIC MEDICINE');
+INSERT INTO [dbo].[Discipline] ([Id],[Description],[Code])
+  VALUES (1,'DIAGNOSTIC HAEMATOLOGY','H'),
+(2,'BIOCHEMISTRY','B'),
+(3,'SEROLOGY','S'),
+(4,'CLINICAL PATHOLOGY','C'),
+(5,'IMMUNOHEAMATOLOGY','I'),
+(6,'MICROBIOLOGY','M'),
+(7,'MOLECULAR BIOLOGY','MB'),
+(8,'HISTOLOGY','H');
 
 -- UNITS
-INSERT INTO [dbo].[Unit] ([Unit])
-  VALUES (' '),
-  ('mg/dL'),
-  ('%'),
-  ('ng/mL'),
-  ('ug/mL');
+SET IDENTITY_INSERT [dbo].[Unit] ON;
+INSERT INTO [dbo].[Unit] ([Id],[Unit])
+  VALUES (1,' '),
+  (2,'g/L'),
+(3,'U/L'),
+(4,'mg/dL'),
+(5,'mmol/L'),
+(6,'umol/L'),
+(7,'IU/mL'),
+(8,'ng/mL'),
+(9,'pmol/L'),
+(10,'IU/L'),
+(11,'ng/L'),
+(12,'mlU/L'),
+(13,'nmol/L'),
+(14,'mIU/mL'),
+(15,'%');
+SET IDENTITY_INSERT [dbo].[Unit] OFF;
+
+
