@@ -157,5 +157,26 @@ namespace CD4.DataLibrary.DataAccess
                 throw;
             }
         }
+
+        /// <summary>
+        /// returns a list of sample numbers for the provided episode number
+        /// </summary>
+        /// <param name="episodeNumber"> episode number used to fetch SIDs</param>
+        /// <returns>List of string SIDs</returns>
+        public async Task<List<string>> GetCinsByEpisodeNumberAsync(int episodeNumber)
+        {
+            var storedProcedure = "[dbo].[usp_GetCinsByEpisodeNumber]";
+            var parameters = new { EpisodeNumber = episodeNumber };
+            try
+            {
+                var output = await LoadDataWithParameterAsync<string, dynamic>(storedProcedure, parameters);
+                return output;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

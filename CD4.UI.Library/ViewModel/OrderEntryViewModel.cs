@@ -1098,7 +1098,7 @@ namespace CD4.UI.Library.ViewModel
         }
 
 
-        //this code is dublicated on ResultEntry View Model. Handle this a bit more gracefully later
+        //this code is dublicated on ResultEntry View Model and hmsLink view model. Handle this a bit more gracefully later
         public async Task<List<BarcodeDataModel>> GetBarcodeDataAsync()
         {
             try

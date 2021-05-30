@@ -274,6 +274,30 @@ namespace CD4.DataLibrary.DataAccess
         }
 
         /// <summary>
+        /// marks all the samples as Collected for the specified EpisodeNumber if the samples and associated tests have registered status
+        /// </summary>
+        /// <param name="episodeNumber">The episode number to which the samples belong</param>
+        /// <returns>true if the procedure completes without error</returns>
+        public async Task<bool> MarkMultipleSamplesCollectedAsync(string episodeNumber, int loggedInUserId)
+        {
+            //set the stored procedure name
+            var storedProcedure = "[dbo].[usp_CollectAllSamplesForEpisode]";
+            //set the parameters for the stored procedure
+            var parameters = new { EpisodeNumber = episodeNumber, UserId = loggedInUserId };
+            try
+            {
+                _ = await SelectInsertOrUpdateAsync<dynamic, dynamic>(storedProcedure, parameters);
+                return true;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        /// <summary>
         /// Change only sample status to validated. Does not mess with test status.
         /// Do not use this method if test status needs to be marked as validated on validating sample.
         /// </summary>

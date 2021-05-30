@@ -86,12 +86,11 @@ namespace CD4.UI.View
             this.splitContainerControl.FixedPanel = DevExpress.XtraEditors.SplitFixedPanel.Panel2;
             this.splitContainerControl.Location = new System.Drawing.Point(0, 34);
             this.splitContainerControl.Name = "splitContainerControl";
-            this.splitContainerControl.Panel1.Controls.Add(this.progressPanel);
             this.splitContainerControl.Panel1.Controls.Add(this.gridControlPatientDetails);
             this.splitContainerControl.Panel1.Text = "PatientDetails";
             this.splitContainerControl.Panel2.Controls.Add(this.gridControlRequestedAnalyses);
             this.splitContainerControl.Panel2.Text = "AnalysisRequested";
-            this.splitContainerControl.Size = new System.Drawing.Size(736, 315);
+            this.splitContainerControl.Size = new System.Drawing.Size(1085, 430);
             this.splitContainerControl.SplitterPosition = 300;
             this.splitContainerControl.TabIndex = 4;
             // 
@@ -101,9 +100,10 @@ namespace CD4.UI.View
             this.progressPanel.Appearance.Options.UseBackColor = true;
             this.progressPanel.BarAnimationElementThickness = 2;
             this.progressPanel.ContentAlignment = System.Drawing.ContentAlignment.MiddleCenter;
-            this.progressPanel.Location = new System.Drawing.Point(310, 155);
+            this.progressPanel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.progressPanel.Location = new System.Drawing.Point(0, 34);
             this.progressPanel.Name = "progressPanel";
-            this.progressPanel.Size = new System.Drawing.Size(18, 18);
+            this.progressPanel.Size = new System.Drawing.Size(1085, 430);
             this.progressPanel.TabIndex = 1;
             this.progressPanel.Text = "progressPanel";
             // 
@@ -114,7 +114,7 @@ namespace CD4.UI.View
             this.gridControlPatientDetails.MainView = this.gridViewPatient;
             this.gridControlPatientDetails.MenuManager = this.barManager;
             this.gridControlPatientDetails.Name = "gridControlPatientDetails";
-            this.gridControlPatientDetails.Size = new System.Drawing.Size(431, 315);
+            this.gridControlPatientDetails.Size = new System.Drawing.Size(780, 430);
             this.gridControlPatientDetails.TabIndex = 0;
             this.gridControlPatientDetails.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewPatient});
@@ -303,15 +303,15 @@ namespace CD4.UI.View
             this.barDockControlTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.barDockControlTop.Location = new System.Drawing.Point(0, 0);
             this.barDockControlTop.Manager = this.barManager;
-            this.barDockControlTop.Size = new System.Drawing.Size(736, 34);
+            this.barDockControlTop.Size = new System.Drawing.Size(1085, 34);
             // 
             // barDockControlBottom
             // 
             this.barDockControlBottom.CausesValidation = false;
             this.barDockControlBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.barDockControlBottom.Location = new System.Drawing.Point(0, 349);
+            this.barDockControlBottom.Location = new System.Drawing.Point(0, 464);
             this.barDockControlBottom.Manager = this.barManager;
-            this.barDockControlBottom.Size = new System.Drawing.Size(736, 0);
+            this.barDockControlBottom.Size = new System.Drawing.Size(1085, 0);
             // 
             // barDockControlLeft
             // 
@@ -319,15 +319,15 @@ namespace CD4.UI.View
             this.barDockControlLeft.Dock = System.Windows.Forms.DockStyle.Left;
             this.barDockControlLeft.Location = new System.Drawing.Point(0, 34);
             this.barDockControlLeft.Manager = this.barManager;
-            this.barDockControlLeft.Size = new System.Drawing.Size(0, 315);
+            this.barDockControlLeft.Size = new System.Drawing.Size(0, 430);
             // 
             // barDockControlRight
             // 
             this.barDockControlRight.CausesValidation = false;
             this.barDockControlRight.Dock = System.Windows.Forms.DockStyle.Right;
-            this.barDockControlRight.Location = new System.Drawing.Point(736, 34);
+            this.barDockControlRight.Location = new System.Drawing.Point(1085, 34);
             this.barDockControlRight.Manager = this.barManager;
-            this.barDockControlRight.Size = new System.Drawing.Size(0, 315);
+            this.barDockControlRight.Size = new System.Drawing.Size(0, 430);
             // 
             // gridControlRequestedAnalyses
             // 
@@ -336,7 +336,7 @@ namespace CD4.UI.View
             this.gridControlRequestedAnalyses.MainView = this.gridViewRequestedAnalyses;
             this.gridControlRequestedAnalyses.MenuManager = this.barManager;
             this.gridControlRequestedAnalyses.Name = "gridControlRequestedAnalyses";
-            this.gridControlRequestedAnalyses.Size = new System.Drawing.Size(300, 315);
+            this.gridControlRequestedAnalyses.Size = new System.Drawing.Size(300, 430);
             this.gridControlRequestedAnalyses.TabIndex = 1;
             this.gridControlRequestedAnalyses.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewRequestedAnalyses});
@@ -387,7 +387,8 @@ namespace CD4.UI.View
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(736, 349);
+            this.ClientSize = new System.Drawing.Size(1085, 464);
+            this.Controls.Add(this.progressPanel);
             this.Controls.Add(this.splitContainerControl);
             this.Controls.Add(this.barDockControlLeft);
             this.Controls.Add(this.barDockControlRight);

@@ -11,9 +11,12 @@ namespace CD4.UI.Library.ViewModel
         BindingList<PatientModel> Patient { get; set; }
         bool IsRequestPriority { get; set; }
         bool LoadingStaticDataStatus { get; set; }
+        bool NotLoadingStaticData { get; set; }
 
         Task<bool> ConfirmAnalysisRequest(List<HmsLinkDataModel> dataToConfirm, int loggedInUserId);
         Task FetchAnalysisRequestForMemoNumberAsync(int memoNumber);
+        Task<List<BarcodeDataModel>> GetBarcodeDataAsync();
+        Task MaskEpisodeSamplesAsCollected(int LoggedInUserId);
         void ResetUi();
     }
 }

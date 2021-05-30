@@ -35,6 +35,8 @@ namespace CD4.UI.Helpers
 
             try
             {
+                var analysisRequestBarcode = GetAnalysisRequestBarcode(barcodeData);
+                if(analysisRequestBarcode != null) { barcodeData.Add(analysisRequestBarcode); }
                 GenerateLabelAndSendToPrinter(barcodeData);
                 return true;
             }
@@ -43,6 +45,28 @@ namespace CD4.UI.Helpers
                 throw;
             }
 
+        }
+
+        private BarcodeDataModel GetAnalysisRequestBarcode(List<BarcodeDataModel> barcodeData)
+        {
+            if (!_globalSettingsHelper.Settings.IsAnalysisRequestBarcodeRequired) { return null; }
+            if (barcodeData.Count == 0) { return null; }
+
+            var requestBarcode = barcodeData.FirstOrDefault();
+            barcodeData.Add(new BarcodeDataModel()
+            {
+                AccessionNumber = requestBarcode.AccessionNumber,
+                Age = requestBarcode.Age,
+                Birthdate = requestBarcode.Birthdate,
+                CollectionDate = requestBarcode.CollectionDate,
+                Discipline = "ANALYSIS REQUEST",
+                FullName = requestBarcode.FullName,
+                NidPp = requestBarcode.NidPp,
+                Seq = requestBarcode.Seq,
+                SamplePriority = requestBarcode.SamplePriority
+            });
+
+            return requestBarcode;
         }
 
         public bool PrintSingleSampleBarcode(List<BarcodeDataModel> barcodeData, string cin)
@@ -59,24 +83,8 @@ namespace CD4.UI.Helpers
 
             try
             {
-                if (_globalSettingsHelper.Settings.IsAnalysisRequestBarcodeRequired)
-                {
-                    var requestBarcode = barcodeData.FirstOrDefault();
-                    barcodeData.Add(new BarcodeDataModel()
-                    {
-                        AccessionNumber = requestBarcode.AccessionNumber,
-                        Age = requestBarcode.Age,
-                        Birthdate = requestBarcode.Birthdate,
-                        CollectionDate = requestBarcode.CollectionDate,
-                        Discipline = "ANALYSIS REQUEST",
-                        FullName = requestBarcode.FullName,
-                        NidPp = requestBarcode.NidPp,
-                        Seq = requestBarcode.Seq,
-                        SamplePriority = requestBarcode.SamplePriority
-                    });
-                }
-
-
+                var requestBarcode = GetAnalysisRequestBarcode(barcodeData);
+                if (requestBarcode != null) { barcodeData.Add(requestBarcode); }
                 GenerateLabelAndSendToPrinter(barcodeData);
                 return true;
             }
@@ -130,7 +138,7 @@ namespace CD4.UI.Helpers
 
         private string GetAbbreviatedName(string fullname)
         {
-            if(_globalSettingsHelper.Settings.IsFullnameAbbreviated)
+            if (_globalSettingsHelper.Settings.IsFullnameAbbreviated)
             {
                 return _namesAbbreviator.Execute(fullname, _fullnameCriticalLength);
             }

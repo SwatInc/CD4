@@ -19,6 +19,8 @@ namespace CD4.UI.Library.ViewModel
         private readonly IStaticDataDataAccess _staticData;
         private readonly IDisciplineDataAccess _disciplineDataAccess;
         private readonly ISampleTypeDataAccess _sampleTypeDataAccess;
+        private readonly ISampleDataAccess _sampleDataAccess;
+        private readonly IStatusDataAccess _statusDataAccess;
         private readonly IAnalysisRequestDataAccess _analysisRequestDataAccess;
         private readonly IMapper _mapper;
         private bool loadingStaticData;
@@ -30,6 +32,8 @@ namespace CD4.UI.Library.ViewModel
             IStaticDataDataAccess staticDataAccess,
             IDisciplineDataAccess disciplineDataAccess,
             ISampleTypeDataAccess sampleTypeDataAccess,
+            ISampleDataAccess sampleDataAccess,
+            IStatusDataAccess statusDataAccess,
             IAnalysisRequestDataAccess analysisRequestDataAccess,
             IMapper mapper)
         {
@@ -38,6 +42,8 @@ namespace CD4.UI.Library.ViewModel
             _staticData = staticDataAccess;
             _disciplineDataAccess = disciplineDataAccess;
             _sampleTypeDataAccess = sampleTypeDataAccess;
+            _sampleDataAccess = sampleDataAccess;
+            _statusDataAccess = statusDataAccess;
             _analysisRequestDataAccess = analysisRequestDataAccess;
             _mapper = mapper;
             AnalysisRequests = new BindingList<HmsLinkDataModel>();
@@ -104,12 +110,16 @@ namespace CD4.UI.Library.ViewModel
             }
         }
 
+        //for anything that needs to be hidden while progress is shown
+        public bool NotLoadingStaticData { get; set; }
         public bool LoadingStaticDataStatus
         {
             get => loadingStaticData; set
             {
                 loadingStaticData = value;
+                NotLoadingStaticData = !value;
                 OnPropertyChanged();
+                OnPropertyChanged(nameof(NotLoadingStaticData));
             }
         }
 
@@ -192,6 +202,8 @@ namespace CD4.UI.Library.ViewModel
         {
             try
             {
+                LoadingStaticDataStatus = true;
+
 #if DEBUG
                 var requestData = await _hmsLinkDataAccess.
                     GetAnalysisRequestDataByEpisodeNumberMock(episodeNumber, _globalSettingsHelper.Settings.HmsLinkQuery);
@@ -207,6 +219,10 @@ namespace CD4.UI.Library.ViewModel
             {
 
                 throw;
+            }
+            finally
+            {
+                LoadingStaticDataStatus = false;
             }
         }
 
@@ -297,49 +313,100 @@ namespace CD4.UI.Library.ViewModel
              * Episode Number
              */
 
-            var hmsLinkData = dataToConfirm.FirstOrDefault();
-            var patient = Patient.FirstOrDefault();
-            var gender = AllGender.Find((x) => x.Gender.ToLower().StartsWith(hmsLinkData.Gender.Trim().ToLower()));
+            LoadingStaticDataStatus = true;
 
-            //generate sample
-            var samples = await GenerateSamplesAsync(dataToConfirm);
-            if (samples is null) { throw new Exception("No samples generated. Make sure to select the required services."); }
-            if (samples.Count == 0) { throw new Exception("No samples generated. Make sure to select the required services."); }
-            foreach (var sample in samples)
+            try
             {
-                var analysisRequestModel = new AnalysisRequestDataModel()
+                var hmsLinkData = dataToConfirm.FirstOrDefault();
+
+                //get sids if AR registered previously
+                var alreadyRegisteredSids = await GetRegisteredSidsForEpisodeNumberAsync(hmsLinkData.EpisodeNumber);
+                string existingSeed = null;
+                if (alreadyRegisteredSids?.Count > 0) { existingSeed = GetExistingSeedFromCins(alreadyRegisteredSids); }
+
+                var patient = Patient.FirstOrDefault();
+                var gender = AllGender.Find((x) => x.Gender.ToLower().StartsWith(hmsLinkData.Gender.Trim().ToLower()));
+
+                //generate sample
+                var samples = await GenerateSamplesAsync(dataToConfirm, existingSeed);
+                if (samples is null) { throw new Exception("No samples generated. Make sure to select the required services."); }
+                if (samples.Count == 0) { throw new Exception("No samples generated. Make sure to select the required services."); }
+                foreach (var sample in samples)
                 {
-                    Cin  = sample.Cin,
-                    SampleCollectionDate = DateTimeOffset.Now,
+                    var analysisRequestModel = new AnalysisRequestDataModel()
+                    {
+                        Cin = sample.Cin,
+                        SampleCollectionDate = DateTimeOffset.Now,
 
-                    NationalIdPassport = hmsLinkData.NidPp,
-                    Fullname = hmsLinkData.FullName,
-                    GenderId = gender.Id,
-                    Age = DateTimeExtensions.ToAgeString((DateTime)hmsLinkData.Birthdate),
-                    PhoneNumber = patient.PhoneNumber,
-                    Birthdate = patient.Birthdate,
-                    Address = patient.Address,
-                    AtollId = GetAtoll(hmsLinkData.RegAtollId, hmsLinkData.RegIslandId).Id,
-                    CountryId = 1,
+                        NationalIdPassport = hmsLinkData.NidPp,
+                        Fullname = hmsLinkData.FullName,
+                        GenderId = gender.Id,
+                        Age = DateTimeExtensions.ToAgeString((DateTime)hmsLinkData.Birthdate),
+                        PhoneNumber = patient.PhoneNumber,
+                        Birthdate = patient.Birthdate,
+                        Address = patient.Address,
+                        AtollId = GetAtoll(hmsLinkData.RegAtollId, hmsLinkData.RegIslandId).Id,
+                        CountryId = 1,
 
-                    ClinicalDetails = new List<ClinicalDetailsOrderEntryModel>(),
-                    Tests = sample.Tests,
-                    EpisodeNumber = hmsLinkData.EpisodeNumber.ToString()
-                };
+                        ClinicalDetails = new List<ClinicalDetailsOrderEntryModel>(),
+                        Tests = sample.Tests,
+                        EpisodeNumber = hmsLinkData.EpisodeNumber.ToString()
+                    };
 
-                var mapped = _mapper.Map<DataLibrary.Models.AnalysisRequestDataModel>(analysisRequestModel);
-                mapped.SiteId = 1;
-                await _analysisRequestDataAccess
-                    .ConfirmRequestAsync(mapped, loggedInUserId, IsRequestPriority);
+                    var mapped = _mapper.Map<DataLibrary.Models.AnalysisRequestDataModel>(analysisRequestModel);
+                    mapped.SiteId = 1;
+                    await _analysisRequestDataAccess
+                        .ConfirmRequestAsync(mapped, loggedInUserId, IsRequestPriority);
+                }
+
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                LoadingStaticDataStatus = false;
             }
 
-            return true;
         }
 
-        private async Task<List<SampleWithTestsModel>> GenerateSamplesAsync(List<HmsLinkDataModel> dataToConfirm)
+        private string GetExistingSeedFromCins(List<string> alreadyRegisteredSids)
         {
-            //get the seed without prefix
-            var seed = await _analysisRequestDataAccess.GetNextCinSeedWithoutPrefix();
+            if (alreadyRegisteredSids is null) return null;
+            if (alreadyRegisteredSids.Count == 0) return null;
+
+            var topCin = alreadyRegisteredSids[0];
+
+            var seed = new string((from c in topCin
+                                   where char.IsDigit(c)
+                                   select c).ToArray());
+
+            Debug.WriteLine("Seed from Cin: " + seed);
+            return seed;
+        }
+
+        private async Task<List<string>> GetRegisteredSidsForEpisodeNumberAsync(int episodeNumber)
+        {
+            try
+            {
+                var cins = await _sampleDataAccess.GetCinsByEpisodeNumberAsync(episodeNumber);
+                return cins;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        private async Task<List<SampleWithTestsModel>> GenerateSamplesAsync(List<HmsLinkDataModel> dataToConfirm, string existingSeed = null)
+        {
+            //get the seed without prefix... use existing seed if available
+            string seed = existingSeed != null ? existingSeed 
+                : await _analysisRequestDataAccess.GetNextCinSeedWithoutPrefix();
+
             var samples = new List<SampleWithTestsModel>();
             foreach (var item in dataToConfirm)
             {
@@ -457,5 +524,40 @@ namespace CD4.UI.Library.ViewModel
 
             return tests;
         }
+
+        //this code is dublicated on ResultEntry View Model and order entry view model. Handle this a bit more gracefully later
+        public async Task<List<BarcodeDataModel>> GetBarcodeDataAsync()
+        {
+            try
+            {
+                var analysisRequest = AnalysisRequests.FirstOrDefault();
+                if (analysisRequest is null) { throw new Exception("Cannot determine the episode number for printing barcodes."); }
+                var data = await _analysisRequestDataAccess
+                    .GetBarcodeDataForMultipleSamplesAsync(analysisRequest.EpisodeNumber.ToString());
+                return _mapper.Map<List<BarcodeDataModel>>(data);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public async Task MaskEpisodeSamplesAsCollected(int LoggedInUserId)
+        {
+            var analysisRequest = AnalysisRequests.FirstOrDefault();
+            if (analysisRequest is null) { throw new Exception("Cannot determine the episode number for collecting samples."); }
+
+            try
+            {
+                await _statusDataAccess
+                    .MarkMultipleSamplesCollectedAsync(analysisRequest.EpisodeNumber.ToString(), LoggedInUserId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
     }
 }
