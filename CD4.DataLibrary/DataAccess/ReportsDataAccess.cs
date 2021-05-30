@@ -17,8 +17,8 @@ namespace CD4.DataLibrary.DataAccess
             var parameters = new { Cin = cin, UserId = loggedInUserId };
             try
             {
-                //Execute the stored procedure by calling LoadAnalysisReportByCinAsync method
-                var output = await LoadAnalysisReportByCinAsync<dynamic>(storedProcedure, parameters);
+                //Execute the stored procedure by calling LoadAnalysisReportAsync method
+                var output = await LoadAnalysisReportAsync<dynamic>(storedProcedure, parameters);
 
                 //If query yeilded no results, return new list
                 if (output.Results.Count == 0)
@@ -37,6 +37,35 @@ namespace CD4.DataLibrary.DataAccess
 
         }
 
+        public async Task<List<AnalysisRequestReportModel>> 
+            GetAnalysisReportForepisodeAsync(string episodeNumber, int loggedInUserId, string procedureName = "")
+        {
+            //stored procedure name to call
+            var storedProcedure = "[dbo].[usp_GetAnalysisReportForEpisode]";
+            if (!string.IsNullOrEmpty(procedureName)) { storedProcedure = procedureName; }
+
+            var parameters = new { EpisodeNumber = episodeNumber, UserId = loggedInUserId };
+            try
+            {
+                //Execute the stored procedure by calling LoadAnalysisReportAsync method
+                var output = await LoadAnalysisReportAsync<dynamic>(storedProcedure, parameters);
+
+                //If query yeilded no results, return new list
+                if (output.Results.Count == 0)
+                {
+                    return new List<AnalysisRequestReportModel>();
+                }
+
+                //map the database model to output model and return
+                return MapFromDatabaseModelToReturnModel(output);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
         /// <summary>
         /// Convert from AnalysisReportDatabaseModel to list of AnalysisRequestReportModel
         /// </summary>

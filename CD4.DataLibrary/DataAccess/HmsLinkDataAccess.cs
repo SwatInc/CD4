@@ -7,21 +7,22 @@ using System.Threading.Tasks;
 
 namespace CD4.DataLibrary.DataAccess
 {
-    public class HmsLinkDataAccess : IHmsLinkDataAccess
+    public class HmsLinkDataAccess : DataAccessBase, IHmsLinkDataAccess
     {
         public async Task<List<HmsLinkDataModel>>
             GetAnalysisRequestDataByEpisodeNumber(int episodeNumber, string query)
         {
             var ConnectionStringName = "HMSLink";
-            var Parameters = new { EpisodeNumber = episodeNumber };
+            var Parameters = new { EpisodeNumber = episodeNumber.ToString() };
 
             try
             {
-
+                var output = await LoadDataWithQueryAndParametersAsync<HmsLinkDataModel, dynamic>
+                    (query, Parameters, ConnectionStringName);
+                return output;
             }
             catch (Exception)
             {
-
                 throw;
             }
 
