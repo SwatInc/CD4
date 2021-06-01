@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CD4.UI</RootNamespace>
     <AssemblyName>CD4.UI</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <LangVersion>8.0</LangVersion>
@@ -27,10 +27,11 @@
     <UpdateUrl>https://1drv.ms/u/s!AiA1ilAlI98lgsZu_QXROvvUexlSqQ%3fe=dvZZjy/</UpdateUrl>
     <WebPage>publish.htm</WebPage>
     <ApplicationRevision>11</ApplicationRevision>
-    <ApplicationVersion>0.5.1.%2a</ApplicationVersion>
+    <ApplicationVersion>0.7.1.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -259,7 +260,7 @@
     <Compile Include="Report\SeventyFiveMillimeterTubeLabel.Designer.cs">
       <DependentUpon>SeventyFiveMillimeterTubeLabel.cs</DependentUpon>
     </Compile>
-    <Compile Include="UiSpecificModels\CinAndReportIdModel.cs" />
+    <Compile Include="UiSpecificModels\CinEpisodeAndReportIdModel.cs" />
     <Compile Include="UiSpecificModels\DisciplineMenu.cs" />
     <Compile Include="UiSpecificModels\GridColumnModel.cs" />
     <Compile Include="UiSpecificModels\ReportActionModel.cs" />
