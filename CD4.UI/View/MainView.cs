@@ -1,5 +1,6 @@
 ﻿using CD4.DataLibrary.DataAccess;
 using CD4.Entensibility.ReportingFramework;
+using CD4.UI.Library.Helpers;
 using CD4.UI.Library.ViewModel;
 using CD4.UI.UiSpecificModels;
 using DevExpress.Skins;
@@ -21,6 +22,7 @@ namespace CD4.UI.View
     {
         private readonly IReportsDataAccess reportsDataAccess;
         private readonly IUserAuthEvaluator _authEvaluator;
+        private readonly IGlobalSettingsHelper _globalSettingsHelper;
         private readonly ILoadMultipleExtensions _reportExtensions;
         private string LoadedLibraryVersions;
         public event EventHandler<int> SelectedDisciplineChanged;
@@ -30,6 +32,7 @@ namespace CD4.UI.View
         public MainView(IMainViewModel viewModel,
             IReportsDataAccess reportsDataAccess,
             IUserAuthEvaluator authEvaluator,
+            IGlobalSettingsHelper globalSettingsHelper,
             ILoadMultipleExtensions reportExtensions)
         {
             InitializeComponent();
@@ -40,6 +43,7 @@ namespace CD4.UI.View
             _viewModel = viewModel;
             this.reportsDataAccess = reportsDataAccess;
             _authEvaluator = authEvaluator;
+            _globalSettingsHelper = globalSettingsHelper;
             _reportExtensions = reportExtensions;
 
             //load auth UI
@@ -389,13 +393,13 @@ namespace CD4.UI.View
             }
         }
 
-        private void ResultView_OnGenerateReportByCin(object sender, CinAndReportIdModel cinAndReportIdModel)
+        private void ResultView_OnGenerateReportByCin(object sender, CinEpisodeAndReportIdModel cinAndReportIdModel)
         {
             //open report view
             // this.OpenMdiForm<ReportView>(cin);
 
             var reportView = new ReportView(reportsDataAccess, 
-                cinAndReportIdModel, _viewModel.GetloggedInUserId(), _reportExtensions) { MdiParent = this };
+                cinAndReportIdModel, _viewModel.GetloggedInUserId(), _reportExtensions, _globalSettingsHelper) { MdiParent = this };
             reportView.Show();
         }
     }

@@ -17,15 +17,17 @@ namespace CD4.UI.View
     public partial class ReportView : DevExpress.XtraEditors.XtraForm
     {
         private readonly IReportsDataAccess _reportsData;
-        private readonly CinAndReportIdModel _cinAndReportId;
+        private readonly CinEpisodeAndReportIdModel _cinAndReportId;
         private readonly int _loggedInUserId;
         private readonly ILoadMultipleExtensions _reportExtensions;
+        private readonly IGlobalSettingsHelper _globalSettingsHelper;
 
         public event EventHandler OnSearchByCin;
         public ReportView(IReportsDataAccess reportsData,
-            CinAndReportIdModel cinAndReportId,
+            CinEpisodeAndReportIdModel cinAndReportId,
             int loggedInUserId,
-            ILoadMultipleExtensions reportExtensions)
+            ILoadMultipleExtensions reportExtensions,
+            IGlobalSettingsHelper globalSettingsHelper)
         {
             InitializeComponent();
 
@@ -34,9 +36,17 @@ namespace CD4.UI.View
             _cinAndReportId = cinAndReportId;
             _loggedInUserId = loggedInUserId;
             _reportExtensions = reportExtensions;
+            _globalSettingsHelper = globalSettingsHelper;
 
             //Write cin to form Tag
-            Tag = cinAndReportId.Cin;
+            if (_globalSettingsHelper.Settings.IsReportByEpisode)
+            {
+                Tag = cinAndReportId.EpisodeNumber;
+            }
+            else
+            {
+                Tag = cinAndReportId.Cin;
+            }
             StartReportGenerationSequence();
 
         }
@@ -69,10 +79,21 @@ namespace CD4.UI.View
 
             try
             {
-                var report = await _reportsData.GetAnalysisReportByCinAsync((string)Tag, _loggedInUserId).ConfigureAwait(true);
-                //map OR automap this response to an object from reporting framework and pass to the report to allow the report to do what ever
-                //crazy mapping it needs to do.
-                MapDataToReport(report.FirstOrDefault());
+                if (_globalSettingsHelper.Settings.IsReportByEpisode)
+                {
+                   var report = await _reportsData.GetAnalysisReportForepisodeAsync((string)Tag, _loggedInUserId).ConfigureAwait(true);
+                    //map OR automap this response to an object from reporting framework and pass to the report to allow the report to do what ever
+                    //crazy mapping it needs to do.
+                    MapDataToReport(report.FirstOrDefault());
+                }
+                else
+                {
+                    var  report = await _reportsData.GetAnalysisReportByCinAsync((string)Tag, _loggedInUserId).ConfigureAwait(true);
+                    //map OR automap this response to an object from reporting framework and pass to the report to allow the report to do what ever
+                    //crazy mapping it needs to do.
+                    MapDataToReport(report.FirstOrDefault());
+                }
+
             }
             catch (Exception ex)
             {

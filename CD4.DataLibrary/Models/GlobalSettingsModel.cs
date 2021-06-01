@@ -13,6 +13,6 @@ namespace CD4.DataLibrary.Models
         public string ReportExportBasePath { get; set; }
         public bool IsFullnameAbbreviated { get; set; }
         public string HmsLinkQuery { get; set; }
-
+        public bool IsReportByEpisode { get; set; }
     }
 }

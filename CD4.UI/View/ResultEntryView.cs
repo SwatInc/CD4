@@ -28,10 +28,11 @@ namespace CD4.UI.View
         private readonly ICommentHelper _commentHelper;
         private readonly ILateOrderEntryViewModel _lateOrderEntryViewModel;
         private readonly ILabNotesViewModel _labNotesViewModel;
+        private readonly IGlobalSettingsHelper _globalSettingsHelper;
         private readonly ILoadMultipleExtensions _reportExtensions;
         System.Windows.Forms.Timer dataRefreshTimer = new System.Windows.Forms.Timer() { Enabled = true, Interval = 1000 };
 
-        public event EventHandler<CinAndReportIdModel> GenerateReportByCin;
+        public event EventHandler<CinEpisodeAndReportIdModel> GenerateReportByCin;
         public event EventHandler PrintBarcodeClick;
 
         public ResultEntryView(IResultEntryViewModel viewModel,
@@ -41,6 +42,7 @@ namespace CD4.UI.View
             ICommentHelper commentHelper,
             ILateOrderEntryViewModel lateOrderEntryViewModel,
             ILabNotesViewModel labNotesViewModel,
+            IGlobalSettingsHelper globalSettingsHelper,
             ILoadMultipleExtensions reportExtensions)
         {
             InitializeComponent();
@@ -57,6 +59,7 @@ namespace CD4.UI.View
             _commentHelper = commentHelper;
             _lateOrderEntryViewModel = lateOrderEntryViewModel;
             _labNotesViewModel = labNotesViewModel;
+            _globalSettingsHelper = globalSettingsHelper;
             _reportExtensions = reportExtensions;
             InitializeBinding();
             InitializePrintMenu();
@@ -680,8 +683,8 @@ namespace CD4.UI.View
 
             if (!DecideToContinuePrinting(cin)) return;
 
-            GenerateReportByCin?.Invoke(this, new CinAndReportIdModel() { Cin = cin, ReportIndex = 3, Action = ReportActionModel.Print });
-            GenerateReportByCin?.Invoke(this, new CinAndReportIdModel() { Cin = cin, ReportIndex = 4, Action = ReportActionModel.Print });
+            GenerateReportByCin?.Invoke(this, new CinEpisodeAndReportIdModel() { Cin = cin, ReportIndex = 3, Action = ReportActionModel.Print });
+            GenerateReportByCin?.Invoke(this, new CinEpisodeAndReportIdModel() { Cin = cin, ReportIndex = 4, Action = ReportActionModel.Print });
 
         }
 
@@ -1149,13 +1152,15 @@ namespace CD4.UI.View
             //get the instance of XtraReport to generate report with..
             var reportId = GetReportIndex(sender);
 
+            string episodeNumber = null;
+            if (_globalSettingsHelper.Settings.IsReportByEpisode) { episodeNumber = _viewModel.RequestData.Find((x) => x.Cin == cin).EpisodeNumber; }
             if (sender.GetType() == typeof(SimpleButton))
             {
-                GenerateReportByCin?.Invoke(this, new CinAndReportIdModel() { Cin = cin, ReportIndex = reportId, Action = ReportActionModel.Print });
+                GenerateReportByCin?.Invoke(this, new CinEpisodeAndReportIdModel() { Cin = cin,EpisodeNumber = episodeNumber, ReportIndex = reportId, Action = ReportActionModel.Print });
             }
             else
             {
-                GenerateReportByCin?.Invoke(this, new CinAndReportIdModel() { Cin = cin, ReportIndex = reportId, Action = ReportActionModel.Export });
+                GenerateReportByCin?.Invoke(this, new CinEpisodeAndReportIdModel() { Cin = cin,EpisodeNumber = episodeNumber, ReportIndex = reportId, Action = ReportActionModel.Export });
             }
             //Raise an event indicating that a sample report is requested.
         }
