@@ -39,12 +39,14 @@
             this.labelControlWelcomeMessage = new DevExpress.XtraEditors.LabelControl();
             this.separatorControl1 = new DevExpress.XtraEditors.SeparatorControl();
             this.simpleButtonCancel = new DevExpress.XtraEditors.SimpleButton();
+            this.pictureEditASMH_logo = new DevExpress.XtraEditors.PictureEdit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditPassword.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditUsername.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureEditLaboratoryLogo.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControlAuthView)).BeginInit();
             this.groupControlAuthView.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.separatorControl1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEditASMH_logo.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // textEditPassword
@@ -190,6 +192,7 @@
             // groupControlAuthView
             // 
             this.groupControlAuthView.Controls.Add(this.ProgressPanelAuthentication);
+            this.groupControlAuthView.Controls.Add(this.pictureEditASMH_logo);
             this.groupControlAuthView.Controls.Add(this.labelControlWelcomeMessage);
             this.groupControlAuthView.Controls.Add(this.separatorControl1);
             this.groupControlAuthView.Controls.Add(this.simpleButtonCancel);
@@ -201,7 +204,7 @@
             this.groupControlAuthView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControlAuthView.Location = new System.Drawing.Point(0, 0);
             this.groupControlAuthView.Name = "groupControlAuthView";
-            this.groupControlAuthView.Size = new System.Drawing.Size(623, 301);
+            this.groupControlAuthView.Size = new System.Drawing.Size(629, 307);
             this.groupControlAuthView.TabIndex = 49;
             // 
             // labelControlWelcomeMessage
@@ -259,6 +262,21 @@
             this.simpleButtonCancel.TabIndex = 4;
             this.simpleButtonCancel.Text = "Cancel";
             // 
+            // pictureEditASMH_logo
+            // 
+            this.pictureEditASMH_logo.EditValue = ((object)(resources.GetObject("pictureEditASMH_logo.EditValue")));
+            this.pictureEditASMH_logo.Location = new System.Drawing.Point(12, 34);
+            this.pictureEditASMH_logo.Name = "pictureEditASMH_logo";
+            this.pictureEditASMH_logo.Properties.AllowFocused = false;
+            this.pictureEditASMH_logo.Properties.Appearance.BackColor = System.Drawing.Color.Transparent;
+            this.pictureEditASMH_logo.Properties.Appearance.Options.UseBackColor = true;
+            this.pictureEditASMH_logo.Properties.BorderStyle = DevExpress.XtraEditors.Controls.BorderStyles.NoBorder;
+            this.pictureEditASMH_logo.Properties.ShowCameraMenuItem = DevExpress.XtraEditors.Controls.CameraMenuItemVisibility.Auto;
+            this.pictureEditASMH_logo.Properties.SizeMode = DevExpress.XtraEditors.Controls.PictureSizeMode.Zoom;
+            this.pictureEditASMH_logo.Properties.ZoomPercent = 75D;
+            this.pictureEditASMH_logo.Size = new System.Drawing.Size(261, 256);
+            this.pictureEditASMH_logo.TabIndex = 51;
+            // 
             // AuthenticationView
             // 
             this.Appearance.BackColor = System.Drawing.SystemColors.Control;
@@ -266,7 +284,7 @@
             this.Appearance.Options.UseFont = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(623, 301);
+            this.ClientSize = new System.Drawing.Size(629, 307);
             this.ControlBox = false;
             this.Controls.Add(this.groupControlAuthView);
             this.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -287,6 +305,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.groupControlAuthView)).EndInit();
             this.groupControlAuthView.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.separatorControl1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureEditASMH_logo.Properties)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -303,5 +322,6 @@
         internal DevExpress.XtraEditors.SimpleButton simpleButtonCancel;
         private DevExpress.XtraEditors.SeparatorControl separatorControl1;
         private DevExpress.XtraEditors.LabelControl labelControlWelcomeMessage;
+        private DevExpress.XtraEditors.PictureEdit pictureEditASMH_logo;
     }
 }

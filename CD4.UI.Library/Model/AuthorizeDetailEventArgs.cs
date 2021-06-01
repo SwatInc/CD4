@@ -19,6 +19,7 @@ namespace CD4.UI.Library.Model
             this.ClaimsCsv = authorizeDetailEvent.ClaimsCsv;
             this.UserId = authorizeDetailEvent.UserId;
             this.IsAuthenticated = authorizeDetailEvent.IsAuthenticated;
+            this.Message = authorizeDetailEvent.Message;
         }
 
         public string UserRole { get; set; }

@@ -57,7 +57,14 @@ namespace CD4.UI.View
             else
             {
                 //show a message that auth failed
-                XtraMessageBox.Show("Invalid username or password! Please try again.");
+                if (e.Message != null)
+                {
+                    XtraMessageBox.Show(e.Message);
+                }
+                else
+                {
+                    XtraMessageBox.Show("Invalid username or password! Please try again.");
+                }
                 //hide authenticating animation
                 SetNormalUiState();
                 //Clear out the textedits and get focus to username
