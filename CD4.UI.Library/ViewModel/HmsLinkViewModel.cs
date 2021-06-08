@@ -346,7 +346,8 @@ namespace CD4.UI.Library.ViewModel
                         Birthdate = patient.Birthdate,
                         Address = patient.Address,
                         AtollId = GetAtoll(hmsLinkData.RegAtollId, hmsLinkData.RegIslandId).Id,
-                        CountryId = 1,
+                        CountryId = GetCountryIdFromBillingAtollData_ASMH_Specific
+                                        (hmsLinkData.RegAtollId, hmsLinkData.RegIslandId),
 
                         ClinicalDetails = new List<ClinicalDetailsOrderEntryModel>(),
                         Tests = sample.Tests,
@@ -370,6 +371,17 @@ namespace CD4.UI.Library.ViewModel
                 LoadingStaticDataStatus = false;
             }
 
+        }
+
+        private int GetCountryIdFromBillingAtollData_ASMH_Specific(int regAtollId, int regIslandId)
+        {
+            if (regAtollId == 1023)
+            {
+                var isValidcountryId = int.TryParse($"{regAtollId}{regIslandId}", out var countryId);
+                if (isValidcountryId) { return countryId; }
+            }
+
+            return 10231130; //maldives
         }
 
         private string GetExistingSeedFromCins(List<string> alreadyRegisteredSids)
@@ -404,7 +416,8 @@ namespace CD4.UI.Library.ViewModel
         private async Task<List<SampleWithTestsModel>> GenerateSamplesAsync(List<HmsLinkDataModel> dataToConfirm, string existingSeed = null)
         {
             //get the seed without prefix... use existing seed if available
-            string seed = existingSeed != null ? existingSeed 
+            string seed = existingSeed != null 
+                ? existingSeed
                 : await _analysisRequestDataAccess.GetNextCinSeedWithoutPrefix();
 
             var samples = new List<SampleWithTestsModel>();
