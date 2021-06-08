@@ -310,6 +310,10 @@
     <Build Include="dbo\StoredProcedures\usp_DecideUpsertResultComment.sql" />
     <Build Include="dbo\StoredProcedures\usp_UpdateResultComment.sql" />
     <Build Include="dbo\StoredProcedures\usp_InsertResultComment.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetCinsByEpisodeNumber.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetBarcodesForEpisode.sql" />
+    <Build Include="dbo\StoredProcedures\usp_CollectAllSamplesForEpisode.sql" />
+    <Build Include="dbo\StoredProcedures\usp_GetAnalysisReportForEpisode.sql" />
   </ItemGroup>
   <ItemGroup>
     <RefactorLog Include="CD4.Data.refactorlog" />

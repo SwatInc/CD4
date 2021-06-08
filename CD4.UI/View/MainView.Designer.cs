@@ -30,6 +30,11 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainView));
+            DevExpress.Utils.SuperToolTip superToolTip1 = new DevExpress.Utils.SuperToolTip();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem1 = new DevExpress.Utils.ToolTipTitleItem();
+            DevExpress.Utils.ToolTipItem toolTipItem1 = new DevExpress.Utils.ToolTipItem();
+            DevExpress.Utils.ToolTipSeparatorItem toolTipSeparatorItem1 = new DevExpress.Utils.ToolTipSeparatorItem();
+            DevExpress.Utils.ToolTipTitleItem toolTipTitleItem2 = new DevExpress.Utils.ToolTipTitleItem();
             this.ribbon = new DevExpress.XtraBars.Ribbon.RibbonControl();
             this.barButtonItemCodifiedResults = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemCountries = new DevExpress.XtraBars.BarButtonItem();
@@ -71,6 +76,7 @@
             this.ribbonPageGroup5 = new DevExpress.XtraBars.Ribbon.RibbonPageGroup();
             this.repositoryItemRatingControl1 = new DevExpress.XtraEditors.Repository.RepositoryItemRatingControl();
             this.ribbonStatusBar = new DevExpress.XtraBars.Ribbon.RibbonStatusBar();
+            this.barButtonItemHmsLink = new DevExpress.XtraBars.BarButtonItem();
             ((System.ComponentModel.ISupportInitialize)(this.ribbon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.popupMenuDiscipline)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.repositoryItemRatingControl1)).BeginInit();
@@ -104,9 +110,10 @@
             this.barButtonItem1,
             this.barButtonItemUpdatePatientDetailsView,
             this.barHeaderItemCD4Version,
-            this.barButtonItemNdaTracking});
+            this.barButtonItemNdaTracking,
+            this.barButtonItemHmsLink});
             this.ribbon.Location = new System.Drawing.Point(0, 0);
-            this.ribbon.MaxItemId = 36;
+            this.ribbon.MaxItemId = 37;
             this.ribbon.Name = "ribbon";
             this.ribbon.PageCategories.AddRange(new DevExpress.XtraBars.Ribbon.RibbonPageCategory[] {
             this.ribbonPageCategoryDiscipline});
@@ -121,7 +128,7 @@
             this.ribbon.ShowDisplayOptionsMenuButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbon.ShowMoreCommandsButton = DevExpress.Utils.DefaultBoolean.False;
             this.ribbon.ShowToolbarCustomizeItem = false;
-            this.ribbon.Size = new System.Drawing.Size(1120, 162);
+            this.ribbon.Size = new System.Drawing.Size(1120, 143);
             this.ribbon.StatusBar = this.ribbonStatusBar;
             this.ribbon.Tag = "ribbon";
             this.ribbon.Toolbar.ShowCustomizeItem = false;
@@ -358,6 +365,7 @@
             // 
             // ribbonPageGroup2
             // 
+            this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemHmsLink);
             this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemOrderEntry);
             this.ribbonPageGroup2.ItemLinks.Add(this.barButtonItemBulkImportOrders);
             this.ribbonPageGroup2.Name = "ribbonPageGroup2";
@@ -440,10 +448,29 @@
             // 
             this.ribbonStatusBar.ItemLinks.Add(this.barStaticItemUsernameAndRole);
             this.ribbonStatusBar.ItemLinks.Add(this.barHeaderItemCD4Version);
-            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 516);
+            this.ribbonStatusBar.Location = new System.Drawing.Point(0, 511);
             this.ribbonStatusBar.Name = "ribbonStatusBar";
             this.ribbonStatusBar.Ribbon = this.ribbon;
-            this.ribbonStatusBar.Size = new System.Drawing.Size(1120, 26);
+            this.ribbonStatusBar.Size = new System.Drawing.Size(1120, 31);
+            // 
+            // barButtonItemHmsLink
+            // 
+            this.barButtonItemHmsLink.Caption = "HMS Link";
+            this.barButtonItemHmsLink.Id = 36;
+            this.barButtonItemHmsLink.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("barButtonItem2.ImageOptions.SvgImage")));
+            this.barButtonItemHmsLink.Name = "barButtonItemHmsLink";
+            toolTipTitleItem1.ImageOptions.SvgImage = ((DevExpress.Utils.Svg.SvgImage)(resources.GetObject("resource.SvgImage")));
+            toolTipTitleItem1.Text = "Import Analysis Requests";
+            toolTipItem1.LeftIndent = 6;
+            toolTipItem1.Text = "Imports Analysis Requests from HMS\r\nbilling component and  generates and\r\ngenerat" +
+    "es barcodes for samples. ";
+            toolTipTitleItem2.LeftIndent = 6;
+            toolTipTitleItem2.Text = "HMS link";
+            superToolTip1.Items.Add(toolTipTitleItem1);
+            superToolTip1.Items.Add(toolTipItem1);
+            superToolTip1.Items.Add(toolTipSeparatorItem1);
+            superToolTip1.Items.Add(toolTipTitleItem2);
+            this.barButtonItemHmsLink.SuperTip = superToolTip1;
             // 
             // MainView
             // 
@@ -512,5 +539,6 @@
         private DevExpress.XtraBars.Ribbon.RibbonPageGroup ribbonPageGroup7;
         private DevExpress.XtraBars.BarHeaderItem barHeaderItemCD4Version;
         private DevExpress.XtraBars.BarButtonItem barButtonItemNdaTracking;
+        private DevExpress.XtraBars.BarButtonItem barButtonItemHmsLink;
     }
 }

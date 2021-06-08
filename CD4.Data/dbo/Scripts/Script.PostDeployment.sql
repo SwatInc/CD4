@@ -14,7 +14,8 @@
 
 --Global settings json
 DELETE FROM [dbo].[GlobalSettings];
-INSERT INTO [dbo].[GlobalSettings]([JsonSettings]) VALUES ('{"VerifyNidPpOnOrder":true,"IsAnalysisRequestBarcodeRequired":true,"ReportExportBasePath":"C:\\Logs\\","IsFullnameAbbreviated":false}')
+INSERT INTO [dbo].[GlobalSettings]([JsonSettings]) VALUES ('{"VerifyNidPpOnOrder": true,"IsAnalysisRequestBarcodeRequired": true,"ReportExportBasePath": "C:\\Logs\\","IsFullnameAbbreviated": false,"HmsLinkQuery":"SELECT [Billid] AS [EpisodeNumber] ,[ptidxno] AS [PatientId] ,[idcard] AS [NidPp] ,[ptName] AS [FullName] ,[sex] AS [Gender] ,[RegAtoll] AS [RegAtollId] ,[regisland] AS [RegIslandId] ,[dob] AS [Birthdate],[BilledDate],[billitemdetailentryid] AS [BillItemDetailEntryId] ,[itemcode] AS [ItemCode] ,[itemdescription] AS [ItemDescription] FROM [ptinfo] [P] INNER JOIN [CashBillMain] [CBM] ON [CBM].[billservedpersonId] = [P].[ptidxno] INNER JOIN [cashbillitemdetail] [CBID] ON [CBID].[billno] = [CBM].[billid] INNER JOIN [serviceList] [SL] ON [SL].[serviceId] = [CBID].[itemcode] WHERE [serviceMainCatId] = 11 AND [isdeleted] = 0 AND [CBM].[billid] = @MemoNumber;","IsReportByEpisode":true}')
+
 --{"VerifyNidPpOnOrder":true,"IsAnalysisRequestBarcodeRequired":true,"ReportExportBasePath":"C:\\Logs\\","IsFullnameAbbreviated":false}
 
 --INSERT INTO [dbo].[Sites] ([Name])

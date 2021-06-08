@@ -12,6 +12,7 @@ namespace CD4.UI.Library.Model
         public bool IsAnalysisRequestBarcodeRequired { get; set; }
         public string ReportExportBasePath { get; set; }
         public bool IsFullnameAbbreviated { get; set; }
-
+        public string HmsLinkQuery { get; set; }
+        public bool IsReportByEpisode { get; set; }
     }
 }

@@ -31,6 +31,17 @@ namespace CD4.DataLibrary.DataAccess
                 var storedProcedure = "[dbo].[usp_GetUserRoleAndClaims]";
                 var parameter = new { username = username };
                 var queryResult = await SelectInsertOrUpdateAsync<AuthorizeDetailModel, dynamic>(storedProcedure, parameter);
+                //if no claims/roles assigned to the user... queryResult will be null.
+                if (queryResult is null)
+                {
+                    return new AuthorizeDetailModel()
+                    {
+                        IsAuthenticated = false,
+                        Message = $"Authentication is successful but, {username} does not have any permissions assigned on CD4.\n"
+                                  + "Please request permissions from the Laboratory Manager."
+                    };
+                }
+
                 queryResult.IsAuthenticated = true;
                 return queryResult;
             }

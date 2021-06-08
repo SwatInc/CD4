@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace CD4.UI.Library.Helpers
 {
@@ -33,12 +34,28 @@ namespace CD4.UI.Library.Helpers
                     VerifyNidPpOnOrder = settings.VerifyNidPpOnOrder,
                     IsAnalysisRequestBarcodeRequired = settings.IsAnalysisRequestBarcodeRequired,
                     ReportExportBasePath = settings.ReportExportBasePath,
-                    IsFullnameAbbreviated = settings.IsFullnameAbbreviated
+                    IsFullnameAbbreviated = settings.IsFullnameAbbreviated,
+                    HmsLinkQuery = settings.HmsLinkQuery,
+                    IsReportByEpisode = settings.IsReportByEpisode
                 };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+
+                MessageBox.Show($"{ex.Message}\n{ex}");
+
+                //handle any inner exceptions
+                var inner = ex.InnerException;
+                var errorMessage = "Inner Stack Trace\n-------------------------\n";
+
+                while (inner != null)
+                {
+                    errorMessage = $"{errorMessage}\n{inner.Message}\n{inner.StackTrace}";
+                    //get the next inner exception for next iteration
+                    inner = inner.InnerException;
+                }
+
+                MessageBox.Show(errorMessage);
             }
 
         }

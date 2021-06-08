@@ -18,7 +18,7 @@ using System.Threading.Tasks;
 
 namespace CD4.UI.Library.ViewModel
 {
-    public class OrderEntryViewModel : INotifyPropertyChanged, IOrderEntryViewModel
+    public class OrderEntryViewModel : ViewModelBase, IOrderEntryViewModel
     {
 
         #region Private Properties
@@ -86,17 +86,6 @@ namespace CD4.UI.Library.ViewModel
             PropertyChanged += OrderEntryViewModel_PropertyChanged;
             InitializeStaticData += OnInitializeStaticDataAsync;
             InitializeStaticData(this, EventArgs.Empty);
-        }
-
-        #endregion
-
-        #region INotifyPropertyChanged Hookup
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        private void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
         #endregion
@@ -556,7 +545,6 @@ namespace CD4.UI.Library.ViewModel
             }
             catch (Exception)
             {
-
                 throw;
             }
 
@@ -1110,7 +1098,7 @@ namespace CD4.UI.Library.ViewModel
         }
 
 
-        //this code is dublicated on ResultEntry View Model. Handle this a bit more gracefully later
+        //this code is dublicated on ResultEntry View Model and hmsLink view model. Handle this a bit more gracefully later
         public async Task<List<BarcodeDataModel>> GetBarcodeDataAsync()
         {
             try

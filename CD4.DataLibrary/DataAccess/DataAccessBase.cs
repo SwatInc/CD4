@@ -35,6 +35,17 @@ namespace CD4.DataLibrary.DataAccess
             return results.ToList();
         }
 
+        internal async Task<List<T>> LoadDataWithQueryAndParametersAsync<T,U>(string query, U parameters, string connectionName = "CD4Data" )
+        {
+            IEnumerable<T> results = new List<T>();
+            using (IDbConnection connection = new SqlConnection(helper.GetConnectionString(connectionName)))
+            {
+                results = await connection.QueryAsync<T>(query,parameters);
+            }
+
+            return results.ToList();
+        }
+
 #pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
         internal async Task<List<T>> LoadDataWithParameterAsync<T,U>
 #pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
@@ -276,7 +287,7 @@ namespace CD4.DataLibrary.DataAccess
         /// <param name="storedProcedure">Stored procedure name</param>
         /// <param name="parameters">An instance with the required parameter, Cin</param>
         /// <returns>A Task of AnalysisReportDatabaseModel</returns>
-        internal async Task<AnalysisReportDatabaseModel> LoadAnalysisReportByCinAsync<T>(string storedProcedure, T parameters)
+        internal async Task<AnalysisReportDatabaseModel> LoadAnalysisReportAsync<T>(string storedProcedure, T parameters)
         {
             //initialize patient and results models
             var patient = new PatientForAnalysisReportDatabaseModel();

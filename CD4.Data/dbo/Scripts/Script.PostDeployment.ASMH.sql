@@ -6,496 +6,1133 @@ Post deployment script for Abdul Samadh Memorial Hospital
 */
 
 -- INSERT SITES
-INSERT INTO [dbo].[Sites] ([Name])
-  VALUES ('PHELBOTOMY');
+SET IDENTITY_INSERT [dbo].[Sites] ON;
+INSERT INTO [dbo].[Sites] ([Id],[Name])
+  VALUES (1,'PHELBOTOMY');
+SET IDENTITY_INSERT [dbo].[Sites] OFF;
 
 -- INSERT NATIONALITIES
-INSERT INTO [dbo].[Country] ([Country])
-  VALUES ('Afghan'),
-('Albanian'),
-('Algerian'),
-('American'),
-('Andorran'),
-('Angolan'),
-('Anguillan'),
-('Argentine'),
-('Armenian'),
-('Australian'),
-('Austrian'),
-('Azerbaijani'),
-('Bahamian'),
-('Bahraini'),
-('Bangladeshi'),
-('Barbadian'),
-('Belarusian'),
-('Belgian'),
-('Belizean'),
-('Beninese'),
-('Bermudian'),
-('Bhutanese'),
-('Bolivian'),
-('Botswanan'),
-('Brazilian'),
-('British'),
-('British Virgin Islander'),
-('Bruneian'),
-('Bulgarian'),
-('Burkinan'),
-('Burmese'),
-('Burundian'),
-('Cambodian'),
-('Cameroonian'),
-('Canadian'),
-('Cape Verdean'),
-('Cayman Islander'),
-('Central African'),
-('Chadian'),
-('Chilean'),
-('Chinese'),
-('Citizen of Antigua and Barbuda'),
-('Citizen of Bosnia and Herzegovina'),
-('Citizen of Guinea-Bissau'),
-('Citizen of Kiribati'),
-('Citizen of Seychelles'),
-('Citizen of the Dominican Republic'),
-('Citizen of Vanuatu'),
-('Colombian'),
-('Comoran'),
-('Congolese (Congo)'),
-('Congolese (DRC)'),
-('Cook Islander'),
-('Costa Rican'),
-('Croatian'),
-('Cuban'),
-('Cymraes'),
-('Cymro'),
-('Cypriot'),
-('Czech'),
-('Danish'),
-('Djiboutian'),
-('Dominican'),
-('Dutch'),
-('East Timorese'),
-('Ecuadorean'),
-('Egyptian'),
-('Emirati'),
-('English'),
-('Equatorial Guinean'),
-('Eritrean'),
-('Estonian'),
-('Ethiopian'),
-('Faroese'),
-('Fijian'),
-('Filipino'),
-('Finnish'),
-('French'),
-('Gabonese'),
-('Gambian'),
-('Georgian'),
-('German'),
-('Ghanaian'),
-('Gibraltarian'),
-('Greek'),
-('Greenlandic'),
-('Grenadian'),
-('Guamanian'),
-('Guatemalan'),
-('Guinean'),
-('Guyanese'),
-('Haitian'),
-('Honduran'),
-('Hong Konger'),
-('Hungarian'),
-('Icelandic'),
-('Indian'),
-('Indonesian'),
-('Iranian'),
-('Iraqi'),
-('Irish'),
-('Israeli'),
-('Italian'),
-('Ivorian'),
-('Jamaican'),
-('Japanese'),
-('Jordanian'),
-('Kazakh'),
-('Kenyan'),
-('Kittitian'),
-('Kosovan'),
-('Kuwaiti'),
-('Kyrgyz'),
-('Lao'),
-('Latvian'),
-('Lebanese'),
-('Liberian'),
-('Libyan'),
-('Liechtenstein citizen'),
-('Lithuanian'),
-('Luxembourger'),
-('Macanese'),
-('Macedonian'),
-('Malagasy'),
-('Malawian'),
-('Malaysian'),
-('Maldivian'),
-('Malian'),
-('Maltese'),
-('Marshallese'),
-('Martiniquais'),
-('Mauritanian'),
-('Mauritian'),
-('Mexican'),
-('Micronesian'),
-('Moldovan'),
-('Monegasque'),
-('Mongolian'),
-('Montenegrin'),
-('Montserratian'),
-('Moroccan'),
-('Mosotho'),
-('Mozambican'),
-('Namibian'),
-('Nauruan'),
-('Nepalese'),
-('New Zealander'),
-('Nicaraguan'),
-('Nigerian'),
-('Nigerien'),
-('Niuean'),
-('North Korean'),
-('Northern Irish'),
-('Norwegian'),
-('Omani'),
-('Pakistani'),
-('Palauan'),
-('Palestinian'),
-('Panamanian'),
-('Papua New Guinean'),
-('Paraguayan'),
-('Peruvian'),
-('Pitcairn Islander'),
-('Polish'),
-('Portuguese'),
-('Prydeinig'),
-('Puerto Rican'),
-('Qatari'),
-('Romanian'),
-('Russian'),
-('Rwandan'),
-('Salvadorean'),
-('Sammarinese'),
-('Samoan'),
-('Sao Tomean'),
-('Saudi Arabian'),
-('Scottish'),
-('Senegalese'),
-('Serbian'),
-('Sierra Leonean'),
-('Singaporean'),
-('Slovak'),
-('Slovenian'),
-('Solomon Islander'),
-('Somali'),
-('South African'),
-('South Korean'),
-('South Sudanese'),
-('Spanish'),
-('Sri Lankan'),
-('St Helenian'),
-('St Lucian'),
-('Stateless'),
-('Sudanese'),
-('Surinamese'),
-('Swazi'),
-('Swedish'),
-('Swiss'),
-('Syrian'),
-('Taiwanese'),
-('Tajik'),
-('Tanzanian'),
-('Thai'),
-('Togolese'),
-('Tongan'),
-('Trinidadian'),
-('Tristanian'),
-('Tunisian'),
-('Turkish'),
-('Turkmen'),
-('Turks and Caicos Islander'),
-('Tuvaluan'),
-('Ugandan'),
-('Ukrainian'),
-('UNKNOWN'),
-('Uruguayan'),
-('Uzbek'),
-('Vatican citizen'),
-('Venezuelan'),
-('Vietnamese'),
-('Vincentian'),
-('Wallisian'),
-('Welsh'),
-('Yemeni'),
-('Zambian'),
-('Zimbabwean');
+SET IDENTITY_INSERT [dbo].[Country] ON;
+INSERT INTO [dbo].[Country] ([Id],[Country])
+  VALUES 
+(10231001,'Afghanistan'),
+(10231002,'Albania'),
+(10231003,'Algeria'),
+(10231004,'American Samoa'),
+(10231005,'Andorra'),
+(10231006,'Angola'),
+(10231007,'Anguilla'),
+(10231008,'Antarctica'),
+(10231009,'Antigua And Barbuda'),
+(10231010,'Argentina'),
+(10231011,'Armenia'),
+(10231012,'Aruba'),
+(10231013,'Australia'),
+(10231014,'Austria'),
+(10231015,'Azerbaijan'),
+(10231016,'Bahamas, The'),
+(10231017,'Bahrain'),
+(10231018,'Bangladesh'),
+(10231019,'Barbados'),
+(10231020,'Belarus'),
+(10231021,'Belgium'),
+(10231022,'Belize'),
+(10231023,'Benin'),
+(10231024,'Bermuda'),
+(10231025,'Bhutan'),
+(10231026,'Bolivia'),
+(10231027,'Bosnia and Herzegovina'),
+(10231028,'Botswana'),
+(10231029,'Bouvet Island'),
+(10231030,'Brazil'),
+(10231031,'British Indian Ocean Territory'),
+(10231032,'Brunei'),
+(10231033,'Bulgaria'),
+(10231034,'Burkina Faso'),
+(10231035,'Burundi'),
+(10231036,'Cambodia'),
+(10231037,'Cameroon'),
+(10231038,'Canada'),
+(10231039,'Cape Verde'),
+(10231040,'Cayman Islands'),
+(10231041,'Central African Republic'),
+(10231042,'Chad'),
+(10231043,'Chile'),
+(10231044,'China'),
+(10231045,'China (Hong Kong S.A.R.)'),
+(10231046,'China (Macau S.A.R.)'),
+(10231047,'Christmas Island'),
+(10231048,'Cocos (Keeling) Islands'),
+(10231049,'Colombia'),
+(10231050,'Comoros'),
+(10231051,'Congo'),
+(10231052,'Congo, Democractic Republic of the  '),
+(10231053,'Cook Islands'),
+(10231054,'Costa Rica'),
+(10231055,'Cote D''Ivoire (Ivory Coast)'),
+(10231056,'Croatia (Hrvatska)'),
+(10231057,'Cuba'),
+(10231058,'Cyprus'),
+(10231059,'Czech Republic'),
+(10231060,'Denmark'),
+(10231061,'Djibouti'),
+(10231062,'Dominica'),
+(10231063,'Dominican Republic'),
+(10231064,'East Timor'),
+(10231065,'Ecuador'),
+(10231066,'Egypt'),
+(10231067,'El Salvador'),
+(10231068,'Equatorial Guinea'),
+(10231069,'Eritrea'),
+(10231070,'Estonia'),
+(10231071,'Ethiopia'),
+(10231072,'Falkland Islands (Islas Malvinas)'),
+(10231073,'Faroe Islands'),
+(10231074,'Fiji Islands'),
+(10231075,'Finland'),
+(10231076,'France'),
+(10231077,'French Guiana'),
+(10231078,'French Polynesia'),
+(10231079,'French Southern Territories'),
+(10231080,'Gabon'),
+(10231081,'Gambia, The'),
+(10231082,'Georgia'),
+(10231083,'Germany'),
+(10231084,'Ghana'),
+(10231085,'Gibraltar'),
+(10231086,'Greece'),
+(10231087,'Greenland'),
+(10231088,'Grenada'),
+(10231089,'Guadeloupe'),
+(10231090,'Guam'),
+(10231091,'Guatemala'),
+(10231092,'Guinea'),
+(10231093,'Guinea-Bissau'),
+(10231094,'Guyana'),
+(10231095,'Haiti'),
+(10231096,'Heard and McDonald Islands'),
+(10231097,'Honduras'),
+(10231098,'Hungary'),
+(10231099,'Iceland'),
+(10231100,'India'),
+(10231101,'Indonesia'),
+(10231102,'Iran'),
+(10231103,'Iraq'),
+(10231104,'Ireland'),
+(10231105,'Israel'),
+(10231106,'Italy'),
+(10231107,'Jamaica'),
+(10231108,'Japan'),
+(10231109,'Jordan'),
+(10231110,'Kazakhstan'),
+(10231111,'Kenya'),
+(10231112,'Kiribati'),
+(10231113,'Korea'),
+(10231114,'Korea, North '),
+(10231115,'Kuwait'),
+(10231116,'Kyrgyzstan'),
+(10231117,'Laos'),
+(10231118,'Latvia'),
+(10231119,'Lebanon'),
+(10231120,'Lesotho'),
+(10231121,'Liberia'),
+(10231122,'Libya'),
+(10231123,'Liechtenstein'),
+(10231124,'Lithuania'),
+(10231125,'Luxembourg'),
+(10231126,'Macedonia, Former Yugoslav Republic of'),
+(10231127,'Madagascar'),
+(10231128,'Malawi'),
+(10231129,'Malaysia'),
+(10231130,'Maldives'),
+(10231131,'Mali'),
+(10231132,'Malta'),
+(10231133,'Marshall Islands'),
+(10231134,'Martinique'),
+(10231135,'Mauritania'),
+(10231136,'Mauritius'),
+(10231137,'Mayotte'),
+(10231138,'Mexico'),
+(10231139,'Micronesia'),
+(10231140,'Moldova'),
+(10231141,'Monaco'),
+(10231142,'Mongolia'),
+(10231143,'Montserrat'),
+(10231144,'Morocco'),
+(10231145,'Mozambique'),
+(10231146,'Myanmar'),
+(10231147,'Namibia'),
+(10231148,'Nauru'),
+(10231149,'Nepal'),
+(10231150,'Netherlands Antilles'),
+(10231151,'Netherlands, The'),
+(10231152,'New Caledonia'),
+(10231153,'New Zealand'),
+(10231154,'Nicaragua'),
+(10231155,'Niger'),
+(10231156,'Nigeria'),
+(10231157,'Niue'),
+(10231158,'Norfolk Island'),
+(10231159,'Northern Mariana Islands'),
+(10231160,'Norway'),
+(10231161,'Oman'),
+(10231162,'Pakistan'),
+(10231163,'Palau'),
+(10231164,'Panama'),
+(10231165,'Papua new Guinea'),
+(10231166,'Paraguay'),
+(10231167,'Peru'),
+(10231168,'Philippines'),
+(10231169,'Pitcairn Island'),
+(10231170,'Poland'),
+(10231171,'Portugal'),
+(10231172,'Puerto Rico'),
+(10231173,'Qatar'),
+(10231174,'Reunion'),
+(10231175,'Romania'),
+(10231176,'Russia'),
+(10231177,'Rwanda'),
+(10231178,'Saint Helena'),
+(10231179,'Saint Kitts And Nevis'),
+(10231180,'Saint Lucia'),
+(10231181,'Saint Pierre and Miquelon'),
+(10231182,'Saint Vincent And The Grenadines'),
+(10231183,'Samoa'),
+(10231184,'San Marino'),
+(10231185,'Sao Tome and Principe'),
+(10231186,'Saudi Arabia'),
+(10231187,'Senegal'),
+(10231188,'Seychelles'),
+(10231189,'Sierra Leone'),
+(10231190,'Singapore'),
+(10231191,'Slovakia'),
+(10231192,'Slovenia'),
+(10231193,'Solomon Islands'),
+(10231194,'Somalia'),
+(10231195,'South Africa'),
+(10231196,'South Georgia And The South Sandwich Islands'),
+(10231197,'Spain'),
+(10231198,'Sri Lanka'),
+(10231199,'Sudan'),
+(10231200,'Suriname'),
+(10231201,'Svalbard And Jan Mayen Islands'),
+(10231202,'Swaziland'),
+(10231203,'Sweden'),
+(10231204,'Switzerland'),
+(10231205,'Syria'),
+(10231206,'Taiwan'),
+(10231207,'Tajikistan'),
+(10231208,'Tanzania'),
+(10231209,'Thailand'),
+(10231210,'Togo'),
+(10231211,'Tokelau'),
+(10231212,'Tonga'),
+(10231213,'Trinidad And Tobago'),
+(10231214,'Tunisia'),
+(10231215,'Turkey'),
+(10231216,'Turkmenistan'),
+(10231217,'Turks And Caicos Islands'),
+(10231218,'Tuvalu'),
+(10231219,'Uganda'),
+(10231220,'Ukraine'),
+(10231221,'United Arab Emirates'),
+(10231222,'United Kingdom'),
+(10231223,'United States'),
+(10231224,'United States Minor Outlying Islands'),
+(10231225,'Uruguay'),
+(10231226,'Uzbekistan'),
+(10231227,'Vanuatu'),
+(10231228,'Vatican City State (Holy See)'),
+(10231229,'Venezuela'),
+(10231230,'Vietnam'),
+(10231231,'Virgin Islands (British)'),
+(10231232,'Virgin Islands (US)'),
+(10231233,'Wallis And Futuna Islands'),
+(10231234,'Western Sahara'),
+(10231235,'Yemen'),
+(10231236,'Yugoslavia'),
+(10231237,'Zambia'),
+(10231238,'Zimbabwe');
+SET IDENTITY_INSERT [dbo].[Country] OFF;
 
+SET IDENTITY_INSERT [dbo].[Gender] ON;
 -- INSERT GENDERS
-INSERT INTO [dbo].[Gender] ([Gender])
-  VALUES ('MALE'),
-  ('FEMALE'),
-  ('UNKNOWN'),
-  ('NOT AVAILABLE');
+INSERT INTO [dbo].[Gender] ([Id],[Gender])
+  VALUES (1,'MALE'),
+  (2, 'FEMALE'),
+  (3, 'UNKNOWN'),
+  (4, 'NOT AVAILABLE');
+SET IDENTITY_INSERT [dbo].[Gender] OFF;
 
+
+SET IDENTITY_INSERT [dbo].[Atoll] ON;
 -- INSERT ATOLLS
-INSERT INTO [dbo].[Atoll] ([Atoll], [Island])
-  VALUES ('AA', 'BODUFOLHUDHOO')
-  , ('AA', 'FERIDHOO')
-  , ('AA', 'HIMANDHOO')
-  , ('AA', 'MAALHOS')
-  , ('AA', 'MATHIVERI')
-  , ('AA', 'RASDHOO')
-  , ('AA', 'THODDOO')
-  , ('AA', 'UKULHAS')
-  , ('AA', 'FESDHOO')
-  , ('ADH', 'DHANGETHI')
-  , ('ADH', 'DHIDDHOO')
-  , ('ADH', 'DHIGURAH')
-  , ('ADH', 'FENFUSHI')
-  , ('ADH', 'HAGGNAAMEEDHOO')
-  , ('ADH', 'KUNBURUDHOO')
-  , ('ADH', 'MAAMIGILI')
-  , ('ADH', 'MAHIBADHOO')
-  , ('ADH', 'MANDHOO')
-  , ('ADH', 'OMADHOO')
-  , ('B', 'DHARAVANDHOO')
-  , ('B', 'DHONFANU')
-  , ('B', 'EYDHAFUSHI')
-  , ('B', 'FEHENDHOO')
-  , ('B', 'FULHADHOO')
-  , ('B', 'GOIDHOO')
-  , ('B', 'HITHAADHOO')
-  , ('B', 'KIHAADHOO')
-  , ('B', 'KAMADHOO')
-  , ('B', 'KENDHOO')
-  , ('B', 'KIHAADHOO')
-  , ('B', 'KUDARIKILU')
-  , ('B', 'MAALHOS')
-  , ('B', 'THULHAADHOO')
-  , ('DH', 'BANDIDHOO')
-  , ('DH', 'GEMENDHOO')
-  , ('DH', 'HULHUDHELI')
-  , ('DH', 'KUDAHUVADHOO')
-  , ('DH', 'MAAENBOODHOO')
-  , ('DH', 'MEEDHOO')
-  , ('DH', 'RINBUDHOO')
-  , ('DH', 'VAANEE')
-  , ('F', 'BILEDDHOO')
-  , ('F', 'DHARANBOODHOO')
-  , ('F', 'FEEALI')
-  , ('F', 'FILITHEYO')
-  , ('F', 'MAGOODHOO')
-  , ('F', 'NILANDHOO')
-  , ('GA', 'DHAANDHOO')
-  , ('GA', 'DHEWADHOO')
-  , ('GA', 'DHIYADHOO')
-  , ('GA', 'GEMANAFUSHI')
-  , ('GA', 'KANDUHULHUDHOOO')
-  , ('GA', 'KOLAMAAFUSHI')
-  , ('GA', 'KONDEY')
-  , ('GA', 'MAAMENDHOO')
-  , ('GA', 'NILANDHOO')
-  , ('GA', 'VILINGILI')
-  , ('GDH', 'FARES MAATHODAA')
-  , ('GDH', 'FIYOAREE')
-  , ('GDH', 'GADDHOO')
-  , ('GDH', 'HOANDEDDHOO')
-  , ('GDH', 'MAATHODAA')
-  , ('GDH', 'MADAVELI')
-  , ('GDH', 'NADELLA')
-  , ('GDH', 'RATHAFANDHOO')
-  , ('GDH', 'THINADHOO')
-  , ('GDH', 'VAADHOO')
-  , ('GN', 'FUVAHMULAH')
-  , ('HA', 'BAARAH')
-  , ('HA', 'BERINMADHOO')
-  , ('HA', 'DHIDDHOO')
-  , ('HA', 'FILLADHOO')
-  , ('HA', 'HATHIFUSHI')
-  , ('HA', 'HOARAFUSHI')
-  , ('HA', 'IHAVANDHOO')
-  , ('HA', 'KELAA')
-  , ('HA', 'MAARANDHOO')
-  , ('HA', 'MULHADHOO')
-  , ('HA', 'MURAIDHOO')
-  , ('HA', 'THAKANDHOO')
-  , ('HA', 'THURAAKUNU')
-  , ('HA', 'ULIGAMU')
-  , ('HA', 'UTHEEMU')
-  , ('HA', 'VASHAFARU')
-  , ('HDH', 'FARIDHOO')
-  , ('HDH', 'FINEY')
-  , ('HDH', 'HANIMAADHOO')
-  , ('HDH', 'HIRIMARADHOO')
-  , ('HDH', 'KULHUDHUFFUSHI')
-  , ('HDH', 'KUMUNDHOO')
-  , ('HDH', 'KUNBURUDHOO')
-  , ('HDH', 'KUNBURUDHOO')
-  , ('HDH', 'MAAVAIDHOO')
-  , ('HDH', 'MAKUNUDHOO')
-  , ('HDH', 'NAIVAADHOO')
-  , ('HDH', 'NELLAIDHOO')
-  , ('HDH', 'NEYKURENDHOO')
-  , ('HDH', 'NOLHIVARAM')
-  , ('HDH', 'NOLHIVARANFARU')
-  , ('HDH', 'VAIKARADHOO')
-  , ('HDH', 'KURINBI')
-  , ('K', 'DHIFFUSHI')
-  , ('K', 'GAAFARU')
-  , ('K', 'GULHI')
-  , ('K', 'GURAIDHOO')
-  , ('K', 'HULHUMALÉ')
-  , ('K', 'HIMMAFUSHI')
-  , ('K', 'HURAA')
-  , ('K', 'KAASHIDHOO')
-  , ('K', 'MALE')
-  , ('K', 'MAAFUSHI')
-  , ('K', 'THULUSDHOO')
-  , ('K', 'VILLIGINLI')
-  , ('L', 'DHANBIDHOO')
-  , ('L', 'FONADHOO')
-  , ('L', 'GAADHOO')
-  , ('L', 'GAN')
-  , ('L', 'HITHADHOO')
-  , ('L', 'ISDHOO')
-  , ('L', 'KALHAIDHOO')
-  , ('L', 'KUNAHANDHOO')
-  , ('L', 'MAABAIDHOO')
-  , ('L', 'MAAMENDHOO')
-  , ('L', 'MAAVAH')
-  , ('L', 'MUNDOO')
-  , ('L', 'KALAIDHOO')
-  , ('LH', 'HINNAVARU')
-  , ('LH', 'KURENDHOO')
-  , ('LH', 'MAAFILAAFUSHI')
-  , ('LH', 'NAIFARU')
-  , ('LH', 'OLHIVELIFUSHI')
-  , ('M', 'BOLI MULAH')
-  , ('M', 'DHIGGARU')
-  , ('M', 'KOLHUFUSHI')
-  , ('M', 'MADIFUSHI')
-  , ('M', 'MADUVVARI')
-  , ('M', 'MULAH')
-  , ('M', 'NAALAAFUSHI')
-  , ('M', 'RAIMMANDHOO')
-  , ('M', 'VEYVAH')
-  , ('M', 'MULI')
-  , ('N', 'FODHDHOO')
-  , ('N', 'HENBANDHOO')
-  , ('N', 'HOLHUDHOO')
-  , ('N', 'KENDHIKOLHUDHOO')
-  , ('N', 'KUDAFAREE')
-  , ('N', 'LANDHOO')
-  , ('N', 'LHOHI')
-  , ('N', 'MAAFARU')
-  , ('N', 'MAALHENDHOO')
-  , ('N', 'MAGOODHOO')
-  , ('N', 'MANADHOO')
-  , ('N', 'MILADHOO')
-  , ('N', 'VELIDHOO')
-  , ('R', 'ALIFUSHI')
-  , ('R', 'ANGOLHITHEEMU')
-  , ('R', 'FAINU')
-  , ('R', 'HULHUDHUFFAARU')
-  , ('R', 'INGURAIDHOO')
-  , ('R', 'INNAMAADHOO')
-  , ('R', 'DHUVAAFARU')
-  , ('R', 'KINOLHAS')
-  , ('R', 'MAAKURATHU')
-  , ('R', 'MADUVVARI')
-  , ('R', 'MEEDHOO')
-  , ('R', 'RASGETHEEMU')
-  , ('R', 'RASMAADHOO')
-  , ('R', 'UNGOOFAARU')
-  , ('R', 'VAADHOO')
-  , ('R', 'KANDHOLHUDHOO')
-  , ('S', 'FEYDHOO')
-  , ('S', 'HITHADHOO')
-  , ('S', 'HULHUDHOO')
-  , ('S', 'MARADHOO')
-  , ('S', 'MEEDHOO')
-  , ('S', 'MARADHOO-FEYDHOO')
-  , ('SH', 'BILEFFAHI')
-  , ('SH', 'FEEVAH')
-  , ('SH', 'FEYDHOO')
-  , ('SH', 'FIRUNBAIDHOO')
-  , ('SH', 'FOAKAIDHOO')
-  , ('SH', 'FUNADHOO')
-  , ('SH', 'GOIDHOO')
-  , ('SH', 'KANDITHEEMU')
-  , ('SH', 'KOMANDOO')
-  , ('SH', 'LHAIMAGU')
-  , ('SH', 'MAAKANDOODHOO')
-  , ('SH', 'MAAUNGOODHOO')
-  , ('SH', 'MAROSHI')
-  , ('SH', 'MILANDHOO')
-  , ('SH', 'NARUDHOO')
-  , ('SH', 'NOOMARAA')
-  , ('TH', 'BURUNEE')
-  , ('TH', 'DHIYAMINGILI')
-  , ('TH', 'GAADHIFFUSHI')
-  , ('TH', 'GURAIDHOO')
-  , ('TH', 'HIRILANDHOO')
-  , ('TH', 'KANDOODHOO')
-  , ('TH', 'KINBIDHOO')
-  , ('TH', 'MADIFUSHI')
-  , ('TH', 'OMADHOO')
-  , ('TH', 'THIMARAFUSHI')
-  , ('TH', 'VANDHOO')
-  , ('TH', 'VEYMANDOO')
-  , ('TH', 'VILUFUSHI')
-  , ('V', 'FELIDHOO')
-  , ('V', 'FULIDHOO')
-  , ('V', 'KEYODHOO')
-  , ('V', 'RAKEEDHOO')
-  , ('V', 'THINADHOO');
+INSERT INTO [dbo].[Atoll] ([Id],[Atoll], [Island])
+  VALUES 
+  (10011,'HA','Thuraakunu'),
+(10012,'HA','Uligamu'),
+(10013,'HA','Berinmadhoo'),
+(10014,'HA','Hathifushi'),
+(10015,'HA','Mulhadhoo'),
+(10016,'HA','Hoarafushi'),
+(10017,'HA','Ihavandhoo'),
+(10018,'HA','Kelaa'),
+(10019,'HA','Vashafaru'),
+(100110,'HA','Dhidhdhoo'),
+(100111,'HA','Filladhoo'),
+(100112,'HA','Maarandhoo'),
+(100113,'HA','Thakandhoo'),
+(100114,'HA','Utheemu'),
+(100115,'HA','Muraidhoo'),
+(100116,'HA','Baarah'),
+(100217,'HDH','Faridhoo'),
+(100218,'HDH','Hodaidhoo'),
+(100219,'HDH','Hanimaadhoo'),
+(100220,'HDH','Finey'),
+(100221,'HDH','Naivaadhoo'),
+(100222,'HDH','Hirimaradhoo'),
+(100223,'HDH','Nolhivaranfaru'),
+(100224,'HDH','Nellaidhoo'),
+(100225,'HDH','Nolhivaram'),
+(100226,'HDH','Kuribi'),
+(100227,'HDH','Kunburudhoo'),
+(100228,'HDH','Kulhudhuffushi'),
+(100229,'HDH','Kumundhoo'),
+(100230,'HDH','Neykurendhoo'),
+(100231,'HDH','Vaikaradhoo'),
+(100232,'HDH','Maavaidhoo'),
+(100233,'HDH','Makunudhoo'),
+(100334,'SH','Kanditheemu'),
+(100335,'SH','Noomaraa'),
+(100336,'SH','Goidhoo'),
+(100337,'SH','Feydhoo'),
+(100338,'SH','Feevah'),
+(100339,'SH','Billefahi'),
+(100340,'SH','Fokaidhoo'),
+(100341,'SH','Narudhoo'),
+(100342,'SH','Maakandoodhoo'),
+(100343,'SH','Maroshi'),
+(100344,'SH','Lhaimagu'),
+(100345,'SH','Firubaidhoo'),
+(100346,'SH','Komandoo'),
+(100347,'SH','Maaugoodhoo'),
+(100348,'SH','Funadhoo'),
+(100449,'N','Hembadhoo'),
+(100450,'N','Kendhikulhudhoo'),
+(100451,'N','Maalhendhoo'),
+(100452,'N','Kudafari'),
+(100453,'N','Landhoo'),
+(100454,'N','Maafaru'),
+(100455,'N','Lhohi'),
+(100456,'N','Miladhoo'),
+(100457,'N','Magoodhoo'),
+(100458,'N','Manadhoo'),
+(100459,'N','Holhudhoo'),
+(100460,'N','Fohdhoo'),
+(100461,'N','Velidhoo'),
+(100562,'R','Alifushi'),
+(100563,'R','Vaadhoo'),
+(100564,'R','Rasgatheem'),
+(100565,'R','Angolhitheem'),
+(100566,'R','Hulhudhufaaru'),
+(100567,'R','Ungoofaaru'),
+(100568,'R','Kandholhudhoo'),
+(100569,'R','Maakurath'),
+(100570,'R','Rasmaadhoo'),
+(100571,'R','Innamaadhoo'),
+(100572,'R','Maduvari'),
+(100573,'R','Inguraidhoo'),
+(100574,'R','Fainu'),
+(100575,'R','Kinolhas'),
+(100576,'R','Meedhoo'),
+(100677,'B','Kudarikilu'),
+(100678,'B','Kamadhoo'),
+(100679,'B','Kendhoo'),
+(100680,'B','Kihaadhoo'),
+(100681,'B','Dhonfanu'),
+(100682,'B','Dharavandhoo'),
+(100683,'B','Maalhos'),
+(100684,'B','Eydhafushi'),
+(100685,'B','Thulhaadhoo'),
+(100686,'B','Hithaadhoo'),
+(100687,'B','Fulhadhoo'),
+(100688,'B','Fehendhoo'),
+(100689,'B','Goidhoo'),
+(100790,'LH','Hinnavaru'),
+(100791,'LH','Naifaru'),
+(100792,'LH','Kurendhoo'),
+(100793,'LH','Olhuvelifushi'),
+(100894,'K','Kaashidhoo'),
+(100895,'K','Gaafaru'),
+(100896,'K','Dhiffushi'),
+(100897,'K','Thulusdhoo'),
+(100898,'K','Huraa'),
+(100899,'K','Himmafushi'),
+(1008100,'K','Gulhi'),
+(1008101,'K','Maafushi'),
+(1008102,'K','Guraidhoo'),
+(1009103,'Male','Male'),
+(1010104,'AU','Thoddoo'),
+(1010105,'AU','Rasdhoo'),
+(1010106,'AU','Ukulhas'),
+(1010107,'AU','Mathiveri'),
+(1010108,'AU','Bodufolhudhoo'),
+(1010109,'AU','Feridhoo'),
+(1010110,'AU','Maalhos'),
+(1010111,'AU','Himendhoo'),
+(1011112,'AD','Hangnaameedhoo'),
+(1011113,'AD','Omadhoo'),
+(1011114,'AD','Kunburudhoo'),
+(1011115,'AD','Mandhoo'),
+(1011116,'AD','Mahibadhoo'),
+(1011117,'AD','Dhangethi'),
+(1011118,'AD','Dhigurah'),
+(1011119,'AD','Dhidhdhoo'),
+(1011120,'AD','Fenfushi'),
+(1011121,'AD','Maamigili'),
+(1012122,'V','Fulidhoo'),
+(1012123,'V','Thinadhoo'),
+(1012124,'V','Felidhoo'),
+(1012125,'V','Keyodhoo'),
+(1012126,'V','Rakeedhoo'),
+(1013127,'M','Raiymandhoo'),
+(1013128,'M','Madifushi'),
+(1013129,'M','Veyvah'),
+(1013130,'M','Mulah'),
+(1013131,'M','Muli'),
+(1013132,'M','Naalaafushi'),
+(1013133,'M','Kolhufushi'),
+(1013134,'M','Dhiggaru'),
+(1013135,'M','Maduvvari'),
+(1014136,'F','Feeali'),
+(1014137,'F','Biledhdhoo'),
+(1014138,'F','Magoodhoo'),
+(1014139,'F','Dharanboodhoo'),
+(1014140,'F','Nilandhoo'),
+(1015141,'DH','Meedhoo'),
+(1015142,'DH','Bandidhoo'),
+(1015143,'DH','Rinbudhoo'),
+(1015144,'DH','Hulhudheli'),
+(1015145,'DH','Gemendhoo'),
+(1015146,'DH','Vaani'),
+(1015147,'DH','Maaenboodhoo'),
+(1015148,'DH','Kudahuvadhoo'),
+(1016149,'TH','Buruni'),
+(1016150,'TH','Vilifushi'),
+(1016151,'TH','Madifushi'),
+(1016152,'TH','Dhiyamigili'),
+(1016153,'TH','Guraidhoo'),
+(1016154,'TH','Kandoodhoo'),
+(1016155,'TH','Vandhoo'),
+(1016156,'TH','Hirilandhoo'),
+(1016157,'TH','Gaadhiffushi'),
+(1016158,'TH','Thimarafushi'),
+(1016159,'TH','Veymandoo'),
+(1016160,'TH','Kinbidhoo'),
+(1016161,'TH','Omadhoo'),
+(1017162,'L','Isdhoo'),
+(1017163,'L','Dhanbidhoo'),
+(1017164,'L','Maabaidhoo'),
+(1017165,'L','Mundoo'),
+(1017166,'L','Kalhaidhoo'),
+(1017167,'L','Gan'),
+(1017168,'L','Maavah'),
+(1017169,'L','Fonadhoo'),
+(1017170,'L','Gaadhoo'),
+(1017171,'L','Maamendhoo'),
+(1017172,'L','Hithadhoo'),
+(1017173,'L','Kunahandhoo'),
+(1018174,'GA','Kolamaafushi'),
+(1018175,'GA','Vilingili'),
+(1018176,'GA','Maamendhoo'),
+(1018177,'GA','Nilandhoo'),
+(1018178,'GA','Dhaandhoo'),
+(1018179,'GA','Dhevvadhoo'),
+(1018180,'GA','Kondey'),
+(1018181,'GA','Dhiyadhoo'),
+(1018182,'GA','Gemanafushi'),
+(1018183,'GA','Kanduhulhudhoo'),
+(1019184,'GDH','Madaveli'),
+(1019185,'GDH','Hoandehdhoo'),
+(1019186,'GDH','Nadalla'),
+(1019187,'GDH','Gadhdhoo'),
+(1019188,'GDH','Rathafandhoo'),
+(1019189,'GDH','Vaadhoo'),
+(1019190,'GDH','Fiyoari'),
+(1019191,'GDH','Maathodaa'),
+(1019192,'GDH','Fares'),
+(1019193,'GDH','Thinadhoo'),
+(1020194,'GN','Fuvahmulah'),
+(1021195,'S','Meedhoo'),
+(1021196,'S','Hithadhoo'),
+(1021197,'S','Maradhoo'),
+(1021198,'S','Feydhoo'),
+(1021199,'S','Maradhoo Feydhoo'),
+(1021200,'S','Hulhudhoo'),
+(1003213,'SH','Milandhoo'),
+(1017220,'L','Mathimaradhoo'),
+(1025299,'Resorts','Resorts'),
+(1023302,'FOREIGN','Foriegners'),
+(1023400,'FOREIGN','Abroad'),
+(1009901,'Male','Hulhumale'''),
+(1009902,'Male','Villingili'),
+(1009903,'Male','Maafannu'),
+(1009904,'Male','Machchangoalhi'),
+(1009905,'Male','Henveyru'),
+(1009906,'Male','Galolhu'),
+(1023999,'FOREIGN','Nothers'),
+(10071000,'LH','Maafilaafushi'),
+(10231001,'FOREIGN','Afghanistan'),
+(10231002,'FOREIGN','Albania'),
+(10231003,'FOREIGN','Algeria'),
+(10231004,'FOREIGN','American Samoa'),
+(10231005,'FOREIGN','Andorra'),
+(10231006,'FOREIGN','Angola'),
+(10231007,'FOREIGN','Anguilla'),
+(10231008,'FOREIGN','Antarctica'),
+(10231009,'FOREIGN','Antigua And Barbuda'),
+(10231010,'FOREIGN','Argentina'),
+(10231011,'FOREIGN','Armenia'),
+(10231012,'FOREIGN','Aruba'),
+(10231013,'FOREIGN','Australia'),
+(10231014,'FOREIGN','Austria'),
+(10231015,'FOREIGN','Azerbaijan'),
+(10231016,'FOREIGN','Bahamas, The'),
+(10231017,'FOREIGN','Bahrain'),
+(10231018,'FOREIGN','Bangladesh'),
+(10231019,'FOREIGN','Barbados'),
+(10231020,'FOREIGN','Belarus'),
+(10231021,'FOREIGN','Belgium'),
+(10231022,'FOREIGN','Belize'),
+(10231023,'FOREIGN','Benin'),
+(10231024,'FOREIGN','Bermuda'),
+(10231025,'FOREIGN','Bhutan'),
+(10231026,'FOREIGN','Bolivia'),
+(10231027,'FOREIGN','Bosnia and Herzegovina'),
+(10231028,'FOREIGN','Botswana'),
+(10231029,'FOREIGN','Bouvet Island'),
+(10231030,'FOREIGN','Brazil'),
+(10231031,'FOREIGN','British Indian Ocean Territory'),
+(10231032,'FOREIGN','Brunei'),
+(10231033,'FOREIGN','Bulgaria'),
+(10231034,'FOREIGN','Burkina Faso'),
+(10231035,'FOREIGN','Burundi'),
+(10231036,'FOREIGN','Cambodia'),
+(10231037,'FOREIGN','Cameroon'),
+(10231038,'FOREIGN','Canada'),
+(10231039,'FOREIGN','Cape Verde'),
+(10231040,'FOREIGN','Cayman Islands'),
+(10231041,'FOREIGN','Central African Republic'),
+(10231042,'FOREIGN','Chad'),
+(10231043,'FOREIGN','Chile'),
+(10231044,'FOREIGN','China'),
+(10231045,'FOREIGN','China (Hong Kong S.A.R.)'),
+(10231046,'FOREIGN','China (Macau S.A.R.)'),
+(10231047,'FOREIGN','Christmas Island'),
+(10231048,'FOREIGN','Cocos (Keeling) Islands'),
+(10231049,'FOREIGN','Colombia'),
+(10231050,'FOREIGN','Comoros'),
+(10231051,'FOREIGN','Congo'),
+(10231052,'FOREIGN','Congo, Democractic Republic of the  '),
+(10231053,'FOREIGN','Cook Islands'),
+(10231054,'FOREIGN','Costa Rica'),
+(10231055,'FOREIGN','Cote D''Ivoire (Ivory Coast)'),
+(10231056,'FOREIGN','Croatia (Hrvatska)'),
+(10231057,'FOREIGN','Cuba'),
+(10231058,'FOREIGN','Cyprus'),
+(10231059,'FOREIGN','Czech Republic'),
+(10231060,'FOREIGN','Denmark'),
+(10231061,'FOREIGN','Djibouti'),
+(10231062,'FOREIGN','Dominica'),
+(10231063,'FOREIGN','Dominican Republic'),
+(10231064,'FOREIGN','East Timor'),
+(10231065,'FOREIGN','Ecuador'),
+(10231066,'FOREIGN','Egypt'),
+(10231067,'FOREIGN','El Salvador'),
+(10231068,'FOREIGN','Equatorial Guinea'),
+(10231069,'FOREIGN','Eritrea'),
+(10231070,'FOREIGN','Estonia'),
+(10231071,'FOREIGN','Ethiopia'),
+(10231072,'FOREIGN','Falkland Islands (Islas Malvinas)'),
+(10231073,'FOREIGN','Faroe Islands'),
+(10231074,'FOREIGN','Fiji Islands'),
+(10231075,'FOREIGN','Finland'),
+(10231076,'FOREIGN','France'),
+(10231077,'FOREIGN','French Guiana'),
+(10231078,'FOREIGN','French Polynesia'),
+(10231079,'FOREIGN','French Southern Territories'),
+(10231080,'FOREIGN','Gabon'),
+(10231081,'FOREIGN','Gambia, The'),
+(10231082,'FOREIGN','Georgia'),
+(10231083,'FOREIGN','Germany'),
+(10231084,'FOREIGN','Ghana'),
+(10231085,'FOREIGN','Gibraltar'),
+(10231086,'FOREIGN','Greece'),
+(10231087,'FOREIGN','Greenland'),
+(10231088,'FOREIGN','Grenada'),
+(10231089,'FOREIGN','Guadeloupe'),
+(10231090,'FOREIGN','Guam'),
+(10231091,'FOREIGN','Guatemala'),
+(10231092,'FOREIGN','Guinea'),
+(10231093,'FOREIGN','Guinea-Bissau'),
+(10231094,'FOREIGN','Guyana'),
+(10231095,'FOREIGN','Haiti'),
+(10231096,'FOREIGN','Heard and McDonald Islands'),
+(10231097,'FOREIGN','Honduras'),
+(10231098,'FOREIGN','Hungary'),
+(10231099,'FOREIGN','Iceland'),
+(10231100,'FOREIGN','India'),
+(10231101,'FOREIGN','Indonesia'),
+(10231102,'FOREIGN','Iran'),
+(10231103,'FOREIGN','Iraq'),
+(10231104,'FOREIGN','Ireland'),
+(10231105,'FOREIGN','Israel'),
+(10231106,'FOREIGN','Italy'),
+(10231107,'FOREIGN','Jamaica'),
+(10231108,'FOREIGN','Japan'),
+(10231109,'FOREIGN','Jordan'),
+(10231110,'FOREIGN','Kazakhstan'),
+(10231111,'FOREIGN','Kenya'),
+(10231112,'FOREIGN','Kiribati'),
+(10231113,'FOREIGN','Korea'),
+(10231114,'FOREIGN','Korea, North '),
+(10231115,'FOREIGN','Kuwait'),
+(10231116,'FOREIGN','Kyrgyzstan'),
+(10231117,'FOREIGN','Laos'),
+(10231118,'FOREIGN','Latvia'),
+(10231119,'FOREIGN','Lebanon'),
+(10231120,'FOREIGN','Lesotho'),
+(10231121,'FOREIGN','Liberia'),
+(10231122,'FOREIGN','Libya'),
+(10231123,'FOREIGN','Liechtenstein'),
+(10231124,'FOREIGN','Lithuania'),
+(10231125,'FOREIGN','Luxembourg'),
+(10231126,'FOREIGN','Macedonia, Former Yugoslav Republic of'),
+(10231127,'FOREIGN','Madagascar'),
+(10231128,'FOREIGN','Malawi'),
+(10231129,'FOREIGN','Malaysia'),
+(10231130,'FOREIGN','Maldives'),
+(10231131,'FOREIGN','Mali'),
+(10231132,'FOREIGN','Malta'),
+(10231133,'FOREIGN','Marshall Islands'),
+(10231134,'FOREIGN','Martinique'),
+(10231135,'FOREIGN','Mauritania'),
+(10231136,'FOREIGN','Mauritius'),
+(10231137,'FOREIGN','Mayotte'),
+(10231138,'FOREIGN','Mexico'),
+(10231139,'FOREIGN','Micronesia'),
+(10231140,'FOREIGN','Moldova'),
+(10231141,'FOREIGN','Monaco'),
+(10231142,'FOREIGN','Mongolia'),
+(10231143,'FOREIGN','Montserrat'),
+(10231144,'FOREIGN','Morocco'),
+(10231145,'FOREIGN','Mozambique'),
+(10231146,'FOREIGN','Myanmar'),
+(10231147,'FOREIGN','Namibia'),
+(10231148,'FOREIGN','Nauru'),
+(10231149,'FOREIGN','Nepal'),
+(10231150,'FOREIGN','Netherlands Antilles'),
+(10231151,'FOREIGN','Netherlands, The'),
+(10231152,'FOREIGN','New Caledonia'),
+(10231153,'FOREIGN','New Zealand'),
+(10231154,'FOREIGN','Nicaragua'),
+(10231155,'FOREIGN','Niger'),
+(10231156,'FOREIGN','Nigeria'),
+(10231157,'FOREIGN','Niue'),
+(10231158,'FOREIGN','Norfolk Island'),
+(10231159,'FOREIGN','Northern Mariana Islands'),
+(10231160,'FOREIGN','Norway'),
+(10231161,'FOREIGN','Oman'),
+(10231162,'FOREIGN','Pakistan'),
+(10231163,'FOREIGN','Palau'),
+(10231164,'FOREIGN','Panama'),
+(10231165,'FOREIGN','Papua new Guinea'),
+(10231166,'FOREIGN','Paraguay'),
+(10231167,'FOREIGN','Peru'),
+(10231168,'FOREIGN','Philippines'),
+(10231169,'FOREIGN','Pitcairn Island'),
+(10231170,'FOREIGN','Poland'),
+(10231171,'FOREIGN','Portugal'),
+(10231172,'FOREIGN','Puerto Rico'),
+(10231173,'FOREIGN','Qatar'),
+(10231174,'FOREIGN','Reunion'),
+(10231175,'FOREIGN','Romania'),
+(10231176,'FOREIGN','Russia'),
+(10231177,'FOREIGN','Rwanda'),
+(10231178,'FOREIGN','Saint Helena'),
+(10231179,'FOREIGN','Saint Kitts And Nevis'),
+(10231180,'FOREIGN','Saint Lucia'),
+(10231181,'FOREIGN','Saint Pierre and Miquelon'),
+(10231182,'FOREIGN','Saint Vincent And The Grenadines'),
+(10231183,'FOREIGN','Samoa'),
+(10231184,'FOREIGN','San Marino'),
+(10231185,'FOREIGN','Sao Tome and Principe'),
+(10231186,'FOREIGN','Saudi Arabia'),
+(10231187,'FOREIGN','Senegal'),
+(10231188,'FOREIGN','Seychelles'),
+(10231189,'FOREIGN','Sierra Leone'),
+(10231190,'FOREIGN','Singapore'),
+(10231191,'FOREIGN','Slovakia'),
+(10231192,'FOREIGN','Slovenia'),
+(10231193,'FOREIGN','Solomon Islands'),
+(10231194,'FOREIGN','Somalia'),
+(10231195,'FOREIGN','South Africa'),
+(10231196,'FOREIGN','South Georgia And The South Sandwich Islands'),
+(10231197,'FOREIGN','Spain'),
+(10231198,'FOREIGN','Sri Lanka'),
+(10231199,'FOREIGN','Sudan'),
+(10231200,'FOREIGN','Suriname'),
+(10231201,'FOREIGN','Svalbard And Jan Mayen Islands'),
+(10231202,'FOREIGN','Swaziland'),
+(10231203,'FOREIGN','Sweden'),
+(10231204,'FOREIGN','Switzerland'),
+(10231205,'FOREIGN','Syria'),
+(10231206,'FOREIGN','Taiwan'),
+(10231207,'FOREIGN','Tajikistan'),
+(10231208,'FOREIGN','Tanzania'),
+(10231209,'FOREIGN','Thailand'),
+(10231210,'FOREIGN','Togo'),
+(10231211,'FOREIGN','Tokelau'),
+(10231212,'FOREIGN','Tonga'),
+(10231213,'FOREIGN','Trinidad And Tobago'),
+(10231214,'FOREIGN','Tunisia'),
+(10231215,'FOREIGN','Turkey'),
+(10231216,'FOREIGN','Turkmenistan'),
+(10231217,'FOREIGN','Turks And Caicos Islands'),
+(10231218,'FOREIGN','Tuvalu'),
+(10231219,'FOREIGN','Uganda'),
+(10231220,'FOREIGN','Ukraine'),
+(10231221,'FOREIGN','United Arab Emirates'),
+(10231222,'FOREIGN','United Kingdom'),
+(10231223,'FOREIGN','United States'),
+(10231224,'FOREIGN','United States Minor Outlying Islands'),
+(10231225,'FOREIGN','Uruguay'),
+(10231226,'FOREIGN','Uzbekistan'),
+(10231227,'FOREIGN','Vanuatu'),
+(10231228,'FOREIGN','Vatican City State (Holy See)'),
+(10231229,'FOREIGN','Venezuela'),
+(10231230,'FOREIGN','Vietnam'),
+(10231231,'FOREIGN','Virgin Islands (British)'),
+(10231232,'FOREIGN','Virgin Islands (US)'),
+(10231233,'FOREIGN','Wallis And Futuna Islands'),
+(10231234,'FOREIGN','Western Sahara'),
+(10231235,'FOREIGN','Yemen'),
+(10231236,'FOREIGN','Yugoslavia'),
+(10231237,'FOREIGN','Zambia'),
+(10231238,'FOREIGN','Zimbabwe');
+
+SET IDENTITY_INSERT [dbo].[Atoll] OFF;
 
 -- INSERT CLINICAL DETAILS
 INSERT INTO [dbo].[ClinicalDetail] ([Detail])
-  VALUES ('Fever')
+  VALUES 
+    ('Fever')
   , ('Cough')
   , ('Runny Nose')
   , ('Breathing Difficulty')
   , ('Travel History');
 
 -- DATA TYPES
-INSERT INTO [dbo].[ResultDataType] ([Name])
-  VALUES ('NUMERIC'),
-  ('CODIFIED'),
-  ('TEXTUAL');
+SET IDENTITY_INSERT [dbo].[ResultDataType] ON;
+INSERT INTO [dbo].[ResultDataType] ([Id],[Name])
+  VALUES 
+  (1, 'NUMERIC'),
+  (2, 'CODIFIED'),
+  (3, 'TEXTUAL');
+SET IDENTITY_INSERT [dbo].[ResultDataType] OFF;
 
+SET IDENTITY_INSERT [dbo].[CodifiedResult] ON;
 -- CODIFIED RESULTS
-INSERT INTO [dbo].[CodifiedResult] ([Code], [ReferenceCode])
-  VALUES ('POSITIVE', 'PA'),
-  ('NEGATIVE', 'NM'),
-  ('REACTIVE', 'PA'),
-  ('NON-REACTIVE', 'NM'),
-  ('INCONCLUSIVE', 'NM');
+INSERT INTO [dbo].[CodifiedResult] ([Id],[Code], [ReferenceCode])
+  VALUES (1,'POSITIVE','PA'),
+(2,'DETECTED','PA'),
+(3,'SENSITIVE','NM'),
+(4,'REACTIVE','PA'),
+(5,'NEGATIVE','NM'),
+(6,'NOT DETECTED','NM'),
+(7,'RESISTANT','PA'),
+(8,'NON-REACTIVE','NM'),
+(9,'TRACE','AT'),
+(10,'1+','PA'),
+(11,'2+','PA'),
+(12,'3+','PA'),
+(13,'4+','PA'),
+(14,'+','PA'),
+(15,'++','PA'),
+(16,'+++','PA'),
+(17,'++++','PA'),
+(18,'Borderline','PA'),
+(19,'Retest','PA'),
+(20,'Insufficient','PA'),
+(21,'Sufficient','NM'),
+(22,'Deficient','PA'),
+(23,'Potential Toxicity','PA'),
+(24,'Normal','NM'),
+(25,'Intermediate','PA'),
+(26,'Inconclusive','PA');
+SET IDENTITY_INSERT [dbo].[CodifiedResult] OFF;
+
 
 --INSERT SAMPLE TYPES
-INSERT INTO [dbo].[SampleType] ([Description], [Colour])
-  VALUES ('SERUM', 'Red'),
-   ('URINE', 'White'),
-  ('WHOLE BLOOD', 'Lavender');
+SET IDENTITY_INSERT [dbo].[SampleType] ON;
+INSERT INTO [dbo].[SampleType] ([Id],[Description], [Colour],[Code])
+  VALUES 
+  (1,'EDTA WHOLE BLOOD', 'Lavender','W'),
+  (2,'SERUM', 'Red','S'),
+  (3,'CITRATE PLASMA', 'Blue','P'),
+  (4,'FLUORIDE PLASMA', 'Gray','P'),
+  (5,'SPOT URINE', 'White','U'),
+  (6,'STOOL','Brown','ST'),
+  (7,'CSF','White','CS'),
+  (8,'SEMEN','Gray','SN'),
+  (9,'PLURAL FLUID','Gray','PL'),
+  (10,'PERITONEAL FLUID','Gray','PE'),
+  (11,'SYNOVIAL FLUID','Gray','SY'),
+  (12,'MID-STREAM URINE','Gray','MU'),
+  (13,'HVS SWAB','Gray','H'),
+  (14,'PUS SWAB','Gray','PU'),
+  (15,'SPUTUM','Gray','ST'),
+  (16,'EXUDATE','Gray','EX'),
+  (17,'MISC SWAB','Gray','SW'),
+  (18,'BLOOD','Gray','BL'),
+  (19,'MISC SMEAR','Gray','SM'),
+  (20,'SKIN','Gray','SK'),
+  (21,'NASOPHARYNGEAL SWAB','Gray','NS');
+  SET IDENTITY_INSERT [dbo].[SampleType] OFF;
 
 --INSERT DISCIPLINES
-INSERT INTO [dbo].[Discipline] ([Description])
-  VALUES ('DIAGNOSTIC HAEMATOLOGY'),
-  ('MOLECULAR BIOLOGY'),
-  ('FORENSIC MEDICINE');
+SET IDENTITY_INSERT [dbo].[Discipline] ON;
+INSERT INTO [dbo].[Discipline] ([Id],[Description],[Code])
+  VALUES 
+(1,'DIAGNOSTIC HAEMATOLOGY','H'),
+(2,'BIOCHEMISTRY','B'),
+(3,'SEROLOGY','S'),
+(4,'CLINICAL PATHOLOGY','C'),
+(5,'IMMUNOHEAMATOLOGY','I'),
+(6,'MICROBIOLOGY','M'),
+(7,'MOLECULAR BIOLOGY','MB'),
+(8,'HISTOLOGY','H');
+SET IDENTITY_INSERT [dbo].[Discipline] OFF;
 
 -- UNITS
-INSERT INTO [dbo].[Unit] ([Unit])
-  VALUES (' '),
-  ('mg/dL'),
-  ('%'),
-  ('ng/mL'),
-  ('ug/mL');
+SET IDENTITY_INSERT [dbo].[Unit] ON;
+INSERT INTO [dbo].[Unit] ([Id],[Unit])
+  VALUES 
+(1,''),
+(2,'g/L'),
+(3,'U/L'),
+(4,'mg/dL'),
+(5,'mmol/L'),
+(6,'umol/L'),
+(7,'IU/mL'),
+(8,'ng/mL'),
+(9,'pmol/L'),
+(10,'IU/L'),
+(11,'ng/L'),
+(12,'mlU/L'),
+(13,'nmol/L'),
+(14,'mIU/mL'),
+(15,'g/dL'),
+(16,'%'),
+(17,'x 10^3/uL'),
+(18,'mm/1st Hr'),
+(19,'x 10^9/L'),
+(20,'x 10^6/uL'),
+(21,' fL'),
+(22,'pg'),
+(23,'sec'),
+(24,'mos/kg'),
+(25,'ug/dL'),
+(26,'ug/mL');
+SET IDENTITY_INSERT [dbo].[Unit] OFF;
+
+delete from [dbo].[Test];
+SET IDENTITY_INSERT [dbo].[Test] ON;
+INSERT INTO [dbo].[Test]([Id],[Description],[DisciplineId],[SampleTypeId],[Mask],[Reportable],[ResultDataTypeId],[UnitId],[DefaultCommented])
+VALUES
+(1,'Haemoglobin',1,1,'##.0',1,1,15,0),
+(2,'Haematocrit',1,1,'##.0',1,1,16,0),
+(3,'Total Leukocyte Count',1,1,'###.0',1,1,17,0),
+(4,'Neutrophil',1,1,'##.0',1,1,16,0),
+(5,'Lymphocyte',1,1,'##.0',1,1,16,0),
+(6,'Monocyte',1,1,'##.0',1,1,16,0),
+(7,'Eosinophil',1,1,'##.0',1,1,16,0),
+(8,'Basophil',1,1,'##.0',1,1,16,0),
+(9,'ESR',1,1,'###.0',1,1,18,0),
+(10,'Thrombocyte Count',1,1,'####',1,1,17,0),
+(11,'Absolute Eosinophil Count',1,1,'##.0',1,1,19,0),
+(12,'Absolute Neutrophil Count',1,1,'###.0',1,1,19,0),
+(13,'Total RBC Count',1,1,'##.##',1,1,20,0),
+(14,'Blood Picture',1,1,'#.###',1,3,1,0),
+(16,'MCV',1,1,'##.0',1,1,21,0),
+(17,'MCH',1,1,'##.0',1,1,22,0),
+(18,'MCHC',1,1,'##.0',1,1,15,0),
+(19,'Haemoparasites',1,1,'',1,2,1,0),
+(20,'G6PD Qualitative',1,1,'24|22',1,2,1,0),
+(21,'Prothrombin Time /INR',1,3,'##.0',1,1,23,0),
+(22,'Bleeding Time',1,3,'###.0',1,1,23,0),
+(23,'Clotting Time',1,3,'###.0',1,1,23,0),
+(24,'Blood Grouping & Rh Typing ',1,3,'',1,2,1,0),
+(25,'Direct Coombs Test',1,1,'1|5',1,2,1,0),
+(26,'Indirect Coombs Test',1,2,'1|5',1,2,1,0),
+(28,'Glycosylated Hb (HbA1C)',2,1,'#.0',1,1,16,0),
+(29,'Random Blood Sugar',2,4,'####.0',1,1,4,0),
+(30,'Fasting Blood Sugar',2,4,'####.0',1,1,4,0),
+(31,'Post Prandial Blood Sugar',2,4,'####.0',1,1,4,0),
+(32,'Post Glucose Blood Sugar',2,4,'####.0',1,1,4,0),
+(33,'Fasting Blood Sugar (GTT)',2,4,'####.0',1,1,4,0),
+(34,'Post Prandial Blood Sugar 1hr',2,4,'####.0',1,1,4,0),
+(35,'Post Prandial Blood Sugar 2hr',2,4,'####.0',1,1,4,0),
+(36,'Post Prandial Blood Sugar 3hr',2,4,'####.0',1,1,4,0),
+(38,'Serum Amylase',2,2,'####.0',1,1,3,0),
+(39,'Lipase',2,2,'####.0',1,1,3,0),
+(40,'Blood Urea',2,2,'####.0',1,1,4,0),
+(41,'Serum Creatinine',2,2,'##.00',1,1,4,0),
+(42,'Serum Uric Acid',2,2,'##.00',1,1,4,0),
+(43,'Serum Osmolality',2,2,'',1,1,24,0),
+(44,'Total Cholestrol',2,2,'####.0',1,1,4,0),
+(45,'Serum Triglyceride ',2,2,'###.00',1,1,4,0),
+(46,'HDL-Cholestrol',2,2,'##.0',1,1,4,0),
+(47,'CK',2,2,'#########.0',1,1,3,0),
+(48,'CK-MB',2,2,'#########.1',1,1,3,0),
+(49,'LDH',2,2,'###.00',1,1,3,0),
+(50,'Troponin T',2,2,'###.00',1,1,1,0),
+(51,'Troponin I',2,2,'###.00',1,1,8,0),
+(52,'Serum Bilirubin - Total',2,2,'##.0',1,1,4,0),
+(53,'Serum Bilirubin - Direct ',2,2,'##.0',1,1,4,0),
+(54,'Serum Bilirubin - Neonatal ',2,2,'##.0',1,1,4,0),
+(55,'Serum Bilirubin - Delta',2,2,'##.0',1,1,4,0),
+(56,'SGOT/AST',2,2,'##.0',1,1,3,0),
+(57,'SGPT/ALT',2,2,'##.0',1,1,3,0),
+(58,'Alkaline Phosphatase',2,2,'##.0',1,1,3,0),
+(59,'GGT',2,2,'##.0',1,1,3,0),
+(60,'Total Serum Protein',2,2,'##.0',1,1,15,0),
+(61,'Serum Albumin',2,2,'##.0',1,1,15,0),
+(62,'Serum Globulin ',2,2,'##.0',1,1,15,0),
+(63,'A/G Ratio',2,2,'##.0',1,1,1,0),
+(64,'Serum Sodium (NA+)',2,2,'##.0',1,1,5,0),
+(65,'Serum Potassium (K+)',2,2,'##.0',1,1,5,0),
+(66,'Serum Chloride (CL-)',2,2,'##.0',1,1,5,0),
+(67,'Serum Magnesium ',2,2,'##.0',1,1,4,0),
+(68,'TCO2 (Carbondioxide)',2,2,'##.0',1,1,1,0),
+(69,'Serum Iron',2,2,'##.0',1,1,1,0),
+(70,'Serum TIBC',2,2,'##.0',1,1,25,0),
+(71,'Serum Ferritin',2,2,'##.0',1,1,8,0),
+(72,'T3',3,2,'##.0',1,1,13,0),
+(73,'T4',3,2,'##.0',1,1,13,0),
+(74,'TSH ',3,2,'##.0',1,1,12,0),
+(75,'Free T3',3,2,'##.0',1,1,9,0),
+(76,'Free T4',3,2,'##.0',1,1,9,0),
+(77,'Serum ß-HCG Titre',3,2,'##.0',1,1,14,0),
+(78,'Serum ß-HCG ',3,2,'##.0',1,2,1,0),
+(79,'FSH',3,2,'##.0',1,1,14,0),
+(80,'Progesterone',3,2,'##.0',1,1,13,0),
+(81,'LH',3,2,'##.0',1,1,14,0),
+(82,'Testosterone',3,2,'##.0',1,1,13,0),
+(83,'Estradiol (E2)',3,2,'##.0',1,1,9,0),
+(84,'Prolactin (PRL)',3,2,'##.0',1,1,8,0),
+(85,'Serum Calcium',2,2,'##.0',1,1,4,0),
+(86,'Serum Phosphorous',2,2,'##.0',1,1,4,0),
+(87,'Vitamin D',3,2,'##.0',1,1,8,0),
+(88,'Total PSA',3,2,'##.0',1,1,8,0),
+(89,'AFP',3,2,'##.0',1,1,7,0),
+(90,'Urine Albumin',4,5,'##.0',1,2,1,0),
+(91,'Urine Glucose',4,5,'###.0',1,2,4,0),
+(92,'Urine Glucose (Fasting)',4,5,'###.0',1,2,4,0),
+(93,'Urine Glucose (Post Prandial)',4,5,'###.0',1,2,4,0);
+
+SET IDENTITY_INSERT [dbo].[Test] OFF;
+
+--insert user: Bismillah.123!
+SET IDENTITY_INSERT [Users] ON
+  INSERT INTO [dbo].[Users] ([Id], [UserName], [Fullname], [PasswordHash], [AccessFailedCount], [EmailConfirmed], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnabled])
+  VALUES ('1', 'swatincadmin', 'Ibrahim Hussain', 'SHA512:88:lhOgh7mA9H1w9L9wu6FoVPUiK+sYR4Tr5A==:8Y2OSxfDTkF9zcplYHlU5LZ/zM3cvpycvAWeEbUxQeR1I3/mCxb7tLt5bBLl2FWJmPEubhYyH0s9tFP60Wo3EQ==', 0, 0, 0, 0, 0);
+
+  INSERT INTO [dbo].[Users] ([Id], [UserName], [Fullname], [PasswordHash], [AccessFailedCount], [EmailConfirmed], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnabled])
+  VALUES ('1', 'athaaulla', 'Athaaulla Hassan', 'SHA512:88:lhOgh7mA9H1w9L9wu6FoVPUiK+sYR4Tr5A==:8Y2OSxfDTkF9zcplYHlU5LZ/zM3cvpycvAWeEbUxQeR1I3/mCxb7tLt5bBLl2FWJmPEubhYyH0s9tFP60Wo3EQ==', 0, 0, 0, 0, 0);
+  
+  INSERT INTO [dbo].[Users] ([Id], [UserName], [Fullname], [PasswordHash], [AccessFailedCount], [EmailConfirmed], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnabled])
+  VALUES ('1', 'hisaan', 'Ahmed Hisan Saeed', 'SHA512:88:lhOgh7mA9H1w9L9wu6FoVPUiK+sYR4Tr5A==:8Y2OSxfDTkF9zcplYHlU5LZ/zM3cvpycvAWeEbUxQeR1I3/mCxb7tLt5bBLl2FWJmPEubhYyH0s9tFP60Wo3EQ==', 0, 0, 0, 0, 0);
+
+SET IDENTITY_INSERT [Users] OFF
+
+
+--1 = Swat, Inc Developer
+--2 = Laboratory Manager
+--3 = On-site IT
+--4 = Laboratory Technologist
+--5 = Pathologist
+--6 = Phlebotomist
+--7 = Reception Staff
+
+--insert roles
+INSERT INTO [dbo].[Roles] ([Id], [Name])
+  VALUES ('1', 'Swat, Inc Developer'),
+  ('2', 'Laboratory Manager'),
+  ('3', 'On-site IT'),
+  ('4', 'Laboratory Technologist'),
+  ('5', 'Pathologist'),
+  ('6', 'Phlebotomist'),
+  ('7', 'Reception Staff');
+
+--setup user roles
+INSERT INTO [dbo].[UserRoles] ([UserId], [RoleId])
+  VALUES ('1', '1'),
+  ('2', '2'),
+  ('3', '2');
+
+
+--setup user claims - develper
+INSERT INTO [dbo].[RoleClaims] ([RoleId], [ClaimValue])
+  VALUES ('1', 'ribbon'),
+    ('1', 'OrderEntryView'),
+    ('1', 'ResultEntryView'),
+    ('1', 'OrderEntry.Search'),
+    ('1', 'OrderEntry.SearchReq'),
+    ('1', 'OrderEntry.Remove'),
+    ('1', 'OrderEntry.Confirm'),
+    ('1', 'OrderEntry.PrintBarcode'),
+    ('1', 'ResultEntryView.LoadWorksheet'),
+    ('1', 'ResultEntryView.Report'),
+    ('1', 'ResultEntry.ValidateSampleOrTest'),
+    ('1', 'ResultEntry.ViewAuditTrail'),
+    ('1', 'ResultEntry.PrintReport'),
+    ('1', 'ResultEntry.RejectSampleOrTest'),
+    ('1', 'ResultEntry.CancelSampleOrTestRejection'),
+    ('1', 'ResultEntry.ShowTestHistory'),
+    ('1', 'MainView'),
+    ('1', 'Ribbon.Profile'),
+    ('1', 'Ribbon.ConfigurationPage'),
+    ('1', 'Ribbon.GeneralPage'),
+    ('1', 'AcceptSamplesView');
+
+    --setup user claims - labManager
+INSERT INTO [dbo].[RoleClaims] ([RoleId], [ClaimValue])
+  VALUES ('2', 'ribbon'),
+    ('2', 'OrderEntryView'),
+    ('2', 'ResultEntryView'),
+    ('2', 'OrderEntry.Search'),
+    ('2', 'OrderEntry.SearchReq'),
+    ('2', 'OrderEntry.Remove'),
+    ('2', 'OrderEntry.Confirm'),
+    ('2', 'OrderEntry.PrintBarcode'),
+    ('2', 'ResultEntryView.LoadWorksheet'),
+    ('2', 'ResultEntryView.Report'),
+    ('2', 'ResultEntry.ValidateSampleOrTest'),
+    ('2', 'ResultEntry.ViewAuditTrail'),
+    ('2', 'ResultEntry.PrintReport'),
+    ('2', 'ResultEntry.RejectSampleOrTest'),
+    ('2', 'ResultEntry.CancelSampleOrTestRejection'),
+    ('2', 'ResultEntry.ShowTestHistory'),
+    ('2', 'MainView'),
+    ('2', 'Ribbon.Profile'),
+    ('2', 'Ribbon.ConfigurationPage'),
+    ('2', 'Ribbon.GeneralPage'),
+    ('2', 'AcceptSamplesView');
+
+    --setup user claims - OnSite IT
+INSERT INTO [dbo].[RoleClaims] ([RoleId], [ClaimValue])
+  VALUES ('3', 'ribbon'),
+    ('3', 'OrderEntryView'),
+    ('3', 'ResultEntryView'),
+    ('3', 'OrderEntry.Search'),
+    ('3', 'OrderEntry.SearchReq'),
+    ('3', 'ResultEntryView.LoadWorksheet'),
+    ('3', 'ResultEntryView.Report'),
+    ('3', 'ResultEntry.ViewAuditTrail'),
+    ('3', 'ResultEntry.PrintReport'),
+    ('3', 'ResultEntry.ShowTestHistory'),
+    ('3', 'MainView'),
+    ('3', 'Ribbon.Profile'),
+    ('3', 'Ribbon.ConfigurationPage'),
+    ('3', 'Ribbon.GeneralPage');
+
+    --setup user claims - technologist
+INSERT INTO [dbo].[RoleClaims] ([RoleId], [ClaimValue])
+  VALUES ('4', 'ribbon'),
+    ('4', 'OrderEntryView'),
+    ('4', 'ResultEntryView'),
+    ('4', 'OrderEntry.Search'),
+    ('4', 'OrderEntry.SearchReq'),
+    ('4', 'OrderEntry.Remove'),
+    ('4', 'OrderEntry.Confirm'),
+    ('4', 'OrderEntry.PrintBarcode'),
+    ('4', 'ResultEntryView.LoadWorksheet'),
+    ('4', 'ResultEntryView.Report'),
+    ('4', 'ResultEntry.ValidateSampleOrTest'),
+    ('4', 'ResultEntry.ViewAuditTrail'),
+    ('4', 'ResultEntry.PrintReport'),
+    ('4', 'ResultEntry.RejectSampleOrTest'),
+    ('4', 'ResultEntry.CancelSampleOrTestRejection'),
+    ('4', 'ResultEntry.ShowTestHistory'),
+    ('4', 'MainView'),
+    ('4', 'Ribbon.Profile'),
+    ('4', 'Ribbon.GeneralPage'),
+    ('4', 'AcceptSamplesView');
+
+--setup user claims - pathologist
+INSERT INTO [dbo].[RoleClaims] ([RoleId], [ClaimValue])
+  VALUES ('5', 'ribbon'),
+    ('5', 'OrderEntryView'),
+    ('5', 'ResultEntryView'),
+    ('5', 'OrderEntry.Search'),
+    ('5', 'OrderEntry.SearchReq'),
+    ('5', 'OrderEntry.Remove'),
+    ('5', 'OrderEntry.Confirm'),
+    ('5', 'OrderEntry.PrintBarcode'),
+    ('5', 'ResultEntryView.LoadWorksheet'),
+    ('5', 'ResultEntryView.Report'),
+    ('5', 'ResultEntry.ValidateSampleOrTest'),
+    ('5', 'ResultEntry.ViewAuditTrail'),
+    ('5', 'ResultEntry.PrintReport'),
+    ('5', 'ResultEntry.RejectSampleOrTest'),
+    ('5', 'ResultEntry.CancelSampleOrTestRejection'),
+    ('5', 'ResultEntry.ShowTestHistory'),
+    ('5', 'MainView'),
+    ('5', 'Ribbon.Profile'),
+    ('5', 'Ribbon.GeneralPage'),
+    ('5', 'AcceptSamplesView');
+
+--setup user claims - phlebotomist
+INSERT INTO [dbo].[RoleClaims] ([RoleId], [ClaimValue])
+  VALUES ('6', 'ribbon'),
+    ('6', 'OrderEntryView'),
+    ('6', 'ResultEntryView'),
+    ('6', 'OrderEntry.Search'),
+    ('6', 'OrderEntry.SearchReq'),
+    ('6', 'OrderEntry.Remove'),
+    ('6', 'OrderEntry.Confirm'),
+    ('6', 'OrderEntry.PrintBarcode'),
+    ('6', 'ResultEntryView.LoadWorksheet'),
+    ('6', 'MainView'),
+    ('6', 'Ribbon.Profile'),
+    ('6', 'Ribbon.GeneralPage'),
+    ('6', 'AcceptSamplesView');
+
+    --setup user claims - reception staff
+INSERT INTO [dbo].[RoleClaims] ([RoleId], [ClaimValue])
+  VALUES ('7', 'ribbon'),
+    ('7', 'OrderEntryView'),
+    ('7', 'ResultEntryView'),
+    ('7', 'OrderEntry.Search'),
+    ('7', 'OrderEntry.SearchReq'),
+    ('7', 'OrderEntry.Remove'),
+    ('7', 'OrderEntry.Confirm'),
+    ('7', 'OrderEntry.PrintBarcode'),
+    ('7', 'ResultEntry.PrintReport'),
+    ('7', 'MainView'),
+    ('7', 'Ribbon.Profile'),
+    ('7', 'Ribbon.GeneralPage'),
+    ('7', 'AcceptSamplesView');
+
+--insert status table data
+INSERT INTO [dbo].[Status] ([Status])
+  VALUES 
+  ('Registered'), 
+  ('Collected'), 
+  ('Received'), 
+  ('ToValidate'), 
+  ('Validated'), 
+  ('Processing'), 
+  ('Rejected'), 
+  ('Removed');

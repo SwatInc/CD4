@@ -9,10 +9,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>CD4.DataLibrary</RootNamespace>
     <AssemblyName>CD4.DataLibrary</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <LangVersion>latest</LangVersion>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -103,6 +104,9 @@
     <Compile Include="DataAccess\DataAccessBase.cs" />
     <Compile Include="DataAccess\DisciplineDataAccess.cs" />
     <Compile Include="DataAccess\GlobalSettingsDataAccess.cs" />
+    <Compile Include="DataAccess\HmsLinkDataAccess.cs" />
+    <Compile Include="DataAccess\IHmsLinkDataAccess.cs" />
+    <Compile Include="Models\HmsLinkDataModel.cs" />
     <Compile Include="DataAccess\IAnalysisRequestDataAccess.cs" />
     <Compile Include="DataAccess\IAssayDataAccess.cs" />
     <Compile Include="DataAccess\IAuthenticationDataAccess.cs" />

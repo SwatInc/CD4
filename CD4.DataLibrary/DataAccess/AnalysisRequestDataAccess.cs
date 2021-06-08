@@ -572,6 +572,25 @@ namespace CD4.DataLibrary.DataAccess
             }
         }
 
+        /// <summary>
+        /// Gets all barcode for samples with the same episode number
+        /// </summary>
+        /// <param name="episodeNumber">The episode number from which samples barcodes are to be fetched</param>
+        /// <returns>List of barcode data models</returns>
+        public async Task<List<BarcodeDataModel>> GetBarcodeDataForMultipleSamplesAsync(string episodeNumber)
+        {
+            var storedProcedure = "[dbo].[usp_GetBarcodesForEpisode]";
+            var parameter = new { EpisodeNumber = episodeNumber };
+            try
+            {
+                return await LoadDataWithParameterAsync<BarcodeDataModel, dynamic>(storedProcedure, parameter);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public async Task InsertSampleCollectedDate(AnalysisRequestDataModel request, int loggedInUserId)
         {
             var storedProcedure = "[dbo].[usp_UpdateSampleWithCin]";
@@ -611,14 +630,34 @@ namespace CD4.DataLibrary.DataAccess
 
         }
 
-        private string FormatCinSeed(int nextCinSeed)
+        public async Task<string> GetNextCinSeedWithoutPrefix()
+        {
+            var storedProcedure = "[dbo].[usp_GetNextSampleNumber]";
+            try
+            {
+                var data = await LoadDataAsync<int>(storedProcedure);
+                return FormatCinSeed(data.FirstOrDefault(), false);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+
+        private string FormatCinSeed(int nextCinSeed, bool prefixed = true)
         {
             var totalLength = 7;
             var padCharacter = '0';
             var prefix = "ML";
 
             var paddedNextSeed = nextCinSeed.ToString().PadLeft(totalLength, padCharacter);
-            return $"{prefix}{paddedNextSeed}";
+            if (prefixed) { return $"{prefix}{paddedNextSeed}"; }
+            return $"{paddedNextSeed}";
         }
+
+
     }
 }
