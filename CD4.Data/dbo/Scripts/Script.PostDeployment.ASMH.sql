@@ -1136,3 +1136,8 @@ INSERT INTO [dbo].[Status] ([Status])
   ('Processing'), 
   ('Rejected'), 
   ('Removed');
+
+  INSERT INTO [dbo].[AuditTypes] ([Description])
+  VALUES ('AnalysisRequest'),
+  ('Sample'),
+  ('Test');
