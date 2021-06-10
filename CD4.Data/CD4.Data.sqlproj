@@ -241,7 +241,6 @@
     <Build Include="dbo\StoredProcedures\usp_GetWorksheetBySpecifiedDate.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetWorksheetBySpecifiedDateAndDiscipline.sql" />
     <Build Include="dbo\Tables\GlobalSettings.sql" />
-    <Build Include="dbo\StoredProcedures\GetReportDataByCin.sql" />
     <Build Include="dbo\StoredProcedures\usp_GetWorksheetBySpecifiedDateStatusIdAndDiscipline.sql" />
     <Build Include="dbo\StoredProcedures\usp_ReadGlobalSettings.sql" />
     <Build Include="dbo\StoredProcedures\usp_UpdateGlobalSettings.sql" />
