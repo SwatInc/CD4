@@ -81,7 +81,7 @@ namespace CD4.UI.View
             {
                 if (_globalSettingsHelper.Settings.IsReportByEpisode)
                 {
-                   var report = await _reportsData.GetAnalysisReportForepisodeAsync((string)Tag, _loggedInUserId).ConfigureAwait(true);
+                   var report = await _reportsData.GetAnalysisReportForEpisodeAsync((string)Tag, _loggedInUserId).ConfigureAwait(true);
                     //map OR automap this response to an object from reporting framework and pass to the report to allow the report to do what ever
                     //crazy mapping it needs to do.
                     MapDataToReport(report.FirstOrDefault());
@@ -214,7 +214,8 @@ namespace CD4.UI.View
                     Result = assay.Result,
                     Unit = assay.Unit,
                     DisplayNormalRange = assay.DisplayNormalRange,
-                    Comment = assay.Comment
+                    Comment = assay.Comment,
+                    SortOrder = assay.SortOrder
                 });
             }
 

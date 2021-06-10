@@ -290,6 +290,14 @@ namespace CD4.UI.View
                     sampleColumn.Width = column.Width;
                 }
 
+                if (column.IsSorted)
+                {
+                    sampleColumn.SortMode = DevExpress.XtraGrid.ColumnSortMode.Default;
+                    sampleColumn.SortOrder = column.IsAscending
+                        ? DevExpress.Data.ColumnSortOrder.Ascending
+                        : DevExpress.Data.ColumnSortOrder.Descending;
+                }
+
                 gridViewSamples.Columns.Add(sampleColumn);
             }
         }
@@ -337,6 +345,14 @@ namespace CD4.UI.View
                 if (sampleColumn.Name == "gridColumnResult")
                 {
                     sampleColumn.ColumnEdit = this.repositoryItemLookUpEditCodifiedPhrases;
+                }
+
+                if (column.IsSorted)
+                {
+                    sampleColumn.SortMode = DevExpress.XtraGrid.ColumnSortMode.Default;
+                    sampleColumn.SortOrder = column.IsAscending 
+                        ? DevExpress.Data.ColumnSortOrder.Ascending 
+                        : DevExpress.Data.ColumnSortOrder.Descending;
                 }
 
                 gridViewTests.Columns.Add(sampleColumn);

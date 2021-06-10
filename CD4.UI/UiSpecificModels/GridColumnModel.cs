@@ -15,5 +15,7 @@ namespace CD4.UI.UiSpecificModels
         public bool Visible { get; set; }
         public int VisibleIndex { get; set; }
         public int Width { get; set; }
+        public bool IsSorted { get; set; }
+        public bool IsAscending { get; set; }
     }
 }
