@@ -87,13 +87,13 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrLabel15 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel16 = new DevExpress.XtraReports.UI.XRLabel();
             this.DetailResults = new DevExpress.XtraReports.UI.DetailBand();
+            this.xrLabel25 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel19 = new DevExpress.XtraReports.UI.XRLabel();
             this.xrLabel17 = new DevExpress.XtraReports.UI.XRLabel();
             this.DetailReport = new DevExpress.XtraReports.UI.DetailReportBand();
             this.GroupHeaderDiscipline = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.xrLabel18 = new DevExpress.XtraReports.UI.XRLabel();
             this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.xrLabel25 = new DevExpress.XtraReports.UI.XRLabel();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
@@ -779,6 +779,22 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.DetailResults.HeightF = 116.84F;
             this.DetailResults.KeepTogether = true;
             this.DetailResults.Name = "DetailResults";
+            this.DetailResults.SortFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
+            new DevExpress.XtraReports.UI.GroupField("SortOrder", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
+            // 
+            // xrLabel25
+            // 
+            this.xrLabel25.AutoWidth = true;
+            this.xrLabel25.CanShrink = true;
+            this.xrLabel25.Dpi = 254F;
+            this.xrLabel25.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Comment]")});
+            this.xrLabel25.LocationFloat = new DevExpress.Utils.PointFloat(126.9998F, 58.42004F);
+            this.xrLabel25.Multiline = true;
+            this.xrLabel25.Name = "xrLabel25";
+            this.xrLabel25.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
+            this.xrLabel25.SizeF = new System.Drawing.SizeF(1451.611F, 58.42F);
+            this.xrLabel25.Text = "xrLabelResultComment";
             // 
             // xrLabel19
             // 
@@ -847,20 +863,6 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // bindingSource
             // 
             this.bindingSource.DataSource = typeof(CD4.Entensibility.ReportingFramework.Models.AnalysisRequestReportModel);
-            // 
-            // xrLabel25
-            // 
-            this.xrLabel25.AutoWidth = true;
-            this.xrLabel25.CanShrink = true;
-            this.xrLabel25.Dpi = 254F;
-            this.xrLabel25.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Comment]")});
-            this.xrLabel25.LocationFloat = new DevExpress.Utils.PointFloat(126.9998F, 58.42004F);
-            this.xrLabel25.Multiline = true;
-            this.xrLabel25.Name = "xrLabel25";
-            this.xrLabel25.Padding = new DevExpress.XtraPrinting.PaddingInfo(2, 2, 0, 0, 96F);
-            this.xrLabel25.SizeF = new System.Drawing.SizeF(1451.611F, 58.42F);
-            this.xrLabel25.Text = "xrLabelResultComment";
             // 
             // AnalysisReportForPrinting
             // 
