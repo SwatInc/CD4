@@ -55,7 +55,8 @@ namespace CD4.DataLibrary.DataAccess
                     UnitId = assayToUpdate.UnitId,
                     Reportable = assayToUpdate.Reportable,
                     Code = assayToUpdate.Code,
-                    DefaultCommented = assayToUpdate.DefaultCommented
+                    DefaultCommented = assayToUpdate.DefaultCommented,
+                    SortOrder = assayToUpdate.SortOrder
                 };
 
                 var output = await SelectInsertOrUpdateAsync<TestsModel, dynamic>(storedProcedure, parameters);

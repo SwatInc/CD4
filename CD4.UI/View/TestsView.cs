@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using DevExpress.XtraEditors;
+﻿using CD4.UI.Library.Model;
 using CD4.UI.Library.ViewModel;
-using CD4.UI.Library.Model;
-using System.Diagnostics;
+using DevExpress.XtraEditors;
+using System.Windows.Forms;
 
 namespace CD4.UI.View
 {
@@ -46,12 +37,14 @@ namespace CD4.UI.View
             this.lookUpEditDiscipline.Properties.DisplayMember = nameof(DisciplineModel.Discipline);
             //selected discipline
             this.lookUpEditDiscipline.DataBindings.Add
-                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedDiscipline)));
+                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedDiscipline),
+                        false, DataSourceUpdateMode.OnPropertyChanged));
 
 
             //description
             this.textEditDescription.DataBindings.Add
-                (new Binding("EditValue", _viewModel.SelectedTest, nameof(_viewModel.SelectedTest.Description)));
+                (new Binding("EditValue", _viewModel.SelectedTest, nameof(_viewModel.SelectedTest.Description),
+                            false, DataSourceUpdateMode.OnPropertyChanged));
 
             //selected sample type
             this.lookUpEditSampleType.Properties.DataSource = _viewModel.SampleTypesList;
@@ -59,7 +52,8 @@ namespace CD4.UI.View
             this.lookUpEditSampleType.Properties.DisplayMember = nameof(SampleTypeModel.Description);
             //sample type datasource
             lookUpEditSampleType.DataBindings.Add
-                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedSampleType)));
+                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedSampleType),
+                            false, DataSourceUpdateMode.OnPropertyChanged));
 
             //LookUpEdit TestDataType Datasource
             this.lookUpEditTestDataType.Properties.DataSource = _viewModel.ResultDataTypes;
@@ -73,7 +67,8 @@ namespace CD4.UI.View
 
             //Result Mask
             this.textEditResultMask.DataBindings.Add
-                (new Binding("EditValue", _viewModel.SelectedTest, nameof(_viewModel.SelectedTest.Mask)));
+                (new Binding("EditValue", _viewModel.SelectedTest, nameof(_viewModel.SelectedTest.Mask),
+                            false, DataSourceUpdateMode.OnPropertyChanged));
 
             //unit
             this.lookUpEditUnit.Properties.DataSource = _viewModel.UnitList;
@@ -81,20 +76,27 @@ namespace CD4.UI.View
             this.lookUpEditUnit.Properties.DisplayMember = nameof(UnitModel.Unit);
             //selected unit
             this.lookUpEditUnit.DataBindings.Add
-                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedUnit)));
+                (new Binding("EditValue", _viewModel, nameof(_viewModel.SelectedUnit),
+                            false, DataSourceUpdateMode.OnPropertyChanged));
 
             //code
             this.textEditCode.DataBindings.Add
-                (new Binding("EditValue", _viewModel.SelectedTest, nameof(_viewModel.SelectedTest.Code)));
+                (new Binding("EditValue", _viewModel.SelectedTest, nameof(_viewModel.SelectedTest.Code),
+                            false, DataSourceUpdateMode.OnPropertyChanged));
 
             //Is Reportable?
             this.checkEditIsReportable.DataBindings.Add
-                (new Binding("Checked", _viewModel.SelectedTest, nameof(_viewModel.SelectedTest.IsReportable)));
+                (new Binding("Checked", _viewModel.SelectedTest, nameof(_viewModel.SelectedTest.IsReportable),
+                            false, DataSourceUpdateMode.OnPropertyChanged));
 
             //Default Commented?
             this.checkEditDefaultCommented.DataBindings.Add
                 (new Binding("Checked", _viewModel.SelectedTest, nameof(_viewModel.SelectedTest.DefaultCommented),
                         false, DataSourceUpdateMode.OnPropertyChanged));
+
+            //sort order
+            spinEditSortOrder.DataBindings.Add(new Binding("EditValue", _viewModel.SelectedTest, nameof(_viewModel.SelectedTest.SortOrder),
+                            false, DataSourceUpdateMode.OnPropertyChanged));
 
         }
 

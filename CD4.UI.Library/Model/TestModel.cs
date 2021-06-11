@@ -157,6 +157,7 @@ namespace CD4.UI.Library.Model
             if (test.Code != this.Code) { return false; }
             if (test.IsReportable != this.IsReportable) return false;
             if (test.DefaultCommented != this.DefaultCommented) return false;
+            if (test.SortOrder != this.sortOrder) return false;
             return true;
         }
 

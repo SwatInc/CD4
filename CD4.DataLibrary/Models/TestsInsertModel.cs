@@ -17,5 +17,6 @@ namespace CD4.DataLibrary.Models
         public bool Reportable { get; set; }
         public string Code { get; set; }
         public bool DefaultCommented { get; set; }
+        public int SortOrder { get; set; }
     }
 }
