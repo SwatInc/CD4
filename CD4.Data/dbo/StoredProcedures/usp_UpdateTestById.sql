@@ -8,7 +8,8 @@
 	@UnitId int,
 	@Reportable bit,
 	@Code varchar(3),
-	@DefaultCommented bit
+	@DefaultCommented bit,
+	@SortOrder int
 AS
 BEGIN
 
@@ -22,7 +23,8 @@ BEGIN
 		[UnitId] = @UnitId,
 		[Reportable] = @Reportable,
 		[Code] = @Code,
-		[DefaultCommented] = @DefaultCommented
+		[DefaultCommented] = @DefaultCommented,
+		[SortOrder] = @SortOrder
 	WHERE Id = @Id;
 
 	SELECT 
@@ -36,6 +38,7 @@ BEGIN
 	  , [t].[Code]
 	  , [t].[Reportable] AS [IsReportable]
 	  , [t].[DefaultCommented]
+	  , [t].[Sortorder]
 	FROM [dbo].[Test] [t]
 	INNER JOIN [dbo].[ResultDataType][r]  ON [t].[ResultDataTypeId] = [r].[Id]
 	INNER JOIN [dbo].[Discipline] [d] ON [t].[DisciplineId] = [d].[Id]
