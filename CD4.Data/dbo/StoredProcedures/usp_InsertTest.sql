@@ -7,7 +7,8 @@
 	@UnitId int,
 	@Reportable bit,
 	@Code varchar(3),
-	@DefaultCommented bit
+	@DefaultCommented bit,
+	@SortOrder int
 AS
 BEGIN
 
@@ -21,7 +22,8 @@ DECLARE @InsertedTestId int;
 		,[Mask],[UnitId]
 		,[Reportable]
 		,[Code]
-		,[DefaultCommented]) 
+		,[DefaultCommented]
+		,[SortOrder]) 
 	VALUES
 		(@DisciplineId
 		,@Description
@@ -30,8 +32,9 @@ DECLARE @InsertedTestId int;
 		,@Mask
 		,@UnitId
 		,@Reportable
-		,@Code,
-		@DefaultCommented);
+		,@Code
+		,@DefaultCommented
+		,@SortOrder);
 
 	SET @InsertedTestId = SCOPE_IDENTITY();
 

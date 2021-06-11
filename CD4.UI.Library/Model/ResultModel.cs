@@ -25,6 +25,7 @@ namespace CD4.UI.Library.Model
         private string unit;
         private string _referenceCode;
         private bool _isDeltaOk;
+        private int _sortOrder;
 
         #endregion
 
@@ -146,6 +147,15 @@ namespace CD4.UI.Library.Model
             {
                 if (_isDeltaOk == value) return;
                 _isDeltaOk = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public int SortOrder
+        {
+            get => _sortOrder; set
+            {
+                _sortOrder = value;
                 OnPropertyChanged();
             }
         }

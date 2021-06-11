@@ -17,7 +17,8 @@ SELECT [R].[Id],
 	   [R].[ReferenceCode],
 	   [R].[IsDeltaOk],
 	   [T].[Reportable],
-	   [RC].[Comment]
+	   [RC].[Comment],
+	   [T].[SortOrder]
 FROM [dbo].[Result] [R]
 INNER JOIN [dbo].[Sample] [S] ON [R].[Sample_Cin] = [S].[Cin]
 INNER JOIN [dbo].[Test] [T] ON [R].[TestId] = [T].[Id]

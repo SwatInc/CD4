@@ -38,7 +38,7 @@ namespace CD4.DataLibrary.DataAccess
         }
 
         public async Task<List<AnalysisRequestReportModel>> 
-            GetAnalysisReportForepisodeAsync(string episodeNumber, int loggedInUserId, string procedureName = "")
+            GetAnalysisReportForEpisodeAsync(string episodeNumber, int loggedInUserId, string procedureName = "")
         {
             //stored procedure name to call
             var storedProcedure = "[dbo].[usp_GetAnalysisReportForEpisode]";
@@ -113,7 +113,8 @@ namespace CD4.DataLibrary.DataAccess
                      Result = assay.Result,
                      Unit = assay.Unit,
                      DisplayNormalRange = assay.DisplayNormalRange,
-                     Comment = assay.Comment
+                     Comment = assay.Comment,
+                     SortOrder = assay.SortOrder
                 });
             }
 

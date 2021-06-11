@@ -9,5 +9,6 @@
         public string Unit { get; set; }
         public string DisplayNormalRange { get; set; } //this is age, gender and test specific
         public string Comment { get; set; }
+        public int SortOrder { get; set; }
     }
 }

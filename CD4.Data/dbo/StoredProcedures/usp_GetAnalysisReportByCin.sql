@@ -15,7 +15,8 @@ AS
 			[Result] NVARCHAR(50)NULL,
 			[Unit] varchar(10) null,
 			[DisplayNormalRange] varchar(100),
-			[Comment] varchar(1000)
+			[Comment] varchar(1000),
+			[SortOrder] int not null
 		);
 
 		INSERT INTO @ReportResult
@@ -27,6 +28,7 @@ AS
 			,[W].[Unit]
 			,[RR].[DisplayNormalRange]
 			,[W].[Comment]
+			,[W].[SortOrder]
 			FROM [dbo].[WorkSheetResultData] [W]
 			INNER JOIN [dbo].[ResultTracking] [RT] ON [W].[Id] = [RT].[ResultId]
 			INNER JOIN [dbo].[ResultReferenceRanges] [RR] ON [W].[Id] = [RR].[ResultId]
@@ -34,7 +36,7 @@ AS
 				 ([W].[Result] IS NOT NULL OR [W].[Result] <> '') AND
 				  [RT].[StatusId] = 5;
 
-		SELECT [Cin],[Discipline],[Assay],[Result],[Unit],[DisplayNormalRange],[Comment] FROM @ReportResult;
+		SELECT [Cin],[Discipline],[Assay],[Result],[Unit],[DisplayNormalRange],[Comment],[SortOrder] FROM @ReportResult;
 	
 		SELECT 
 		DISTINCT([R].[NidPp])

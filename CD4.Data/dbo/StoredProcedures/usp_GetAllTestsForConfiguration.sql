@@ -13,6 +13,7 @@ SET NOCOUNT ON;
 	  , [t].[Code]
 	  , [t].[Reportable] AS [IsReportable]
 	  , [t].[DefaultCommented]
+	  , [t].[SortOrder]
 	FROM [dbo].[Test] [t]
 	INNER JOIN [dbo].[ResultDataType][r]  ON [t].[ResultDataTypeId] = [r].[Id]
 	INNER JOIN [dbo].[Discipline] [d] ON [t].[DisciplineId] = [d].[Id]

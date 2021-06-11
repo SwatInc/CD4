@@ -790,6 +790,8 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.DetailResults.HeightF = 116.84F;
             this.DetailResults.KeepTogether = true;
             this.DetailResults.Name = "DetailResults";
+            this.DetailResults.SortFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
+            new DevExpress.XtraReports.UI.GroupField("SortOrder", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
             // 
             // xrLabel25
             // 

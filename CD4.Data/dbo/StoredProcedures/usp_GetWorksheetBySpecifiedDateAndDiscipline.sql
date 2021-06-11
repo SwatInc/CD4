@@ -69,7 +69,8 @@ BEGIN
                [Mask],
                [Unit],
                [ReferenceCode],
-               [IsDeltaOk]
+               [IsDeltaOk],
+               [SortOrder]
 	           FROM [dbo].[WorkSheetResultData]
 	           WHERE [DisciplineId] = @DisciplineId AND  [Cin] IN (SELECT [Cin] FROM @TempCins)
 			   ORDER BY [Test];

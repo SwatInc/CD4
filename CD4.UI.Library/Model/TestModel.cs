@@ -17,6 +17,7 @@ namespace CD4.UI.Library.Model
         private string unit;
         private string code;
         private bool defaultCommented;
+        private int sortOrder;
 
         public int Id
         {
@@ -108,7 +109,14 @@ namespace CD4.UI.Library.Model
                 OnPropertyChanged();
             }
         }
-
+        public int SortOrder
+        {
+            get => sortOrder; set
+            {
+                sortOrder = value;
+                OnPropertyChanged();
+            }
+        }
 
 
         #region INotifyPropertyChanged Hookup
@@ -149,6 +157,7 @@ namespace CD4.UI.Library.Model
             if (test.Code != this.Code) { return false; }
             if (test.IsReportable != this.IsReportable) return false;
             if (test.DefaultCommented != this.DefaultCommented) return false;
+            if (test.SortOrder != this.sortOrder) return false;
             return true;
         }
 

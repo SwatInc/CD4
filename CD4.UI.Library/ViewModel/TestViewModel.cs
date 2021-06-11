@@ -361,6 +361,7 @@ namespace CD4.UI.Library.ViewModel
             SelectedTest.Code = selectedRow.Code;
             SelectedTest.IsReportable = selectedRow.IsReportable;
             SelectedTest.DefaultCommented = selectedRow.DefaultCommented;
+            SelectedTest.SortOrder = selectedRow.SortOrder;
         }
 
         public void ProcessSaveTest(object sender, EventArgs e)
@@ -418,7 +419,8 @@ namespace CD4.UI.Library.ViewModel
                     UnitId = SelectedUnit,
                     Reportable = SelectedTest.IsReportable,
                     Code = SelectedTest.Code,
-                    DefaultCommented = SelectedTest.DefaultCommented
+                    DefaultCommented = SelectedTest.DefaultCommented,
+                    SortOrder = SelectedTest.SortOrder
                 };
 
                 OnInitiateTestUpdate?.Invoke(this, updateModel);
@@ -449,7 +451,8 @@ namespace CD4.UI.Library.ViewModel
                     UnitId = SelectedUnit,
                     Reportable = SelectedTest.IsReportable,
                     Code = SelectedTest.Code,
-                    DefaultCommented = SelectedTest.DefaultCommented
+                    DefaultCommented = SelectedTest.DefaultCommented,
+                    SortOrder = SelectedTest.SortOrder
                 };
 
                 //raise event to save
