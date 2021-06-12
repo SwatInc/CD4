@@ -17,7 +17,9 @@ AS
 			[Unit] varchar(10) null,
 			[DisplayNormalRange] varchar(100),
 			[Comment] varchar(1000),
-			[SortOrder] int not null
+			[SortOrder] int not null,
+	        [PrimaryHeader] varchar(200) NOT NULL,
+	        [SecondaryHeader] varchar(200) NOT NULL
 		);
 
 		--get all cins for the report
@@ -37,6 +39,8 @@ AS
 			,[RR].[DisplayNormalRange]
 			,[W].[Comment]
 			,[W].[SortOrder]
+	        ,[W].[PrimaryHeader]
+	        ,[W].[SecondaryHeader]
 			FROM [dbo].[WorkSheetResultData] [W]
 			INNER JOIN [dbo].[ResultTracking] [RT] ON [W].[Id] = [RT].[ResultId]
 			INNER JOIN [dbo].[ResultReferenceRanges] [RR] ON [W].[Id] = [RR].[ResultId]
@@ -46,7 +50,7 @@ AS
 				  ([W].[Result] IS NOT NULL OR [W].[Result] <> '') AND
 				  [RT].[StatusId] = 5;
 
-		SELECT [Cin],[Discipline],[Assay],[Result],[Unit],[DisplayNormalRange],[Comment],[SortOrder] FROM @ReportResult;
+		SELECT [Cin],[Discipline],[Assay],[Result],[Unit],[DisplayNormalRange],[Comment],[SortOrder],[PrimaryHeader],[SecondaryHeader] FROM @ReportResult;
 	
 		SELECT 
 		DISTINCT([R].[NidPp])

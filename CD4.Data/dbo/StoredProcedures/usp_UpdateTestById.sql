@@ -9,7 +9,9 @@
 	@Reportable bit,
 	@Code varchar(3),
 	@DefaultCommented bit,
-	@SortOrder int
+	@SortOrder int,
+	@PrimaryHeader varchar(200) = '',
+	@SecondaryHeader varchar(200) = ''
 AS
 BEGIN
 
@@ -24,7 +26,9 @@ BEGIN
 		[Reportable] = @Reportable,
 		[Code] = @Code,
 		[DefaultCommented] = @DefaultCommented,
-		[SortOrder] = @SortOrder
+		[SortOrder] = @SortOrder,
+		[PrimaryHeader] = @PrimaryHeader,
+		[SecondaryHeader] = @SecondaryHeader
 	WHERE Id = @Id;
 
 	SELECT 
@@ -39,6 +43,8 @@ BEGIN
 	  , [t].[Reportable] AS [IsReportable]
 	  , [t].[DefaultCommented]
 	  , [t].[Sortorder]
+	  , [t].[PrimaryHeader]
+	  , [t].[SecondaryHeader]
 	FROM [dbo].[Test] [t]
 	INNER JOIN [dbo].[ResultDataType][r]  ON [t].[ResultDataTypeId] = [r].[Id]
 	INNER JOIN [dbo].[Discipline] [d] ON [t].[DisciplineId] = [d].[Id]
