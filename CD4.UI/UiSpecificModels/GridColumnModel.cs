@@ -17,5 +17,6 @@ namespace CD4.UI.UiSpecificModels
         public int Width { get; set; }
         public bool IsSorted { get; set; }
         public bool IsAscending { get; set; }
+        public int HeaderGroupIndex { get; set; }
     }
 }
