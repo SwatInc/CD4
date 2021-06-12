@@ -10,5 +10,7 @@
         public string DisplayNormalRange { get; set; }
         public string Comment { get; set; }
         public int SortOrder { get; set; }
+        public string PrimaryHeader { get; set; }
+        public string SecondaryHeader { get; set; }
     }
 }

@@ -10,5 +10,7 @@
         public string DisplayNormalRange { get; set; } //this is age, gender and test specific
         public string Comment { get; set; }
         public int SortOrder { get; set; }
+        public string PrimaryHeader { get; set; }
+        public string SecondaryHeader { get; set; }
     }
 }
