@@ -30,7 +30,6 @@ namespace CD4.Extensions.Reports.Medlab.Report
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AnalysisReportForPrinting));
             DevExpress.XtraPrinting.BarCode.PDF417Generator pdF417Generator1 = new DevExpress.XtraPrinting.BarCode.PDF417Generator();
             DevExpress.XtraPrinting.BarCode.QRCodeGenerator qrCodeGenerator1 = new DevExpress.XtraPrinting.BarCode.QRCodeGenerator();
@@ -93,7 +92,11 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.DetailReport = new DevExpress.XtraReports.UI.DetailReportBand();
             this.GroupHeaderDiscipline = new DevExpress.XtraReports.UI.GroupHeaderBand();
             this.xrLabel18 = new DevExpress.XtraReports.UI.XRLabel();
-            this.bindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.GroupHeaderAssayPrimary = new DevExpress.XtraReports.UI.GroupHeaderBand();
+            this.GroupHeaderAssaySecondary = new DevExpress.XtraReports.UI.GroupHeaderBand();
+            this.xrLabel26 = new DevExpress.XtraReports.UI.XRLabel();
+            this.xrLabel27 = new DevExpress.XtraReports.UI.XRLabel();
+            this.bindingSource = new System.Windows.Forms.BindingSource();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this)).BeginInit();
             // 
@@ -737,7 +740,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrLabel14});
             this.GroupHeaderCin.Dpi = 254F;
             this.GroupHeaderCin.HeightF = 125.7117F;
-            this.GroupHeaderCin.Level = 1;
+            this.GroupHeaderCin.Level = 3;
             this.GroupHeaderCin.Name = "GroupHeaderCin";
             this.GroupHeaderCin.RepeatEveryPage = true;
             // 
@@ -825,7 +828,9 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.DetailReport.Bands.AddRange(new DevExpress.XtraReports.UI.Band[] {
             this.DetailResults,
             this.GroupHeaderCin,
-            this.GroupHeaderDiscipline});
+            this.GroupHeaderDiscipline,
+            this.GroupHeaderAssayPrimary,
+            this.GroupHeaderAssaySecondary});
             this.DetailReport.DataMember = "Assays";
             this.DetailReport.DataSource = this.bindingSource;
             this.DetailReport.Dpi = 254F;
@@ -839,8 +844,9 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.GroupHeaderDiscipline.Dpi = 254F;
             this.GroupHeaderDiscipline.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
             new DevExpress.XtraReports.UI.GroupField("Discipline", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
-            this.GroupHeaderDiscipline.HeightF = 83.82003F;
+            this.GroupHeaderDiscipline.HeightF = 58.42F;
             this.GroupHeaderDiscipline.KeepTogether = true;
+            this.GroupHeaderDiscipline.Level = 2;
             this.GroupHeaderDiscipline.Name = "GroupHeaderDiscipline";
             this.GroupHeaderDiscipline.PageBreak = DevExpress.XtraReports.UI.PageBreak.BeforeBandExceptFirstEntry;
             // 
@@ -850,7 +856,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrLabel18.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
             new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Discipline]")});
             this.xrLabel18.Font = new System.Drawing.Font("Segoe UI", 9.75F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))));
-            this.xrLabel18.LocationFloat = new DevExpress.Utils.PointFloat(91.44F, 25.40002F);
+            this.xrLabel18.LocationFloat = new DevExpress.Utils.PointFloat(91.44F, 0F);
             this.xrLabel18.Multiline = true;
             this.xrLabel18.Name = "xrLabel18";
             this.xrLabel18.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
@@ -859,6 +865,65 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrLabel18.StylePriority.UseTextAlignment = false;
             this.xrLabel18.Text = "xrLabel18";
             this.xrLabel18.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
+            // 
+            // GroupHeaderAssayPrimary
+            // 
+            this.GroupHeaderAssayPrimary.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrLabel26});
+            this.GroupHeaderAssayPrimary.Dpi = 254F;
+            this.GroupHeaderAssayPrimary.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
+            new DevExpress.XtraReports.UI.GroupField("PrimaryHeader", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
+            this.GroupHeaderAssayPrimary.HeightF = 58.42F;
+            this.GroupHeaderAssayPrimary.Level = 1;
+            this.GroupHeaderAssayPrimary.Name = "GroupHeaderAssayPrimary";
+            // 
+            // GroupHeaderAssaySecondary
+            // 
+            this.GroupHeaderAssaySecondary.Controls.AddRange(new DevExpress.XtraReports.UI.XRControl[] {
+            this.xrLabel27});
+            this.GroupHeaderAssaySecondary.Dpi = 254F;
+            this.GroupHeaderAssaySecondary.GroupFields.AddRange(new DevExpress.XtraReports.UI.GroupField[] {
+            new DevExpress.XtraReports.UI.GroupField("SecondaryHeader", DevExpress.XtraReports.UI.XRColumnSortOrder.Ascending)});
+            this.GroupHeaderAssaySecondary.HeightF = 58.42F;
+            this.GroupHeaderAssaySecondary.Name = "GroupHeaderAssaySecondary";
+            // 
+            // xrLabel26
+            // 
+            this.xrLabel26.AutoWidth = true;
+            this.xrLabel26.CanGrow = false;
+            this.xrLabel26.CanShrink = true;
+            this.xrLabel26.Dpi = 254F;
+            this.xrLabel26.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[PrimaryHeader]")});
+            this.xrLabel26.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.xrLabel26.LocationFloat = new DevExpress.Utils.PointFloat(91.44048F, 0F);
+            this.xrLabel26.Multiline = true;
+            this.xrLabel26.Name = "xrLabel26";
+            this.xrLabel26.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
+            this.xrLabel26.SizeF = new System.Drawing.SizeF(1559.56F, 58.42F);
+            this.xrLabel26.StylePriority.UseFont = false;
+            this.xrLabel26.StylePriority.UseTextAlignment = false;
+            this.xrLabel26.Text = "xrLabel26";
+            this.xrLabel26.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
+            // 
+            // xrLabel27
+            // 
+            this.xrLabel27.AutoWidth = true;
+            this.xrLabel27.CanGrow = false;
+            this.xrLabel27.CanShrink = true;
+            this.xrLabel27.Dpi = 254F;
+            this.xrLabel27.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[SecondaryHeader]")});
+            this.xrLabel27.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Bold);
+            this.xrLabel27.LocationFloat = new DevExpress.Utils.PointFloat(194.6271F, 0F);
+            this.xrLabel27.Multiline = true;
+            this.xrLabel27.Name = "xrLabel27";
+            this.xrLabel27.Padding = new DevExpress.XtraPrinting.PaddingInfo(5, 5, 0, 0, 254F);
+            this.xrLabel27.SizeF = new System.Drawing.SizeF(1456.373F, 58.42F);
+            this.xrLabel27.StylePriority.UseFont = false;
+            this.xrLabel27.StylePriority.UseTextAlignment = false;
+            this.xrLabel27.Text = "xrLabel27";
+            this.xrLabel27.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleLeft;
             // 
             // bindingSource
             // 
@@ -951,5 +1016,9 @@ namespace CD4.Extensions.Reports.Medlab.Report
         private DevExpress.XtraReports.UI.XRBarCode xrBarCode2;
         private DevExpress.XtraReports.UI.XRLabel xrLabel20;
         private DevExpress.XtraReports.UI.XRLabel xrLabel25;
+        private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeaderAssayPrimary;
+        private DevExpress.XtraReports.UI.XRLabel xrLabel26;
+        private DevExpress.XtraReports.UI.GroupHeaderBand GroupHeaderAssaySecondary;
+        private DevExpress.XtraReports.UI.XRLabel xrLabel27;
     }
 }

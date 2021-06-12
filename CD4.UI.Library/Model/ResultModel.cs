@@ -26,6 +26,8 @@ namespace CD4.UI.Library.Model
         private string _referenceCode;
         private bool _isDeltaOk;
         private int _sortOrder;
+        private string _primaryHeader;
+        private string _secondaryHeader;
 
         #endregion
 
@@ -156,6 +158,23 @@ namespace CD4.UI.Library.Model
             get => _sortOrder; set
             {
                 _sortOrder = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string PrimaryHeader
+        {
+            get => _primaryHeader; set
+            {
+                _primaryHeader = value;
+                OnPropertyChanged();
+            }
+        }
+        public string SecondaryHeader
+        {
+            get => _secondaryHeader; set
+            {
+                _secondaryHeader = value;
                 OnPropertyChanged();
             }
         }

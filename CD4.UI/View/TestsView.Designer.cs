@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TestsView));
             this.gridControlCodifiedValues = new DevExpress.XtraGrid.GridControl();
             this.gridViewTests = new DevExpress.XtraGrid.Views.Grid.GridView();
@@ -43,6 +42,8 @@
             this.gridColumnCode = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnDefaultCommented = new DevExpress.XtraGrid.Columns.GridColumn();
             this.gridColumnSortOrder = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnPrimaryHeader = new DevExpress.XtraGrid.Columns.GridColumn();
+            this.gridColumnSecondaryHeader = new DevExpress.XtraGrid.Columns.GridColumn();
             this.splitContainerControl = new DevExpress.XtraEditors.SplitContainerControl();
             this.lookUpEditUnit = new DevExpress.XtraEditors.LookUpEdit();
             this.checkEditDefaultCommented = new DevExpress.XtraEditors.CheckEdit();
@@ -54,7 +55,8 @@
             this.lookUpEditTestDataType = new DevExpress.XtraEditors.LookUpEdit();
             this.textEditId = new DevExpress.XtraEditors.TextEdit();
             this.textEditDescription = new DevExpress.XtraEditors.TextEdit();
-            this.barManager1 = new DevExpress.XtraBars.BarManager(this.components);
+            this.spinEditSortOrder = new DevExpress.XtraEditors.SpinEdit();
+            this.barManager1 = new DevExpress.XtraBars.BarManager();
             this.bar = new DevExpress.XtraBars.Bar();
             this.barButtonItemNewTest = new DevExpress.XtraBars.BarButtonItem();
             this.barButtonItemSave = new DevExpress.XtraBars.BarButtonItem();
@@ -62,7 +64,8 @@
             this.barDockControlBottom = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlLeft = new DevExpress.XtraBars.BarDockControl();
             this.barDockControlRight = new DevExpress.XtraBars.BarDockControl();
-            this.spinEditSortOrder = new DevExpress.XtraEditors.SpinEdit();
+            this.textEditPrimaryHeader = new DevExpress.XtraEditors.TextEdit();
+            this.textEditSecondaryHeader = new DevExpress.XtraEditors.TextEdit();
             ((System.ComponentModel.ISupportInitialize)(this.gridControlCodifiedValues)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gridViewTests)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainerControl)).BeginInit();
@@ -77,8 +80,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTestDataType.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditId.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditDescription.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEditSortOrder.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditPrimaryHeader.Properties)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditSecondaryHeader.Properties)).BeginInit();
             this.SuspendLayout();
             // 
             // gridControlCodifiedValues
@@ -105,7 +110,9 @@
             this.gridColumnUnit,
             this.gridColumnCode,
             this.gridColumnDefaultCommented,
-            this.gridColumnSortOrder});
+            this.gridColumnSortOrder,
+            this.gridColumnPrimaryHeader,
+            this.gridColumnSecondaryHeader});
             this.gridViewTests.GridControl = this.gridControlCodifiedValues;
             this.gridViewTests.Name = "gridViewTests";
             this.gridViewTests.OptionsBehavior.AutoSelectAllInEditor = false;
@@ -138,7 +145,7 @@
             this.gridColumnResultDataType.FieldName = "ResultDataType";
             this.gridColumnResultDataType.Name = "gridColumnResultDataType";
             this.gridColumnResultDataType.Visible = true;
-            this.gridColumnResultDataType.VisibleIndex = 4;
+            this.gridColumnResultDataType.VisibleIndex = 6;
             this.gridColumnResultDataType.Width = 63;
             // 
             // gridColumnIsReportable
@@ -147,7 +154,7 @@
             this.gridColumnIsReportable.FieldName = "IsReportable";
             this.gridColumnIsReportable.Name = "gridColumnIsReportable";
             this.gridColumnIsReportable.Visible = true;
-            this.gridColumnIsReportable.VisibleIndex = 7;
+            this.gridColumnIsReportable.VisibleIndex = 9;
             this.gridColumnIsReportable.Width = 51;
             // 
             // gridColumnMask
@@ -156,7 +163,7 @@
             this.gridColumnMask.FieldName = "Mask";
             this.gridColumnMask.Name = "gridColumnMask";
             this.gridColumnMask.Visible = true;
-            this.gridColumnMask.VisibleIndex = 5;
+            this.gridColumnMask.VisibleIndex = 7;
             this.gridColumnMask.Width = 69;
             // 
             // gridColumnDiscipline
@@ -174,7 +181,7 @@
             this.gridColumnSampleType.FieldName = "SampleType";
             this.gridColumnSampleType.Name = "gridColumnSampleType";
             this.gridColumnSampleType.Visible = true;
-            this.gridColumnSampleType.VisibleIndex = 3;
+            this.gridColumnSampleType.VisibleIndex = 5;
             this.gridColumnSampleType.Width = 76;
             // 
             // gridColumnUnit
@@ -183,7 +190,7 @@
             this.gridColumnUnit.FieldName = "Unit";
             this.gridColumnUnit.Name = "gridColumnUnit";
             this.gridColumnUnit.Visible = true;
-            this.gridColumnUnit.VisibleIndex = 6;
+            this.gridColumnUnit.VisibleIndex = 8;
             this.gridColumnUnit.Width = 38;
             // 
             // gridColumnCode
@@ -192,7 +199,7 @@
             this.gridColumnCode.FieldName = "Code";
             this.gridColumnCode.Name = "gridColumnCode";
             this.gridColumnCode.Visible = true;
-            this.gridColumnCode.VisibleIndex = 8;
+            this.gridColumnCode.VisibleIndex = 10;
             this.gridColumnCode.Width = 50;
             // 
             // gridColumnDefaultCommented
@@ -201,7 +208,7 @@
             this.gridColumnDefaultCommented.FieldName = "DefaultCommented";
             this.gridColumnDefaultCommented.Name = "gridColumnDefaultCommented";
             this.gridColumnDefaultCommented.Visible = true;
-            this.gridColumnDefaultCommented.VisibleIndex = 9;
+            this.gridColumnDefaultCommented.VisibleIndex = 11;
             this.gridColumnDefaultCommented.Width = 58;
             // 
             // gridColumnSortOrder
@@ -210,7 +217,23 @@
             this.gridColumnSortOrder.FieldName = "SortOrder";
             this.gridColumnSortOrder.Name = "gridColumnSortOrder";
             this.gridColumnSortOrder.Visible = true;
-            this.gridColumnSortOrder.VisibleIndex = 10;
+            this.gridColumnSortOrder.VisibleIndex = 12;
+            // 
+            // gridColumnPrimaryHeader
+            // 
+            this.gridColumnPrimaryHeader.Caption = "Primary Header";
+            this.gridColumnPrimaryHeader.FieldName = "PrimaryHeader";
+            this.gridColumnPrimaryHeader.Name = "gridColumnPrimaryHeader";
+            this.gridColumnPrimaryHeader.Visible = true;
+            this.gridColumnPrimaryHeader.VisibleIndex = 3;
+            // 
+            // gridColumnSecondaryHeader
+            // 
+            this.gridColumnSecondaryHeader.Caption = "Secondary Header";
+            this.gridColumnSecondaryHeader.FieldName = "Secondary Header";
+            this.gridColumnSecondaryHeader.Name = "gridColumnSecondaryHeader";
+            this.gridColumnSecondaryHeader.Visible = true;
+            this.gridColumnSecondaryHeader.VisibleIndex = 4;
             // 
             // splitContainerControl
             // 
@@ -220,6 +243,8 @@
             this.splitContainerControl.Name = "splitContainerControl";
             this.splitContainerControl.Panel1.Controls.Add(this.gridControlCodifiedValues);
             this.splitContainerControl.Panel1.Text = "Panel1";
+            this.splitContainerControl.Panel2.Controls.Add(this.textEditSecondaryHeader);
+            this.splitContainerControl.Panel2.Controls.Add(this.textEditPrimaryHeader);
             this.splitContainerControl.Panel2.Controls.Add(this.lookUpEditUnit);
             this.splitContainerControl.Panel2.Controls.Add(this.checkEditDefaultCommented);
             this.splitContainerControl.Panel2.Controls.Add(this.textEditCode);
@@ -256,7 +281,7 @@
             // 
             // checkEditDefaultCommented
             // 
-            this.checkEditDefaultCommented.Location = new System.Drawing.Point(17, 327);
+            this.checkEditDefaultCommented.Location = new System.Drawing.Point(17, 394);
             this.checkEditDefaultCommented.Name = "checkEditDefaultCommented";
             this.checkEditDefaultCommented.Properties.Caption = "Default Commented ?";
             this.checkEditDefaultCommented.Size = new System.Drawing.Size(173, 19);
@@ -306,7 +331,7 @@
             // 
             // checkEditIsReportable
             // 
-            this.checkEditIsReportable.Location = new System.Drawing.Point(17, 302);
+            this.checkEditIsReportable.Location = new System.Drawing.Point(17, 369);
             this.checkEditIsReportable.Name = "checkEditIsReportable";
             this.checkEditIsReportable.Properties.Caption = "Reportable ?";
             this.checkEditIsReportable.Size = new System.Drawing.Size(102, 19);
@@ -360,6 +385,25 @@
             this.textEditDescription.Properties.NullValuePromptShowForEmptyValue = true;
             this.textEditDescription.Size = new System.Drawing.Size(173, 20);
             this.textEditDescription.TabIndex = 0;
+            // 
+            // spinEditSortOrder
+            // 
+            this.spinEditSortOrder.EditValue = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.spinEditSortOrder.Location = new System.Drawing.Point(17, 332);
+            this.spinEditSortOrder.Name = "spinEditSortOrder";
+            this.spinEditSortOrder.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
+            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
+            this.spinEditSortOrder.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.Default;
+            this.spinEditSortOrder.Properties.Mask.EditMask = "n0";
+            this.spinEditSortOrder.Properties.NullText = "Sort Order";
+            this.spinEditSortOrder.Properties.NullValuePrompt = "Sort Order";
+            this.spinEditSortOrder.Properties.NullValuePromptShowForEmptyValue = true;
+            this.spinEditSortOrder.Size = new System.Drawing.Size(173, 20);
+            this.spinEditSortOrder.TabIndex = 13;
             // 
             // barManager1
             // 
@@ -433,19 +477,25 @@
             this.barDockControlRight.Manager = this.barManager1;
             this.barDockControlRight.Size = new System.Drawing.Size(0, 430);
             // 
-            // textEditSortOrder
+            // textEditPrimaryHeader
             // 
-            this.spinEditSortOrder.Location = new System.Drawing.Point(17, 280);
-            this.spinEditSortOrder.Name = "textEditSortOrder";
-            this.spinEditSortOrder.Properties.Buttons.AddRange(new DevExpress.XtraEditors.Controls.EditorButton[] {
-            new DevExpress.XtraEditors.Controls.EditorButton(DevExpress.XtraEditors.Controls.ButtonPredefines.Combo)});
-            this.spinEditSortOrder.Properties.EditValueChangedFiringMode = DevExpress.XtraEditors.Controls.EditValueChangedFiringMode.Default;
-            this.spinEditSortOrder.Properties.Mask.EditMask = "n0";
-            this.spinEditSortOrder.Properties.NullText = "Sort Order";
-            this.spinEditSortOrder.Properties.NullValuePrompt = "Sort Order";
-            this.spinEditSortOrder.Properties.NullValuePromptShowForEmptyValue = true;
-            this.spinEditSortOrder.Size = new System.Drawing.Size(173, 20);
-            this.spinEditSortOrder.TabIndex = 13;
+            this.textEditPrimaryHeader.Location = new System.Drawing.Point(17, 280);
+            this.textEditPrimaryHeader.Name = "textEditPrimaryHeader";
+            this.textEditPrimaryHeader.Properties.NullText = "Primary Header";
+            this.textEditPrimaryHeader.Properties.NullValuePrompt = "Primary Header";
+            this.textEditPrimaryHeader.Properties.NullValuePromptShowForEmptyValue = true;
+            this.textEditPrimaryHeader.Size = new System.Drawing.Size(173, 20);
+            this.textEditPrimaryHeader.TabIndex = 14;
+            // 
+            // textEditSecondaryHeader
+            // 
+            this.textEditSecondaryHeader.Location = new System.Drawing.Point(17, 306);
+            this.textEditSecondaryHeader.Name = "textEditSecondaryHeader";
+            this.textEditSecondaryHeader.Properties.NullText = "Secondary Header";
+            this.textEditSecondaryHeader.Properties.NullValuePrompt = "Secondary Header";
+            this.textEditSecondaryHeader.Properties.NullValuePromptShowForEmptyValue = true;
+            this.textEditSecondaryHeader.Size = new System.Drawing.Size(173, 20);
+            this.textEditSecondaryHeader.TabIndex = 15;
             // 
             // TestsView
             // 
@@ -473,8 +523,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.lookUpEditTestDataType.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditId.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.textEditDescription.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.spinEditSortOrder.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.barManager1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditPrimaryHeader.Properties)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.textEditSecondaryHeader.Properties)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -515,5 +567,9 @@
         private DevExpress.XtraBars.BarDockControl barDockControlRight;
         private DevExpress.XtraGrid.Columns.GridColumn gridColumnSortOrder;
         private DevExpress.XtraEditors.SpinEdit spinEditSortOrder;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnPrimaryHeader;
+        private DevExpress.XtraGrid.Columns.GridColumn gridColumnSecondaryHeader;
+        private DevExpress.XtraEditors.TextEdit textEditSecondaryHeader;
+        private DevExpress.XtraEditors.TextEdit textEditPrimaryHeader;
     }
 }

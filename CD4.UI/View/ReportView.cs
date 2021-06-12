@@ -215,7 +215,9 @@ namespace CD4.UI.View
                     Unit = assay.Unit,
                     DisplayNormalRange = assay.DisplayNormalRange,
                     Comment = assay.Comment,
-                    SortOrder = assay.SortOrder
+                    SortOrder = assay.SortOrder,
+                    PrimaryHeader = assay.PrimaryHeader,
+                    SecondaryHeader = assay.SecondaryHeader
                 });
             }
 

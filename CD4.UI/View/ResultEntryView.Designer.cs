@@ -48,8 +48,8 @@ namespace CD4.UI.View
             this.gridControlSamples = new DevExpress.XtraGrid.GridControl();
             this.gridViewSamples = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.progressPanelTests = new DevExpress.XtraWaitForm.ProgressPanel();
-            this.gridControlTests = new DevExpress.XtraGrid.GridControl();
-            this.gridViewTests = new DevExpress.XtraGrid.Views.Grid.GridView();
+            this.gridControlTests = new CustomGridControl();
+            this.gridViewTests = new CustomGridView();
             this.repositoryItemLookUpEditCodifiedPhrases = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.graphsUserControl = new CD4.UI.UserControls.GraphsUserControl();
             this.groupControlFunctions = new DevExpress.XtraEditors.GroupControl();
@@ -239,7 +239,7 @@ namespace CD4.UI.View
             this.splitContainerControlFunctions.Panel1.Text = "Panel1";
             this.splitContainerControlFunctions.Panel2.Controls.Add(this.groupControlFunctions);
             this.splitContainerControlFunctions.Panel2.Text = "Panel2";
-            this.splitContainerControlFunctions.Size = new System.Drawing.Size(1294, 428);
+            this.splitContainerControlFunctions.Size = new System.Drawing.Size(1294, 433);
             this.splitContainerControlFunctions.SplitterPosition = 308;
             this.splitContainerControlFunctions.TabIndex = 0;
             // 
@@ -301,7 +301,7 @@ namespace CD4.UI.View
             this.progressPanelTests.Dock = System.Windows.Forms.DockStyle.Fill;
             this.progressPanelTests.Location = new System.Drawing.Point(0, 0);
             this.progressPanelTests.Name = "progressPanelTests";
-            this.progressPanelTests.Size = new System.Drawing.Size(884, 308);
+            this.progressPanelTests.Size = new System.Drawing.Size(889, 308);
             this.progressPanelTests.TabIndex = 3;
             // 
             // gridControlTests
@@ -312,7 +312,7 @@ namespace CD4.UI.View
             this.gridControlTests.Name = "gridControlTests";
             this.gridControlTests.RepositoryItems.AddRange(new DevExpress.XtraEditors.Repository.RepositoryItem[] {
             this.repositoryItemLookUpEditCodifiedPhrases});
-            this.gridControlTests.Size = new System.Drawing.Size(884, 308);
+            this.gridControlTests.Size = new System.Drawing.Size(889, 308);
             this.gridControlTests.TabIndex = 0;
             this.gridControlTests.ViewCollection.AddRange(new DevExpress.XtraGrid.Views.Base.BaseView[] {
             this.gridViewTests});
@@ -320,7 +320,9 @@ namespace CD4.UI.View
             // gridViewTests
             // 
             this.gridViewTests.GridControl = this.gridControlTests;
+            this.gridViewTests.GroupFormat = "{0} [#image]{1} {2}";
             this.gridViewTests.Name = "gridViewTests";
+            this.gridViewTests.OptionsBehavior.AutoExpandAllGroups = true;
             this.gridViewTests.OptionsView.ShowGroupPanel = false;
             // 
             // repositoryItemLookUpEditCodifiedPhrases
@@ -341,7 +343,7 @@ namespace CD4.UI.View
             this.graphsUserControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.graphsUserControl.Location = new System.Drawing.Point(0, 0);
             this.graphsUserControl.Name = "graphsUserControl";
-            this.graphsUserControl.Size = new System.Drawing.Size(884, 308);
+            this.graphsUserControl.Size = new System.Drawing.Size(889, 308);
             this.graphsUserControl.TabIndex = 4;
             // 
             // groupControlFunctions
@@ -358,7 +360,7 @@ namespace CD4.UI.View
             this.groupControlFunctions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupControlFunctions.Location = new System.Drawing.Point(0, 0);
             this.groupControlFunctions.Name = "groupControlFunctions";
-            this.groupControlFunctions.Size = new System.Drawing.Size(1294, 110);
+            this.groupControlFunctions.Size = new System.Drawing.Size(1294, 120);
             this.groupControlFunctions.TabIndex = 1;
             this.groupControlFunctions.Text = "Functions";
             // 
@@ -506,8 +508,8 @@ namespace CD4.UI.View
         private DevExpress.XtraEditors.SplitContainerControl splitContainerControlSamplesAndTest;
         private DevExpress.XtraGrid.GridControl gridControlSamples;
         private DevExpress.XtraGrid.Views.Grid.GridView gridViewSamples;
-        private DevExpress.XtraGrid.GridControl gridControlTests;
-        private DevExpress.XtraGrid.Views.Grid.GridView gridViewTests;
+        private CustomGridControl gridControlTests;
+        private CustomGridView gridViewTests;
         private DevExpress.XtraEditors.GroupControl groupControlSelectedPatientRequestClinicalDetailsArea;
         private DevExpress.XtraEditors.GroupControl groupControlFunctions;
         private DevExpress.XtraEditors.ListBoxControl listBoxControlClinicalDetails;
