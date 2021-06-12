@@ -8,7 +8,9 @@
 	@Reportable bit,
 	@Code varchar(3),
 	@DefaultCommented bit,
-	@SortOrder int
+	@SortOrder int,
+	@PrimaryHeader varchar(200) = '',
+	@SecondaryHeader varchar(200) = ''
 AS
 BEGIN
 
@@ -23,7 +25,9 @@ DECLARE @InsertedTestId int;
 		,[Reportable]
 		,[Code]
 		,[DefaultCommented]
-		,[SortOrder]) 
+		,[SortOrder]
+		,[PrimaryHeader]
+		,[SecondaryHeader]) 
 	VALUES
 		(@DisciplineId
 		,@Description
@@ -34,7 +38,9 @@ DECLARE @InsertedTestId int;
 		,@Reportable
 		,@Code
 		,@DefaultCommented
-		,@SortOrder);
+		,@SortOrder
+		,@PrimaryHeader
+		,@SecondaryHeader);
 
 	SET @InsertedTestId = SCOPE_IDENTITY();
 
@@ -49,6 +55,8 @@ DECLARE @InsertedTestId int;
 	  , [t].[Code]
 	  , [t].[Reportable] AS [IsReportable]
 	  , [t].[DefaultCommented]
+	  , [t].[PrimaryHeader]
+	  , [t].[SecondaryHeader]
 	FROM [dbo].[Test] [t]
 	INNER JOIN [dbo].[ResultDataType][r]  ON [t].[ResultDataTypeId] = [r].[Id]
 	INNER JOIN [dbo].[Discipline] [d] ON [t].[DisciplineId] = [d].[Id]

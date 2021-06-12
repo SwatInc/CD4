@@ -290,6 +290,14 @@ namespace CD4.UI.View
                     sampleColumn.Width = column.Width;
                 }
 
+                gridViewSamples.Columns.Add(sampleColumn);
+
+                if (column.HeaderGroupIndex > 0)
+                {
+                    sampleColumn.Group();
+                    sampleColumn.GroupIndex = column.HeaderGroupIndex;
+                }
+
                 if (column.IsSorted)
                 {
                     sampleColumn.SortMode = DevExpress.XtraGrid.ColumnSortMode.Default;
@@ -297,8 +305,6 @@ namespace CD4.UI.View
                         ? DevExpress.Data.ColumnSortOrder.Ascending
                         : DevExpress.Data.ColumnSortOrder.Descending;
                 }
-
-                gridViewSamples.Columns.Add(sampleColumn);
             }
         }
 
@@ -325,6 +331,10 @@ namespace CD4.UI.View
                 default:
                     break;
             }
+
+
+            gridViewTests.ClearGrouping();
+            gridViewTests.ClearSorting();
             foreach (var column in gridColumns)
             {
                 var sampleColumn = new GridColumn
@@ -347,15 +357,21 @@ namespace CD4.UI.View
                     sampleColumn.ColumnEdit = this.repositoryItemLookUpEditCodifiedPhrases;
                 }
 
+                gridViewTests.Columns.Add(sampleColumn);
+
+                if (column.HeaderGroupIndex > 0)
+                {
+                    sampleColumn.Group();
+                    sampleColumn.GroupIndex = column.HeaderGroupIndex;
+                }
+
                 if (column.IsSorted)
                 {
                     sampleColumn.SortMode = DevExpress.XtraGrid.ColumnSortMode.Default;
-                    sampleColumn.SortOrder = column.IsAscending 
-                        ? DevExpress.Data.ColumnSortOrder.Ascending 
+                    sampleColumn.SortOrder = column.IsAscending
+                        ? DevExpress.Data.ColumnSortOrder.Ascending
                         : DevExpress.Data.ColumnSortOrder.Descending;
                 }
-
-                gridViewTests.Columns.Add(sampleColumn);
             }
         }
 

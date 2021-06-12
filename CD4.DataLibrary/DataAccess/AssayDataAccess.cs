@@ -56,7 +56,9 @@ namespace CD4.DataLibrary.DataAccess
                     Reportable = assayToUpdate.Reportable,
                     Code = assayToUpdate.Code,
                     DefaultCommented = assayToUpdate.DefaultCommented,
-                    SortOrder = assayToUpdate.SortOrder
+                    SortOrder = assayToUpdate.SortOrder,
+                    PrimaryHeader = assayToUpdate.PrimaryHeader,
+                    SecondaryHeader = assayToUpdate.SecondaryHeader
                 };
 
                 var output = await SelectInsertOrUpdateAsync<TestsModel, dynamic>(storedProcedure, parameters);

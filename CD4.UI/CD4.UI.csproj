@@ -238,6 +238,15 @@
     <Compile Include="AutofacFormFactory.cs" />
     <Compile Include="Cd4Application.cs" />
     <Compile Include="ContainerConfig.cs" />
+    <Compile Include="CustomGridControl\CustomDataController.cs" />
+    <Compile Include="CustomGridControl\CustomGridControl.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomGridControl\CustomGridView.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CustomGridControl\CustomGridViewInfo.cs" />
+    <Compile Include="CustomGridControl\CustomGridViewInfoRegistrator.cs" />
     <Compile Include="Extensions\Extensions.cs" />
     <Compile Include="FormFactory.cs" />
     <Compile Include="Helpers\BarcodeHelper.cs" />

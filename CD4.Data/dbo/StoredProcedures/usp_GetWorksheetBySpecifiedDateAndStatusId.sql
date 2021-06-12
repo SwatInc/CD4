@@ -92,7 +92,9 @@ BEGIN
                [Unit],
                [ReferenceCode],
                [IsDeltaOk],
-               [SortOrder]
+               [SortOrder],
+	           [PrimaryHeader],
+	           [SecondaryHeader]
 	           FROM [dbo].[WorkSheetResultData]
 	           WHERE [Cin] IN (SELECT [Cin] FROM @TempCins)
 			   ORDER BY [Test];

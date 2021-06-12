@@ -98,6 +98,14 @@ namespace CD4.UI.View
             spinEditSortOrder.DataBindings.Add(new Binding("EditValue", _viewModel.SelectedTest, nameof(_viewModel.SelectedTest.SortOrder),
                             false, DataSourceUpdateMode.OnPropertyChanged));
 
+            //primary header and secondary header
+            //code
+            this.textEditPrimaryHeader.DataBindings.Add
+                (new Binding("EditValue", _viewModel.SelectedTest, nameof(_viewModel.SelectedTest.PrimaryHeader),
+                            false, DataSourceUpdateMode.OnPropertyChanged));
+            this.textEditSecondaryHeader.DataBindings.Add
+                (new Binding("EditValue", _viewModel.SelectedTest, nameof(_viewModel.SelectedTest.SecondaryHeader),
+                            false, DataSourceUpdateMode.OnPropertyChanged));
         }
 
         private void GridViewTests_FocusedRowChanged(object sender, DevExpress.XtraGrid.Views.Base.FocusedRowChangedEventArgs e)

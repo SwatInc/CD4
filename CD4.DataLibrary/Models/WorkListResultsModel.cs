@@ -14,5 +14,7 @@
         public string ReferenceCode { get; set; }
         public bool IsDeltaOk { get; set; }
         public int SortOrder { get; set; }
+        public string PrimaryHeader { get; set; }
+        public string SecondaryHeader { get; set; }
     }
 }

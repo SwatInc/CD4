@@ -18,6 +18,8 @@ namespace CD4.UI.Library.Model
         private string code;
         private bool defaultCommented;
         private int sortOrder;
+        private string primaryHeader;
+        private string secondaryHeader;
 
         public int Id
         {
@@ -117,6 +119,22 @@ namespace CD4.UI.Library.Model
                 OnPropertyChanged();
             }
         }
+        public string PrimaryHeader
+        {
+            get => primaryHeader; set
+            {
+                primaryHeader = value;
+                OnPropertyChanged();
+            }
+        }
+        public string SecondaryHeader
+        {
+            get => secondaryHeader; set
+            {
+                secondaryHeader = value;
+                OnPropertyChanged();
+            }
+        }
 
 
         #region INotifyPropertyChanged Hookup
@@ -157,7 +175,9 @@ namespace CD4.UI.Library.Model
             if (test.Code != this.Code) { return false; }
             if (test.IsReportable != this.IsReportable) return false;
             if (test.DefaultCommented != this.DefaultCommented) return false;
-            if (test.SortOrder != this.sortOrder) return false;
+            if (test.SortOrder != this.SortOrder) return false;
+            if (test.PrimaryHeader != this.PrimaryHeader) return false;
+            if (test.SecondaryHeader != this.SecondaryHeader) return false;
             return true;
         }
 

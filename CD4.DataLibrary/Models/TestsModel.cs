@@ -22,5 +22,8 @@ namespace CD4.DataLibrary.Models
         public bool IsReportable { get; set; }
         public bool DefaultCommented { get; set; }
         public int SortOrder { get; set; }
+        public string PrimaryHeader { get; set; }
+        public string SecondaryHeader { get; set; }
+
     }
 }
