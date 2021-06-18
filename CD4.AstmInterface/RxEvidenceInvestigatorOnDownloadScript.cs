@@ -16,6 +16,7 @@ public class RxEvidenceInvestigatorOnDownloadScript
         var Cutoff300 = 300M;
         var Cutoff100 = 100M;
         var Cutoff50 = 50M;
+        var Cutoff5 = 5M;
 
         var uploadCode = (UploadCodes)Enum.Parse(typeof(UploadCodes), measurement.TestCode);
         var isMeasurementNumeric = decimal.TryParse(measurement.MeasurementValue.Replace(">",""), out decimal decimalResult);
@@ -29,13 +30,7 @@ public class RxEvidenceInvestigatorOnDownloadScript
             return $"{uploadCode}_I|ނުދައްކާ NEGATIVE| ";
         }
 
-        if (UploadCodes.BENZ1 == uploadCode)
-        {
-            if (decimalResult >= Cutoff300) { return $"{uploadCode}_I|ދައްކާ POSITIVE| "; }
-            return $"{uploadCode}_I|ނުދައްކާ NEGATIVE| ";
-        }
-
-        if (UploadCodes.BENZ2 == uploadCode)
+        if (UploadCodes.BENZ == uploadCode)
         {
             if (decimalResult >= Cutoff300) { return $"{uploadCode}_I|ދައްކާ POSITIVE| "; }
             return $"{uploadCode}_I|ނުދައްކާ NEGATIVE| ";
@@ -69,6 +64,11 @@ public class RxEvidenceInvestigatorOnDownloadScript
             return $"{uploadCode}_I|ނުދައްކާ NEGATIVE| ";
         }
 
+        if (UploadCodes.ETG == uploadCode)
+        {
+            if (decimalResult >= Cutoff5) { return $"{uploadCode}_I|ދައްކާ POSITIVE| "; }
+            return $"{uploadCode}_I|ނުދައްކާ NEGATIVE| ";
+        }
 
         return GetEmptyReturnResult();
     }
@@ -87,6 +87,8 @@ public class RxEvidenceInvestigatorOnDownloadScript
         BZG,
         ETHANOL,
         MDONE,
-        OPIAT
+        OPIAT,
+        BENZ,
+        ETG 
     }
 }
