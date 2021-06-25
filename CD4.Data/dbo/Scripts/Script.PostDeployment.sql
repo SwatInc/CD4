@@ -937,21 +937,21 @@ INSERT INTO [dbo].[GlobalSettings]([JsonSettings]) VALUES ('{"VerifyNidPpOnOrder
 --  VALUES ('Registered'), ('Collected'), ('Received'), ('ToValidate'), ('Validated'), ('Processing'), ('Rejected'), ('Removed');
 
 
----- insert system printer
---INSERT INTO [dbo].[Printers] ([Description])
---  VALUES ('\\RECEPTION1\BarcodePrinter');
---INSERT INTO [dbo].[Printers] ([Description])
---  VALUES ('OneNote for Windows 10');
---INSERT INTO [dbo].[PrinterTypes] ([Description])
---  VALUES ('Barcode Printer');
---INSERT INTO [dbo].[PrinterTypes] ([Description])
---  VALUES ('Document Printer');
---INSERT INTO [dbo].[WorkStations] ([Description])
---  VALUES ('IbrahimHucyn');
---INSERT INTO [dbo].[WorkStationPrinters] ([WorkStationId], [PrinterId], [PrinterTypeId])
---  VALUES (1, 1, 1);
---INSERT INTO [dbo].[WorkStationPrinters] ([WorkStationId], [PrinterId], [PrinterTypeId])
---  VALUES (1, 2, 2);
+-- insert system printer
+INSERT INTO [dbo].[Printers] ([Description])
+  VALUES ('\\RECEPTION1\BarcodePrinter');
+INSERT INTO [dbo].[Printers] ([Description])
+  VALUES ('OneNote for Windows 10');
+INSERT INTO [dbo].[PrinterTypes] ([Description])
+  VALUES ('Barcode Printer');
+INSERT INTO [dbo].[PrinterTypes] ([Description])
+  VALUES ('Document Printer');
+INSERT INTO [dbo].[WorkStations] ([Description])
+  VALUES ('IbrahimHucyn');
+INSERT INTO [dbo].[WorkStationPrinters] ([WorkStationId], [PrinterId], [PrinterTypeId])
+  VALUES (1, 1, 1);
+INSERT INTO [dbo].[WorkStationPrinters] ([WorkStationId], [PrinterId], [PrinterTypeId])
+  VALUES (1, 2, 2);
 
 
 ---- Insert rows into table 'dbo.AuditTypes' in schema '[dbo]'
