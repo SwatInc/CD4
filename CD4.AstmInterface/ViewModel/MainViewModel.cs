@@ -95,7 +95,7 @@ namespace CD4.AstmInterface.ViewModel
         private async void RunInitalze(object sender, EventArgs e)
         {
             await LoadAndInitializeScript();
-            InitializeAstm();
+            await InitializeAstmAsync();
         }
 
         private async Task LoadAndInitializeScript()
@@ -147,7 +147,7 @@ namespace CD4.AstmInterface.ViewModel
             }
         }
 
-        private void InitializeAstm()
+        private async Task InitializeAstmAsync()
         {
             switch (Settings.ConnectionMode)
             {
@@ -157,13 +157,14 @@ namespace CD4.AstmInterface.ViewModel
 
                     lowLevelConnection = new Lis01A02TCPConnection(Settings.IpAddress, uShortPort);
                     lisConnection = new Lis01A2Connection(lowLevelConnection);
-                    Connect();
+                    
+                    await ConnectAsync();
 
                     break;
                 case ConnectionMode.Serial:
                     lowLevelConnection = new Lis01A02RS232Connection(Settings.SerialPort);
                     lisConnection = new Lis01A2Connection(lowLevelConnection);
-                    Connect();
+                    await ConnectAsync();
 
                     break;
                 default:
@@ -171,7 +172,7 @@ namespace CD4.AstmInterface.ViewModel
             }
         }
 
-        private void Connect()
+        private async Task ConnectAsync()
         {
             lisParser = new LISParser(lisConnection);
 
@@ -179,11 +180,18 @@ namespace CD4.AstmInterface.ViewModel
             lisParser.OnReceivedRecord += LISParser_OnReceivedRecord; //incoming LIS frames will trigger this event
             try
             {
-                lisParser.Connection.Connect();
+                if (Settings.IsSever && Settings.ConnectionMode == ConnectionMode.Ethernet)
+                {
+                    await ((Lis01A02TCPConnection)lowLevelConnection).StartListeningAsync();
+                }
+                else
+                {
+                    lisParser.Connection.Connect();
+                }
             }
             catch (Exception ex)
             {
-                logger.Error($"Error connecting: {ex.Message}");
+                logger.Error($"Error connecting: {ex.Message}\n{ex.StackTrace}");
                 MessageBox.Show(ex.Message);
             }
         }
@@ -215,10 +223,16 @@ namespace CD4.AstmInterface.ViewModel
                     break;
                 case LisRecordType.Result:
                     var result = (ResultRecord)e.ReceivedRecord;
-                    var testIds = result.UniversalTestID.TestID.Split('^');
 
-                    string testCode = null;
-                    if (testIds.Length == 4) { testCode = testIds[3]; }
+                    string testCode = "";
+
+                    testCode = string.Concat(result.UniversalTestID.TestID,
+                        result.UniversalTestID.TestName,
+                        result.UniversalTestID.TestType,
+                        result.UniversalTestID.ManufacturerCode)
+                        .ToString()
+                        .Replace("^","")
+                        .Trim();
 
                     tempResults.Measurements.Add(new MeasurementValues()
                     {

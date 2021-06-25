@@ -25,7 +25,7 @@ namespace CD4.AstmInterface.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int ConnectionMode {
             get {
                 return ((int)(this["ConnectionMode"]));
@@ -109,7 +109,7 @@ namespace CD4.AstmInterface.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool IsServer {
             get {
                 return ((bool)(this["IsServer"]));
@@ -121,7 +121,7 @@ namespace CD4.AstmInterface.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        [global::System.Configuration.DefaultSettingValueAttribute("192.168.100.55")]
         public string IpAddress {
             get {
                 return ((string)(this["IpAddress"]));
@@ -133,7 +133,7 @@ namespace CD4.AstmInterface.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("48569")]
         public int Port {
             get {
                 return ((int)(this["Port"]));
@@ -181,7 +181,7 @@ namespace CD4.AstmInterface.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("EvidenceInvestigator01")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Analyser01")]
         public string AnalyserName {
             get {
                 return ((string)(this["AnalyserName"]));
