@@ -21,10 +21,12 @@ namespace CD4.Entensibility.ReportingFramework.Models
         public string Opiates { get; set; }
         public string Benzodiazepine1 { get; set; }
         public string Benzodiazepine2 { get; set; }
+        public string Benzodiazepines { get; set; }
         public string Cocaine { get; set; }
         public string Cannabinoids { get; set; }
         public string Amphetamine { get; set; }
         public string Ethanol { get; set; }
+        public string Ethylglucuronide { get; set; }
         public string Methadone { get; set; }
 
     }

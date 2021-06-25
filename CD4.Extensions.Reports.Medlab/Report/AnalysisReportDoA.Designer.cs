@@ -76,11 +76,6 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell34 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell35 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell36 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableRow15 = new DevExpress.XtraReports.UI.XRTableRow();
-            this.xrTableCell57 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableCell58 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableCell59 = new DevExpress.XtraReports.UI.XRTableCell();
-            this.xrTableCell60 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableRow14 = new DevExpress.XtraReports.UI.XRTableRow();
             this.xrTableCell53 = new DevExpress.XtraReports.UI.XRTableCell();
             this.xrTableCell54 = new DevExpress.XtraReports.UI.XRTableCell();
@@ -608,14 +603,13 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTable3.Rows.AddRange(new DevExpress.XtraReports.UI.XRTableRow[] {
             this.xrTableRow7,
             this.xrTableRow9,
-            this.xrTableRow15,
             this.xrTableRow14,
             this.xrTableRow13,
             this.xrTableRow12,
             this.xrTableRow11,
             this.xrTableRow10,
             this.xrTableRow8});
-            this.xrTable3.SizeF = new System.Drawing.SizeF(650.0001F, 237.8334F);
+            this.xrTable3.SizeF = new System.Drawing.SizeF(650.0001F, 211.4075F);
             this.xrTable3.StylePriority.UseBorders = false;
             this.xrTable3.StylePriority.UsePadding = false;
             // 
@@ -781,81 +775,6 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell36.TextAlignment = DevExpress.XtraPrinting.TextAlignment.BottomCenter;
             this.xrTableCell36.Weight = 1D;
             // 
-            // xrTableRow15
-            // 
-            this.xrTableRow15.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
-            this.xrTableCell57,
-            this.xrTableCell58,
-            this.xrTableCell59,
-            this.xrTableCell60});
-            this.xrTableRow15.Name = "xrTableRow15";
-            this.xrTableRow15.Weight = 1D;
-            // 
-            // xrTableCell57
-            // 
-            this.xrTableCell57.BorderColor = System.Drawing.Color.Gray;
-            this.xrTableCell57.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Benzodiazepine1]")});
-            this.xrTableCell57.Font = new System.Drawing.Font("Faruma", 10F);
-            this.xrTableCell57.Multiline = true;
-            this.xrTableCell57.Name = "xrTableCell57";
-            this.xrTableCell57.Padding = new DevExpress.XtraPrinting.PaddingInfo(4, 2, 2, 2, 100F);
-            this.xrTableCell57.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
-            this.xrTableCell57.StylePriority.UseBorderColor = false;
-            this.xrTableCell57.StylePriority.UseFont = false;
-            this.xrTableCell57.StylePriority.UsePadding = false;
-            this.xrTableCell57.StylePriority.UseTextAlignment = false;
-            this.xrTableCell57.Text = "ނުދައްކާ NEGATIVE";
-            this.xrTableCell57.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell57.Weight = 0.90129217974530873D;
-            // 
-            // xrTableCell58
-            // 
-            this.xrTableCell58.BorderColor = System.Drawing.Color.Gray;
-            this.xrTableCell58.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
-            | DevExpress.XtraPrinting.BorderSide.Right) 
-            | DevExpress.XtraPrinting.BorderSide.Bottom)));
-            this.xrTableCell58.Font = new System.Drawing.Font("Faruma", 10F);
-            this.xrTableCell58.Multiline = true;
-            this.xrTableCell58.Name = "xrTableCell58";
-            this.xrTableCell58.Padding = new DevExpress.XtraPrinting.PaddingInfo(4, 2, 2, 2, 100F);
-            this.xrTableCell58.RightToLeft = DevExpress.XtraReports.UI.RightToLeft.Yes;
-            this.xrTableCell58.StylePriority.UseBorderColor = false;
-            this.xrTableCell58.StylePriority.UseBorders = false;
-            this.xrTableCell58.StylePriority.UseFont = false;
-            this.xrTableCell58.StylePriority.UsePadding = false;
-            this.xrTableCell58.StylePriority.UseTextAlignment = false;
-            this.xrTableCell58.Text = "ބެންޒޯޑައިޒީޕައިން (Benzodiazepine-1) ";
-            this.xrTableCell58.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
-            this.xrTableCell58.Weight = 1.5858873411419505D;
-            // 
-            // xrTableCell59
-            // 
-            this.xrTableCell59.BorderColor = System.Drawing.Color.Gray;
-            this.xrTableCell59.Font = new System.Drawing.Font("Faruma", 10F);
-            this.xrTableCell59.Multiline = true;
-            this.xrTableCell59.Name = "xrTableCell59";
-            this.xrTableCell59.StylePriority.UseBorderColor = false;
-            this.xrTableCell59.StylePriority.UseFont = false;
-            this.xrTableCell59.StylePriority.UseTextAlignment = false;
-            this.xrTableCell59.Text = "BENZ-1";
-            this.xrTableCell59.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell59.Weight = 0.51282047911274065D;
-            // 
-            // xrTableCell60
-            // 
-            this.xrTableCell60.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
-            | DevExpress.XtraPrinting.BorderSide.Right) 
-            | DevExpress.XtraPrinting.BorderSide.Bottom)));
-            this.xrTableCell60.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold);
-            this.xrTableCell60.Multiline = true;
-            this.xrTableCell60.Name = "xrTableCell60";
-            this.xrTableCell60.StylePriority.UseBorders = false;
-            this.xrTableCell60.StylePriority.UseFont = false;
-            this.xrTableCell60.StylePriority.UseTextAlignment = false;
-            this.xrTableCell60.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
-            this.xrTableCell60.Weight = 1D;
-            // 
             // xrTableRow14
             // 
             this.xrTableRow14.Cells.AddRange(new DevExpress.XtraReports.UI.XRTableCell[] {
@@ -870,7 +789,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             this.xrTableCell53.BorderColor = System.Drawing.Color.Gray;
             this.xrTableCell53.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
-            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Benzodiazepine2]")});
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Benzodiazepines]")});
             this.xrTableCell53.Font = new System.Drawing.Font("Faruma", 10F);
             this.xrTableCell53.Multiline = true;
             this.xrTableCell53.Name = "xrTableCell53";
@@ -900,7 +819,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell54.StylePriority.UseFont = false;
             this.xrTableCell54.StylePriority.UsePadding = false;
             this.xrTableCell54.StylePriority.UseTextAlignment = false;
-            this.xrTableCell54.Text = "ބެންޒޯޑައިޒީޕައިން (Benzodiazepine-2) ";
+            this.xrTableCell54.Text = "ބެންޒޯޑައިޒީޕައިން (Benzodiazepines) ";
             this.xrTableCell54.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
             this.xrTableCell54.Weight = 1.5858873411419505D;
             // 
@@ -913,7 +832,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell55.StylePriority.UseBorderColor = false;
             this.xrTableCell55.StylePriority.UseFont = false;
             this.xrTableCell55.StylePriority.UseTextAlignment = false;
-            this.xrTableCell55.Text = "BENZ-2";
+            this.xrTableCell55.Text = "BENZ";
             this.xrTableCell55.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
             this.xrTableCell55.Weight = 0.51282047911274065D;
             // 
@@ -1069,8 +988,7 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // 
             // xrTableCell48
             // 
-            this.xrTableCell48.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right) 
-            | DevExpress.XtraPrinting.BorderSide.Bottom)));
+            this.xrTableCell48.Borders = ((DevExpress.XtraPrinting.BorderSide)((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right)));
             this.xrTableCell48.Font = new System.Drawing.Font("Cambria", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.xrTableCell48.Multiline = true;
             this.xrTableCell48.Name = "xrTableCell48";
@@ -1245,6 +1163,8 @@ namespace CD4.Extensions.Reports.Medlab.Report
             // xrTableCell29
             // 
             this.xrTableCell29.BorderColor = System.Drawing.Color.Gray;
+            this.xrTableCell29.ExpressionBindings.AddRange(new DevExpress.XtraReports.UI.ExpressionBinding[] {
+            new DevExpress.XtraReports.UI.ExpressionBinding("BeforePrint", "Text", "[Ethylglucuronide]")});
             this.xrTableCell29.Font = new System.Drawing.Font("Faruma", 10F);
             this.xrTableCell29.Multiline = true;
             this.xrTableCell29.Name = "xrTableCell29";
@@ -1256,7 +1176,6 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell29.StylePriority.UseTextAlignment = false;
             this.xrTableCell29.Text = "ނުދައްކާ NEGATIVE";
             this.xrTableCell29.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell29.Visible = false;
             this.xrTableCell29.Weight = 0.90129217974530873D;
             // 
             // xrTableCell30
@@ -1277,7 +1196,6 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell30.StylePriority.UseTextAlignment = false;
             this.xrTableCell30.Text = "ބަނގު އާވި (Ethyl Glucuronide)";
             this.xrTableCell30.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
-            this.xrTableCell30.Visible = false;
             this.xrTableCell30.Weight = 1.5858873411419505D;
             // 
             // xrTableCell31
@@ -1291,13 +1209,11 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell31.StylePriority.UseTextAlignment = false;
             this.xrTableCell31.Text = "ETG";
             this.xrTableCell31.TextAlignment = DevExpress.XtraPrinting.TextAlignment.MiddleCenter;
-            this.xrTableCell31.Visible = false;
             this.xrTableCell31.Weight = 0.51282047911274065D;
             // 
             // xrTableCell32
             // 
-            this.xrTableCell32.Borders = ((DevExpress.XtraPrinting.BorderSide)((((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Top) 
-            | DevExpress.XtraPrinting.BorderSide.Right) 
+            this.xrTableCell32.Borders = ((DevExpress.XtraPrinting.BorderSide)(((DevExpress.XtraPrinting.BorderSide.Left | DevExpress.XtraPrinting.BorderSide.Right) 
             | DevExpress.XtraPrinting.BorderSide.Bottom)));
             this.xrTableCell32.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold);
             this.xrTableCell32.Multiline = true;
@@ -1306,7 +1222,6 @@ namespace CD4.Extensions.Reports.Medlab.Report
             this.xrTableCell32.StylePriority.UseFont = false;
             this.xrTableCell32.StylePriority.UseTextAlignment = false;
             this.xrTableCell32.TextAlignment = DevExpress.XtraPrinting.TextAlignment.TopCenter;
-            this.xrTableCell32.Visible = false;
             this.xrTableCell32.Weight = 1D;
             // 
             // xrTable2
@@ -1841,11 +1756,6 @@ namespace CD4.Extensions.Reports.Medlab.Report
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell34;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell35;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell36;
-        private DevExpress.XtraReports.UI.XRTableRow xrTableRow15;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell57;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell58;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell59;
-        private DevExpress.XtraReports.UI.XRTableCell xrTableCell60;
         private DevExpress.XtraReports.UI.XRTableRow xrTableRow14;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell53;
         private DevExpress.XtraReports.UI.XRTableCell xrTableCell54;

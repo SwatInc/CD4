@@ -48,8 +48,8 @@ namespace CD4.UI.View
             this.gridControlSamples = new DevExpress.XtraGrid.GridControl();
             this.gridViewSamples = new DevExpress.XtraGrid.Views.Grid.GridView();
             this.progressPanelTests = new DevExpress.XtraWaitForm.ProgressPanel();
-            this.gridControlTests = new CustomGridControl();
-            this.gridViewTests = new CustomGridView();
+            this.gridControlTests = new CD4.UI.CustomGridControl();
+            this.gridViewTests = new CD4.UI.CustomGridView();
             this.repositoryItemLookUpEditCodifiedPhrases = new DevExpress.XtraEditors.Repository.RepositoryItemLookUpEdit();
             this.graphsUserControl = new CD4.UI.UserControls.GraphsUserControl();
             this.groupControlFunctions = new DevExpress.XtraEditors.GroupControl();
@@ -395,7 +395,6 @@ namespace CD4.UI.View
             this.simpleButtonPrintBothResultEntryReport.TabIndex = 10;
             this.simpleButtonPrintBothResultEntryReport.Tag = "ResultEntryView.DoAReport";
             this.simpleButtonPrintBothResultEntryReport.Text = "Report Both DoA Report";
-            this.simpleButtonPrintBothResultEntryReport.Visible = false;
             // 
             // exportReportOnDefaultTemplate
             // 
