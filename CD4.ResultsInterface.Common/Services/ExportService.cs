@@ -10,14 +10,38 @@ namespace CD4.ResultsInterface.Common.Services
 {
     public class ExportService : IExportService
     {
-        public async Task<bool> ExportToUploader(List<InterfaceResultsModel> interfaceResults, string basepath, string extension, string controlFileExtension)
+        private async Task<bool> ExportAsync<T>(List<T> dataList, string basepath, string extension, string controlFileExtension)
         {
-            if (interfaceResults.Count == 0)
+            #region NULL Checks
+
+            if (dataList is null)
+            {
+                throw new ArgumentNullException(nameof(dataList));
+            }
+
+            if (string.IsNullOrEmpty(basepath))
+            {
+                throw new ArgumentException($"'{nameof(basepath)}' cannot be null or empty.", nameof(basepath));
+            }
+
+            if (string.IsNullOrEmpty(extension))
+            {
+                throw new ArgumentException($"'{nameof(extension)}' cannot be null or empty.", nameof(extension));
+            }
+
+            if (string.IsNullOrEmpty(controlFileExtension))
+            {
+                throw new ArgumentException($"'{nameof(controlFileExtension)}' cannot be null or empty.", nameof(controlFileExtension));
+            }
+
+            if (dataList.Count == 0)
             {
                 return false;
             }
 
-            var exportData = JsonConvert.SerializeObject(interfaceResults);
+            #endregion
+
+            var exportData = JsonConvert.SerializeObject(dataList);
             var filenameWithoutExtension = $"{basepath}\\{DateTime.Now:yyyyMMdd_HHmmss_fffffff}";
             byte[] result = Encoding.UTF8.GetBytes(exportData);
             try
@@ -34,6 +58,51 @@ namespace CD4.ResultsInterface.Common.Services
             {
                 throw;
             }
+        }
+
+        public async Task<bool> ExportToUploaderAsync(List<InterfaceResultsModel> interfaceResults, string basepath, string extension, string controlFileExtension)
+        {
+            return await ExportAsync(interfaceResults, basepath, extension, controlFileExtension);
+        }
+
+        public async Task ExportQueryToOrderDownloaderAsync(List<string> jsonQueryRecord, string basepath, string extension, string controlFileExtension)
+        {
+            #region NULL Check
+            if (jsonQueryRecord is null)
+            {
+                throw new ArgumentNullException(nameof(jsonQueryRecord));
+            }
+
+            if (string.IsNullOrEmpty(basepath))
+            {
+                throw new ArgumentException($"'{nameof(basepath)}' cannot be null or empty.", nameof(basepath));
+            }
+
+            if (string.IsNullOrEmpty(extension))
+            {
+                throw new ArgumentException($"'{nameof(extension)}' cannot be null or empty.", nameof(extension));
+            }
+
+            if (string.IsNullOrEmpty(controlFileExtension))
+            {
+                throw new ArgumentException($"'{nameof(controlFileExtension)}' cannot be null or empty.", nameof(controlFileExtension));
+            }
+            #endregion
+
+            _ = await ExportAsync(jsonQueryRecord, basepath, extension, controlFileExtension);
+        }
+
+        public async Task ExportQueryToOrderDownloaderAsync(List<dynamic> queryRecord)
+        {
+            #region NULL Check
+            if (queryRecord is null)
+            {
+                throw new ArgumentNullException(nameof(queryRecord));
+            }
+
+            #endregion
+
+            _ = await ExportAsync(queryRecord, "C:\\Export", "qrd.json", "qok");
         }
     }
 }
