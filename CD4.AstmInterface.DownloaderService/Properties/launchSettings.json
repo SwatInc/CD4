@@ -1,0 +1,11 @@
+﻿{
+  "profiles": {
+    "CD4.AstmInterface.DownloaderService": {
+      "commandName": "Project",
+      "dotnetRunMessages": "true",
+      "environmentVariables": {
+        "DOTNET_ENVIRONMENT": "Development"
+      }
+    }
+  }
+}
