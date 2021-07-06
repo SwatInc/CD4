@@ -52,7 +52,7 @@ namespace CD4.AstmInterface.ViewModel
 
             _logger.Info("Application startup... loaded settings");
 
-            Initialize += RunInitalze;
+            Initialize += RunInitalize;
             ResultsReadyForExport += ExportResults;
             OnRequireInterpretation += MainViewModel_OnRequireInterpretation;
             OnQueryReceived += MainViewModel_OnQueryReceived;
@@ -81,7 +81,7 @@ namespace CD4.AstmInterface.ViewModel
                 //initiate sending a response to analyser that there is no order for the sample
                 //log the error
                 _logger.Error($"An error occured while trying to fetch order for analyser query: {query}");
-                _logger.Error(ex.Message+"\n"+ex.StackTrace);
+                _logger.Error(ex.Message + "\n" + ex.StackTrace);
             }
         }
 
@@ -120,7 +120,7 @@ namespace CD4.AstmInterface.ViewModel
 
         }
 
-        private async void RunInitalze(object sender, EventArgs e)
+        private async void RunInitalize(object sender, EventArgs e)
         {
             await LoadAndInitializeScript();
             await InitializeAstmAsync();
@@ -285,6 +285,7 @@ namespace CD4.AstmInterface.ViewModel
                     break;
                 case LisRecordType.Query:
                     var query = (QueryRecord)e.ReceivedRecord;
+                    query.UserFieldNumberTwo = Settings.AnalyserName;
                     OnQueryReceived?.Invoke(this, query);
                     break;
                 case LisRecordType.Terminator:
