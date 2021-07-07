@@ -42,7 +42,7 @@ BEGIN
 	  , [t].[Code]
 	  , [t].[Reportable] AS [IsReportable]
 	  , [t].[DefaultCommented]
-	  , [t].[Sortorder]
+	  , [t].[SortOrder]
 	  , [t].[PrimaryHeader]
 	  , [t].[SecondaryHeader]
 	FROM [dbo].[Test] [t]
