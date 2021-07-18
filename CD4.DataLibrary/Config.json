@@ -2,7 +2,7 @@
   "ConnectionName": [
     {
       "Name": "CD4Data",
-      "ConnectionString": "Server=localhost,10433;Database=CD4Data.Staging.ASMH;User Id=sa;Password=Bismillah.123!;",
+      "ConnectionString": "Server=localhost,10433;Database=CD4Data;User Id=sa;Password=Bismillah.123!;",
       "Provider": "System.Data.SqlClient"
     },
     {

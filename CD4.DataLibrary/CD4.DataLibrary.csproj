@@ -106,6 +106,8 @@
     <Compile Include="DataAccess\GlobalSettingsDataAccess.cs" />
     <Compile Include="DataAccess\HmsLinkDataAccess.cs" />
     <Compile Include="DataAccess\IHmsLinkDataAccess.cs" />
+    <Compile Include="DataAccess\IOrderDownloadDataAccess.cs" />
+    <Compile Include="DataAccess\OrderDownloadDataAccess.cs" />
     <Compile Include="Models\HmsLinkDataModel.cs" />
     <Compile Include="DataAccess\IAnalysisRequestDataAccess.cs" />
     <Compile Include="DataAccess\IAssayDataAccess.cs" />
@@ -170,6 +172,7 @@
     <Compile Include="Models\GenericModelAndListModel.cs" />
     <Compile Include="Models\GlobalSettingsModel.cs" />
     <Compile Include="Models\NdaTrackingModel.cs" />
+    <Compile Include="Models\OrdersDownloadModel.cs" />
     <Compile Include="Models\ResultDataTypeModel.cs" />
     <Compile Include="Models\SampleTypeModel.cs" />
     <Compile Include="Models\ScientistModel.cs" />
