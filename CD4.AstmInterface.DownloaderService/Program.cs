@@ -1,3 +1,5 @@
+using CD4.DataLibrary.DataAccess;
+using CD4.ResultsInterface.Common.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -45,6 +47,8 @@ namespace CD4.AstmInterface.DownloaderService
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddHostedService<Worker>();
+                    services.AddTransient<IExportService, ExportService>();
+                    services.AddTransient<IOrderDownloadDataAccess, OrderDownloadDataAccess>();
                 })
                 .UseSerilog();
     }

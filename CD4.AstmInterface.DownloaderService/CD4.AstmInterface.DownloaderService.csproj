@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <UserSecretsId>dotnet-CD4.AstmInterface.DownloaderService-E8CC3F1D-5A8D-4915-8EA8-0AD4A9E10A7A</UserSecretsId>
+    <Platforms>AnyCPU;x64;x86</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,11 +12,23 @@
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="Serilog" Version="2.10.0" />
     <PackageReference Include="Serilog.AspNetCore" Version="4.1.0" />
-    <PackageReference Include="Serilog.Sinks.File" Version="4.1.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="4.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.2" />
   </ItemGroup>
   
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Hosting" Version="5.0.0" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <ProjectReference Include="..\CD4.DataLibrary\CD4.DataLibrary.csproj" />
+    <ProjectReference Include="..\CD4.ResultsInterface.Common\CD4.ResultsInterface.Common.csproj" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <Reference Include="SwatInc.Lis.Lis02A2">
+      <HintPath>..\..\..\SwatInc.Lis.Lis01A2\SwatInc.Lis.Lis02A2\bin\Debug\netcoreapp3.1\SwatInc.Lis.Lis02A2.dll</HintPath>
+    </Reference>
   </ItemGroup>
 </Project>
