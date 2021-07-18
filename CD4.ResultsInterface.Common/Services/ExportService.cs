@@ -42,8 +42,42 @@ namespace CD4.ResultsInterface.Common.Services
             #endregion
 
             var exportData = JsonConvert.SerializeObject(dataList);
+
+            try
+            {
+                return await ExportAsync<bool>(exportData, basepath, extension, controlFileExtension);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+        private async Task<bool> ExportAsync<T>(string jsonExportData, string basepath, string extension, string controlFileExtension)
+        {
+            #region NULL checks
+            if (string.IsNullOrEmpty(jsonExportData))
+            {
+                throw new ArgumentException($"'{nameof(jsonExportData)}' cannot be null or empty.", nameof(jsonExportData));
+            }
+
+            if (string.IsNullOrEmpty(basepath))
+            {
+                throw new ArgumentException($"'{nameof(basepath)}' cannot be null or empty.", nameof(basepath));
+            }
+
+            if (string.IsNullOrEmpty(extension))
+            {
+                throw new ArgumentException($"'{nameof(extension)}' cannot be null or empty.", nameof(extension));
+            }
+
+            if (string.IsNullOrEmpty(controlFileExtension))
+            {
+                throw new ArgumentException($"'{nameof(controlFileExtension)}' cannot be null or empty.", nameof(controlFileExtension));
+            }
+            #endregion
+
             var filenameWithoutExtension = $"{basepath}\\{DateTime.Now:yyyyMMdd_HHmmss_fffffff}";
-            byte[] result = Encoding.UTF8.GetBytes(exportData);
+            byte[] result = Encoding.UTF8.GetBytes(jsonExportData);
             try
             {
                 using (FileStream SourceStream = File.Open($"{filenameWithoutExtension}.{extension}", FileMode.OpenOrCreate))
@@ -103,6 +137,19 @@ namespace CD4.ResultsInterface.Common.Services
             #endregion
 
             _ = await ExportAsync(queryRecord, "C:\\Export", "qrd.json", "qok");
+        }
+
+        public async Task ExportJsonDataAsync(string jsonExportData, string basepath, string extension, string controlFileExtension)
+        {
+            try
+            {
+                await ExportAsync<bool>(jsonExportData, basepath, extension, controlFileExtension);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
         }
     }
 }
