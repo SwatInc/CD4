@@ -41,13 +41,13 @@ namespace CD4.AstmInterface.ViewModel
         private event EventHandler Initialize;
         private event EventHandler<InterfaceResultsModel> OnRequireInterpretation;
 
-        public MainViewModel(IScriptDataAccess scriptDataAccess)
+        public MainViewModel(IScriptDataAccess scriptDataAccess, IExportService exportService)
         {
             _logger = LoggerFactory.GetLogger(typeof(MainViewModel));
             _scriptDataAccess = scriptDataAccess;
             Settings = new Model.Settings();
             _interfaceResults = new List<InterfaceResultsModel>();
-            _exportService = new ExportService();
+            _exportService = exportService;
             _queryResponseBuffer = new List<OrderRecord>();
 
             _logger.Info("Application startup... loaded settings");
