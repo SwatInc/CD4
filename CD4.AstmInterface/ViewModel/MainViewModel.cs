@@ -25,12 +25,14 @@ namespace CD4.AstmInterface.ViewModel
     {
         dynamic _script;
         private bool _isScriptLoaded;
+        private bool _processingIncomingOrders;
         private readonly IExportService _exportService;
         private readonly ILogger _logger;
         private readonly IScriptDataAccess _scriptDataAccess;
+        private Timer _checkIncomingOrders;
         private List<InterfaceResultsModel> _interfaceResults;
         private InterfaceResultsModel _tempResults;
-        private List<OrderRecord> _queryResponseBuffer;
+        private List<OrdersDownloadModel> _ordersBuffer;
 
         private ILis01A2Connection _lowLevelConnection;
         private ILisConnection _lisConnection;
@@ -39,26 +41,235 @@ namespace CD4.AstmInterface.ViewModel
         private EventHandler<List<InterfaceResultsModel>> ResultsReadyForExport;
         private event EventHandler<QueryRecord> OnQueryReceived;
         private event EventHandler Initialize;
+        private event EventHandler InitializeOrderTransmission;
         private event EventHandler<InterfaceResultsModel> OnRequireInterpretation;
 
         public MainViewModel(IScriptDataAccess scriptDataAccess, IExportService exportService)
         {
             _logger = LoggerFactory.GetLogger(typeof(MainViewModel));
+            _processingIncomingOrders = false;
             _scriptDataAccess = scriptDataAccess;
             Settings = new Model.Settings();
             _interfaceResults = new List<InterfaceResultsModel>();
             _exportService = exportService;
-            _queryResponseBuffer = new List<OrderRecord>();
-
+            _ordersBuffer = new List<OrdersDownloadModel>();
             _logger.Info("Application startup... loaded settings");
 
+            _checkIncomingOrders = new Timer() { Enabled = true, Interval = 10000 };
+            _checkIncomingOrders.Start();
+
             Initialize += RunInitalize;
+            InitializeOrderTransmission += OnInitializeOrderTransmission;
             ResultsReadyForExport += ExportResults;
             OnRequireInterpretation += MainViewModel_OnRequireInterpretation;
             OnQueryReceived += MainViewModel_OnQueryReceived;
 
             //invoke events
             Initialize?.Invoke(this, EventArgs.Empty);
+            _checkIncomingOrders.Tick += OnIncomingOrders_Tick;
+        }
+
+        private void OnInitializeOrderTransmission(object sender, EventArgs e)
+        {
+            if (_processingIncomingOrders)
+            { _logger.Info("Cannot tramsmit while processing incoming orders"); return; }
+            _checkIncomingOrders.Enabled = false;
+
+            #region Sanity Checks before handling orders
+            _logger.Info("Checking for active analyser connection");
+            _logger.Info($"Connection Status: {_lisParser?.Connection?.Status}");
+            if (_lisParser?.Connection?.Status != 0) { return; }
+
+            if (_lisParser is null) { _logger.Info("LIS Parser is null."); return; }
+            if (_lisParser?.Connection is null) { _logger.Info("Connection is null."); return; }
+
+            _logger.Info("Connection looks idle. Checking for communication");
+            var IsCommunicationOk = _lisParser.Connection.EstablishSendMode();
+
+            _lisParser.Connection.StopSendMode();
+            if (!IsCommunicationOk) { _logger.Warn($"Cannot communicate with analyser."); return; }
+            _logger.Info("Send mode established. Checking for incoming orders.");
+            #endregion
+
+            var message = BuildAstmMessage();
+            try
+            {
+
+                if (message.Count > 0)
+                {
+                    _lisParser.SendRecords(message);
+                    _ordersBuffer.Clear();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"Error sending records.");
+                _logger.Error($"{ex.Message}\n{ex.StackTrace}");
+            }
+
+            _checkIncomingOrders.Enabled = true;
+        }
+
+        private List<AbstractLisRecord> BuildAstmMessage()
+        {
+            var lisRecordList = new List<AbstractLisRecord>();
+
+            #region Header Record
+
+            var header = new HeaderRecord()
+            {
+                SenderID = Settings.SenderName,
+                ProcessingID = HeaderProcessingID.Production
+            };
+            lisRecordList.Add(header);
+            #endregion
+
+            for (int i = 0; i < _ordersBuffer.Count; i++)
+            {
+                var record = _ordersBuffer[i];
+
+                #region Patient Record
+                var patient = new PatientRecord()
+                {
+                    SequenceNumber = i + 1,
+                    PracticeAssignedPatientId = record.NidPp, // get actual patient ID
+                    LaboratoryAssignedPatientId = record.NidPp,
+                    PatientName = new PatientName(record.Fullname),
+                    Birthdate = record.Birthdate
+                };
+                lisRecordList.Add(patient);
+                #endregion
+
+                #region Order Record
+
+                //assuming that the universal test id is already constructed and delimited by pipe '|' character
+                var order = new OrderRecord()
+                {
+                    SequenceNumber = 1,
+                    SpecimenID = record.Sid,
+                    TestID = new UniversalTestID(record.Download.Replace("|", @"\")),
+                    ReportType = OrderReportType.Order,
+                    RequestedDateTime = DateTime.Now
+                };
+
+                if (record.SamplePriority) { order.Priority = OrderPriority.Stat; }
+                else { order.Priority = OrderPriority.None; }
+
+                lisRecordList.Add(order);
+
+                #endregion
+
+            }
+
+            #region Terminator Record
+            var terminator = new TerminatorRecord();
+            lisRecordList.Add(terminator);
+            #endregion
+
+            return lisRecordList;
+
+        }
+
+        private void OnIncomingOrders_Tick(object sender, EventArgs e)
+        {
+            _processingIncomingOrders = true;
+            var incomingOrders = new List<OrdersDownloadModel>();
+
+            try
+            {
+                _checkIncomingOrders.Enabled = false;
+
+                #region Sanity Checks before handling orders
+                _logger.Info("Checking for active analyser connection");
+                _logger.Info($"Connection Status: {_lisParser?.Connection?.Status}");
+                if (_lisParser?.Connection?.Status != 0) { return; }
+
+                if (_lisParser is null) { _logger.Info("LIS Parser is null."); return; }
+                if (_lisParser?.Connection is null) { _logger.Info("Connection is null."); return; }
+
+                _logger.Info("Connection looks idle. Checking for communication");
+                var IsCommunicationOk = _lisParser.Connection.EstablishSendMode();
+                if (!IsCommunicationOk) { _logger.Warn($"Cannot communicate with analyser."); return; }
+
+                _lisParser.Connection.StopSendMode();
+                _logger.Info("Send mode established. Checking for incoming orders.");
+                #endregion
+
+                var controlFiles = Directory.GetFiles(Settings.IncomingPath, $"*.{Settings.OrderControlFileExtension}");
+                if (controlFiles is null) { _logger.Info("No incoming orders."); return; }
+                if (controlFiles.Length == 0) { _logger.Info("No incoming orders."); return; }
+
+                _logger.Info($"Detected {controlFiles.Length} record(s) incoming.");
+                foreach (var controlFile in controlFiles)
+                {
+                    _logger.Info($"Processing for control file {controlFile}");
+                    var orderDataFileInfo = new FileInfo
+                        (controlFile.Replace(Settings.OrderControlFileExtension, Settings.OrderDataFileExtension));
+                    var controlFileInfo = new FileInfo(controlFile);
+
+                    _logger.Info($"Deleting control file");
+                    if (controlFileInfo.Exists) { controlFileInfo.Delete(); }
+
+                    if (TryGetOrderData(orderDataFileInfo, out var orderData))
+                    {
+                        incomingOrders.AddRange(orderData);
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                _logger.Error($"{ex.Message}\n{ex.StackTrace}");
+            }
+            finally
+            {
+                _processingIncomingOrders = false;
+                if (incomingOrders.Count > 0)
+                {
+                    _logger.Info($"Adding {incomingOrders.Count} record(s) to orders buffer");
+                    _ordersBuffer.AddRange(incomingOrders);
+                    InitializeOrderTransmission?.Invoke(this, EventArgs.Empty);
+
+                    //checkIncomingOrders will be enabled after orders transmission 
+                }
+                else
+                {
+                    _checkIncomingOrders.Enabled = true;
+                }
+            }
+
+
+        }
+
+        private bool TryGetOrderData(FileInfo orderDataFileInfo, out List<OrdersDownloadModel> orderData)
+        {
+            orderData = new List<OrdersDownloadModel>();
+            if (orderDataFileInfo.Exists)
+            {
+                try
+                {
+                    _logger.Info("Reading incoming orders data file");
+
+                    var jsonData = File.ReadAllText(orderDataFileInfo.FullName);
+                    var data = JsonConvert.DeserializeObject<List<OrdersDownloadModel>>(jsonData);
+                    orderData.AddRange(data);
+
+                    _logger.Info($"Deleting order file: {orderDataFileInfo.FullName}");
+                    orderDataFileInfo.Delete();
+
+                    return true;
+                }
+                catch (Exception ex)
+                {
+                    _logger.Error($"Error reading datafile(s)\n{ex.Message}\n{ex.StackTrace}");
+                    return false;
+                }
+            }
+            else
+            {
+                _logger.Warn($"Cannot find orders data file: {orderDataFileInfo.FullName}");
+                return false;
+            }
         }
 
         private async void MainViewModel_OnQueryReceived(object sender, QueryRecord e)
