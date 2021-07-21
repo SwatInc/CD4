@@ -44,5 +44,17 @@
     <Setting Name="AnalyserName" Type="System.String" Scope="User">
       <Value Profile="(Default)">Analyser01</Value>
     </Setting>
+    <Setting Name="SenderName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">CD4 LIMS</Value>
+    </Setting>
+    <Setting Name="IncomingPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">C:\Export</Value>
+    </Setting>
+    <Setting Name="OrderControlFileExtension" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ook</Value>
+    </Setting>
+    <Setting Name="OrderDataFileExtension" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ord</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

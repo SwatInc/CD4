@@ -7,8 +7,6 @@ namespace CD4.AstmInterface.Model
     public class Settings
     {
         private Properties.Settings settings;
-        private string driverPath;
-
         public Settings()
         {
             settings = new Properties.Settings();
@@ -116,13 +114,43 @@ namespace CD4.AstmInterface.Model
 
         #endregion
 
+        #region Orders
+        [Category("Test Order Settings")]
+        public string IncomingPath
+        {
+            get => settings.IncomingPath;
+            set => settings.IncomingPath = value;
+        }
+
+        [Category("Test Order Settings")]
+        public string OrderControlFileExtension
+        {
+            get => settings.OrderControlFileExtension;
+            set => settings.OrderControlFileExtension = value;
+        }
+
+        [Category("Test Order Settings")]
+        public string OrderDataFileExtension 
+        { 
+            get => settings.OrderDataFileExtension; 
+            set => settings.OrderDataFileExtension = value; 
+        }
+
+        #endregion
+
         #region Rules Engine
         [Category("Rules Engine")]
-        public string AnalyserName 
+        public string AnalyserName
         {
             get => settings.AnalyserName;
             set => settings.AnalyserName = value;
         }
         #endregion
+
+        public string SenderName
+        {
+            get => settings.SenderName;
+            set => settings.SenderName = value;
+        }
     }
 }

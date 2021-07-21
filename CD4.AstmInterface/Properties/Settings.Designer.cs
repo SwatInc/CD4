@@ -12,7 +12,7 @@ namespace CD4.AstmInterface.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.8.1.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.10.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -188,6 +188,54 @@ namespace CD4.AstmInterface.Properties {
             }
             set {
                 this["AnalyserName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("CD4 LIMS")]
+        public string SenderName {
+            get {
+                return ((string)(this["SenderName"]));
+            }
+            set {
+                this["SenderName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("C:\\Export")]
+        public string IncomingPath {
+            get {
+                return ((string)(this["IncomingPath"]));
+            }
+            set {
+                this["IncomingPath"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ook")]
+        public string OrderControlFileExtension {
+            get {
+                return ((string)(this["OrderControlFileExtension"]));
+            }
+            set {
+                this["OrderControlFileExtension"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("ord")]
+        public string OrderDataFileExtension {
+            get {
+                return ((string)(this["OrderDataFileExtension"]));
+            }
+            set {
+                this["OrderDataFileExtension"] = value;
             }
         }
     }

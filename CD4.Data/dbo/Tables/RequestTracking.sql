@@ -9,3 +9,8 @@
     CONSTRAINT [FK_RequestTracking_Status] FOREIGN KEY ([StatusId]) REFERENCES [dbo].[Status]([Id]), 
     CONSTRAINT [FK_RequestTracking_Users] FOREIGN KEY ([UsersId]) REFERENCES [dbo].[Users]([Id])
 )
+GO
+CREATE NONCLUSTERED INDEX [ResultTracking_StatusId_ResultId]
+ON [dbo].[ResultTracking] ([StatusId])
+INCLUDE ([ResultId])
+GO
