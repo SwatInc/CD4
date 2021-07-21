@@ -1,4 +1,5 @@
 using CD4.DataLibrary.DataAccess;
+using CD4.ResultsInterface.Common.Models;
 using CD4.ResultsInterface.Common.Services;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
@@ -156,17 +157,17 @@ namespace CD4.AstmInterface.DownloaderService
                         .GetAwaiter()
                         .GetResult();
 
-                    if (orders is null) 
+                    if (orders is null)
                     {
                         _logger.LogInformation("No orders downloaded. Writing out empty query response.");
                         ExportEmptyQueryResponse(query.StartingRange.SpecimenID);
-                        continue;  
+                        continue;
                     }
-                    if (orders.Count == 0) 
+                    if (orders.Count == 0)
                     {
                         _logger.LogInformation("No orders downloaded. Writing out empty query response.");
                         ExportEmptyQueryResponse(query.StartingRange.SpecimenID);
-                        continue; 
+                        continue;
                     }
 
                     var jsonOrders = JsonConvert.SerializeObject(orders);
@@ -189,21 +190,21 @@ namespace CD4.AstmInterface.DownloaderService
 
         private void ExportEmptyQueryResponse(string sid)
         {
-            var empty = new
+            var emptyResponse = new List<OrdersDownloadModel>() 
             {
-                Download = "",
-                Sid = sid,
-                SamplePriority = "",
-                TestPriority = "",
-                EpisodeNumber = "",
-                Age = "",
-                Fullname = "",
-                NidPp = "",
-                Birthdate = "",
-                Address = ""
+                new OrdersDownloadModel() 
+                {
+                    Download = "",
+                    Sid = sid,
+                    SamplePriority = false,
+                    TestPriority = false,
+                    EpisodeNumber = "",
+                    Age = "",
+                    Fullname = "",
+                    NidPp = "",
+                    Address = ""
+                }
             };
-
-            var emptyResponse = new List<dynamic>() { empty };
 
             ExportQueryResponse(JsonConvert.SerializeObject(emptyResponse));
             _logger.LogInformation("Exported empty query response.");
